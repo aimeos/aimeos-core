@@ -73,7 +73,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'ignore-modified', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 

@@ -31,7 +31,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$list = $this->object->getSearchAttributes();
 
 		foreach( $list as $attribute ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 }

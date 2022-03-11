@@ -199,12 +199,12 @@ abstract class Base
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Address\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->context()->db();
 		$dbname = $this->getResourceName();

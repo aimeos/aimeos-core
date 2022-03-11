@@ -107,9 +107,9 @@ abstract class Base
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		return $this->manager->filter( $default, $site );
 	}
@@ -144,7 +144,7 @@ abstract class Base
 	/**
 	 * Returns the additional column/search definitions
 	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSaveAttributes() : array
 	{
@@ -156,7 +156,7 @@ abstract class Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -193,12 +193,12 @@ abstract class Base
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		return $this->manager->search( $filter, $ref, $total );
 	}

@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->values = array(
-			'name' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
+			'name' => new \Aimeos\Base\Criteria\Attribute\Standard( array(
 				'code' => 'name',
 				'internalcode' => 'name',
 				'type' => 'string',
@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'label' => 'Name',
 				'default' => 'unittest',
 			) ),
-			'site' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
+			'site' => new \Aimeos\Base\Criteria\Attribute\Standard( array(
 				'code' => 'site',
 				'internalcode' => 'site',
 				'type' => 'string',
@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'label' => 'Site',
 				'default' => 'de',
 			) ),
-			'language' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
+			'language' => new \Aimeos\Base\Criteria\Attribute\Standard( array(
 				'code' => 'language',
 				'internalcode' => 'language',
 				'type' => 'string',
@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'label' => 'Language',
 				'default' => 'de',
 			) ),
-			'domain' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
+			'domain' => new \Aimeos\Base\Criteria\Attribute\Standard( array(
 				'code' => 'domain',
 				'internalcode' => 'domain',
 				'type' => 'string',
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetValue()
 	{
-		$item = new \Aimeos\MW\Criteria\Attribute\Standard( array(
+		$item = new \Aimeos\Base\Criteria\Attribute\Standard( array(
 			'code' => 'name',
 			'internalcode' => 'name',
 			'type' => 'string',

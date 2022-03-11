@@ -397,7 +397,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -427,12 +427,12 @@ class Standard
 	/**
 	 * Search for all tag items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Tag\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$context = $this->context();

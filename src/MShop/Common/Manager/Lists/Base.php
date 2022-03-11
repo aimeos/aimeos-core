@@ -63,13 +63,13 @@ abstract class Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param array|string $key Search key or list of keys to aggregate items for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		$required = [trim( $this->prefix, '.' )];
 		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required, $value, $type );
@@ -106,9 +106,9 @@ abstract class Base
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		if( $default !== false )
 		{
@@ -260,12 +260,12 @@ abstract class Base
 	/**
 	 * Search for all list items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 

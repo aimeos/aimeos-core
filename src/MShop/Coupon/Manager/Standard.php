@@ -173,7 +173,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -446,12 +446,12 @@ class Standard
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Coupon\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$context = $this->context();
 		$dbm = $context->db();
@@ -660,9 +660,9 @@ class Standard
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		if( $default !== false )
 		{

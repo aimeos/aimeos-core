@@ -32,9 +32,9 @@ trait Site
 	/**
 	 * Returns a filter object.
 	 *
-	 * @return \Aimeos\MW\Criteria\Iface Filter object
+	 * @return \Aimeos\Base\Criteria\Iface Filter object
 	 */
-	abstract public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface;
+	abstract public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface;
 
 
 	/**
@@ -42,10 +42,10 @@ trait Site
 	 *
 	 * @param string $name Name of the site condition
 	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
+	 * @return \Aimeos\Base\Criteria\Expression\Iface Site search condition
 	 * @since 2022.04
 	 */
-	protected function siteCondition( string $name, int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
+	protected function siteCondition( string $name, int $sitelevel ) : \Aimeos\Base\Criteria\Expression\Iface
 	{
 		$sites = $this->context()->locale()->getSites();
 		$values = [''];

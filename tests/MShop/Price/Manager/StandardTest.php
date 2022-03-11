@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $object ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $object );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $object );
 		}
 	}
 
@@ -182,7 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $this->object->filter() );
 	}
 
 

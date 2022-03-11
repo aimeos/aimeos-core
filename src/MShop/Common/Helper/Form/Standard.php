@@ -32,13 +32,13 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $values Form parameter items
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $values Form parameter items
 	 * @param bool $external True if URL points to an external site, false if it stays on the same site
 	 * @param string $html Custom HTML for rendering form (e.g. Including JS or custom html)
 	 */
 	public function __construct( string $url = '', string $method = '', array $values = [], bool $external = true, string $html = '' )
 	{
-		map( $values )->implements( \Aimeos\MW\Criteria\Attribute\Iface::class, true );
+		map( $values )->implements( \Aimeos\Base\Criteria\Attribute\Iface::class, true );
 
 		$this->url = $url;
 		$this->external = $external;
@@ -149,9 +149,9 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface Attribute item for the given key
 	 */
-	public function getValue( string $key ) : \Aimeos\MW\Criteria\Attribute\Iface
+	public function getValue( string $key ) : \Aimeos\Base\Criteria\Attribute\Iface
 	{
 		if( !isset( $this->values[$key] ) ) {
 			return null;
@@ -165,10 +165,10 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface $value Attribute item for the given key
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setValue( string $key, \Aimeos\MW\Criteria\Attribute\Iface $value ) : \Aimeos\MShop\Common\Helper\Form\Iface
+	public function setValue( string $key, \Aimeos\Base\Criteria\Attribute\Iface $value ) : \Aimeos\MShop\Common\Helper\Form\Iface
 	{
 		$this->values[$key] = $value;
 		return $this;
@@ -178,7 +178,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getValues() : array
 	{

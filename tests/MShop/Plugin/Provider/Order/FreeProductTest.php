@@ -63,7 +63,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'count', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 

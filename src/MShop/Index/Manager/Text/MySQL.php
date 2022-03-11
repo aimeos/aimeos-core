@@ -67,14 +67,14 @@ class MySQL
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attriubte items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attriubte items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
 		}
 
 		return $list;

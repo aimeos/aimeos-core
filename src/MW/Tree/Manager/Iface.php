@@ -23,16 +23,16 @@ interface Iface
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes() : array;
 
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return \Aimeos\MW\Criteria\Iface Search object instance
+	 * @return \Aimeos\Base\Criteria\Iface Search object instance
 	 */
-	public function createSearch() : \Aimeos\MW\Criteria\Iface;
+	public function createSearch() : \Aimeos\Base\Criteria\Iface;
 
 	/**
 	 * Creates a new node object.
@@ -54,10 +54,10 @@ interface Iface
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null ) : \Aimeos\MW\Tree\Node\Iface;
+	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MW\Tree\Node\Iface;
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
@@ -94,10 +94,10 @@ interface Iface
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
-	public function searchNodes( \Aimeos\MW\Criteria\Iface $search ) : array;
+	public function searchNodes( \Aimeos\Base\Criteria\Iface $search ) : array;
 
 	/**
 	 * Checks, whether a tree is read only.

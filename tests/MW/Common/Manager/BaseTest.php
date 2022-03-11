@@ -123,7 +123,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCriteriaKeyList()
 	{
-		$criteria = new \Aimeos\MW\Criteria\PHP();
+		$dbm = \TestHelper::getDBManager();
+		$conn = $dbm->acquire();
+
+		$criteria = new \Aimeos\Base\Criteria\SQL( $conn );
 
 		$expr = array(
 			$criteria->compare( '==', 'product.id', 1 ),
@@ -138,6 +141,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		$result = $method->invokeArgs( $this->object, array( $criteria, array( 'product.id' ) ) );
+
+		$dbm->release( $conn );
 
 		$this->assertEquals( array( 'list', 'product', 'product.id' ), $result );
 	}
@@ -193,7 +198,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'type' => 'datetime',
 			'label' => 'test',
 		);
-		$attr = new \Aimeos\MW\Criteria\Attribute\Standard( $args );
+		$attr = new \Aimeos\Base\Criteria\Attribute\Standard( $args );
 
 		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTranslations' );
@@ -243,7 +248,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'type' => 'datetime',
 			'label' => 'test',
 		);
-		$attr = new \Aimeos\MW\Criteria\Attribute\Standard( $args );
+		$attr = new \Aimeos\Base\Criteria\Attribute\Standard( $args );
 
 		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTypes' );

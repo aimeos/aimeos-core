@@ -84,23 +84,23 @@ interface Iface
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface Attribute item for the given key
 	 */
-	public function getValue( string $key ) : \Aimeos\MW\Criteria\Attribute\Iface;
+	public function getValue( string $key ) : \Aimeos\Base\Criteria\Attribute\Iface;
 
 	/**
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface $value Attribute item for the given key
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setValue( string $key, \Aimeos\MW\Criteria\Attribute\Iface $value ) : \Aimeos\MShop\Common\Helper\Form\Iface;
+	public function setValue( string $key, \Aimeos\Base\Criteria\Attribute\Iface $value ) : \Aimeos\MShop\Common\Helper\Form\Iface;
 
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getValues() : array;
 }

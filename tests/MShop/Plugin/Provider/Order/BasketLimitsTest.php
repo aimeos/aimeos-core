@@ -88,7 +88,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'max-value', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 

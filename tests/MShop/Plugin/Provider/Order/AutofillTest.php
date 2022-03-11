@@ -75,7 +75,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'orderservice', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 

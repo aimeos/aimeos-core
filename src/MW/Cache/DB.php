@@ -31,7 +31,7 @@ class DB
 	/**
 	 * Initializes the object instance.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Criteria\Attribute\Standard:
+	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\Base\Criteria\Attribute\Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value
 	 *	[cache.expire] => Array containing the codes/types/labels for the expiration date
@@ -92,7 +92,7 @@ class DB
 		try
 		{
 			$date = date( 'Y-m-d H:i:00' );
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$search = new \Aimeos\Base\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '<', $this->searchConfig['cache.expire']['code'], $date ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -158,7 +158,7 @@ class DB
 
 		try
 		{
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$search = new \Aimeos\Base\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.id']['code'], $keys ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -197,7 +197,7 @@ class DB
 
 		try
 		{
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$search = new \Aimeos\Base\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.tag.name']['code'], $tags ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -239,7 +239,7 @@ class DB
 
 		try
 		{
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$search = new \Aimeos\Base\Criteria\SQL( $conn );
 			$expires = array(
 				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
 				$search->compare( '==', 'cache.expire', null ),
@@ -295,7 +295,7 @@ class DB
 
 		try
 		{
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$search = new \Aimeos\Base\Criteria\SQL( $conn );
 			$expires = array(
 				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
 				$search->compare( '==', 'cache.expire', null ),

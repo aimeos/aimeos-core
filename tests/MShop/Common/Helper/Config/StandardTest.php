@@ -14,7 +14,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckBoolean()
 	{
 		$def = ['code' => 'key', 'type' => 'boolean', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => '0'] ) );
@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckBooleanInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'boolean', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a true/false value'], $object->check( ['key' => 'a'] ) );
@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckString()
 	{
 		$def = ['code' => 'key', 'type' => 'string', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => 'abc'] ) );
@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckStringInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'string', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a string'], $object->check( ['key' => new \stdClass()] ) );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckText()
 	{
 		$def = ['code' => 'key', 'type' => 'text', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => 'abc'] ) );
@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckTextInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'text', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a string'], $object->check( ['key' => new \stdClass()] ) );
@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckInteger()
 	{
 		$def = ['code' => 'key', 'type' => 'integer', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => '123'] ) );
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckIntegerInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'integer', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not an integer number'], $object->check( ['key' => 'abc'] ) );
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckNumber()
 	{
 		$def = ['code' => 'key', 'type' => 'number', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => '10.25'] ) );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckNumberInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'number', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a number'], $object->check( ['key' => 'abc'] ) );
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckDate()
 	{
 		$def = ['code' => 'key', 'type' => 'date', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => '2000-01-01'] ) );
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckDateInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'date', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a date'], $object->check( ['key' => '01/01/2000'] ) );
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckDatetime()
 	{
 		$def = ['code' => 'key', 'type' => 'datetime', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => '2000-01-01 00:00:00'] ) );
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckDatetimeInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'datetime', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a date and time'], $object->check( ['key' => '01/01/2000'] ) );
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckSelectList()
 	{
 		$def = ['code' => 'key', 'type' => 'select', 'required' => true, 'default' => ['test' => 'val']];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => 'test'] ) );
@@ -166,7 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckSelectInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'select', 'required' => true, 'default' => ['test']];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a listed value'], $object->check( ['key' => 'test2'] ) );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckMap()
 	{
 		$def = ['code' => 'key', 'type' => 'map', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => null], $object->check( ['key' => ['a' => 'test']] ) );
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckMapInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'map', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->assertEquals( ['key' => 'Not a key/value map'], $object->check( ['key' => 'test'] ) );
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckInvalid()
 	{
 		$def = ['code' => 'key', 'type' => 'invalid', 'required' => true];
-		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
+		$criteria = new \Aimeos\Base\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );

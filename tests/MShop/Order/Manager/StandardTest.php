@@ -357,21 +357,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
 	public function testCreateSearchDefault()
 	{
 		$result = $this->object->filter( true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
 
 	public function testCreateSearchSite()
 	{
 		$result = $this->object->filter( false, true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
 

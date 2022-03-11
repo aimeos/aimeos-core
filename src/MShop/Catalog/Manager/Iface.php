@@ -36,11 +36,11 @@ interface Iface
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
 	public function getTree( string $id = null, array $ref = [],
-		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $criteria = null );
 
 
 	/**

@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->filter( true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $search );
 	}
 
 
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->config()->set( 'mshop/product/manager/strict-events', 0 );
 
 		$search = $this->object->filter( true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $search );
 		$this->assertEquals( 'event', $search->getConditions()->getExpressions()[2]->getExpressions()[2]->getValue() );
 	}
 
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 

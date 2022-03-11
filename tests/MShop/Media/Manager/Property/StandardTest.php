@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $media ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $media );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $media );
 		}
 	}
 

@@ -95,13 +95,13 @@ class Standard
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate', [], $value, $type );
 	}
@@ -223,7 +223,7 @@ class Standard
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array List of items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -507,12 +507,12 @@ class Standard
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		/** mshop/index/manager/attribute/search/mysql
 		 * Retrieves the records matched by the given criteria in the database

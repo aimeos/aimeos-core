@@ -67,7 +67,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 16, count( $result ) );
 
 		foreach( $result as $key => $item ) {
-			$this->assertInstanceOf( 'Aimeos\MW\Criteria\Attribute\Iface', $item );
+			$this->assertInstanceOf( 'Aimeos\Base\Criteria\Attribute\Iface', $item );
 		}
 	}
 

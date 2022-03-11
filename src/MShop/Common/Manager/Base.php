@@ -64,9 +64,9 @@ abstract class Base
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @return \Aimeos\Base\Criteria\Iface New search criteria object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		$db = $this->getResourceName();
 		$config = $this->context->config();
@@ -81,9 +81,9 @@ abstract class Base
 		switch( $adapter )
 		{
 			case 'pgsql':
-				$search = new \Aimeos\MW\Criteria\PgSQL( $conn ); break;
+				$search = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
 			default:
-				$search = new \Aimeos\MW\Criteria\SQL( $conn ); break;
+				$search = new \Aimeos\Base\Criteria\SQL( $conn ); break;
 		}
 
 		$dbm->release( $conn, $db );
@@ -116,12 +116,12 @@ abstract class Base
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		return $this->object()->search( $filter, $ref, $total );
 	}
@@ -163,7 +163,7 @@ abstract class Base
 	/**
 	 * Returns the additional column/search definitions
 	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSaveAttributes() : array
 	{
@@ -216,7 +216,7 @@ abstract class Base
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param array|string $keys Search key or list of keys for aggregation
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
@@ -225,7 +225,7 @@ abstract class Base
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $keys, string $cfgPath,
+	protected function aggregateBase( \Aimeos\Base\Criteria\Iface $search, $keys, string $cfgPath,
 		array $required = [], string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/common/manager/aggregate/limit
@@ -402,14 +402,14 @@ abstract class Base
 	 * Creates the criteria attribute items from the list of entries
 	 *
 	 * @param array $list Associative array of code as key and array with properties as values
-	 * @return \Aimeos\MW\Criteria\Attribute\Standard[] List of criteria attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Standard[] List of criteria attribute items
 	 */
 	protected function createAttributes( array $list ) : array
 	{
 		$attr = [];
 
 		foreach( $list as $key => $fields ) {
-			$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
+			$attr[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
 		}
 
 		return $attr;
@@ -422,9 +422,9 @@ abstract class Base
 	 *
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
 	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
-	 * @return \Aimeos\MW\Criteria\Iface Search critery object
+	 * @return \Aimeos\Base\Criteria\Iface Search critery object
 	 */
-	protected function filterBase( string $domain, ?bool $default = true ) : \Aimeos\MW\Criteria\Iface
+	protected function filterBase( string $domain, ?bool $default = true ) : \Aimeos\Base\Criteria\Iface
 	{
 		$filter = self::filter();
 
@@ -469,7 +469,7 @@ abstract class Base
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
 	 * @param string[] $default List of sub-domains if no others are configured
 	 * @param bool $withsub True to include search definitions of sub-domains, false if not
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Associative list of search keys and criteria attribute items as values
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] Associative list of search keys and criteria attribute items as values
 	 * @since 2014.09
 	 */
 	protected function getSearchAttributesBase( array $list, string $path, array $default, bool $withsub ) : array
@@ -634,13 +634,13 @@ abstract class Base
 	/**
 	 * Returns the SQL strings for joining dependent tables.
 	 *
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
 	 * @param string $prefix Search key prefix
 	 * @return array List of JOIN SQL strings
 	 */
 	private function getJoins( array $attributes, string $prefix ) : array
 	{
-		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
@@ -717,9 +717,9 @@ abstract class Base
 	/**
 	 * Returns a search object singleton
 	 *
-	 * @return \Aimeos\MW\Criteria\Iface Search object
+	 * @return \Aimeos\Base\Criteria\Iface Search object
 	 */
-	protected function getSearch() : \Aimeos\MW\Criteria\Iface
+	protected function getSearch() : \Aimeos\Base\Criteria\Iface
 	{
 		if( !isset( $this->search ) ) {
 			$this->search = $this->filter();
@@ -753,9 +753,9 @@ abstract class Base
 	 * Returns the site coditions for the search request
 	 *
 	 * @param string[] $keys Sorted list of criteria keys
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
 	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return \Aimeos\MW\Criteria\Expression\Iface[] List of search conditions
+	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
 	 * @since 2015.01
 	 */
 	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
@@ -779,14 +779,14 @@ abstract class Base
 	/**
 	 * Returns the string replacements for the SQL statements
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search critera object
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
-	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
+	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins,
+	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $plugins,
 		array $joins, array $columns = [] ) : array
 	{
 		$types = $this->getSearchTypes( $attributes );
@@ -825,17 +825,17 @@ abstract class Base
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
 	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param int|null $total Contains the number of all records matching the criteria if not null
 	 * @param int $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
-	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
+	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @return \Aimeos\Base\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
-	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
+	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\Base\Criteria\Iface $search,
 		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
 		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
 	{

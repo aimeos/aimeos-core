@@ -101,12 +101,12 @@ class None
 	/**
 	 * Search for cache entries based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
+	 * @param \Aimeos\Base\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MAdmin\Cache\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		return map();
 	}
@@ -129,7 +129,7 @@ class None
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Returns a list of search attributes
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] Returns a list of search attributes
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{

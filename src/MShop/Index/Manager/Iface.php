@@ -24,13 +24,13 @@ interface Iface
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map;
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Optimizes the index if necessary.

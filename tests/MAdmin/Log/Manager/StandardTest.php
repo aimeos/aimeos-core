@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attr );
+			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attr );
 		}
 	}
 

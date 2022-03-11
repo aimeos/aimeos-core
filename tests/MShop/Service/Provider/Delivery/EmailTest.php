@@ -64,7 +64,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 5, count( $result ) );
 
 		foreach( $result as $key => $item ) {
-			$this->assertInstanceOf( 'Aimeos\MW\Criteria\Attribute\Iface', $item );
+			$this->assertInstanceOf( 'Aimeos\Base\Criteria\Attribute\Iface', $item );
 		}
 	}
 

@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
@@ -206,19 +206,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter( true );
 
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $search );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $search->getConditions() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $search );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $search->getConditions() );
 
 		$list = $search->getConditions()->getExpressions();
 		$this->assertArrayHasKey( 0, $list );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $list[0] );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $list[0] );
 	}
 
 
 	public function testCreateSearchSite()
 	{
 		$result = $this->object->filter( false, true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
 

@@ -116,12 +116,12 @@ interface Iface
 	 * array( 'text' => 1 ) // second result set with refid 12 counted
 	 * </code>
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param array|string $key Search key or list of keys to aggregate items for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
-	 * @see \Aimeos\MW\Criteria\Iface
+	 * @see \Aimeos\Base\Criteria\Iface
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map;
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map;
 }

@@ -185,7 +185,7 @@ class Standard
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{

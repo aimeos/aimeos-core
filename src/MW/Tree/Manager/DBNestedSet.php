@@ -29,7 +29,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	/**
 	 * Initializes the tree manager.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Criteria\Attribute\Standard:
+	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\Base\Criteria\Attribute\Standard:
 	 *	[id] => Array describing unique ID codes/types/labels
 	 *	[label] => Array describing codes/types/labels for descriptive labels
 	 *	[status] => Array describing codes/types/labels for status values
@@ -98,14 +98,14 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes() : array
 	{
 		$attributes = [];
 
 		foreach( $this->searchConfig as $values ) {
-			$attributes[] = new \Aimeos\MW\Criteria\Attribute\Standard( $values );
+			$attributes[] = new \Aimeos\Base\Criteria\Attribute\Standard( $values );
 		}
 
 		return $attributes;
@@ -115,12 +115,12 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return \Aimeos\MW\Criteria\Iface Search object instance
+	 * @return \Aimeos\Base\Criteria\Iface Search object instance
 	 */
-	public function createSearch() : \Aimeos\MW\Criteria\Iface
+	public function createSearch() : \Aimeos\Base\Criteria\Iface
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
-		$search = new \Aimeos\MW\Criteria\SQL( $conn );
+		$search = new \Aimeos\Base\Criteria\SQL( $conn );
 		$this->dbm->release( $conn, $this->dbname );
 
 		return $search;
@@ -189,10 +189,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @param \Aimeos\MW\Criteria\Iface|null $condition Optional criteria object with conditions
+	 * @param \Aimeos\Base\Criteria\Iface|null $condition Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $condition = null ) : \Aimeos\MW\Tree\Node\Iface
+	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $condition = null ) : \Aimeos\MW\Tree\Node\Iface
 	{
 		if( $id === null )
 		{
@@ -535,11 +535,11 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string|null $id Search nodes starting at the node with the given ID
 	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
-	public function searchNodes( \Aimeos\MW\Criteria\Iface $search, string $id = null ) : array
+	public function searchNodes( \Aimeos\Base\Criteria\Iface $search, string $id = null ) : array
 	{
 		$left = 1;
 		$right = 0x7FFFFFFF;

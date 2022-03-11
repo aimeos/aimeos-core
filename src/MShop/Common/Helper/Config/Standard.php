@@ -25,7 +25,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 	/**
 	 * Initializes the object with the criteria objects to check against
 	 *
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface $criteria Criteria attribute objects
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface $criteria Criteria attribute objects
 	 */
 	public function __construct( array $criteria )
 	{

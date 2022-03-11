@@ -77,12 +77,12 @@ class Nolimit
 	/**
 	 * Search for stock items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$item = $this->object()->create( ['stock.type' => 'default'] );
@@ -128,20 +128,20 @@ class Nolimit
 	/**
 	 * Returns the product IDs from the conditions
 	 *
-	 * @param \Aimeos\MW\Criteria\Expression\Iface|null $cond Criteria object
+	 * @param \Aimeos\Base\Criteria\Expression\Iface|null $cond Criteria object
 	 * @return string[] List of product IDs
 	 */
-	protected function getProductIds( \Aimeos\MW\Criteria\Expression\Iface $cond = null ) : array
+	protected function getProductIds( \Aimeos\Base\Criteria\Expression\Iface $cond = null ) : array
 	{
 		$list = [];
 
-		if( $cond instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface )
+		if( $cond instanceof \Aimeos\Base\Criteria\Expression\Combine\Iface )
 		{
 			foreach( $cond->getExpressions() as $expr ) {
 				$list = array_merge( $list, $this->getProductIds( $expr ) );
 			}
 		}
-		elseif( $cond instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface )
+		elseif( $cond instanceof \Aimeos\Base\Criteria\Expression\Compare\Iface )
 		{
 			if( $cond->getName() === 'stock.productid' && $cond->getOperator() === '==' ) {
 				$list = array_merge( $list, (array) $cond->getValue() );

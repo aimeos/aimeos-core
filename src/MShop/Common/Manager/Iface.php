@@ -49,9 +49,9 @@ interface Iface
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface;
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface;
 
 	/**
 	 * Deletes one or more items.
@@ -82,7 +82,7 @@ interface Iface
 	/**
 	 * Returns the attributes used for saving column values.
 	 *
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of attribute items
 	 */
 	public function getSaveAttributes() : array;
 
@@ -90,7 +90,7 @@ interface Iface
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array;
 
@@ -115,12 +115,12 @@ interface Iface
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map;
+	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map;
 
 	/**
 	 * Injects the reference of the outmost object

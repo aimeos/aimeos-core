@@ -71,9 +71,9 @@ abstract class DBBase
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		return $this->manager->filter( $default );
 	}
@@ -130,7 +130,7 @@ abstract class DBBase
 	 * Returns a list of attribute objects describing the available criteria for searching
 	 *
 	 * @param bool $withsub True to return attributes of sub-managers too
-	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array List of items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -294,14 +294,14 @@ abstract class DBBase
 	/**
 	 * Returns the string replacements for the SQL statements
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search critera object
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items
-	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item keys and criteria plugin objects
+	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items
+	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of item keys and criteria plugin objects
 	 * @param string[] $joins Associative list of SQL joins
-	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins,
+	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $plugins,
 		array $joins, array $columns = [] ) : array
 	{
 		$list = [];
@@ -389,14 +389,14 @@ abstract class DBBase
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
 	 * @return \Aimeos\MShop\Product\Item\Iface[] List of product items
 	 */
-	protected function searchItemsIndexBase( \Aimeos\MW\Criteria\Iface $search,
+	protected function searchItemsIndexBase( \Aimeos\Base\Criteria\Iface $search,
 		array $ref, int &$total = null, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
 	{
 		$list = $ids = [];

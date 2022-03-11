@@ -145,7 +145,7 @@ class Standard
 	 * Returns the medias that can be used for searching.
 	 *
 	 * @param bool $withsub Return also medias of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
