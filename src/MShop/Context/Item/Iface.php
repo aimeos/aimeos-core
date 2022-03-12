@@ -250,17 +250,17 @@ interface Iface
 	/**
 	 * Returns the view object.
 	 *
-	 * @return \Aimeos\MW\View\Iface View object
+	 * @return \Aimeos\Base\View\Iface View object
 	 */
-	public function view() : \Aimeos\MW\View\Iface;
+	public function view() : \Aimeos\Base\View\Iface;
 
 	/**
 	 * Sets the view object.
 	 *
-	 * @param \Aimeos\MW\View\Iface $view View object
+	 * @param \Aimeos\Base\View\Iface $view View object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setView( \Aimeos\MW\View\Iface $view ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setView( \Aimeos\Base\View\Iface $view ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the account name of the user/editor.

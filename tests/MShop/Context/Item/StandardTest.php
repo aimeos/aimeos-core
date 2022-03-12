@@ -258,10 +258,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetView()
 	{
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\Base\View\Standard();
 		$return = $this->object->setView( $view );
 
-		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $this->object->view() );
+		$this->assertInstanceOf( \Aimeos\Base\View\Iface::class, $this->object->view() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
