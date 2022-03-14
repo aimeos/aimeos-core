@@ -171,12 +171,16 @@ class Imagick
 
 			if( $fit === 2 && $width && $height )
 			{
+error_log( __METHOD__ . ': cropping' );
 				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
 				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
 				$newMedia->image->setImagePage( 0, 0, 0, 0 );
 			}
 			elseif( $fit === 1 && $width && $height )
 			{
+error_log( __METHOD__ . ': padding' );
+				$this->resize( $newMedia, $width, $height );
+
 				$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
 				$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
 
@@ -184,14 +188,8 @@ class Imagick
 			}
 			else
 			{
-				$w = $this->image->getImageWidth();
-				$h = $this->image->getImageHeight();
-
-				list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
-
-				if( $w > $newWidth || $h > $newHeight ) {
-					$newMedia->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
-				}
+error_log( __METHOD__ . ': ratio' );
+				$this->resize( $newMedia, $width, $height );
 			}
 
 			return $this->watermark( $newMedia );
@@ -232,12 +230,35 @@ class Imagick
 
 
 	/**
+	 * Resizes the image to the given width and height.
+	 *
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object that should be resized
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
+	 */
+	protected function resize( \Aimeos\MW\Media\Image\Iface $media, ?int $width, ?int $height ) : \Aimeos\MW\Media\Image\Iface
+	{
+		$w = $this->image->getImageWidth();
+		$h = $this->image->getImageHeight();
+
+		list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
+
+		if( $w > $newWidth || $h > $newHeight ) {
+			$media->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
+		}
+
+		return $media;
+	}
+
+
+	/**
 	 * Adds the configured water mark to the image
 	 *
 	 * @param \Aimeos\MW\Media\Image\Iface $media Media object the watermark should be applied to
 	 * @return \Aimeos\MW\Media\Image\Iface Media object with watermark
 	 */
-	protected function watermark( \Aimeos\MW\Media\Image\Iface $media )
+	protected function watermark( \Aimeos\MW\Media\Image\Iface $media ) : \Aimeos\MW\Media\Image\Iface
 	{
 		if( self::$wmimg === null ) {
 			return $media;
