@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetMessageQueueManager()
 	{
 		$context = \TestHelper::context();
-		$mq = new \Aimeos\MW\MQueue\Manager\Standard( $context->config() );
+		$mq = new \Aimeos\Base\MQueue\Manager\Standard( $context->config() );
 		$return = $this->object->setMessageQueueManager( $mq );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );

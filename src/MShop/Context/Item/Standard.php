@@ -432,10 +432,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the message queue manager object.
 	 *
-	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
+	 * @param \Aimeos\Base\MQueue\Manager\Iface $mqManager Message queue manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface
+	public function setMessageQueueManager( \Aimeos\Base\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->queue = $mqManager;
 
@@ -448,9 +448,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"
 	 * @param string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
+	 * @return \Aimeos\Base\MQueue\Queue\Iface Message queue object
 	 */
-	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
+	public function queue( string $resource, string $queue ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
 		if( !isset( $this->queue ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
