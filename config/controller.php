@@ -31,6 +31,9 @@ return [
 				'video/mp4' => 'mp4',
 				'video/webm' => 'webm',
 			],
+			'previews' => [[
+				'force-size' => 0,
+			]],
 			'catalog' => [
 				'stage' => [
 					'previews' => [[

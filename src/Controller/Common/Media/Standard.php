@@ -366,11 +366,8 @@ class Standard
 			$maxheight = ( isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null );
 			$fit = ( isset( $entry['force-size'] ) ? (int) $entry['force-size'] : 0 );
 
-			if( $maxheight || $maxwidth )
-			{
-				$image = $media->scale( $maxwidth, $maxheight, $fit );
-				$list[$image->getWidth()] = $image;
-			}
+			$image = $media->scale( $maxwidth, $maxheight, $fit );
+			$list[$image->getWidth()] = $image;
 		}
 
 		return $list;
