@@ -31,16 +31,6 @@ return [
 				'video/mp4' => 'mp4',
 				'video/webm' => 'webm',
 			],
-			'previews' => [[
-				'maxwidth' => 480,
-				'force-size' => false,
-			], [
-				'maxwidth' => 960,
-				'force-size' => false,
-			], [
-				'maxwidth' => 1920,
-				'force-size' => false,
-			]],
 			'catalog' => [
 				'stage' => [
 					'previews' => [[
