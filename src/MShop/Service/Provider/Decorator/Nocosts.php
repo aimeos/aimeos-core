@@ -25,7 +25,7 @@ class Nocosts
 	 * Returns the costs per item as negative value to get no costs at all.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @param array Selected options by customer from frontend
+	 * @param array $options Selected options by customer from frontend
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
