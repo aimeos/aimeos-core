@@ -69,9 +69,10 @@ class Costs
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param array Selected options by customer from frontend
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$config = $this->getServiceItem()->getConfig();
 
@@ -82,7 +83,7 @@ class Costs
 		}
 
 		$value = $basket->getPrice()->getValue() * $config['costs.percent'] / 100;
-		$price = $this->getProvider()->calcPrice( $basket );
+		$price = $this->getProvider()->calcPrice( $basket, $options );
 		$price->setCosts( $price->getCosts() + $value );
 
 		return $price;
