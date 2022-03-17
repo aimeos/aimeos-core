@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
 /**
- * Decorator for reduction of service providers prices.
+ * Decorator for reduction of basket value.
  *
  * @package MShop
  * @subpackage Service
