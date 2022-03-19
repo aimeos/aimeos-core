@@ -38,10 +38,8 @@ return [
 				'stage' => [
 					'previews' => [[
 						'maxwidth' => 960,
-						'force-size' => false,
 					], [
 						'maxwidth' => 1920,
-						'force-size' => false,
 					]],
 				]
 			],
@@ -49,15 +47,17 @@ return [
 				'previews' => [[
 					'maxwidth' => 240,
 					'maxheight' => 320,
-					'force-size' => false,
+					'force-size' => 1,
 				], [
-					'maxwidth' => 720,
-					'maxheight' => 960,
-					'force-size' => false,
+					'maxwidth' => 480,
+					'maxheight' => 640,
+					'force-size' => 1,
 				], [
-					'maxwidth' => 2160,
-					'maxheight' => 2880,
-					'force-size' => false,
+					'maxwidth' => 960,
+					'maxheight' => 1280,
+					'force-size' => 1,
+				], [
+					'maxwidth' => 1920,
 				]],
 			],
 		],
