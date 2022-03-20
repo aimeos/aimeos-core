@@ -128,7 +128,7 @@ class Setup
 		$session = new \Aimeos\Base\Session\None();
 		$ctx->setSession( $session );
 
-		$cache = new \Aimeos\MW\Cache\None();
+		$cache = new \Aimeos\Base\Cache\None();
 		$ctx->setCache( $cache );
 
 		$process = new \Aimeos\Base\Process\Pcntl( $conf->get( 'pcntl_max', 4 ), $conf->get( 'pcntl_priority', 19 ) );

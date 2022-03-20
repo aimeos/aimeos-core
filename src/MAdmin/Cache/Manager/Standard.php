@@ -22,6 +22,7 @@ class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
 	implements \Aimeos\MAdmin\Cache\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	private static $conn;
 	private $object;
 
 	private $searchConfig = array(
@@ -71,91 +72,18 @@ class Standard
 	/**
 	 * Returns the cache object
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
-	public function getCache() : \Aimeos\MW\Cache\Iface
+	public function getCache() : \Aimeos\Base\Cache\Iface
 	{
 		if( !isset( $this->object ) )
 		{
-			/** madmin/cache/manager/deletebytag/mysql
-			 * Deletes the items from the database matched by the given tags
-			 *
-			 * @see madmin/cache/manager/deletebytag/ansi
-			 */
+			if( !isset( self::$conn ) ) {
+				self::$conn = $this->context()->db()->acquire( 'db-cache' );
+			}
 
-			/** madmin/cache/manager/deletebytag/ansi
-			 * Deletes the items from the database matched by the given tags
-			 *
-			 * Removes the records specified by the given tags from the cache database.
-			 * The records must be from the site that is configured via the
-			 * context item.
-			 *
-			 * The ":cond" placeholder is replaced by the name of the tag column and
-			 * the given tag or list of tags.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for deleting items by tags
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/cache/manager/delete/ansi
-			 * @see madmin/cache/manager/get/ansi
-			 * @see madmin/cache/manager/set/ansi
-			 * @see madmin/cache/manager/settag/ansi
-			 * @see madmin/cache/manager/search/ansi
-			 * @see madmin/cache/manager/count/ansi
-			 */
-
-			/** madmin/cache/manager/get/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see madmin/cache/manager/get/ansi
-			 */
-
-			/** madmin/cache/manager/get/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the cache
-			 * database. The records must be from the sites that is
-			 * configured in the context item.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/cache/manager/delete/ansi
-			 * @see madmin/cache/manager/deletebytag/ansi
-			 * @see madmin/cache/manager/set/ansi
-			 * @see madmin/cache/manager/settag/ansi
-			 * @see madmin/cache/manager/search/ansi
-			 * @see madmin/cache/manager/count/ansi
-			 */
-
-			$cfg = array(
-				'search' => $this->searchConfig,
-				'dbname' => $this->getResourceName(),
-				'sql' => array(
-					'delete' => $this->getSqlConfig( 'madmin/cache/manager/delete' ),
-					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/deletebytag' ),
-					'get' => $this->getSqlConfig( 'madmin/cache/manager/get' ),
-					'set' => $this->getSqlConfig( 'madmin/cache/manager/set' ),
-					'settag' => $this->getSqlConfig( 'madmin/cache/manager/settag' ),
-				),
-			);
-			$dbm = $this->context()->db();
-			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $cfg, $dbm );
+			$cfg = $this->context()->config()->get( 'madmin/cache/manager' );
+			$this->object = \Aimeos\Base\Cache\Factory::create( 'DB', $cfg, self::$conn );
 		}
 
 		return $this->object;
@@ -170,62 +98,7 @@ class Standard
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->context();
-		$config = $context->config();
-
-		foreach( $config->get( 'madmin/cache/manager/submanagers', [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
-		}
-
-		/** madmin/cache/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see madmin/cache/manager/delete/ansi
-		 */
-
-		/** madmin/cache/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the cache database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see madmin/cache/manager/deletebytag/ansi
-		 * @see madmin/cache/manager/get/ansi
-		 * @see madmin/cache/manager/set/ansi
-		 * @see madmin/cache/manager/settag/ansi
-		 * @see madmin/cache/manager/search/ansi
-		 * @see madmin/cache/manager/count/ansi
-		 */
-
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$sql = str_replace( ':cond', '1=1', $this->getSqlConfig( 'madmin/cache/manager/delete' ) );
-			$stmt = $conn->create( $sql )->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
+		$this->getCache()->clear();
 		return $this;
 	}
 

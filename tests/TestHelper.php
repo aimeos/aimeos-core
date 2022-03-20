@@ -138,7 +138,7 @@ class TestHelper
 		$ctx->setMessageQueueManager( $mq );
 
 
-		$cache = new \Aimeos\MW\Cache\None();
+		$cache = new \Aimeos\Base\Cache\None();
 		$ctx->setCache( $cache );
 
 

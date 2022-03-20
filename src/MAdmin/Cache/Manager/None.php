@@ -36,11 +36,11 @@ class None
 	/**
 	 * Returns the cache object
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
-	public function getCache() : \Aimeos\MW\Cache\Iface
+	public function getCache() : \Aimeos\Base\Cache\Iface
 	{
-		return \Aimeos\MW\Cache\Factory::create( 'None', [], null );
+		return \Aimeos\Base\Cache\Factory::create( 'None', [], null );
 	}
 
 

@@ -23,17 +23,17 @@ interface Iface
 	/**
 	 * Returns the cache object.
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
-	public function cache() : \Aimeos\MW\Cache\Iface;
+	public function cache() : \Aimeos\Base\Cache\Iface;
 
 	/**
 	 * Sets the cache object.
 	 *
-	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
+	 * @param \Aimeos\Base\Cache\Iface $cache Cache object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setCache( \Aimeos\MW\Cache\Iface $cache ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setCache( \Aimeos\Base\Cache\Iface $cache ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the configuration object.

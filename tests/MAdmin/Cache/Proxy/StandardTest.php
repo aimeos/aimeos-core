@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MAdmin::cache( true );
 		$this->context = \TestHelper::context();
 
-		$this->mock = $this->getMockBuilder( \Aimeos\MW\Cache\DB::class )
+		$this->mock = $this->getMockBuilder( \Aimeos\Base\Cache\DB::class )
 			->disableOriginalConstructor()->getMock();
 
 		$manager = $this->getMockBuilder( \Aimeos\MAdmin\Cache\Manager\Standard::class )

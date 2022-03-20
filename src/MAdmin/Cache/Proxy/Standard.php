@@ -19,7 +19,7 @@ namespace Aimeos\MAdmin\Cache\Proxy;
  * @subpackage Cache
  */
 class Standard
-	implements \Aimeos\MW\Cache\Iface
+	implements \Aimeos\Base\Cache\Iface
 {
 	private $object;
 	private $context;
@@ -199,7 +199,7 @@ class Standard
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
 	protected function object()
 	{

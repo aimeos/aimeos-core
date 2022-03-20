@@ -8,42 +8,32 @@
 
 return array(
 	'manager' => array(
-		'delete' => array(
-			'ansi' => '
-				DELETE FROM "madmin_cache" WHERE :cond
-			',
-		),
-		'deletebytag' => array(
-			'ansi' => '
-				DELETE FROM "madmin_cache" WHERE id IN (
-					SELECT "tid" FROM "madmin_cache_tag" WHERE :cond
-				)
-			',
-		),
-		'get' => array(
-			'ansi' => '
-				SELECT "id", "value", "expire" FROM "madmin_cache"
-				WHERE :cond
-			',
-		),
-		'set' => array(
-			'ansi' => '
-				INSERT INTO "madmin_cache" (
-					"id", "expire", "value"
-				) VALUES (
-					?, ?, ?
-				)
-			',
-		),
-		'settag' => array(
-			'ansi' => '
-				INSERT INTO "madmin_cache_tag" (
-					"tid", "tname"
-				) VALUES (
-					?, ?
-				)
-			',
-		),
+		'cleanup' => 'DELETE FROM "madmin_cache" WHERE "expire" < ?',
+		'clear' => 'DELETE FROM "madmin_cache"',
+		'delete' => 'DELETE FROM "madmin_cache" WHERE "id" IN (?)',
+		'deletebytag' => '
+			DELETE FROM "madmin_cache" WHERE "id" IN (
+				SELECT "tid" FROM "mw_cache_tag_test" WHERE "tname" IN (?)
+			)
+		',
+		'get' => '
+			SELECT "id", "value", "expire" FROM "madmin_cache"
+			WHERE ( "expire" >= ? OR "expire" IS NULL ) AND "id" IN (?)
+		',
+		'set' => '
+			INSERT INTO "madmin_cache" (
+				"id", "expire", "value"
+			) VALUES (
+				?, ?, ?
+			)
+		',
+		'settag' => '
+			INSERT INTO "madmin_cache_tag" (
+				"tid", "tname"
+			) VALUES (
+				?, ?
+			)
+		',
 		'search' => array(
 			'ansi' => '
 				SELECT "id", "value", "expire"
