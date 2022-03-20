@@ -22,7 +22,8 @@ class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
 	implements \Aimeos\MAdmin\Cache\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private static $conn;
+	private $dbm;
+	private $conn;
 	private $object;
 
 	private $searchConfig = array(
@@ -69,6 +70,16 @@ class Standard
 	}
 
 
+	public function __destruct()
+	{
+		if( $this->dbm && $this->conn ) {
+			$this->dbm->release( $this->conn, 'db-cache' );
+		}
+
+		unset( $this->conn, $this->dbm, $this->object );
+	}
+
+
 	/**
 	 * Returns the cache object
 	 *
@@ -78,12 +89,13 @@ class Standard
 	{
 		if( !isset( $this->object ) )
 		{
-			if( !isset( self::$conn ) ) {
-				self::$conn = $this->context()->db()->acquire( 'db-cache' );
-			}
+			$context = $this->context();
+			$cfg = $context->config()->get( 'madmin/cache/manager' );
 
-			$cfg = $this->context()->config()->get( 'madmin/cache/manager' );
-			$this->object = \Aimeos\Base\Cache\Factory::create( 'DB', $cfg, self::$conn );
+			$this->dbm = $context->db();
+			$this->conn = $this->dbm->acquire( 'db-cache' );
+
+			$this->object = \Aimeos\Base\Cache\Factory::create( 'DB', $cfg, $this->conn );
 		}
 
 		return $this->object;

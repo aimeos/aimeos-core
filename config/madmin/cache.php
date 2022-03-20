@@ -13,7 +13,7 @@ return array(
 		'delete' => 'DELETE FROM "madmin_cache" WHERE "id" IN (?)',
 		'deletebytag' => '
 			DELETE FROM "madmin_cache" WHERE "id" IN (
-				SELECT "tid" FROM "mw_cache_tag_test" WHERE "tname" IN (?)
+				SELECT "tid" FROM "madmin_cache_tag" WHERE "tname" IN (?)
 			)
 		',
 		'get' => '

@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
 
 

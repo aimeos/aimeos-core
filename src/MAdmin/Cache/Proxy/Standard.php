@@ -36,6 +36,12 @@ class Standard
 	}
 
 
+	public function destruct()
+	{
+		unset( $this->object );
+	}
+
+
 	/**
 	 * Removes all expired cache entries.
 	 *
