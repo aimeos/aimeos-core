@@ -171,14 +171,12 @@ class Imagick
 
 			if( $fit === 2 && $width && $height )
 			{
-error_log( __METHOD__ . ': cropping' );
 				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
 				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
 				$newMedia->image->setImagePage( 0, 0, 0, 0 );
 			}
 			elseif( $fit === 1 && $width && $height )
 			{
-error_log( __METHOD__ . ': padding' );
 				$this->resize( $newMedia, $width, $height );
 
 				$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
@@ -188,7 +186,6 @@ error_log( __METHOD__ . ': padding' );
 			}
 			else
 			{
-error_log( __METHOD__ . ': ratio' );
 				$this->resize( $newMedia, $width, $height );
 			}
 
