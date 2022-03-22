@@ -56,7 +56,7 @@ class OrderAddProductParentid extends Base
 	}
 
 
-	protected function update( \Aimeos\MShop\Context\Item\Iface $context, array $codes )
+	protected function update( \Aimeos\MShop\ContextIface $context, array $codes )
 	{
 		$start = 0; $size = 1000;
 		$pmanager = \Aimeos\MShop::create( $context, 'product' );

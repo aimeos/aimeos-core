@@ -32,7 +32,7 @@ class JobAddTestData extends Base
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\Context\Item\Iface::class, true );
+		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
 		$this->info( 'Adding admin test data', 'v' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );

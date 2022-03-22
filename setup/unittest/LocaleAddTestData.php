@@ -46,7 +46,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\Context\Item\Iface::class, true );
+		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
 		$this->info( 'Adding test data for MShop locale domain', 'v' );
 

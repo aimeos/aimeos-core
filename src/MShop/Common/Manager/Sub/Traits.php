@@ -25,21 +25,21 @@ trait Traits
 	/**
 	 * Returns the context object.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
-	abstract protected function context() : \Aimeos\MShop\Context\Item\Iface;
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
 
 
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string[] $decorators List of decorator names that should be wrapped around the manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Common\Manager\Iface $manager,
+	protected function addDecorators( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )

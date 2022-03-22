@@ -47,12 +47,12 @@ class MShop
 	 * domain or the getSubManager() method to hand over specifc implementation
 	 * names.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
+	 * @param \Aimeos\MShop\ContextIface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Exception If the given path is invalid or the manager wasn't found
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $path ) : \Aimeos\MShop\Common\Manager\Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $path ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $path ) )
 		{

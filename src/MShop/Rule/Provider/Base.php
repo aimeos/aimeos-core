@@ -41,10 +41,10 @@ abstract class Base
 	/**
 	 * Initializes the rule instance.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 * @param \Aimeos\MShop\Rule\Item\Iface $item Rule item object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Rule\Item\Iface $item )
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Rule\Item\Iface $item )
 	{
 		$this->item = $item;
 		$this->context = $context;
@@ -169,9 +169,9 @@ abstract class Base
 	/**
 	 * Returns the context object.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
+	 * @return \Aimeos\MShop\ContextIface Context item object
 	 */
-	protected function context() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
 	}

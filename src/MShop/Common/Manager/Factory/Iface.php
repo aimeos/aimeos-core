@@ -23,8 +23,8 @@ interface Iface
 	/**
 	 * Initializes the manager by using the given context object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 * @return null
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
+	public function __construct( \Aimeos\MShop\ContextIface $context );
 }

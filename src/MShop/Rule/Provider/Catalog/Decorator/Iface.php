@@ -22,10 +22,10 @@ interface Iface extends \Aimeos\MShop\Rule\Provider\Iface
 	/**
 	 * Initializes the rule instance
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 * @param \Aimeos\MShop\Rule\Item\Iface $item Rule item object
 	 * @param \Aimeos\MShop\Rule\Provider\Iface $provider Rule provider object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Rule\Item\Iface $item,
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Rule\Item\Iface $item,
 		\Aimeos\MShop\Rule\Provider\Iface $provider );
 }

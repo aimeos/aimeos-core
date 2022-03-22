@@ -32,10 +32,10 @@ abstract class Base
 	/**
 	 * Initializes the service provider object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration for the provider
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
 	{
 		$this->context = $context;
 		$this->serviceItem = $serviceItem;
@@ -300,9 +300,9 @@ abstract class Base
 	/**
 	 * Returns the context item.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item
+	 * @return \Aimeos\MShop\ContextIface Context item
 	 */
-	protected function context() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
 	}

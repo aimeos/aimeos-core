@@ -27,11 +27,11 @@ abstract class Base
 	 * compatible with the constructor of the factory interface if this
 	 * intermediate constructor isn't implemented!
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
 	{
 		parent::__construct( $context, $item, $code );
 	}

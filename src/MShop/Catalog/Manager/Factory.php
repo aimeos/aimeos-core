@@ -25,12 +25,12 @@ class Factory
 	/**
 	 * Creates a catalog DAO object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Shop context instance with necessary objects
 	 * @param string|null $name Manager name
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Catalog\Exception If requested manager implementation couldn't be found
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/catalog/manager/name
 		 * Class name of the used catalog manager implementation

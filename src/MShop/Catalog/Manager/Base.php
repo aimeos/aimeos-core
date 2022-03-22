@@ -30,9 +30,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $searchConfig )
+	public function __construct( \Aimeos\MShop\ContextIface $context, array $searchConfig )
 	{
 		parent::__construct( $context );
 

@@ -51,10 +51,10 @@ class Setup
 	/**
 	 * Sets a custom context object
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @return self Same object for fluid method calls
 	 */
-	public function context( \Aimeos\MShop\Context\Item\Iface $context ) : self
+	public function context( \Aimeos\MShop\ContextIface $context ) : self
 	{
 		$this->context = $context;
 		return $this;
@@ -101,11 +101,11 @@ class Setup
 	/**
 	 * Returns a new context object
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface New context object
+	 * @return \Aimeos\MShop\ContextIface New context object
 	 */
-	protected function createContext() : \Aimeos\MShop\Context\Item\Iface
+	protected function createContext() : \Aimeos\MShop\ContextIface
 	{
-		$ctx = new \Aimeos\MShop\Context\Item\Standard();
+		$ctx = new \Aimeos\MShop\Context();
 
 		$conf = new \Aimeos\Base\Config\PHPArray( [], $this->bootstrap->getConfigPaths() );
 

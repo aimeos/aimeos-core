@@ -46,12 +46,12 @@ class MAdmin
 	 * domain or the getSubManager() method to hand over specifc implementation
 	 * names.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
+	 * @param \Aimeos\MShop\ContextIface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "log"
 	 * @return \Aimeos\MShop\Common\Manager\Iface MAdmin manager object
 	 * @throws \Aimeos\MAdmin\Exception If the given path is invalid or the manager wasn't found
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $path ) : \Aimeos\MShop\Common\Manager\Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $path ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $path ) )
 		{

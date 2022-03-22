@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$result = $method->invokeArgs( $object, [] );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $result );
 		$this->assertSame( $context, $result );
 	}
 

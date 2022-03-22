@@ -25,13 +25,13 @@ class Factory
 	/**
 	 * Creates a attribute manager DAO object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Shop context instance with necessary objects
 	 * @param string|null $name Manager name
 	 * @return \Aimeos\MShop\Common\Manager\Iface Attribute manager implementing \Aimeos\MShop\Common\Manager\Iface
 	 * @throws \Aimeos\MShop\Attribute\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/attribute/manager/name
 		 * Class name of the used attribute manager implementation

@@ -31,11 +31,11 @@ abstract class Base
 	/**
 	 * Initializes the coupon model.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
 	{
 		$this->context = $context;
 		$this->item = $item;
@@ -176,9 +176,9 @@ abstract class Base
 	/**
 	 * Returns the stored context object.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
-	protected function context() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
 	}

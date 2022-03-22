@@ -28,11 +28,11 @@ abstract class Base
 	/**
 	 * Creates the type manager using the given context object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 *
 	 * @throws \Aimeos\MShop\Exception if no configuration is available
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
+	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		parent::__construct( $context );
 

@@ -25,11 +25,11 @@ class Factory
 	/**
 	 * Creates an admin log manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param string|null $name Manager name
 	 * @return \Aimeos\MShop\Common\Manager\Iface Log manager object
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/log/manager/name
 		 * Class name of the used log manager implementation

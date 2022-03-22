@@ -28,12 +28,12 @@ abstract class Base
 	 * Initializes a new coupon provider object using the given context object.
 	 *
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider interface
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $couponItem Coupon item with configuration for the provider
 	 * @param string $code Coupon code entered by the customer
 	 */
 	public function __construct( \Aimeos\MShop\Coupon\Provider\Iface $provider,
-		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $couponItem, string $code )
+		\Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Coupon\Item\Iface $couponItem, string $code )
 	{
 		$this->provider = $provider;
 

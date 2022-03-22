@@ -22,10 +22,10 @@ interface Iface
 	/**
 	 * Initializes the object
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @return null
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
+	public function __construct( \Aimeos\MShop\ContextIface $context );
 
 	/**
 	 * Stores the uploaded file and adds the references to the media item

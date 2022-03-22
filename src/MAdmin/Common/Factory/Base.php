@@ -24,12 +24,12 @@ abstract class Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function addManagerDecorators( \Aimeos\MShop\ContextIface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $context->config();

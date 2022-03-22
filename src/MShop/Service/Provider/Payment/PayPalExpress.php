@@ -175,11 +175,11 @@ class PayPalExpress
 	/**
 	 * Initializes the provider object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration
 	 * @throws \Aimeos\MShop\Service\Exception If one of the required configuration values isn't available
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
+	public function __construct( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
 	{
 		parent::__construct( $context, $serviceItem );
 

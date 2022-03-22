@@ -40,13 +40,13 @@ abstract class Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param array $decorators List of decorator names that should be wrapped around the manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function addDecorators( \Aimeos\MShop\ContextIface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
@@ -77,12 +77,12 @@ abstract class Base
 	/**
 	 * Adds the decorators to the manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function addManagerDecorators( \Aimeos\MShop\ContextIface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $context->config();
@@ -137,12 +137,12 @@ abstract class Base
 	/**
 	 * Creates a manager object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param string $classname Name of the manager class
 	 * @param string $interface Name of the manager interface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function createManager( \Aimeos\MShop\Context\Item\Iface $context, string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
+	protected static function createManager( \Aimeos\MShop\ContextIface $context, string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

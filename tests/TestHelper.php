@@ -28,7 +28,7 @@ class TestHelper
 	 * Returns the context object
 	 *
 	 * @param string $site Site code
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
 	public static function context( $site = 'unittest' )
 	{
@@ -104,11 +104,11 @@ class TestHelper
 	 * Creates a new context object
 	 *
 	 * @param string $site Site code
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
 	private static function createContext( $site )
 	{
-		$ctx = new \Aimeos\MShop\Context\Item\Standard();
+		$ctx = new \Aimeos\MShop\Context();
 		$aimeos = self::getAimeos();
 
 

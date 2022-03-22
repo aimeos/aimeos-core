@@ -6,8 +6,9 @@
 			<directory>MW/</directory>
 		</testsuite>
 		<testsuite name="MShop suite">
-			<directory>MShop/</directory>
 			<file>MShopTest.php</file>
+			<file>ContextTest.php</file>
+			<directory>MShop/</directory>
 		</testsuite>
 		<testsuite name="MAdmin suite">
 			<directory>MAdmin/</directory>

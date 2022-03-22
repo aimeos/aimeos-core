@@ -25,12 +25,12 @@ class Factory
 	/**
 	 * Creates a new controller specified by the given name.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
+	 * @param \Aimeos\MShop\ContextIface $context Context object required by controllers
 	 * @param string|null $name Name of the controller or "Standard" if null
 	 * @return \Aimeos\Controller\Common\Media\Iface New media controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : Iface
+	public static function create( \Aimeos\MShop\ContextIface $context, string $name = null ) : Iface
 	{
 		/** controller/common/media/name
 		 * Class name of the used media common controller implementation

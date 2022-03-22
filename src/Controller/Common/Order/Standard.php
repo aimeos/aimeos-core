@@ -27,9 +27,9 @@ class Standard
 	/**
 	 * Initializes the object.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context
+	 * @param \Aimeos\MShop\ContextIface $context
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
+	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$this->context = $context;
 	}
@@ -187,9 +187,9 @@ class Standard
 	/**
 	 * Returns the context item object.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
+	 * @return \Aimeos\MShop\ContextIface Context item object
 	 */
-	protected function context() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
 	}
