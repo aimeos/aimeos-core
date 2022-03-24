@@ -370,13 +370,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -531,14 +526,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -598,13 +585,9 @@ class Standard
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->context()->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context()->db( $this->getResourceName() );
 		$items = [];
 
-		try
-		{
 			$required = array( 'coupon.code' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
@@ -739,14 +722,6 @@ class Standard
 				throw $e;
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return map( $items );
 	}
 
@@ -784,12 +759,8 @@ class Standard
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
 		$conditions = $search->getConditionSource( $types, $translations );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
 			/** mshop/coupon/manager/code/counter/mysql
 			 * Increases or decreases the counter of the coupon code record matched by the given code
 			 *
@@ -834,14 +805,6 @@ class Standard
 			$stmt->bind( 4, $code );
 
 			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $this;
 	}

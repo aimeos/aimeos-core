@@ -136,13 +136,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -238,14 +233,6 @@ class Standard
 			$stmt->execute()->finish();
 
 			$item->setId( $item->getCode() ); // set modified flag to false
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $item;
 	}
@@ -364,15 +351,9 @@ class Standard
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$context = $this->context();
-
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
+		$conn = $context->db( $this->getResourceName() );
 		$items = [];
 
-		try
-		{
 			$attributes = $this->object()->getSearchAttributes();
 			$translations = $this->getSearchTranslations( $attributes );
 			$types = $this->getSearchTypes( $attributes );
@@ -472,14 +453,6 @@ class Standard
 			if( $total !== null ) {
 				$total = $this->getTotal( $conn, $find, $replace );
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return map( $items );
 	}

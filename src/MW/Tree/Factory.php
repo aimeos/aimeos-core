@@ -25,7 +25,7 @@ class Factory
 	 *
 	 * @param string $name Manager type name
 	 * @param array $config Associative list of configuration strings for managing the tree
-	 * @param \Aimeos\Base\DB\Manager\Iface|null $resource Reference to the resource which should be used for managing the tree
+	 * @param \Aimeos\Base\DB\Connection\Iface|null $resource Reference to the resource which should be used for managing the tree
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager object of the requested type
 	 * @throws \Aimeos\MW\Tree\Exception if class isn't found
 	 */

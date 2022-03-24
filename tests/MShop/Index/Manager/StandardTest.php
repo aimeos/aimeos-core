@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = self::$products['CNE'];
 
 		$context = $this->context;
-		$dbm = $context->db();
+		$conn = $context->db( 'db-index' );
 		$siteId = $context->locale()->getSiteId();
 
 		$sqlAttribute = 'SELECT COUNT(*) as count FROM "mshop_index_attribute" WHERE "siteid" = ? AND "prodid" = ?';
@@ -181,10 +181,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->save( $item );
 
-		$cntAttribute = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalog = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPrice = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntText = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttribute = $this->getValue( $conn, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalog = $this->getValue( $conn, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPrice = $this->getValue( $conn, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntText = $this->getValue( $conn, $sqlText, 'count', $siteId, $item->getId() );
 
 		$this->assertEquals( 6, $cntAttribute );
 		$this->assertEquals( 5, $cntCatalog );
@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns value of a catalog_index column.
 	 *
-	 * @param \Aimeos\Base\DB\Manager\Iface $dbm Database Manager for connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
 	 * @param string $siteId Siteid of the db entry
@@ -334,7 +334,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 * @return string $value Value returned for specified sql statement
 	 * @throws \Exception If column not available or error during a connection to db
 	 */
-	protected function getValue( \Aimeos\Base\DB\Manager\Iface $dbm, $sql, $column, $siteId, $productId )
+	protected function getValue( \Aimeos\Base\DB\Connection\Iface $conn, $sql, $column, $siteId, $productId )
 	{
 		$config = $this->context->config();
 
@@ -344,34 +344,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$dbname = 'db-product';
 		}
 
-		$conn = $dbm->acquire( $dbname );
+		$stmt = $conn->create( $sql );
+		$stmt->bind( 1, $siteId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $productId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$result = $stmt->execute();
 
-		try
-		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $productId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$result = $stmt->execute();
-
-			if( ( $row = $result->fetch() ) === null ) {
-				throw new \RuntimeException( 'No rows available' );
-			}
-
-			if( !isset( $row[$column] ) ) {
-				throw new \RuntimeException( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
-			}
-
-			$value = $row[$column];
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+		if( ( $row = $result->fetch() ) === null ) {
+			throw new \RuntimeException( 'No rows available' );
 		}
 
-		return $value;
+		if( !isset( $row[$column] ) ) {
+			throw new \RuntimeException( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
+		}
+
+		return $row[$column];
 	}
 
 

@@ -118,13 +118,8 @@ abstract class Base
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$path = $this->getConfigPath();
@@ -184,14 +179,6 @@ abstract class Base
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -206,33 +193,21 @@ abstract class Base
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->context()->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context()->db( $this->getResourceName() );
 		$items = [];
 
-		try
+		$required = [trim( $this->prefix, '.' )];
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$cfgPathSearch = $this->getConfigPath() . 'search';
+		$cfgPathCount = $this->getConfigPath() . 'count';
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
 		{
-			$required = [trim( $this->prefix, '.' )];
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->getConfigPath() . 'search';
-			$cfgPathCount = $this->getConfigPath() . 'count';
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row[$this->prefix . 'id']] = $item;
-				}
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row[$this->prefix . 'id']] = $item;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
 		}
 
 		return map( $items );

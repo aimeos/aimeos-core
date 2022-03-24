@@ -192,17 +192,19 @@ class Context implements \Aimeos\MShop\ContextIface
 
 
 	/**
-	 * Returns the database manager object.
+	 * Returns the database connection object.
 	 *
+	 * @param string $resource Database resource name
+	 * @param bool $new Create a new database connection
 	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
 	 */
-	public function db() : \Aimeos\Base\DB\Manager\Iface
+	public function db( string $resource = 'db', bool $new = false ) : \Aimeos\Base\DB\Connection\Iface
 	{
 		if( !isset( $this->db ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );
 		}
 
-		return $this->db;
+		return $this->db->get( $resource, $new );
 	}
 
 

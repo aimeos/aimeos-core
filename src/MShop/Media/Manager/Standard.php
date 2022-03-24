@@ -359,13 +359,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -520,14 +515,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		$item = $this->savePropertyItems( $item, 'media', $fetch );
 		return $this->saveListItems( $item, 'media', $fetch );
 	}
@@ -545,13 +532,8 @@ class Standard
 	{
 		$map = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'media' );
 
 			/** mshop/media/manager/sitemode
@@ -709,14 +691,6 @@ class Standard
 				}
 				$map[$row['media.id']] = $row;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		$propItems = []; $name = 'media/property';
 		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )

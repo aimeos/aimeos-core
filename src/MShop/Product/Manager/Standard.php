@@ -480,13 +480,8 @@ class Standard
 	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			/** mshop/product/manager/rate/mysql
 			 * Updates the rating of the product in the database
 			 *
@@ -529,14 +524,6 @@ class Standard
 
 			$stmt->execute()->finish();
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $this;
 	}
 
@@ -551,13 +538,8 @@ class Standard
 	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			/** mshop/product/manager/stock/mysql
 			 * Updates the rating of the product in the database
 			 *
@@ -599,14 +581,6 @@ class Standard
 
 			$stmt->execute()->finish();
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $this;
 	}
 
@@ -627,13 +601,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -796,14 +765,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		$item = $this->savePropertyItems( $item, 'product', $fetch );
 		return $this->saveListItems( $item, 'product', $fetch );
 	}
@@ -821,13 +782,8 @@ class Standard
 	{
 		$map = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'product' );
 
 			/** mshop/product/manager/sitemode
@@ -990,14 +946,6 @@ class Standard
 
 				$map[$row['product.id']] = $row;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 
 		$propItems = []; $name = 'product/property';

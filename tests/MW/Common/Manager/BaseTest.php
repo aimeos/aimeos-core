@@ -124,7 +124,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetCriteriaKeyList()
 	{
 		$dbm = \TestHelper::getDBManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->get();
 
 		$criteria = new \Aimeos\Base\Criteria\SQL( $conn );
 
@@ -141,8 +141,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		$result = $method->invokeArgs( $this->object, array( $criteria, array( 'product.id' ) ) );
-
-		$dbm->release( $conn );
 
 		$this->assertEquals( array( 'list', 'product', 'product.id' ), $result );
 	}

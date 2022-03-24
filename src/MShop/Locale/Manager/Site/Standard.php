@@ -259,13 +259,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$columns = $this->object()->getSaveAttributes();
 
@@ -323,14 +318,6 @@ class Standard
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $item;
 	}
@@ -607,13 +594,8 @@ class Standard
 	{
 		$items = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$attributes = $this->object()->getSearchAttributes();
 			$translations = $this->getSearchTranslations( $attributes );
 			$types = $this->getSearchTypes( $attributes );
@@ -731,14 +713,6 @@ class Standard
 				$total = $this->getTotal( $conn, $find, $replace );
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return map( $items );
 	}
 
@@ -830,13 +804,8 @@ class Standard
 	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
 
@@ -935,16 +904,8 @@ class Standard
 			$path = 'mshop/locale/manager/newid';
 			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );
 
-			$dbm->release( $conn, $dbname );
-
 			// Add unique site identifier
 			$item = $this->object()->save( $item->setSiteId( $item->getId() . '.' ) );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $item;
 	}

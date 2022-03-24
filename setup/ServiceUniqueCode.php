@@ -37,8 +37,7 @@ class ServiceUniqueCode extends Base
 		$this->info( 'Ensure unique codes in mshop_service', 'v' );
 
 		$list = [];
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-service' );
+		$conn = $this->context()->db( 'db-service' );
 		$result = $conn->create( $this->select )->execute();
 
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -53,7 +52,5 @@ class ServiceUniqueCode extends Base
 			$stmt->bind( 2, $code . '2' );
 			$stmt->execute()->finish();
 		}
-
-		$dbm->release( $conn, 'db-service' );
 	}
 }

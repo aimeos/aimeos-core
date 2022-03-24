@@ -462,13 +462,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$billingAddress = $item->getPaymentAddress();
@@ -642,14 +637,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		$item = $this->savePropertyItems( $item, 'customer', $fetch );
 		$item = $this->saveAddressItems( $item, 'customer', $fetch );
 		return $this->saveListItems( $item, 'customer', $fetch );
@@ -668,13 +655,8 @@ class Standard
 	{
 		$map = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'customer' );
 
 			/** mshop/customer/manager/sitemode
@@ -826,14 +808,6 @@ class Standard
 			while( ( $row = $results->fetch() ) !== null ) {
 				$map[$row['customer.id']] = $row;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		$addrItems = [];
 		if( in_array( 'customer/address', $ref, true ) ) {

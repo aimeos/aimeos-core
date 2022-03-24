@@ -21,8 +21,7 @@ class MediaMigratePreview extends Base
 	{
 		$this->info( 'Migrating preview column in media table', 'v' );
 
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-media' );
+		$conn = $this->context()->db( 'db-media' );
 
 		$select = 'SELECT "id", "preview" FROM "mshop_media" WHERE "preview" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_media" SET "preview" = ? WHERE "id" = ?';
@@ -37,7 +36,5 @@ class MediaMigratePreview extends Base
 
 			$stmt->execute()->finish();
 		}
-
-		$dbm->release( $conn, 'db-media' );
 	}
 }

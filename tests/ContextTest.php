@@ -126,7 +126,6 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 		$dbm = \Aimeos\Base\DB\Factory::create( $config, 'PDO' );
 		$return = $this->object->setDatabaseManager( $dbm );
 
-		$this->assertSame( $dbm, $this->object->db() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 	}
 

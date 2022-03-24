@@ -430,13 +430,8 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			/** mshop/index/manager/supplier/insert/mysql
 			 * Inserts a new supplier record into the product index database
 			 *
@@ -508,14 +503,6 @@ class Standard
 					}
 				}
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuild( $items );

@@ -22,13 +22,12 @@ class SubscriptionMigratePeriod extends Base
 		$this->info( 'Updating period count in subscriptions', 'v' );
 
 		$dbdomain = 'db-order';
-		$dbm = $this->context()->db();
 
 		$select = 'SELECT "id", "interval", "end", "ctime" FROM "mshop_subscription" WHERE "period" = 0';
 		$update = 'UPDATE "mshop_subscription" SET "period" = ? WHERE "id" = ?';
 
-		$cselect = $dbm->acquire( $dbdomain );
-		$cupdate = $dbm->acquire( $dbdomain );
+		$cselect = $this->context()->db( $dbdomain );
+		$cupdate = $this->context()->db( $dbdomain, true );
 
 		$stmt = $cupdate->create( $update );
 		$result = $cselect->create( $select )->execute();
@@ -51,7 +50,6 @@ class SubscriptionMigratePeriod extends Base
 			$stmt->execute()->finish();
 		}
 
-		$dbm->release( $cupdate, $dbdomain );
-		$dbm->release( $cselect, $dbdomain );
+		$cupdate->close();
 	}
 }

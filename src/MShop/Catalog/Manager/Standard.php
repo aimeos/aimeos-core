@@ -199,12 +199,8 @@ class Standard extends Base
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
 			/** mshop/catalog/manager/cleanup/mysql
 			 * Deletes the categories for the given site from the database
 			 *
@@ -247,14 +243,6 @@ class Standard extends Base
 			$stmt->bind( 1, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $this;
 	}
@@ -509,13 +497,8 @@ class Standard extends Base
 	{
 		$nodeMap = $siteMap = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbname = $this->getResourceName();
-		$dbm = $context->db();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'catalog' );
 
 			/** mshop/catalog/manager/sitemode
@@ -692,14 +675,6 @@ class Standard extends Base
 					break;
 				}
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $this->buildItems( $nodeMap, $ref, 'catalog' );
 	}
@@ -880,12 +855,8 @@ class Standard extends Base
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
-			$dbname = $this->getResourceName();
-			$dbm = $this->context()->db();
-
-			$conn = $dbm->acquire( $dbname );
+			$conn = $this->context()->db( $this->getResourceName() );
 			$conn->create( $sql )->execute()->finish();
-			$dbm->release( $conn, $dbname );
 		}
 
 		return $this;
@@ -921,12 +892,8 @@ class Standard extends Base
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
-			$dbname = $this->getResourceName();
-			$dbm = $this->context()->db();
-
-			$conn = $dbm->acquire( $dbname );
+			$conn = $this->context()->db( $this->getResourceName() );
 			$conn->create( $sql )->execute()->finish();
-			$dbm->release( $conn, $dbname );
 		}
 
 		return $this;
@@ -946,13 +913,8 @@ class Standard extends Base
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$siteid = $context->locale()->getSiteId();
 			$columns = $this->object()->getSaveAttributes();
 
@@ -1075,14 +1037,6 @@ class Standard extends Base
 			}
 
 			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return $this;
 	}

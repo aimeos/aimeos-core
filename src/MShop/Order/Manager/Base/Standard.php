@@ -570,13 +570,8 @@ class Standard extends Base
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -736,14 +731,6 @@ class Standard extends Base
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -763,14 +750,9 @@ class Standard extends Base
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
+		$conn = $context->db( $this->getResourceName() );
 		$map = $items = $custItems = [];
 
-		try
-		{
 			$required = array( 'order.base' );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -895,14 +877,6 @@ class Standard extends Base
 				$map[$row['order.base.id']] = $row;
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		if( ( isset( $ref['customer'] ) || in_array( 'customer', $ref ) )
 			&& !( $ids = map( $map )->col( 'order.base.customerid' )->filter() )->empty()
 		) {
@@ -959,36 +933,24 @@ class Standard extends Base
 		$search->setConditions( $search->and( $expr ) );
 
 		$context = $this->context();
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
+		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$sitelevel = $context->config()->get( 'mshop/order/manager/sitemode', $sitelevel );
+
+		$cfgPathSearch = 'mshop/order/manager/base/search';
+		$cfgPathCount = 'mshop/order/manager/base/count';
+		$required = array( 'order.base' );
+		$total = null;
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
+
+		if( ( $row = $results->fetch() ) === null )
 		{
-			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$sitelevel = $context->config()->get( 'mshop/order/manager/sitemode', $sitelevel );
-
-			$cfgPathSearch = 'mshop/order/manager/base/search';
-			$cfgPathCount = 'mshop/order/manager/base/count';
-			$required = array( 'order.base' );
-			$total = null;
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
-
-			if( ( $row = $results->fetch() ) === null )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Order base item with order ID "%1$s" not found' );
-				throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
-			}
-			$results->finish();
-
-			$dbm->release( $conn, $dbname );
+			$msg = $this->context()->translate( 'mshop', 'Order base item with order ID "%1$s" not found' );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
 		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
+		$results->finish();
 
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );

@@ -111,60 +111,48 @@ abstract class Base
 		}
 
 		$context = $this->context();
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$path = $this->getConfigPath();
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$path = $this->getConfigPath();
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null ) {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-			} else {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-			}
-
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
-
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getKey() );
-			$stmt->bind( $idx++, $item->getType() );
-			$stmt->bind( $idx++, $item->getLanguageId() );
-			$stmt->bind( $idx++, $item->getValue() );
-			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
-
-			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			} else {
-				$stmt->bind( $idx++, $date ); //ctime
-			}
-
-			$stmt->execute()->finish();
-
-			if( $id === null && $fetch === true ) {
-				$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-			}
-
-			$item->setId( $id );
-
-			$dbm->release( $conn, $dbname );
+		if( $id === null ) {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
+		} else {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
 		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 		}
+
+		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getKey() );
+		$stmt->bind( $idx++, $item->getType() );
+		$stmt->bind( $idx++, $item->getLanguageId() );
+		$stmt->bind( $idx++, $item->getValue() );
+		$stmt->bind( $idx++, $date ); //mtime
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
+
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $date ); //ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
+		}
+
+		$item->setId( $id );
 
 		return $item;
 	}
@@ -209,33 +197,20 @@ abstract class Base
 	{
 		$items = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$cfgPathSearch = $this->getConfigPath() . 'search';
+		$cfgPathCount = $this->getConfigPath() . 'count';
+		$required = array( trim( $this->prefix, '.' ) );
 
-		try
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
 		{
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->getConfigPath() . 'search';
-			$cfgPathCount = $this->getConfigPath() . 'count';
-			$required = array( trim( $this->prefix, '.' ) );
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row[$this->prefix . 'id']] = $item;
-				}
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row[$this->prefix . 'id']] = $item;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
 		}
 
 		return map( $items );

@@ -167,11 +167,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		if( !isset( $this->treeManagers[$siteid] ) )
 		{
 			$context = $this->context();
-			$dbm = $context->db();
-
-			$conn = $dbm->acquire( 'db-catalog' );
+			$conn = $context->db( 'db-catalog' );
 			$sitestr = '\'' . $conn->escape( $siteid ) . '\'';
-			$dbm->release( $conn, 'db-catalog' );
 
 
 			$colstring = '';
@@ -574,7 +571,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				),
 			);
 
-			$this->treeManagers[$siteid] = \Aimeos\MW\Tree\Factory::create( 'DBNestedSet', $treeConfig, $dbm );
+			$this->treeManagers[$siteid] = \Aimeos\MW\Tree\Factory::create( 'DBNestedSet', $treeConfig, $conn );
 		}
 
 		return $this->treeManagers[$siteid];

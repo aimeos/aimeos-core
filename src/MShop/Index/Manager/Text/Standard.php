@@ -441,12 +441,8 @@ class Standard
 		$items->implements( \Aimeos\MShop\Product\Item\Iface::class, true );
 
 		$context = $this->context();
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
 			/** mshop/index/manager/text/insert/mysql
 			 * Inserts a new text record into the product index database
 			 *
@@ -488,14 +484,6 @@ class Standard
 			foreach( $items as $item ) {
 				$this->saveTexts( $stmt, $item );
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuild( $items );

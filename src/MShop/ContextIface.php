@@ -48,11 +48,13 @@ interface ContextIface
 	public function setConfig( \Aimeos\Base\Config\Iface $config ) : \Aimeos\MShop\ContextIface;
 
 	/**
-	 * Returns the database manager object.
+	 * Returns the database connection object.
 	 *
+	 * @param string $resource Database resource name
+	 * @param bool $new Create a new database connection
 	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
 	 */
-	public function db() : \Aimeos\Base\DB\Manager\Iface;
+	public function db( string $resource = 'db', bool $new = false ) : \Aimeos\Base\DB\Connection\Iface;
 
 	/**
 	 * Sets the database connection manager object.

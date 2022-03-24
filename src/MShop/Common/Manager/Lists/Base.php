@@ -191,67 +191,54 @@ abstract class Base
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$path = $this->getConfigPath();
+		$columns = $this->object()->getSaveAttributes();
 
-		try
-		{
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$path = $this->getConfigPath();
-			$columns = $this->object()->getSaveAttributes();
-
-			if( $id === null ) {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-			} else {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-			}
-
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
-
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getKey() );
-			$stmt->bind( $idx++, $item->getType() );
-			$stmt->bind( $idx++, $item->getDomain() );
-			$stmt->bind( $idx++, $item->getRefId() );
-			$stmt->bind( $idx++, $item->getDateStart() );
-			$stmt->bind( $idx++, $item->getDateEnd() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $this->context()->editor() );
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
-
-
-			if( $id !== null ) {
-				$stmt->bind( 14, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			} else {
-				$stmt->bind( 14, $date ); //ctime
-			}
-
-			$stmt->execute()->finish();
-
-			if( $id === null && $fetch === true ) {
-				$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-			}
-
-			$item->setId( $id );
-
-			$dbm->release( $conn, $dbname );
+		if( $id === null ) {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
+		} else {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
 		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 		}
+
+		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getKey() );
+		$stmt->bind( $idx++, $item->getType() );
+		$stmt->bind( $idx++, $item->getDomain() );
+		$stmt->bind( $idx++, $item->getRefId() );
+		$stmt->bind( $idx++, $item->getDateStart() );
+		$stmt->bind( $idx++, $item->getDateEnd() );
+		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $date ); //mtime
+		$stmt->bind( $idx++, $this->context()->editor() );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
+
+
+		if( $id !== null ) {
+			$stmt->bind( 14, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( 14, $date ); //ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
+		}
+
+		$item->setId( $id );
 
 		return $item;
 	}
@@ -268,42 +255,29 @@ abstract class Base
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
+		$conn = $this->context()->db( $this->getResourceName() );
 
-		$dbm = $this->context()->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$cfgPathSearch = $this->getConfigPath() . 'search';
+		$cfgPathCount = $this->getConfigPath() . 'count';
 
-		try
+		$name = trim( $this->prefix, '.' );
+		$required = array( $name );
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
 		{
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->getConfigPath() . 'search';
-			$cfgPathCount = $this->getConfigPath() . 'count';
-
-			$name = trim( $this->prefix, '.' );
-			$required = array( $name );
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
+			if( ( $row[$this->prefix . 'config'] = json_decode( $config = $row[$this->prefix . 'config'], true ) ) === null )
 			{
-				if( ( $row[$this->prefix . 'config'] = json_decode( $config = $row[$this->prefix . 'config'], true ) ) === null )
-				{
-					$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
-					$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
-					$this->context()->logger()->warning( $msg, 'core' );
-				}
-
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row[$this->prefix . 'id']] = $item;
-				}
+				$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
+				$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
+				$this->context()->logger()->warning( $msg, 'core' );
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row[$this->prefix . 'id']] = $item;
+			}
 		}
 
 		return $this->buildItems( $items, $ref );

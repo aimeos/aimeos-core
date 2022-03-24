@@ -22,8 +22,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 {
 	private $searchConfig = [];
 	private $config;
-	private $dbname;
-	private $dbm;
+	private $conn;
 
 
 	/**
@@ -69,12 +68,12 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 *		SELECT LAST_INSERT_ID()
 	 *
 	 * @param array $config Associative array holding the SQL statements
-	 * @param \Aimeos\Base\DB\Manager\Iface $resource Database manager
+	 * @param \Aimeos\Base\DB\Connection\Iface $resource Database connection
 	 */
 	public function __construct( array $config, $resource )
 	{
-		if( !( $resource instanceof \Aimeos\Base\DB\Manager\Iface ) ) {
-			throw new \Aimeos\MW\Tree\Exception( 'Given resource isn\'t a database manager object' );
+		if( !( $resource instanceof \Aimeos\Base\DB\Connection\Iface ) ) {
+			throw new \Aimeos\MW\Tree\Exception( 'Given resource isn\'t a database connection object' );
 		}
 
 		if( !isset( $config['search'] ) ) {
@@ -88,10 +87,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$this->checkSearchConfig( $config['search'] );
 		$this->checkSqlConfig( $config['sql'] );
 
-		$this->dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
 		$this->searchConfig = $config['search'];
 		$this->config = $config['sql'];
-		$this->dbm = $resource;
+		$this->conn = $resource;
 	}
 
 
@@ -119,11 +117,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	public function createSearch() : \Aimeos\Base\Criteria\Iface
 	{
-		$conn = $this->dbm->acquire( $this->dbname );
-		$search = new \Aimeos\Base\Criteria\SQL( $conn );
-		$this->dbm->release( $conn, $this->dbname );
-
-		return $search;
+		return new \Aimeos\Base\Criteria\SQL( $this->conn );
 	}
 
 
@@ -148,37 +142,25 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	{
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmt = $this->conn->create( $this->config['delete'] );
+		$stmt->bind( 1, $node->left, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 2, $node->right, $this->searchConfig['right']['internaltype'] );
+		$stmt->execute()->finish();
 
-		try
-		{
-			$stmt = $conn->create( $this->config['delete'] );
-			$stmt->bind( 1, $node->left, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 2, $node->right, $this->searchConfig['right']['internaltype'] );
-			$stmt->execute()->finish();
+		$diff = $node->right - $node->left + 1;
 
-			$diff = $node->right - $node->left + 1;
+		$stmt = $this->conn->create( $this->config['move-left'] );
+		$stmt->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$stmt->bind( 3, $node->right + 1, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmt->execute()->finish();
 
-			$stmt = $conn->create( $this->config['move-left'] );
-			$stmt->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-			$stmt->bind( 3, $node->right + 1, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
-			$stmt->execute()->finish();
-
-			$stmt = $conn->create( $this->config['move-right'] );
-			$stmt->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
-			$stmt->bind( 2, $node->right + 1, $this->searchConfig['right']['internaltype'] );
-			$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
-			$stmt->execute()->finish();
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+		$stmt = $this->conn->create( $this->config['move-right'] );
+		$stmt->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 2, $node->right + 1, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmt->execute()->finish();
 
 		return $this;
 	}
@@ -225,29 +207,17 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
 
 
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmt = $this->conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
+		$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
+		$stmt->bind( 2, $numlevel, $this->searchConfig['level']['internaltype'] );
+		$result = $stmt->execute();
 
-		try
-		{
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
-			$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-			$stmt->bind( 2, $numlevel, $this->searchConfig['level']['internaltype'] );
-			$result = $stmt->execute();
-
-			if( ( $row = $result->fetch() ) === null ) {
-				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
-			}
-
-			$node = $this->createNodeBase( $row );
-			$this->createTree( $result, $node );
-
-			$this->dbm->release( $conn, $this->dbname );
+		if( ( $row = $result->fetch() ) === null ) {
+			throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+
+		$node = $this->createNodeBase( $row );
+		$this->createTree( $result, $node );
 
 		return $node;
 	}
@@ -294,50 +264,38 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmt = $this->conn->create( $this->config['move-left'] );
+		$stmt->bind( 1, 2, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$stmt->bind( 3, $node->left, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmt->execute()->finish();
 
-		try
-		{
-			$stmt = $conn->create( $this->config['move-left'] );
-			$stmt->bind( 1, 2, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-			$stmt->bind( 3, $node->left, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
-			$stmt->execute()->finish();
+		$stmt = $this->conn->create( $this->config['move-right'] );
+		$stmt->bind( 1, 2, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 2, $node->left, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmt->execute()->finish();
 
-			$stmt = $conn->create( $this->config['move-right'] );
-			$stmt->bind( 1, 2, $this->searchConfig['right']['internaltype'] );
-			$stmt->bind( 2, $node->left, $this->searchConfig['right']['internaltype'] );
-			$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
-			$stmt->execute()->finish();
-
-			$stmt = $conn->create( $this->config['insert'] );
-			$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
-			$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
-			$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
-			$stmt->bind( 4, (int) $node->parentid, $this->searchConfig['parentid']['internaltype'] );
-			$stmt->bind( 5, $node->level, $this->searchConfig['level']['internaltype'] );
-			$stmt->bind( 6, $node->left, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 7, $node->right, $this->searchConfig['right']['internaltype'] );
-			$stmt->execute()->finish();
+		$stmt = $this->conn->create( $this->config['insert'] );
+		$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
+		$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
+		$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
+		$stmt->bind( 4, (int) $node->parentid, $this->searchConfig['parentid']['internaltype'] );
+		$stmt->bind( 5, $node->level, $this->searchConfig['level']['internaltype'] );
+		$stmt->bind( 6, $node->left, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 7, $node->right, $this->searchConfig['right']['internaltype'] );
+		$stmt->execute()->finish();
 
 
-			$result = $conn->create( $this->config['newid'] )->execute();
+		$result = $this->conn->create( $this->config['newid'] )->execute();
 
-			if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false ) {
-				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No new record ID available' ) );
-			}
-			$result->finish();
-
-			$node->setId( $row[0] );
-
-			$this->dbm->release( $conn, $this->dbname );
+		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false ) {
+			throw new \Aimeos\MW\Tree\Exception( sprintf( 'No new record ID available' ) );
 		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+		$result->finish();
+
+		$node->setId( $row[0] );
 
 		return $node;
 	}
@@ -427,64 +385,52 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmtLeft = $this->conn->create( $this->config['move-left'] );
+		$stmtRight = $this->conn->create( $this->config['move-right'] );
+		$updateParentId = $this->conn->create( $this->config['update-parentid'] );
+		// open gap for inserting node or subtree
 
-		try
-		{
-			$stmtLeft = $conn->create( $this->config['move-left'] );
-			$stmtRight = $conn->create( $this->config['move-right'] );
-			$updateParentId = $conn->create( $this->config['update-parentid'] );
-			// open gap for inserting node or subtree
+		$stmtLeft->bind( 1, $diff, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$stmtLeft->bind( 3, $openNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->execute()->finish();
 
-			$stmtLeft->bind( 1, $diff, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-			$stmtLeft->bind( 3, $openNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->execute()->finish();
+		$stmtRight->bind( 1, $diff, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 2, $openNodeRightBegin, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->execute()->finish();
 
-			$stmtRight->bind( 1, $diff, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 2, $openNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->execute()->finish();
+		// move node or subtree to the new gap
 
-			// move node or subtree to the new gap
+		$stmtLeft->bind( 1, $movesize, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 2, $leveldiff, $this->searchConfig['level']['internaltype'] );
+		$stmtLeft->bind( 3, $moveNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 4, $moveNodeLeftEnd, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->execute()->finish();
 
-			$stmtLeft->bind( 1, $movesize, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 2, $leveldiff, $this->searchConfig['level']['internaltype'] );
-			$stmtLeft->bind( 3, $moveNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 4, $moveNodeLeftEnd, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->execute()->finish();
+		$stmtRight->bind( 1, $movesize, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 2, $moveNodeRightBegin, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 3, $moveNodeRightEnd, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->execute()->finish();
 
-			$stmtRight->bind( 1, $movesize, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 2, $moveNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 3, $moveNodeRightEnd, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->execute()->finish();
+		// close gap opened by moving the node or subtree to the new location
 
-			// close gap opened by moving the node or subtree to the new location
+		$stmtLeft->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$stmtLeft->bind( 3, $closeNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->execute()->finish();
 
-			$stmtLeft->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-			$stmtLeft->bind( 3, $closeNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
-			$stmtLeft->execute()->finish();
-
-			$stmtRight->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 2, $closeNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
-			$stmtRight->execute()->finish();
+		$stmtRight->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 2, $closeNodeRightBegin, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->execute()->finish();
 
 
-			$updateParentId->bind( 1, $newParentId, $this->searchConfig['parentid']['internaltype'] );
-			$updateParentId->bind( 2, $id, $this->searchConfig['id']['internaltype'] );
-			$updateParentId->execute()->finish();
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+		$updateParentId->bind( 1, $newParentId, $this->searchConfig['parentid']['internaltype'] );
+		$updateParentId->bind( 2, $id, $this->searchConfig['id']['internaltype'] );
+		$updateParentId->execute()->finish();
 
 		return $this;
 	}
@@ -509,24 +455,12 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			return $node;
 		}
 
-		$conn = $this->dbm->acquire( $this->dbname );
-
-		try
-		{
-			$stmt = $conn->create( $this->config['update'] );
-			$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
-			$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
-			$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
-			$stmt->bind( 4, $node->getId(), $this->searchConfig['id']['internaltype'] );
-			$stmt->execute()->finish();
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+		$stmt = $this->conn->create( $this->config['update'] );
+		$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
+		$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
+		$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
+		$stmt->bind( 4, $node->getId(), $this->searchConfig['id']['internaltype'] );
+		$stmt->execute()->finish();
 
 		return $node;
 	}
@@ -568,33 +502,21 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$this->config['search']
 		);
 
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $left, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 2, $right, $this->searchConfig['right']['internaltype'] );
+		$result = $stmt->execute();
 
 		try
 		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $left, $this->searchConfig['left']['internaltype'] );
-			$stmt->bind( 2, $right, $this->searchConfig['right']['internaltype'] );
-			$result = $stmt->execute();
-
-			try
-			{
-				$nodes = [];
-				while( ( $row = $result->fetch() ) !== null ) {
-					$nodes[$row['id']] = $this->createNodeBase( $row );
-				}
+			$nodes = [];
+			while( ( $row = $result->fetch() ) !== null ) {
+				$nodes[$row['id']] = $this->createNodeBase( $row );
 			}
-			catch( \Exception $e )
-			{
-				$result->finish();
-				throw $e;
-			}
-
-			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( \Exception $e )
 		{
-			$this->dbm->release( $conn, $this->dbname );
+			$result->finish();
 			throw $e;
 		}
 
@@ -773,30 +695,16 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	protected function getNodeById( string $id ) : \Aimeos\MW\Tree\Node\Iface
 	{
-		$conn = $this->dbm->acquire( $this->dbname );
+		$stmt = $this->conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
+		$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
+		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$result = $stmt->execute();
 
-		try
-		{
-			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
-			$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-			$result = $stmt->execute();
-
-			if( ( $row = $result->fetch() ) === null ) {
-				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
-			}
-
-			$node = $this->createNodeBase( $row );
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+		if( ( $row = $result->fetch() ) === null ) {
+			throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 		}
 
-		return $node;
+		return $this->createNodeBase( $row );
 	}
 
 

@@ -183,6 +183,7 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
 		try {
 			$siteid = $context->locale()->getSiteId();
@@ -190,12 +191,6 @@ class Standard
 			$siteid = '';
 		}
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$columns = $this->object()->getSaveAttributes();
 
@@ -341,14 +336,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -436,13 +423,8 @@ class Standard
 	{
 		$items = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'log' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
@@ -566,14 +548,6 @@ class Standard
 					$items[$row['log.id']] = $item;
 				}
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return map( $items );
 	}

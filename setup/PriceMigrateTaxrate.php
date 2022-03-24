@@ -27,8 +27,7 @@ class PriceMigrateTaxrate extends Base
 
 		$this->info( 'Migrating taxrate column in price table', 'v' );
 
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-price' );
+		$conn = $this->context()->db( 'db-price' );
 
 		$select = 'SELECT "id", "taxrate" FROM "mshop_price" WHERE "taxrate" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_price" SET "taxrate" = ? WHERE "id" = ?';
@@ -43,7 +42,5 @@ class PriceMigrateTaxrate extends Base
 
 			$stmt->execute()->finish();
 		}
-
-		$dbm->release( $conn, 'db-price' );
 	}
 }

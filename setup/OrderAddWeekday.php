@@ -27,8 +27,8 @@ class OrderAddWeekday extends Base
 
 		$this->info( 'Populate weekday column in order table', 'v' );
 
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-order' );
+		$conn = $this->context()->db( 'db-order' );
+
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\'';
 		$update = 'UPDATE "mshop_order" SET "cwday" = ? WHERE "id" = ?';
 
@@ -44,7 +44,5 @@ class OrderAddWeekday extends Base
 
 			$stmt->execute()->finish();
 		}
-
-		$dbm->release( $conn, 'db-order' );
 	}
 }

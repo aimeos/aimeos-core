@@ -702,13 +702,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$price = $item->getPrice();
 			$date = date( 'Y-m-d H:i:s' );
@@ -883,14 +878,6 @@ class Standard
 
 			$item->setId( $id );
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $this->saveAttributeItems( $item, $fetch );
 	}
 
@@ -908,14 +895,9 @@ class Standard
 		$context = $this->context();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
+		$conn = $context->db( $this->getResourceName() );
 		$map = $items = $prodItems = [];
 
-		try
-		{
 			$required = array( 'order.base.product' );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -1065,14 +1047,6 @@ class Standard
 				$results->finish();
 				throw $e;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 
 		if( isset( $ref['product'] ) || in_array( 'product', $ref ) )

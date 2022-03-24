@@ -152,13 +152,8 @@ class Standard
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->object()->getSaveAttributes();
@@ -306,14 +301,6 @@ class Standard
 
 			$item->setId( $id ); // so item is no longer modified
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -402,13 +389,8 @@ class Standard
 		$items = [];
 		$context = $this->context();
 		$logger = $context->logger();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'job' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
@@ -532,14 +514,6 @@ class Standard
 					$items[$row['job.id']] = $item;
 				}
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return map( $items );
 	}

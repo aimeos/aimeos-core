@@ -69,14 +69,12 @@ abstract class Base
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		$db = $this->getResourceName();
+		$conn = $this->context->db( $db );
 		$config = $this->context->config();
-		$dbm = $this->context->db();
 
 		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
 			$adapter = $config->get( 'resource/db/adapter' );
 		}
-
-		$conn = $dbm->acquire( $db );
 
 		switch( $adapter )
 		{
@@ -85,8 +83,6 @@ abstract class Base
 			default:
 				$search = new \Aimeos\Base\Criteria\SQL( $conn ); break;
 		}
-
-		$dbm->release( $conn, $db );
 
 		return $search;
 	}
@@ -252,12 +248,8 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
-		$dbname = $this->getResourceName();
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context->db( $this->getResourceName() );
 
-		try
-		{
 			$total = null;
 			$cols = $map = [];
 			$search = clone $search;
@@ -321,14 +313,6 @@ abstract class Base
 				$temp = $last;
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return map( $map );
 	}
 
@@ -369,29 +353,17 @@ abstract class Base
 			return $this;
 		}
 
-		$dbm = $this->context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context->db( $this->getResourceName() );
 
-		try
+		$sql = $this->getSqlConfig( $cfgpath );
+		$sql = str_replace( ':cond', '1=1', $sql );
+
+		$stmt = $conn->create( $sql );
+
+		foreach( $siteids as $siteid )
 		{
-			$sql = $this->getSqlConfig( $cfgpath );
-			$sql = str_replace( ':cond', '1=1', $sql );
-
-			$stmt = $conn->create( $sql );
-
-			foreach( $siteids as $siteid )
-			{
-				$stmt->bind( 1, $siteid );
-				$stmt->execute()->finish();
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+			$stmt->bind( 1, $siteid );
+			$stmt->execute()->finish();
 		}
 
 		return $this;
@@ -914,26 +886,15 @@ abstract class Base
 		$cond = $search->getConditionSource( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
-		$dbm = $context->db();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
-			$stmt = $conn->create( $sql );
+		$stmt = $conn->create( $sql );
 
-			if( $siteid ) {
-				$stmt->bind( 1, $context->locale()->getSiteId() );
-			}
-
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
+		if( $siteid ) {
+			$stmt->bind( 1, $context->locale()->getSiteId() );
 		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
+
+		$stmt->execute()->finish();
 
 		return $this;
 	}
@@ -947,11 +908,8 @@ abstract class Base
 	 */
 	protected function beginTransation( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->db();
-
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context->db( $dbname );
 		$conn->begin();
-		$dbm->release( $conn, $dbname );
 
 		return $this;
 	}
@@ -965,11 +923,8 @@ abstract class Base
 	 */
 	protected function commitTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->db();
-
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context->db( $dbname );
 		$conn->commit();
-		$dbm->release( $conn, $dbname );
 
 		return $this;
 	}
@@ -983,11 +938,8 @@ abstract class Base
 	 */
 	protected function rollbackTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->db();
-
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context->db( $dbname );
 		$conn->rollback();
-		$dbm->release( $conn, $dbname );
 
 		return $this;
 	}

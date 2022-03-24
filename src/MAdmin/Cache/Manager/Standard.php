@@ -22,7 +22,6 @@ class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
 	implements \Aimeos\MAdmin\Cache\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $dbm;
 	private $conn;
 	private $object;
 
@@ -72,11 +71,7 @@ class Standard
 
 	public function __destruct()
 	{
-		if( $this->dbm && $this->conn ) {
-			$this->dbm->release( $this->conn, 'db-cache' );
-		}
-
-		unset( $this->conn, $this->dbm, $this->object );
+		unset( $this->conn, $this->object );
 	}
 
 
@@ -92,9 +87,7 @@ class Standard
 			$context = $this->context();
 			$cfg = $context->config()->get( 'madmin/cache/manager' );
 
-			$this->dbm = $context->db();
-			$this->conn = $this->dbm->acquire( 'db-cache' );
-
+			$this->conn = $context->db( 'db-cache' );
 			$this->object = \Aimeos\Base\Cache\Factory::create( 'DB', $cfg, $this->conn );
 		}
 
@@ -276,114 +269,101 @@ class Standard
 	{
 		$items = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$required = array( 'cache' );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
-		try
+		/** madmin/cache/manager/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see madmin/cache/manager/search/ansi
+		 */
+
+		/** madmin/cache/manager/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the cache
+		 * database. The records must be from the sites that is
+		 * configured in the context item.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see madmin/cache/manager/get/ansi
+		 * @see madmin/cache/manager/delete/ansi
+		 * @see madmin/cache/manager/deletebytag/ansi
+		 * @see madmin/cache/manager/set/ansi
+		 * @see madmin/cache/manager/settag/ansi
+		 * @see madmin/cache/manager/count/ansi
+		 */
+		$cfgPathSearch = 'madmin/cache/manager/search';
+
+		/** madmin/cache/manager/count/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see madmin/cache/manager/count/ansi
+		 */
+
+		/** madmin/cache/manager/count/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the cache
+		 * database. The records must be from the sites that is
+		 * configured in the context item.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see madmin/cache/manager/get/ansi
+		 * @see madmin/cache/manager/delete/ansi
+		 * @see madmin/cache/manager/deletebytag/ansi
+		 * @see madmin/cache/manager/set/ansi
+		 * @see madmin/cache/manager/settag/ansi
+		 * @see madmin/cache/manager/search/ansi
+		 */
+		$cfgPathCount = 'madmin/cache/manager/count';
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
 		{
-			$required = array( 'cache' );
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
-
-			/** madmin/cache/manager/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see madmin/cache/manager/search/ansi
-			 */
-
-			/** madmin/cache/manager/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the cache
-			 * database. The records must be from the sites that is
-			 * configured in the context item.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/cache/manager/get/ansi
-			 * @see madmin/cache/manager/delete/ansi
-			 * @see madmin/cache/manager/deletebytag/ansi
-			 * @see madmin/cache/manager/set/ansi
-			 * @see madmin/cache/manager/settag/ansi
-			 * @see madmin/cache/manager/count/ansi
-			 */
-			$cfgPathSearch = 'madmin/cache/manager/search';
-
-			/** madmin/cache/manager/count/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see madmin/cache/manager/count/ansi
-			 */
-
-			/** madmin/cache/manager/count/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the cache
-			 * database. The records must be from the sites that is
-			 * configured in the context item.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/cache/manager/get/ansi
-			 * @see madmin/cache/manager/delete/ansi
-			 * @see madmin/cache/manager/deletebytag/ansi
-			 * @see madmin/cache/manager/set/ansi
-			 * @see madmin/cache/manager/settag/ansi
-			 * @see madmin/cache/manager/search/ansi
-			 */
-			$cfgPathCount = 'madmin/cache/manager/count';
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row['id']] = $item;
-				}
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row['id']] = $item;
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
 		}
 
 		return map( $items );

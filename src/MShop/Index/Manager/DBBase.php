@@ -225,12 +225,8 @@ abstract class DBBase
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
 
-
 		$this->begin();
-
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
 		try
 		{
@@ -240,12 +236,9 @@ abstract class DBBase
 			$stmt->bind( 2, $siteid );
 
 			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $dbname );
 		}
 		catch( \Exception $e )
 		{
-			$dbm->release( $conn, $dbname );
 			$this->rollback();
 			throw $e;
 		}
@@ -359,23 +352,10 @@ abstract class DBBase
 	protected function optimizeBase( string $path ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			foreach( (array) $this->getSqlConfig( $path ) as $sql ) {
-				$conn->create( $sql )->execute()->finish();
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+		foreach( (array) $this->getSqlConfig( $path ) as $sql ) {
+			$conn->create( $sql )->execute()->finish();
 		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
@@ -401,13 +381,8 @@ abstract class DBBase
 	{
 		$list = $ids = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'product' );
 
 			/** mshop/index/manager/sitemode
@@ -447,14 +422,6 @@ abstract class DBBase
 			while( ( $row = $results->fetch() ) !== null ) {
 				$ids[] = $row['id'];
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$prodSearch = $manager->filter();

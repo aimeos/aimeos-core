@@ -153,9 +153,8 @@ class TablesMigrateSiteid extends Base
 	{
 		$map = [];
 
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-locale' );
-		$tconn = $dbm->acquire( 'db-locale' );
+		$conn = $this->context()->db(  'db-locale'  );
+		$tconn = $this->context()->db(  'db-locale', true );
 
 		$type = \Aimeos\Base\DB\Statement\Base::PARAM_INT;
 		$roots = $conn->create( 'SELECT id, nleft, nright FROM mshop_locale_site WHERE level = 0' )->execute();
@@ -172,8 +171,7 @@ class TablesMigrateSiteid extends Base
 			}
 		}
 
-		$dbm->release( $tconn, 'db-locale' );
-		$dbm->release( $conn, 'db-locale' );
+		$tconn->close();
 
 		return $map;
 	}
