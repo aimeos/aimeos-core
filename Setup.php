@@ -116,7 +116,7 @@ class Setup
 		$conf = new \Aimeos\Base\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 
-		$dbm = new \Aimeos\Base\DB\Manager\DBAL( $conf );
+		$dbm = \Aimeos\Base\DB\Factory::create( $conf, 'DBAL' );
 		$ctx->setDatabaseManager( $dbm );
 
 		$logger = new \Aimeos\Base\Logger\Errorlog( \Aimeos\Base\Logger\Iface::INFO );

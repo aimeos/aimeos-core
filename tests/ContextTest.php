@@ -123,7 +123,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	public function testSetDatabaseManager()
 	{
 		$config = new \Aimeos\Base\Config\PHPArray();
-		$dbm = new \Aimeos\Base\DB\Manager\PDO( $config );
+		$dbm = \Aimeos\Base\DB\Factory::create( $config, 'PDO' );
 		$return = $this->object->setDatabaseManager( $dbm );
 
 		$this->assertSame( $dbm, $this->object->db() );
