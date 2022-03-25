@@ -86,7 +86,7 @@ interface ContextIface
 	 * @param string $resource Resource name, e.g. "fs-admin"
 	 * @return \Aimeos\Base\Filesystem\Iface File system object
 	 */
-	public function fs( string $resource ) : \Aimeos\Base\Filesystem\Iface;
+	public function fs( string $resource = 'fs' ) : \Aimeos\Base\Filesystem\Iface;
 
 	/**
 	 * Sets the file system manager object.
