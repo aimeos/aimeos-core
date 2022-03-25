@@ -874,9 +874,6 @@ abstract class Base
 			return $this;
 		}
 
-		$context = $this->context();
-		$dbname = $this->getResourceName();
-
 		$search = $this->object()->filter();
 		$search->setConditions( $search->compare( '==', $name, $items ) );
 
@@ -886,6 +883,7 @@ abstract class Base
 		$cond = $search->getConditionSource( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
+		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
 		$stmt = $conn->create( $sql );
