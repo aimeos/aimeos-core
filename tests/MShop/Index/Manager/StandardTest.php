@@ -336,14 +336,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getValue( \Aimeos\Base\DB\Connection\Iface $conn, $sql, $column, $siteId, $productId )
 	{
-		$config = $this->context->config();
-
-		if( $config->get( 'resource/db-product' ) === null ) {
-			$dbname = $config->get( 'resource/default', 'db' );
-		} else {
-			$dbname = 'db-product';
-		}
-
 		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $siteId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $productId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
