@@ -516,7 +516,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatusDelivery() : ?int
 	{
-		return $this->get( 'order.base.product.statusdelivery' );
+		return $this->get( 'order.base.product.statusdelivery', -1 );
 	}
 
 
@@ -562,7 +562,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatusPayment() : ?int
 	{
-		return $this->get( 'order.base.product.statuspayment' );
+		return $this->get( 'order.base.product.statuspayment', -1 );
 	}
 
 
