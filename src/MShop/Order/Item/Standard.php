@@ -266,8 +266,8 @@ class Standard
 			{
 				case 'order.channel': $item = $item->setChannel( $value ); break;
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
-				case 'order.statusdelivery': $item = $item->setStatusDelivery( is_numeric( $value ) ? (int) $value : null ); break;
-				case 'order.statuspayment': $item = $item->setStatusPayment( is_numeric( $value ) ? (int) $value : null ); break;
+				case 'order.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
+				case 'order.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
 				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
