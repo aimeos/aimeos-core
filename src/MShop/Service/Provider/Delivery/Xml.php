@@ -98,11 +98,7 @@ class Xml
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-		$baseItem = $this->getOrderBase( $order->getBaseId(), $ref );
-
-		$this->createFile( $this->createXml( [$order], [$baseItem->getId() => $baseItem] ) );
-
+		$this->createFile( $this->createXml( [$order] ) );
 		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
@@ -115,8 +111,7 @@ class Xml
 	 */
 	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
-		$baseItems = $this->getOrderBaseItems( $orders );
-		$this->createFile( $this->createXml( $orders, $baseItems ) );
+		$this->createFile( $this->createXml( $orders ) );
 
 		foreach( $orders as $key => $order ) {
 			$orders[$key] = $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
@@ -202,34 +197,14 @@ class Xml
 	 * Creates the XML file for the given orders
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
 	 * @return string Generated XML
 	 */
-	protected function createXml( iterable $orderItems, iterable $baseItems ) : string
+	protected function createXml( iterable $orderItems ) : string
 	{
 		$view = $this->context()->view();
 		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body' );
 
-		return $view->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )->render( $template );
-	}
-
-
-	/**
-	 * Returns the order base items for the given orders
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
-	 */
-	protected function getOrderBaseItems( iterable $orderItems ) : \Aimeos\Map
-	{
-		$ids = map( $orderItems )->getBaseId();
-		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-
-		$manager = \Aimeos\MShop::create( $this->context(), 'order/base' );
-		$search = $manager->filter()->slice( 0, $ids->count() );
-		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
-
-		return $manager->search( $search, $ref );
+		return $view->assign( ['orderItems' => $orderItems] )->render( $template );
 	}
 
 

@@ -288,7 +288,7 @@ class PayPalExpress
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$baseItem = $this->getOrderBase( $order->getBaseId() );
+		$baseItem = $order->getBaseItem();
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $baseItem, $type, $this->getServiceItem()->getCode() );
 

@@ -105,11 +105,7 @@ class Email
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-		$baseItem = $this->getOrderBase( $order->getBaseId(), $ref );
-
-		$this->send( [$order], [$baseItem->getId() => $baseItem] );
-
+		$this->send( [$order] );
 		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
@@ -122,7 +118,7 @@ class Email
 	 */
 	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
-		$this->send( $orders, $this->getOrderBaseItems( $orders ) );
+		$this->send( $orders );
 		return map( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
@@ -130,15 +126,14 @@ class Email
 	/**
 	 * Returns the content for the e-mail body
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
+	 * @param iterable $orderItems List of order items to export
 	 */
-	protected function getEmailContent( iterable $orderItems, iterable $baseItems )
+	protected function getEmailContent( iterable $orderItems )
 	{
 		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body' );
 
 		return $this->context()->view()
-			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
+			->assign( ['orderItems' => $orderItems] )
 			->render( $template );
 	}
 
@@ -147,34 +142,14 @@ class Email
 	 * Returns the order content for the e-mail attachment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
 	 */
-	protected function getOrderContent( iterable $orderItems, iterable $baseItems )
+	protected function getOrderContent( iterable $orderItems )
 	{
 		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order' );
 
 		return $this->context()->view()
-			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
+			->assign( ['orderItems' => $orderItems] )
 			->render( $template );
-	}
-
-
-	/**
-	 * Returns the order base items for the given orders
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
-	 */
-	protected function getOrderBaseItems( iterable $orderItems ) : \Aimeos\Map
-	{
-		$ids = map( $orderItems )->getBaseId();
-		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-
-		$manager = \Aimeos\MShop::create( $this->context(), 'order/base' );
-		$search = $manager->filter()->slice( 0, $ids->count() );
-		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
-
-		return $manager->search( $search, $ref );
 	}
 
 
@@ -182,16 +157,15 @@ class Email
 	 * Sends an e-mail for the given orders
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
 	 */
-	protected function send( iterable $orderItems, iterable $baseItems )
+	protected function send( iterable $orderItems )
 	{
 		$this->context()->mail()->create()
 			->to( (string) $this->getConfigValue( 'email.to' ) )
 			->from( (string) $this->getConfigValue( 'email.from' ) )
 			->subject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
-			->attach( $this->getOrderContent( $orderItems, $baseItems ), 'orders.csv', 'text/plain' )
-			->text( $this->getEmailContent( $orderItems, $baseItems ) )
+			->attach( $this->getOrderContent( $orderItems ), 'orders.csv', 'text/plain' )
+			->text( $this->getEmailContent( $orderItems ) )
 			->send();
 	}
 }

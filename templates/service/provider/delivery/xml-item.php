@@ -14,7 +14,7 @@ $enc = $this->encoder();
 $baseItems = $this->get( 'baseItems', [] );
 
 ?>
-<?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : ?>
+<?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : $baseItem = $item->getBaseItem() ?>
 
 	<orderitem ref="<?= $enc->attr( $id ) ?>">
 		<order.ordernumber><![CDATA[<?= $item->getOrderNumber() ?>]]></order.ordernumber>
@@ -23,32 +23,70 @@ $baseItems = $this->get( 'baseItems', [] );
 			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 		<?php endforeach ?>
 
-		<?php if( isset( $baseItems[$item->getBaseId()] ) ) : $baseItem = $baseItems[$item->getBaseId()] ?>
+		<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
+			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+		<?php endforeach ?>
 
-			<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
-				<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-			<?php endforeach ?>
-
-			<address>
-				<?php foreach( $baseItem->getAddresses() as $type => $list ) : ?>
-					<?php foreach( $list as $addressItem ) : ?>
-						<addressitem type="<?= $enc->attr( $addressItem->getType() ) ?>" position="<?= $enc->attr( $addressItem->getPosition() ) ?>">
-							<?php foreach( $addressItem->toArray() as $key => $value ) : ?>
-								<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-							<?php endforeach ?>
-						</addressitem>
-					<?php endforeach ?>
+		<address>
+			<?php foreach( $baseItem->getAddresses() as $type => $list ) : ?>
+				<?php foreach( $list as $addressItem ) : ?>
+					<addressitem type="<?= $enc->attr( $addressItem->getType() ) ?>" position="<?= $enc->attr( $addressItem->getPosition() ) ?>">
+						<?php foreach( $addressItem->toArray() as $key => $value ) : ?>
+							<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+						<?php endforeach ?>
+					</addressitem>
 				<?php endforeach ?>
-			</address>
+			<?php endforeach ?>
+		</address>
 
-			<product>
-				<?php foreach( $baseItem->getProducts() as $productItem ) : ?>
-					<productitem position="<?= $enc->attr( $productItem->getPosition() ) ?>">
-						<?php foreach( $productItem->toArray() as $key => $value ) : ?>
+		<product>
+			<?php foreach( $baseItem->getProducts() as $productItem ) : ?>
+				<productitem position="<?= $enc->attr( $productItem->getPosition() ) ?>">
+					<?php foreach( $productItem->toArray() as $key => $value ) : ?>
+						<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+					<?php endforeach ?>
+					<attribute>
+						<?php foreach( $productItem->getAttributeItems() as $attributeItem ) : ?>
+							<attributeitem>
+								<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
+									<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+								<?php endforeach ?>
+							</attributeitem>
+						<?php endforeach ?>
+					</attribute>
+					<product>
+						<?php foreach( $productItem->getProducts() as $subprodItem ) : ?>
+							<productitem position="<?= $enc->attr( $subprodItem->getPosition() ) ?>">
+								<?php foreach( $subprodItem->toArray() as $key => $value ) : ?>
+									<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+								<?php endforeach ?>
+								<attribute>
+									<?php foreach( $subprodItem->getAttributeItems() as $attributeItem ) : ?>
+										<attributeitem>
+											<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
+												<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+											<?php endforeach ?>
+										</attributeitem>
+									<?php endforeach ?>
+								</attribute>
+								<product>
+								</product>
+							</productitem>
+						<?php endforeach ?>
+					</product>
+				</productitem>
+			<?php endforeach ?>
+		</product>
+
+		<service>
+			<?php foreach( $baseItem->getServices() as $type => $list ) : ?>
+				<?php foreach( $list as $serviceItem ) : ?>
+					<serviceitem type="<?= $enc->attr( $serviceItem->getType() ) ?>" position="<?= $enc->attr( $serviceItem->getPosition() ) ?>">
+						<?php foreach( $serviceItem->toArray() as $key => $value ) : ?>
 							<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 						<?php endforeach ?>
 						<attribute>
-							<?php foreach( $productItem->getAttributeItems() as $attributeItem ) : ?>
+							<?php foreach( $serviceItem->getAttributeItems() as $attributeItem ) : ?>
 								<attributeitem>
 									<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
 										<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
@@ -56,60 +94,18 @@ $baseItems = $this->get( 'baseItems', [] );
 								</attributeitem>
 							<?php endforeach ?>
 						</attribute>
-						<product>
-							<?php foreach( $productItem->getProducts() as $subprodItem ) : ?>
-								<productitem position="<?= $enc->attr( $subprodItem->getPosition() ) ?>">
-									<?php foreach( $subprodItem->toArray() as $key => $value ) : ?>
-										<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-									<?php endforeach ?>
-									<attribute>
-										<?php foreach( $subprodItem->getAttributeItems() as $attributeItem ) : ?>
-											<attributeitem>
-												<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
-													<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-												<?php endforeach ?>
-											</attributeitem>
-										<?php endforeach ?>
-									</attribute>
-									<product>
-									</product>
-								</productitem>
-							<?php endforeach ?>
-						</product>
-					</productitem>
+					</serviceitem>
 				<?php endforeach ?>
-			</product>
+			<?php endforeach ?>
+		</service>
 
-			<service>
-				<?php foreach( $baseItem->getServices() as $type => $list ) : ?>
-					<?php foreach( $list as $serviceItem ) : ?>
-						<serviceitem type="<?= $enc->attr( $serviceItem->getType() ) ?>" position="<?= $enc->attr( $serviceItem->getPosition() ) ?>">
-							<?php foreach( $serviceItem->toArray() as $key => $value ) : ?>
-								<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-							<?php endforeach ?>
-							<attribute>
-								<?php foreach( $serviceItem->getAttributeItems() as $attributeItem ) : ?>
-									<attributeitem>
-										<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
-											<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-										<?php endforeach ?>
-									</attributeitem>
-								<?php endforeach ?>
-							</attribute>
-						</serviceitem>
-					<?php endforeach ?>
-				<?php endforeach ?>
-			</service>
-
-			<coupon>
-				<?php foreach( $baseItem->getCoupons() as $coupon => $list ) : ?>
-					<couponitem>
-						<order.base.coupon.code><![CDATA[<?= $coupon ?>]]></order.base.coupon.code>
-					</couponitem>
-				<?php endforeach ?>
-			</coupon>
-
-		<?php endif ?>
+		<coupon>
+			<?php foreach( $baseItem->getCoupons() as $coupon => $list ) : ?>
+				<couponitem>
+					<order.base.coupon.code><![CDATA[<?= $coupon ?>]]></order.base.coupon.code>
+				</couponitem>
+			<?php endforeach ?>
+		</coupon>
 
 	</orderitem>
 

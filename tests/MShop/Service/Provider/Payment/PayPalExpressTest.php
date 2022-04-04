@@ -39,7 +39,8 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'order.channel' => 'web',
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
 		] );
-		$this->order = $orderManager->search( $search )->first( new \RuntimeException( 'No order found' ) );
+		$ref = ['order/base', 'order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$this->order = $orderManager->search( $search, $ref )->first( new \RuntimeException( 'No order found' ) );
 
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )

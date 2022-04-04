@@ -10,14 +10,9 @@ $csv = function( string $type, string $id, array $data ) {
 };
 
 
-$baseItems = $this->get( 'baseItems', [] );
-
 foreach( $this->get( 'orderItems', [] ) as $orderItem )
 {
-	if( ( $baseItem = $baseItems[$orderItem->getBaseId()] ?? null ) === null ) {
-		continue;
-	}
-
+	$baseItem = $orderItem->getBaseItem();
 	$data = ['order.ordernumber' => $orderItem->getOrderNumber()] + $orderItem->toArray() + $baseItem->toArray();
 
 	echo $csv( 'invoice', $orderItem->getId(), $data );
