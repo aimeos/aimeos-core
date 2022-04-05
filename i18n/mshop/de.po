@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos, 2015-2021
+# Aimeos, 2015-2022
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 12:34+0100\n"
-"PO-Revision-Date: 2022-03-09 11:38+0000\n"
-"Last-Translator: Aimeos\n"
+"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Aimeos, 2015-2022\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +156,7 @@ msgstr "Der Code \"%1$s\" darf nicht länger als 32 Zeichen sein"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Der Schlüssel enthält ungültige Zeichen: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"

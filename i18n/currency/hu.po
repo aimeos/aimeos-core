@@ -2,20 +2,21 @@
 # Translators:
 # Translators:
 # Translators:
-# Martin Vyšohlíd <vysohlidm@gmail.com>, 2016
+# nzed <nemesreviz@gmail.com>, 2022
+# Nóra Antal <nora1984antal@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:34+0000\n"
-"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>, 2016\n"
-"Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
+"Last-Translator: nzed <nemesreviz@gmail.com>, 2022\n"
+"Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. United Arab Emirates dirham
 #. reference: https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham
@@ -24,7 +25,7 @@ msgstr ""
 #. symbol: د.إ
 #. sequence: n/a
 msgid "AED"
-msgstr "د.إ"
+msgstr ""
 
 #. Afghan afghani
 #. reference: https://en.wikipedia.org/wiki/Afghan_afghani
@@ -33,7 +34,7 @@ msgstr "د.إ"
 #. symbol: Af (singular), Afs (plural)
 #. sequence: <amount><sign>
 msgid "AFN"
-msgstr "فغانۍ"
+msgstr ""
 
 #. Albanian Lek
 #. reference: https://en.wikipedia.org/wiki/Albanian_lek
@@ -42,7 +43,7 @@ msgstr "فغانۍ"
 #. symbol: Lek (singular), Lekë (plural)
 #. sequence: n/a
 msgid "ALL"
-msgstr "L"
+msgstr ""
 
 #. Armenian Dram
 #. reference: https://en.wikipedia.org/wiki/Armenian_dram
@@ -52,7 +53,7 @@ msgstr "L"
 #. sequence: n/a
 #. name: dram? unclear, code was chosen for currency sign
 msgid "AMD"
-msgstr "AMD"
+msgstr ""
 
 #. Netherlands Antillean gulden
 #. reference: https://en.wikipedia.org/wiki/Netherlands_Antillean_guilder
@@ -61,7 +62,7 @@ msgstr "AMD"
 #. symbol: ƒ
 #. sequence: <sign><amount>
 msgid "ANG"
-msgstr "ƒ"
+msgstr ""
 
 #. Angolan Kwanza
 #. reference: https://en.wikipedia.org/wiki/Angolan_kwanza
@@ -70,7 +71,7 @@ msgstr "ƒ"
 #. symbol: Kz
 #. sequence: n/a
 msgid "AOA"
-msgstr "Kz"
+msgstr ""
 
 #. Argentine Peso
 #. reference: https://en.wikipedia.org/wiki/Argentine_peso
@@ -404,7 +405,7 @@ msgstr ""
 #. symbol: €
 #. sequence: n/a
 msgid "EUR"
-msgstr ""
+msgstr "€"
 
 #. Fijian dollar
 #. reference: https://en.wikipedia.org/wiki/Fiji_dollar
@@ -422,7 +423,7 @@ msgstr ""
 #. symbol: £, FK£
 #. sequence: <sign><amount>
 msgid "FKP"
-msgstr ""
+msgstr "£"
 
 #. Pound Sterling
 #. reference: https://en.wikipedia.org/wiki/Pound_sterling
@@ -431,7 +432,7 @@ msgstr ""
 #. symbol: £
 #. sequence: <sign><amount>
 msgid "GBP"
-msgstr ""
+msgstr "£"
 
 #. Georgian lari
 #. reference: https://en.wikipedia.org/wiki/Georgian_lari
@@ -458,7 +459,7 @@ msgstr ""
 #. symbol: £
 #. sequence: n/a
 msgid "GIP"
-msgstr ""
+msgstr "£"
 
 #. Gambian dalasi
 #. reference: https://en.wikipedia.org/wiki/Gambian_dalasi
@@ -512,7 +513,7 @@ msgstr ""
 #. symbol: L
 #. sequence: <sign><amount>
 msgid "HNL"
-msgstr "L"
+msgstr ""
 
 #. Croatian kuna
 #. reference: https://en.wikipedia.org/wiki/Croatian_kuna
@@ -539,7 +540,7 @@ msgstr ""
 #. symbol: Ft
 #. sequence: n/a
 msgid "HUF"
-msgstr ""
+msgstr "Ft"
 
 #. Indonesian rupiah
 #. reference: https://en.wikipedia.org/wiki/Indonesian_rupiah
@@ -1136,7 +1137,7 @@ msgstr ""
 #. symbol: £
 #. sequence: <sign><amount>
 msgid "SHP"
-msgstr ""
+msgstr "£"
 
 #. Sierra Leonean leone
 #. reference: https://en.wikipedia.org/wiki/Sierra_Leonean_leone
