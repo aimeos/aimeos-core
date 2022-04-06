@@ -138,7 +138,7 @@ class Supplier
 	 * rules for the value of each field in the frontend.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
