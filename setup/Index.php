@@ -38,7 +38,12 @@ class Index extends Base
 		if( !$db->hasIndex( 'mshop_index_text', 'idx_msindte_content' ) )
 		{
 			$db->for( 'mysql', 'CREATE FULLTEXT INDEX `idx_msindte_content` ON `mshop_index_text` (`content`)' );
-			$db->for( 'postgresql', 'CREATE INDEX "idx_msindte_content" ON "mshop_index_text" USING GIN (to_tsvector(\'english\', "content"))' );
+
+			try {
+				$db->for( 'postgresql', 'CREATE INDEX "idx_msindte_content" ON "mshop_index_text" USING GIN (to_tsvector(\'english\', "content"))' );
+			} catch( \Exception $e ) {
+				// Doctrine DBAL bug: https://github.com/doctrine/dbal/issues/5351
+			}
 		}
 	}
 }
