@@ -4,10 +4,10 @@
  * Common resource configuration file
  */
 
-return array(
+return [
 
 	// default database configuration
-	'db' => array(
+	'db' => [
 
 		// database adapter (e.g 'mysql', 'pgsql', etc.)
 		'adapter' => 'mysql',
@@ -28,39 +28,41 @@ return array(
 		'password' => '',
 
 		// SQL statements executed immediately after connecting to the database server
-		'stmt' => array( "SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'" ),
-
-		// number of concurrent database connections while processing one request
-		'limit' => 2,
+		'stmt' => ["SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'"],
 
 		// use persistent connections and connection pooling
 		'opt-persistent' => false,
-	),
+	],
 	// If using the order domain in an other database or database server
-	// 'db-order' => array('adapter' => 'mysql', 'host' => 'localhost', ....)
+	// 'db-order' => ['adapter' => 'mysql', 'host' => 'localhost', ....]
 
 	// default e-mail configuration
 	'email' => [
-		'from-email' => 'root@localhost',
+
+		// Sender e-mail address
+		'from-email' => 'me@localhost',
+
+		// Sender name
+		'from-name' => 'MyShop',
 	],
 
 	// default message queue configuration
-	'fs' => array(
+	'fs' => [
 
 		// file system adapter
 		'adapter' => 'Standard',
 
 		// base directory for file system view
 		'basedir' => '.',
-	),
+	],
 
 	// default message queue configuration
-	'mq' => array(
+	'mq' => [
 
 		// message queue adapter
 		'adapter' => 'Standard',
 
 		// use database configuration from resource "db"
 		'db' => 'db',
-	),
-);
+	],
+];
