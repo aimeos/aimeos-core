@@ -85,7 +85,14 @@ class Standard
 		if( !isset( $this->object ) )
 		{
 			$context = $this->context();
-			$cfg = $context->config()->get( 'madmin/cache/manager' );
+			$cfg = [
+				'clear' => $context->config()->get( 'madmin/cache/manager/clear' ),
+				'delete' => $context->config()->get( 'madmin/cache/manager/delete' ),
+				'deletebytag' => $context->config()->get( 'madmin/cache/manager/deletebytag' ),
+				'get' => $context->config()->get( 'madmin/cache/manager/get' ),
+				'set' => $context->config()->get( 'madmin/cache/manager/set' ),
+				'settag' => $context->config()->get( 'madmin/cache/manager/settag' ),
+			];
 
 			$this->conn = $context->db( 'db-cache' );
 			$this->object = \Aimeos\Base\Cache\Factory::create( 'DB', $cfg, $this->conn );
