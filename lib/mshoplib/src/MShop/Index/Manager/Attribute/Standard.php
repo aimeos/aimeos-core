@@ -39,7 +39,7 @@ class Standard
 					FROM "mshop_index_attribute" AS mindat_allof
 					WHERE mpro."id" = mindat_allof."prodid" AND :site AND mindat_allof."attrid" IN ( $1 )
 					GROUP BY mindat_allof."prodid"
-					HAVING COUNT(DISTINCT mindat_allof."artid") > 1
+					HAVING COUNT(DISTINCT mindat_allof."artid") > 0
 					) = $2
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
