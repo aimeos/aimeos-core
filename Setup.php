@@ -88,10 +88,10 @@ class Setup
 	/**
 	 * Sets the verbosity level
 	 *
-	 * @param mixed $level Verbosity level (empty: none, v: notice: vv: info, vvv: debug)
+	 * @param mixed $level Verbosity level (empty: none, v: notice, vv: info, vvv: debug)
 	 * @return self Same object for fluid method calls
 	 */
-	public function verbose( $level = 'vv' ) : self
+	public function verbose( $level = 'v' ) : self
 	{
 		$this->verbose = $level;
 		return $this;
