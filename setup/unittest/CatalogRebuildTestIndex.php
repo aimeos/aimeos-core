@@ -31,7 +31,7 @@ class CatalogRebuildTestIndex extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Rebuilding index for test data', 'v' );
+		$this->info( 'Rebuilding index for test data', 'vv' );
 
 		\Aimeos\MShop\Index\Manager\Factory::create( $this->context() )->rebuild();
 	}

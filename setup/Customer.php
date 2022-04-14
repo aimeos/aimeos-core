@@ -13,7 +13,7 @@ class Customer extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating customer schema', 'v' );
+		$this->info( 'Creating customer schema', 'vv' );
 		$db = $this->db( 'db-customer' );
 
 		foreach( $this->paths( 'default/schema/customer.php' ) as $filepath )

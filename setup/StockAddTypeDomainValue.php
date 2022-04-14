@@ -19,7 +19,7 @@ class StockAddTypeDomainValue extends Base
 
 	public function up()
 	{
-		$this->info( 'Add stock type domain values', 'v' );
+		$this->info( 'Add stock type domain values', 'vv' );
 
 		$this->db( 'db-stock' )->exec( 'UPDATE mshop_stock_type SET domain=\'product\' WHERE domain=\'\'' );
 	}

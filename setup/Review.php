@@ -13,7 +13,7 @@ class Review extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating review schema', 'v' );
+		$this->info( 'Creating review schema', 'vv' );
 		$db = $this->db( 'db-review' );
 
 		foreach( $this->paths( 'default/schema/review.php' ) as $filepath )

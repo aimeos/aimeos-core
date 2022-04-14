@@ -30,7 +30,7 @@ class IndexRebuildPerf extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Rebuilding index for performance data', 'v' );
+		$this->info( 'Rebuilding index for performance data', 'vv' );
 
 		\Aimeos\MShop::create( $this->context(), 'index' )->rebuild();
 	}

@@ -25,7 +25,7 @@ class IndexRemoveCtimeEditor extends Base
 			return;
 		}
 
-		$this->info( 'Remove ctime/editor from index tables', 'v' );
+		$this->info( 'Remove ctime/editor from index tables', 'vv' );
 
 		$tables = [
 			'mshop_index_attribute', 'mshop_index_catalog', 'mshop_index_price',

@@ -31,7 +31,7 @@ class LocaleMigrateSite extends Base
 			return;
 		}
 
-		$this->info( 'Use "id" column in "mshop_locale_site"', 'v' );
+		$this->info( 'Use "id" column in "mshop_locale_site"', 'vv' );
 
 
 		$db->dropForeign( 'mshop_locale', 'fk_msloc_siteid' )

@@ -33,7 +33,7 @@ class CatalogAddTestData extends BaseAddTestData
 	{
 		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
-		$this->info( 'Adding catalog test data', 'v' );
+		$this->info( 'Adding catalog test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );

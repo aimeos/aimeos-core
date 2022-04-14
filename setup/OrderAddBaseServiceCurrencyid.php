@@ -25,7 +25,7 @@ class OrderAddBaseServiceCurrencyid extends Base
 			return;
 		}
 
-		$this->info( 'Adding currency ID to order base service table', 'v' );
+		$this->info( 'Adding currency ID to order base service table', 'vv' );
 
 		$db->exec( '
 			UPDATE mshop_order_base_service SET currencyid = (

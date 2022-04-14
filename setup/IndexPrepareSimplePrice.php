@@ -25,7 +25,7 @@ class IndexPrepareSimplePrice extends Base
 			return;
 		}
 
-		$this->info( 'Prepare mshop_index_price table for simplification', 'v' );
+		$this->info( 'Prepare mshop_index_price table for simplification', 'vv' );
 
 		$db->dropTable( 'mshop_index_price' );
 	}

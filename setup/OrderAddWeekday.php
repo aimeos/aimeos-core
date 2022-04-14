@@ -25,7 +25,7 @@ class OrderAddWeekday extends Base
 			return;
 		}
 
-		$this->info( 'Populate weekday column in order table', 'v' );
+		$this->info( 'Populate weekday column in order table', 'vv' );
 
 		$conn = $this->context()->db( 'db-order' );
 

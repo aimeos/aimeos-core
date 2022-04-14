@@ -13,7 +13,7 @@ class Product extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating product schema', 'v' );
+		$this->info( 'Creating product schema', 'vv' );
 		$db = $this->db( 'db-product' );
 
 		foreach( $this->paths( 'default/schema/product.php' ) as $filepath )

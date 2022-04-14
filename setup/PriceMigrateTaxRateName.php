@@ -31,7 +31,7 @@ class PriceMigrateTaxRateName extends Base
 			return;
 		}
 
-		$this->info( 'Migrating taxrate name in price table', 'v' );
+		$this->info( 'Migrating taxrate name in price table', 'vv' );
 
 		$db->stmt()->update( 'mshop_price' )
 			->set( 'taxrate', 'REPLACE(' . $db->qi( 'taxrate' ) . ', \'{"":\', \'{"tax":\')' )

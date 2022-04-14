@@ -19,7 +19,7 @@ class SubscriptionMigrateProductId extends Base
 
 	public function up()
 	{
-		$this->info( 'Updating product ID in subscriptions', 'v' );
+		$this->info( 'Updating product ID in subscriptions', 'vv' );
 
 		$this->db( 'db-order' )->exec( '
 			UPDATE mshop_subscription

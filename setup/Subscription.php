@@ -13,7 +13,7 @@ class Subscription extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating subscription schema', 'v' );
+		$this->info( 'Creating subscription schema', 'vv' );
 		$db = $this->db( 'db-order' );
 
 		foreach( $this->paths( 'default/schema/subscription.php' ) as $filepath )

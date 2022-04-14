@@ -31,7 +31,7 @@ class DemoRebuildIndex extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Rebuilding index for demo data', 'v' );
+		$this->info( 'Rebuilding index for demo data', 'vv' );
 
 		if( $this->context()->config()->get( 'setup/default/demo', '' ) === '' ) {
 			return;

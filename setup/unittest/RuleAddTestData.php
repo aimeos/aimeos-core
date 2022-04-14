@@ -30,7 +30,7 @@ class RuleAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding rule test data', 'v' );
+		$this->info( 'Adding rule test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addRuleData();

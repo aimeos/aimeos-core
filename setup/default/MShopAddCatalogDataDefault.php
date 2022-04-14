@@ -31,7 +31,7 @@ class MShopAddCatalogDataDefault extends Base
 	public function up()
 	{
 		$sitecode = $this->context()->locale()->getSiteItem()->getCode();
-		$this->info( sprintf( 'Adding MShop catalog data for site "%1$s"', $sitecode ), 'v' );
+		$this->info( sprintf( 'Adding MShop catalog data for site "%1$s"', $sitecode ), 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = __DIR__ . $ds . 'data' . $ds . 'catalog.php';

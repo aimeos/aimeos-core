@@ -48,7 +48,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	{
 		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
-		$this->info( 'Adding test data for MShop locale domain', 'v' );
+		$this->info( 'Adding test data for MShop locale domain', 'vv' );
 
 		// Set editor for further tasks
 		$this->context()->setEditor( 'core:lib/mshoplib' );

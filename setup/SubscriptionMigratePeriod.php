@@ -19,7 +19,7 @@ class SubscriptionMigratePeriod extends Base
 
 	public function up()
 	{
-		$this->info( 'Updating period count in subscriptions', 'v' );
+		$this->info( 'Updating period count in subscriptions', 'vv' );
 
 		$dbdomain = 'db-order';
 

@@ -31,7 +31,7 @@ class AttributeAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding attribute test data', 'v' );
+		$this->info( 'Adding attribute test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );

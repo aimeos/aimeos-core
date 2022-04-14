@@ -33,7 +33,7 @@ class LogAddTestData extends Base
 	{
 		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
-		$this->info( 'Adding admin log test data', 'v' );
+		$this->info( 'Adding admin log test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addLogTestData();

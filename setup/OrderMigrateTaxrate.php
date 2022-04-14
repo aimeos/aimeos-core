@@ -22,7 +22,7 @@ class OrderMigrateTaxrate extends Base
 		$dbdomain = 'db-order';
 		$db = $this->db( $dbdomain );
 
-		$this->info( 'Migrating taxrate columns in order tables', 'v' );
+		$this->info( 'Migrating taxrate columns in order tables', 'vv' );
 		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );
 
 		if( $db->hasTable( 'mshop_order_base_product' ) )

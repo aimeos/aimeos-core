@@ -13,7 +13,7 @@ class Text extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating text schema', 'v' );
+		$this->info( 'Creating text schema', 'vv' );
 		$db = $this->db( 'db-text' );
 
 		foreach( $this->paths( 'default/schema/text.php' ) as $filepath )

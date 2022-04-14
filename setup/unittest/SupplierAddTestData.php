@@ -30,7 +30,7 @@ class SupplierAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding supplier test data', 'v' );
+		$this->info( 'Adding supplier test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );

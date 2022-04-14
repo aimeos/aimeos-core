@@ -13,7 +13,7 @@ class Order extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating order schema', 'v' );
+		$this->info( 'Creating order schema', 'vv' );
 		$db = $this->db( 'db-order' );
 
 		foreach( $this->paths( 'default/schema/order.php' ) as $filepath )

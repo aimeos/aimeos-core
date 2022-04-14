@@ -13,7 +13,7 @@ class Log extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating log schema', 'v' );
+		$this->info( 'Creating log schema', 'vv' );
 		$db = $this->db( 'db-log' );
 
 		foreach( $this->paths( 'default/schema/log.php' ) as $filepath )

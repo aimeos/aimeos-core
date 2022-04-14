@@ -31,7 +31,7 @@ class CouponAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding coupon test data', 'v' );
+		$this->info( 'Adding coupon test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'coupon.php';

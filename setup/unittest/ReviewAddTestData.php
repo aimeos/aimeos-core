@@ -30,7 +30,7 @@ class ReviewAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding review test data', 'v' );
+		$this->info( 'Adding review test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$ds = DIRECTORY_SEPARATOR;

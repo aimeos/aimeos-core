@@ -25,7 +25,7 @@ class CacheRemoveIndexes extends Base
 			return;
 		}
 
-		$this->info( 'Remove wrong "idx_majob_expire" and "fk_macac_tid" cache indexes', 'v' );
+		$this->info( 'Remove wrong "idx_majob_expire" and "fk_macac_tid" cache indexes', 'vv' );
 
 		$db->dropIndex( 'madmin_cache', 'idx_majob_expire' )->dropIndex( 'madmin_cache_tag', 'fk_macac_tid' );
 	}

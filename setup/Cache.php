@@ -13,7 +13,7 @@ class Cache extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating cache schema', 'v' );
+		$this->info( 'Creating cache schema', 'vv' );
 		$db = $this->db( 'db-cache' );
 
 		foreach( $this->paths( 'default/schema/cache.php' ) as $filepath )

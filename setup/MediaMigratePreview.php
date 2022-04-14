@@ -19,7 +19,7 @@ class MediaMigratePreview extends Base
 
 	public function up()
 	{
-		$this->info( 'Migrating preview column in media table', 'v' );
+		$this->info( 'Migrating preview column in media table', 'vv' );
 
 		$conn = $this->context()->db( 'db-media' );
 

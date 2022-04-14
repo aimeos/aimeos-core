@@ -31,7 +31,7 @@ class CustomerAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding customer test data', 'v' );
+		$this->info( 'Adding customer test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process();

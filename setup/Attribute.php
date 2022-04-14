@@ -13,7 +13,7 @@ class Attribute extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating attribute schema', 'v' );
+		$this->info( 'Creating attribute schema', 'vv' );
 		$db = $this->db( 'db-attribute' );
 
 		foreach( $this->paths( 'default/schema/attribute.php' ) as $filepath )

@@ -25,7 +25,7 @@ class CustomerDropAddressForeign extends Base
 			return;
 		}
 
-		$this->info( 'Drop "fk_mscusad_parentid" in customer address table', 'v' );
+		$this->info( 'Drop "fk_mscusad_parentid" in customer address table', 'vv' );
 
 		$db->dropForeign( 'mshop_customer_address', 'fk_mscusad_parentid' );
 		$db->dropIndex( 'mshop_customer_address', 'fk_mscusad_parentid' );

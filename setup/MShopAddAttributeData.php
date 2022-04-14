@@ -31,7 +31,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 	protected function process()
 	{
 		$site = $this->context()->locale()->getSiteItem()->getCode();
-		$this->info( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 'v' );
+		$this->info( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'attribute.php';

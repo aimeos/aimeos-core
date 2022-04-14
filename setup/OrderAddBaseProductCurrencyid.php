@@ -25,7 +25,7 @@ class OrderAddBaseProductCurrencyid extends Base
 			return;
 		}
 
-		$this->info( 'Adding currency ID to order base product table', 'v' );
+		$this->info( 'Adding currency ID to order base product table', 'vv' );
 
 		$db->exec( '
 			UPDATE mshop_order_base_product SET currencyid = (

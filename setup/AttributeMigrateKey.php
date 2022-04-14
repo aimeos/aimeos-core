@@ -33,7 +33,7 @@ class AttributeMigrateKey extends Base
 			return;
 		}
 
-		$this->info( 'Update attribute "key" columns', 'v' );
+		$this->info( 'Update attribute "key" columns', 'vv' );
 
 		$db->table( 'mshop_attribute' )->string( 'key', 255 )->default( '' )->up();
 

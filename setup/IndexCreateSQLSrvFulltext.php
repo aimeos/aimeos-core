@@ -27,7 +27,7 @@ class IndexCreateSQLSrvFulltext extends Base
 			return;
 		}
 
-		$this->info( 'Creating full text index on "mshop_index_text.content" for SQL Server', 'v' );
+		$this->info( 'Creating full text index on "mshop_index_text.content" for SQL Server', 'vv' );
 
 		$result = $db->stmt()->select( 'object_id' )
 			->from( 'sys.fulltext_indexes' )

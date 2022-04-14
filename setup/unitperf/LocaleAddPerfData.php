@@ -43,7 +43,7 @@ class LocaleAddPerfData extends MShopAddLocaleData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding performance data for MShop locale domain', 'v' );
+		$this->info( 'Adding performance data for MShop locale domain', 'vv' );
 
 		// Set editor for further tasks
 		$this->context()->setEditor( 'unitperf:core' );

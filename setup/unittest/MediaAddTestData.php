@@ -33,7 +33,7 @@ class MediaAddTestData extends BaseAddTestData
 	{
 		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
 
-		$this->info( 'Adding media test data', 'v' );
+		$this->info( 'Adding media test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );

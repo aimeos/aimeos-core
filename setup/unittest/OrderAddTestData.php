@@ -31,7 +31,7 @@ class OrderAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding order test data', 'v' );
+		$this->info( 'Adding order test data', 'vv' );
 
 		$context = $this->context();
 		$context->setEditor( 'core:lib/mshoplib' );

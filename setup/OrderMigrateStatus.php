@@ -19,7 +19,7 @@ class OrderMigrateStatus extends Base
 
 	public function up()
 	{
-		$this->info( 'Migrate order product payment/delivery status', 'v' );
+		$this->info( 'Migrate order product payment/delivery status', 'vv' );
 
 		$db = $this->db( 'db-order' );
 

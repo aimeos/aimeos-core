@@ -13,7 +13,7 @@ class Supplier extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating supplier schema', 'v' );
+		$this->info( 'Creating supplier schema', 'vv' );
 		$db = $this->db( 'db-supplier' );
 
 		foreach( $this->paths( 'default/schema/supplier.php' ) as $filepath )

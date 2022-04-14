@@ -30,7 +30,7 @@ class MShopAddLocaleLangCurData extends MShopAddLocaleData
 	 */
 	public function up()
 	{
-		$this->info( 'Add locale data for languages and currencies', 'v' );
+		$this->info( 'Add locale data for languages and currencies', 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );

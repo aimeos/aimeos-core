@@ -54,7 +54,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 		}
 
 
-		$this->info( 'Processing product demo data', 'v' );
+		$this->info( 'Processing product demo data', 'vv' );
 
 		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'product' );

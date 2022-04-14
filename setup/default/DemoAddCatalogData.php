@@ -42,7 +42,7 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing catalog demo data' );
+		$this->info( 'Processing catalog demo data', 'vv' );
 
 		$context = $this->context();
 

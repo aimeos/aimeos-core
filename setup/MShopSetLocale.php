@@ -34,7 +34,7 @@ class MShopSetLocale extends Base
 		$context = $this->context();
 		$site = $context->config()->get( 'setup/site', 'default' );
 
-		$this->info( sprintf( 'Setting locale to "%1$s"', $site ), 'v' );
+		$this->info( sprintf( 'Setting locale to "%1$s"', $site ), 'vv' );
 
 		// Set locale for further tasks
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context );

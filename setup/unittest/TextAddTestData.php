@@ -30,7 +30,7 @@ class TextAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding text test data', 'v' );
+		$this->info( 'Adding text test data', 'vv' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );

@@ -25,7 +25,7 @@ class LocaleRemoveIndexes extends Base
 			return;
 		}
 
-		$this->info( 'Remove indexes from mshop_locale', 'v' );
+		$this->info( 'Remove indexes from mshop_locale', 'vv' );
 
 		$db->dropIndex( 'mshop_locale', 'fk_mslocsi_id' );
 		$db->dropIndex( 'mshop_locale', 'fk_mslocla_id' );

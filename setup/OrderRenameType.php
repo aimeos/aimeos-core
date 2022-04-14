@@ -23,7 +23,7 @@ class OrderRenameType extends Base
 
 		if( $db->hasTable( 'mshop_order' ) && !$db->hasColumn( 'mshop_order', 'channel' ) )
 		{
-			$this->info( 'Rename "type" to "channel" in "mshop_order" table', 'v' );
+			$this->info( 'Rename "type" to "channel" in "mshop_order" table', 'vv' );
 
 			$db->dropIndex( 'mshop_order', 'idx_msord_sid_type' )
 				->renameColumn( 'mshop_order', 'type', 'channel' );

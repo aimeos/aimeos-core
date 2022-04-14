@@ -32,7 +32,7 @@ class TablesMigrateListsKey extends Base
 
 	public function up()
 	{
-		$this->info( 'Update lists "key" columns', 'v' );
+		$this->info( 'Update lists "key" columns', 'vv' );
 
 		$this->process( $this->tables );
 	}

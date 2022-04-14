@@ -31,7 +31,7 @@ class TagAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding tag test data', 'v' );
+		$this->info( 'Adding tag test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$ds = DIRECTORY_SEPARATOR;

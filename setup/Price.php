@@ -13,7 +13,7 @@ class Price extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating price schema', 'v' );
+		$this->info( 'Creating price schema', 'vv' );
 		$db = $this->db( 'db-price' );
 
 		foreach( $this->paths( 'default/schema/price.php' ) as $filepath )

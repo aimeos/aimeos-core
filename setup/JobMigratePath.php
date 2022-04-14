@@ -25,7 +25,7 @@ class JobMigratePath extends Base
 			return;
 		}
 
-		$this->info( 'Migrating path in job table', 'v' );
+		$this->info( 'Migrating path in job table', 'vv' );
 
 		$conn = $this->context()->db( 'db-job' );
 

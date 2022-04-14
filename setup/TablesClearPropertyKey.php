@@ -31,7 +31,7 @@ class TablesClearPropertyKey extends Base
 
 	public function up()
 	{
-		$this->info( 'Clear property "key" columns', 'v' );
+		$this->info( 'Clear property "key" columns', 'vv' );
 
 		foreach( $this->tables() as $rname => $table )
 		{

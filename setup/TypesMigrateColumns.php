@@ -114,7 +114,7 @@ class TypesMigrateColumns extends Base
 
 	public function up()
 	{
-		$this->info( 'Migrate type columns', 'v' );
+		$this->info( 'Migrate type columns', 'vv' );
 
 		$this->info( 'Add new type columns', 'vv', 1 );
 

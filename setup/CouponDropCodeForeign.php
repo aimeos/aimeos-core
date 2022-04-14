@@ -25,7 +25,7 @@ class CouponDropCodeForeign extends Base
 			return;
 		}
 
-		$this->info( 'Drop "fk_mscouco_parentid" in coupon code table', 'v' );
+		$this->info( 'Drop "fk_mscouco_parentid" in coupon code table', 'vv' );
 
 		$db->dropForeign( 'mshop_coupon_code', 'fk_mscouco_parentid' );
 		$db->dropIndex( 'mshop_coupon_code', 'fk_mscouco_parentid' );

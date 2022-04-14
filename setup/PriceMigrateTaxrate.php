@@ -25,7 +25,7 @@ class PriceMigrateTaxrate extends Base
 			return;
 		}
 
-		$this->info( 'Migrating taxrate column in price table', 'v' );
+		$this->info( 'Migrating taxrate column in price table', 'vv' );
 
 		$conn = $this->context()->db( 'db-price' );
 

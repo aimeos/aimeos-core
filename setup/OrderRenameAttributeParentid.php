@@ -28,7 +28,7 @@ class OrderRenameAttributeParentid extends Base
 		if( $db->hasTable( 'mshop_order_base_product_attr' )
 			&& !$db->hasColumn( 'mshop_order_base_product_attr', 'parentid' )
 		) {
-			$this->info( 'Rename "ordprodid" to "parentid" in "mshop_order_base_product_attr" table', 'v' );
+			$this->info( 'Rename "ordprodid" to "parentid" in "mshop_order_base_product_attr" table', 'vv' );
 
 			$db->dropForeign( 'mshop_order_base_product_attr', 'fk_msordbaprat_ordprodid' )
 				->dropIndex( 'mshop_order_base_product_attr', 'fk_msordbaprat_ordprodid' )
@@ -40,7 +40,7 @@ class OrderRenameAttributeParentid extends Base
 		if( $db->hasTable( 'mshop_order_base_service_attr' )
 			&& !$db->hasColumn( 'mshop_order_base_service_attr', 'parentid' )
 		) {
-			$this->info( 'Rename "ordservid" to "parentid" in "mshop_order_base_service_attr" table', 'v' );
+			$this->info( 'Rename "ordservid" to "parentid" in "mshop_order_base_service_attr" table', 'vv' );
 
 			$db->dropForeign( 'mshop_order_base_service_attr', 'fk_msordbaseat_ordservid' )
 				->dropIndex( 'mshop_order_base_service_attr', 'fk_msordbaseat_ordservid' )

@@ -19,7 +19,7 @@ class IndexRemoveIndexes extends Base
 
 	public function up()
 	{
-		$this->info( 'Remove old indexes from mshop_index_* tables', 'v' );
+		$this->info( 'Remove old indexes from mshop_index_* tables', 'vv' );
 
 		$this->db( 'db-product' )
 			->dropIndex( 'mshop_index_supplier', 'unq_msindsup_p_sid_supid_lt_po' );

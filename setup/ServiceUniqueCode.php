@@ -34,7 +34,7 @@ class ServiceUniqueCode extends Base
 			return;
 		}
 
-		$this->info( 'Ensure unique codes in mshop_service', 'v' );
+		$this->info( 'Ensure unique codes in mshop_service', 'vv' );
 
 		$list = [];
 		$conn = $this->context()->db( 'db-service' );

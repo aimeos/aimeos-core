@@ -19,7 +19,7 @@ class OrderRenameProductSupplier extends Base
 
 	public function up()
 	{
-		$this->info( 'Rename "suppliername" to "vendor" in "mshop_order_base_product" table', 'v' );
+		$this->info( 'Rename "suppliername" to "vendor" in "mshop_order_base_product" table', 'vv' );
 
 		$db = $this->db( 'db-order' );
 		$db->dropColumn( 'mshop_order_base_product', 'supplierid' );

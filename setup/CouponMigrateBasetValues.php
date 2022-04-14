@@ -25,7 +25,7 @@ class CouponMigrateBasetValues extends Base
 			return;
 		}
 
-		$this->info( 'Migrating basketvalues configuration in coupon table', 'v' );
+		$this->info( 'Migrating basketvalues configuration in coupon table', 'vv' );
 
 		$db->stmt()->update( 'mshop_coupon' )
 			->set( 'provider', 'REPLACE(' . $db->qi( 'provider' ) . ', \'BasketValues\', \'Basket\')' )

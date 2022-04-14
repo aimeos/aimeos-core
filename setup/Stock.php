@@ -13,7 +13,7 @@ class Stock extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating stock schema', 'v' );
+		$this->info( 'Creating stock schema', 'vv' );
 		$db = $this->db( 'db-stock' );
 
 		foreach( $this->paths( 'default/schema/stock.php' ) as $filepath )

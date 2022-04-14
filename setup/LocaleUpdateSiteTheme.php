@@ -19,7 +19,7 @@ class LocaleUpdateSiteTheme extends Base
 
 	public function up()
 	{
-		$this->info( 'Allow NULL for "theme" column in "mshop_locale_site"', 'v' );
+		$this->info( 'Allow NULL for "theme" column in "mshop_locale_site"', 'vv' );
 
 		$this->db( 'db-locale' )->update( 'mshop_locale_site', ['theme' => null], ['theme' => ''] );
 	}

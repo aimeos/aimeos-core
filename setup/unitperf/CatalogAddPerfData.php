@@ -49,7 +49,7 @@ class CatalogAddPerfData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding catalog performance data', 'v' );
+		$this->info( 'Adding catalog performance data', 'vv' );
 
 		$treeFcn = function( array $parents, $catParentId, $numCatPerLevel, $level, $catLabel, $catIdx ) use ( &$treeFcn ) {
 

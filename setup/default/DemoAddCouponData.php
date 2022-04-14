@@ -39,7 +39,7 @@ class DemoAddCouponData extends MShopAddDataAbstract
 		}
 
 
-		$this->info( 'Processing coupon demo data', 'v' );
+		$this->info( 'Processing coupon demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$search = $manager->filter();

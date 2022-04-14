@@ -25,7 +25,7 @@ class CacheRemoveForeignkey extends Base
 			return;
 		}
 
-		$this->info( 'Remove foreign key "fk_macac_tid_tsid" from "madmin_cache_tag"', 'v' );
+		$this->info( 'Remove foreign key "fk_macac_tid_tsid" from "madmin_cache_tag"', 'vv' );
 
 		$db->dropForeign( 'madmin_cache_tag', 'fk_macac_tid_tsid' );
 	}

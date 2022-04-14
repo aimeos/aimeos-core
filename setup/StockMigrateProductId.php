@@ -25,7 +25,7 @@ class StockMigrateProductId extends Base
 			return;
 		}
 
-		$this->info( 'Migrate product code to product ID in stock table', 'v' );
+		$this->info( 'Migrate product code to product ID in stock table', 'vv' );
 
 		if( !$db->hasColumn( 'mshop_stock', 'prodid' ) )
 		{

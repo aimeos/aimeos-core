@@ -25,7 +25,7 @@ class LocaleRenameSiteSupplier extends Base
 			return;
 		}
 
-		$this->info( 'Rename "supplierid" column in "mshop_locale_site"', 'v' );
+		$this->info( 'Rename "supplierid" column in "mshop_locale_site"', 'vv' );
 
 		$db->renameColumn( 'mshop_locale_site', 'supplierid', 'refid' );
 	}

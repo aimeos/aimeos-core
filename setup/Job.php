@@ -13,7 +13,7 @@ class Job extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating job schema', 'v' );
+		$this->info( 'Creating job schema', 'vv' );
 		$db = $this->db( 'db-job' );
 
 		foreach( $this->paths( 'default/schema/job.php' ) as $filepath )

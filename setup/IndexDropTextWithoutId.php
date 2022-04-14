@@ -25,7 +25,7 @@ class IndexDropTextWithoutId extends Base
 			return;
 		}
 
-		$this->info( 'Droping mshop_index_text table without ID column', 'v' );
+		$this->info( 'Droping mshop_index_text table without ID column', 'vv' );
 
 		$db->dropTable( 'mshop_index_text' );
 	}

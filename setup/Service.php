@@ -13,7 +13,7 @@ class Service extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating service schema', 'v' );
+		$this->info( 'Creating service schema', 'vv' );
 		$db = $this->db( 'db-service' );
 
 		foreach( $this->paths( 'default/schema/service.php' ) as $filepath )

@@ -42,7 +42,7 @@ class MShopAddLocaleData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding locale data if not yet present', 'v' );
+		$this->info( 'Adding locale data if not yet present', 'vv' );
 
 		// Set editor for further tasks
 		$this->context()->setEditor( 'core:setup' );
@@ -84,7 +84,7 @@ class MShopAddLocaleData extends Base
 	 */
 	protected function addLocaleSiteData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, $manager = 'Standard', $parentId = null )
 	{
-		$this->info( 'Adding data for MShop locale sites', 'v', 1 );
+		$this->info( 'Adding data for MShop locale sites', 'vv', 1 );
 
 		$siteIds = [];
 		$manager = $localeManager->getSubManager( 'site', $manager );
@@ -112,7 +112,7 @@ class MShopAddLocaleData extends Base
 	 */
 	protected function addLocaleCurrencyData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data )
 	{
-		$this->info( 'Adding data for MShop locale currencies', 'v', 1 );
+		$this->info( 'Adding data for MShop locale currencies', 'vv', 1 );
 
 		$manager = $localeManager->getSubManager( 'currency', 'Standard' );
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
@@ -131,7 +131,7 @@ class MShopAddLocaleData extends Base
 	 */
 	protected function addLocaleLanguageData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data )
 	{
-		$this->info( 'Adding data for MShop locale languages', 'v', 1 );
+		$this->info( 'Adding data for MShop locale languages', 'vv', 1 );
 
 		$manager = $localeManager->getSubManager( 'language', 'Standard' );
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
@@ -150,7 +150,7 @@ class MShopAddLocaleData extends Base
 	 */
 	protected function addLocaleData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, array $siteIds )
 	{
-		$this->info( 'Adding data for MShop locales', 'v', 1 );
+		$this->info( 'Adding data for MShop locales', 'vv', 1 );
 
 		foreach( $data as $dataset )
 		{

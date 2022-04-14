@@ -26,7 +26,7 @@ class ProductMigrateSupplier extends Base
 			return;
 		}
 
-		$this->info( 'Migrating supplier references to product domain', 'v' );
+		$this->info( 'Migrating supplier references to product domain', 'vv' );
 
 		$insert = $db->stmt()->insert( 'mshop_product_list' )->values( [
 			'parentid' => '?', 'siteid' => '?', 'key' => '?', 'domain' => '?', 'type' => '?',

@@ -96,7 +96,7 @@ class TablesMigrateSiteid extends Base
 			return;
 		}
 
-		$this->info( 'Update "siteid" columns', 'v' );
+		$this->info( 'Update "siteid" columns', 'vv' );
 
 		$db->table( 'mshop_locale_site' )->int( 'siteid' )->default( 0 )->up();
 

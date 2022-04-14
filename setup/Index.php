@@ -19,7 +19,7 @@ class Index extends Base
 
 	public function up()
 	{
-		$this->info( 'Creating index schema', 'v' );
+		$this->info( 'Creating index schema', 'vv' );
 		$db = $this->db( 'db-product' );
 
 		foreach( $this->paths( 'default/schema/index.php' ) as $filepath )

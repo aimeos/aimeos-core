@@ -13,7 +13,7 @@ class Locale extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating locale schema', 'v' );
+		$this->info( 'Creating locale schema', 'vv' );
 		$db = $this->db( 'db-locale' );
 
 		foreach( $this->paths( 'default/schema/locale.php' ) as $filepath )

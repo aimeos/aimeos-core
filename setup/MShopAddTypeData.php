@@ -38,7 +38,7 @@ class MShopAddTypeData extends Base
 		$context = $this->context();
 		$sitecode = $context->locale()->getSiteItem()->getCode();
 
-		$this->info( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 'v' );
+		$this->info( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 'vv' );
 
 		if( !$filename )
 		{
@@ -89,7 +89,7 @@ class MShopAddTypeData extends Base
 	{
 		foreach( $data as $domain => $entries )
 		{
-			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'v' );
+			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'vv' );
 
 			$manager = $this->manager( $domain );
 			$map = $this->existing( $domain, $entries );

@@ -13,7 +13,7 @@ class Catalog extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating catalog schema', 'v' );
+		$this->info( 'Creating catalog schema', 'vv' );
 		$db = $this->db( 'db-catalog' );
 
 		foreach( $this->paths( 'default/schema/catalog.php' ) as $filepath )

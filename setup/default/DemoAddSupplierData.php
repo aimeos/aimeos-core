@@ -49,7 +49,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 		}
 
 
-		$this->info( 'Processing supplier demo data', 'v' );
+		$this->info( 'Processing supplier demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
 

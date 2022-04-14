@@ -31,7 +31,7 @@ class MShopAddCodeDataDefault extends MShopAddCodeData
 	public function up()
 	{
 		$site = $this->context()->locale()->getSiteItem()->getCode();
-		$this->info( sprintf( 'Adding default code data for site "%1$s"', $site ), 'v' );
+		$this->info( sprintf( 'Adding default code data for site "%1$s"', $site ), 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'code.php';

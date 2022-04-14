@@ -39,7 +39,7 @@ class DemoAddServiceData extends MShopAddDataAbstract
 		}
 
 
-		$this->info( 'Processing service demo data', 'v' );
+		$this->info( 'Processing service demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'service' );
 

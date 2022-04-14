@@ -26,7 +26,7 @@ class ProductMigrateCatalog extends Base
 			return;
 		}
 
-		$this->info( 'Migrating category references to product domain', 'v' );
+		$this->info( 'Migrating category references to product domain', 'vv' );
 
 		$insert = $db->stmt()->insert( 'mshop_product_list' )->values( [
 			'parentid' => '?', 'siteid' => '?', 'key' => '?', 'domain' => '?', 'type' => '?',

@@ -13,7 +13,7 @@ class Media extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating media schema', 'v' );
+		$this->info( 'Creating media schema', 'vv' );
 		$db = $this->db( 'db-media' );
 
 		foreach( $this->paths( 'default/schema/media.php' ) as $filepath )

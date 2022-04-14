@@ -31,7 +31,7 @@ class TablesMigratePropertyKey extends Base
 
 	public function up()
 	{
-		$this->info( 'Update property "key" columns', 'v' );
+		$this->info( 'Update property "key" columns', 'vv' );
 
 		foreach( $this->tables() as $rname => $table )
 		{

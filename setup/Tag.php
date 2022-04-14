@@ -13,7 +13,7 @@ class Tag extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating tag schema', 'v' );
+		$this->info( 'Creating tag schema', 'vv' );
 		$db = $this->db( 'db-tag' );
 
 		foreach( $this->paths( 'default/schema/tag.php' ) as $filepath )

@@ -25,7 +25,7 @@ class OrderAddProductParentid extends Base
 			return;
 		}
 
-		$this->info( 'Separate product ID and parent ID in order base product table', 'v' );
+		$this->info( 'Separate product ID and parent ID in order base product table', 'vv' );
 
 		$table = $db->table( 'mshop_order_base_product' );
 		$table->refid( 'parentprodid' )->up();

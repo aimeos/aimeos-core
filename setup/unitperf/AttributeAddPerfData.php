@@ -30,7 +30,7 @@ class AttributeAddPerfData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding attribute performance data', 'v' );
+		$this->info( 'Adding attribute performance data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 		$manager->begin();

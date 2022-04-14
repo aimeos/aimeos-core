@@ -19,7 +19,7 @@ class MediaAddFsname extends Base
 
 	public function up()
 	{
-		$this->info( 'Populating "fsname" column in media table', 'v' );
+		$this->info( 'Populating "fsname" column in media table', 'vv' );
 
 		$this->db( 'db-media' )->update( 'mshop_media', ['fsname' => 'fs-media'], ['fsname' => ''] );
 	}

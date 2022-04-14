@@ -30,7 +30,7 @@ class CustomerAddPerfData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding customer performance data', 'v' );
+		$this->info( 'Adding customer performance data', 'vv' );
 
 		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context() );
 

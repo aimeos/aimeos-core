@@ -30,7 +30,7 @@ class ServiceAddPerfData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding service performance data', 'v' );
+		$this->info( 'Adding service performance data', 'vv' );
 
 
 		$services = [

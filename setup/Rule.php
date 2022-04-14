@@ -13,7 +13,7 @@ class Rule extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating rule schema', 'v' );
+		$this->info( 'Creating rule schema', 'vv' );
 		$db = $this->db( 'db-rule' );
 
 		foreach( $this->paths( 'default/schema/rule.php' ) as $filepath )

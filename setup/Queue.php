@@ -13,7 +13,7 @@ class Queue extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating queue schema', 'v' );
+		$this->info( 'Creating queue schema', 'vv' );
 		$db = $this->db( 'db-queue' );
 
 		foreach( $this->paths( 'default/schema/queue.php' ) as $filepath )

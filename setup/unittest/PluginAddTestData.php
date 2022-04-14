@@ -31,7 +31,7 @@ class PluginAddTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding plugin test data', 'v' );
+		$this->info( 'Adding plugin test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addPluginData();

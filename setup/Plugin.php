@@ -13,7 +13,7 @@ class Plugin extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating plugin schema', 'v' );
+		$this->info( 'Creating plugin schema', 'vv' );
 		$db = $this->db( 'db-plugin' );
 
 		foreach( $this->paths( 'default/schema/plugin.php' ) as $filepath )

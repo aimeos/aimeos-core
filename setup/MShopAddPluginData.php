@@ -36,7 +36,7 @@ class MShopAddPluginData extends Base
 	 */
 	protected function process()
 	{
-		$this->info( 'Adding default plugin data', 'v' );
+		$this->info( 'Adding default plugin data', 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context(), 'Standard' );
@@ -61,7 +61,7 @@ class MShopAddPluginData extends Base
 	 */
 	protected function addPluginData( \Aimeos\MShop\Common\Manager\Iface $pluginManager, array $data )
 	{
-		$this->info( 'Adding data for MShop plugins', 'v' );
+		$this->info( 'Adding data for MShop plugins', 'vv' );
 
 		$types = [];
 		$manager = $pluginManager->getSubManager( 'type' );

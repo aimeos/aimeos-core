@@ -13,7 +13,7 @@ class Coupon extends Base
 {
 	public function up()
 	{
-		$this->info( 'Creating coupon schema', 'v' );
+		$this->info( 'Creating coupon schema', 'vv' );
 		$db = $this->db( 'db-coupon' );
 
 		foreach( $this->paths( 'default/schema/coupon.php' ) as $filepath )
