@@ -86,6 +86,7 @@ class Standard
 		{
 			$context = $this->context();
 			$cfg = [
+				'cleanup' => $context->config()->get( 'madmin/cache/manager/cleanup' ),
 				'clear' => $context->config()->get( 'madmin/cache/manager/clear' ),
 				'delete' => $context->config()->get( 'madmin/cache/manager/delete' ),
 				'deletebytag' => $context->config()->get( 'madmin/cache/manager/deletebytag' ),
