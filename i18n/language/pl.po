@@ -419,6 +419,9 @@ msgstr "paszto"
 msgid "pt"
 msgstr "portugalski"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "keczua"
 

@@ -418,6 +418,9 @@ msgstr "Peştuca"
 msgid "pt"
 msgstr "Portekizce"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Keçuva"
 

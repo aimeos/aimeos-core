@@ -418,6 +418,9 @@ msgstr "Pastu"
 msgid "pt"
 msgstr "Portugál"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Kecsua"
 

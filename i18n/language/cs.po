@@ -418,6 +418,9 @@ msgstr ""
 msgid "pt"
 msgstr ""
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr ""
 

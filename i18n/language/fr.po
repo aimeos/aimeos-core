@@ -417,6 +417,9 @@ msgstr "Pachtoune"
 msgid "pt"
 msgstr "Portugais"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Quechua"
 

@@ -418,6 +418,9 @@ msgstr "Пушту"
 msgid "pt"
 msgstr "Португальский"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Кечуа"
 
