@@ -419,6 +419,9 @@ msgstr "لغة بشتوية"
 msgid "pt"
 msgstr "لغة البرتغالية"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "كتشوا"
 

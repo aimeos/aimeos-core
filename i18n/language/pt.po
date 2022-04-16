@@ -419,6 +419,9 @@ msgstr "Pastó"
 msgid "pt"
 msgstr "Português"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Quéchua"
 

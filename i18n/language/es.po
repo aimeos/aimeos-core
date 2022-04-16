@@ -417,6 +417,9 @@ msgstr "Pastún"
 msgid "pt"
 msgstr "Portugués"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Quechua"
 

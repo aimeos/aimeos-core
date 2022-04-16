@@ -418,6 +418,9 @@ msgstr "普什图语"
 msgid "pt"
 msgstr "葡萄牙语"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "克丘亚语"
 

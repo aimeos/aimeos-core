@@ -420,6 +420,9 @@ msgstr ""
 msgid "pt"
 msgstr "Portugali"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr ""
 

@@ -419,6 +419,9 @@ msgstr "Pashto"
 msgid "pt"
 msgstr "Portuguese"
 
+msgid "pt_BR"
+msgstr ""
+
 msgid "qu"
 msgstr "Quechua"
 
