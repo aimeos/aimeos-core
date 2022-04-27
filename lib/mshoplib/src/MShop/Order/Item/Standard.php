@@ -180,7 +180,7 @@ class Standard
 	 */
 	public function getStatusDelivery() : ?int
 	{
-		return $this->get( 'order.statusdelivery' );
+		return $this->get( 'order.statusdelivery', -1 );
 	}
 
 
@@ -225,7 +225,7 @@ class Standard
 	 */
 	public function getStatusPayment() : ?int
 	{
-		return $this->get( 'order.statuspayment' );
+		return $this->get( 'order.statuspayment', -1 );
 	}
 
 
