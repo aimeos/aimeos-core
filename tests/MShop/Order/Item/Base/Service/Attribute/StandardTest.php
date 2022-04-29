@@ -18,7 +18,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-
 		$this->values = array(
 			'order.base.service.attribute.id' => 3,
 			'order.base.service.attribute.siteid' => 99,
@@ -28,6 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.attribute.name' => 'UnitName',
 			'order.base.service.attribute.code' => 'UnitCode',
 			'order.base.service.attribute.value' => 'UnitValue',
+			'order.base.service.attribute.price' => '1.00',
 			'order.base.service.attribute.quantity' => 1,
 			'order.base.service.attribute.mtime' => '2020-12-31 23:59:59',
 			'order.base.service.attribute.ctime' => '2011-01-01 00:00:01',
@@ -197,6 +197,32 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPrice()
+	{
+		$this->assertEquals( '1.00', $this->object->getPrice() );
+	}
+
+
+	public function testSetPrice()
+	{
+		$return = $this->object->setPrice( '3.75' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $return );
+		$this->assertEquals( '3.75', $this->object->getPrice() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetPriceNull()
+	{
+		$return = $this->object->setPrice( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getPrice() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2020-12-31 23:59:59', $this->object->getTimeModified() );
@@ -248,6 +274,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.attribute.code' => 'test',
 			'order.base.service.attribute.value' => 'value',
 			'order.base.service.attribute.name' => 'test item',
+			'order.base.service.attribute.price' => '2.00',
 			'order.base.service.attribute.quantity' => 4,
 		);
 
@@ -260,8 +287,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.service.attribute.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.base.service.attribute.type'], $item->getType() );
 		$this->assertEquals( $list['order.base.service.attribute.code'], $item->getCode() );
-		$this->assertEquals( $list['order.base.service.attribute.value'], $item->getValue() );
 		$this->assertEquals( $list['order.base.service.attribute.name'], $item->getName() );
+		$this->assertEquals( $list['order.base.service.attribute.value'], $item->getValue() );
+		$this->assertEquals( $list['order.base.service.attribute.price'], $item->getPrice() );
 		$this->assertEquals( $list['order.base.service.attribute.quantity'], $item->getQuantity() );
 	}
 
@@ -278,8 +306,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getParentId(), $list['order.base.service.attribute.parentid'] );
 		$this->assertEquals( $this->object->getType(), $list['order.base.service.attribute.type'] );
 		$this->assertEquals( $this->object->getCode(), $list['order.base.service.attribute.code'] );
-		$this->assertEquals( $this->object->getValue(), $list['order.base.service.attribute.value'] );
 		$this->assertEquals( $this->object->getName(), $list['order.base.service.attribute.name'] );
+		$this->assertEquals( $this->object->getValue(), $list['order.base.service.attribute.value'] );
+		$this->assertEquals( $this->object->getPrice(), $list['order.base.service.attribute.price'] );
 		$this->assertEquals( $this->object->getQuantity(), $list['order.base.service.attribute.quantity'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.base.service.attribute.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.base.service.attribute.ctime'] );

@@ -91,6 +91,13 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
+		'order.base.service.attribute.price' => array(
+			'code' => 'order.base.service.attribute.price',
+			'internalcode' => 'mordbaseat."price"',
+			'label' => 'Service attribute price',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.service.attribute.ctime' => array(
 			'code' => 'order.base.service.attribute.ctime',
 			'internalcode' => 'mordbaseat."ctime"',
@@ -580,6 +587,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, json_encode( $item->getValue() ) );
 			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPrice() );
 			$stmt->bind( $idx++, $item->getName() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );

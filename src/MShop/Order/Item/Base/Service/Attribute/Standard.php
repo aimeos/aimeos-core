@@ -48,7 +48,7 @@ class Standard
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
@@ -209,11 +209,34 @@ class Standard
 	 * Sets the quantity of the service attribute.
 	 *
 	 * @param float $value Quantity of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
 		return $this->set( 'order.base.service.attribute.quantity', $value );
+	}
+
+
+	/**
+	 * Returns the price of the service attribute.
+	 *
+	 * @return string|null Price of the service attribute
+	 */
+	public function getPrice() : ?string
+	{
+		return $this->get( 'order.base.service.attribute.price' );
+	}
+
+
+	/**
+	 * Sets the price of the service attribute.
+	 *
+	 * @param string|null $value Price of the service attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	{
+		return $this->set( 'order.base.service.attribute.price', $value );
 	}
 
 
@@ -270,6 +293,7 @@ class Standard
 				case 'order.base.service.attribute.name': $item = $item->setName( $value ); break;
 				case 'order.base.service.attribute.code': $item = $item->setCode( $value ); break;
 				case 'order.base.service.attribute.value': $item = $item->setValue( $value ); break;
+				case 'order.base.service.attribute.price': $item = $item->setPrice( $value ); break;
 				case 'order.base.service.attribute.quantity': $item = $item->setQuantity( $value ); break;
 				default: continue 2;
 			}
@@ -295,6 +319,7 @@ class Standard
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();
 		$list['order.base.service.attribute.value'] = $this->getValue();
+		$list['order.base.service.attribute.price'] = $this->getPrice();
 		$list['order.base.service.attribute.quantity'] = $this->getQuantity();
 
 		if( $private === true )

@@ -27,6 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.attribute.code' => 'size',
 			'order.base.product.attribute.value' => '30',
 			'order.base.product.attribute.name' => 'small',
+			'order.base.product.attribute.price' => '1.00',
 			'order.base.product.attribute.quantity' => 2,
 			'order.base.product.attribute.mtime' => '2011-01-06 13:20:34',
 			'order.base.product.attribute.ctime' => '2011-01-01 00:00:01',
@@ -195,6 +196,32 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPrice()
+	{
+		$this->assertEquals( '1.00', $this->object->getPrice() );
+	}
+
+
+	public function testSetPrice()
+	{
+		$return = $this->object->setPrice( '3.75' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
+		$this->assertEquals( '3.75', $this->object->getPrice() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetPriceNull()
+	{
+		$return = $this->object->setPrice( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getPrice() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetTimeModified()
 	{
 		$regexp = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
@@ -248,6 +275,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.attribute.code' => 'test',
 			'order.base.product.attribute.value' => 'value',
 			'order.base.product.attribute.name' => 'test item',
+			'order.base.product.attribute.price' => '2.00',
 			'order.base.product.attribute.quantity' => 4,
 		);
 
@@ -260,8 +288,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.attribute.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.base.product.attribute.type'], $item->getType() );
 		$this->assertEquals( $list['order.base.product.attribute.code'], $item->getCode() );
-		$this->assertEquals( $list['order.base.product.attribute.value'], $item->getValue() );
 		$this->assertEquals( $list['order.base.product.attribute.name'], $item->getName() );
+		$this->assertEquals( $list['order.base.product.attribute.value'], $item->getValue() );
+		$this->assertEquals( $list['order.base.product.attribute.price'], $item->getPrice() );
 		$this->assertEquals( $list['order.base.product.attribute.quantity'], $item->getQuantity() );
 	}
 
@@ -278,8 +307,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getParentId(), $list['order.base.product.attribute.parentid'] );
 		$this->assertEquals( $this->object->getType(), $list['order.base.product.attribute.type'] );
 		$this->assertEquals( $this->object->getCode(), $list['order.base.product.attribute.code'] );
-		$this->assertEquals( $this->object->getValue(), $list['order.base.product.attribute.value'] );
 		$this->assertEquals( $this->object->getName(), $list['order.base.product.attribute.name'] );
+		$this->assertEquals( $this->object->getValue(), $list['order.base.product.attribute.value'] );
+		$this->assertEquals( $this->object->getPrice(), $list['order.base.product.attribute.price'] );
 		$this->assertEquals( $this->object->getQuantity(), $list['order.base.product.attribute.quantity'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.base.product.attribute.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.base.product.attribute.ctime'] );

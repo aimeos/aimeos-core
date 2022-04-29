@@ -218,6 +218,29 @@ class Standard
 
 
 	/**
+	 * Returns the price of the product attribute.
+	 *
+	 * @return string|null Price of the product attribute
+	 */
+	public function getPrice() : ?string
+	{
+		return $this->get( 'order.base.product.attribute.price' );
+	}
+
+
+	/**
+	 * Sets the price of the product attribute.
+	 *
+	 * @param string|null $value Price of the product attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
+	 */
+	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	{
+		return $this->set( 'order.base.product.attribute.price', $value );
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -268,8 +291,9 @@ class Standard
 				case 'order.base.product.attribute.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
 				case 'order.base.product.attribute.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.attribute.code': $item = $item->setCode( $value ); break;
-				case 'order.base.product.attribute.value': $item = $item->setValue( $value ); break;
 				case 'order.base.product.attribute.name': $item = $item->setName( $value ); break;
+				case 'order.base.product.attribute.value': $item = $item->setValue( $value ); break;
+				case 'order.base.product.attribute.price': $item = $item->setPrice( $value ); break;
 				case 'order.base.product.attribute.quantity': $item = $item->setQuantity( $value ); break;
 				default: continue 2;
 			}
@@ -295,6 +319,7 @@ class Standard
 		$list['order.base.product.attribute.code'] = $this->getCode();
 		$list['order.base.product.attribute.name'] = $this->getName();
 		$list['order.base.product.attribute.value'] = $this->getValue();
+		$list['order.base.product.attribute.price'] = $this->getPrice();
 		$list['order.base.product.attribute.quantity'] = $this->getQuantity();
 
 		if( $private === true )

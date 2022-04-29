@@ -134,6 +134,7 @@ return array(
 			$table->type();
 			$table->code()->length( 255 );
 			$table->float( 'quantity' )->default( 1 );
+			$table->decimal( 'price', 12 )->null( true );
 			$table->string( 'name' )->default( '' );
 			$table->text( 'value' );
 			$table->meta();
@@ -184,6 +185,7 @@ return array(
 			$table->type();
 			$table->code()->length( 255 );
 			$table->float( 'quantity' )->default( 1 );
+			$table->decimal( 'price', 12 )->null( true );
 			$table->string( 'name' )->default( '' );
 			$table->text( 'value' );
 			$table->meta();

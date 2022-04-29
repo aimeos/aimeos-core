@@ -271,9 +271,9 @@ return array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_product_attr" ( :names
 								"attrid", "parentid", "type", "code", "value",
-								"quantity", "name", "mtime", "editor", "siteid", "ctime"
+								"quantity", "price", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -281,8 +281,8 @@ return array(
 						'ansi' => '
 							UPDATE "mshop_order_base_product_attr"
 							SET :names
-								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?,
-								"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
+								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -294,7 +294,8 @@ return array(
 								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
-								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime"
+								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime",
+								mordbaprat."price" AS "order.base.product.attribute.price"
 							FROM "mshop_order_base_product_attr" mordbaprat
 							:joins
 							WHERE :cond
@@ -308,7 +309,8 @@ return array(
 								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
-								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime"
+								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime",
+								mordbaprat."price" AS "order.base.product.attribute.price"
 							FROM "mshop_order_base_product_attr" mordbaprat
 							:joins
 							WHERE :cond
@@ -514,9 +516,9 @@ return array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_service_attr" ( :names
 								"attrid", "parentid", "type", "code", "value",
-								"quantity", "name", "mtime", "editor", "siteid", "ctime"
+								"quantity", "price", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -524,8 +526,8 @@ return array(
 						'ansi' => '
 							UPDATE "mshop_order_base_service_attr"
 							SET :names
-								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?,
-								"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
+								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -537,7 +539,8 @@ return array(
 								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
-								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor"
+								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor",
+								mordbaseat."price" AS "order.base.service.attribute.price"
 							FROM "mshop_order_base_service_attr" mordbaseat
 							:joins
 							WHERE :cond
@@ -551,7 +554,8 @@ return array(
 								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
-								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor"
+								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor",
+								mordbaseat."price" AS "order.base.service.attribute.price"
 							FROM "mshop_order_base_service_attr" mordbaseat
 							:joins
 							WHERE :cond

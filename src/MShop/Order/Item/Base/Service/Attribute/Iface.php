@@ -105,6 +105,21 @@ interface Iface
 	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
 
 	/**
+	 * Returns the price of the service attribute.
+	 *
+	 * @return string|null Price of the service attribute
+	 */
+	public function getPrice() : ?string;
+
+	/**
+	 * Sets the price of the service attribute.
+	 *
+	 * @param string|null $value Price of the service attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
+
+	/**
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from

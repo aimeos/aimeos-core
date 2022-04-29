@@ -102,6 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.quantity', 1 );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.price', '1.00' );
 		$expr[] = $search->compare( '>=', 'order.base.product.attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.product.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );
@@ -150,17 +151,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'order.base.product.attribute.value', 33 ),
-			$search->compare( '==', 'order.base.product.attribute.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$orderItems = $this->object->search( $search )->toArray();
-
-		if( !( $item = reset( $orderItems ) ) ) {
-			throw new \RuntimeException( 'empty search result' );
-		}
+		$search = $this->object->filter()->add( ['order.base.product.attribute.value' => 33] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'empty search result' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unittest1' );
@@ -185,6 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
+		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
@@ -199,6 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
+		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );

@@ -53,7 +53,7 @@ return [[
 			'attribute' => [[
 				'order.base.product.attribute.type' => 'default', 'order.base.product.attribute.code' => 'width',
 				'order.base.product.attribute.value' => 33, 'order.base.product.attribute.name' => '33',
-				'order.base.product.attribute.quantity' => 1
+				'order.base.product.attribute.quantity' => 1, 'order.base.product.attribute.price' => '1.00',
 			], [
 				'order.base.product.attribute.type' => 'default', 'order.base.product.attribute.code' => 'length',
 				'order.base.product.attribute.value' => 36, 'order.base.product.attribute.name' => '36',
@@ -132,11 +132,11 @@ return [[
 			], [
 				'order.base.service.attribute.type' => 'payment', 'order.base.service.attribute.name' => 'payment method',
 				'order.base.service.attribute.code' => 'NAME', 'order.base.service.attribute.value' => 'CreditCard',
-				'order.base.service.attribute.quantity' => 1
+				'order.base.service.attribute.quantity' => 1, 'order.base.service.attribute.price' => '1.00',
 			], [
 				'order.base.service.attribute.type' => 'payment', 'order.base.service.attribute.name' => 'reference id',
 				'order.base.service.attribute.code' => 'REFID', 'order.base.service.attribute.value' => 12345678,
-				'order.base.service.attribute.quantity' => 1
+				'order.base.service.attribute.quantity' => 1, 'order.base.service.attribute.price' => '0.50',
 			], [
 				'order.base.service.attribute.type' => 'payment', 'order.base.service.attribute.name' => 'transaction date',
 				'order.base.service.attribute.code' => 'TXDATE', 'order.base.service.attribute.value' => '2009-08-18',

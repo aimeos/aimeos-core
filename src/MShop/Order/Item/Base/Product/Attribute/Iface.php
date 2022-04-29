@@ -105,6 +105,21 @@ interface Iface
 	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface;
 
 	/**
+	 * Returns the price of the product attribute.
+	 *
+	 * @return string|null Price of the product attribute
+	 */
+	public function getPrice() : ?string;
+
+	/**
+	 * Sets the price of the product attribute.
+	 *
+	 * @param string|null $value Price of the product attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
+	 */
+	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface;
+
+	/**
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
