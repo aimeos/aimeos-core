@@ -185,7 +185,7 @@ class Standard
 		$fs = $this->context->fs( $fsname );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
-		if( !$force && !( $is && date( 'Y-m-d H:i:s', $fs->time( $item->getUrl() ) ) < $item->getTimeModified() ) ) {
+		if( !$force && $is && date( 'Y-m-d H:i:s', $fs->time( $item->getUrl() ) ) < $item->getTimeModified() ) {
 			return $item;
 		}
 
