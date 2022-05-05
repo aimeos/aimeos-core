@@ -92,7 +92,7 @@ return array(
 			$table->code( 'prodcode' );
 			$table->type( 'stocktype' )->default( 'default' );
 			$table->string( 'vendor' )->default( '' );
-			$table->text( 'name' )->default( '' );
+			$table->string( 'name' )->default( '' );
 			$table->text( 'description' )->default( '' );
 			$table->string( 'mediaurl' )->default( '' );
 			$table->string( 'target' )->default( '' );
@@ -110,7 +110,7 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'statuspayment' )->default( -1 );
 			$table->smallint( 'statusdelivery' )->default( -1 );
-			$table->string( 'notes' )->default( '' );
+			$table->text( 'notes' )->default( '' );
 			$table->meta();
 
 			$table->unique( ['baseid', 'pos'], 'unq_msordbapr_bid_pos' );
