@@ -183,8 +183,8 @@ class MShopConfigDocTask extends Task
 
 			$header = join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) );
 
-			$keyvalue = print_r( str_replace( ["\n\t"], ["\n "], $list['value'] ), true );
-			$defvalue = $list['default'];
+			$keyvalue = print_r( str_replace( ["\n\t"], ["\n "], print_r( $list['value'] ?? '', true ) ), true );
+			$defvalue = $list['default'] ?? '';
 			$matches = [];
 
 			if( preg_match( "/([\t]+)/", $keyvalue, $matches ) === 1 )
@@ -193,7 +193,7 @@ class MShopConfigDocTask extends Task
 				$defvalue = str_replace( $matches[1], '', $defvalue );
 			}
 
-			$default = "* Default: " . str_replace( ["\n\t"], ["\n "], $defvalue ) . "\n";
+			$default = "* Default: " . str_replace( ["\n\t"], ["\n "], print_r( $defvalue, true ) ) . "\n";
 
 			$data .= "\n$short";
 			$data .= "\n```";
