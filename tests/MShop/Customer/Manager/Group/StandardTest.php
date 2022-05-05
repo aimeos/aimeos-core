@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Manager\Group;
+namespace Aimeos\MShop\Customer\Manager\Group;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -137,15 +137,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '~=', 'customer.group.code', 'unitgroup' ),
-			$search->compare( '==', 'customer.group.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 1 );
-
 		$total = 0;
+		$search = $this->object->filter()->add( 'customer.group.code', '~=', 'unitgroup' )->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
