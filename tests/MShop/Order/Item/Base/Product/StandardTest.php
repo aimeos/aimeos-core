@@ -56,6 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.target' => 'testtarget',
 			'order.base.product.quantity' => 11,
 			'order.base.product.qtyopen' => 5,
+			'order.base.product.scale' => 0.1,
 			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
 			'order.base.product.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
 			'order.base.product.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
@@ -367,6 +368,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( '3-4d', $this->object->getTimeFrame() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetScale()
+	{
+		$this->assertEquals( 0.1, $this->object->getScale() );
+	}
+
+
+	public function testSetScale()
+	{
+		$return = $this->object->setScale( 2.5 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 2.5, $this->object->getScale() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -878,6 +895,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.position' => 4,
 			'order.base.product.quantity' => 5,
 			'order.base.product.qtyopen' => 3,
+			'order.base.product.scale' => 0.5,
 			'order.base.product.statuspayment' => 6,
 			'order.base.product.statusdelivery' => 0,
 			'order.base.product.flags' => 1,
@@ -904,6 +922,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.timeframe'], $item->getTimeFrame() );
 		$this->assertEquals( $list['order.base.product.target'], $item->getTarget() );
 		$this->assertEquals( $list['order.base.product.position'], $item->getPosition() );
+		$this->assertEquals( $list['order.base.product.scale'], $item->getScale() );
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
 		$this->assertEquals( $list['order.base.product.qtyopen'], $item->getQuantityOpen() );
 		$this->assertEquals( $list['order.base.product.statuspayment'], $item->getStatusPayment() );
@@ -950,6 +969,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getPrice()->getTaxFlag(), $arrayObject['order.base.product.taxflag'] );
 		$this->assertEquals( $this->object->getQuantityOpen(), $arrayObject['order.base.product.qtyopen'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['order.base.product.quantity'] );
+		$this->assertEquals( $this->object->getScale(), $arrayObject['order.base.product.scale'] );
 		$this->assertEquals( $this->object->getStatusPayment(), $arrayObject['order.base.product.statuspayment'] );
 		$this->assertEquals( $this->object->getStatusDelivery(), $arrayObject['order.base.product.statusdelivery'] );
 		$this->assertEquals( $this->object->getFlags(), $arrayObject['order.base.product.flags'] );
@@ -981,9 +1001,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getDescription() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( -1, $productCopy->getStatusDelivery() );
+		$this->assertEquals( 0.1, $productCopy->getScale() );
 		$this->assertEquals( '', $productCopy->getVendor() );
-		$this->assertEquals( '', $productCopy->getMediaUrl() );
 		$this->assertEquals( '', $productCopy->getTarget() );
+		$this->assertEquals( '', $productCopy->getMediaUrl() );
 		$this->assertEquals( 'abc', $productCopy->get( 'customprop' ) );
 
 		$this->assertTrue( $productCopy->isModified() );

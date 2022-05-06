@@ -457,6 +457,33 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the quantity scale of the product.
+	 *
+	 * @return float Minimum quantity value
+	 */
+	public function getScale() : float
+	{
+		return (float) $this->get( 'order.base.product.scale', 1 );
+	}
+
+
+	/**
+	 * Sets the quantity scale of the product.
+	 *
+	 * @param float $quantity Minimum quantity value
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setScale( float $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		if( $quantity <= 0 ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity scale must be greater than 0' ) );
+		}
+
+		return $this->set( 'order.base.product.scale', $quantity );
+	}
+
+
+	/**
 	 * 	Returns the flags for the product item.
 	 *
 	 * @return int Flags, e.g. for immutable products
@@ -624,6 +651,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				case 'order.base.product.timeframe': $item = $item->setTimeFrame( $value ); break;
+				case 'order.base.product.scale': $item = $item->setScale( (float) $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( (float) $value ); break;
 				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
@@ -656,8 +684,9 @@ class Standard extends Base implements Iface
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.parentproductid'] = $this->getParentProductId();
 		$list['order.base.product.vendor'] = $this->getVendor();
-		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();
+		$list['order.base.product.scale'] = $this->getScale();
 		$list['order.base.product.quantity'] = $this->getQuantity();
+		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();
 		$list['order.base.product.currencyid'] = $price->getCurrencyId();
 		$list['order.base.product.price'] = $price->getValue();
 		$list['order.base.product.costs'] = $price->getCosts();
@@ -724,6 +753,7 @@ class Standard extends Base implements Iface
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );
 		$this->setType( $product->getType() );
+		$this->setScale( $product->getScale() );
 		$this->setTarget( $product->getTarget() );
 		$this->setName( $product->getName() );
 

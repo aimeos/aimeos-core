@@ -301,6 +301,21 @@ interface Iface
 	public function setQuantityOpen( float $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
+	 * Returns the quantity scale of the product.
+	 *
+	 * @return float Minimum quantity value
+	 */
+	public function getScale() : float;
+
+	/**
+	 * Sets the quantity scale of the product.
+	 *
+	 * @param float $quantitiy Minimum quantity value
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setScale( float $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
 	 * Returns the stored price item for the selected product and package.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate

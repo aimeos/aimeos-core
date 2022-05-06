@@ -99,6 +99,7 @@ return array(
 			$table->string( 'timeframe', 16 )->default( '' );
 			$table->float( 'quantity' )->default( 1 );
 			$table->float( 'qtyopen' )->default( 0 );
+			$table->float( 'scale' )->default( 1 );
 			$table->string( 'currencyid', 3 );
 			$table->decimal( 'price', 12 )->null( true );
 			$table->decimal( 'costs', 12 )->default( '0.00' );

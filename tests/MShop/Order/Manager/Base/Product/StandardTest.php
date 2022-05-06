@@ -153,6 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.product.target', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.qtyopen', 6 );
+		$expr[] = $search->compare( '==', 'order.base.product.scale', 0.1 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
@@ -189,8 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemRef()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNE' ) );
+		$search = $this->object->filter()->add( ['order.base.product.prodcode' => 'CNE'] )->slice( 0, 1 );
 		$result = $this->object->search( $search, ['product'] );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -233,17 +233,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'order.base.product.price', '0.00' ),
-			$search->compare( '==', 'order.base.product.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$orderItems = $this->object->search( $search )->toArray();
-
-		if( !( $item = reset( $orderItems ) ) ) {
-			throw new \RuntimeException( 'empty search result' );
-		}
+		$search = $this->object->filter()->add( ['order.base.product.price' => '0.00'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'empty search result' ) );
 
 		$item->setId( null );
 		$item->setPosition( $item->getPosition() + 1 );
@@ -279,6 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPrice()->getTaxflag(), $itemSaved->getPrice()->getTaxflag() );
 		$this->assertEquals( $item->getPrice()->getTaxValue(), $itemSaved->getPrice()->getTaxValue() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
+		$this->assertEquals( $item->getScale(), $itemSaved->getScale() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 		$this->assertEquals( $item->getQuantityOpen(), $itemSaved->getQuantityOpen() );
 		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
@@ -312,6 +304,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPrice()->getTaxflag(), $itemUpd->getPrice()->getTaxflag() );
 		$this->assertEquals( $itemExp->getPrice()->getTaxValue(), $itemUpd->getPrice()->getTaxValue() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
+		$this->assertEquals( $itemExp->getScale(), $itemUpd->getScale() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getQuantityOpen(), $itemUpd->getQuantityOpen() );
 		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );

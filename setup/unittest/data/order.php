@@ -44,7 +44,7 @@ return [[
 		'product' => [[
 			'price.value' => '4.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.product.type' => 'default', 'order.base.product.prodcode' => 'CNE',
-			'order.base.product.vendor' => 'Test vendor',
+			'order.base.product.vendor' => 'Test vendor', 'order.base.product.scale' => 0.1,
 			'order.base.product.stocktype' => 'default', 'order.base.product.name' => 'Cafe Noire Expresso',
 			'order.base.product.mediaurl' => 'somewhere/thump1.jpg', 'order.base.product.quantity' => 9, 'order.base.product.qtyopen' => 6,
 			'order.base.product.flags' => '0', 'order.base.product.position' => 1,
@@ -66,7 +66,7 @@ return [[
 		], [
 			'price.value' => '6.00', 'price.costs' => '0.50', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.product.type' => 'default', 'order.base.product.prodcode' => 'CNC',
-			'order.base.product.vendor' => 'Test vendor',
+			'order.base.product.vendor' => 'Test vendor', 'order.base.product.scale' => 0.1,
 			'order.base.product.stocktype' => 'default', 'order.base.product.name' => 'Cafe Noire Cappuccino',
 			'order.base.product.mediaurl' => 'somewhere/thump2.jpg', 'order.base.product.quantity' => 3, 'order.base.product.qtyopen' => 3,
 			'order.base.product.flags' => '0', 'order.base.product.position' => 2, 'order.base.product.statusdelivery' => 1,
@@ -346,7 +346,7 @@ return [[
 		'product' => [[
 			'price.value' => '4.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.product.type' => 'default', 'order.base.product.prodcode' => 'CNE',
-			'order.base.product.vendor' => 'Test vendor',
+			'order.base.product.vendor' => 'Test vendor', 'order.base.product.scale' => 0.1,
 			'order.base.product.stocktype' => 'default', 'order.base.product.name' => 'Cafe Noire Expresso',
 			'order.base.product.mediaurl' => 'somewhere/thump1.jpg', 'order.base.product.quantity' => 3, 'order.base.product.qtyopen' => 0,
 			'order.base.product.flags' => '0', 'order.base.product.position' => 1, 'order.base.product.statusdelivery' => 1,

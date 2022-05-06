@@ -136,6 +136,13 @@ class Standard
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
+		'order.base.product.scale' => array(
+			'code' => 'order.base.product.scale',
+			'internalcode' => 'mordbapr."scale"',
+			'label' => 'Product quantity scale',
+			'type' => 'float',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
+		),
 		'order.base.product.qtyopen' => array(
 			'code' => 'order.base.product.qtyopen',
 			'internalcode' => 'mordbapr."qtyopen"',
@@ -807,7 +814,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDescription() );
 			$stmt->bind( $idx++, $item->getMediaUrl() );
 			$stmt->bind( $idx++, $item->getTimeFrame() );
-			$stmt->bind( $idx++, $item->getQuantity() );
+			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $price->getCurrencyId() );
 			$stmt->bind( $idx++, $price->getValue() );
 			$stmt->bind( $idx++, $price->getCosts() );
@@ -822,8 +829,9 @@ class Standard
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $item->getTarget() );
-			$stmt->bind( $idx++, $item->getQuantityOpen() );
+			$stmt->bind( $idx++, $item->getQuantityOpen(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getNotes() );
+			$stmt->bind( $idx++, $item->getScale(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 
 			if( $id !== null ) {
