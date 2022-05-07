@@ -84,14 +84,14 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Best seller', 'mimetype' => 'image/webp',
+				'label' => 'Demo: Best seller stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-1-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-1-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-1-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-1-big.webp',
 				],
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'stage', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
@@ -159,14 +159,14 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: New arrivals', 'mimetype' => 'image/webp',
+				'label' => 'Demo: New arrivals stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-2-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-2-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-2-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-2-big.webp',
 				],
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'stage', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
@@ -198,14 +198,14 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Hot deals', 'mimetype' => 'image/webp',
+				'label' => 'Demo: Hot deals stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-3-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-3-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-3-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-3-big.webp',
 				],
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'stage', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
