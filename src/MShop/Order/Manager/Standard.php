@@ -181,7 +181,7 @@ class Standard
 
 		$name = 'order:status';
 		$expr = $this->siteString( 'mordst_cs."siteid"', $level );
-		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 
