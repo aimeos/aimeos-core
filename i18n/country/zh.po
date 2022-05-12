@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
+# Hans He, 2022
 # manuel.fries <manuel.fries@gdatasoftware.com>, 2014
 msgid ""
 msgstr ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:34+0000\n"
-"Last-Translator: manuel.fries <manuel.fries@gdatasoftware.com>, 2014\n"
+"Last-Translator: Hans He, 2022\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -756,7 +757,7 @@ msgid "WS"
 msgstr "萨摩亚"
 
 msgid "XK"
-msgstr ""
+msgstr "科索沃"
 
 msgid "YE"
 msgstr "也门"
