@@ -80,6 +80,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertContains( 'product', $result );
 		$this->assertContains( 'product/lists', $result );
 		$this->assertContains( 'product/property', $result );
+
+		$this->assertEquals( ['product'], $this->object->getResourceType( false ) );
 	}
 
 

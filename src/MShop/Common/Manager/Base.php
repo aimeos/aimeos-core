@@ -641,10 +641,13 @@ abstract class Base
 	 */
 	protected function getResourceTypeBase( string $type, string $path, array $default, bool $withsub ) : array
 	{
-		$list = array( $type );
+		$list = [$type];
 
-		foreach( $this->context->config()->get( $path, $default ) as $domain ) {
-			$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
+		if( $withsub )
+		{
+			foreach( $this->context->config()->get( $path, $default ) as $domain ) {
+				$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
+			}
 		}
 
 		return $list;
