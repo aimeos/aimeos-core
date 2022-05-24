@@ -24,6 +24,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 {
 	use \Aimeos\MShop\Common\Manager\Sub\Traits;
 
+	private static $siteInactive = [];
 
 	private $context;
 	private $object;
@@ -753,6 +754,41 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Returns the site IDs that are inactive
+	 *
+	 * @param string $current Current site ID
+	 * @return \Aimeos\Map List of inactive site IDs
+	 */
+	protected function getInactiveSites( string $current ) : \Aimeos\Map
+	{
+		// Required for fetching customer item below
+		if( !strncmp( current( $this->getResourceType( false ) ), 'customer', 8 ) ) {
+			return map();
+		}
+
+		if( !isset( self::$siteInactive[$current] ) )
+		{
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'locale/site' );
+			$search = $manager->filter()->add( 'locale.site.siteid', '=~', $current )->add( 'locale.site.status', '<', 1 );
+			$sites = $manager->search( $search )->getSiteId();
+
+			if( ( $userId = $this->getContext()->user() ) )
+			{
+				$siteId = \Aimeos\MShop::create( $this->getContext(), 'customer' )->get( $userId )->getSiteId();
+
+				$sites = $sites->filter( function( $item ) use ( $siteId ) {
+					return strncmp( $item, $siteId, strlen( $siteId ) );
+				} );
+			}
+
+			self::$siteInactive[$current] = $sites;
+		}
+
+		return self::$siteInactive[$current];
+	}
+
+
+	/**
 	 * Returns the site expression for the given name
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
@@ -766,15 +802,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		$sites = $this->context->getLocale()->getSites();
 		$cond = [$search->compare( '==', $name, '' )];
+		$current = $sites[Locale::SITE_ONE] ?? null;
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
 			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
-		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
-			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
+		} elseif( $current ) {
+			$cond[] = $search->compare( '==', $name, $current );
 		}
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
 			$cond[] = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
+		}
+
+		if( $current && !( $inactive = $this->getInactiveSites( $current ) )->isEmpty() )
+		{
+			return $filter->and( [
+				$filter->is( $name, '!=', $inactive ),
+				$filter->or( $cond )
+			] );
 		}
 
 		return $search->or( $cond );

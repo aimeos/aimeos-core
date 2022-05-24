@@ -124,7 +124,8 @@ class Standard
 	{
 		$siteItem = $this->getObject()->getSubManager( 'site' )->find( $site );
 
-		if( $active && $siteItem->getStatus() < 1 ) {
+		// allow active and reviewed sites
+		if( $active && $siteItem->getStatus() < 1 && $siteItem->getStatus() !== -1 ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'Site not found' );
 		}
 
