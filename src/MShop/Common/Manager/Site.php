@@ -21,6 +21,9 @@ use \Aimeos\MShop\Locale\Manager\Base as Locale;
  */
 trait Site
 {
+	private static $siteInactive = [];
+
+
 	/**
 	 * Returns the context object.
 	 *
@@ -48,12 +51,13 @@ trait Site
 	protected function siteCondition( string $name, int $sitelevel ) : \Aimeos\Base\Criteria\Expression\Iface
 	{
 		$sites = $this->context()->locale()->getSites();
+		$current = $sites[Locale::SITE_ONE] ?? null;
 		$values = [''];
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
 			$values = array_merge( $values, $sites[Locale::SITE_PATH] );
-		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
-			$values[] = $sites[Locale::SITE_ONE];
+		} elseif( $current ) {
+			$values[] = $current;
 		}
 
 		$filter = $this->filter();
@@ -63,24 +67,50 @@ trait Site
 			$cond[] = $filter->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
 		}
 
+		if( $current && !( $inactive = $this->siteInactive( $current ) )->isEmpty() )
+		{
+			return $filter->and( [
+				$filter->is( $name, '!=', $inactive ),
+				$filter->or( $cond )
+			] );
+		}
+
 		return $filter->or( $cond );
 	}
 
 
 	/**
-	 * Returns the site expression for the given name
+	 * Returns the site IDs that are inactive
 	 *
-	 * @param string $name SQL name for the site condition
-	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return string Site search condition
-	 * @since 2022.04
+	 * @param string $current Current site ID
+	 * @return \Aimeos\Map List of inactive site IDs
 	 */
-	protected function siteString( string $name, int $sitelevel ) : string
+	protected function siteInactive( string $current ) : \Aimeos\Map
 	{
-		$translation = ['marker' => $name];
-		$types = ['marker' => \Aimeos\Base\DB\Statement\Base::PARAM_STR];
+		// Required for fetching customer item below
+		if( !strncmp( current( $this->getResourceType( false ) ), 'customer', 8 ) ) {
+			return map();
+		}
 
-		return $this->siteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
+		if( !isset( self::$siteInactive[$current] ) )
+		{
+			$manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
+			$search = $manager->filter()->add( 'locale.site.siteid', '=~', $current )->add( 'locale.site.status', '<', 1 );
+			$sites = $manager->search( $search )->getSiteId();
+
+			if( ( $userId = $this->context()->user() ) )
+			{
+				$siteId = \Aimeos\MShop::create( $this->context(), 'customer' )->get( $userId )->getSiteId();
+
+				$sites = $sites->filter( function( $item ) use ( $siteId ) {
+					return strncmp( $item, $siteId, strlen( $siteId ) );
+				} );
+			}
+
+			self::$siteInactive[$current] = $sites;
+		}
+
+		return self::$siteInactive[$current];
 	}
 
 
@@ -115,5 +145,22 @@ trait Site
 		}
 
 		return $this->context()->locale()->getSiteId();
+	}
+
+
+	/**
+	 * Returns the site expression for the given name
+	 *
+	 * @param string $name SQL name for the site condition
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return string Site search condition
+	 * @since 2022.04
+	 */
+	protected function siteString( string $name, int $sitelevel ) : string
+	{
+		$translation = ['marker' => $name];
+		$types = ['marker' => \Aimeos\Base\DB\Statement\Base::PARAM_STR];
+
+		return $this->siteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
 	}
 }
