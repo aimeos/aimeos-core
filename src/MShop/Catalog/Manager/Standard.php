@@ -728,7 +728,14 @@ class Standard extends Base
 	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
 		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
+		$mode = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
+		$mode = $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $mode );
+
+		if( $mode !== \Aimeos\MShop\Locale\Manager\Base::SITE_ONE ) {
+			$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
+		} else {
+			$sitePath = [$this->context()->locale()->getSiteId()];
+		}
 
 		foreach( $sitePath as $siteId )
 		{
