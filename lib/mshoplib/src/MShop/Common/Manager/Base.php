@@ -816,9 +816,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		if( $current && !( $inactive = $this->getInactiveSites( $current ) )->isEmpty() )
 		{
-			return $filter->and( [
-				$filter->is( $name, '!=', $inactive ),
-				$filter->or( $cond )
+			return $search->and( [
+				$search->is( $name, '!=', $inactive ),
+				$search->or( $cond )
 			] );
 		}
 
