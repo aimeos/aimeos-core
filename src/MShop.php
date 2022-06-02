@@ -230,10 +230,11 @@ class MShop
 	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param string $classname Name of the manager class
 	 * @param string $interface Name of the manager interface
+	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected static function createManager( \Aimeos\MShop\ContextIface $context,
-		string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
+		string $classname, string $interface, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
@@ -251,7 +252,7 @@ class MShop
 			throw new \Aimeos\MShop\Exception( $msg, 400 );
 		}
 
-		return $manager;
+		return self::addManagerDecorators( $context, $manager, $domain );
 	}
 
 
@@ -268,8 +269,7 @@ class MShop
 		$iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $name;
 
-		$manager = self::createManager( $context, $classname, $iface );
-		$manager = self::addManagerDecorators( $context, $manager, $domain );
+		$manager = self::createManager( $context, $classname, $iface, $domain );
 
 		self::$objects[$classname] = $manager;
 		$paths = [$domain => $manager];

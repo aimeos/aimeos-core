@@ -100,12 +100,12 @@ abstract class Base
 		if( is_iterable( $items ) )
 		{
 			foreach( $items as $id => $item ) {
-				$items[$id] = $this->object()->saveItem( $item, $fetch );
+				$items[$id] = $this->saveItem( $item, $fetch );
 			}
 			return map( $items );
 		}
 
-		return $this->object()->saveItem( $items, $fetch );
+		return $this->saveItem( $items, $fetch );
 	}
 
 
@@ -119,7 +119,7 @@ abstract class Base
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		return $this->object()->search( $filter, $ref, $total );
+		return map();
 	}
 
 
