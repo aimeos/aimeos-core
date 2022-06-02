@@ -254,8 +254,7 @@ class Autofill
 		if( $order->getAddresses()->isEmpty() && (bool) $this->getConfigValue( 'orderaddress', true ) === true )
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), 'order/base/address' );
-			$search = $manager->filter();
-			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
+			$search = $manager->filter()->add( ['order.base.address.baseid' => $item->getBaseId()] );
 			$addresses = [];
 
 			foreach( $manager->search( $search ) as $address ) {

@@ -177,7 +177,7 @@ class OrderAddTestData extends Base
 
 	protected function getAttributes() : \Aimeos\Map
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context(), 'Standard' );
+		$attributeManager = \Aimeos\MShop::create( $this->context(), 'attribute', 'Standard' );
 
 		return $attributeManager->search( $attributeManager->filter() )
 			->groupBy( 'attribute.type' )->map( function( $list ) {
@@ -188,28 +188,28 @@ class OrderAddTestData extends Base
 
 	protected function getCustomer() : \Aimeos\MShop\Customer\Item\Iface
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
+		$customerManager = \Aimeos\MShop::create( $this->context(), 'customer', 'Standard' );
 		return $customerManager->find( 'test@example.com' );
 	}
 
 
 	protected function getProducts() : \Aimeos\Map
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context(), 'Standard' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product', 'Standard' );
 		return $productManager->search( $productManager->filter() )->col( 'product.id', 'product.code' );
 	}
 
 
 	protected function getServices() : \Aimeos\Map
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context(), 'Standard' );
+		$serviceManager = \Aimeos\MShop::create( $this->context(), 'service', 'Standard' );
 		return $serviceManager->search( $serviceManager->filter() )->col( 'service.id', 'service.code' );
 	}
 
 
 	protected function getOrderManager( $path = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' );
 
 		if( $path )
 		{
@@ -224,6 +224,6 @@ class OrderAddTestData extends Base
 
 	protected function getPriceManager() : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return \Aimeos\MShop\Price\Manager\Factory::create( $this->context(), 'Standard' );
+		return \Aimeos\MShop::create( $this->context(), 'price', 'Standard' );
 	}
 }

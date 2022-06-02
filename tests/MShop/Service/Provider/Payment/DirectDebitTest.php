@@ -53,7 +53,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderManager->filter()->add( [
@@ -133,7 +133,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() )->create();
+		$orderItem = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );

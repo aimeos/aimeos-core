@@ -51,7 +51,7 @@ class TagAddTestData extends Base
 	 */
 	private function addTagData( array $testdata )
 	{
-		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::create( $this->context(), 'Standard' );
+		$tagManager = \Aimeos\MShop::create( $this->context(), 'tag', 'Standard' );
 		$tagTypeManager = $tagManager->getSubManager( 'type', 'Standard' );
 
 		$tagManager->begin();

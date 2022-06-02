@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->editor = \TestHelper::context()->editor();
-		$this->object = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelper::context() );
+		$this->object = new \Aimeos\MShop\Attribute\Manager\Standard( \TestHelper::context() );
 	}
 
 

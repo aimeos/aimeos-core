@@ -20,7 +20,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$search = $servManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 
@@ -48,7 +48,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPrice()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
 
@@ -82,7 +82,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
@@ -100,7 +100,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -117,7 +117,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'cancel' );
 
@@ -127,7 +127,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'capture' );
 
@@ -137,7 +137,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'process' );
 
@@ -147,7 +147,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testQuery()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'query' );
 
@@ -157,7 +157,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'refund' );
 
@@ -167,7 +167,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRepay()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'repay' );
 
@@ -177,7 +177,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+		$item = \Aimeos\MShop::create( $this->context, 'order' )
 			->getSubManager( 'base' )->getSubManager( 'service' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'setConfigFE' );
@@ -209,7 +209,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$orderItem = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'updateSync' )->will( $this->returnValue( $orderItem ) );

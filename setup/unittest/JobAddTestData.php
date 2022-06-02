@@ -32,8 +32,6 @@ class JobAddTestData extends Base
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
-
 		$this->info( 'Adding admin test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
@@ -48,7 +46,7 @@ class JobAddTestData extends Base
 	 */
 	private function addJobTestData()
 	{
-		$manager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MAdmin::create( $this->context(), 'job', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';

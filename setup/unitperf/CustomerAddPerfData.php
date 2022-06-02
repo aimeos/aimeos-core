@@ -32,7 +32,7 @@ class CustomerAddPerfData extends Base
 	{
 		$this->info( 'Adding customer performance data', 'vv' );
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context() );
+		$customerManager = \Aimeos\MShop::create( $this->context(), 'customer', 'Standard' );
 
 		$customerItem = $customerManager->create();
 		$customerItem->setCode( 'unitperf@example.com' );

@@ -20,6 +20,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
@@ -30,6 +32,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
+		\Aimeos\MShop::cache( false );
 		unset( $this->object, $this->order, $this->plugin, $this->context );
 	}
 
@@ -62,8 +65,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
-		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
-		$this->context->config()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
 
 		$orderStub->addService( $serviceDelivery, 'delivery' );
@@ -118,8 +120,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
-		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
-		$this->context->config()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
 
 		$orderStub->addService( $serviceDelivery, 'delivery' );

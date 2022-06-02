@@ -19,7 +19,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
+		$servManager = \Aimeos\MShop::create( $context, 'service' );
 		$search = $servManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $servManager->search( $search, array( 'price' ) )->toArray();
@@ -61,7 +61,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->getSubManager( 'base' );
 		$search = $orderBaseManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$result = $orderBaseManager->search( $search )->toArray();
@@ -80,7 +80,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailable()
 	{
 		$orderBaseManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/base' );
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelper::context() );
+		$localeManager = \Aimeos\MShop::create( \TestHelper::context(), 'locale' );
 
 		$localeItem = $localeManager->create();
 

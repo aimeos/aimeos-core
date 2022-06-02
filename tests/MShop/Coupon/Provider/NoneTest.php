@@ -18,8 +18,8 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$item = \Aimeos\MShop::create( $context, 'coupon' )->create();
 
 		// Don't create order base item by create() as this would already register the plugins
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );

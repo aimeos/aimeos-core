@@ -51,8 +51,8 @@ class ReviewAddTestData extends Base
 	 */
 	protected function addData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Review\Manager\Factory::create( $this->context(), 'Standard' );
-		$custManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'review', 'Standard' );
+		$custManager = \Aimeos\MShop::create( $this->context(), 'customer', 'Standard' );
 
 		$manager->begin();
 
@@ -87,7 +87,7 @@ class ReviewAddTestData extends Base
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' )
+		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' )
 			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
 
 		$parts = explode( '/', $key );

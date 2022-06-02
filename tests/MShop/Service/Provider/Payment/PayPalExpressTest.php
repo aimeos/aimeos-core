@@ -21,8 +21,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelper::context();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
 
 		$search = $serviceManager->filter()->add( ['service.code' => 'paypalexpress'] );
 		$this->serviceItem = $serviceManager->search( $search )->first( new \RuntimeException( 'No service item available' ) );
@@ -33,7 +35,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
+		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $orderManager->filter()->add( [
 			'order.channel' => 'web',
@@ -50,13 +52,13 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->orderMock->expects( $this->any() )->method( 'save' )->will( $this->returnArgument( 0 ) );
 
-		$this->context->config()->set( 'mshop/order/manager/name', 'MockPayPal' );
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\MockPayPal', $this->orderMock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $this->orderMock );
 	}
 
 
 	protected function tearDown() : void
 	{
+		\Aimeos\MShop::cache( false );
 		unset( $this->object, $this->serviceItem, $this->order );
 	}
 
@@ -113,7 +115,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$helperForm = $this->object->process( $this->order );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
+		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
@@ -168,7 +170,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	public function testUpdatePush()
 	{
 		//IPN Call
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
+		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$price = $orderBaseManager->get( $this->order->getBaseId() )->getPrice();
@@ -242,7 +244,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
+		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );

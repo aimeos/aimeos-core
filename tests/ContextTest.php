@@ -153,7 +153,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelper::context() )->create();
+		$locale = \Aimeos\MShop::create( \TestHelper::context(), 'locale' )->create();
 		$this->object->setLocale( $locale->setLanguageId( 'en' ) );
 
 		$return = $this->object->setI18n( ['en' => $context->i18n()] );
@@ -174,7 +174,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelper::context() )->create();
+		$locale = \Aimeos\MShop::create( \TestHelper::context(), 'locale' )->create();
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertSame( $locale, $this->object->locale() );

@@ -21,14 +21,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->editor();
-		$manager = \Aimeos\MShop\Text\Manager\Factory::create( $this->context, 'Standard' );
-		$this->object = $manager->getSubManager( 'lists', 'Standard' );
+
+		$this->object = new \Aimeos\MShop\Text\Manager\Lists\Standard( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->context );
+		unset( $this->object );
 	}
 
 

@@ -18,7 +18,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
 
 		$serviceItem = $serviceManager->create()->setConfig( [
 			'email.from' => 'test@localhost',

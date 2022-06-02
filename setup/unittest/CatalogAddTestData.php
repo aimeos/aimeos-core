@@ -31,11 +31,9 @@ class CatalogAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
-
 		$this->info( 'Adding catalog test data', 'vv' );
-
 		$this->context()->setEditor( 'core:lib/mshoplib' );
+
 		$this->process( $this->getData() );
 	}
 
@@ -54,22 +52,6 @@ class CatalogAddTestData extends BaseAddTestData
 		}
 
 		return $testdata;
-	}
-
-
-	/**
-	 * Returns the manager for the current setup task
-	 *
-	 * @param string $domain Domain name of the manager
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
-	 */
-	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		if( $domain === 'catalog' ) {
-			return \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context(), 'Standard' );
-		}
-
-		return parent::getManager( $domain );
 	}
 
 

@@ -31,8 +31,8 @@ class SupplierAddTestData extends BaseAddTestData
 	public function up()
 	{
 		$this->info( 'Adding supplier test data', 'vv' );
-
 		$this->context()->setEditor( 'core:lib/mshoplib' );
+
 		$this->process( $this->getData() );
 	}
 
@@ -51,22 +51,6 @@ class SupplierAddTestData extends BaseAddTestData
 		}
 
 		return $testdata;
-	}
-
-
-	/**
-	 * Returns the manager for the current setup task
-	 *
-	 * @param string $domain Domain name of the manager
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
-	 */
-	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		if( $domain === 'supplier' ) {
-			return \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context(), 'Standard' );
-		}
-
-		return parent::getManager( $domain );
 	}
 
 

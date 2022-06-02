@@ -44,7 +44,7 @@ class RuleAddTestData extends Base
 	 */
 	private function addRuleData()
 	{
-		$ruleManager = \Aimeos\MShop\Rule\Manager\Factory::create( $this->context(), 'Standard' );
+		$ruleManager = \Aimeos\MShop::create( $this->context(), 'rule', 'Standard' );
 		$ruleTypeManager = $ruleManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;

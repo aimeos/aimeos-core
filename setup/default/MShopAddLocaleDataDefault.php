@@ -63,7 +63,7 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		}
 
 		$siteIds = [];
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
 
 		if( isset( $data['locale/site'] ) ) {
 			$siteIds = $this->addLocaleSiteData( $localeManager, $data['locale/site'] );

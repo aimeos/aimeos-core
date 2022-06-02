@@ -51,7 +51,7 @@ class CouponAddTestData extends Base
 	 */
 	private function addCouponData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'coupon', 'Standard' );
 		$codeManager = $manager->getSubmanager( 'code' );
 
 		foreach( $testdata['coupon'] ?? [] as $entry )

@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager->expects( $this->once() )->method( 'getCache' )
 			->will( $this->returnValue( $this->mock ) );
 
-		\Aimeos\MAdmin::inject( 'cache', $manager );
+		\Aimeos\MAdmin::inject( \Aimeos\MAdmin\Cache\Manager\Standard::class, $manager );
 
 		$this->object = new \Aimeos\MAdmin\Cache\Proxy\Standard( $this->context );
 	}

@@ -155,8 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'CNC', ['text'] );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNC', ['text'] );
 
 		$this->object->delete( $product->getId() );
 		$this->object->save( $product );
@@ -172,8 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItemNoName()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'IJKL', ['text'] );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'IJKL', ['text'] );
 
 		$this->object->delete( $product->getId() );
 		$this->object->save( $product );

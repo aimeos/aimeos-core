@@ -158,7 +158,7 @@ class TestHelper
 		$ctx->setView( $view );
 
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $ctx );
+		$localeManager = \Aimeos\MShop::create( $ctx, 'locale' );
 		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 

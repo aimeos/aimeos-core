@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->find( 'CNC' );
 		$listItem = $this->object->createListItem();
-		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->create()->setType( 'name' );
+		$refItem = \Aimeos\MShop::create( $this->context, 'text' )->create()->setType( 'name' );
 
 		$item->setId( null );
 		$item->setCode( 'CNC-test' );
@@ -268,7 +268,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
+		$manager = \Aimeos\MShop::create( $context, 'product' );
 
 		$item = $manager->create();
 		$item->setType( 'default' );
@@ -279,7 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listItem = $listManager->create();
 		$listItem->setType( 'default' );
 
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $context );
+		$textManager = \Aimeos\MShop::create( $context, 'text' );
 
 		$textItem = $textManager->create();
 		$textItem->setType( 'name' );
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveItemSitecheck()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'product' );
 
 		$search = $manager->filter()->slice( 0, 1 );
 		$products = $manager->search( $search )->toArray();

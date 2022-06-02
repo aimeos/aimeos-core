@@ -19,7 +19,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->create()->setId( -1 );
+		$serviceItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setId( -1 );
 
 		$this->object = $this->getMockBuilder( TestBase::class )
 			->setConstructorArgs( [$this->context, $serviceItem] )
@@ -72,7 +72,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testQuery()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->query( $item );
@@ -100,7 +100,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$orderItem = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );
@@ -134,7 +134,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['save'] )
 			->getMock();
 
-		\Aimeos\MShop::inject( 'customer', $stub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Customer\Manager\Standard::class, $stub );
 
 		$stub->expects( $this->once() )->method( 'save' );
 

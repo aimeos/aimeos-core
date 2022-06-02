@@ -59,7 +59,7 @@ class LocaleAddPerfData extends MShopAddLocaleData
 			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
 		}
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
+		$localeManager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' );
 		$localeSiteManager = $localeManager->getSubManager( 'site' );
 
 		$siteIds = [];

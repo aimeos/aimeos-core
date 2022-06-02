@@ -52,7 +52,7 @@ class SubscriptionAddTestData extends Base
 	protected function import( array $data )
 	{
 		$list = [];
-		$manager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'subscription', 'Standard' );
 
 		foreach( $data as $entry )
 		{
@@ -78,7 +78,7 @@ class SubscriptionAddTestData extends Base
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' )
+		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' )
 			->getSubManager( 'base' )->getSubManager( 'product' );
 
 		$parts = explode( '/', $key );

@@ -20,8 +20,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'fixedrebate.productcode' => 'U:MD', 'fixedrebate.rebate' => ['EUR' => '2.50'] ) );
 
 		// Don't create order base item by create() as this would already register the plugins
@@ -112,7 +112,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$products = $this->getOrderProducts();
 		$this->orderBase->addProduct( $products['CNE'] );
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( $config );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
@@ -154,7 +154,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 			),
 		);
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( $config );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
@@ -185,7 +185,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelper::context();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelper::context() )->create();
+		$couponItem = \Aimeos\MShop::create( \TestHelper::context(), 'coupon' )->create();
 		$couponItem->setConfig( array( 'fixedrebate.rebate' => '2.50' ) );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );

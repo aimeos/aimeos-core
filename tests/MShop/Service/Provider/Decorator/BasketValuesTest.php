@@ -20,22 +20,22 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderProducts = [];
 		$context = \TestHelper::context();
-		$this->serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $context )->create();
+		$this->serviceItem = \Aimeos\MShop::create( $context, 'service' )->create();
 
 		$provider = new \Aimeos\MShop\Service\Provider\Delivery\Standard( $context, $this->serviceItem );
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\BasketValues( $provider, $context, $this->serviceItem );
 		$this->object->setObject( $this->object );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
+		$orderManager = \Aimeos\MShop::create( $context, 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
+		$productManager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $productManager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
 		$products = $productManager->search( $search )->toArray();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$price = $priceManager->create();
 		$price->setValue( 321 );
 

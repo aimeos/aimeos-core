@@ -39,7 +39,7 @@ class MShopAddPluginData extends Base
 		$this->info( 'Adding default plugin data', 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context(), 'Standard' );
+		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin', 'Standard' );
 
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
 

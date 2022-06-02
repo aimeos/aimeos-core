@@ -21,16 +21,18 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelper::context();
 		$this->context->setUserId( null );
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\OrderCheck::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )
 			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\OrderCheck( $this->mockProvider, $this->context, $this->servItem );
@@ -39,7 +41,8 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', null );
+		\Aimeos\MShop::cache( false );
+		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
 
 
@@ -131,7 +134,6 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableTotal()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->config()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -143,7 +145,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 			->method( 'search' )
 			->will( $this->returnValue( map( [$mock->create()] ) ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -156,7 +158,6 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableTotalNotEnough()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->config()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -168,7 +169,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 			->method( 'search' )
 			->will( $this->returnValue( map() ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}
@@ -177,7 +178,6 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableLimit()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->config()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -189,7 +189,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 			->method( 'search' )
 			->will( $this->returnValue( map() ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -202,7 +202,6 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableLimitTooMuch()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->config()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -214,7 +213,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 			->method( 'search' )
 			->will( $this->returnValue( map( [$mock->create()] ) ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}

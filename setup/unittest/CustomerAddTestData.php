@@ -32,8 +32,8 @@ class CustomerAddTestData extends BaseAddTestData
 	public function up()
 	{
 		$this->info( 'Adding customer test data', 'vv' );
-
 		$this->context()->setEditor( 'core:lib/mshoplib' );
+
 		$this->process();
 	}
 
@@ -71,22 +71,6 @@ class CustomerAddTestData extends BaseAddTestData
 
 		$manager->save( $items );
 		$manager->commit();
-	}
-
-
-	/**
-	 * Returns the manager for the current setup task
-	 *
-	 * @param string $domain Domain name of the manager
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
-	 */
-	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		if( $domain === 'customer' ) {
-			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
-		}
-
-		return \Aimeos\MShop::create( $this->context(), $domain );
 	}
 
 

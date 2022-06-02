@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelper::context() )->create();
+		$this->price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create();
 
 		$attrValues = array(
 			'order.base.product.attribute.id' => 4,
@@ -647,7 +647,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttribute()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -687,7 +687,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -711,7 +711,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -748,7 +748,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItemList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -790,7 +790,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$item = $attManager->create();
@@ -822,7 +822,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItems()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$list = array(

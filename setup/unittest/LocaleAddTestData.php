@@ -46,11 +46,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
-
 		$this->info( 'Adding test data for MShop locale domain', 'vv' );
-
-		// Set editor for further tasks
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		if( $this->context()->config()->get( 'setup/site' ) !== 'unittest' ) {
@@ -66,7 +62,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 		}
 
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
+		$localeManager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' );
 		$this->cleanupSites( $localeManager );
 
 		$siteIds = [];

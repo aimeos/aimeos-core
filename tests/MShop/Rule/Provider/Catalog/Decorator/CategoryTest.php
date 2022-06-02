@@ -19,7 +19,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->item = \Aimeos\MShop\Rule\Manager\Factory::create( $this->context )->create();
+		$this->item = \Aimeos\MShop::create( $this->context, 'rule' )->create();
 
 		$this->stub = $this->getMockBuilder( \Aimeos\MShop\Rule\Provider\Catalog\Percent::class )
 			->setConstructorArgs( [$this->context, $this->item] )

@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$statusStub->expects( $this->once() )->method( 'save' );
 
-		\Aimeos\MShop::inject( 'order/status', $statusStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Status\Standard::class, $statusStub );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -215,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
 
-		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class, $orderCouponStub );
 
 
 		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$couponCodeStub->expects( $this->once() )->method( 'increase' );
 
-		\Aimeos\MShop::inject( 'coupon/code', $couponCodeStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Coupon\Manager\Code\Standard::class, $couponCodeStub );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -251,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
 
-		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class, $orderCouponStub );
 
 
 		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
@@ -262,7 +262,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$couponCodeStub->expects( $this->once() )->method( 'increase' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		\Aimeos\MShop::inject( 'coupon/code', $couponCodeStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Coupon\Manager\Code\Standard::class, $couponCodeStub );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -362,7 +362,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductStub->create()] ) ) );
 
-		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class, $orderProductStub );
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
@@ -372,7 +372,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
 
-		\Aimeos\MShop::inject( 'stock', $stockStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
 
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -408,7 +408,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
-		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class, $orderProductStub );
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
@@ -418,7 +418,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
 
-		\Aimeos\MShop::inject( 'stock', $stockStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
 
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -454,7 +454,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
-		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class, $orderProductStub );
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
@@ -464,7 +464,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
 
-		\Aimeos\MShop::inject( 'stock', $stockStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
 
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -497,7 +497,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class, $orderProductStub );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -525,7 +525,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			return $item->getStockLevel() === 10;
 		} ) );
 
-		\Aimeos\MShop::inject( 'stock', $stockStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
 
 
 		$stockItem = $stockStub->create();
@@ -580,7 +580,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			return $item->getStockLevel() === 300;
 		} ) );
 
-		\Aimeos\MShop::inject( 'stock', $stockStub );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );

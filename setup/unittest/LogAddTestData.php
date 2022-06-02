@@ -31,8 +31,6 @@ class LogAddTestData extends Base
 	 */
 	public function up()
 	{
-		map( [$this->context()] )->implements( \Aimeos\MShop\ContextIface::class, true );
-
 		$this->info( 'Adding admin log test data', 'vv' );
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
@@ -45,7 +43,7 @@ class LogAddTestData extends Base
 	 */
 	private function addLogTestData()
 	{
-		$manager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->context(), 'Standard' );
+		$manager = \Aimeos\MAdmin::create( $this->context(), 'log', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'log.php';

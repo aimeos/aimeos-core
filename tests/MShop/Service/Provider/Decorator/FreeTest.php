@@ -19,9 +19,11 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelper::context();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Example::class )
@@ -33,7 +35,8 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', null );
+		\Aimeos\MShop::cache( false );
+		unset( $this->object, $this->mockProvider, $this->servItem, $this->context );
 	}
 
 

@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->find( 'CNC', ['attribute'] );
 		$attrItem = $product->getRefItems( 'attribute' )->first();
 
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+		$attributeManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$id = $attributeManager->find( '30', [], 'product', 'length' )->getId();
 
 		$search = $this->object->filter();
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAllof()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
 		$attrIds = [
 			$manager->find( '30', [], 'product', 'length' )->getId(),
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAllofArticle()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
 		$attrIds = [
 			$manager->find( '30', [], 'product', 'length' )->getId(),
@@ -182,7 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsOneof()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
 		$length = $manager->find( '30', [], 'product', 'length' )->getId();
 		$width = $manager->find( '29', [], 'product', 'width' )->getId();
@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsOneofArticle()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
 		$color = $manager->find( 'white', [], 'product', 'color' )->getId();
 		$size = $manager->find( 'm', [], 'product', 'size' )->getId();

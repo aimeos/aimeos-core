@@ -19,6 +19,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
@@ -29,6 +31,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
+		\Aimeos\MShop::cache( false );
 		unset( $this->object, $this->plugin, $this->order, $this->context );
 	}
 
@@ -129,25 +132,16 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
-
-		$orderBaseStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
-
 		$orderBaseAddressStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Address\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
 		$item1 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$item2 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
-		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseAddressStub ) );
 		$orderBaseAddressStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
-		$this->context->config()->set( 'mshop/order/manager/name', 'PluginAutofill' );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Address\Standard::class, $orderBaseAddressStub );
 
 
 		$this->plugin->setConfig( array(
@@ -168,12 +162,6 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
-
-		$orderBaseStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
-
 		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Service\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
@@ -183,13 +171,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT )
 			->setAttributeItems( [new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard()] );
 
-		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
-		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseServiceStub ) );
 		$orderBaseServiceStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
-		$this->context->config()->set( 'mshop/order/manager/name', 'PluginAutofill' );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Service\Standard::class, $orderBaseServiceStub );
 
 
 		$this->plugin->setConfig( array(

@@ -86,7 +86,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateEnd( '1999-12-31 23:59:59' );
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
+		\Aimeos\MShop::create( $this->context, 'product' )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
 
@@ -101,7 +101,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateStart( '2100-12-31 23:59:59' );
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
+		\Aimeos\MShop::create( $this->context, 'product' )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
 
@@ -115,7 +115,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
 			->create()->copyFrom( $this->product );
 
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product->setStatus( 0 ) );
+		\Aimeos\MShop::create( $this->context, 'product' )->save( $this->product->setStatus( 0 ) );
 
 		$this->order->addProduct( $badItem );
 		$badItemPosition = $this->order->getProducts()->firstKey();

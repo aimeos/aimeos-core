@@ -19,14 +19,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$search = $servManager->filter();
-		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
-		$result = $servManager->search( $search, array( 'price' ) )->toArray();
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found' );
-		}
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
+		$search = $servManager->filter()->add( ['service.provider' => 'Standard'] );
+		$item = $servManager->search( $search, ['price'] )->first( new \RuntimeException( 'No order base item found' ) );
 
 		$this->object = new TestBase( $this->context, $item );
 	}
@@ -57,7 +52,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->cancel( $item );
@@ -66,7 +61,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->capture( $item );
@@ -74,7 +69,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$this->object->injectGlobalConfigBE( ['payment.url-success' => 'url'] );
 
 		$result = $this->object->process( $item, [] );
@@ -84,7 +79,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->refund( $item );
@@ -93,7 +88,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRepay()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->repay( $item );
@@ -102,7 +97,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+		$item = \Aimeos\MShop::create( $this->context, 'order' )
 			->getSubManager( 'base' )->getSubManager( 'service' )->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
@@ -111,7 +106,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransfer()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->transfer( $item );

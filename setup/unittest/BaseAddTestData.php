@@ -123,11 +123,12 @@ class BaseAddTestData extends Base
 	 * Returns the manager for the current setup task
 	 *
 	 * @param string $domain Domain name of the manager
+	 * @param string $name Specific manager implemenation
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function getManager( string $domain, string $name = 'Standard' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return \Aimeos\MShop::create( $this->context(), $domain );
+		return \Aimeos\MShop::create( $this->context(), $domain, $name );
 	}
 
 

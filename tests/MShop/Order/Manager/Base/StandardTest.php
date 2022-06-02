@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$orderProductManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order' )
 			->getSubManager( 'base' )->getSubManager( 'product' );
 
 		$search = $this->object->filter()->add( ['order.base.costs' => '1.50', 'order.base.editor' => $this->editor] );

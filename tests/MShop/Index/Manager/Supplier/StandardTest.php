@@ -77,10 +77,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
+		$supplierManager = \Aimeos\MShop::create( $this->context, 'supplier' );
 		$supItem = $supplierManager->find( 'unitSupplier001' );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->find( 'CNC' )->setId( null )->setCode( 'ModifiedCNC' )
 			->addListItem( 'supplier', $productManager->createListItem(), $supItem );
 
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $id ) );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', $id] ), 0 ) );
@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPositionList()
 	{
-		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', [$id]] ), 0 ) );

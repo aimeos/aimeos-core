@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelper::context() );
+		$this->object = \Aimeos\MShop::create( \TestHelper::context(), 'coupon' );
 
 		$this->item = $this->object->create();
 		$this->item->setProvider( 'None' );

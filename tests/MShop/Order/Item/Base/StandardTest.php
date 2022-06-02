@@ -32,8 +32,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.editor' => 'unitTestUser'
 		);
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create()->setValue( 0 );
-		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->create();
+		$price = \Aimeos\MShop::create( $context, 'price' )->create()->setValue( 0 );
+		$this->locale = \Aimeos\MShop::create( $context, 'locale' )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $price, $this->locale, $this->values );
 	}
 
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelper::context() )->create();
+		$locale = \Aimeos\MShop::create( \TestHelper::context(), 'locale' )->create();
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );

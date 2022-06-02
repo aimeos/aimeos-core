@@ -103,24 +103,4 @@ class StockAddTestData extends BaseAddTestData
 
 		return $testdata;
 	}
-
-
-	/**
-	 * Returns the manager for the current setup task
-	 *
-	 * @param string $domain Domain name of the manager
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
-	 */
-	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		if( $domain === 'product' ) {
-			return \Aimeos\MShop\Product\Manager\Factory::create( $this->context(), 'Standard' );
-		}
-
-		if( $domain === 'stock' ) {
-			return \Aimeos\MShop\Stock\Manager\Factory::create( $this->context(), 'Standard' );
-		}
-
-		return parent::getManager( $domain );
-	}
 }

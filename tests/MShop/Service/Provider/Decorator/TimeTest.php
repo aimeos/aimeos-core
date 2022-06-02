@@ -28,7 +28,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Time::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )
 			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Time( $this->mockProvider, $this->context, $this->servItem );
@@ -112,7 +112,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->filter();
 		$expr = array(

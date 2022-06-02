@@ -23,13 +23,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->create();
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$locale = \Aimeos\MShop::create( $context, 'locale' )->create();
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $locale, [] );
 
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
+		$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
@@ -562,11 +562,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function createProduct( $code )
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelper::context() );
+		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->create();
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelper::context() )->create();
+		$price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

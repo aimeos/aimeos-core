@@ -21,18 +21,18 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::context();
 
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'freeshipping.productcode' => 'U:SD' ) );
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 
-		$delPrice = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
+		$delPrice = \Aimeos\MShop::create( $context, 'price' )->create();
 		$delPrice->setCosts( '5.00' );
 		$delPrice->setCurrencyId( 'EUR' );
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $context )
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$manager = \Aimeos\MShop::create( $context, 'order' )
 			->getSubManager( 'base' )->getSubManager( 'service' );
 
 		$delivery = $manager->create();
@@ -79,7 +79,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelper::context() )->create();
+		$couponItem = \Aimeos\MShop::create( \TestHelper::context(), 'coupon' )->create();
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );

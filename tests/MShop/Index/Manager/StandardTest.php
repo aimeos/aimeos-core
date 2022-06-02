@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::context();
 
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
+		$productManager = \Aimeos\MShop::create( $context, 'product' );
 
 		$search = $productManager->filter()->add( ['product.code' => ['CNC', 'CNE']] );
 		$result = $productManager->search( $search, ['attribute', 'price', 'text', 'product'] );
@@ -122,8 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'CNE' );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
 
 		$this->assertEquals( $product, $this->object->find( 'CNE' ) );
 	}
@@ -131,8 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'CNE' );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
 
 		$item = $this->object->get( $product->getId() );
 		$this->assertEquals( $product, $item );
@@ -282,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRebuildWithList()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$search = $manager->filter();
 
 		$search = $manager->filter();

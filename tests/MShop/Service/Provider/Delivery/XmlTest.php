@@ -20,7 +20,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		file_exists( 'tmp' ) ?: mkdir( 'tmp' );
 
 		$this->context = \TestHelper::context();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
+		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$serviceItem = $serviceManager->create()->setConfig( [
 			'xml.exportpath' => 'tmp/order-export_%d.xml',
 			'xml.updatedir' => __DIR__ . '/_tests',
@@ -135,7 +135,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )->method( 'save' );
 
-		\Aimeos\MShop::inject( 'order', $mock );
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->object->updateAsync();
 	}

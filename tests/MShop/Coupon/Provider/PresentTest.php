@@ -20,8 +20,8 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
 		// Don't create order base item by create() as this would already register the plugins
@@ -62,7 +62,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelper::context();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelper::context() )->create();
+		$couponItem = \Aimeos\MShop::create( \TestHelper::context(), 'coupon' )->create();
 
 		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 

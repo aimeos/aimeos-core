@@ -20,8 +20,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->editor();
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context, 'Standard' );
-		$this->object = $supplierManager->getSubManager( 'lists', 'Standard' );
+
+		$this->object = new \Aimeos\MShop\Supplier\Manager\Lists\Standard( \TestHelper::context() );
 	}
 
 
