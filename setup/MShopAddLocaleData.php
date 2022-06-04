@@ -45,7 +45,7 @@ class MShopAddLocaleData extends Base
 		$this->info( 'Adding locale data if not yet present', 'vv' );
 
 		// Set editor for further tasks
-		$this->context()->setEditor( 'core:setup' );
+		$this->context()->setEditor( 'core' );
 
 		$code = $this->context()->config()->get( 'setup/site', 'default' );
 

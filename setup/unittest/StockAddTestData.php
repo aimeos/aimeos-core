@@ -32,7 +32,7 @@ class StockAddTestData extends BaseAddTestData
 	public function up()
 	{
 		$this->info( 'Adding stock test data', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		$testdata = $this->getData();
 		$this->addTypeItems( $testdata, ['stock/type'] );

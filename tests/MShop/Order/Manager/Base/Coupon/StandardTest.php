@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.coupon.code' )->toArray();
 
 		$this->assertEquals( 3, count( $result ) );

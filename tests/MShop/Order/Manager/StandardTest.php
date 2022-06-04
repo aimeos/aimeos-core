@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'order.channel' );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateMultiple()
 	{
 		$cols = ['order.channel', 'order.statuspayment'];
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols );
 
 		$this->assertEquals( ['phone' => [6 => 1], 'web' => [5 => 1, 6 => 2]], $result->toArray() );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAvg()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAvgMultiple()
 	{
 		$cols = ['order.cmonth', 'order.statuspayment'];
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateSum()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateSumMultiple()
 	{
 		$cols = ['order.cmonth', 'order.statuspayment'];
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateTimes()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth' )->toArray();
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddress()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAddressMultiple()
 	{
 		$cols = ['order.base.address.countryid', 'order.statuspayment'];
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols )->toArray();
 
 		$this->assertEquals( ['DE' => [5 => 1, 6 => 3]], $result );
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMonth()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'order.channel' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );

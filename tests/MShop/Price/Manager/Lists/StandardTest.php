@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'price.lists.editor', 'core:lib/mshoplib' ),
+			$search->compare( '==', 'price.lists.editor', 'core' ),
 		);
 		$search->setConditions( $search->and( $expr ) );
 

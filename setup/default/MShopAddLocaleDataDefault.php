@@ -45,7 +45,7 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		$this->info( 'Adding data for MShop locale domain', 'vv' );
 
 		// Set editor for further tasks
-		$context = $this->context()->setEditor( 'core:setup' );
+		$context = $this->context()->setEditor( 'core' );
 
 		$db = $this->db( 'db-locale' );
 

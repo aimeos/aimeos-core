@@ -34,7 +34,7 @@ class OrderAddTestData extends Base
 		$this->info( 'Adding order test data', 'vv' );
 
 		$context = $this->context();
-		$context->setEditor( 'core:lib/mshoplib' );
+		$context->setEditor( 'core' );
 		$context->locale()->setCurrencyId( 'EUR' );
 
 		$manager = $this->getOrderManager( 'base' );

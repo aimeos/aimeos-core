@@ -163,7 +163,7 @@ class TestHelper
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:lib/mshoplib' );
+		$ctx->setEditor( 'core' );
 
 		return $ctx;
 	}

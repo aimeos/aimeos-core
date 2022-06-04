@@ -32,7 +32,7 @@ class LogAddTestData extends Base
 	public function up()
 	{
 		$this->info( 'Adding admin log test data', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		$this->addLogTestData();
 	}

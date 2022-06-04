@@ -32,7 +32,7 @@ class ServiceAddTestData extends BaseAddTestData
 	public function up()
 	{
 		$this->info( 'Adding service test data', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		$this->process( $this->getData() );
 	}

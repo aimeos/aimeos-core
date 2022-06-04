@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
 		$this->assertEquals( 4, count( $result ) );
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAvg()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'avg' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateSum()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'sum' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );

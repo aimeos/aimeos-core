@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAvg()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.price', 'avg' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateSum()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.quantity', 'sum' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateTotal()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.total()', 'sum' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );

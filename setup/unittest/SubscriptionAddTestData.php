@@ -31,7 +31,7 @@ class SubscriptionAddTestData extends Base
 	public function up()
 	{
 		$this->info( 'Adding subscription test data', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'subscription.php';

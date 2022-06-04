@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$search->setConditions( $search->and( [
 			$search->compare( '==', 'review.domain', 'product' ),
-			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
+			$search->compare( '==', 'review.editor', 'core' )
 		] ) );
 		$result = $this->object->aggregate( $search, 'review.rating' )->toArray();
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateRating()
 	{
-		$search = $this->object->filter()->add( ['review.domain' => 'product', 'review.editor' => 'core:lib/mshoplib'] );
+		$search = $this->object->filter()->add( ['review.domain' => 'product', 'review.editor' => 'core'] );
 		$result = $this->object->aggregate( $search, 'review.rating', null, 'rate' )->toArray();
 
 		$this->assertEquals( [0 => [0 => 1], 4 => [4 => 1]], $result );

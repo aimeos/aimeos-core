@@ -32,7 +32,7 @@ class CatalogAddTestData extends BaseAddTestData
 	public function up()
 	{
 		$this->info( 'Adding catalog test data', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		$this->process( $this->getData() );
 	}

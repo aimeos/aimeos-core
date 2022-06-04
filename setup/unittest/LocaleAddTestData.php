@@ -47,7 +47,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	public function up()
 	{
 		$this->info( 'Adding test data for MShop locale domain', 'vv' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core' );
 
 		if( $this->context()->config()->get( 'setup/site' ) !== 'unittest' ) {
 			return;

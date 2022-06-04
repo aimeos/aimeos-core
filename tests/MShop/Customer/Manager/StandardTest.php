@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '10.0', $payAddr->getLongitude() );
 		$this->assertEquals( '50.0', $payAddr->getLatitude() );
 		$this->assertEquals( 1, $actual->getStatus() );
-		$this->assertEquals( 'core:lib/mshoplib', $actual->editor() );
+		$this->assertEquals( 'core', $actual->editor() );
 
 		$this->assertEquals( $expected, $actual );
 		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
