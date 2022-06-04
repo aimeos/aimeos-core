@@ -575,178 +575,178 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$billingAddress = $item->getPaymentAddress();
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$billingAddress = $item->getPaymentAddress();
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null )
-			{
-				/** mshop/customer/manager/insert/mysql
-				 * Inserts a new customer record into the database table
-				 *
-				 * @see mshop/customer/manager/insert/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/customer/manager/insert/mysql
+			 * Inserts a new customer record into the database table
+			 *
+			 * @see mshop/customer/manager/insert/ansi
+			 */
 
-				/** mshop/customer/manager/insert/ansi
-				 * Inserts a new customer record into the database table
-				 *
-				 * Items with no ID yet (i.e. the ID is NULL) will be created in
-				 * the database and the newly created ID retrieved afterwards
-				 * using the "newid" SQL statement.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the customer item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the save() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/customer/manager/update/ansi
-				 * @see mshop/customer/manager/newid/ansi
-				 * @see mshop/customer/manager/delete/ansi
-				 * @see mshop/customer/manager/search/ansi
-				 * @see mshop/customer/manager/count/ansi
-				 */
-				$path = 'mshop/customer/manager/insert';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-			}
-			else
-			{
-				/** mshop/customer/manager/update/mysql
-				 * Updates an existing customer record in the database
-				 *
-				 * @see mshop/customer/manager/update/ansi
-				 */
+			/** mshop/customer/manager/insert/ansi
+			 * Inserts a new customer record into the database table
+			 *
+			 * Items with no ID yet (i.e. the ID is NULL) will be created in
+			 * the database and the newly created ID retrieved afterwards
+			 * using the "newid" SQL statement.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the customer item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/customer/manager/update/ansi
+			 * @see mshop/customer/manager/newid/ansi
+			 * @see mshop/customer/manager/delete/ansi
+			 * @see mshop/customer/manager/search/ansi
+			 * @see mshop/customer/manager/count/ansi
+			 */
+			$path = 'mshop/customer/manager/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/customer/manager/update/mysql
+			 * Updates an existing customer record in the database
+			 *
+			 * @see mshop/customer/manager/update/ansi
+			 */
 
-				/** mshop/customer/manager/update/ansi
-				 * Updates an existing customer record in the database
-				 *
-				 * Items which already have an ID (i.e. the ID is not NULL) will
-				 * be updated in the database.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the customer item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the save() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/customer/manager/insert/ansi
-				 * @see mshop/customer/manager/newid/ansi
-				 * @see mshop/customer/manager/delete/ansi
-				 * @see mshop/customer/manager/search/ansi
-				 * @see mshop/customer/manager/count/ansi
-				 */
-				$path = 'mshop/customer/manager/update';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/customer/manager/update/ansi
+			 * Updates an existing customer record in the database
+			 *
+			 * Items which already have an ID (i.e. the ID is not NULL) will
+			 * be updated in the database.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the customer item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/customer/manager/insert/ansi
+			 * @see mshop/customer/manager/newid/ansi
+			 * @see mshop/customer/manager/delete/ansi
+			 * @see mshop/customer/manager/search/ansi
+			 * @see mshop/customer/manager/count/ansi
+			 */
+			$path = 'mshop/customer/manager/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getCode() );
-			$stmt->bind( $idx++, $billingAddress->getCompany() );
-			$stmt->bind( $idx++, $billingAddress->getVatID() );
-			$stmt->bind( $idx++, $billingAddress->getSalutation() );
-			$stmt->bind( $idx++, $billingAddress->getTitle() );
-			$stmt->bind( $idx++, $billingAddress->getFirstname() );
-			$stmt->bind( $idx++, $billingAddress->getLastname() );
-			$stmt->bind( $idx++, $billingAddress->getAddress1() );
-			$stmt->bind( $idx++, $billingAddress->getAddress2() );
-			$stmt->bind( $idx++, $billingAddress->getAddress3() );
-			$stmt->bind( $idx++, $billingAddress->getPostal() );
-			$stmt->bind( $idx++, $billingAddress->getCity() );
-			$stmt->bind( $idx++, $billingAddress->getState() );
-			$stmt->bind( $idx++, $billingAddress->getCountryId() );
-			$stmt->bind( $idx++, $billingAddress->getLanguageId() );
-			$stmt->bind( $idx++, $billingAddress->getTelephone() );
-			$stmt->bind( $idx++, $billingAddress->getEmail() );
-			$stmt->bind( $idx++, $billingAddress->getTelefax() );
-			$stmt->bind( $idx++, $billingAddress->getWebsite() );
-			$stmt->bind( $idx++, $billingAddress->getLongitude() );
-			$stmt->bind( $idx++, $billingAddress->getLatitude() );
-			$stmt->bind( $idx++, $billingAddress->getBirthday() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getDateVerified() );
-			$stmt->bind( $idx++, $item->getPassword() );
-			$stmt->bind( $idx++, $date ); // Modification time
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $billingAddress->getCompany() );
+		$stmt->bind( $idx++, $billingAddress->getVatID() );
+		$stmt->bind( $idx++, $billingAddress->getSalutation() );
+		$stmt->bind( $idx++, $billingAddress->getTitle() );
+		$stmt->bind( $idx++, $billingAddress->getFirstname() );
+		$stmt->bind( $idx++, $billingAddress->getLastname() );
+		$stmt->bind( $idx++, $billingAddress->getAddress1() );
+		$stmt->bind( $idx++, $billingAddress->getAddress2() );
+		$stmt->bind( $idx++, $billingAddress->getAddress3() );
+		$stmt->bind( $idx++, $billingAddress->getPostal() );
+		$stmt->bind( $idx++, $billingAddress->getCity() );
+		$stmt->bind( $idx++, $billingAddress->getState() );
+		$stmt->bind( $idx++, $billingAddress->getCountryId() );
+		$stmt->bind( $idx++, $billingAddress->getLanguageId() );
+		$stmt->bind( $idx++, $billingAddress->getTelephone() );
+		$stmt->bind( $idx++, $billingAddress->getEmail() );
+		$stmt->bind( $idx++, $billingAddress->getTelefax() );
+		$stmt->bind( $idx++, $billingAddress->getWebsite() );
+		$stmt->bind( $idx++, $billingAddress->getLongitude() );
+		$stmt->bind( $idx++, $billingAddress->getLatitude() );
+		$stmt->bind( $idx++, $billingAddress->getBirthday() );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getDateVerified() );
+		$stmt->bind( $idx++, $item->getPassword() );
+		$stmt->bind( $idx++, $date ); // Modification time
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
-			if( $id !== null ) {
-				$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-				$billingAddress->setId( $id ); // enforce ID to be present
-			} else {
-				$stmt->bind( $idx, $date ); // Creation time
-			}
+		if( $id !== null ) {
+			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$billingAddress->setId( $id ); // enforce ID to be present
+		} else {
+			$stmt->bind( $idx, $date ); // Creation time
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			if( $id === null )
-			{
-				/** mshop/customer/manager/newid/mysql
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * @see mshop/customer/manager/newid/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/customer/manager/newid/mysql
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * @see mshop/customer/manager/newid/ansi
+			 */
 
-				/** mshop/customer/manager/newid/ansi
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * As soon as a new record is inserted into the database table,
-				 * the database server generates a new and unique identifier for
-				 * that record. This ID can be used for retrieving, updating and
-				 * deleting that specific record from the table again.
-				 *
-				 * For MySQL:
-				 *  SELECT LAST_INSERT_ID()
-				 * For PostgreSQL:
-				 *  SELECT currval('seq_mcus_id')
-				 * For SQL Server:
-				 *  SELECT SCOPE_IDENTITY()
-				 * For Oracle:
-				 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
-				 *
-				 * There's no way to retrive the new ID by a SQL statements that
-				 * fits for most database servers as they implement their own
-				 * specific way.
-				 *
-				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/customer/manager/insert/ansi
-				 * @see mshop/customer/manager/update/ansi
-				 * @see mshop/customer/manager/delete/ansi
-				 * @see mshop/customer/manager/search/ansi
-				 * @see mshop/customer/manager/count/ansi
-				 */
-				$path = 'mshop/customer/manager/newid';
-				$id = $this->newId( $conn, $path );
-			}
+			/** mshop/customer/manager/newid/ansi
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_mcus_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/customer/manager/insert/ansi
+			 * @see mshop/customer/manager/update/ansi
+			 * @see mshop/customer/manager/delete/ansi
+			 * @see mshop/customer/manager/search/ansi
+			 * @see mshop/customer/manager/count/ansi
+			 */
+			$path = 'mshop/customer/manager/newid';
+			$id = $this->newId( $conn, $path );
+		}
 
-			$item->setId( $id );
+		$item->setId( $id );
 
 		$item = $this->savePropertyItems( $item, 'customer', $fetch );
 		$item = $this->saveAddressItems( $item, 'customer', $fetch );

@@ -453,159 +453,159 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null )
-			{
-				/** mshop/service/manager/insert/mysql
-				 * Inserts a new service record into the database table
-				 *
-				 * @see mshop/service/manager/insert/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/service/manager/insert/mysql
+			 * Inserts a new service record into the database table
+			 *
+			 * @see mshop/service/manager/insert/ansi
+			 */
 
-				/** mshop/service/manager/insert/ansi
-				 * Inserts a new service record into the database table
-				 *
-				 * Items with no ID yet (i.e. the ID is NULL) will be created in
-				 * the database and the newly created ID retrieved afterwards
-				 * using the "newid" SQL statement.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the service item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the save() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/service/manager/update/ansi
-				 * @see mshop/service/manager/newid/ansi
-				 * @see mshop/service/manager/delete/ansi
-				 * @see mshop/service/manager/search/ansi
-				 * @see mshop/service/manager/count/ansi
-				 */
-				$path = 'mshop/service/manager/insert';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-			}
-			else
-			{
-				/** mshop/service/manager/update/mysql
-				 * Updates an existing service record in the database
-				 *
-				 * @see mshop/service/manager/update/ansi
-				 */
+			/** mshop/service/manager/insert/ansi
+			 * Inserts a new service record into the database table
+			 *
+			 * Items with no ID yet (i.e. the ID is NULL) will be created in
+			 * the database and the newly created ID retrieved afterwards
+			 * using the "newid" SQL statement.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the service item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/service/manager/update/ansi
+			 * @see mshop/service/manager/newid/ansi
+			 * @see mshop/service/manager/delete/ansi
+			 * @see mshop/service/manager/search/ansi
+			 * @see mshop/service/manager/count/ansi
+			 */
+			$path = 'mshop/service/manager/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/service/manager/update/mysql
+			 * Updates an existing service record in the database
+			 *
+			 * @see mshop/service/manager/update/ansi
+			 */
 
-				/** mshop/service/manager/update/ansi
-				 * Updates an existing service record in the database
-				 *
-				 * Items which already have an ID (i.e. the ID is not NULL) will
-				 * be updated in the database.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the service item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the save() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/service/manager/insert/ansi
-				 * @see mshop/service/manager/newid/ansi
-				 * @see mshop/service/manager/delete/ansi
-				 * @see mshop/service/manager/search/ansi
-				 * @see mshop/service/manager/count/ansi
-				 */
-				$path = 'mshop/service/manager/update';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/service/manager/update/ansi
+			 * Updates an existing service record in the database
+			 *
+			 * Items which already have an ID (i.e. the ID is not NULL) will
+			 * be updated in the database.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the service item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/service/manager/insert/ansi
+			 * @see mshop/service/manager/newid/ansi
+			 * @see mshop/service/manager/delete/ansi
+			 * @see mshop/service/manager/search/ansi
+			 * @see mshop/service/manager/count/ansi
+			 */
+			$path = 'mshop/service/manager/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getType() );
-			$stmt->bind( $idx++, $item->getCode() );
-			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getProvider() );
-			$stmt->bind( $idx++, $item->getDateStart() );
-			$stmt->bind( $idx++, $item->getDateEnd() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getType() );
+		$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, $item->getProvider() );
+		$stmt->bind( $idx++, $item->getDateStart() );
+		$stmt->bind( $idx++, $item->getDateEnd() );
+		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
-			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			} else {
-				$stmt->bind( $idx++, $date ); // ctime
-			}
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $date ); // ctime
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			if( $id === null )
-			{
-				/** mshop/service/manager/newid/mysql
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * @see mshop/service/manager/newid/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/service/manager/newid/mysql
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * @see mshop/service/manager/newid/ansi
+			 */
 
-				/** mshop/service/manager/newid/ansi
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * As soon as a new record is inserted into the database table,
-				 * the database server generates a new and unique identifier for
-				 * that record. This ID can be used for retrieving, updating and
-				 * deleting that specific record from the table again.
-				 *
-				 * For MySQL:
-				 *  SELECT LAST_INSERT_ID()
-				 * For PostgreSQL:
-				 *  SELECT currval('seq_mser_id')
-				 * For SQL Server:
-				 *  SELECT SCOPE_IDENTITY()
-				 * For Oracle:
-				 *  SELECT "seq_mser_id".CURRVAL FROM DUAL
-				 *
-				 * There's no way to retrive the new ID by a SQL statements that
-				 * fits for most database servers as they implement their own
-				 * specific way.
-				 *
-				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/service/manager/insert/ansi
-				 * @see mshop/service/manager/update/ansi
-				 * @see mshop/service/manager/delete/ansi
-				 * @see mshop/service/manager/search/ansi
-				 * @see mshop/service/manager/count/ansi
-				 */
-				$path = 'mshop/service/manager/newid';
-				$id = $this->newId( $conn, $path );
-			}
+			/** mshop/service/manager/newid/ansi
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_mser_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_mser_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/service/manager/insert/ansi
+			 * @see mshop/service/manager/update/ansi
+			 * @see mshop/service/manager/delete/ansi
+			 * @see mshop/service/manager/search/ansi
+			 * @see mshop/service/manager/count/ansi
+			 */
+			$path = 'mshop/service/manager/newid';
+			$id = $this->newId( $conn, $path );
+		}
 
-			$item->setId( $id );
+		$item->setId( $id );
 
 		return $this->saveListItems( $item, 'service', $fetch );
 	}

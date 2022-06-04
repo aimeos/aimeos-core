@@ -138,101 +138,101 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null )
-			{
-				/** mshop/locale/manager/currency/insert/mysql
-				 * Inserts a new currency record into the database table
-				 *
-				 * @see mshop/locale/manager/currency/insert/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/locale/manager/currency/insert/mysql
+			 * Inserts a new currency record into the database table
+			 *
+			 * @see mshop/locale/manager/currency/insert/ansi
+			 */
 
-				/** mshop/locale/manager/currency/insert/ansi
-				 * Inserts a new currency record into the database table
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the currency item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the save() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/locale/manager/currency/update/ansi
-				 * @see mshop/locale/manager/currency/delete/ansi
-				 * @see mshop/locale/manager/currency/search/ansi
-				 * @see mshop/locale/manager/currency/count/ansi
-				 */
-				$path = 'mshop/locale/manager/currency/insert';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-			}
-			else
-			{
-				/** mshop/locale/manager/currency/update/mysql
-				 * Updates an existing currency record in the database
-				 *
-				 * @see mshop/locale/manager/currency/update/ansi
-				 */
+			/** mshop/locale/manager/currency/insert/ansi
+			 * Inserts a new currency record into the database table
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the currency item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/currency/update/ansi
+			 * @see mshop/locale/manager/currency/delete/ansi
+			 * @see mshop/locale/manager/currency/search/ansi
+			 * @see mshop/locale/manager/currency/count/ansi
+			 */
+			$path = 'mshop/locale/manager/currency/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/locale/manager/currency/update/mysql
+			 * Updates an existing currency record in the database
+			 *
+			 * @see mshop/locale/manager/currency/update/ansi
+			 */
 
-				/** mshop/locale/manager/currency/update/ansi
-				 * Updates an existing currency record in the database
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the currency item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the save() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/locale/manager/currency/insert/ansi
-				 * @see mshop/locale/manager/currency/delete/ansi
-				 * @see mshop/locale/manager/currency/search/ansi
-				 * @see mshop/locale/manager/currency/count/ansi
-				 */
-				$path = 'mshop/locale/manager/currency/update';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/locale/manager/currency/update/ansi
+			 * Updates an existing currency record in the database
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the currency item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/currency/insert/ansi
+			 * @see mshop/locale/manager/currency/delete/ansi
+			 * @see mshop/locale/manager/currency/search/ansi
+			 * @see mshop/locale/manager/currency/count/ansi
+			 */
+			$path = 'mshop/locale/manager/currency/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->editor() );
-			// bind ID but code and id are identical after saveing the stuff
-			// id is the flag to detect updates or inserts!
-			$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->editor() );
+		// bind ID but code and id are identical after saveing the stuff
+		// id is the flag to detect updates or inserts!
+		$stmt->bind( $idx++, $item->getCode() );
 
-			if( $id === null ) {
-				$stmt->bind( $idx++, $date ); // ctime
-			}
+		if( $id === null ) {
+			$stmt->bind( $idx++, $date ); // ctime
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			$item->setId( $item->getCode() ); // set modified flag to false
+		$item->setId( $item->getCode() ); // set modified flag to false
 
 		return $item;
 	}

@@ -261,63 +261,63 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$columns = $this->object()->getSaveAttributes();
 
-			/** mshop/locale/manager/site/update/mysql
-			 * Updates an existing site record in the database
-			 *
-			 * @see mshop/locale/manager/site/update/ansi
-			 */
+		/** mshop/locale/manager/site/update/mysql
+		 * Updates an existing site record in the database
+		 *
+		 * @see mshop/locale/manager/site/update/ansi
+		 */
 
-			/** mshop/locale/manager/site/update/ansi
-			 * Updates an existing site record in the database
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the site item to the statement before they are
-			 * sent to the database server. The order of the columns must
-			 * correspond to the order in the save() method, so the
-			 * correct values are bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for updating records
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/locale/manager/site/insert/ansi
-			 * @see mshop/locale/manager/site/delete/ansi
-			 * @see mshop/locale/manager/site/search/ansi
-			 * @see mshop/locale/manager/site/count/ansi
-			 * @see mshop/locale/manager/site/newid/ansi
-			 */
-			$path = 'mshop/locale/manager/site/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		/** mshop/locale/manager/site/update/ansi
+		 * Updates an existing site record in the database
+		 *
+		 * The SQL statement must be a string suitable for being used as
+		 * prepared statement. It must include question marks for binding
+		 * the values from the site item to the statement before they are
+		 * sent to the database server. The order of the columns must
+		 * correspond to the order in the save() method, so the
+		 * correct values are bound to the columns.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for updating records
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/insert/ansi
+		 * @see mshop/locale/manager/site/delete/ansi
+		 * @see mshop/locale/manager/site/search/ansi
+		 * @see mshop/locale/manager/site/count/ansi
+		 * @see mshop/locale/manager/site/newid/ansi
+		 */
+		$path = 'mshop/locale/manager/site/update';
+		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getSiteId() );
-			$stmt->bind( $idx++, $item->getCode() );
-			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getIcon() );
-			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getRefId() );
-			$stmt->bind( $idx++, $item->getTheme() );
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getSiteId() );
+		$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getIcon() );
+		$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
+		$stmt->bind( $idx++, $item->getRefId() );
+		$stmt->bind( $idx++, $item->getTheme() );
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
+		$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
-			$stmt->execute()->finish();
-			$item->setId( $id ); // set Modified false
+		$stmt->execute()->finish();
+		$item->setId( $id ); // set Modified false
 
 		return $item;
 	}
