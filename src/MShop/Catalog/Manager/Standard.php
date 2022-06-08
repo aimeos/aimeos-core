@@ -837,7 +837,7 @@ class Standard extends Base
 		$mode = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 		$mode = $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $mode );
 
-		if( $mode !== \Aimeos\MShop\Locale\Manager\Base::SITE_ONE ) {
+		if( $mode === \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
 			$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
 		} else {
 			$sitePath = [$this->context()->locale()->getSiteId()];
