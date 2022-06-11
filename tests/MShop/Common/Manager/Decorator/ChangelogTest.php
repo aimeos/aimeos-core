@@ -58,7 +58,7 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->config()->set( 'mshop/common/manager/maxdepth', 0 );
 
-		$item = $this->mock->find( 'U:TESTP' );
+		$item = $this->mock->find( 'U:TESTP' )->setId( null );
 
 		$this->mock->expects( $this->once() )->method( 'save' )->will( $this->returnArgument( 0 ) );
 		$this->logger->expects( $this->once() )->method( 'notice' );
