@@ -242,13 +242,8 @@ abstract class Base
 	 */
 	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$key = $this->prefix . 'id';
-
-		if( ( $this->bdata[$key] = $this->checkId( $this->getId(), $id ) ) === null ) {
-			$this->modified = true;
-		} else {
-			$this->modified = false;
-		}
+		$this->bdata[$this->prefix . 'id'] = $id;
+		$this->modified = ( $id === null );
 
 		return $this;
 	}
@@ -426,6 +421,7 @@ abstract class Base
 	 * @param string|null $old Current ID of the item
 	 * @param string|null $new New ID which should be set in the item
 	 * @return string|null Value of the new ID
+	 * @deprecated 2023.01
 	 */
 	public static function checkId( ?string $old, ?string $new ) : ?string
 	{

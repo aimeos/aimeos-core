@@ -131,12 +131,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$id = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id );
 		$this->set( 'order.base.id', $id );
-
-		if( $id !== null ) {
-			$this->modified = false;
-		}
+		$this->modified = ( $id === null );
 
 		return $this;
 	}
