@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macro\Iface, \ArrayAccess
+abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
 	use \Aimeos\MW\Observer\Publisher\Traits;
 	use \Aimeos\Macro\Macroable;
@@ -119,6 +119,23 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 		}
 
 		$this->bdata[$name] = $value;
+	}
+
+
+	/**
+	 * Specifies the data which should be serialized to JSON by json_encode().
+	 *
+	 * @return array<string,mixed> Data to serialize to JSON
+	 */
+	#[\ReturnTypeWillChange]
+	public function jsonSerialize()
+	{
+		return $this->bdata + [
+			'coupons' => $this->coupons,
+			'products' => $this->products,
+			'services' => $this->services,
+			'addresses' => $this->addresses,
+		];
 	}
 
 

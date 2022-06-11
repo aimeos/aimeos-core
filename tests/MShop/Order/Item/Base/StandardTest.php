@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->values = array(
 			'order.base.id' => 1,
-			'order.base.siteid' => 99,
+			'order.base.siteid' => '1.99.',
 			'order.base.customerid' => 'testuser',
 			'order.base.customerref' => 'ABC-1234',
 			'order.base.comment' => 'this is a comment from unittest',
@@ -41,6 +41,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->locale, $this->object, $this->values );
+	}
+
+
+	public function testJsonSerialize()
+	{
+		$result = json_decode( json_encode( $this->object ), true );
+
+		$this->assertEquals( 1, $result['order.base.id'] );
+		$this->assertEquals( '1.99.', $result['order.base.siteid'] );
+		$this->assertArrayHasKey( 'price', $result );
+		$this->assertArrayHasKey( 'locale', $result );
+		$this->assertArrayHasKey( 'customer', $result );
+		$this->assertArrayHasKey( 'coupons', $result );
+		$this->assertArrayHasKey( 'products', $result );
+		$this->assertArrayHasKey( 'services', $result );
+		$this->assertArrayHasKey( 'addresses', $result );
 	}
 
 
@@ -68,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->object->getSiteId() );
+		$this->assertEquals( '1.99.', $this->object->getSiteId() );
 	}
 
 

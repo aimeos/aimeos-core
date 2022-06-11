@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Item;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess
+	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
 	use \Aimeos\Macro\Macroable;
 
@@ -86,6 +86,18 @@ abstract class Base
 	public function __set( string $name, $value )
 	{
 		$this->set( $name, $value );
+	}
+
+
+	/**
+	 * Specifies the data which should be serialized to JSON by json_encode().
+	 *
+	 * @return array<string,mixed> Data to serialize to JSON
+	 */
+	#[\ReturnTypeWillChange]
+	public function jsonSerialize()
+	{
+		return $this->bdata;
 	}
 
 

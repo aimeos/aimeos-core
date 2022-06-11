@@ -140,6 +140,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testJsonSerialize()
+	{
+		$result = json_decode( json_encode( $this->object ), true );
+
+		$this->assertEquals( 1, $result['product.id'] );
+		$this->assertEquals( '1.33.99.', $result['product.siteid'] );
+
+
+		$result = json_decode( json_encode( [1 => $this->object] ), true );
+
+		$this->assertEquals( 1, $result[1]['product.id'] );
+		$this->assertEquals( '1.33.99.', $result[1]['product.siteid'] );
+	}
+
+
 	public function testAssign()
 	{
 		$this->assertEquals( false, $this->object->get( 'test', false ) );

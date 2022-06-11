@@ -65,6 +65,22 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
+	 * Specifies the data which should be serialized to JSON by json_encode().
+	 *
+	 * @return array<string,mixed> Data to serialize to JSON
+	 */
+	#[\ReturnTypeWillChange]
+	public function jsonSerialize()
+	{
+		return parent::jsonSerialize() + [
+			'price' => $this->price,
+			'locale' => $this->locale,
+			'customer' => $this->customer,
+		];
+	}
+
+
+	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
 	 * @param array $what Type of data
