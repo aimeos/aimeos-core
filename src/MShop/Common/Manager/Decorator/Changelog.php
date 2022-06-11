@@ -22,6 +22,22 @@ class Changelog
 	extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
 	/**
+	 * Deletes one or more items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->getManager()->delete( $items );
+
+		$this->context()->logger()->notice( $items, 'changelog:delete' );
+
+		return $this;
+	}
+
+
+	/**
 	 * Adds or updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $items Item object whose data should be saved
@@ -32,7 +48,7 @@ class Changelog
 	{
 		$items = $this->getManager()->save( $items, true );
 
-		$this->context()->logger()->notice( map( $items )->toJson(), 'core/changelog' );
+		$this->context()->logger()->notice( $items, 'changelog:save' );
 
 		return $items;
 	}
