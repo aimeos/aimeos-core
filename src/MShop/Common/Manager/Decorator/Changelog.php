@@ -31,10 +31,8 @@ class Changelog
 	{
 		$this->getManager()->delete( $items );
 
-		if( !map( $items )->isEmpty() )
-		{
-			$msg = current( $this->getResourceType( false ) ) . ': ' . json_encode( $items );
-			$this->context()->logger()->notice( $msg, 'changelog:delete' );
+		if( !map( $items )->isEmpty() ) {
+			$this->context()->logger()->notice( $items, 'changelog:delete' );
 		}
 
 		return $this;
@@ -50,7 +48,7 @@ class Changelog
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		$log = !( $map = map( $items ) )->isEmpty() && $map->isModified()->filter()->sum();
+		$log = map( $items )->isModified()->filter()->sum();
 
 		$items = $this->getManager()->save( $items, true );
 
