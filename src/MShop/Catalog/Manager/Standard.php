@@ -1028,128 +1028,128 @@ class Standard extends Base
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$siteid = $context->locale()->getSiteId();
-			$columns = $this->object()->getSaveAttributes();
+		$siteid = $context->locale()->getSiteId();
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $case !== true )
-			{
-				/** mshop/catalog/manager/update-usage/mysql
-				 * Updates the config, editor and mtime value of an updated record
-				 *
-				 * @see mshop/catalog/manager/update-usage/ansi
-				 */
+		if( $case !== true )
+		{
+			/** mshop/catalog/manager/update-usage/mysql
+			 * Updates the config, editor and mtime value of an updated record
+			 *
+			 * @see mshop/catalog/manager/update-usage/ansi
+			 */
 
-				/** mshop/catalog/manager/update-usage/ansi
-				 * Updates the config, editor and mtime value of an updated record
-				 *
-				 * Each record contains some usage information like when it was
-				 * created, last modified and by whom. These information are part
-				 * of the catalog items and the generic tree manager doesn't care
-				 * about this information. Thus, they are updated after the tree
-				 * manager saved the basic record information.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the catalog item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the method using this statement,
-				 * so the correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/catalog/manager/delete/ansi
-				 * @see mshop/catalog/manager/get/ansi
-				 * @see mshop/catalog/manager/insert/ansi
-				 * @see mshop/catalog/manager/newid/ansi
-				 * @see mshop/catalog/manager/search/ansi
-				 * @see mshop/catalog/manager/search-item/ansi
-				 * @see mshop/catalog/manager/count/ansi
-				 * @see mshop/catalog/manager/move-left/ansi
-				 * @see mshop/catalog/manager/move-right/ansi
-				 * @see mshop/catalog/manager/update-parentid/ansi
-				 * @see mshop/catalog/manager/insert-usage/ansi
-				 */
-				$path = 'mshop/catalog/manager/update-usage';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
-			else
-			{
-				/** mshop/catalog/manager/insert-usage/mysql
-				 * Updates the config, editor, ctime and mtime value of an inserted record
-				 *
-				 * @see mshop/catalog/manager/insert-usage/ansi
-				 */
+			/** mshop/catalog/manager/update-usage/ansi
+			 * Updates the config, editor and mtime value of an updated record
+			 *
+			 * Each record contains some usage information like when it was
+			 * created, last modified and by whom. These information are part
+			 * of the catalog items and the generic tree manager doesn't care
+			 * about this information. Thus, they are updated after the tree
+			 * manager saved the basic record information.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the catalog item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the method using this statement,
+			 * so the correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/catalog/manager/delete/ansi
+			 * @see mshop/catalog/manager/get/ansi
+			 * @see mshop/catalog/manager/insert/ansi
+			 * @see mshop/catalog/manager/newid/ansi
+			 * @see mshop/catalog/manager/search/ansi
+			 * @see mshop/catalog/manager/search-item/ansi
+			 * @see mshop/catalog/manager/count/ansi
+			 * @see mshop/catalog/manager/move-left/ansi
+			 * @see mshop/catalog/manager/move-right/ansi
+			 * @see mshop/catalog/manager/update-parentid/ansi
+			 * @see mshop/catalog/manager/insert-usage/ansi
+			 */
+			$path = 'mshop/catalog/manager/update-usage';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
+		else
+		{
+			/** mshop/catalog/manager/insert-usage/mysql
+			 * Updates the config, editor, ctime and mtime value of an inserted record
+			 *
+			 * @see mshop/catalog/manager/insert-usage/ansi
+			 */
 
-				/** mshop/catalog/manager/insert-usage/ansi
-				 * Updates the config, editor, ctime and mtime value of an inserted record
-				 *
-				 * Each record contains some usage information like when it was
-				 * created, last modified and by whom. These information are part
-				 * of the catalog items and the generic tree manager doesn't care
-				 * about this information. Thus, they are updated after the tree
-				 * manager inserted the basic record information.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the catalog item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the method using this statement,
-				 * so the correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/catalog/manager/delete/ansi
-				 * @see mshop/catalog/manager/get/ansi
-				 * @see mshop/catalog/manager/insert/ansi
-				 * @see mshop/catalog/manager/newid/ansi
-				 * @see mshop/catalog/manager/search/ansi
-				 * @see mshop/catalog/manager/search-item/ansi
-				 * @see mshop/catalog/manager/count/ansi
-				 * @see mshop/catalog/manager/move-left/ansi
-				 * @see mshop/catalog/manager/move-right/ansi
-				 * @see mshop/catalog/manager/update-parentid/ansi
-				 * @see mshop/catalog/manager/update-usage/ansi
-				 */
-				$path = 'mshop/catalog/manager/insert-usage';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/catalog/manager/insert-usage/ansi
+			 * Updates the config, editor, ctime and mtime value of an inserted record
+			 *
+			 * Each record contains some usage information like when it was
+			 * created, last modified and by whom. These information are part
+			 * of the catalog items and the generic tree manager doesn't care
+			 * about this information. Thus, they are updated after the tree
+			 * manager inserted the basic record information.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the catalog item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the method using this statement,
+			 * so the correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/catalog/manager/delete/ansi
+			 * @see mshop/catalog/manager/get/ansi
+			 * @see mshop/catalog/manager/insert/ansi
+			 * @see mshop/catalog/manager/newid/ansi
+			 * @see mshop/catalog/manager/search/ansi
+			 * @see mshop/catalog/manager/search-item/ansi
+			 * @see mshop/catalog/manager/count/ansi
+			 * @see mshop/catalog/manager/move-left/ansi
+			 * @see mshop/catalog/manager/move-right/ansi
+			 * @see mshop/catalog/manager/update-parentid/ansi
+			 * @see mshop/catalog/manager/update-usage/ansi
+			 */
+			$path = 'mshop/catalog/manager/insert-usage';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getUrl() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
-			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $item->getTarget() );
+		$stmt->bind( $idx++, $item->getUrl() );
+		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $item->getTarget() );
 
-			if( $case !== true )
-			{
-				$stmt->bind( $idx++, $siteid );
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			}
-			else
-			{
-				$stmt->bind( $idx++, $date ); // ctime
-				$stmt->bind( $idx++, $siteid );
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			}
+		if( $case !== true )
+		{
+			$stmt->bind( $idx++, $siteid );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		}
+		else
+		{
+			$stmt->bind( $idx++, $date ); // ctime
+			$stmt->bind( $idx++, $siteid );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
 		return $this;
 	}
