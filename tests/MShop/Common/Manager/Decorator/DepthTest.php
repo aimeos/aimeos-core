@@ -23,23 +23,28 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Depth( $manager, $this->context );
 	}
 
+
 	protected function tearDown() : void
 	{
 		unset( $this->object, $this->context );
 	}
 
-	public function testSearchItems()
+
+	public function testSearch()
 	{
-		$item = $this->object->find( 'U:TESTP', ['product'] );
+		$filter = $this->object->filter()->add( ['product.code' => 'U:TESTP'] );
+		$item = $this->object->search( $filter, ['product'] );
 
 		$this->assertEquals( 1, count( $item->getRefItems( 'product' ) ) );
 	}
 
-	public function testSearchLimitOne()
+
+	public function testSearchLimit()
 	{
 		$this->context->config()->set( 'mshop/common/manager/maxdepth', 0 );
 
-		$item = $this->object->find( 'U:TESTP', ['product'] );
+		$filter = $this->object->filter()->add( ['product.code' => 'U:TESTP'] );
+		$item = $this->object->search( $filter, ['product'] );
 
 		$this->assertEquals( 0, count( $item->getRefItems( 'product' ) ) );
 	}
