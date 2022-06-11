@@ -252,31 +252,31 @@ trait Traits
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$context = $this->context();
-		$rmListIds = $rmIds = $refManager = [];
+		$rmListItems = $rmItems = $refManager = [];
 		$listManager = $this->object()->getSubManager( 'lists' );
 
 
 		foreach( $item->getListItemsDeleted() as $listItem )
 		{
-			$rmListIds[] = $listItem->getId();
+			$rmListItems[] = $listItem;
 
 			if( ( $refItem = $listItem->getRefItem() ) !== null ) {
-				$rmIds[$listItem->getDomain()][] = $refItem->getId();
+				$rmItems[$listItem->getDomain()][] = $refItem->getId();
 			}
 		}
 
 
 		try
 		{
-			foreach( $rmIds as $refDomain => $ids )
+			foreach( $rmItems as $refDomain => $list )
 			{
 				$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
 				$refManager[$refDomain]->begin();
 
-				$refManager[$refDomain]->delete( $ids );
+				$refManager[$refDomain]->delete( $list );
 			}
 
-			$listManager->delete( $rmListIds );
+			$listManager->delete( $rmListItems );
 
 
 			foreach( $item->getListItems( null, null, null, false ) as $listItem )
