@@ -294,7 +294,7 @@ class Standard
 			}
 
 			$sitestr = $this->siteString( 'mattpr."siteid"', $level );
-			$keystr = $this->toExpression( 'mattpr."key"', $keys, '=~' );
+			$keystr = $this->toExpression( 'mattpr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

@@ -338,7 +338,7 @@ class Standard
 			}
 
 			$sitestr = $this->siteString( 'mpripr."siteid"', $level );
-			$keystr = $this->toExpression( 'mpripr."key"', $keys, '=~' );
+			$keystr = $this->toExpression( 'mpripr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
