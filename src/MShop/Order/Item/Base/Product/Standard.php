@@ -120,7 +120,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setOrderAddressId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.orderaddressid', ( $value !== null ? $value : null ) );
+		return $this->set( 'order.base.product.orderaddressid', $value );
 	}
 
 
@@ -145,7 +145,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setOrderProductId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.orderproductid', ( $value !== null ? $value : null ) );
+		return $this->set( 'order.base.product.orderproductid', $value );
 	}
 
 
@@ -530,7 +530,7 @@ class Standard extends Base implements Iface
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.product.position', ( $value !== null ? $value : null ) );
+		return $this->set( 'order.base.product.position', $value );
 	}
 
 

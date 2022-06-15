@@ -107,7 +107,7 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.address.position', ( $value !== null ? $value : null ) );
+		return $this->set( 'order.base.address.position', $value );
 	}
 
 

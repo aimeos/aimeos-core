@@ -240,7 +240,7 @@ class Standard extends Base implements Iface
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order service position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.service.position', ( $value !== null ? $value : null ) );
+		return $this->set( 'order.base.service.position', $value );
 	}
 
 
