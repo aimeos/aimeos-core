@@ -295,7 +295,7 @@ class Standard
 				case 'subscription.interval': $item = $item->setInterval( $value ); break;
 				case 'subscription.period': $item = $item->setPeriod( (int) $value ); break;
 				case 'subscription.status': $item = $item->setStatus( (int) $value ); break;
-				case 'subscription.reason': $item = $item->setReason( $value ); break;
+				case 'subscription.reason': $item = $item->setReason( $value !== null ? (int) $value : null ); break;
 				default: continue 2;
 			}
 
