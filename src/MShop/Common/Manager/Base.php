@@ -48,6 +48,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the class names of the manager and used decorators.
+	 *
+	 * @return array List of class names
+	 */
+	public function classes() : array
+	{
+		return [get_class( $this )];
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted

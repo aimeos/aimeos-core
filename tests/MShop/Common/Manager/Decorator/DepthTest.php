@@ -30,6 +30,13 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testClasses()
+	{
+		$expected = ['Aimeos\MShop\Product\Manager\Standard', 'Aimeos\MShop\Common\Manager\Decorator\Depth'];
+		$this->assertEquals( $expected, $this->object->classes() );
+	}
+
+
 	public function testSearch()
 	{
 		$filter = $this->object->filter()->add( ['product.code' => 'U:TESTP'] );
