@@ -142,6 +142,8 @@ trait Traits
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
+
+		$name = $this->context()->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name' ) ?: ( $name ?: 'Standard' );
 		$key = $domain . $manager . $name;
 
 		if( !isset( $this->subManagers[$key] ) )
@@ -156,11 +158,6 @@ trait Traits
 			{
 				$msg = $this->context()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $manager ) );
-			}
-
-			if( $name === null ) {
-				$path = 'mshop/' . $domain . '/manager/' . $manager . '/name';
-				$name = $this->context()->config()->get( $path, 'Standard' );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false )
