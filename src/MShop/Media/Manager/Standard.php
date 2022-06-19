@@ -701,19 +701,21 @@ class Standard
 		$context = $this->context();
 		$fsname = $item->getFileSystem();
 
+		$url = $item->getUrl();
 		$fs = $context->fs( $fsname );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
-		if( !$force && $is && date( 'Y-m-d H:i:s', $fs->time( $item->getUrl() ) ) < $item->getTimeModified() ) {
+		if( !$force && $is && preg_match( '#^[a-zA-Z]{1,10}://#', $url ) !== 1
+			&& date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified()
+		) {
 			return $item;
 		}
 
-		$domain = $item->getDomain();
-		$name = basename( $item->getUrl() );
-		$media = $this->getFile( $item->getUrl() );
-
 		$previews = [];
+		$name = basename( $url );
+		$media = $this->getFile( $url );
 		$item = $this->deletePreviews( $item, $fs );
+		$domain = $item->getDomain();
 
 		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $mediaFile )
 		{
