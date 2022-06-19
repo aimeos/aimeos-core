@@ -350,6 +350,101 @@ class Standard
 
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Media\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		/** mshop/media/manager/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/media/manager/delete/ansi
+		 */
+
+		/** mshop/media/manager/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the media database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/media/manager/insert/ansi
+		 * @see mshop/media/manager/update/ansi
+		 * @see mshop/media/manager/newid/ansi
+		 * @see mshop/media/manager/search/ansi
+		 * @see mshop/media/manager/count/ansi
+		 */
+		$path = 'mshop/media/manager/delete';
+
+		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
+	}
+
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
+	 */
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		if( $default !== false )
+		{
+			$object = $this->filterBase( 'media', $default );
+			$langid = $this->context()->locale()->getLanguageId();
+
+			if( $langid !== null )
+			{
+				$temp = array(
+					$object->compare( '==', 'media.languageid', $langid ),
+					$object->compare( '==', 'media.languageid', null ),
+				);
+
+				$expr = array(
+					$object->getConditions(),
+					$object->or( $temp ),
+				);
+
+				$object->setConditions( $object->and( $expr ) );
+			}
+
+			return $object;
+		}
+
+		return parent::filter();
+	}
+
+
+	/**
+	 * Returns an item for the given ID.
+	 *
+	 * @param string $id ID of the item that should be retrieved
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 */
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->getItemBase( 'media.id', $id, $ref, $default );
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param bool $withsub Return also the resource type of sub-managers if true
@@ -396,61 +491,15 @@ class Standard
 
 
 	/**
-	 * Removes multiple items.
+	 * Returns a new manager for media extensions
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Media\Manager\Iface Manager object for chaining method calls
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/media/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/media/manager/delete/ansi
-		 */
-
-		/** mshop/media/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the media database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/media/manager/insert/ansi
-		 * @see mshop/media/manager/update/ansi
-		 * @see mshop/media/manager/newid/ansi
-		 * @see mshop/media/manager/search/ansi
-		 * @see mshop/media/manager/count/ansi
-		 */
-		$path = 'mshop/media/manager/delete';
-
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
-	}
-
-
-	/**
-	 * Returns an item for the given ID.
-	 *
-	 * @param string $id ID of the item that should be retrieved
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getItemBase( 'media.id', $id, $ref, $default );
+		return $this->getSubManagerBase( 'media', $manager, $name );
 	}
 
 
@@ -628,6 +677,54 @@ class Standard
 
 		$item = $this->savePropertyItems( $item, 'media', $fetch );
 		return $this->saveListItems( $item, 'media', $fetch );
+	}
+
+
+	/**
+	 * Rescales the original file to preview files referenced by the media item
+	 *
+	 * The height/width configuration for scaling
+	 * - mshop/media/<files|preview>/maxheight
+	 * - mshop/media/<files|preview>/maxwidth
+	 * - mshop/media/<files|preview>/force-size
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
+	 * @param bool $force True to enforce creating new preview images
+	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
+	 */
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		if( strncmp( $item->getMimeType(), 'image/', 6 ) ) {
+			return $item;
+		}
+
+		$context = $this->context();
+		$fsname = $item->getFileSystem();
+
+		$fs = $context->fs( $fsname );
+		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
+
+		if( !$force && $is && date( 'Y-m-d H:i:s', $fs->time( $item->getUrl() ) ) < $item->getTimeModified() ) {
+			return $item;
+		}
+
+		$domain = $item->getDomain();
+		$name = basename( $item->getUrl() );
+		$media = $this->getFile( $item->getUrl() );
+
+		$previews = [];
+		$item = $this->deletePreviews( $item, $fs );
+
+		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $mediaFile )
+		{
+			$mime = $this->getMime( $mediaFile );
+			$filepath = $this->getPath( $name, $mime, $domain ?: '-' );
+
+			$this->store( $mediaFile->save( null, $mime ), $filepath, $fs );
+			$previews[$mediaFile->getWidth()] = $filepath;
+		}
+
+		return $item->setPreviews( $previews );
 	}
 
 
@@ -815,55 +912,6 @@ class Standard
 
 
 	/**
-	 * Creates a filter object.
-	 *
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
-	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
-	{
-		if( $default !== false )
-		{
-			$object = $this->filterBase( 'media', $default );
-			$langid = $this->context()->locale()->getLanguageId();
-
-			if( $langid !== null )
-			{
-				$temp = array(
-					$object->compare( '==', 'media.languageid', $langid ),
-					$object->compare( '==', 'media.languageid', null ),
-				);
-
-				$expr = array(
-					$object->getConditions(),
-					$object->or( $temp ),
-				);
-
-				$object->setConditions( $object->and( $expr ) );
-			}
-
-			return $object;
-		}
-
-		return parent::filter();
-	}
-
-
-	/**
-	 * Returns a new manager for media extensions
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'media', $manager, $name );
-	}
-
-
-	/**
 	 * Creates a new media item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
@@ -878,5 +926,312 @@ class Standard
 		$values['.languageid'] = $this->languageId;
 
 		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems, $propItems );
+	}
+
+
+	/**
+	 * Creates scaled images according to the configuration settings
+	 *
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param string $domain Domain the item is from, e.g. product, catalog, etc.
+	 * @param string $type Type of the item within the given domain, e.g. default, stage, etc.
+	 * @return \Aimeos\MW\Media\Image\Iface[] Associative list of image width as keys and scaled media object as values
+	 */
+	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type ) : array
+	{
+		$list = [];
+		$config = $this->context()->config();
+
+		/** controller/common/media/previews
+		 * Scaling options for preview images
+		 *
+		 * For responsive images, several preview images of different sizes are
+		 * generated. This setting controls how many preview images are generated,
+		 * what's their maximum width and height and if the given width/height is
+		 * enforced by cropping images that doesn't fit.
+		 *
+		 * The setting must consist of a list image size definitions like:
+		 *
+		 *  [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
+		 *    ['maxwidth' => 720, 'maxheight' => 960, 'force-size' => false],
+		 *    ['maxwidth' => 2160, 'maxheight' => 2880, 'force-size' => false],
+		 *  ]
+		 *
+		 * "maxwidth" sets the maximum allowed width of the image whereas
+		 * "maxheight" does the same for the maximum allowed height. If both
+		 * values are given, the image is scaled proportionally so it fits into
+		 * the box defined by both values. In case the image has different
+		 * proportions than the specified ones and "force-size" is false, the
+		 * image is resized to fit entirely into the specified box. One side of
+		 * the image will be shorter than it would be possible by the specified
+		 * box.
+		 *
+		 * If "force-size" is true, scaled images that doesn't fit into the
+		 * given maximum width/height are centered and then cropped. By default,
+		 * images aren't cropped.
+		 *
+		 * The values for "maxwidth" and "maxheight" can also be null or not
+		 * used. In that case, the width or height or both is unbound. If none
+		 * of the values are given, the image won't be scaled at all. If only
+		 * one value is set, the image will be scaled exactly to the given width
+		 * or height and the other side is scaled proportionally.
+		 *
+		 * You can also define different preview sizes for different domains (e.g.
+		 * for catalog images) and for different types (e.g. catalog stage images).
+		 * Use configuration settings like
+		 *
+		 *  controller/common/media/<domain>/previews
+		 *  controller/common/media/<domain>/<type>/previews
+		 *
+		 * for example:
+		 *
+		 *  controller/common/media/catalog/previews => [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
+		 *  ]
+		 *  controller/common/media/catalog/previews => [
+		 *    ['maxwidth' => 400, 'maxheight' => 300, 'force-size' => false]
+		 *  ]
+		 *  controller/common/media/catalog/stage/previews => [
+		 *    ['maxwidth' => 360, 'maxheight' => 320, 'force-size' => true],
+		 *    ['maxwidth' => 720, 'maxheight' => 480, 'force-size' => true]
+		 *  ]
+		 *
+		 * These settings will create two preview images for catalog stage images,
+		 * one with a different size for all other catalog images and all images
+		 * from other domains will be sized to 240x320px. The available domains
+		 * which can have images are:
+		 *
+		 * * attribute
+		 * * catalog
+		 * * product
+		 * * service
+		 * * supplier
+		 *
+		 * There are a few image types included per domain ("default" is always
+		 * available). You can also add your own types in the admin backend and
+		 * extend the frontend to display them where you need them.
+		 *
+		 * @param array List of image size definitions
+		 * @category Developer
+		 * @category User
+		 * @since 2019.07
+		 */
+		$previews = $config->get( 'controller/common/media/previews', [] );
+		$previews = $config->get( 'controller/common/media/' . $domain . '/previews', $previews );
+		$previews = $config->get( 'controller/common/media/' . $domain . '/' . $type . '/previews', $previews );
+
+		foreach( $previews as $entry )
+		{
+			$maxwidth = $entry['maxwidth'] ?? null;
+			$maxheight = $entry['maxwidth'] ?? null;
+
+			$list[] = $media->scale( $maxwidth, $maxheight, $entry['force-size'] ?? 0 );
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Removes the previes images from the storage
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
+	 * @param \Aimeos\Base\Filesystem\Iface $fs File system where the files are stored
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item with preview images removed
+	 */
+	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item,
+		\Aimeos\Base\Filesystem\Iface $fs ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		$previews = $item->getPreviews();
+
+		// don't delete first (smallest) image because it may be referenced in past orders
+		if( $item->getDomain() === 'product' ) {
+			$previews = array_slice( $previews, 1 );
+		}
+
+		foreach( $previews as $preview )
+		{
+			if( $preview && $fs->has( $preview ) ) {
+				$fs->rm( $preview );
+			}
+		}
+
+		return $item->setPreviews( [] );
+	}
+
+
+	/**
+	 * Returns the file content of the file or URL
+	 *
+	 * @param string $path Path to the file or URL
+	 * @return string File content
+	 * @throws \Aimeos\MShop\Media\Exception If no file is found
+	 */
+	protected function getContent( string $path ) : string
+	{
+		if( $path )
+		{
+			if( preg_match( '#^[a-zA-Z]{1,10}://#', $path ) === 1 )
+			{
+				if( ( $content = @file_get_contents( $path ) ) === false ) {
+					throw new \Aimeos\MShop\Media\Exception( sprintf( 'Downloading file "%1$s" failed', $path ) );
+				}
+
+				return $content;
+			}
+
+			$fs = $this->context()->fs( 'fs-media' );
+
+			if( $fs->has( $path ) ) {
+				return $fs->read( $path );
+			}
+		}
+
+		throw new \Aimeos\MShop\Media\Exception( sprintf( 'File "%1$s" not found', $path ) );
+	}
+
+
+	/**
+	 * Returns the media object for the given file name
+	 *
+	 * @param string $file Path to the file
+	 * @return \Aimeos\MW\Media\Iface Media object
+	 */
+	protected function getFile( string $filepath ) : \Aimeos\MW\Media\Iface
+	{
+		/** controller/common/media/options
+		 * Options used for processing the uploaded media files
+		 *
+		 * When uploading a file, a preview image for that file is generated if
+		 * possible (especially for images). You can configure certain options
+		 * for the generated images, namely the implementation of the scaling
+		 * algorithm and the quality of the resulting images with
+		 *
+		 *  array(
+		 *  	'image' => array(
+		 *  		'name' => 'Imagick',
+		 *  		'quality' => 75,
+		 * 			'background' => '#f8f8f8' // only if "force-size" is true
+		 *  	)
+		 *  )
+		 *
+		 * @param array Multi-dimendional list of configuration options
+		 * @since 2016.01
+		 * @category Developer
+		 * @category User
+		 */
+		$options = $this->context()->config()->get( 'controller/common/media/options', [] );
+
+		return \Aimeos\MW\Media\Factory::get( $this->getContent( $filepath ), $options );
+	}
+
+
+	/**
+	 * Creates a new file path from the given arguments
+	 *
+	 * @param string $filename Original file name, can contain the path as well
+	 * @param string $mimetype Mime type
+	 * @param string $domain data domain
+	 * @return string New file name including the file path
+	 */
+	protected function getPath( string $filename, string $mimetype, string $domain ) : string
+	{
+		$context = $this->context();
+
+		/** controller/common/media/extensions
+		 * Available files extensions for mime types of uploaded files
+		 *
+		 * Uploaded files should have the right file extension (e.g. ".jpg" for
+		 * JPEG images) so files are recognized correctly if downloaded by users.
+		 * The extension of the uploaded file can't be trusted and only its mime
+		 * type can be determined automatically. This configuration setting
+		 * provides the file extensions for the configured mime types. You can
+		 * add more mime type / file extension combinations if required.
+		 *
+		 * @param array Associative list of mime types as keys and file extensions as values
+		 * @since 2018.04
+		 * @category Developer
+		 */
+		$list = $context->config()->get( 'controller/common/media/extensions', [] );
+
+		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
+		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
+
+		$ext = isset( $list[$mimetype] ) ? '.' . $list[$mimetype] : '';
+		$siteId = $context->locale()->getSiteId();
+
+		// the "d" after {siteid} is the required extension for Windows (no dots at the end allowed)
+		return "${siteId}d/preview/${domain}/${filename[0]}/${filename[1]}/${filename}${ext}";
+	}
+
+
+	/**
+	 * Returns the mime type for the new image
+	 *
+	 * @param \Aimeos\MW\Media\Iface $media Media object
+	 * @return string New mime type
+	 * @throws \Aimeos\Controller\Common\Exception If no mime types are configured
+	 */
+	protected function getMime( \Aimeos\MW\Media\Iface $media ) : string
+	{
+		$mimetype = $media->getMimetype();
+		$config = $this->context()->config();
+
+		/** controller/common/media/files/allowedtypes
+		 * A list of image mime types that are allowed for uploaded image files
+		 *
+		 * The list of allowed image types must be explicitly configured for the
+		 * uploaded image files. Trying to upload and store an image file not
+		 * available in the list of allowed mime types will result in an exception.
+		 *
+		 * @param array List of image mime types
+		 * @since 2016.01
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/common/media/preview/allowedtypes
+		 * A list of image mime types that are allowed for preview image files
+		 *
+		 * The list of allowed image types must be explicitly configured for the
+		 * preview image files. Trying to create a preview image whose mime type
+		 * is not available in the list of allowed mime types will result in an
+		 * exception.
+		 *
+		 * @param array List of image mime types
+		 * @since 2016.01
+		 * @category Developer
+		 * @category User
+		 */
+		$default = [
+			'image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
+			'application/pdf', 'application/zip',
+			'video/mp4', 'video/webm'
+		];
+		$allowed = $config->get( 'controller/common/media/preview/allowedtypes', $default );
+
+		if( in_array( $mimetype, ['image/jpeg', 'image/png'] )
+			&& !empty( $supported = $media::supports( $allowed ) ) && ( $imgtype = reset( $supported ) ) !== false
+		) {
+			return $imgtype;
+		}
+
+		return $mimetype;
+	}
+
+
+	/**
+	 * Stores the file content
+	 *
+	 * @param string $content File content
+	 * @param string $filepath Path of the new file
+	 * @param \Aimeos\Base\Filesystem\Iface $fs File system object
+	 * @return \Aimeos\Controller\Common\Media\Iface Self object for fluent interface
+	 */
+	protected function store( string $content, string $filepath, \Aimeos\Base\Filesystem\Iface $fs ) : Iface
+	{
+		$fs->write( $filepath, $content );
+		return $this;
 	}
 }
