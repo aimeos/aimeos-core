@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetContent()
 	{
 		$dest = dirname( __DIR__, 3 ) . '/tmp/';
-		@mkdir( $dest, 0755, true );
+		is_dir( $dest ) ?: mkdir( $dest, 0755, true );
 		copy( __DIR__ . '/_testfiles/test.gif', $dest . 'test.gif' );
 
 		$result = $this->access( 'getContent' )->invokeArgs( $this->object, ['test.gif'] );
@@ -336,7 +336,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetFile()
 	{
 		$dest = dirname( __DIR__, 3 ) . '/tmp/';
-		@mkdir( $dest, 0755, true );
+		is_dir( $dest ) ?: mkdir( $dest, 0755, true );
 		copy( __DIR__ . '/_testfiles/test.gif', $dest . 'test.gif' );
 
 		$result = $this->access( 'getFile' )->invokeArgs( $this->object, ['test.gif'] );

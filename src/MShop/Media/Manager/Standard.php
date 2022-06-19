@@ -717,7 +717,7 @@ class Standard
 		$item = $this->deletePreviews( $item, $fs );
 		$domain = $item->getDomain();
 
-		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $mediaFile )
+		foreach( $this->createPreviews( $media, $item->getDomain(), (string) $item->getType() ) as $mediaFile )
 		{
 			$mime = $this->getMime( $mediaFile );
 			$filepath = $this->getPath( $name, $mime, $domain ?: '-' );
