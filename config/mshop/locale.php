@@ -325,7 +325,7 @@ return array(
 				WHERE :cond
 				GROUP BY :columns :group
 					mloc."id", mloc."siteid", mloc."site_id", mloc."langid", mloc."currencyid", mloc."pos",
-					mloc."status", mloc."mtime", mloc."editor", mloc."ctime"
+					mloc."status", mloc."mtime", mloc."editor", mloc."ctime", mlocsi."code"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
