@@ -35,7 +35,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.status' => 1,
 			'locale.mtime' => '2011-01-01 00:00:02',
 			'locale.ctime' => '2011-01-01 00:00:01',
-			'locale.editor' => 'unitTestUser'
+			'locale.editor' => 'unitTestUser',
+			'locale.sitecode' => 'unittest',
 		);
 
 		$this->object = new \Aimeos\MShop\Locale\Item\Standard( $this->values, $this->siteItem,
@@ -50,19 +51,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSite()
+	public function testGetSiteItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->getSiteItem() );
 
 		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$wrongobject->getSiteItem();
-	}
-
-
-	public function testGetSiteId()
-	{
-		$this->assertEquals( '1', $this->object->getSiteId() );
 	}
 
 
@@ -74,6 +69,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '/1/2/', $this->object->getSites( Locale::SITE_ONE ) );
 		$this->assertEquals( ['/1/', '/1/2'], $this->object->getSites( Locale::SITE_PATH ) );
 		$this->assertEquals( '/1/2/', $this->object->getSites( Locale::SITE_SUBTREE ) );
+	}
+
+
+	public function testGetSiteCode()
+	{
+		$this->assertEquals( 'unittest', $this->object->getSiteCode() );
+	}
+
+
+	public function testGetSiteId()
+	{
+		$this->assertEquals( '1', $this->object->getSiteId() );
 	}
 
 
@@ -248,6 +255,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['locale.editor'] );
+		$this->assertEquals( $this->object->getSiteCode(), $arrayObject['locale.sitecode'] );
 	}
 
 

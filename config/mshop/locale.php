@@ -317,7 +317,7 @@ return array(
 					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
-					mloc."ctime" AS "locale.ctime"
+					mloc."ctime" AS "locale.ctime", mlocsi."code" AS "locale.sitecode"
 				FROM "mshop_locale" mloc
 				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
@@ -335,7 +335,7 @@ return array(
 					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
-					mloc."ctime" AS "locale.ctime"
+					mloc."ctime" AS "locale.ctime", mlocsi."code" AS "locale.sitecode"
 				FROM "mshop_locale" mloc
 				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")

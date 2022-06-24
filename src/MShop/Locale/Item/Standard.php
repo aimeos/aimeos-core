@@ -55,6 +55,17 @@ class Standard
 
 
 	/**
+	 * Returns the site code of the item.
+	 *
+	 * @return string|null Site code or NULL if not available
+	 */
+	public function getSiteCode() : ?string
+	{
+		return $this->get( 'locale.sitecode' );
+	}
+
+
+	/**
 	 * Returns the site item object.
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
@@ -71,6 +82,17 @@ class Standard
 
 
 	/**
+	 * Returns the list site IDs up to the root site item.
+	 *
+	 * @return array List of site IDs
+	 */
+	public function getSitePath() : array
+	{
+		return (array) ( $this->sites[Locale::SITE_PATH] ?? ( $this->sites[Locale::SITE_ONE] ?? [] ) );
+	}
+
+
+	/**
 	 * Returns the site IDs for the locale site constants.
 	 *
 	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
@@ -83,17 +105,6 @@ class Standard
 		}
 
 		return $this->sites[$level] ?? ( $this->sites[Locale::SITE_ONE] ?? [] );
-	}
-
-
-	/**
-	 * Returns the list site IDs up to the root site item.
-	 *
-	 * @return array List of site IDs
-	 */
-	public function getSitePath() : array
-	{
-		return (array) ( $this->sites[Locale::SITE_PATH] ?? ( $this->sites[Locale::SITE_ONE] ?? [] ) );
 	}
 
 
@@ -276,10 +287,11 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['locale.siteid'] = $this->getSiteId();
-		$list['locale.languageid'] = $this->getLanguageId();
 		$list['locale.currencyid'] = $this->getCurrencyId();
+		$list['locale.languageid'] = $this->getLanguageId();
 		$list['locale.position'] = $this->getPosition();
+		$list['locale.sitecode'] = $this->getSiteCode();
+		$list['locale.siteid'] = $this->getSiteId();
 		$list['locale.status'] = $this->getStatus();
 
 		return $list;
