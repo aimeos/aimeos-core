@@ -39,7 +39,7 @@ class Standard
 	{
 		parent::__construct( 'text.', $values );
 
-		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
+		$this->langid = $values['.languageid'] ?? null;
 		$this->initListItems( $listItems, $refItems );
 	}
 
