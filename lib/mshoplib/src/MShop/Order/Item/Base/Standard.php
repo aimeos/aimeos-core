@@ -375,6 +375,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		foreach( $list as $key => $value )
 		{
+			if( ( $value === null || is_scalar( $value ) ) && strpos( $key, '.' ) === false ) {
+				$this->set( $key, $value );
+			}
+
 			switch( $key )
 			{
 				case 'order.base.id': $item = $item->setId( $value ); break;
@@ -424,6 +428,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			$list['order.base.mtime'] = $this->getTimeModified();
 			$list['order.base.ctime'] = $this->getTimeCreated();
 			$list['order.base.editor'] = $this->getEditor();
+		}
+
+		foreach( $this->bdata as $key => $value )
+		{
+			if( strpos( $key, '.' ) === false ) {
+				$list[$key] = $value;
+			}
 		}
 
 		return $list;
