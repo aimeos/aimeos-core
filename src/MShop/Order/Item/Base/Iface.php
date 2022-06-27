@@ -118,20 +118,6 @@ interface Iface
 	public function getSiteCode() : string;
 
 	/**
-	 * Tests if the order object was modified.
-	 *
-	 * @return bool True if modified, false if not
-	 */
-	public function isModified() : bool;
-
-	/**
-	 * Sets the modified flag of the object.
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setModified() : \Aimeos\MShop\Order\Item\Base\Iface;
-
-	/**
 	 * Adds a customer address as billing or delivery address for an order.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type

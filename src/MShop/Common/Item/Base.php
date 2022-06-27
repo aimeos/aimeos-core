@@ -24,11 +24,10 @@ abstract class Base
 {
 	use \Aimeos\Macro\Macroable;
 
-	private $available = true;
-	private $modified = false;
-	private $prefix;
-
 	// protected due to PHP serialization
+	protected $available = true;
+	protected $modified = false;
+	protected $bprefix;
 	protected $bdata;
 
 
@@ -40,7 +39,7 @@ abstract class Base
 	 */
 	public function __construct( string $prefix, array $values )
 	{
-		$this->prefix = (string) $prefix;
+		$this->bprefix = $prefix;
 		$this->bdata = $values;
 	}
 
@@ -224,7 +223,7 @@ abstract class Base
 	 */
 	public function getId() : ?string
 	{
-		$key = $this->prefix . 'id';
+		$key = $this->bprefix . 'id';
 
 		if( isset( $this->bdata[$key] ) && $this->bdata[$key] != '' ) {
 			return (string) $this->bdata[$key];
@@ -242,7 +241,7 @@ abstract class Base
 	 */
 	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$this->bdata[$this->prefix . 'id'] = $id;
+		$this->bdata[$this->bprefix . 'id'] = $id;
 		$this->modified = ( $id === null );
 
 		return $this;
@@ -256,7 +255,7 @@ abstract class Base
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( $this->prefix . 'siteid', $this->get( 'siteid', '' ) );
+		return $this->get( $this->bprefix . 'siteid', $this->get( 'siteid', '' ) );
 	}
 
 
@@ -286,7 +285,7 @@ abstract class Base
 	 */
 	public function getTimeModified() : ?string
 	{
-		return $this->get( $this->prefix . 'mtime', $this->get( 'mtime' ) );
+		return $this->get( $this->bprefix . 'mtime', $this->get( 'mtime' ) );
 	}
 
 
@@ -297,7 +296,7 @@ abstract class Base
 	 */
 	public function getTimeCreated() : ?string
 	{
-		return $this->get( $this->prefix . 'ctime', $this->get( 'ctime' ) );
+		return $this->get( $this->bprefix . 'ctime', $this->get( 'ctime' ) );
 	}
 
 
@@ -308,7 +307,7 @@ abstract class Base
 	 */
 	public function editor() : string
 	{
-		return $this->get( $this->prefix . 'editor', $this->get( 'editor', '' ) );
+		return $this->get( $this->bprefix . 'editor', $this->get( 'editor', '' ) );
 	}
 
 
@@ -368,10 +367,10 @@ abstract class Base
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		if( $private && array_key_exists( $this->prefix . 'id', $list ) )
+		if( $private && array_key_exists( $this->bprefix . 'id', $list ) )
 		{
-			$this->setId( $list[$this->prefix . 'id'] );
-			unset( $list[$this->prefix . 'id'] );
+			$this->setId( $list[$this->bprefix . 'id'] );
+			unset( $list[$this->bprefix . 'id'] );
 		}
 
 		// Add custom columns
@@ -394,14 +393,14 @@ abstract class Base
 	 */
 	public function toArray( bool $private = false ) : array
 	{
-		$list = [$this->prefix . 'id' => $this->getId()];
+		$list = [$this->bprefix . 'id' => $this->getId()];
 
 		if( $private === true )
 		{
-			$list[$this->prefix . 'siteid'] = $this->getSiteId();
-			$list[$this->prefix . 'ctime'] = $this->getTimeCreated();
-			$list[$this->prefix . 'mtime'] = $this->getTimeModified();
-			$list[$this->prefix . 'editor'] = $this->editor();
+			$list[$this->bprefix . 'siteid'] = $this->getSiteId();
+			$list[$this->bprefix . 'ctime'] = $this->getTimeCreated();
+			$list[$this->bprefix . 'mtime'] = $this->getTimeModified();
+			$list[$this->bprefix . 'editor'] = $this->editor();
 		}
 
 		foreach( $this->bdata as $key => $value )

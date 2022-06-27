@@ -25,7 +25,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	protected $locale;
 	protected $customer;
 	protected $recalc = false;
-	protected $available = true;
 
 
 	/**
@@ -109,43 +108,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function getCustomerItem() : ?\Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->customer;
-	}
-
-
-	/**
-	 * Returns the ID of the order if already available.
-	 *
-	 * @return string|null ID of the order item
-	 */
-	public function getId() : ?string
-	{
-		return $this->get( 'order.base.id' );
-	}
-
-
-	/**
-	 * Sets the id of the order base object.
-	 *
-	 * @param string|null $id Unique ID of the order base object
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
-	 */
-	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->set( 'order.base.id', $id );
-		$this->modified = ( $id === null );
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the ID of the site the item is stored.
-	 *
-	 * @return string Site ID (or null if not available)
-	 */
-	public function getSiteId() : string
-	{
-		return $this->get( 'order.base.siteid', '' );
 	}
 
 
@@ -293,7 +255,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->notify( 'setLocale.before', $locale );
 
 		$this->locale = clone $locale;
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notify( 'setLocale.after', $locale );
 
@@ -332,35 +294,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Tests if the item is available based on status, time, language and currency
-	 *
-	 * @return bool True if available, false if not
-	 */
-	public function isAvailable() : bool
-	{
-		return $this->available;
-	}
-
-
-	/**
-	 * Sets the general availability of the item
-	 *
-	 * @param bool $value True if available, false if not
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->available = $value;
-		return $this;
-	}
-
-
-	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 * @return \Aimeos\MShop\Common\Item\Iface Order base item for method chaining
 	 */
-	public function setModified() : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->recalc = true;
 		return parent::setModified();
@@ -379,10 +317,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$item = $this;
 		$locale = $item->locale();
 
-		unset( $list['order.base.siteid'] );
-		unset( $list['order.base.ctime'] );
-		unset( $list['order.base.mtime'] );
-		unset( $list['order.base.editor'] );
+		parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
@@ -414,20 +349,20 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$price = $this->getPrice();
 		$locale = $this->locale();
 
-		$list = array(
-			'order.base.id' => $this->getId(),
-			'order.base.sitecode' => $this->getSiteCode(),
-			'order.base.customerid' => $this->getCustomerId(),
-			'order.base.languageid' => $locale->getLanguageId(),
-			'order.base.currencyid' => $price->getCurrencyId(),
-			'order.base.price' => $price->getValue(),
-			'order.base.costs' => $price->getCosts(),
-			'order.base.rebate' => $price->getRebate(),
-			'order.base.taxvalue' => $price->getTaxValue(),
-			'order.base.taxflag' => $price->getTaxFlag(),
-			'order.base.customerref' => $this->getCustomerReference(),
-			'order.base.comment' => $this->getComment(),
-		);
+		$list = parent::toArray( $private );
+
+		$list['order.base.id'] = $this->getId();
+		$list['order.base.sitecode'] = $this->getSiteCode();
+		$list['order.base.customerid'] = $this->getCustomerId();
+		$list['order.base.languageid'] = $locale->getLanguageId();
+		$list['order.base.currencyid'] = $price->getCurrencyId();
+		$list['order.base.price'] = $price->getValue();
+		$list['order.base.costs'] = $price->getCosts();
+		$list['order.base.rebate'] = $price->getRebate();
+		$list['order.base.taxflag'] = $price->getTaxFlag();
+		$list['order.base.taxvalue'] = $price->getTaxValue();
+		$list['order.base.customerref'] = $this->getCustomerReference();
+		$list['order.base.comment'] = $this->getComment();
 
 		if( $private === true )
 		{

@@ -18,19 +18,19 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
+abstract class Base
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
 	use \Aimeos\MW\Observer\Publisher\Traits;
 	use \Aimeos\Macro\Macroable;
 
 
 	// protected is a workaround for serialize problem
-	protected $bdata;
 	protected $coupons;
 	protected $products;
 	protected $services = [];
 	protected $addresses = [];
-	protected $modified = false;
 
 
 	/**
@@ -56,7 +56,8 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 			map( $couponProducts )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
 		}
 
-		$this->bdata = $values;
+		parent::__construct( 'order.base.', $values );
+
 		$this->coupons = $coupons;
 		$this->products = $products;
 
@@ -71,58 +72,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 
 
 	/**
-	 * Clones internal objects of the order base item.
-	 */
-	public function __clone()
-	{
-	}
-
-
-	/**
-	 * Returns the item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @return mixed|null Property value or null if property is unknown
-	 */
-	public function __get( string $name )
-	{
-		if( array_key_exists( $name, $this->bdata ) ) {
-			return $this->bdata[$name];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Tests if the item property for the given name is available
-	 *
-	 * @param string $name Name of the property
-	 * @return bool True if the property exists, false if not
-	 */
-	public function __isset( string $name ) : bool
-	{
-		return array_key_exists( $name, $this->bdata );
-	}
-
-
-	/**
-	 * Sets the new item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @param mixed $value New property value
-	 */
-	public function __set( string $name, $value )
-	{
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
-			$this->setModified();
-		}
-
-		$this->bdata[$name] = $value;
-	}
-
-
-	/**
 	 * Specifies the data which should be serialized to JSON by json_encode().
 	 *
 	 * @return array<string,mixed> Data to serialize to JSON
@@ -130,70 +79,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()
 	{
-		return $this->bdata + [
+		return parent::jsonSerialize() + [
 			'coupons' => $this->coupons,
 			'products' => $this->products,
 			'services' => $this->services,
 			'addresses' => $this->addresses,
 		];
-	}
-
-
-	/**
-	 * Tests if the item property for the given name is available
-	 *
-	 * @param string $name Name of the property
-	 * @return bool True if the property exists, false if not
-	 */
-	public function offsetExists( $name ) : bool
-	{
-		return array_key_exists( $name, $this->bdata );
-	}
-
-
-	/**
-	 * Returns the item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @return mixed|null Property value or null if property is unknown
-	 */
-	#[\ReturnTypeWillChange]
-	public function offsetGet( $name )
-	{
-		if( array_key_exists( $name, $this->bdata ) ) {
-			return $this->bdata[$name];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Sets the new item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @param mixed $value New property value
-	 */
-	public function offsetSet( $name, $value ) : void
-	{
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
-			$this->setModified();
-		}
-
-		$this->bdata[$name] = $value;
-	}
-
-
-	/**
-	 * Removes an item property
-	 * This is not supported by items
-	 *
-	 * @param string $name Name of the property
-	 * @throws \LogicException Always thrown because this method isn't supported
-	 */
-	public function offsetUnset( $name ) : void
-	{
-		throw new \LogicException( 'Not implemented' );
 	}
 
 
@@ -226,58 +117,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 
 
 	/**
-	 * Assigns multiple key/value pairs to the item
-	 *
-	 * @param iterable $pairs Associative list of key/value pairs
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
-	 */
-	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		foreach( $pairs as $key => $value ) {
-			$this->set( $key, $value );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @param mixed $default Default value if property is unknown
-	 * @return mixed|null Property value or default value if property is unknown
-	 */
-	public function get( string $name, $default = null )
-	{
-		if( isset( $this->bdata[$name] ) ) {
-			return $this->bdata[$name];
-		}
-
-		return $default;
-	}
-
-
-	/**
-	 * Sets the new item property for the given name
-	 *
-	 * @param string $name Name of the property
-	 * @param mixed $value New property value
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value )
-		{
-			$this->bdata[$name] = $value;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -285,29 +124,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	public function getResourceType() : string
 	{
 		return 'order/base';
-	}
-
-
-	/**
-	 * Tests if the order object was modified.
-	 *
-	 * @return bool True if modified, false if not
-	 */
-	public function isModified() : bool
-	{
-		return $this->modified;
-	}
-
-
-	/**
-	 * Sets the modified flag of the object.
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setModified() : \Aimeos\MShop\Order\Item\Base\Iface
-	{
-		$this->modified = true;
-		return $this;
 	}
 
 
