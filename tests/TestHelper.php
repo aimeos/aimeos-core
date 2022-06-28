@@ -177,11 +177,7 @@ class TestHelper
 	 */
 	protected static function createView( \Aimeos\Base\Config\Iface $config )
 	{
-		$tmplpaths = array_merge_recursive(
-			self::getAimeos()->getCustomPaths( 'lib/custom/templates' ),
-			self::getAimeos()->getCustomPaths( 'client/html/templates' ),
-			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
-		);
+		$tmplpaths = self::getAimeos()->getTemplatePaths( 'controller/jobs/templates' );
 
 		$view = new \Aimeos\Base\View\Standard( $tmplpaths );
 
