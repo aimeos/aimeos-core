@@ -73,7 +73,8 @@ class MShop
 		if( empty( $name ) )
 		{
 			$subpath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
-			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', 'Standard' );
+			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
+			$name = $name ?: $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
 		}
 
 		$localClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
