@@ -26,7 +26,7 @@ return array(
 	'setup' => array(
 		'setup',
 	),
-	'custom' => array(
+	'template' => array(
 		'controller/jobs/templates' => array(
 			'templates',
 		),
