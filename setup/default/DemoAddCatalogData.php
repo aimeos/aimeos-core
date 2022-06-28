@@ -66,7 +66,10 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
 
 		$search = $manager->filter();
-		$search->setConditions( $search->compare( '=~', 'catalog.code', 'demo-' ) );
+		$search->add( $search->and( [
+			$search->compare( '=~', 'catalog.code', 'demo-' ),
+			$search->compare( '==', 'catalog.level', 1 )
+		] ) );
 		$manager->delete( $manager->search( $search )->getId()->toArray() );
 
 
