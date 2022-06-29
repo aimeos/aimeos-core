@@ -42,12 +42,8 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 		$this->info( 'Processing customer demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'customer' );
-
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'demo@example.com' ) );
-		$services = $manager->search( $search );
-
-		$manager->delete( $services->toArray() );
+		$search = $manager->filter()->add( ['customer.code' => 'demo@example.com'] );
+		$manager->delete( $manager->search( $search ) );
 
 
 		if( $value === '1' )
