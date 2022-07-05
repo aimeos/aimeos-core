@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"POT-Creation-Date: 2022-07-05 11:56+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Aimeos, 2015-2022\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
@@ -214,6 +214,10 @@ msgid "Date value before \"%1$s\""
 msgstr "Der Datumswert ist vor \"%1$s\""
 
 #, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "Herunterladen der Datei \"%1$s\" ist fehl geschlagen"
+
+#, php-format
 msgid "Duplicate coupon code"
 msgstr "Doppelter Gutscheincode"
 
@@ -224,6 +228,10 @@ msgstr "Doppelter Gutscheincode \"%1$s\""
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
 msgstr "Knoten \"%1$s\" konnte nicht transformiert werden"
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "Die Datei \"%1$s\" ist unbekannt"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
@@ -763,6 +771,10 @@ msgstr "Produktanzahl muss größer als 0 und kleiner als %1$d sein"
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
 msgstr "Produktanzahl muss größer als 0 sein und darf 2147483647 nicht überschreiten"
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr "Mengenskala muss größer als 0 sein"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"

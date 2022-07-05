@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"POT-Creation-Date: 2022-07-05 11:56+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: b5fdd37cec45d8078af7e530465bb050, 2016\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -214,6 +214,10 @@ msgid "Date value before \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr ""
+
+#, php-format
 msgid "Duplicate coupon code"
 msgstr ""
 
@@ -223,6 +227,10 @@ msgstr "Código do cupom \"%1$s\" duplicado"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
+#, php-format
+msgid "File \"%1$s\" not found"
 msgstr ""
 
 #, php-format
@@ -762,6 +770,10 @@ msgstr ""
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr ""
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
 msgstr ""
 
 #, php-format

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"POT-Creation-Date: 2022-07-05 11:56+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Péter Kozma <kopegrafika@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
@@ -214,6 +214,10 @@ msgid "Date value before \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "\"%1$s\" állomány letöltése nem sikerült"
+
+#, php-format
 msgid "Duplicate coupon code"
 msgstr "Ismétlődő kuponkód"
 
@@ -224,6 +228,10 @@ msgstr "\"%1$s\" kupon kód duplikálása"
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
 msgstr ""
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "\"%1$s\" állomány nem található"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
@@ -763,6 +771,10 @@ msgstr ""
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
 msgstr "A mennyiségnek nagyobbnak kell lennie, mint 0, és nem haladhatja meg a 2147483647 értéket"
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
