@@ -337,6 +337,43 @@ class Standard
 
 
 	/**
+	 * Copies the media item and the referenced files
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
+	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
+	 * @todo 2023.01 Add to media manager interface
+	 */
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		$item = (clone $item)->setId( null );
+
+		$path = $item->getUrl();
+		$previews = $item->getPreviews();
+		$fsname = $item->getFileSystem();
+		$fs = $this->context()->fs( $fsname );
+
+		if( $fs->has( $path ) )
+		{
+			$newPath = $this->getPath( substr( basename( $path ), 9 ), 'files', $item->getMimeType() );
+			$fs->copy( $path, $newPath );
+			$item->setUrl( $newPath );
+		}
+
+		foreach( $previews as $size => $preview )
+		{
+			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
+			{
+				$newPath = $this->getPath( substr( basename( $preview ), 9 ), 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+				$fs->copy( $preview, $newPath );
+				$previews[$size] = $newPath;
+			}
+		}
+
+		return $item->setPreviews( $previews );
+	}
+
+
+	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -691,6 +728,7 @@ class Standard
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param bool $force True to enforce creating new preview images
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
+	 * @todo 2023.01 Add to media manager interface
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
