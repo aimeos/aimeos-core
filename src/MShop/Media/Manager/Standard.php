@@ -345,7 +345,7 @@ class Standard
 	 */
 	public function copy( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		$item = (clone $item)->setId( null );
+		$item = ( clone $item )->setId( null );
 
 		$path = $item->getUrl();
 		$previews = $item->getPreviews();
