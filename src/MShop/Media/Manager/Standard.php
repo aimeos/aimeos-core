@@ -749,22 +749,28 @@ class Standard
 			return $item;
 		}
 
-		$previews = [];
-		$name = basename( $url );
 		$media = $this->getFile( $url );
-		$item = $this->deletePreviews( $item, $fs );
-		$domain = $item->getDomain();
 
-		foreach( $this->createPreviews( $media, $item->getDomain(), (string) $item->getType() ) as $mediaFile )
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
-			$mime = $this->getMime( $mediaFile );
-			$filepath = $this->getPath( $name, $mime, $domain ?: '-' );
+			$previews = [];
+			$name = basename( $url );
+			$domain = $item->getDomain();
+			$item = $this->deletePreviews( $item, $fs );
 
-			$this->store( $mediaFile->save( null, $mime ), $filepath, $fs );
-			$previews[$mediaFile->getWidth()] = $filepath;
+			foreach( $this->createPreviews( $media, $item->getDomain(), (string) $item->getType() ) as $mediaFile )
+			{
+				$mime = $this->getMime( $mediaFile );
+				$filepath = $this->getPath( $name, $mime, $domain ?: '-' );
+
+				$this->store( $mediaFile->save( null, $mime ), $filepath, $fs );
+				$previews[$mediaFile->getWidth()] = $filepath;
+			}
+
+			$item->setPreviews( $previews );
 		}
 
-		return $item->setPreviews( $previews );
+		return $item;
 	}
 
 
