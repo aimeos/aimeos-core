@@ -71,22 +71,33 @@ class Category
 			$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
 			$catIds = $manager->search( $filter )->keys()->toArray();
 
-			$filter = $listManager->filter( true )->slice( 0, count( $prodIds ) )->add( [
+			$filter = $listManager->filter( true )->add( [
 				'catalog.lists.parentid' => $catIds,
 				'catalog.lists.refid' => array_keys( $prodIds ),
 				'catalog.lists.type' => ['default', 'promotion'],
 				'catalog.lists.domain' => 'product',
 			] );
 
-			foreach( $listManager->search( $filter ) as $listItem )
+			$start = 0;
+			do
 			{
-				if( isset( $prodIds[$listItem->getRefId()] ) )
+				$result = $listManager->search( $filter->slice( $start ) );
+
+				foreach ( $result as $listItem )
 				{
-					foreach( $prodIds[$listItem->getRefId()] as $product ) {
-						$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+					if( isset( $prodIds[$listItem->getRefId()] ) )
+					{
+						foreach( $prodIds[$listItem->getRefId()] as $product ) {
+							$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+						}
+						unset( $prodIds[$listItem->getRefId()] );
 					}
 				}
+
+				$count = count( $result );
+				$start += $count;
 			}
+			while( $count == $filter->getLimit() );
 
 			return $price;
 		}
