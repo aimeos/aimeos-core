@@ -87,6 +87,8 @@ class Category
 				foreach( $prodIds[$item->getId()] ?? [] as $product ) {
 					$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 				}
+
+				unset( $prodIds[$item->getId()] );
 			}
 
 			return $price;
