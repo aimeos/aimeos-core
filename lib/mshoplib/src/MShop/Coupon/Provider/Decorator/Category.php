@@ -76,14 +76,15 @@ class Category
 				'catalog.lists.refid' => array_keys( $prodIds ),
 				'catalog.lists.type' => ['default', 'promotion'],
 				'catalog.lists.domain' => 'product',
-			] );	
+			] );
 
 			$start = 0;
 			do
 			{
 				$result = $listManager->search( $filter->slice( $start ) );
 
-				foreach ( $result as $listItem ) {
+				foreach ( $result as $listItem )
+				{
 					if( isset( $prodIds[$listItem->getRefId()] ) )
 					{
 						foreach( $prodIds[$listItem->getRefId()] as $product ) {
