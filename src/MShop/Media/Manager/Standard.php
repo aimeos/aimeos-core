@@ -1208,7 +1208,7 @@ class Standard
 		$siteId = $context->locale()->getSiteId();
 
 		// the "d" after {siteid} is the required extension for Windows (no dots at the end allowed)
-		return "${siteId}d/preview/${domain}/${filename[0]}/${filename[1]}/${filename}${ext}";
+		return "${siteId}d/${domain}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
 
 
