@@ -772,7 +772,7 @@ msgstr "Miktar 0'dan büyük olmalıdır ve 2147483647 değerinden büyük olmam
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Miktar ölçeği 0'dan büyük olmalıdır"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
