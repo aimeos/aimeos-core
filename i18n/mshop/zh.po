@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"POT-Creation-Date: 2022-07-05 11:56+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Hans He, 2022\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
@@ -216,6 +216,10 @@ msgid "Date value before \"%1$s\""
 msgstr "日期值在 \"%1$s\" 之前"
 
 #, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "檔案 \"%1$s\" 下載失敗"
+
+#, php-format
 msgid "Duplicate coupon code"
 msgstr "重複的優惠券代碼"
 
@@ -226,6 +230,10 @@ msgstr "重複的優惠券代碼 \"%1$s\""
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
 msgstr "展开 \"%1$s\" 节点失败"
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "找不到檔案 \"%1$s\""
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
@@ -765,6 +773,10 @@ msgstr "数量必须大于等于 0 且不能超过 %1$d"
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
 msgstr "数量必须大于等于 0 且不能超过 2147483647"
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"

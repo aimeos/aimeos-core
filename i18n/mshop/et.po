@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-05 09:19+0200\n"
+"POT-Creation-Date: 2022-07-05 11:56+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: ranx2k <ranko@murumets.eu>, 2021\n"
 "Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
@@ -213,6 +213,10 @@ msgid "Date value before \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr ""
+
+#, php-format
 msgid "Duplicate coupon code"
 msgstr ""
 
@@ -222,6 +226,10 @@ msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
+#, php-format
+msgid "File \"%1$s\" not found"
 msgstr ""
 
 #, php-format
@@ -761,6 +769,10 @@ msgstr ""
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr ""
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
 msgstr ""
 
 #, php-format
