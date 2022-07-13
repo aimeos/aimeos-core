@@ -57,7 +57,7 @@ abstract class Base
 	/**
 	 * Returns the lowest price for the given quantity
 	 *
-	 * @param \Aimeos\Map Associative list of quantity as keys and price item as value
+	 * @param \Aimeos\Map $priceList Associative list of quantity as keys and price item as value
 	 * @param float $quantity Number of products
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 */
