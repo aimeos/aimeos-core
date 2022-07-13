@@ -236,8 +236,8 @@ class Imagick
 	 */
 	protected function resize( \Aimeos\MW\Media\Image\Iface $media, ?int $width, ?int $height ) : \Aimeos\MW\Media\Image\Iface
 	{
-		$w = $this->image->getImageWidth();
-		$h = $this->image->getImageHeight();
+		$w = $media->image->getImageWidth();
+		$h = $media->image->getImageHeight();
 
 		list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
 
