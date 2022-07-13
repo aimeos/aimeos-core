@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'price.editor', '' );
 
 		$param = ['customer', 'test', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'price:has', $param ), null );
@@ -249,7 +249,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'price.editor', '' );
 
 		$param = ['zone', null, 'NY'];
 		$expr[] = $search->compare( '!=', $search->make( 'price:prop', $param ), null );
@@ -270,25 +270,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
-		$search->slice( 0, 10 );
+		$search = $this->object->filter()->slice( 0, 10 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
-		$this->assertEquals( 29, $total );
+		$this->assertGreaterThanOrEqual( 27, $total );
 	}
 
 
 	public function testSearchItemsBase()
 	{
 		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'price.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
-		$this->assertEquals( 27, count( $results ) );
+		$this->assertGreaterThanOrEqual( 25, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
