@@ -50,9 +50,25 @@ abstract class Base
 			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $quantity ) );
 		}
 
+		return $this->call( 'calcLowestPrice', $priceList, $quantity );
+	}
+
+
+	/**
+	 * Returns the lowest price for the given quantity
+	 *
+	 * @param \Aimeos\Map Associative list of quantity as keys and price item as value
+	 * @param float $quantity Number of products
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
+	 */
+	protected function calcLowestPrice( \Aimeos\Map $priceList, float $quantity ) : \Aimeos\MShop\Price\Item\Iface
+	{
+		$price = $priceList->first();
+
 		foreach( $priceList as $qty => $priceItem )
 		{
-			if( $qty <= $quantity && $qty > $price->getQuantity() && $priceItem->getValue() < $price->getValue() ) {
+			// add $priceItem->getValue() < $price->getValue() to use lowest price regardless of quantity
+			if( $quantity >= $qty && $price->getQuantity() < $qty ) {
 				$price = $priceItem;
 			}
 		}
