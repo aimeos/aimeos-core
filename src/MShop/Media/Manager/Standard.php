@@ -359,6 +359,10 @@ class Standard
 			$item->setUrl( $newPath );
 		}
 
+		if( $fsname !== 'fs-mimeicon' && empty( $previews ) ) {
+			return $this->scale( $item, true );
+		}
+
 		foreach( $previews as $size => $preview )
 		{
 			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
@@ -732,10 +736,6 @@ class Standard
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( strncmp( $item->getMimeType(), 'image/', 6 ) ) {
-			return $item;
-		}
-
 		$context = $this->context();
 		$fsname = $item->getFileSystem();
 
