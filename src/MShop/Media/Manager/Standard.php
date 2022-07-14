@@ -1089,14 +1089,7 @@ class Standard
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item,
 		\Aimeos\Base\Filesystem\Iface $fs ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		$previews = $item->getPreviews();
-
-		// don't delete first (smallest) image because it may be referenced in past orders
-		if( $item->getDomain() === 'product' ) {
-			$previews = array_slice( $previews, 1 );
-		}
-
-		foreach( $previews as $preview )
+		foreach( $this->call( 'removePreviews', $item ) as $preview )
 		{
 			if( $preview && $fs->has( $preview ) ) {
 				$fs->rm( $preview );
@@ -1264,6 +1257,25 @@ class Standard
 		}
 
 		return $mimetype;
+	}
+
+
+	/**
+	 * Returns the preview images to be deleted
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with preview URLs
+	 * @return iterable List of preview URLs to remove
+	 */
+	protected function removePreviews( \Aimeos\MShop\Media\Item\Iface $item ) : iterable
+	{
+		$previews = $item->getPreviews();
+
+		// don't delete first (smallest) image because it may be referenced in past orders
+		if( $item->getDomain() === 'product' ) {
+			$previews = array_slice( $previews, 1 );
+		}
+
+		return $previews;
 	}
 
 
