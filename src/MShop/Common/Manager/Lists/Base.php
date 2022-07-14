@@ -68,6 +68,7 @@ abstract class Base
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
+	 * @deprecated 2023.01
 	 */
 	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
