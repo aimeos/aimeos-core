@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddress()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
+		$search = $this->object->filter()->add( ['order.editor' => 'core', 'order.base.address.type' => 'payment'] );
 		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAddressMultiple()
 	{
 		$cols = ['order.base.address.countryid', 'order.statuspayment'];
-		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
+		$search = $this->object->filter()->add( ['order.editor' => 'core', 'order.base.address.type' => 'payment'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols )->toArray();
 
 		$this->assertEquals( ['DE' => [5 => 1, 6 => 3]], $result );

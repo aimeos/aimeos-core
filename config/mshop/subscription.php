@@ -16,7 +16,6 @@ return array(
 					FROM "mshop_subscription" mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
 					ORDER BY mord.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
@@ -29,7 +28,6 @@ return array(
 					FROM "mshop_subscription" mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
 					ORDER BY mord.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
