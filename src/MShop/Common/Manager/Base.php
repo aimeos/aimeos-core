@@ -306,7 +306,7 @@ abstract class Base
 			$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
 			$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
 			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
-			$sql = str_replace( ':type', $type ?: 'count', $sql );
+			$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
