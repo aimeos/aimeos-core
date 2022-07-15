@@ -421,7 +421,11 @@ class Standard
 	 */
 	public function hasChildren() : bool
 	{
-		return !empty( $this->children );
+		if( count( $this->children ) > 0 ) {
+			return true;
+		}
+
+		return $this->node->hasChildren();
 	}
 
 
