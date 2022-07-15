@@ -766,7 +766,7 @@ class Standard
 	{
 		if( $default !== false )
 		{
-			$object = $this->filterBase( 'text' );
+			$object = $this->filterBase( 'text', $default );
 			$langid = $this->context()->locale()->getLanguageId();
 
 			if( $langid !== null )

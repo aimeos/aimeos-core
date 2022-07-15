@@ -407,7 +407,7 @@ abstract class Base
 	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
 	 * @return \Aimeos\Base\Criteria\Iface Search critery object
 	 */
-	protected function filterBase( string $domain, ?bool $default = true ) : \Aimeos\Base\Criteria\Iface
+	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
 	{
 		$filter = self::filter();
 
@@ -598,12 +598,7 @@ abstract class Base
 	 */
 	protected function getItemBase( string $key, string $id, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->object()->filter( $default )->slice( 0, 1 );
-		$expr = [
-			$criteria->compare( '==', $key, $id ),
-			$criteria->getConditions()
-		];
-		$criteria->setConditions( $criteria->and( $expr ) );
+		$criteria = $this->object()->filter( $default )->add( [$key => $id] )->slice( 0, 1 );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
