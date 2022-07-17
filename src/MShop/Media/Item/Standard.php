@@ -271,6 +271,8 @@ class Standard
 			return '';
 		}
 
+		ksort( $list );
+
 		if( $width === false ) {
 			return (string) reset( $list );
 		} elseif( $width === true ) {
