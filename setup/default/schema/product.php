@@ -54,6 +54,7 @@ return array(
 			$table->index( ['siteid', 'rating'], 'idx_mspro_sid_rating' );
 			$table->index( ['siteid', 'label'], 'idx_mspro_sid_label' );
 			$table->index( ['siteid', 'start'], 'idx_mspro_sid_start' );
+			$table->index( ['siteid', 'type'], 'idx_mspro_sid_type' );
 			$table->index( ['siteid', 'end'], 'idx_mspro_sid_end' );
 		},
 
