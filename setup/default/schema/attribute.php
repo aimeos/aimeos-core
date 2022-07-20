@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msattty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msattty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msattty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msattty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msattty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msattty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msattty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msattty_code_sid' );
 		},
 
 		'mshop_attribute' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -42,12 +42,12 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['domain', 'siteid', 'type', 'code'], 'unq_msatt_dom_sid_type_code' );
+			$table->unique( ['domain', 'type', 'code', 'siteid'], 'unq_msatt_dom_type_code_sid' );
 			$table->index( ['domain', 'siteid', 'status', 'type', 'pos'], 'idx_msatt_dom_sid_stat_typ_pos' );
-			$table->index( ['siteid', 'status'], 'idx_msatt_sid_status' );
-			$table->index( ['siteid', 'label'], 'idx_msatt_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msatt_sid_code' );
-			$table->index( ['siteid', 'type'], 'idx_msatt_sid_type' );
+			$table->index( ['status', 'siteid'], 'idx_msatt_status_sid' );
+			$table->index( ['label', 'siteid'], 'idx_msatt_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msatt_code_sid' );
+			$table->index( ['type', 'siteid'], 'idx_msatt_type_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msatt_key_sid' );
 		},
 
@@ -64,10 +64,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msattlity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msattlity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msattlity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msattlity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msattlity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msattlity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msattlity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msattlity_code_sid' );
 		},
 
 		'mshop_attribute_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -87,7 +87,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msattli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msattli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msattli_key_sid' );
 			$table->index( ['parentid'], 'fk_msattli_pid' );
 
@@ -107,10 +107,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msattprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msattprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msattprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msattprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msattprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msattprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msattprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msattprty_code_sid' );
 		},
 
 		'mshop_attribute_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -126,7 +126,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_msattpr_sid_ty_lid_value' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_msattpr_ty_lid_value_sid' );
 			$table->index( ['key', 'siteid'], 'fk_msattpr_key_sid' );
 			$table->index( ['parentid'], 'fk_msattpr_pid' );
 
