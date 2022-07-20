@@ -20,7 +20,9 @@ return array(
 			$table->string( 'request', 32 )->default( '' );
 			$table->text( 'message', 0x1ffff );
 
-			$table->index( ['siteid', 'timestamp', 'facility', 'priority'], 'idx_malog_sid_time_facility_prio' );
+			$table->index( ['timestamp', 'siteid'], 'idx_malog_time_sid' );
+			$table->index( ['facility', 'siteid'], 'idx_malog_facility_sid' );
+			$table->index( ['priority', 'siteid'], 'idx_malog_prio_sid' );
 		},
 	),
 );
