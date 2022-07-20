@@ -19,8 +19,8 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'ctime'], 'idx_majob_sid_ctime' );
-			$table->index( ['siteid', 'status'], 'idx_majob_sid_status' );
+			$table->index( ['ctime', 'siteid'], 'idx_majob_ctime_sid' );
+			$table->index( ['status', 'siteid'], 'idx_majob_status_sid' );
 		},
 	),
 );
