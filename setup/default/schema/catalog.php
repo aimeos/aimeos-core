@@ -27,9 +27,9 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'code'], 'unq_mscat_sid_code' );
-			$table->index( ['siteid', 'nleft', 'nright', 'level', 'parentid'], 'idx_mscat_sid_nlt_nrt_lvl_pid' );
-			$table->index( ['siteid', 'status'], 'idx_mscat_sid_status' );
+			$table->unique( ['code', 'siteid'], 'unq_mscat_code_sid' );
+			$table->index( ['nleft', 'nright', 'level', 'parentid', 'siteid'], 'idx_mscat_nlt_nrt_lvl_pid_sid' );
+			$table->index( ['status', 'siteid'], 'idx_mscat_status_sid' );
 		},
 
 		'mshop_catalog_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -45,10 +45,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mscatlity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mscatlity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mscatlity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mscatlity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mscatlity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mscatlity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mscatlity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mscatlity_code_sid' );
 		},
 
 		'mshop_catalog_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -68,9 +68,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mscatli_pid_dm_sid_ty_rid' );
-			$table->index( ['parentid', 'domain', 'siteid', 'pos', 'refid'], 'idx_mscatli_pid_dm_sid_pos_rid' );
-			$table->index( ['refid', 'domain', 'siteid', 'type'], 'idx_mscatli_rid_dom_sid_ty' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mscatli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mscatli_key_sid' );
 			$table->index( ['parentid'], 'fk_mscatli_pid' );
 
