@@ -75,10 +75,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['site_id', 'langid', 'currencyid'], 'unq_msloc_sid_lang_curr' );
-			$table->index( ['site_id', 'currencyid'], 'idx_msloc_sid_curid' );
-			$table->index( ['site_id', 'status'], 'idx_msloc_sid_status' );
-			$table->index( ['site_id', 'pos'], 'idx_msloc_sid_pos' );
+			$table->unique( ['langid', 'currencyid', 'site_id'], 'unq_msloc_lang_curr_sid' );
 			$table->index( ['site_id'], 'fk_msloc_siteid' );
 			$table->index( ['langid'], 'fk_msloc_langid' );
 			$table->index( ['currencyid'], 'fk_msloc_currid' );
