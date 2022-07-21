@@ -736,11 +736,10 @@ class Standard
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		$context = $this->context();
-		$fsname = $item->getFileSystem();
-
 		$url = $item->getUrl();
-		$fs = $context->fs( $fsname );
+		$context = $this->context();
+
+		$fs = $context->fs( $item->getFileSystem() );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
 		if( !$force && $is && preg_match( '#^[a-zA-Z]{1,10}://#', $url ) !== 1
@@ -755,18 +754,20 @@ class Standard
 		{
 			$previews = [];
 			$name = basename( $url );
+			$old = $item->getPreviews();
 			$domain = $item->getDomain();
-			$item = $this->deletePreviews( $item, $fs );
 
-			foreach( $this->createPreviews( $media, $item->getDomain(), (string) $item->getType() ) as $mediaFile )
+			foreach( $this->createPreviews( $media, $domain, $item->getType() ) as $width => $mediaFile )
 			{
 				$mime = $this->getMime( $mediaFile );
-				$filepath = $this->getPath( $name, $mime, $domain ?: '-' );
+				$path = $old[$width] ?? $this->getPath( $name, $mime, $domain ?: '-' );
 
-				$this->store( $mediaFile->save( null, $mime ), $filepath, $fs );
-				$previews[$mediaFile->getWidth()] = $filepath;
+				$this->store( $mediaFile->save( null, $mime ), $path, $fs );
+				$previews[$width] = $path;
+				unset( $old[$width] );
 			}
 
+			$item = $this->deletePreviews( $item, $old );
 			$item->setPreviews( $previews );
 		}
 
@@ -1072,7 +1073,9 @@ class Standard
 			$maxwidth = $entry['maxwidth'] ?? null;
 			$maxheight = $entry['maxwidth'] ?? null;
 
-			$list[] = $media->scale( $maxwidth, $maxheight, $entry['force-size'] ?? 0 );
+			$file = $media->scale( $maxwidth, $maxheight, $entry['force-size'] ?? 0 );
+			$width = $file->getWidth();
+			$list[$width] = $file;
 		}
 
 		return $list;
@@ -1083,20 +1086,24 @@ class Standard
 	 * Removes the previes images from the storage
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
-	 * @param \Aimeos\Base\Filesystem\Iface $fs File system where the files are stored
+	 * @param array List of preview paths to remove
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item with preview images removed
 	 */
-	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item,
-		\Aimeos\Base\Filesystem\Iface $fs ) : \Aimeos\MShop\Media\Item\Iface
+	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		foreach( $this->call( 'removePreviews', $item ) as $preview )
+		if( !empty( $this->call( 'removePreviews', $item, $paths ) ) )
 		{
-			if( $preview && $fs->has( $preview ) ) {
-				$fs->rm( $preview );
+			$fs = $this->context()->fs( $item->getFileSystem() );
+
+			foreach( $previews as $preview )
+			{
+				if( $preview && $fs->has( $preview ) ) {
+					$fs->rm( $preview );
+				}
 			}
 		}
 
-		return $item->setPreviews( [] );
+		return $item;
 	}
 
 
@@ -1263,19 +1270,18 @@ class Standard
 	/**
 	 * Returns the preview images to be deleted
 	 *
-	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with preview URLs
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
+	 * @param array List of preview paths to remove
 	 * @return iterable List of preview URLs to remove
 	 */
-	protected function removePreviews( \Aimeos\MShop\Media\Item\Iface $item ) : iterable
+	protected function removePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : iterable
 	{
-		$previews = $item->getPreviews();
-
 		// don't delete first (smallest) image because it may be referenced in past orders
 		if( $item->getDomain() === 'product' ) {
-			$previews = array_slice( $previews, 1 );
+			return array_slice( $paths, 1 );
 		}
 
-		return $previews;
+		return $paths;
 	}
 
 
