@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mspluty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mspluty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mspluty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mspluty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mspluty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mspluty_status_pos_sid' );
+			$table->index( ['label', 'siteid'], 'idx_mspluty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mspluty_code_sid' );
 		},
 
 		'mshop_plugin' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -41,11 +41,11 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'type', 'provider'], 'unq_msplu_sid_ty_prov' );
-			$table->index( ['siteid', 'provider'], 'idx_msplu_sid_prov' );
-			$table->index( ['siteid', 'status'], 'idx_msplu_sid_status' );
-			$table->index( ['siteid', 'label'], 'idx_msplu_sid_label' );
-			$table->index( ['siteid', 'pos'], 'idx_msplu_sid_pos' );
+			$table->unique( ['type', 'provider', 'siteid'], 'unq_msplu_ty_prov_sid' );
+			$table->index( ['provider', 'siteid'], 'idx_msplu_prov_sid' );
+			$table->index( ['status', 'siteid'], 'idx_msplu_status_sid' );
+			$table->index( ['label', 'siteid'], 'idx_msplu_label_sid' );
+			$table->index( ['pos', 'siteid'], 'idx_msplu_pos_sid' );
 		},
 	),
 );
