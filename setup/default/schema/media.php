@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msmedty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msmedty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msmedty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msmedty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msmedty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msmedty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msmedty_code_sid' );
 		},
 
 		'mshop_media' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -44,10 +44,9 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'domain', 'langid'], 'idx_msmed_sid_dom_langid' );
-			$table->index( ['siteid', 'domain', 'label'], 'idx_msmed_sid_dom_label' );
-			$table->index( ['siteid', 'domain', 'mimetype'], 'idx_msmed_sid_dom_mime' );
-			$table->index( ['siteid', 'domain', 'link'], 'idx_msmed_sid_dom_link' );
+			$table->index( ['domain', 'mimetype', 'siteid'], 'idx_msmed_dom_mime_sid' );
+			$table->index( ['label', 'siteid'], 'idx_msmed_label_sid' );
+			$table->index( ['link', 'siteid'], 'idx_msmed_link_sid' );
 		},
 
 		'mshop_media_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -63,10 +62,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedlity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msmedlity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msmedlity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msmedlity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msmedlity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msmedlity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msmedlity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msmedlity_code_sid' );
 		},
 
 		'mshop_media_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -86,7 +85,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msmedli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msmedli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msmedli_key_sid' );
 			$table->index( ['parentid'], 'fk_msmedli_pid' );
 
@@ -106,10 +105,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msmedprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msmedprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msmedprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msmedprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msmedprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msmedprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msmedprty_code_sid' );
 		},
 
 		'mshop_media_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -125,7 +124,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_msmedpr_sid_ty_lid_value' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_msmedpr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'fk_msmedpr_key_sid' );
 			$table->index( ['parentid'], 'fk_msmedpr_pid' );
 
