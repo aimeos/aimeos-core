@@ -29,7 +29,7 @@ return array(
 
 			$table->index( ['customerid', 'sitecode'], 'idx_msordba_custid_scode' );
 			$table->index( ['customerid', 'siteid'], 'idx_msordba_custid_sid' );
-			$table->index( ['siteid', 'ctime'], 'idx_msordba_sid_ctime' );
+			$table->index( ['ctime', 'siteid'], 'idx_msordba_ctime_sid' );
 		},
 
 		'mshop_order_base_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -66,12 +66,11 @@ return array(
 			$table->meta();
 
 			$table->unique( ['baseid', 'type'], 'unq_msordbaad_bid_type' );
-			$table->index( ['siteid', 'baseid', 'type'], 'idx_msordbaad_sid_bid_typ' );
-			$table->index( ['baseid', 'siteid', 'lastname'], 'idx_msordbaad_bid_sid_lname' );
-			$table->index( ['baseid', 'siteid', 'address1'], 'idx_msordbaad_bid_sid_addr1' );
-			$table->index( ['baseid', 'siteid', 'postal'], 'idx_msordbaad_bid_sid_postal' );
-			$table->index( ['baseid', 'siteid', 'city'], 'idx_msordbaad_bid_sid_city' );
-			$table->index( ['baseid', 'siteid', 'email'], 'idx_msordbaad_bid_sid_email' );
+			$table->index( ['baseid', 'lastname'], 'idx_msordbaad_bid_lname' );
+			$table->index( ['baseid', 'address1'], 'idx_msordbaad_bid_addr1' );
+			$table->index( ['baseid', 'postal'], 'idx_msordbaad_bid_postal' );
+			$table->index( ['baseid', 'city'], 'idx_msordbaad_bid_city' );
+			$table->index( ['baseid', 'email'], 'idx_msordbaad_bid_email' );
 			$table->index( ['baseid'], 'fk_msordbaad_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaad_baseid' );
@@ -115,10 +114,10 @@ return array(
 			$table->meta();
 
 			$table->unique( ['baseid', 'pos'], 'unq_msordbapr_bid_pos' );
-			$table->index( ['baseid', 'siteid', 'prodid'], 'idx_msordbapr_bid_sid_pid' );
-			$table->index( ['baseid', 'siteid', 'prodcode'], 'idx_msordbapr_bid_sid_pcd' );
-			$table->index( ['baseid', 'siteid', 'qtyopen'], 'idx_msordbapr_bid_sid_qtyo' );
-			$table->index( ['ctime', 'siteid', 'prodid', 'baseid'], 'idx_msordbapr_ct_sid_pid_bid' );
+			$table->index( ['baseid', 'prodid'], 'idx_msordbapr_bid_pid' );
+			$table->index( ['baseid', 'prodcode'], 'idx_msordbapr_bid_pcd' );
+			$table->index( ['baseid', 'qtyopen'], 'idx_msordbapr_bid_qtyo' );
+			$table->index( ['ctime', 'prodid', 'baseid'], 'idx_msordbapr_ct_pid_bid' );
 			$table->index( ['baseid'], 'fk_msordbapr_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbapr_baseid' );
@@ -168,8 +167,8 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->unique( ['baseid', 'siteid', 'code', 'type'], 'unq_msordbase_bid_sid_cd_typ' );
-			$table->index( ['siteid', 'code', 'type'], 'idx_msordbase_sid_code_type' );
+			$table->unique( ['baseid', 'code', 'type', 'siteid'], 'unq_msordbase_bid_cd_typ_sid' );
+			$table->index( ['code', 'type', 'siteid'], 'idx_msordbase_code_type_sid' );
 			$table->index( ['baseid'], 'fk_msordbase_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbase_baseid' );
@@ -208,7 +207,7 @@ return array(
 			$table->code();
 			$table->meta();
 
-			$table->index( ['baseid', 'siteid', 'code'], 'idx_msordbaco_bid_sid_code' );
+			$table->index( ['baseid', 'code'], 'idx_msordbaco_bid_code' );
 			$table->index( ['baseid'], 'fk_msordbaco_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaco_baseid' );
@@ -234,19 +233,19 @@ return array(
 			$table->string( 'chour', 2 )->default( '' );
 			$table->meta();
 
-			$table->index( ['siteid', 'channel'], 'idx_msord_sid_channel' );
-			$table->index( ['siteid', 'ctime', 'statuspayment'], 'idx_msord_sid_ctime_pstat' );
-			$table->index( ['siteid', 'mtime', 'statuspayment'], 'idx_msord_sid_mtime_pstat' );
-			$table->index( ['siteid', 'mtime', 'statusdelivery'], 'idx_msord_sid_mtime_dstat' );
-			$table->index( ['siteid', 'statusdelivery'], 'idx_msord_sid_dstatus' );
-			$table->index( ['siteid', 'datedelivery'], 'idx_msord_sid_ddate' );
-			$table->index( ['siteid', 'datepayment'], 'idx_msord_sid_pdate' );
-			$table->index( ['siteid', 'editor'], 'idx_msord_sid_editor' );
-			$table->index( ['siteid', 'cdate'], 'idx_msord_sid_cdate' );
-			$table->index( ['siteid', 'cmonth'], 'idx_msord_sid_cmonth' );
-			$table->index( ['siteid', 'cweek'], 'idx_msord_sid_cweek' );
-			$table->index( ['siteid', 'cwday'], 'idx_msord_sid_cwday' );
-			$table->index( ['siteid', 'chour'], 'idx_msord_sid_chour' );
+			$table->index( ['channel', 'siteid'], 'idx_msord_channel_sid' );
+			$table->index( ['ctime', 'statuspayment', 'siteid'], 'idx_msord_ctime_pstat_sid' );
+			$table->index( ['mtime', 'statuspayment', 'siteid'], 'idx_msord_mtime_pstat_sid' );
+			$table->index( ['mtime', 'statusdelivery', 'siteid'], 'idx_msord_mtime_dstat_sid' );
+			$table->index( ['statusdelivery', 'siteid'], 'idx_msord_dstat_sid' );
+			$table->index( ['datedelivery', 'siteid'], 'idx_msord_ddate_sid' );
+			$table->index( ['datepayment', 'siteid'], 'idx_msord_pdate_sid' );
+			$table->index( ['editor', 'siteid'], 'idx_msord_editor_sid' );
+			$table->index( ['cdate', 'siteid'], 'idx_msord_cdate_sid' );
+			$table->index( ['cmonth', 'siteid'], 'idx_msord_cmonth_sid' );
+			$table->index( ['cweek', 'siteid'], 'idx_msord_cweek_sid' );
+			$table->index( ['cwday', 'siteid'], 'idx_msord_cwday_sid' );
+			$table->index( ['chour', 'siteid'], 'idx_msord_chour_sid' );
 			$table->index( ['baseid'], 'fk_msord_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msord_baseid' );
@@ -263,7 +262,7 @@ return array(
 			$table->string( 'value', 64 );
 			$table->meta();
 
-			$table->index( ['siteid', 'parentid', 'type', 'value'], 'idx_msordstatus_val_sid' );
+			$table->index( ['parentid', 'type', 'value', 'siteid'], 'idx_msordst_pid_typ_val_sid' );
 			$table->index( ['parentid'], 'fk_msordst_pid' );
 
 			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordst_pid' );
