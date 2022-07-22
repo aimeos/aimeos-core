@@ -240,8 +240,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getMimeType(), $itemSaved->getMimeType() );
 		$this->assertEquals( $item->getUrl(), $itemSaved->getUrl() );
-		$this->assertEquals( $item->getPreview(), $itemSaved->getPreview() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
+		$this->assertEquals( 0, strncmp( $item->getPreview(), $itemSaved->getPreview(), 19 ) );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -256,8 +256,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getMimeType(), $itemUpd->getMimeType() );
 		$this->assertEquals( $itemExp->getUrl(), $itemUpd->getUrl() );
-		$this->assertEquals( $itemExp->getPreview(), $itemUpd->getPreview() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
+		$this->assertEquals( 0, strncmp( $itemExp->getPreview(), $itemUpd->getPreview(), 16 ) );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

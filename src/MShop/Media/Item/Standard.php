@@ -272,13 +272,14 @@ class Standard
 		}
 
 		ksort( $list );
+		$time = $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
 
 		if( $width === false ) {
-			return (string) reset( $list );
+			return (string) reset( $list ) . $time;
 		} elseif( $width === true ) {
-			return (string) end( $list );
+			return (string) end( $list ) . $time;
 		} elseif( isset( $list[$width] ) ) {
-			return (string) $list[$width];
+			return (string) $list[$width] . $time;
 		}
 
 		$before = $after = [];
@@ -293,9 +294,9 @@ class Standard
 		}
 
 		if( ( $path = array_shift( $after ) ) !== null ) {
-			return (string) $path;
+			return (string) $path . $time;
 		} elseif( ( $path = array_pop( $before ) ) !== null ) {
-			return (string) $path;
+			return (string) $path . $time;
 		}
 
 		return '';
@@ -307,9 +308,20 @@ class Standard
 	 *
 	 * @return array Associative list of widths in pixels as keys and urls as values
 	 */
-	public function getPreviews() : array
+	public function getPreviews( bool $version = false ) : array
 	{
-		return (array) $this->get( 'media.previews', [] );
+		$previews = (array) $this->get( 'media.previews', [] );
+
+		if( $version )
+		{
+			$time = $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
+
+			foreach( $previews as $key => $path ) {
+				$previews[$key] = $path . $time;
+			}
+		}
+
+		return $previews;
 	}
 
 

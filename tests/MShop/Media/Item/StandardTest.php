@@ -197,11 +197,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPreview()
 	{
-		$this->assertEquals( '/directory/test.jpg', $this->object->getPreview() );
-		$this->assertEquals( '/directory/test.jpg', $this->object->getPreview( 100 ) );
-		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( true ) );
-		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( 150 ) );
-		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( 250 ) );
+		$this->assertStringStartsWith( '/directory/test.jpg', $this->object->getPreview() );
+		$this->assertStringStartsWith( '/directory/test.jpg', $this->object->getPreview( 100 ) );
+		$this->assertStringStartsWith( '/directory/test2.jpg', $this->object->getPreview( true ) );
+		$this->assertStringStartsWith( '/directory/test2.jpg', $this->object->getPreview( 150 ) );
+		$this->assertStringStartsWith( '/directory/test2.jpg', $this->object->getPreview( 250 ) );
 	}
 
 
@@ -211,13 +211,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPreviewsVersion()
+	{
+		$expected = [100 => '/directory/test.jpg', 200 => '/directory/test2.jpg'];
+
+		foreach( $this->object->getPreviews() as $key => $path ) {
+			$this->assertStringStartsWith( $expected[$key], $path );
+		}
+	}
+
+
 	public function testSetPreview()
 	{
 		$return = $this->object->setPreview( '/pictures/category.jpg' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
+		$this->assertStringStartsWith( '/pictures/category.jpg', $this->object->getPreview() );
 		$this->assertEquals( [1 => '/pictures/category.jpg'], $this->object->getPreviews() );
-		$this->assertEquals( '/pictures/category.jpg', $this->object->getPreview() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
