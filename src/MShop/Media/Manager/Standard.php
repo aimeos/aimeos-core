@@ -1091,11 +1091,11 @@ class Standard
 	 */
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( !empty( $this->call( 'removePreviews', $item, $paths ) ) )
+		if( !empty( $paths = $this->call( 'removePreviews', $item, $paths ) ) )
 		{
 			$fs = $this->context()->fs( $item->getFileSystem() );
 
-			foreach( $previews as $preview )
+			foreach( $paths as $preview )
 			{
 				if( $preview && $fs->has( $preview ) ) {
 					$fs->rm( $preview );
@@ -1276,8 +1276,10 @@ class Standard
 	 */
 	protected function removePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : iterable
 	{
+		$previews = $item->getPreviews();
+
 		// don't delete first (smallest) image because it may be referenced in past orders
-		if( $item->getDomain() === 'product' ) {
+		if( $item->getDomain() === 'product' && in_array( key( $previews ), $paths ) ) {
 			return array_slice( $paths, 1 );
 		}
 
