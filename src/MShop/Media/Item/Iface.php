@@ -95,6 +95,7 @@ interface Iface
 	 * Returns all preview urls of the media item
 	 *
 	 * @return array Associative list of widths in pixels as keys and urls as values
+	 * @todo 2023.01 Add version parameter
 	 */
 	public function getPreviews() : array;
 
@@ -118,6 +119,7 @@ interface Iface
 	 * Returns the url of the media item.
 	 *
 	 * @return string|null URL of the media file
+	 * @todo 2023.01 Add version parameter
 	 */
 	public function getUrl() : string;
 

@@ -185,6 +185,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetUrlVersion()
+	{
+		$this->assertStringStartsWith( 'http://www.url.com/test.jpg?v=', $this->object->getUrl( true ) );
+	}
+
+
 	public function testSetUrl()
 	{
 		$return = $this->object->setUrl( null )->setUrl( '/pictures/category.jpg' );
@@ -213,9 +219,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPreviewsVersion()
 	{
-		$expected = [100 => '/directory/test.jpg', 200 => '/directory/test2.jpg'];
+		$expected = [100 => '/directory/test.jpg?v=', 200 => '/directory/test2.jpg?v='];
 
-		foreach( $this->object->getPreviews() as $key => $path ) {
+		foreach( $this->object->getPreviews( true ) as $key => $path ) {
 			$this->assertStringStartsWith( $expected[$key], $path );
 		}
 	}

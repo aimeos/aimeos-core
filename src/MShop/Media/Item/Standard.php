@@ -239,11 +239,18 @@ class Standard
 	/**
 	 * Returns the url of the media item.
 	 *
+	 * @param bool $version TRUE to add file version as parameter, FALSE for path only
 	 * @return string URL of the media file
 	 */
-	public function getUrl() : string
+	public function getUrl( bool $version = false ) : string
 	{
-		return (string) $this->get( 'media.url', '' );
+		$url = (string) $this->get( 'media.url', '' );
+
+		if( $version ) {
+			$url .= $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
+		}
+
+		return $url;
 	}
 
 
@@ -306,6 +313,7 @@ class Standard
 	/**
 	 * Returns all preview urls for images of different sizes.
 	 *
+	 * @param bool $version TRUE to add file version as parameter, FALSE for path only
 	 * @return array Associative list of widths in pixels as keys and urls as values
 	 */
 	public function getPreviews( bool $version = false ) : array
