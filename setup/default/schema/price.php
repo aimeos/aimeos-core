@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msprity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msprity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msprity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msprity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msprity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msprity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msprity_code_sid' );
 		},
 
 		'mshop_price' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -45,11 +45,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'domain', 'currencyid'], 'idx_mspri_sid_dom_currid' );
-			$table->index( ['siteid', 'domain', 'quantity'], 'idx_mspri_sid_dom_quantity' );
-			$table->index( ['siteid', 'domain', 'value'], 'idx_mspri_sid_dom_value' );
-			$table->index( ['siteid', 'domain', 'costs'], 'idx_mspri_sid_dom_costs' );
-			$table->index( ['siteid', 'domain', 'rebate'], 'idx_mspri_sid_dom_rebate' );
+			$table->index( ['domain', 'currencyid', 'value', 'siteid'], 'idx_mspri_dom_cid_val_sid' );
 		},
 
 		'mshop_price_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -65,10 +61,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprility_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msprility_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msprility_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msprility_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msprility_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msprility_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msprility_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msprility_code_sid' );
 		},
 
 		'mshop_price_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -88,7 +84,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msprili_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msprili_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msprili_key_sid' );
 			$table->index( ['parentid'], 'fk_msprili_pid' );
 
@@ -108,10 +104,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mspriprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mspriprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mspriprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mspriprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mspriprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mspriprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mspriprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mspriprty_code_sid' );
 		},
 
 		'mshop_price_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -127,7 +123,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_mspripr_sid_ty_lid_value' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mspripr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'fk_mspripr_key_sid' );
 			$table->index( ['parentid'], 'fk_mspripr_pid' );
 
