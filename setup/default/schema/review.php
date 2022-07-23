@@ -25,11 +25,11 @@ return array(
 			$table->text( 'response' )->default( '' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'customerid', 'domain', 'refid'], 'unq_msrev_sid_cid_dom_rid' );
-			$table->index( ['siteid', 'domain', 'refid', 'status', 'ctime'], 'idx_msrev_sid_dom_rid_sta_ct' );
-			$table->index( ['siteid', 'domain', 'refid', 'status', 'rating'], 'idx_msrev_sid_dom_rid_sta_rate' );
-			$table->index( ['siteid', 'domain', 'customerid', 'mtime'], 'idx_msrev_sid_dom_cid_mt' );
-			$table->index( ['siteid', 'rating', 'domain'], 'idx_msrev_sid_rate_dom' );
+			$table->unique( ['customerid', 'domain', 'refid', 'siteid'], 'unq_msrev_cid_dom_rid_sid' );
+			$table->index( ['domain', 'refid', 'status', 'ctime', 'siteid'], 'idx_msrev_dom_rid_sta_ct_sid' );
+			$table->index( ['domain', 'refid', 'status', 'rating', 'siteid'], 'idx_msrev_dom_rid_sta_rate_sid' );
+			$table->index( ['domain', 'customerid', 'mtime', 'siteid'], 'idx_msrev_dom_cid_mt_sid' );
+			$table->index( ['rating', 'domain', 'siteid'], 'idx_msrev_rate_dom_sid' );
 		},
 	),
 );
