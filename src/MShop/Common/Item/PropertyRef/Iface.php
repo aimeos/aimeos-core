@@ -63,6 +63,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param string $type Type of the properties
 	 * @return \Aimeos\Map List of property values
+	 * @todo 2023.01 Add $active parameter to interface
 	 */
 	public function getProperties( string $type ) : \Aimeos\Map;
 

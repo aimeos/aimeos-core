@@ -135,13 +135,14 @@ trait Traits
 	 * Returns the property values for the given type
 	 *
 	 * @param string $type Type of the properties
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\Map List of property values
 	 */
-	public function getProperties( string $type ) : \Aimeos\Map
+	public function getProperties( string $type, bool $active = true ) : \Aimeos\Map
 	{
 		$list = [];
 
-		foreach( $this->getPropertyItems( $type ) as $id => $item ) {
+		foreach( $this->getPropertyItems( $type, $active ) as $id => $item ) {
 			$list[$id] = $item->getValue();
 		}
 
