@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msproty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msproty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msproty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msproty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msproty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msproty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msproty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msproty_code_sid' );
 		},
 
 		'mshop_product' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -48,14 +48,14 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'code'], 'unq_mspro_siteid_code' );
-			$table->index( ['id', 'siteid', 'status', 'start', 'end', 'rating'], 'idx_mspro_id_sid_stat_st_end_rt' );
-			$table->index( ['siteid', 'status', 'start', 'end', 'rating'], 'idx_mspro_sid_stat_st_end_rt' );
-			$table->index( ['siteid', 'rating'], 'idx_mspro_sid_rating' );
-			$table->index( ['siteid', 'label'], 'idx_mspro_sid_label' );
-			$table->index( ['siteid', 'start'], 'idx_mspro_sid_start' );
-			$table->index( ['siteid', 'type'], 'idx_mspro_sid_type' );
-			$table->index( ['siteid', 'end'], 'idx_mspro_sid_end' );
+			$table->unique( ['code', 'siteid'], 'unq_mspro_siteid_code_sid' );
+			$table->index( ['id', 'status', 'start', 'end', 'rating', 'siteid'], 'idx_mspro_id_stat_st_end_rt_sid' );
+			$table->index( ['status', 'start', 'end', 'rating', 'siteid'], 'idx_mspro_stat_st_end_rt_sid' );
+			$table->index( ['rating', 'siteid'], 'idx_mspro_rating_sid' );
+			$table->index( ['label', 'siteid'], 'idx_mspro_label_sid' );
+			$table->index( ['start', 'siteid'], 'idx_mspro_start_sid' );
+			$table->index( ['type', 'siteid'], 'idx_mspro_type_sid' );
+			$table->index( ['end', 'siteid'], 'idx_mspro_end_sid' );
 		},
 
 		'mshop_product_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -71,10 +71,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprolity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msprolity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msprolity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msprolity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msprolity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msprolity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msprolity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msprolity_code_sid' );
 		},
 
 		'mshop_product_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -94,7 +94,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msproli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msproli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msproli_key_sid' );
 			$table->index( ['parentid'], 'fk_msproli_pid' );
 
@@ -114,10 +114,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msproprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msproprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msproprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msproprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msproprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msproprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msproprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msproprty_code_sid' );
 		},
 
 		'mshop_product_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -133,7 +133,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_mspropr_sid_ty_lid_value' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mspropr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'fk_mspropr_key_sid' );
 			$table->index( ['parentid'], 'fk_mspropr_pid' );
 
