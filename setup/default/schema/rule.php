@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msrulty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msrulty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msrulty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msrulty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msrulty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msrulty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msrulty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msrulty_code_sid' );
 		},
 
 		'mshop_rule' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -42,12 +42,12 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'provider'], 'idx_msrul_sid_prov' );
-			$table->index( ['siteid', 'status'], 'idx_msrul_sid_status' );
-			$table->index( ['siteid', 'label'], 'idx_msrul_sid_label' );
-			$table->index( ['siteid', 'pos'], 'idx_msrul_sid_pos' );
-			$table->index( ['siteid', 'start'], 'idx_msrul_sid_start' );
-			$table->index( ['siteid', 'end'], 'idx_msrul_sid_end' );
+			$table->index( ['provider', 'siteid'], 'idx_msrul_prov_sid' );
+			$table->index( ['status', 'siteid'], 'idx_msrul_status_sid' );
+			$table->index( ['label', 'siteid'], 'idx_msrul_label_sid' );
+			$table->index( ['pos', 'siteid'], 'idx_msrul_pos_sid' );
+			$table->index( ['start', 'siteid'], 'idx_msrul_start_sid' );
+			$table->index( ['end', 'siteid'], 'idx_msrul_end_sid' );
 		},
 	),
 );
