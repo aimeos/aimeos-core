@@ -20,9 +20,9 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'code'], 'unq_mssup_sid_code' );
+			$table->unique( ['code', 'siteid'], 'unq_mssup_code_sid' );
+			$table->index( ['label', 'siteid'], 'idx_mssup_label_sid' );
 			$table->index( ['siteid', 'status'], 'idx_mssup_sid_status' );
-			$table->index( ['siteid', 'label'], 'idx_mssup_sid_label' );
 		},
 
 		'mshop_supplier_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -56,7 +56,6 @@ return array(
 			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->index( ['siteid', 'parentid'], 'idx_mssupad_sid_rid' );
 			$table->index( ['parentid'], 'fk_mssupad_pid' );
 
 			$table->foreign( 'parentid', 'mshop_supplier', 'id', 'fk_mssupad_pid' );
@@ -75,10 +74,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mssuplity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mssuplity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mssuplity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mssuplity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mssuplity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mssuplity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mssuplity_sid_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mssuplity_sid_code_sid' );
 		},
 
 		'mshop_supplier_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -98,9 +97,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mssupli_pid_dm_sid_ty_rid' );
-			$table->index( ['parentid', 'domain', 'siteid', 'pos', 'refid'], 'idx_mssupli_pid_dm_sid_pos_rid' );
-			$table->index( ['refid', 'domain', 'siteid', 'type'], 'idx_mssupli_rid_dom_sid_ty' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mssupli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mssupli_key_sid' );
 			$table->index( ['parentid'], 'fk_mssupli_pid' );
 
