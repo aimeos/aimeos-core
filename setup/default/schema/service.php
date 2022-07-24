@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msserty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msserty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msserty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msserty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msserty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msserty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msserty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msserty_code_sid' );
 		},
 
 		'mshop_service' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -43,12 +43,12 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'code'], 'unq_msser_siteid_code' );
-			$table->index( ['siteid', 'status', 'start', 'end'], 'idx_msser_sid_stat_start_end' );
-			$table->index( ['siteid', 'provider'], 'idx_msser_sid_prov' );
-			$table->index( ['siteid', 'code'], 'idx_msser_sid_code' );
-			$table->index( ['siteid', 'label'], 'idx_msser_sid_label' );
-			$table->index( ['siteid', 'pos'], 'idx_msser_sid_pos' );
+			$table->unique( ['code', 'siteid'], 'unq_msser_siteid_code_sid' );
+			$table->index( ['status', 'start', 'end', 'siteid'], 'idx_msser_stat_start_end_sid' );
+			$table->index( ['provider', 'siteid'], 'idx_msser_prov_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msser_code_sid' );
+			$table->index( ['label', 'siteid'], 'idx_msser_label_sid' );
+			$table->index( ['pos', 'siteid'], 'idx_msser_pos_sid' );
 		},
 
 		'mshop_service_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -64,10 +64,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msserlity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msserlity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msserlity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msserlity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msserlity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msserlity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msserlity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msserlity_code_sid' );
 		},
 
 		'mshop_service_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -87,7 +87,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msserli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msserli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msserli_key_sid' );
 			$table->index( ['parentid'], 'fk_msserli_pid' );
 
