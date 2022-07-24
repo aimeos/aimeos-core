@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_msstoty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_msstoty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_msstoty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_msstoty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_msstoty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_msstoty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_msstoty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_msstoty_code_sid' );
 		},
 
 		'mshop_stock' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -40,9 +40,9 @@ return array(
 			$table->string( 'timeframe', 16 )->default( '' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'prodid', 'type'], 'unq_mssto_sid_pid_ty' );
-			$table->index( ['siteid', 'stocklevel'], 'idx_mssto_sid_stocklevel' );
-			$table->index( ['siteid', 'backdate'], 'idx_mssto_sid_backdate' );
+			$table->unique( ['prodid', 'type', 'siteid'], 'unq_mssto_pid_ty_sid' );
+			$table->index( ['stocklevel', 'siteid'], 'idx_mssto_stocklevel_sid' );
+			$table->index( ['backdate', 'siteid'], 'idx_mssto_backdate_sid' );
 		},
 	),
 );
