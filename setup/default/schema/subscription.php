@@ -27,10 +27,10 @@ return array(
 			$table->smallint( 'status' )->default( 0 );
 			$table->meta();
 
-			$table->index( ['siteid', 'next', 'status'], 'idx_mssub_sid_next_stat' );
-			$table->index( ['siteid', 'baseid'], 'idx_mssub_sid_baseid' );
-			$table->index( ['siteid', 'ordprodid'], 'idx_mssub_sid_opid' );
-			$table->index( ['siteid', 'productid', 'period'], 'idx_mssub_sid_pid_period' );
+			$table->index( ['productid', 'period', 'siteid'], 'idx_mssub_pid_period_sid' );
+			$table->index( ['next', 'status', 'siteid'], 'idx_mssub_next_stat_sid' );
+			$table->index( ['ordprodid'], 'idx_mssub_opid' );
+			$table->index( ['baseid'], 'idx_mssub_baseid' );
 		},
 	),
 );
