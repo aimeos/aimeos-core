@@ -176,7 +176,6 @@ return array(
 						mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
 						mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
 					FROM "mshop_catalog_list" mcatli
-					USE INDEX (unq_mscatli_pid_dm_ty_rid_sid, idx_mscatli_key_sid)
 					:joins
 					WHERE :cond
 					ORDER BY :order
