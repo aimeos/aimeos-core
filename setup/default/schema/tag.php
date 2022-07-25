@@ -21,10 +21,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstagty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mstagty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mstagty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mstagty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mstagty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mstagty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mstagty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mstagty_code_sid' );
 		},
 
 		'mshop_tag' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -39,9 +39,9 @@ return array(
 			$table->string( 'label' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'type', 'langid', 'label'], 'unq_mstag_sid_dom_ty_lid_lab' );
-			$table->index( ['siteid', 'domain', 'langid'], 'idx_mstag_sid_dom_langid' );
-			$table->index( ['siteid', 'domain', 'label'], 'idx_mstag_sid_dom_label' );
+			$table->unique( ['domain', 'type', 'langid', 'label', 'siteid'], 'unq_mstag_dom_ty_lid_lab_sid' );
+			$table->index( ['langid', 'domain', 'siteid'], 'idx_mstag_dom_langid_sid' );
+			$table->index( ['label', 'domain', 'siteid'], 'idx_mstag_dom_label_sid' );
 		},
 	),
 );
