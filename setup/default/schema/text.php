@@ -8,11 +8,6 @@
 
 return array(
 
-	'exclude' => array(
-		'idx_mstex_sid_dom_cont',
-	),
-
-
 	'table' => array(
 		'mshop_text_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
@@ -27,10 +22,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mstexty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mstexty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mstexty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mstexty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mstexty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mstexty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mstexty_code_sid' );
 		},
 
 		'mshop_text' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -47,9 +42,9 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'domain', 'status'], 'idx_mstex_sid_domain_status' );
-			$table->index( ['siteid', 'domain', 'langid'], 'idx_mstex_sid_domain_langid' );
-			$table->index( ['siteid', 'domain', 'label'], 'idx_mstex_sid_dom_label' );
+			$table->index( ['domain', 'status', 'siteid'], 'idx_mstex_dom_stat_sid' );
+			$table->index( ['langid', 'siteid'], 'idx_mstex_langid_sid' );
+			$table->index( ['label', 'siteid'], 'idx_mstex_label_sid' );
 		},
 
 		'mshop_text_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -65,10 +60,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexlity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_mstexlity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_mstexlity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_mstexlity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mstexlity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mstexlity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mstexlity_label' );
+			$table->index( ['code', 'siteid'], 'idx_mstexlity_code' );
 		},
 
 		'mshop_text_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -88,7 +83,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mstexli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mstexli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mstexli_key_sid' );
 			$table->index( ['parentid'], 'fk_mstexli_pid' );
 
