@@ -41,6 +41,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testDeleteItems()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
+
+		$item = $this->object->create()->setUrl( 'test.jpg' )->setPreviews( [1 => 'test-1.jpg'] );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [$item] ) );
 	}
 
 

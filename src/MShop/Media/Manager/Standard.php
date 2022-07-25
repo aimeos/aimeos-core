@@ -393,10 +393,10 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Media\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/media/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -428,9 +428,23 @@ class Standard
 		 * @see mshop/media/manager/search/ansi
 		 * @see mshop/media/manager/count/ansi
 		 */
-		$path = 'mshop/media/manager/delete';
+		$cfgpath = 'mshop/media/manager/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
+		$fs = $this->context()->fs( 'fs-media' );
+
+		foreach( map( $items ) as $item )
+		{
+			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
+			{
+				if( ( $path = $item->getUrl() ) && $fs->has( $path ) ) {
+					$fs->rm( $path );
+				}
+
+				$this->deletePreviews( $item, $item->getPreviews() );
+			}
+		}
+
+		return $this->deleteItemsBase( $items, $cfgpath )->deleteRefItems( $items );
 	}
 
 
