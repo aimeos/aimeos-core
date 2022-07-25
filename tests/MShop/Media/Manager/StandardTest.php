@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
 
-		$item = $this->object->create()->setUrl( 'test.jpg' )->setPreviews( [1 => 'test-1.jpg'] );
+		$item = $this->object->create()->setUrl( 'test.jpg' )->setPreviews( [1 => 'test-1.jpg'] )->setId( -1 );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [$item] ) );
 	}
 
