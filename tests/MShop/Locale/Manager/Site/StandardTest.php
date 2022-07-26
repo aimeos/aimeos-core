@@ -140,6 +140,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRate()
+	{
+		$item = $this->object->find( 'unittest' );
+		$result = $this->object->rate( $item->getId(), '4.00', 5 );
+		$item2 = $this->object->find( 'unittest' );
+
+		$this->object->rate( $item->getId(), $item->getRating(), $item->getRatings() );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $result );
+		$this->assertEquals( '4.00', $item2->getRating() );
+		$this->assertEquals( 5, $item2->getRatings() );
+	}
+
+
 	public function testSearchItems()
 	{
 		$siteid = $this->context->locale()->getSiteId();
@@ -154,6 +168,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '=~', 'locale.site.config', '{' );
 		$expr[] = $search->compare( '==', 'locale.site.icon', 'path/to/site-icon.png' );
 		$expr[] = $search->compare( '=~', 'locale.site.logo', '{' );
+		$expr[] = $search->compare( '==', 'locale.site.rating', '0.00' );
+		$expr[] = $search->compare( '==', 'locale.site.ratings', 0 );
 		$expr[] = $search->compare( '==', 'locale.site.refid', '1234' );
 		$expr[] = $search->compare( '==', 'locale.site.theme', 'shop' );
 		$expr[] = $search->compare( '==', 'locale.site.status', 1 );

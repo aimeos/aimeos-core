@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Locale\Item\Site;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
-		\Aimeos\MShop\Common\Item\Tree\Iface
+		\Aimeos\MShop\Common\Item\Rating\Iface, \Aimeos\MShop\Common\Item\Tree\Iface
 {
 	/**
 	 * Sets the ID of the site.

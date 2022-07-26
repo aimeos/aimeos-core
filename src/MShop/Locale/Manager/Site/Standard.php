@@ -95,6 +95,22 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'locale.site.rating' => array(
+			'code' => 'locale.site.rating',
+			'internalcode' => 'mlocsi."rating"',
+			'label' => 'Rating value',
+			'type' => 'decimal',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'locale.site.ratings' => array(
+			'code' => 'locale.site.ratings',
+			'internalcode' => 'mlocsi."ratings"',
+			'label' => 'Number of ratings',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 		'locale.site.refid' => array(
 			'code' => 'locale.site.refid',
 			'internalcode' => 'mlocsi."refid"',
@@ -373,6 +389,7 @@ class Standard
 		 * @see mshop/locale/manager/site/search/ansi
 		 * @see mshop/locale/manager/site/count/ansi
 		 * @see mshop/locale/manager/site/newid/ansi
+		 * @see mshop/locale/manager/site/rate/ansi
 		 */
 		$path = 'mshop/locale/manager/site/delete';
 
@@ -672,6 +689,7 @@ class Standard
 			 * @see mshop/locale/manager/site/delete/ansi
 			 * @see mshop/locale/manager/site/count/ansi
 			 * @see mshop/locale/manager/site/newid/ansi
+			 * @see mshop/locale/manager/site/rate/ansi
 			 */
 			$path = 'mshop/locale/manager/site/search';
 
@@ -839,6 +857,7 @@ class Standard
 			 * @see mshop/locale/manager/site/search/ansi
 			 * @see mshop/locale/manager/site/count/ansi
 			 * @see mshop/locale/manager/site/newid/ansi
+			 * @see mshop/locale/manager/site/rate/ansi
 			 */
 			$path = 'mshop/locale/manager/site/insert';
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
@@ -900,6 +919,7 @@ class Standard
 			 * @see mshop/locale/manager/site/delete/ansi
 			 * @see mshop/locale/manager/site/search/ansi
 			 * @see mshop/locale/manager/site/count/ansi
+			 * @see mshop/locale/manager/site/rate/ansi
 			 */
 			$path = 'mshop/locale/manager/newid';
 			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );
@@ -925,6 +945,62 @@ class Standard
 	{
 		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for locale site manager not available' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'move()' ) );
+	}
+
+
+	/**
+	 * Updates the rating of the item
+	 *
+	 * @param string $id ID of the item
+	 * @param string $rating Decimal value of the rating
+	 * @param int $ratings Total number of ratings for the item
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+			/** mshop/locale/manager/site/rate/mysql
+			 * Updates the rating of the product in the database
+			 *
+			 * @see mshop/locale/manager/site/rate/ansi
+			 */
+
+			/** mshop/locale/manager/site/rate/ansi
+			 * Updates the rating of the product in the database
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values for the rating to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the rate() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for update ratings
+			 * @since 2022.10
+			 * @category Developer
+			 * @see mshop/locale/manager/site/update/ansi
+			 * @see mshop/locale/manager/site/delete/ansi
+			 * @see mshop/locale/manager/site/search/ansi
+			 * @see mshop/locale/manager/site/count/ansi
+			 * @see mshop/locale/manager/site/newid/ansi
+			 */
+			$path = 'mshop/locale/manager/site/rate';
+
+			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
+
+			$stmt->bind( 1, $rating );
+			$stmt->bind( 2, $ratings, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, (int) $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+
+			$stmt->execute()->finish();
+
+		return $this;
 	}
 
 

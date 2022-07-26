@@ -50,6 +50,8 @@ return array(
 			$table->refid( 'refid' )->default( '' );
 			$table->string( 'theme', 32 )->null( true );
 			$table->smallint( 'level' )->default( 0 );
+			$table->decimal( 'rating', 4 )->default( 0 );
+			$table->int( 'ratings' )->default( 0 );
 			$table->int( 'nleft' );
 			$table->int( 'nright' );
 			$table->smallint( 'status' )->default( 1 );
@@ -59,6 +61,7 @@ return array(
 			$table->unique( ['siteid'], 'unq_mslocsi_siteid' );
 			$table->index( ['nleft', 'nright', 'level', 'parentid'], 'idx_mslocsi_nlt_nrt_lvl_pid' );
 			$table->index( ['level', 'status'], 'idx_mslocsi_level_status' );
+			$table->index( ['rating'], 'idx_mslocsi_rating' );
 			$table->index( ['label'], 'idx_mslocsi_label' );
 		},
 

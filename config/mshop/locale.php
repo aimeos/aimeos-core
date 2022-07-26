@@ -214,6 +214,13 @@ return array(
 					FROM "mshop_locale_site"
 				'
 			),
+			'rate' => array(
+				'ansi' => '
+					UPDATE "mshop_locale_site"
+					SET "rating" = ?, "ratings" = ?
+					WHERE "id" = ?
+				'
+			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_locale_site"
@@ -230,6 +237,7 @@ return array(
 						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
 						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
 						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
+						mlocsi."rating" AS "locale.site.rating", mlocsi."ratings" AS "locale.site.ratings",
 						mlocsi."refid" AS "locale.site.refid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
@@ -244,6 +252,7 @@ return array(
 						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
 						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
 						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
+						mlocsi."rating" AS "locale.site.rating", mlocsi."ratings" AS "locale.site.ratings",
 						mlocsi."refid" AS "locale.site.refid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"

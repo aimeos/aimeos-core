@@ -25,6 +25,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.config' => array( 'timezone' => 'Europe/Berlin' ),
 			'locale.site.icon' => 'path/to/site-icon.png',
 			'locale.site.logo' => [1 => 'path/to/site-logo.png'],
+			'locale.site.rating' => '4.80',
+			'locale.site.ratings' => 5,
 			'locale.site.refid' => '1234',
 			'locale.site.theme' => 'elegance',
 			'locale.site.status' => 1,
@@ -178,19 +180,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetStatus()
+	public function testGetRating()
 	{
-		$this->assertEquals( 1, $this->object->getStatus() );
+		$this->assertEquals( '4.80', $this->object->getRating() );
 	}
 
 
-	public function testSetStatus()
+	public function testGetRatings()
 	{
-		$return = $this->object->setStatus( 0 );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
-		$this->assertEquals( 0, $this->object->getStatus() );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 5, $this->object->getRatings() );
 	}
 
 
@@ -206,6 +204,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( '5678', $this->object->getRefId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetStatus()
+	{
+		$this->assertEquals( 1, $this->object->getStatus() );
+	}
+
+
+	public function testSetStatus()
+	{
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
+		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -315,6 +329,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getIcon(), $arrayObject['locale.site.icon'] );
 		$this->assertEquals( $this->object->getTheme(), $arrayObject['locale.site.theme'] );
 		$this->assertEquals( $this->object->getRefId(), $arrayObject['locale.site.refid'] );
+		$this->assertEquals( $this->object->getRating(), $arrayObject['locale.site.rating'] );
+		$this->assertEquals( $this->object->getRatings(), $arrayObject['locale.site.ratings'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.site.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.site.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['locale.site.editor'] );

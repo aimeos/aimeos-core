@@ -243,25 +243,24 @@ class Standard
 
 
 	/**
-	 * Returns the status property of the Site.
+	 * Returns the rating of the item
 	 *
-	 * @return int Returns the status of the Site
+	 * @return string Decimal value of the item rating
 	 */
-	public function getStatus() : int
+	public function getRating() : string
 	{
-		return $this->get( 'locale.site.status', 1 );
+		return (string) $this->get( 'locale.site.rating', 0 );
 	}
 
 
 	/**
-	 * Sets status property.
+	 * Returns the total number of ratings for the item
 	 *
-	 * @param int $status The status of the Site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return int Total number of ratings for the item
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function getRatings() : int
 	{
-		return $this->set( 'locale.site.status', $status );
+		return (int) $this->get( 'locale.site.ratings', 0 );
 	}
 
 
@@ -286,6 +285,30 @@ class Standard
 	{
 		return $this->set( 'locale.site.refid', $value );
 	}
+
+
+	/**
+	 * Returns the status property of the Site.
+	 *
+	 * @return int Returns the status of the Site
+	 */
+	public function getStatus() : int
+	{
+		return $this->get( 'locale.site.status', 1 );
+	}
+
+
+	/**
+	 * Sets status property.
+	 *
+	 * @param int $status The status of the Site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'locale.site.status', $status );
+	}
+
 
 	/**
 	 * Returns the theme name for the site.
@@ -383,6 +406,8 @@ class Standard
 		$list['locale.site.status'] = $this->getStatus();
 		$list['locale.site.refid'] = $this->getRefId();
 		$list['locale.site.hasChildren'] = $this->hasChildren();
+		$list['locale.site.ratings'] = $this->getRatings();
+		$list['locale.site.rating'] = $this->getRating();
 
 		if( $private === true )
 		{
