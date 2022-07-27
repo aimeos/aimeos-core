@@ -56,8 +56,6 @@ return array(
 			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->index( ['parentid'], 'fk_mssupad_pid' );
-
 			$table->foreign( 'parentid', 'mshop_supplier', 'id', 'fk_mssupad_pid' );
 		},
 
@@ -99,7 +97,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mssupli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mssupli_key_sid' );
-			$table->index( ['parentid'], 'fk_mssupli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_supplier', 'id', 'fk_mssupli_pid' );
 		},

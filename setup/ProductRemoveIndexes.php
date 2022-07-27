@@ -39,6 +39,7 @@ class ProductRemoveIndexes extends Base
 			->dropIndex( 'mshop_product_list_type', 'idx_msprolity_sid_status_pos' )
 			->dropIndex( 'mshop_product_list_type', 'idx_msprolity_sid_label' )
 			->dropIndex( 'mshop_product_list_type', 'idx_msprolity_sid_code' )
+			->dropIndex( 'mshop_product_property', 'fk_mspropr_key_sid' )
 			->dropIndex( 'mshop_product_property', 'unq_mspropr_sid_ty_lid_value' )
 			->dropIndex( 'mshop_product_property_type', 'unq_msproprty_sid_dom_code' )
 			->dropIndex( 'mshop_product_property_type', 'idx_msproprty_sid_status_pos' )

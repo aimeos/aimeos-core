@@ -35,6 +35,7 @@ class MediaRemoveIndexes extends Base
 			->dropIndex( 'mshop_media_list_type', 'idx_msmedlity_sid_status_pos' )
 			->dropIndex( 'mshop_media_list_type', 'idx_msmedlity_sid_label' )
 			->dropIndex( 'mshop_media_list_type', 'idx_msmedlity_sid_code' )
+			->dropIndex( 'mshop_media_property', 'fk_msmedpr_key_sid' )
 			->dropIndex( 'mshop_media_property', 'unq_msmedpr_sid_ty_lid_value' )
 			->dropIndex( 'mshop_media_property_type', 'unq_msmedprty_sid_dom_code' )
 			->dropIndex( 'mshop_media_property_type', 'idx_msmedprty_sid_status_pos' )

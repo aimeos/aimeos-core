@@ -79,9 +79,6 @@ return array(
 			$table->meta();
 
 			$table->unique( ['langid', 'currencyid', 'site_id'], 'unq_msloc_lang_curr_sid' );
-			$table->index( ['site_id'], 'fk_msloc_siteid' );
-			$table->index( ['langid'], 'fk_msloc_langid' );
-			$table->index( ['currencyid'], 'fk_msloc_currid' );
 
 			$table->foreign( 'site_id', 'mshop_locale_site', 'id', 'fk_msloc_siteid' );
 			$table->foreign( 'langid', 'mshop_locale_language', 'id', 'fk_msloc_langid' );

@@ -46,7 +46,6 @@ return array(
 			$table->index( ['siteid', 'count', 'start', 'end'], 'idx_mscouco_sid_ct_start_end' );
 			$table->index( ['siteid', 'start'], 'idx_mscouco_sid_start' );
 			$table->index( ['siteid', 'end'], 'idx_mscouco_sid_end' );
-			$table->index( ['parentid'], 'fk_mscouco_pid' );
 
 			$table->foreign( 'parentid', 'mshop_coupon', 'id', 'fk_mscouco_pid' );
 		},

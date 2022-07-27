@@ -70,7 +70,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mscatli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mscatli_key_sid' );
-			$table->index( ['parentid'], 'fk_mscatli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_catalog', 'id', 'fk_mscatli_pid' );
 		},

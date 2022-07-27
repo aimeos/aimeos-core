@@ -82,7 +82,6 @@ return array(
 			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->index( ['parentid'], 'fk_mscusad_pid' );
 			$table->index( ['langid'], 'idx_mscusad_langid' );
 			$table->index( ['lastname', 'firstname'], 'idx_mscusad_last_first' );
 			$table->index( ['postal', 'address1'], 'idx_mscusad_post_addr1' );
@@ -145,7 +144,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mscusli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mscusli_key_sid' );
-			$table->index( ['parentid'], 'fk_mscusli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mscusli_pid' );
 		},
@@ -183,8 +181,7 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mcuspr_pid_ty_lid_val_sid' );
-			$table->index( ['key', 'siteid'], 'fk_mscuspr_key_sid' );
-			$table->index( ['parentid'], 'fk_mcuspr_pid' );
+			$table->index( ['key', 'siteid'], 'idx_mscuspr_key_sid' );
 
 			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mcuspr_pid' );
 		},

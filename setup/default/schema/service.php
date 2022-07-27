@@ -89,7 +89,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msserli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msserli_key_sid' );
-			$table->index( ['parentid'], 'fk_msserli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_service', 'id', 'fk_msserli_pid' );
 		},

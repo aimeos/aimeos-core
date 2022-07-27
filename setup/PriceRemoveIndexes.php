@@ -36,6 +36,7 @@ class PriceRemoveIndexes extends Base
 			->dropIndex( 'mshop_price_list_type', 'idx_msprility_sid_status_pos' )
 			->dropIndex( 'mshop_price_list_type', 'idx_msprility_sid_label' )
 			->dropIndex( 'mshop_price_list_type', 'idx_msprility_sid_code' )
+			->dropIndex( 'mshop_price_property', 'fk_mspripr_key_sid' )
 			->dropIndex( 'mshop_price_property', 'unq_mspripr_sid_ty_lid_value' )
 			->dropIndex( 'mshop_price_property_type', 'unq_mspriprty_sid_dom_code' )
 			->dropIndex( 'mshop_price_property_type', 'idx_mspriprty_sid_status_pos' )

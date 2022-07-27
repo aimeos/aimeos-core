@@ -89,7 +89,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msattli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msattli_key_sid' );
-			$table->index( ['parentid'], 'fk_msattli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_attribute', 'id', 'fk_msattli_pid' );
 		},
@@ -127,8 +126,7 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_msattpr_ty_lid_value_sid' );
-			$table->index( ['key', 'siteid'], 'fk_msattpr_key_sid' );
-			$table->index( ['parentid'], 'fk_msattpr_pid' );
+			$table->index( ['key', 'siteid'], 'idx_msattpr_key_sid' );
 
 			$table->foreign( 'parentid', 'mshop_attribute', 'id', 'fk_msattpr_pid' );
 		},

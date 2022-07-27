@@ -71,7 +71,6 @@ return array(
 			$table->index( ['baseid', 'postal'], 'idx_msordbaad_bid_postal' );
 			$table->index( ['baseid', 'city'], 'idx_msordbaad_bid_city' );
 			$table->index( ['baseid', 'email'], 'idx_msordbaad_bid_email' );
-			$table->index( ['baseid'], 'fk_msordbaad_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaad_baseid' );
 		},
@@ -118,7 +117,6 @@ return array(
 			$table->index( ['baseid', 'prodcode'], 'idx_msordbapr_bid_pcd' );
 			$table->index( ['baseid', 'qtyopen'], 'idx_msordbapr_bid_qtyo' );
 			$table->index( ['ctime', 'prodid', 'baseid'], 'idx_msordbapr_ct_pid_bid' );
-			$table->index( ['baseid'], 'fk_msordbapr_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbapr_baseid' );
 		},
@@ -140,7 +138,6 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaprat_oid_aid_ty_cd' );
-			$table->index( ['parentid'], 'fk_msordbaprat_parentid' );
 
 			$table->foreign( 'parentid', 'mshop_order_base_product', 'id', 'fk_msordbaprat_parentid' );
 		},
@@ -169,7 +166,6 @@ return array(
 
 			$table->unique( ['baseid', 'code', 'type', 'siteid'], 'unq_msordbase_bid_cd_typ_sid' );
 			$table->index( ['code', 'type', 'siteid'], 'idx_msordbase_code_type_sid' );
-			$table->index( ['baseid'], 'fk_msordbase_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbase_baseid' );
 		},
@@ -191,7 +187,6 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaseat_oid_aid_ty_cd' );
-			$table->index( ['parentid'], 'fk_msordbaseat_parentid' );
 
 			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbaseat_parentid' );
 		},
@@ -208,7 +203,6 @@ return array(
 			$table->meta();
 
 			$table->index( ['baseid', 'code'], 'idx_msordbaco_bid_code' );
-			$table->index( ['baseid'], 'fk_msordbaco_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaco_baseid' );
 		},
@@ -246,7 +240,6 @@ return array(
 			$table->index( ['cweek', 'siteid'], 'idx_msord_cweek_sid' );
 			$table->index( ['cwday', 'siteid'], 'idx_msord_cwday_sid' );
 			$table->index( ['chour', 'siteid'], 'idx_msord_chour_sid' );
-			$table->index( ['baseid'], 'fk_msord_baseid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msord_baseid' );
 		},
@@ -263,7 +256,6 @@ return array(
 			$table->meta();
 
 			$table->index( ['parentid', 'type', 'value', 'siteid'], 'idx_msordst_pid_typ_val_sid' );
-			$table->index( ['parentid'], 'fk_msordst_pid' );
 
 			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordst_pid' );
 		},

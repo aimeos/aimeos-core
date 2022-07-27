@@ -43,6 +43,7 @@ class CustomerRemoveIndexes extends Base
 			->dropIndex( 'mshop_customer_list_type', 'idx_mscuslity_sid_status_pos' )
 			->dropIndex( 'mshop_customer_list_type', 'idx_mscuslity_sid_label' )
 			->dropIndex( 'mshop_customer_list_type', 'idx_mscuslity_sid_code' )
+			->dropIndex( 'mshop_customer_property', 'fk_mscuspr_key_sid' )
 			->dropIndex( 'mshop_customer_property', 'unq_mcuspr_sid_ty_lid_value' )
 			->dropIndex( 'mshop_customer_property_type', 'unq_mcusprty_sid_dom_code' )
 			->dropIndex( 'mshop_customer_property_type', 'idx_mcusprty_sid_status_pos' )

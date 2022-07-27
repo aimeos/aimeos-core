@@ -36,6 +36,7 @@ class AttributeRemoveIndexes extends Base
 			->dropIndex( 'mshop_attribute_list_type', 'idx_msattlity_sid_status_pos' )
 			->dropIndex( 'mshop_attribute_list_type', 'idx_msattlity_sid_label' )
 			->dropIndex( 'mshop_attribute_list_type', 'idx_msattlity_sid_code' )
+			->dropIndex( 'mshop_attribute_property', 'fk_msattpr_key_sid' )
 			->dropIndex( 'mshop_attribute_property', 'unq_msattpr_sid_ty_lid_value' )
 			->dropIndex( 'mshop_attribute_property_type', 'unq_msattprty_sid_dom_code' )
 			->dropIndex( 'mshop_attribute_property_type', 'idx_msattprty_sid_status_pos' )

@@ -85,7 +85,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_mstexli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mstexli_key_sid' );
-			$table->index( ['parentid'], 'fk_mstexli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_text', 'id', 'fk_mstexli_pid' );
 		},

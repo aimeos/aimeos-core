@@ -86,7 +86,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msprili_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msprili_key_sid' );
-			$table->index( ['parentid'], 'fk_msprili_pid' );
 
 			$table->foreign( 'parentid', 'mshop_price', 'id', 'fk_msprili_pid' );
 		},
@@ -124,8 +123,7 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mspripr_pid_ty_lid_val_sid' );
-			$table->index( ['key', 'siteid'], 'fk_mspripr_key_sid' );
-			$table->index( ['parentid'], 'fk_mspripr_pid' );
+			$table->index( ['key', 'siteid'], 'idx_mspripr_key_sid' );
 
 			$table->foreign( 'parentid', 'mshop_price', 'id', 'fk_mspripr_pid' );
 		},

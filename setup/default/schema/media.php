@@ -87,7 +87,6 @@ return array(
 
 			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_msmedli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_msmedli_key_sid' );
-			$table->index( ['parentid'], 'fk_msmedli_pid' );
 
 			$table->foreign( 'parentid', 'mshop_media', 'id', 'fk_msmedli_pid' );
 		},
@@ -125,8 +124,7 @@ return array(
 			$table->meta();
 
 			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_msmedpr_pid_ty_lid_val_sid' );
-			$table->index( ['key', 'siteid'], 'fk_msmedpr_key_sid' );
-			$table->index( ['parentid'], 'fk_msmedpr_pid' );
+			$table->index( ['key', 'siteid'], 'idx_msmedpr_key_sid' );
 
 			$table->foreign( 'parentid', 'mshop_media', 'id', 'fk_msmedpr_pid' );
 		},
