@@ -767,14 +767,13 @@ class Standard
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
 			$previews = [];
-			$name = basename( $url );
 			$old = $item->getPreviews();
 			$domain = $item->getDomain();
 
 			foreach( $this->createPreviews( $media, $domain, $item->getType() ) as $width => $mediaFile )
 			{
 				$mime = $this->getMime( $mediaFile );
-				$path = $old[$width] ?? $this->getPath( $name, $mime, $domain ?: '-' );
+				$path = $old[$width] ?? $this->getPath( $url, $mime, $domain ?: '-' );
 
 				$this->store( $mediaFile->save( null, $mime ), $path, $fs );
 				$previews[$width] = $path;
@@ -1190,12 +1189,12 @@ class Standard
 	/**
 	 * Creates a new file path from the given arguments
 	 *
-	 * @param string $filename Original file name, can contain the path as well
+	 * @param string $filepath Original file name, can contain the path as well
 	 * @param string $mimetype Mime type
 	 * @param string $domain data domain
 	 * @return string New file name including the file path
 	 */
-	protected function getPath( string $filename, string $mimetype, string $domain ) : string
+	protected function getPath( string $filepath, string $mimetype, string $domain ) : string
 	{
 		$context = $this->context();
 
@@ -1215,14 +1214,15 @@ class Standard
 		 */
 		$list = $context->config()->get( 'controller/common/media/extensions', [] );
 
+		$filename = basename( $filepath );
 		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
 		$ext = isset( $list[$mimetype] ) ? '.' . $list[$mimetype] : '';
-		$siteId = $context->locale()->getSiteId();
+		$siteid = $context->locale()->getSiteId();
 
 		// the "d" after {siteid} is the required extension for Windows (no dots at the end allowed)
-		return "${siteId}d/${domain}/${filename[0]}/${filename[1]}/${filename}${ext}";
+		return "${siteid}d/${domain}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
 
 
