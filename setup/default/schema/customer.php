@@ -82,7 +82,7 @@ return array(
 			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->index( ['langid'], 'idx_mscusad_langid' );
+			$table->index( ['langid', 'siteid'], 'idx_mscusad_langid_sid' );
 			$table->index( ['lastname', 'firstname'], 'idx_mscusad_last_first' );
 			$table->index( ['postal', 'address1'], 'idx_mscusad_post_addr1' );
 			$table->index( ['postal', 'city'], 'idx_mscusad_post_city' );
@@ -161,10 +161,10 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['domain', 'code', 'siteid'], 'unq_mcusprty_dom_code_sid' );
-			$table->index( ['status', 'siteid', 'pos'], 'idx_mcusprty_status_sid_pos' );
-			$table->index( ['label', 'siteid'], 'idx_mcusprty_label_sid' );
-			$table->index( ['code', 'siteid'], 'idx_mcusprty_code_sid' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_mscusprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_mscusprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_mscusprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_mscusprty_code_sid' );
 		},
 
 		'mshop_customer_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -180,7 +180,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mcuspr_pid_ty_lid_val_sid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_mscuspr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'idx_mscuspr_key_sid' );
 
 			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mcuspr_pid' );

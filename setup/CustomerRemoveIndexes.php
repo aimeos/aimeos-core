@@ -34,10 +34,6 @@ class CustomerRemoveIndexes extends Base
 			->dropIndex( 'mshop_customer_address', 'idx_mscusad_sid_post_ci' )
 			->dropIndex( 'mshop_customer_address', 'idx_mscusad_sid_city' )
 			->dropIndex( 'mshop_customer_address', 'idx_mscusad_sid_email' )
-			->dropIndex( 'mshop_customer_type', 'unq_mscusty_sid_dom_code' )
-			->dropIndex( 'mshop_customer_type', 'idx_mscusty_sid_status_pos' )
-			->dropIndex( 'mshop_customer_type', 'idx_mscusty_sid_label' )
-			->dropIndex( 'mshop_customer_type', 'idx_mscusty_sid_code' )
 			->dropIndex( 'mshop_customer_list', 'unq_mscusli_pid_dm_sid_ty_rid' )
 			->dropIndex( 'mshop_customer_list_type', 'unq_mscuslity_sid_dom_code' )
 			->dropIndex( 'mshop_customer_list_type', 'idx_mscuslity_sid_status_pos' )
@@ -48,6 +44,6 @@ class CustomerRemoveIndexes extends Base
 			->dropIndex( 'mshop_customer_property_type', 'unq_mcusprty_sid_dom_code' )
 			->dropIndex( 'mshop_customer_property_type', 'idx_mcusprty_sid_status_pos' )
 			->dropIndex( 'mshop_customer_property_type', 'idx_mcusprty_sid_label' )
-			->dropIndex( 'mshop_customer_property_type', 'idx_mscusprty_code_sid' );
+			->dropIndex( 'mshop_customer_property_type', 'idx_mcusprty_sid_code' );
 	}
 }
