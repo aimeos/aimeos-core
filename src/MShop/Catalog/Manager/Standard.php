@@ -367,7 +367,7 @@ class Standard extends Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $this->context()->locale()->getSiteId();
+		$values['siteid'] = $values['siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 

@@ -290,7 +290,7 @@ class Standard extends Base
 		$context = $this->context();
 		$locale = $context->locale();
 
-		$values['order.base.siteid'] = $locale->getSiteId();
+		$values['order.base.siteid'] = $values['order.base.siteid'] ?? $locale->getSiteId();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$base = $this->createItemBase( $priceManager->create(), clone $locale, $values );

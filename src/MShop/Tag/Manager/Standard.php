@@ -245,7 +245,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['tag.siteid'] = $this->context()->locale()->getSiteId();
+		$values['tag.siteid'] = $values['tag.siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 

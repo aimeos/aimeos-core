@@ -230,7 +230,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['job.siteid'] = $this->context()->locale()->getSiteId();
+		$values['job.siteid'] = $values['job.siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 

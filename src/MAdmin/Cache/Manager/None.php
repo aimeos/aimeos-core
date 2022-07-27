@@ -52,7 +52,7 @@ class None
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $this->context()->locale()->getSiteId();
+		$values['siteid'] = $values['siteid'] ?? $this->context()->locale()->getSiteId();
 		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
 	}
 

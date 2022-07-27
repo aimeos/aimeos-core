@@ -372,7 +372,7 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$locale = $this->context()->locale();
-		$values['price.siteid'] = $locale->getSiteId();
+		$values['price.siteid'] = $values['price.siteid'] ?? $locale->getSiteId();
 
 		if( !isset( $values['price.currencyid'] ) && $locale->getCurrencyId() !== null ) {
 			$values['price.currencyid'] = $locale->getCurrencyId();
