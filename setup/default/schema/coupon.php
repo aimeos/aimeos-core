@@ -22,11 +22,11 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->index( ['siteid', 'status', 'start', 'end'], 'idx_mscou_sid_stat_start_end' );
-			$table->index( ['siteid', 'provider'], 'idx_mscou_sid_provider' );
-			$table->index( ['siteid', 'label'], 'idx_mscou_sid_label' );
-			$table->index( ['siteid', 'start'], 'idx_mscou_sid_start' );
-			$table->index( ['siteid', 'end'], 'idx_mscou_sid_end' );
+			$table->index( ['status', 'start', 'end', 'siteid'], 'idx_mscou_stat_start_end_sid' );
+			$table->index( ['provider', 'siteid'], 'idx_mscou_provider_sid' );
+			$table->index( ['label', 'siteid'], 'idx_mscou_label_sid' );
+			$table->index( ['start', 'siteid'], 'idx_mscou_start_sid' );
+			$table->index( ['end', 'siteid'], 'idx_mscou_end_sid' );
 		},
 
 		'mshop_coupon_code' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -42,10 +42,10 @@ return array(
 			$table->refid( 'ref' )->default( '' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'code'], 'unq_mscouco_sid_code' );
-			$table->index( ['siteid', 'count', 'start', 'end'], 'idx_mscouco_sid_ct_start_end' );
-			$table->index( ['siteid', 'start'], 'idx_mscouco_sid_start' );
-			$table->index( ['siteid', 'end'], 'idx_mscouco_sid_end' );
+			$table->unique( ['code', 'siteid'], 'unq_mscouco_code_sid' );
+			$table->index( ['count', 'start', 'end', 'siteid'], 'idx_mscouco_ct_start_end_sid' );
+			$table->index( ['start', 'siteid'], 'idx_mscouco_start_sid' );
+			$table->index( ['end', 'siteid'], 'idx_mscouco_end_sid' );
 
 			$table->foreign( 'parentid', 'mshop_coupon', 'id', 'fk_mscouco_pid' );
 		},
