@@ -38,21 +38,25 @@ class TablesMigratePropertyKey extends Base
 			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
 			$db = $this->db( $rname );
-			$db2 = $this->db( $rname, true );
 
-			$update = $db2->stmt()->update( $table )->set( $db2->qi( 'key' ), '?' )->where( $db2->qi( 'id' ) . '= ?' );
-
-			$q = $db->stmt();
-			$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
-				->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
-
-			while( $row = $result->fetch() )
+			if( $db->hasTable( $table ) )
 			{
-				$value = substr( $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . $row['value'], 0, 255 );
-				$update->setParameters( [$value, $row['id']] )->execute();
-			}
+				$db2 = $this->db( $rname, true );
 
-			$db2->close();
+				$update = $db2->stmt()->update( $table )->set( $db2->qi( 'key' ), '?' )->where( $db2->qi( 'id' ) . '= ?' );
+
+				$q = $db->stmt();
+				$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
+					->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
+
+				while( $row = $result->fetch() )
+				{
+					$value = substr( $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . $row['value'], 0, 255 );
+					$update->setParameters( [$value, $row['id']] )->execute();
+				}
+
+				$db2->close();
+			}
 		}
 	}
 }

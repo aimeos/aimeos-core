@@ -45,19 +45,23 @@ class TablesMigrateListsKey extends Base
 			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
 			$db = $this->db( $rname );
-			$db2 = $this->db( $rname, true );
 
-			$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
+			if( $db->hasTable( $table ) )
+			{
+				$db2 = $this->db( $rname, true );
 
-			$q = $db->stmt();
-			$result = $q->select( 'id', 'domain', 'type', 'refid' )->from( $table )
-				->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
+				$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
 
-			while( $row = $result->fetch() ) {
-				$update->setParameters( [$row['domain'] . '|' . $row['type'] . '|' . $row['refid'], $row['id']] )->execute();
+				$q = $db->stmt();
+				$result = $q->select( 'id', 'domain', 'type', 'refid' )->from( $table )
+					->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
+
+				while( $row = $result->fetch() ) {
+					$update->setParameters( [$row['domain'] . '|' . $row['type'] . '|' . $row['refid'], $row['id']] )->execute();
+				}
+
+				$db2->close();
 			}
-
-			$db2->close();
 		}
 	}
 }
