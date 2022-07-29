@@ -261,68 +261,68 @@ abstract class Base
 
 		$conn = $this->context->db( $this->getResourceName() );
 
-			$total = null;
-			$cols = $map = [];
-			$search = clone $search;
-			$search->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
+		$total = null;
+		$cols = $map = [];
+		$search = clone $search;
+		$search->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
 
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$attrList = $this->object()->getSearchAttributes();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$attrList = $this->object()->getSearchAttributes();
 
-			if( $value === null && ( $value = key( $attrList ) ) === null )
-			{
-				$msg = $this->context()->translate( 'mshop', 'No search keys available' );
-				throw new \Aimeos\MShop\Exception( $msg );
-			}
+		if( $value === null && ( $value = key( $attrList ) ) === null )
+		{
+			$msg = $this->context()->translate( 'mshop', 'No search keys available' );
+			throw new \Aimeos\MShop\Exception( $msg );
+		}
 
-			if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
-				$value = substr( $value, 0, $pos );
-			}
+		if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
+			$value = substr( $value, 0, $pos );
+		}
 
-			if( !isset( $attrList[$value] ) )
+		if( !isset( $attrList[$value] ) )
+		{
+			$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $value ) );
+		}
+
+		foreach( $keys as $string )
+		{
+			if( !isset( $attrList[$string] ) )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $value ) );
+				throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
 			}
 
-			foreach( $keys as $string )
-			{
-				if( !isset( $attrList[$string] ) )
-				{
-					$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
-					throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
-				}
+			$cols[] = $attrList[$string]->getInternalCode();
+			$acols[] = $attrList[$string]->getInternalCode() . ' AS "' . $string . '"';
 
-				$cols[] = $attrList[$string]->getInternalCode();
-				$acols[] = $attrList[$string]->getInternalCode() . ' AS "' . $string . '"';
+			/** @todo Required to get the joins, but there should be a better way */
+			$search->add( [$string => null], '!=' );
+		}
+		$search->add( [$valkey => null], '!=' );
 
-				/** @todo Required to get the joins, but there should be a better way */
-				$search->add( [$string => null], '!=' );
+		$sql = $this->getSqlConfig( $cfgPath );
+		$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
+		$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
+		$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
+		$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
+		$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
+
+		$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
+		{
+			$row = $this->transform( $row );
+
+			$temp = &$map;
+			$last = array_pop( $row );
+
+			foreach( $row as $val ) {
+				$temp[$val] = $temp[$val] ?? [];
+				$temp = &$temp[$val];
 			}
-			$search->add( [$valkey => null], '!=' );
-
-			$sql = $this->getSqlConfig( $cfgPath );
-			$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
-			$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
-			$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
-			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
-			$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
-
-			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				$row = $this->transform( $row );
-
-				$temp = &$map;
-				$last = array_pop( $row );
-
-				foreach( $row as $val ) {
-					$temp[$val] = $temp[$val] ?? [];
-					$temp = &$temp[$val];
-				}
-				$temp = $last;
-			}
+			$temp = $last;
+		}
 
 		return map( $map );
 	}
