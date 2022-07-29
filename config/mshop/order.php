@@ -18,6 +18,7 @@ return array(
 							FROM "mshop_order_base_address" mordbaad
 							:joins
 							WHERE :cond
+							GROUP BY mordbaad.id, :cols, :val
 							ORDER BY mordbaad.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -30,6 +31,7 @@ return array(
 							FROM "mshop_order_base_address" mordbaad
 							:joins
 							WHERE :cond
+							GROUP BY mordbaad.id, :cols, :val
 							ORDER BY mordbaad.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -142,6 +144,7 @@ return array(
 							FROM "mshop_order_base_coupon" mordbaco
 							:joins
 							WHERE :cond
+							GROUP BY mordbaco.id, :cols, :val
 							ORDER BY mordbaco.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -154,6 +157,7 @@ return array(
 							FROM "mshop_order_base_coupon" mordbaco
 							:joins
 							WHERE :cond
+							GROUP BY mordbaco.id, :cols, :val
 							ORDER BY mordbaco.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -237,6 +241,7 @@ return array(
 								FROM "mshop_order_base_product_attr" mordbaprat
 								:joins
 								WHERE :cond
+								GROUP BY mordbaprat.id, :cols, :val
 								ORDER BY mordbaprat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
@@ -249,6 +254,7 @@ return array(
 								FROM "mshop_order_base_product_attr" mordbaprat
 								:joins
 								WHERE :cond
+								GROUP BY mordbaprat.id, :cols, :val
 								ORDER BY mordbaprat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
@@ -338,6 +344,7 @@ return array(
 							FROM "mshop_order_base_product" mordbapr
 							:joins
 							WHERE :cond
+							GROUP BY mordbapr.id, :cols, :val
 							ORDER BY mordbapr.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -350,6 +357,7 @@ return array(
 							FROM "mshop_order_base_product" mordbapr
 							:joins
 							WHERE :cond
+							GROUP BY mordbapr.id, :cols, :val
 							ORDER BY mordbapr.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -478,6 +486,7 @@ return array(
 								FROM "mshop_order_base_service_attr" mordbaseat
 								:joins
 								WHERE :cond
+								GROUP BY mordbaseat.id, :cols, :val
 								ORDER BY mordbaseat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
@@ -490,6 +499,7 @@ return array(
 								FROM "mshop_order_base_service_attr" mordbaseat
 								:joins
 								WHERE :cond
+								GROUP BY mordbaseat.id, :cols, :val
 								ORDER BY mordbaseat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
@@ -579,6 +589,7 @@ return array(
 							FROM "mshop_order_base_service" mordbase
 							:joins
 							WHERE :cond
+							GROUP BY mordbase.id, :cols, :val
 							ORDER BY mordbase.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -591,6 +602,7 @@ return array(
 							FROM "mshop_order_base_service" mordbase
 							:joins
 							WHERE :cond
+							GROUP BY mordbase.id, :cols, :val
 							ORDER BY mordbase.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -695,6 +707,7 @@ return array(
 						FROM "mshop_order_base" mordba
 						:joins
 						WHERE :cond
+						GROUP BY mordba.id, :cols, :val
 						ORDER BY mordba.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
@@ -707,6 +720,7 @@ return array(
 						FROM "mshop_order_base" mordba
 						:joins
 						WHERE :cond
+						GROUP BY mordba.id, :cols, :val
 						ORDER BY mordba.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
@@ -807,6 +821,7 @@ return array(
 						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
+						GROUP BY mordst.id, :cols, :val
 						ORDER BY mordst.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
@@ -819,6 +834,7 @@ return array(
 						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
+						GROUP BY mordst.id, :cols, :val
 						ORDER BY mordst.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
@@ -900,6 +916,7 @@ return array(
 					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
+					GROUP BY mord.id, :cols, :val
 					ORDER BY mord.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
@@ -912,6 +929,7 @@ return array(
 					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
+					GROUP BY mord.id, :cols, :val
 					ORDER BY mord.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
