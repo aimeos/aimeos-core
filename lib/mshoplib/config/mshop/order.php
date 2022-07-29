@@ -14,11 +14,11 @@ return array(
 					'ansi' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
-							GROUP BY mordbaad.id, :cols, :val
+							GROUP BY mordbaad.id, :cols
 							ORDER BY mordbaad.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -27,11 +27,11 @@ return array(
 					'mysql' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
-							GROUP BY mordbaad.id, :cols, :val
+							GROUP BY mordbaad.id, :cols
 							ORDER BY mordbaad.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -140,11 +140,11 @@ return array(
 					'ansi' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_coupon" AS mordbaco
 							:joins
 							WHERE :cond
-							GROUP BY mordbaco.id, :cols, :val
+							GROUP BY mordbaco.id, :cols
 							ORDER BY mordbaco.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -153,11 +153,11 @@ return array(
 					'mysql' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_coupon" AS mordbaco
 							:joins
 							WHERE :cond
-							GROUP BY mordbaco.id, :cols, :val
+							GROUP BY mordbaco.id, :cols
 							ORDER BY mordbaco.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -237,11 +237,11 @@ return array(
 						'ansi' => '
 							SELECT :keys, :type("val") AS "value"
 							FROM (
-								SELECT :acols, :val AS "val"
+								SELECT :acols, :type(:val) AS "val"
 								FROM "mshop_order_base_product_attr" AS mordbaprat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaprat.id, :cols, :val
+								GROUP BY mordbaprat.id, :cols
 								ORDER BY mordbaprat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
@@ -250,11 +250,11 @@ return array(
 						'mysql' => '
 							SELECT :keys, :type("val") AS "value"
 							FROM (
-								SELECT :acols, :val AS "val"
+								SELECT :acols, :type(:val) AS "val"
 								FROM "mshop_order_base_product_attr" AS mordbaprat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaprat.id, :cols, :val
+								GROUP BY mordbaprat.id, :cols
 								ORDER BY mordbaprat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
@@ -338,11 +338,11 @@ return array(
 					'ansi' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
+							GROUP BY mordbapr.id, :cols
 							ORDER BY mordbapr.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -351,11 +351,11 @@ return array(
 					'mysql' => '
 						SELECT :keys, :type("val") AS "value"
 						FROM (
-							SELECT :acols, :val AS "val"
+							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
+							GROUP BY mordbapr.id, :cols
 							ORDER BY mordbapr.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
@@ -481,11 +481,11 @@ return array(
 						'ansi' => '
 							SELECT :keys, :type("val") AS "value"
 							FROM (
-								SELECT :acols, :val AS "val"
+								SELECT :acols, :type(:val) AS "val"
 								FROM "mshop_order_base_service_attr" AS mordbaseat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaseat.id, :cols, :val
+								GROUP BY mordbaseat.id, :cols
 								ORDER BY mordbaseat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
@@ -494,11 +494,11 @@ return array(
 						'mysql' => '
 							SELECT :keys, :type("val") AS "value"
 							FROM (
-								SELECT :acols, :val AS "val"
+								SELECT :acols, :type(:val) AS "val"
 								FROM "mshop_order_base_service_attr" AS mordbaseat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaseat.id, :cols, :val
+								GROUP BY mordbaseat.id, :cols
 								ORDER BY mordbaseat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
@@ -700,11 +700,11 @@ return array(
 				'ansi' => '
 					SELECT :keys, :type("val") AS "value"
 					FROM (
-						SELECT :acols, :val AS "val"
+						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
+						GROUP BY mordba.id, :cols
 						ORDER BY mordba.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
@@ -713,11 +713,11 @@ return array(
 				'mysql' => '
 					SELECT :keys, :type("val") AS "value"
 					FROM (
-						SELECT :acols, :val AS "val"
+						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
+						GROUP BY mordba.id, :cols
 						ORDER BY mordba.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
@@ -814,11 +814,11 @@ return array(
 				'ansi' => '
 					SELECT :keys, :type("val") AS "value"
 					FROM (
-						SELECT :acols, :val AS "val"
+						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_status" AS mordst
 						:joins
 						WHERE :cond
-						GROUP BY mordst.id, :cols, :val
+						GROUP BY mordst.id, :cols
 						ORDER BY mordst.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
@@ -827,11 +827,11 @@ return array(
 				'mysql' => '
 					SELECT :keys, :type("val") AS "value"
 					FROM (
-						SELECT :acols, :val AS "val"
+						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_status" AS mordst
 						:joins
 						WHERE :cond
-						GROUP BY mordst.id, :cols, :val
+						GROUP BY mordst.id, :cols
 						ORDER BY mordst.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
@@ -909,11 +909,11 @@ return array(
 			'ansi' => '
 				SELECT :keys, :type("val") AS "value"
 				FROM (
-					SELECT :acols, :val AS "val"
+					SELECT :acols, :type(:val) AS "val"
 					FROM "mshop_order" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
+					GROUP BY mord.id, :cols
 					ORDER BY mord.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
@@ -922,11 +922,11 @@ return array(
 			'mysql' => '
 				SELECT :keys, :type("val") AS "value"
 				FROM (
-					SELECT :acols, :val AS "val"
+					SELECT :acols, :type(:val) AS "val"
 					FROM "mshop_order" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
+					GROUP BY mord.id, :cols
 					ORDER BY mord.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
