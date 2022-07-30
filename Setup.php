@@ -198,21 +198,21 @@ class Setup
 		\Aimeos\Upscheme\Schema\Table::macro( 'code', function( string $name = 'code' ) {
 			return $this->string( $name, 64 )
 				->opt( 'charset', 'utf8mb3', 'mysql' )
-				->opt( 'collation', 'utf8_bin', 'mysql' )
+				->opt( 'collation', 'utf8mb3_bin', 'mysql' )
 				->default( '' );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) {
 			return $this->string( $name, 64 )
 				->opt( 'charset', 'utf8mb3', 'mysql' )
-				->opt( 'collation', 'utf8_bin', 'mysql' )
+				->opt( 'collation', 'utf8mb3_bin', 'mysql' )
 				->default( '' );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'refid', function( string $name = 'refid' ) {
 			return $this->string( $name, 36 )
 				->opt( 'charset', 'utf8mb3', 'mysql' )
-				->opt( 'collation', 'utf8_bin', 'mysql' )
+				->opt( 'collation', 'utf8mb3_bin', 'mysql' )
 				->default( '' );
 		} );
 
