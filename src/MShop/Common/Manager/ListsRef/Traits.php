@@ -171,29 +171,29 @@ trait Traits
 		if( is_array( $domains ) )
 		{
 			$list = [];
-			$expr = [$search->compare( '==', $prefix . '.lists.parentid', $ids )];
 
 			foreach( $domains as $key => $domain )
 			{
 				if( is_array( $domain ) )
 				{
-					$list[] = $search->and( [
-						$search->compare( '==', $prefix . '.lists.domain', $key ),
-						$search->compare( '==', $prefix . '.lists.type', $domain ),
-					] );
+					foreach( $domain as $type ) {
+						$list[] = $search->is( $prefix . '.lists.key', '=~', $key . '|' . $type . '|' );
+					}
 				}
 				else
 				{
-					$list[] = $search->compare( '==', $prefix . '.lists.domain', $domain );
+					$list[] = $search->is( $prefix . '.lists.key', '=~', $domain . '|' );
 				}
 			}
 
-			$expr[] = $search->or( $list );
-			$search->setConditions( $search->and( $expr ) );
+			$search->setConditions( $search->and( [
+				$search->is( $prefix . '.lists.parentid', '==', $ids ),
+				$search->or( $list )
+			] ) );
 		}
 		else
 		{
-			$search->setConditions( $search->compare( '==', $prefix . '.lists.parentid', $ids ) );
+			$search->setConditions( $search->is( $prefix . '.lists.parentid', '==', $ids ) );
 		}
 
 		return $manager->search( $search, $domains );
