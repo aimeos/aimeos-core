@@ -8,27 +8,18 @@
 namespace Aimeos\MShop\Order\Item\Status;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Item\Status\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp() : void
 	{
 		$this->values = array(
 			'order.status.id' => 1,
-			'order.status.siteid' => 99,
-			'order.status.parentid'=>11,
+			'order.status.siteid' => '1.',
+			'order.status.parentid' => 11,
 			'order.status.type' => 'teststatus',
 			'order.status.value' => 'this is a value from unittest',
 			'order.status.mtime' => '2011-01-01 00:00:02',
@@ -40,21 +31,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
+
 
 	public function testGetId()
 	{
 		$this->assertEquals( 1, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -71,15 +58,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->object->getSiteId() );
+		$this->assertEquals( '1.', $this->object->getSiteId() );
 	}
+
 
 	public function testGetParentId()
 	{
 		$this->assertEquals( 11, $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -90,10 +80,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'teststatus', $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -104,10 +96,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetValue()
 	{
 		$this->assertEquals( "this is a value from unittest", $this->object->getValue() );
 	}
+
 
 	public function testSetValue()
 	{
@@ -118,15 +112,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
