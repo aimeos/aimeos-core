@@ -554,7 +554,7 @@ abstract class Base
 		}
 
 		$msg = $this->context()->translate( 'mshop', 'No item found for conditions: %1$s' );
-		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ) );
+		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ), 404 );
 	}
 
 
@@ -605,7 +605,7 @@ abstract class Base
 		}
 
 		$msg = $this->context()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
-		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ) );
+		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ), 404 );
 	}
 
 
