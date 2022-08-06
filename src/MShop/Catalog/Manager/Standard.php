@@ -818,7 +818,7 @@ class Standard extends Base
 		}
 
 		$msg = $this->context()->translate( 'mshop', 'Catalog path for ID "%1$s" not found' );
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ), 404 );
 	}
 
 
@@ -888,7 +888,7 @@ class Standard extends Base
 		}
 
 		$msg = $this->context()->translate( 'mshop', 'No catalog node for ID "%1$s"' );
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ), 404 );
 	}
 
 
