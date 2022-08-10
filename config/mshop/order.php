@@ -848,7 +848,7 @@ return array(
 							"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 						) VALUES (
 							src."customerid", src."content", src."name", src."mtime", src."editor", src."siteid", src."ctime", src."id"
-						)
+						);
 				'
 			),
 			'search' => array(
