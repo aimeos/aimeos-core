@@ -18,8 +18,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
 		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
+
 		$this->object = new \Aimeos\MShop\Order\Manager\Status\Standard( $this->context );
 	}
 
@@ -136,10 +137,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->get( $itemSaved->getId() );
 	}
 
+
 	public function testCreateSearch()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}
+
 
 	public function testSearchItems()
 	{
@@ -157,8 +160,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.status.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.status.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.status.editor', $this->editor );
-
-
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
@@ -190,7 +191,4 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
-
-
-
 }
