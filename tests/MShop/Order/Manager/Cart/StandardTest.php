@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
+		$search = $this->object->filter()->add( ['order.cart.customerid' => -1] )->slice( 0, 1 );
 		$item = $this->object->search( $search )->first( new \Exception( 'No order cart item found' ) );
 
 		$item->setId( 'unittest_1' );
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.cart.id', null );
 		$expr[] = $search->compare( '==', 'order.cart.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.cart.customerid', null );
+		$expr[] = $search->compare( '==', 'order.cart.customerid', '-1' );
 		$expr[] = $search->compare( '>=', 'order.cart.name', '' );
 		$expr[] = $search->compare( '>=', 'order.cart.content', '' );
 		$expr[] = $search->compare( '>=', 'order.cart.mtime', '1970-01-01 00:00:00' );
