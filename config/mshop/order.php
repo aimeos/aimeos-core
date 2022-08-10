@@ -812,6 +812,89 @@ return array(
 				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
 		),
+		'cart' => array(
+			'delete' => array(
+				'ansi' => '
+					DELETE FROM "mshop_order_cart"
+					WHERE :cond AND siteid = ?
+				'
+			),
+			'insert' => array(
+				'mysql' => '
+					INSERT INTO "mshop_order_cart" (
+						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
+					) VALUES (
+						?, ?, ?, ?, ?, ?, ?, ?
+					) ON DUPLICATE KEY UPDATE
+						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+				',
+				'pgsql' => '
+					INSERT INTO "mshop_order_cart" (
+						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
+					) VALUES (
+						?, ?, ?, ?, ?, ?, ?, ?
+					) ON CONFLICT ("id") DO UPDATE SET
+						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+				',
+				'sqlsrv' => '
+					MERGE "mshop_order_cart" AS tgt
+					USING ( SELECT ?, ?, ?, ?, ?, ?, ?, ? ) AS src (
+						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
+					) ON (tgt."id" = src."id")
+					WHEN MATCHED THEN
+						UPDATE SET "customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+					WHEN NOT MATCHED THEN
+						INSERT (
+							"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
+						) VALUES (
+							src."customerid", src."content", src."name", src."mtime", src."editor", src."siteid", src."ctime", src."id"
+						)
+				'
+			),
+			'search' => array(
+				'ansi' => '
+					SELECT :columns
+						mordca."id" AS "order.cart.id", mordca."siteid" AS "order.cart.siteid",
+						mordca."customerid" AS "order.cart.customerid", mordca."name" AS "order.cart.name",
+						mordca."content" AS "order.cart.content", mordca."mtime" AS "order.cart.mtime",
+						mordca."ctime" AS "order.cart.ctime", mordca."editor" AS "order.cart.editor"
+					FROM "mshop_order_cart" mordca
+					:joins
+					WHERE :cond
+					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT :columns
+						mordca."id" AS "order.cart.id", mordca."siteid" AS "order.cart.siteid",
+						mordca."customerid" AS "order.cart.customerid", mordca."name" AS "order.cart.name",
+						mordca."content" AS "order.cart.content", mordca."mtime" AS "order.cart.mtime",
+						mordca."ctime" AS "order.cart.ctime", mordca."editor" AS "order.cart.editor"
+					FROM "mshop_order_cart" mordca
+					:joins
+					WHERE :cond
+					ORDER BY :order
+					LIMIT :size OFFSET :start
+				'
+			),
+			'count' => array(
+				'ansi' => '
+					SELECT COUNT( DISTINCT mordca."id" ) AS "count"
+					FROM "mshop_order_cart" mordca
+					:joins
+					WHERE :cond
+				'
+			),
+			'newid' => array(
+				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+				'mysql' => 'SELECT LAST_INSERT_ID()',
+				'oracle' => 'SELECT mshop_order_cart_seq.CURRVAL FROM DUAL',
+				'pgsql' => 'SELECT lastval()',
+				'sqlite' => 'SELECT last_insert_rowid()',
+				'sqlsrv' => 'SELECT @@IDENTITY',
+				'sqlanywhere' => 'SELECT @@IDENTITY',
+			),
+		),
 		'status' => array(
 			'aggregate' => array(
 				'ansi' => '
