@@ -97,7 +97,6 @@ abstract class Base
 		{
 			return $this->object()->create();
 		}
-
 	}
 
 
