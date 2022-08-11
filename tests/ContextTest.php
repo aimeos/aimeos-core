@@ -110,6 +110,12 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetToken()
+	{
+		$this->assertNull( $this->object->token() );
+	}
+
+
 	public function testSetConfig()
 	{
 		$config = new \Aimeos\Base\Config\PHPArray();
@@ -250,6 +256,15 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setSession( $session );
 
 		$this->assertSame( $session, $this->object->session() );
+		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
+	}
+
+
+	public function testSetToken()
+	{
+		$return = $this->object->setToken( 'token-123' );
+
+		$this->assertEquals( 'token-123', $this->object->token() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 	}
 

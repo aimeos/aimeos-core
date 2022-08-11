@@ -247,6 +247,21 @@ interface ContextIface
 	public function setSession( \Aimeos\Base\Session\Iface $session ) : \Aimeos\MShop\ContextIface;
 
 	/**
+	 * Returns the session token.
+	 *
+	 * @return string|null Session token
+	 */
+	public function token() : ?string;
+
+	/**
+	 * Sets the ion token.
+	 *
+	 * @param string Session token
+	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 */
+	public function setToken( string $token ) : \Aimeos\MShop\ContextIface;
+
+	/**
 	 * Returns the view object.
 	 *
 	 * @return \Aimeos\Base\View\Iface View object

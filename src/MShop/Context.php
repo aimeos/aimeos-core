@@ -30,6 +30,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	private $password;
 	private $process;
 	private $session;
+	private $token;
 	private $view;
 	private $user;
 	private $groups;
@@ -566,6 +567,29 @@ class Context implements \Aimeos\MShop\ContextIface
 		}
 
 		return $this->session;
+	}
+
+	/**
+	 * Returns the session token.
+	 *
+	 * @return string|null Session token
+	 */
+	public function token() : ?string
+	{
+		return $this->token;
+	}
+
+
+	/**
+	 * Sets the ion token.
+	 *
+	 * @param string Session token
+	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 */
+	public function setToken( string $token ) : \Aimeos\MShop\ContextIface
+	{
+		$this->token = $token;
+		return $this;
 	}
 
 

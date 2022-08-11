@@ -67,30 +67,37 @@ abstract class Base
 	public function getSession( string $type = 'default' ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$context = $this->context();
-		$session = $context->session();
+		$token = $context->token();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();
-		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
-		if( ( $serorder = $session->get( $key ) ) === null ) {
-			return $this->object()->create();
-		}
+		$key = $token . '-' . $sitecode . '-' . $language . '-' . $currency . '-' . $type;
 
-		$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
-
-		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
+		try
 		{
-			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
-			$context->logger()->warning( $msg, 'core/order' );
+			$serorder = \Aimeos\MShop::create( $context, 'order/cart' )->get( $key )->getContent();
 
+			$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
+
+			if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
+			{
+				$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
+				$context->logger()->warning( $msg, 'core/order' );
+
+				return $this->object()->create();
+			}
+
+			\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
+
+			return $order;
+		}
+		catch( \Exception $e )
+		{
 			return $this->object()->create();
 		}
 
-		\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
-
-		return $order;
 	}
 
 
@@ -128,18 +135,23 @@ abstract class Base
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$context = $this->context();
-		$session = $context->session();
+		$token = $context->token();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();
-		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
+
+		$key = $token . '-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
+
+		$session = $context->session();
 
 		$list = $session->get( 'aimeos/basket/list', [] );
 		$list[$key] = $key;
 
 		$session->set( 'aimeos/basket/list', $list );
-		$session->set( $key, serialize( clone $order ) );
+
+		$manager = \Aimeos\MShop::create( $context, 'order/cart' );
+		$manager->save( $manager->create()->setId( $key )->setContent( serialize( clone $order ) ) );
 
 		return $this;
 	}
