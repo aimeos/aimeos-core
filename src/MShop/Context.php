@@ -583,7 +583,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Sets the ion token.
 	 *
-	 * @param string Session token
+	 * @param string $token Session token
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
 	public function setToken( string $token ) : \Aimeos\MShop\ContextIface
