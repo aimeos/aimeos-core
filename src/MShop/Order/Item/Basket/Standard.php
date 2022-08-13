@@ -20,14 +20,19 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Basket\Iface
 {
+	private $item;
+
+
 	/**
 	 * Initializes the object
 	 *
 	 * @param array $values Associative list of key/value pairs with order status properties
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $item Basket object
 	 */
-	public function __construct( array $values = [] )
+	public function __construct( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $item = null )
 	{
 		parent::__construct( 'order.basket.', $values );
+		$this->item = $item;
 	}
 
 
@@ -44,25 +49,26 @@ class Standard
 
 
 	/**
-	 * Returns the content of the basket.
+	 * Returns the basket object.
 	 *
-	 * @return string Content of the basket
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null $basket Basket object
 	 */
-	public function getContent() : string
+	public function getItem() : ?\Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return (string) $this->get( 'order.basket.content' );
+		return $this->item;
 	}
 
 
 	/**
-	 * Sets the content of the basket.
+	 * Sets the basket object.
 	 *
-	 * @param string $value Content of the basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setContent( string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	public function setItem( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
-		return $this->set( 'order.basket.content', $value );
+		$this->item = $basket;
+		return $this->setModified();
 	}
 
 
@@ -139,7 +145,6 @@ class Standard
 			switch( $key )
 			{
 				case 'order.basket.customerid': $item = $item->setCustomerId( $value ); break;
-				case 'order.basket.content': $item = $item->setContent( $value ); break;
 				case 'order.basket.name': $item = $item->setName( $value ); break;
 				default: continue 2;
 			}
@@ -163,7 +168,6 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['order.basket.name'] = $this->getName();
-		$list['order.basket.content'] = $this->getContent();
 		$list['order.basket.customerid'] = $this->getCustomerId();
 
 		return $list;

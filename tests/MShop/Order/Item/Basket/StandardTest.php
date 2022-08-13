@@ -9,6 +9,7 @@ namespace Aimeos\MShop\Order\Item\Basket;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $basket;
 	private $object;
 	private $values;
 
@@ -20,19 +21,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.basket.siteid' => '1.',
 			'order.basket.customerid' => '11',
 			'order.basket.name' => 'testbasket',
-			'order.basket.content' => 'this is a value from unittest',
 			'order.basket.mtime' => '2011-01-01 00:00:02',
 			'order.basket.ctime' => '2011-01-01 00:00:01',
 			'order.basket.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values );
+		$locale = \TestHelper::context()->locale();
+		$price = new \Aimeos\MShop\Price\Item\Standard();
+
+		$this->basket = new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale, [] );
+		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values, $this->basket );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->basket );
 	}
 
 
@@ -74,18 +78,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetContent()
+	public function testGetItem()
 	{
-		$this->assertEquals( "this is a value from unittest", $this->object->getContent() );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $this->object->getItem() );
 	}
 
 
-	public function testSetContent()
+	public function testSetItem()
 	{
-		$return = $this->object->setContent( 'was changed by unittest' );
+		$return = $this->object->setItem( $this->basket );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
-		$this->assertEquals( 'was changed by unittest', $this->object->getContent() );
+		$this->assertSame( $this->basket, $this->object->getItem() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -137,7 +141,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'order.basket.id' => '123-456',
 			'order.basket.customerid' => '123',
-			'order.basket.content' => 'basket value',
 			'order.basket.name' => 'test basket name',
 		);
 
@@ -147,7 +150,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.basket.id'], $item->getId() );
 		$this->assertEquals( $list['order.basket.customerid'], $item->getCustomerId() );
-		$this->assertEquals( $list['order.basket.content'], $item->getContent() );
 		$this->assertEquals( $list['order.basket.name'], $item->getName() );
 	}
 
@@ -161,7 +163,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $list['order.basket.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.basket.siteid'] );
 		$this->assertEquals( $this->object->getCustomerId(), $list['order.basket.customerid'] );
-		$this->assertEquals( $this->object->getContent(), $list['order.basket.content'] );
 		$this->assertEquals( $this->object->getName(), $list['order.basket.name'] ); ;
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.basket.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.basket.ctime'] );

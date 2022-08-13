@@ -42,9 +42,10 @@ class OrderAddBasketTestData extends Base
 		}
 
 		$manager = \Aimeos\MShop::create( $context, 'order/basket', 'Standard' );
+		$baseManager = \Aimeos\MShop::create( $context, 'order/base', 'Standard' );
 
 		foreach( $testdata as $entry ) {
-			$manager->save( $manager->create()->fromArray( $entry, true ) )->setCustomerId( $this->getCustomer()->getId() );
+			$manager->save( $manager->create()->fromArray( $entry, true )->setItem( $baseManager->create() ) );
 		}
 	}
 

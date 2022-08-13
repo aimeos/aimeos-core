@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getCustomerId(), $itemSaved->getCustomerId() );
-		$this->assertEquals( $item->getContent(), $itemSaved->getContent() );
+		$this->assertEquals( $item->getItem(), $itemSaved->getItem() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getCustomerId(), $itemUpd->getCustomerId() );
-		$this->assertEquals( $itemExp->getContent(), $itemUpd->getContent() );
+		$this->assertEquals( $itemExp->getItem(), $itemUpd->getItem() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );

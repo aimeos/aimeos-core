@@ -172,11 +172,13 @@ class Standard
 
 		$sql = $this->getSqlConfig( 'mshop/order/manager/basket/insert' );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+		$serialized = serialize( $item->getItem() );
 		$idx = 1;
 
 		// insert
 		$stmt->bind( $idx++, $item->getCustomerId() );
-		$stmt->bind( $idx++, $item->getContent() );
+		$stmt->bind( $idx++, $serialized );
 		$stmt->bind( $idx++, $item->getName() );
 		$stmt->bind( $idx++, $date ); //mtime
 		$stmt->bind( $idx++, $context->editor() );
@@ -185,7 +187,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getId() );
 		// update
 		$stmt->bind( $idx++, $item->getCustomerId() );
-		$stmt->bind( $idx++, $item->getContent() );
+		$stmt->bind( $idx++, $serialized );
 		$stmt->bind( $idx++, $item->getName() );
 		$stmt->bind( $idx++, $date ); //mtime
 		$stmt->bind( $idx++, $context->editor() );
@@ -556,12 +558,19 @@ class Standard
 			 */
 			$cfgPathCount = 'mshop/order/manager/basket/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				if( $item = $this->createItemBase( $row ) ) {
+				$basket = unserialize( $row['order.basket.content'] );
+
+				if( !( $basket instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+				{
+					$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $serorder );
+					$context->logger()->warning( $msg, 'core/order' );
+				}
+
+				if( $item = $this->createItemBase( $row, $basket ?: null ) ) {
 					$items[$row['order.basket.id']] = $item;
 				}
 			}
@@ -574,10 +583,11 @@ class Standard
 	 * Creates a new order basket object.
 	 *
 	 * @param array $values List of attributes for the order basket object
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $basket Basket object
 	 * @return \Aimeos\MShop\Order\Item\Basket\Iface New order basket object
 	 */
-	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $basket = null ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Basket\Standard( $values );
+		return new \Aimeos\MShop\Order\Item\Basket\Standard( $values, $basket );
 	}
 }

@@ -75,28 +75,13 @@ abstract class Base
 
 		$key = $token . '-' . $sitecode . '-' . $language . '-' . $currency . '-' . $type;
 
-		try
-		{
-			$serorder = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getContent();
-
-			$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
-
-			if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
-			{
-				$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
-				$context->logger()->warning( $msg, 'core/order' );
-
-				return $this->object()->create();
-			}
-
-			\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
-
-			return $order;
-		}
-		catch( \Exception $e )
-		{
+		if( ( $order = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getItem() ) === null ){
 			return $this->object()->create();
 		}
+
+		\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
+
+		return $order;
 	}
 
 
@@ -150,7 +135,7 @@ abstract class Base
 		$session->set( 'aimeos/basket/list', $list );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/basket' );
-		$manager->save( $manager->create()->setId( $key )->setContent( serialize( clone $order ) ) );
+		$manager->save( $manager->create()->setId( $key )->setCustomerId( $context->user() )->setItem( clone $order ) );
 
 		return $this;
 	}
