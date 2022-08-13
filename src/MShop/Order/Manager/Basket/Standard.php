@@ -566,7 +566,7 @@ class Standard
 
 				if( !( $basket instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 				{
-					$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $serorder );
+					$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $row['order.basket.content'] );
 					$context->logger()->warning( $msg, 'core/order' );
 				}
 
