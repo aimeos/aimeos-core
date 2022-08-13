@@ -28,7 +28,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Initializes the shopping cart.
+	 * Initializes the shopping basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency

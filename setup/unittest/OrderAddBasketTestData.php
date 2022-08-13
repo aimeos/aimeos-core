@@ -10,9 +10,9 @@ namespace Aimeos\Upscheme\Task;
 
 
 /**
- * Adds order cart test data.
+ * Adds order basket test data.
  */
-class OrderAddCartTestData extends Base
+class OrderAddBasketTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -30,18 +30,18 @@ class OrderAddCartTestData extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Adding order cart test data', 'vv' );
+		$this->info( 'Adding order basket test data', 'vv' );
 
 		$context = $this->context()->setEditor( 'core' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'order-cart.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'order-basket.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order carts', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order baskets', $path ) );
 		}
 
-		$manager = \Aimeos\MShop::create( $context, 'order/cart', 'Standard' );
+		$manager = \Aimeos\MShop::create( $context, 'order/basket', 'Standard' );
 
 		foreach( $testdata as $entry ) {
 			$manager->save( $manager->create()->fromArray( $entry, true ) )->setCustomerId( $this->getCustomer()->getId() );

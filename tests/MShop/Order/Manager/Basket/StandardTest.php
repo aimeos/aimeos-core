@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2022
  */
 
-namespace Aimeos\MShop\Order\Manager\Cart;
+namespace Aimeos\MShop\Order\Manager\Basket;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->editor();
 
-		$this->object = new \Aimeos\MShop\Order\Manager\Cart\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Order\Manager\Basket\Standard( $this->context );
 	}
 
 
@@ -46,20 +46,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getResourceType();
 
-		$this->assertContains( 'order/cart', $result );
+		$this->assertContains( 'order/basket', $result );
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Cart\Iface::class, $this->object->create() );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $this->object->create() );
 	}
 
 
 	public function testGetItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-		$expected = $this->object->search( $search )->first( new \Exception( 'No order cart item found' ) );
+		$expected = $this->object->search( $search )->first( new \Exception( 'No order basket item found' ) );
 
 		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
 	}
@@ -67,8 +67,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter()->add( ['order.cart.customerid' => -1] )->slice( 0, 1 );
-		$item = $this->object->search( $search )->first( new \Exception( 'No order cart item found' ) );
+		$search = $this->object->filter()->add( ['order.basket.customerid' => -1] )->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \Exception( 'No order basket item found' ) );
 
 		$item->setId( 'unittest_1' );
 		$resultSaved = $this->object->save( $item );
@@ -123,14 +123,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->locale()->getSiteId();
 
 		$expr = [];
-		$expr[] = $search->compare( '!=', 'order.cart.id', null );
-		$expr[] = $search->compare( '==', 'order.cart.siteid', $siteid );
-		$expr[] = $search->compare( '==', 'order.cart.customerid', '-1' );
-		$expr[] = $search->compare( '>=', 'order.cart.name', '' );
-		$expr[] = $search->compare( '>=', 'order.cart.content', '' );
-		$expr[] = $search->compare( '>=', 'order.cart.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.cart.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.cart.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.basket.id', null );
+		$expr[] = $search->compare( '==', 'order.basket.siteid', $siteid );
+		$expr[] = $search->compare( '==', 'order.basket.customerid', '-1' );
+		$expr[] = $search->compare( '>=', 'order.basket.name', '' );
+		$expr[] = $search->compare( '>=', 'order.basket.content', '' );
+		$expr[] = $search->compare( '>=', 'order.basket.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.basket.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.basket.editor', $this->editor );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();

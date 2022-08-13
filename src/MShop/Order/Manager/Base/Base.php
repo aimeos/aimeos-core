@@ -77,7 +77,7 @@ abstract class Base
 
 		try
 		{
-			$serorder = \Aimeos\MShop::create( $context, 'order/cart' )->get( $key )->getContent();
+			$serorder = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getContent();
 
 			$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
 
@@ -149,7 +149,7 @@ abstract class Base
 
 		$session->set( 'aimeos/basket/list', $list );
 
-		$manager = \Aimeos\MShop::create( $context, 'order/cart' );
+		$manager = \Aimeos\MShop::create( $context, 'order/basket' );
 		$manager->save( $manager->create()->setId( $key )->setContent( serialize( clone $order ) ) );
 
 		return $this;

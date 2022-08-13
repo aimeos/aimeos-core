@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_order_cart' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_basket' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 

@@ -812,16 +812,16 @@ return array(
 				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
 		),
-		'cart' => array(
+		'basket' => array(
 			'delete' => array(
 				'ansi' => '
-					DELETE FROM "mshop_order_cart"
+					DELETE FROM "mshop_order_basket"
 					WHERE :cond AND siteid = ?
 				'
 			),
 			'insert' => array(
 				'mysql' => '
-					INSERT INTO "mshop_order_cart" (
+					INSERT INTO "mshop_order_basket" (
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
@@ -829,7 +829,7 @@ return array(
 						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 				',
 				'pgsql' => '
-					INSERT INTO "mshop_order_cart" (
+					INSERT INTO "mshop_order_basket" (
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
@@ -837,7 +837,7 @@ return array(
 						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 				',
 				'sqlsrv' => '
-					MERGE "mshop_order_cart" AS tgt
+					MERGE "mshop_order_basket" AS tgt
 					USING ( SELECT ?, ?, ?, ?, ?, ?, ?, ? ) AS src (
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 					) ON (tgt."id" = src."id")
@@ -854,11 +854,11 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mordca."id" AS "order.cart.id", mordca."siteid" AS "order.cart.siteid",
-						mordca."customerid" AS "order.cart.customerid", mordca."name" AS "order.cart.name",
-						mordca."content" AS "order.cart.content", mordca."mtime" AS "order.cart.mtime",
-						mordca."ctime" AS "order.cart.ctime", mordca."editor" AS "order.cart.editor"
-					FROM "mshop_order_cart" mordca
+						mordba."id" AS "order.basket.id", mordba."siteid" AS "order.basket.siteid",
+						mordba."customerid" AS "order.basket.customerid", mordba."name" AS "order.basket.name",
+						mordba."content" AS "order.basket.content", mordba."mtime" AS "order.basket.mtime",
+						mordba."ctime" AS "order.basket.ctime", mordba."editor" AS "order.basket.editor"
+					FROM "mshop_order_basket" mordba
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -866,11 +866,11 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mordca."id" AS "order.cart.id", mordca."siteid" AS "order.cart.siteid",
-						mordca."customerid" AS "order.cart.customerid", mordca."name" AS "order.cart.name",
-						mordca."content" AS "order.cart.content", mordca."mtime" AS "order.cart.mtime",
-						mordca."ctime" AS "order.cart.ctime", mordca."editor" AS "order.cart.editor"
-					FROM "mshop_order_cart" mordca
+						mordba."id" AS "order.basket.id", mordba."siteid" AS "order.basket.siteid",
+						mordba."customerid" AS "order.basket.customerid", mordba."name" AS "order.basket.name",
+						mordba."content" AS "order.basket.content", mordba."mtime" AS "order.basket.mtime",
+						mordba."ctime" AS "order.basket.ctime", mordba."editor" AS "order.basket.editor"
+					FROM "mshop_order_basket" mordba
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -879,8 +879,8 @@ return array(
 			),
 			'count' => array(
 				'ansi' => '
-					SELECT COUNT( DISTINCT mordca."id" ) AS "count"
-					FROM "mshop_order_cart" mordca
+					SELECT COUNT( DISTINCT mordba."id" ) AS "count"
+					FROM "mshop_order_basket" mordba
 					:joins
 					WHERE :cond
 				'
@@ -888,7 +888,7 @@ return array(
 			'newid' => array(
 				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 				'mysql' => 'SELECT LAST_INSERT_ID()',
-				'oracle' => 'SELECT mshop_order_cart_seq.CURRVAL FROM DUAL',
+				'oracle' => 'SELECT mshop_order_basket_seq.CURRVAL FROM DUAL',
 				'pgsql' => 'SELECT lastval()',
 				'sqlite' => 'SELECT last_insert_rowid()',
 				'sqlsrv' => 'SELECT @@IDENTITY',

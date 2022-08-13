@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MShop\Order\Item\Cart;
+namespace Aimeos\MShop\Order\Item\Basket;
 
 
 /**
@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Item\Cart;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Item\Base
-	implements \Aimeos\MShop\Order\Item\Cart\Iface
+	implements \Aimeos\MShop\Order\Item\Basket\Iface
 {
 	/**
 	 * Initializes the object
@@ -27,7 +27,7 @@ class Standard
 	 */
 	public function __construct( array $values = [] )
 	{
-		parent::__construct( 'order.cart.', $values );
+		parent::__construct( 'order.basket.', $values );
 	}
 
 
@@ -44,71 +44,71 @@ class Standard
 
 
 	/**
-	 * Returns the content of the cart.
+	 * Returns the content of the basket.
 	 *
-	 * @return string Content of the cart
+	 * @return string Content of the basket
 	 */
 	public function getContent() : string
 	{
-		return (string) $this->get( 'order.cart.content' );
+		return (string) $this->get( 'order.basket.content' );
 	}
 
 
 	/**
-	 * Sets the content of the cart.
+	 * Sets the content of the basket.
 	 *
-	 * @param string $value Content of the cart
-	 * @return \Aimeos\MShop\Order\Item\Cart\Iface Cart item for chaining method calls
+	 * @param string $value Content of the basket
+	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setContent( string $value ) : \Aimeos\MShop\Order\Item\Cart\Iface
+	public function setContent( string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
-		return $this->set( 'order.cart.content', $value );
+		return $this->set( 'order.basket.content', $value );
 	}
 
 
 	/**
-	 * Returns the ID of the customer who owns the cart.
+	 * Returns the ID of the customer who owns the basket.
 	 *
 	 * @return string Unique ID of the customer
 	 */
 	public function getCustomerId() : string
 	{
-		return (string) $this->get( 'order.cart.customerid', '' );
+		return (string) $this->get( 'order.basket.customerid', '' );
 	}
 
 
 	/**
-	 * Sets the ID of the customer who owned the cart.
+	 * Sets the ID of the customer who owned the basket.
 	 *
 	 * @param string $customerid Unique ID of the customer
-	 * @return \Aimeos\MShop\Order\Item\Cart\Iface Cart item for chaining method calls
+	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setCustomerId( ?string $value ) : \Aimeos\MShop\Order\Item\Cart\Iface
+	public function setCustomerId( ?string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
-		return $this->set( 'order.cart.customerid', (string) $value );
+		return $this->set( 'order.basket.customerid', (string) $value );
 	}
 
 
 	/**
-	 * Returns the name of the cart.
+	 * Returns the name of the basket.
 	 *
-	 * @return string Name for the cart
+	 * @return string Name for the basket
 	 */
 	public function getName() : string
 	{
-		return (string) $this->get( 'order.cart.name', '' );
+		return (string) $this->get( 'order.basket.name', '' );
 	}
 
 
 	/**
-	 * Sets the name of the cart.
+	 * Sets the name of the basket.
 	 *
-	 * @param string $value Name for the cart
-	 * @return \Aimeos\MShop\Order\Item\Cart\Iface Cart item for chaining method calls
+	 * @param string $value Name for the basket
+	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setName( ?string $value ) : \Aimeos\MShop\Order\Item\Cart\Iface
+	public function setName( ?string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
-		return $this->set( 'order.cart.name', (string) $value );
+		return $this->set( 'order.basket.name', (string) $value );
 	}
 
 
@@ -119,7 +119,7 @@ class Standard
 	 */
 	public function getResourceType() : string
 	{
-		return 'order/cart';
+		return 'order/basket';
 	}
 
 
@@ -128,7 +128,7 @@ class Standard
 	 *
 	 * @param array &$list Associative list of item keys and their values
 	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Cart\Iface Order status item for chaining method calls
+	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Order status item for chaining method calls
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
@@ -138,9 +138,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.cart.customerid': $item = $item->setCustomerId( $value ); break;
-				case 'order.cart.content': $item = $item->setContent( $value ); break;
-				case 'order.cart.name': $item = $item->setName( $value ); break;
+				case 'order.basket.customerid': $item = $item->setCustomerId( $value ); break;
+				case 'order.basket.content': $item = $item->setContent( $value ); break;
+				case 'order.basket.name': $item = $item->setName( $value ); break;
 				default: continue 2;
 			}
 
@@ -162,9 +162,9 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.cart.name'] = $this->getName();
-		$list['order.cart.content'] = $this->getContent();
-		$list['order.cart.customerid'] = $this->getCustomerId();
+		$list['order.basket.name'] = $this->getName();
+		$list['order.basket.content'] = $this->getContent();
+		$list['order.basket.customerid'] = $this->getCustomerId();
 
 		return $list;
 	}

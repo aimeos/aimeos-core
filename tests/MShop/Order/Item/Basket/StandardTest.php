@@ -4,7 +4,7 @@
  * @copyright Aimeos (aimeos.org), 2022
  */
 
-namespace Aimeos\MShop\Order\Item\Cart;
+namespace Aimeos\MShop\Order\Item\Basket;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -16,17 +16,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->values = array(
-			'order.cart.id' => '123-456-789',
-			'order.cart.siteid' => '1.',
-			'order.cart.customerid' => '11',
-			'order.cart.name' => 'testcart',
-			'order.cart.content' => 'this is a value from unittest',
-			'order.cart.mtime' => '2011-01-01 00:00:02',
-			'order.cart.ctime' => '2011-01-01 00:00:01',
-			'order.cart.editor' => 'unitTestUser'
+			'order.basket.id' => '123-456-789',
+			'order.basket.siteid' => '1.',
+			'order.basket.customerid' => '11',
+			'order.basket.name' => 'testbasket',
+			'order.basket.content' => 'this is a value from unittest',
+			'order.basket.mtime' => '2011-01-01 00:00:02',
+			'order.basket.ctime' => '2011-01-01 00:00:01',
+			'order.basket.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Cart\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values );
 	}
 
 
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( '987-654-321' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Cart\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
 		$this->assertEquals( '987-654-321', $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCustomerId( '12' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Cart\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
 		$this->assertEquals( '12', $this->object->getCustomerId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setContent( 'was changed by unittest' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Cart\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
 		$this->assertEquals( 'was changed by unittest', $this->object->getContent() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'testcart', $this->object->getName() );
+		$this->assertEquals( 'testbasket', $this->object->getName() );
 	}
 
 
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setName( 'unittest' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Cart\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
 		$this->assertEquals( 'unittest', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -126,29 +126,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->assertEquals( 'order/cart', $this->object->getResourceType() );
+		$this->assertEquals( 'order/basket', $this->object->getResourceType() );
 	}
 
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Cart\Standard();
+		$item = new \Aimeos\MShop\Order\Item\Basket\Standard();
 
 		$list = $entries = array(
-			'order.cart.id' => '123-456',
-			'order.cart.customerid' => '123',
-			'order.cart.content' => 'cart value',
-			'order.cart.name' => 'test cart name',
+			'order.basket.id' => '123-456',
+			'order.basket.customerid' => '123',
+			'order.basket.content' => 'basket value',
+			'order.basket.name' => 'test basket name',
 		);
 
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( '', $item->getSiteId() );
-		$this->assertEquals( $list['order.cart.id'], $item->getId() );
-		$this->assertEquals( $list['order.cart.customerid'], $item->getCustomerId() );
-		$this->assertEquals( $list['order.cart.content'], $item->getContent() );
-		$this->assertEquals( $list['order.cart.name'], $item->getName() );
+		$this->assertEquals( $list['order.basket.id'], $item->getId() );
+		$this->assertEquals( $list['order.basket.customerid'], $item->getCustomerId() );
+		$this->assertEquals( $list['order.basket.content'], $item->getContent() );
+		$this->assertEquals( $list['order.basket.name'], $item->getName() );
 	}
 
 
@@ -158,13 +158,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( count( $this->values ), count( $list ) );
 
-		$this->assertEquals( $this->object->getId(), $list['order.cart.id'] );
-		$this->assertEquals( $this->object->getSiteId(), $list['order.cart.siteid'] );
-		$this->assertEquals( $this->object->getCustomerId(), $list['order.cart.customerid'] );
-		$this->assertEquals( $this->object->getContent(), $list['order.cart.content'] );
-		$this->assertEquals( $this->object->getName(), $list['order.cart.name'] ); ;
-		$this->assertEquals( $this->object->getTimeModified(), $list['order.cart.mtime'] );
-		$this->assertEquals( $this->object->getTimeCreated(), $list['order.cart.ctime'] );
-		$this->assertEquals( $this->object->editor(), $list['order.cart.editor'] );
+		$this->assertEquals( $this->object->getId(), $list['order.basket.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $list['order.basket.siteid'] );
+		$this->assertEquals( $this->object->getCustomerId(), $list['order.basket.customerid'] );
+		$this->assertEquals( $this->object->getContent(), $list['order.basket.content'] );
+		$this->assertEquals( $this->object->getName(), $list['order.basket.name'] ); ;
+		$this->assertEquals( $this->object->getTimeModified(), $list['order.basket.mtime'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $list['order.basket.ctime'] );
+		$this->assertEquals( $this->object->editor(), $list['order.basket.editor'] );
 	}
 }

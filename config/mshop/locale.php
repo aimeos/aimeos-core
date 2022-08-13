@@ -173,7 +173,7 @@ return array(
 						'index' => 'index',
 						'media' => 'media',
 						'order' => 'order',
-						'order/cart' => 'order/cart',
+						'order/basket' => 'order/basket',
 						'plugin' => 'plugin',
 						'price' => 'price',
 						'product' => 'product',

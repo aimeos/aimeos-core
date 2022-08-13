@@ -6,11 +6,11 @@
  * @subpackage Order
  */
 
-namespace Aimeos\MShop\Order\Manager\Cart;
+namespace Aimeos\MShop\Order\Manager\Basket;
 
 
 /**
- * Interface for all order cart manager implementations.
+ * Interface for all order basket manager implementations.
  *
  * @package MShop
  * @subpackage Order
