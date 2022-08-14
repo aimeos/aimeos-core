@@ -75,11 +75,18 @@ abstract class Base
 
 		$key = $token . '-' . $sitecode . '-' . $language . '-' . $currency . '-' . $type;
 
-		if( ( $order = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getItem() ) === null ) {
+		try
+		{
+			if( ( $order = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getItem() ) === null ) {
+				return $this->object()->create();
+			}
+
+			\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
+		}
+		catch( \Exception $e )
+		{
 			return $this->object()->create();
 		}
-
-		\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
 
 		return $order;
 	}
