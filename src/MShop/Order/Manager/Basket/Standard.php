@@ -128,6 +128,25 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface New search criteria object
+	 */
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		$filter = parent::filter( $default, $site );
+
+		if( $default !== false ) {
+			$filter->add( 'order.basket.customerid', '==', $this->context()->user() );
+		}
+
+		return $filter;
+	}
+
+
+	/**
 	 * Adds or updates an order basket object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Basket\Iface $item Order basket object whose data should be saved
