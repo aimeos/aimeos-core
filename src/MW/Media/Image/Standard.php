@@ -64,6 +64,10 @@ class Standard
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)' ) );
 		}
 
+		if( imagepalettetotruecolor( $this->image ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagepalettetotruecolor)' ) );
+		}
+
 		$this->options = $options;
 		$this->mimetype = $mimetype;
 	}
