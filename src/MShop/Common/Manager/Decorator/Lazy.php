@@ -32,6 +32,8 @@ class Lazy
 	{
 		if( $total === null )
 		{
+			$search = clone $search;
+
 			return map( function() use ( $search, $ref, &$total ) {
 				return $this->getManager()->search( $search, $ref, $total )->all();
 			} );
