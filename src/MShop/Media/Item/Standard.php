@@ -246,8 +246,8 @@ class Standard
 	{
 		$url = (string) $this->get( 'media.url', '' );
 
-		if( $version ) {
-			$url .= $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
+		if( $url && $version && !\Aimeos\Base\Str::starts( $url, ['http', 'data:', '/'] ) && $this->getTimeModified() ) {
+			$url .= '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() );
 		}
 
 		return $url;
@@ -279,34 +279,36 @@ class Standard
 		}
 
 		ksort( $list );
-		$time = $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
+		$path = '';
 
 		if( $width === false ) {
-			return (string) reset( $list ) . $time;
+			$path = reset( $list );
 		} elseif( $width === true ) {
-			return (string) end( $list ) . $time;
+			$path = end( $list );
 		} elseif( isset( $list[$width] ) ) {
-			return (string) $list[$width] . $time;
-		}
+			$path = $list[$width];
+		} else {
+			$before = $after = [];
 
-		$before = $after = [];
+			foreach( $list as $idx => $path )
+			{
+				if( $idx < $width ) {
+					$before[$idx] = $path;
+				} else {
+					$after[$idx] = $path;
+				}
+			}
 
-		foreach( $list as $idx => $path )
-		{
-			if( $idx < $width ) {
-				$before[$idx] = $path;
-			} else {
-				$after[$idx] = $path;
+			if( ( $path = array_shift( $after ) ) === null && ( $path = array_pop( $before ) ) === null ) {
+				return '';
 			}
 		}
 
-		if( ( $path = array_shift( $after ) ) !== null ) {
-			return (string) $path . $time;
-		} elseif( ( $path = array_pop( $before ) ) !== null ) {
-			return (string) $path . $time;
+		if( $path && !\Aimeos\Base\Str::starts( $path, ['http', 'data:', '/'] ) && $this->getTimeModified() ) {
+			$path .= '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() );
 		}
 
-		return '';
+		return $path;
 	}
 
 
@@ -320,12 +322,13 @@ class Standard
 	{
 		$previews = (array) $this->get( 'media.previews', [] );
 
-		if( $version )
+		if( $version && $this->getTimeModified() )
 		{
-			$time = $this->getTimeModified() ? '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ) : '';
-
-			foreach( $previews as $key => $path ) {
-				$previews[$key] = $path . $time;
+			foreach( $previews as $key => $path )
+			{
+				if( $path && !\Aimeos\Base\Str::starts( $path, ['http', 'data:', '/'] ) ) {
+					$previews[$key] = $path . '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() );
+				}
 			}
 		}
 
