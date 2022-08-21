@@ -168,6 +168,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
+		'supplier.position' => array(
+			'code' => 'supplier.position',
+			'internalcode' => 'msup."pos"',
+			'label' => 'Position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+		),
 		'supplier.status' => array(
 			'code' => 'supplier.status',
 			'internalcode' => 'msup."status"',
@@ -503,6 +510,7 @@ class Standard
 
 		$stmt->bind( $idx++, $item->getCode() );
 		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );

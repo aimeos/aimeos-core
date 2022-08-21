@@ -105,6 +105,29 @@ class Standard
 	}
 
 
+	/**
+	 * Returns the position of the supplier item.
+	 *
+	 * @return int Position of the item
+	 */
+	public function getPosition() : int
+	{
+		return $this->get( 'supplier.position', 0 );
+	}
+
+
+	/**
+	 * Sets the new position of the supplier item.
+	 *
+	 * @param int $position Position of the item
+	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
+	 */
+	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'supplier.position', $position );
+	}
+
+
 
 	/**
 	 * Returns the status of the item
@@ -169,6 +192,7 @@ class Standard
 				case 'supplier.code': $item = $item->setCode( $value ); break;
 				case 'supplier.label': $item = $item->setLabel( $value ); break;
 				case 'supplier.status': $item = $item->setStatus( (int) $value ); break;
+				case 'supplier.position': $item = $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 
@@ -192,6 +216,7 @@ class Standard
 		$list['supplier.code'] = $this->getCode();
 		$list['supplier.label'] = $this->getLabel();
 		$list['supplier.status'] = $this->getStatus();
+		$list['supplier.position'] = $this->getPosition();
 
 		return $list;
 	}

@@ -338,9 +338,9 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_supplier" ( :names
-					"code", "label", "status", "mtime", "editor", "siteid", "ctime"
+					"code", "label", "pos", "status", "mtime", "editor", "siteid", "ctime"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -348,7 +348,7 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_supplier"
 				SET :names
-					"code" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+					"code" = ?, "label" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
@@ -357,14 +357,15 @@ return array(
 				SELECT :columns
 					msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 					msup."code" AS "supplier.code", msup."label" AS "supplier.label",
-					msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
-					msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
+					msup."pos" AS "supplier.position", msup."status" AS "supplier.status",
+					msup."mtime" AS "supplier.mtime", msup."ctime" AS "supplier.ctime",
+					msup."editor" AS "supplier.editor"
 				FROM "mshop_supplier" msup
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
-					msup."id", msup."siteid", msup."code", msup."label", msup."status", msup."mtime",
-					msup."editor", msup."ctime"
+					msup."id", msup."siteid", msup."code", msup."label", msup."pos", msup."status",
+					msup."mtime", msup."editor", msup."ctime"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -372,8 +373,9 @@ return array(
 				SELECT :columns
 					msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 					msup."code" AS "supplier.code", msup."label" AS "supplier.label",
-					msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
-					msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
+					msup."pos" AS "supplier.position", msup."status" AS "supplier.status",
+					msup."mtime" AS "supplier.mtime", msup."ctime" AS "supplier.ctime",
+					msup."editor" AS "supplier.editor"
 				FROM "mshop_supplier" msup
 				:joins
 				WHERE :cond

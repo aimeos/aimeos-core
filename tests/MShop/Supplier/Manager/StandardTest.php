@@ -103,9 +103,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
+		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
-		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
+		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -113,9 +114,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
+		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
-		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
+		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -146,6 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'supplier.siteid', null );
 		$expr[] = $search->compare( '==', 'supplier.label', 'Unit Supplier 001' );
 		$expr[] = $search->compare( '==', 'supplier.code', 'unitSupplier001' );
+		$expr[] = $search->compare( '==', 'supplier.position', 0 );
 		$expr[] = $search->compare( '==', 'supplier.status', 1 );
 		$expr[] = $search->compare( '>=', 'supplier.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );

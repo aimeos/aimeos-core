@@ -14,7 +14,7 @@ return [
 	],
 
 	'supplier' => [[
-		'supplier.label' => 'Unit Supplier 001', 'supplier.code' => 'unitSupplier001', 'supplier.status' => 1,
+		'supplier.label' => 'Unit Supplier 001', 'supplier.code' => 'unitSupplier001', 'supplier.position' => 0, 'supplier.status' => 1,
 		'address' => [[
 			'supplier.address.company' => 'Example company', 'supplier.address.vatid' => 'DE999999999',
 			'supplier.address.salutation' => 'ms', 'supplier.address.title' => '',
@@ -48,7 +48,7 @@ return [
 			]],
 		],
 	], [
-		'supplier.label' => 'Unit Supplier 002', 'supplier.code' => 'unitSupplier002', 'supplier.status' => 1,
+		'supplier.label' => 'Unit Supplier 002', 'supplier.code' => 'unitSupplier002', 'supplier.position' => 1, 'supplier.status' => 1,
 		'address' => [[
 			'supplier.address.company' => 'Example company LLC', 'supplier.address.vatid' => 'DE999999999',
 			'supplier.address.salutation' => 'ms', 'supplier.address.title' => '',
@@ -63,7 +63,7 @@ return [
 			'supplier.address.position' => '1', 'supplier.address.birthday' => '2001-01-01',
 		]],
 	], [
-		'supplier.label' => 'Unit Supplier 003', 'supplier.code' => 'unitSupplier003', 'supplier.status' => 0,
+		'supplier.label' => 'Unit Supplier 003', 'supplier.code' => 'unitSupplier003', 'supplier.position' => 1, 'supplier.status' => 0,
 		'address' => [[
 			'supplier.address.company' => 'unitcompany', 'supplier.address.vatid' => 'vatnumber',
 			'supplier.address.salutation' => 'company', 'supplier.address.title' => 'unittitle',

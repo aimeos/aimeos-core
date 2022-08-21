@@ -23,6 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.siteid' => 99,
 			'supplier.label' => 'unitObject',
 			'supplier.code' => 'unitCode',
+			'supplier.position' => 1,
 			'supplier.status' => 4,
 			'supplier.mtime' => '2011-01-01 00:00:02',
 			'supplier.ctime' => '2011-01-01 00:00:01',
@@ -97,6 +98,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
+	public function testGetPosition()
+	{
+		$this->assertEquals( 1, $this->object->getPosition() );
+	}
+
+
+	public function testSetPosition()
+	{
+		$return = $this->object->setPosition( 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $return );
+		$this->assertEquals( 0, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
+	}
 
 
 	public function testGetStatus()
@@ -185,6 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.id' => 1,
 			'supplier.code' => 'test',
 			'supplier.label' => 'test item',
+			'supplier.position' => 1,
 			'supplier.status' => 0,
 		);
 
@@ -196,6 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['supplier.code'], $item->getCode() );
 		$this->assertEquals( $list['supplier.label'], $item->getLabel() );
 		$this->assertEquals( $list['supplier.status'], $item->getStatus() );
+		$this->assertEquals( $list['supplier.position'], $item->getPosition() );
 	}
 
 
@@ -210,6 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['supplier.label'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['supplier.code'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['supplier.status'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['supplier.position'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['supplier.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['supplier.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['supplier.editor'] );

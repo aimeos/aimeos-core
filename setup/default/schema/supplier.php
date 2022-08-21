@@ -18,11 +18,12 @@ return array(
 			$table->code();
 			$table->string( 'label' )->default( '' );
 			$table->smallint( 'status' )->default( 1 );
+			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
 			$table->unique( ['code', 'siteid'], 'unq_mssup_code_sid' );
 			$table->index( ['label', 'siteid'], 'idx_mssup_label_sid' );
-			$table->index( ['siteid', 'status'], 'idx_mssup_sid_status' );
+			$table->index( ['siteid', 'status', 'pos', 'label'], 'idx_mssup_sid_stat_pos_label' );
 		},
 
 		'mshop_supplier_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
