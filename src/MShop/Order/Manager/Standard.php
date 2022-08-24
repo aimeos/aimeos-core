@@ -1026,7 +1026,7 @@ class Standard
 			$row = $result->fetch();
 			$result->finish();
 
-			$conn->create( 'UPDATE "mshop_locale_site" SET "invoice" = "invoice" + 1 WHERE "siteid" = ?' )
+			$conn->create( 'UPDATE "mshop_locale_site" SET "invoiceno" = "invoiceno" + 1 WHERE "siteid" = ?' )
 				->bind( 1, $siteId )->execute()->finish();
 
 			$conn->query( 'COMMIT' )->finish();
@@ -1034,6 +1034,7 @@ class Standard
 		catch( \Exception $e )
 		{
 			$conn->close();
+			throw $e;
 		}
 
 		return $row['invoiceno'] ?? '';
