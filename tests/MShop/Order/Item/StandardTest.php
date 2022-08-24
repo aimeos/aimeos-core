@@ -22,6 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.id' => 15,
 			'order.siteid' => 99,
 			'order.channel' => 'web',
+			'order.invoiceno' => 'INV-0014',
 			'order.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PENDING,
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 			'order.datepayment' => '2004-12-01 12:34:56',
@@ -123,6 +124,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getBaseId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetInvoiceNumber()
+	{
+		$this->assertEquals( $this->values['order.invoiceno'], $this->object->getInvoiceNumber() );
+	}
+
+
+	public function testSetInvoiceNumber()
+	{
+		$return = $this->object->setInvoiceNumber( 'INV-01010' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
+		$this->assertEquals( 'INV-01010', $this->object->getInvoiceNumber() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -259,6 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'order.id' => 1,
+			'order.invoiceno' => 'INV-1',
 			'order.channel' => 'web',
 			'order.baseid' => 2,
 			'order.relatedid' => '3',
@@ -273,6 +291,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.id'], $item->getId() );
+		$this->assertEquals( $list['order.invoiceno'], $item->getInvoiceNumber() );
 		$this->assertEquals( $list['order.channel'], $item->getChannel() );
 		$this->assertEquals( $list['order.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.relatedid'], $item->getRelatedId() );
@@ -290,12 +309,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $list['order.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.siteid'] );
+		$this->assertEquals( $this->object->getBaseId(), $list['order.baseid'] );
 		$this->assertEquals( $this->object->getChannel(), $list['order.channel'] );
+		$this->assertEquals( $this->object->getInvoiceNumber(), $list['order.invoiceno'] );
 		$this->assertEquals( $this->object->getStatusDelivery(), $list['order.statusdelivery'] );
 		$this->assertEquals( $this->object->getStatusPayment(), $list['order.statuspayment'] );
 		$this->assertEquals( $this->object->getDatePayment(), $list['order.datepayment'] );
 		$this->assertEquals( $this->object->getDateDelivery(), $list['order.datedelivery'] );
-		$this->assertEquals( $this->object->getBaseId(), $list['order.baseid'] );
 		$this->assertEquals( $this->object->getRelatedId(), $list['order.relatedid'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.ctime'] );

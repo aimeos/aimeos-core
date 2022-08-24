@@ -231,6 +231,7 @@ return array(
 			$table->bigint( 'baseid' );
 			$table->refid( 'relatedid' )->default( '' );
 			$table->string( 'channel', 16 )->default( '' );
+			$table->string( 'invoiceno', 32 )->default( '' );
 			$table->datetime( 'datepayment' )->null( true );
 			$table->datetime( 'datedelivery' )->null( true );
 			$table->smallint( 'statuspayment' )->default( -1 );

@@ -1022,11 +1022,11 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_order" ( :names
-					"baseid", "channel", "datepayment", "datedelivery",
+					"baseid", "invoiceno", "channel", "datepayment", "datedelivery",
 					"statusdelivery", "statuspayment", "relatedid", "mtime",
 					"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "cwday", "chour"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -1034,8 +1034,8 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_order"
 				SET :names
-					"baseid" = ?, "channel" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?,
-					"statuspayment" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
+					"baseid" = ?, "invoiceno" = ?, "channel" = ?, "datepayment" = ?, "datedelivery" = ?,
+					"statusdelivery" = ?, "statuspayment" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
@@ -1048,8 +1048,8 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mord."id" AS "order.id", mord."baseid" AS "order.baseid",
-					mord."siteid" AS "order.siteid", mord."channel" AS "order.channel",
+					mord."id" AS "order.id", mord."baseid" AS "order.baseid", mord."channel" AS "order.channel",
+					mord."siteid" AS "order.siteid", mord."invoiceno" AS "order.invoiceno",
 					mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
@@ -1058,15 +1058,16 @@ return array(
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
-					mord."id", mord."baseid", mord."siteid", mord."channel", mord."datepayment", mord."datedelivery",
-					mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime", mord."mtime", mord."editor"
+					mord."id", mord."baseid", mord."invoiceno", mord."siteid", mord."channel", mord."datepayment",
+					mord."datedelivery", mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime",
+					mord."mtime", mord."editor"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mord."id" AS "order.id", mord."baseid" AS "order.baseid",
-					mord."siteid" AS "order.siteid", mord."channel" AS "order.channel",
+					mord."id" AS "order.id", mord."baseid" AS "order.baseid", mord."channel" AS "order.channel",
+					mord."siteid" AS "order.siteid", mord."invoiceno" AS "order.invoiceno",
 					mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",

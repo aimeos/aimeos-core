@@ -229,6 +229,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
 		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
 		$this->assertEquals( $item->getStatusDelivery(), $itemSaved->getStatusDelivery() );
+		$this->assertEquals( $item->getInvoiceNumber(), $itemSaved->getInvoiceNumber() );
 		$this->assertEquals( $item->getRelatedId(), $itemSaved->getRelatedId() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
@@ -243,6 +244,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
 		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );
 		$this->assertEquals( $itemExp->getStatusDelivery(), $itemUpd->getStatusDelivery() );
+		$this->assertEquals( $itemExp->getInvoiceNumber(), $itemUpd->getInvoiceNumber() );
 		$this->assertEquals( $itemExp->getRelatedId(), $itemUpd->getRelatedId() );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );
@@ -388,6 +390,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );
 		$expr[] = $search->compare( '==', 'order.channel', 'web' );
+		$expr[] = $search->compare( '==', 'order.invoiceno', 'UINV-001' );
 		$expr[] = $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' );
 		$expr[] = $search->compare( '==', 'order.datedelivery', null );
 		$expr[] = $search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );

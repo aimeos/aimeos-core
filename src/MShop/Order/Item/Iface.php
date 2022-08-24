@@ -57,6 +57,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setBaseId( string $id ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
+	 * Returns the number of the invoice.
+	 *
+	 * @return string Invoice number
+	 */
+	public function getInvoiceNumber() : string;
+
+	/**
+	 * Sets the number of the invoice.
+	 *
+	 * @param string $value Invoice number
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 */
+	public function setInvoiceNumber( string $value ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
 	 * Returns the channel of the invoice (repeating, web, phone, etc).
 	 *
 	 * @return string Invoice channel

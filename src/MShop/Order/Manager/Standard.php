@@ -157,6 +157,13 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.invoiceno' => array(
+			'code' => 'order.invoiceno',
+			'internalcode' => 'mord."invoiceno"',
+			'label' => 'Invoice number',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
 		'order.relatedid' => array(
 			'code' => 'order.relatedid',
 			'internalcode' => 'mord."relatedid"',
@@ -566,6 +573,7 @@ class Standard
 		}
 
 		$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getInvoiceNumber() );
 		$stmt->bind( $idx++, $item->getChannel() );
 		$stmt->bind( $idx++, $item->getDatePayment() );
 		$stmt->bind( $idx++, $item->getDateDelivery() );

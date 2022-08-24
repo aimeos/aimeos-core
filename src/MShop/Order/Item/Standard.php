@@ -101,6 +101,28 @@ class Standard
 		return $this->set( 'order.baseid', $id );
 	}
 
+	/**
+	 * Returns the number of the invoice.
+	 *
+	 * @return string Invoice number
+	 */
+	public function getInvoiceNumber() : string
+	{
+		return $this->get( 'order.invoiceno', '' );
+	}
+
+
+	/**
+	 * Sets the number of the invoice.
+	 *
+	 * @param string $value Invoice number
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 */
+	public function setInvoiceNumber( string $value ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'order.invoiceno', $value );
+	}
+
 
 	/**
 	 * Returns the channel of the invoice (repeating, web, phone, etc).
@@ -266,6 +288,7 @@ class Standard
 			{
 				case 'order.channel': $item = $item->setChannel( $value ); break;
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
+				case 'order.invoiceno': !$private ?: $item = $item->setInvoiceNumber( $value ); break;
 				case 'order.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
 				case 'order.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
@@ -292,6 +315,7 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['order.channel'] = $this->getChannel();
+		$list['order.invoiceno'] = $this->getInvoiceNumber();
 		$list['order.statusdelivery'] = $this->getStatusDelivery();
 		$list['order.statuspayment'] = $this->getStatusPayment();
 		$list['order.datedelivery'] = $this->getDateDelivery();
