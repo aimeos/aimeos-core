@@ -480,6 +480,15 @@ class Standard
 			return $item;
 		}
 
+		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
+		{
+			try {
+				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
+			} catch( \Exception $e ) { // redo on transaction deadlock
+				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
+			}
+		}
+
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
@@ -993,6 +1002,41 @@ class Standard
 
 			$statusManager->save( $statusItem, false );
 		}
+	}
+
+
+	/**
+	 * Creates a new invoice number for the passed order and site.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item with necessary values
+	 * @return string Unique invoice number for the current site
+	 */
+	public function createInvoiceNumber( \Aimeos\MShop\Order\Item\Iface $item ) : string
+	{
+		$context = $this->context();
+		$siteId = $context->locale()->getSiteId();
+		$conn = $context->db( 'db-locale', true );
+
+		try
+		{
+			$conn->query( 'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE' )->finish();
+			$conn->query( 'START TRANSACTION' )->finish();
+
+			$stmt = $conn->query( 'SELECT "invoiceno" FROM "mshop_locale_site" where "siteid" = ?', [$siteId] );
+			$row = $result->fetch();
+			$result->finish();
+
+			$stmt = $conn->create( 'UPDATE "mshop_locale_site" SET "invoice" = "invoice" + 1 WHERE "siteid" = ?' );
+			$stmt->bind( 1, $siteId )->execute()->finish();
+
+			$conn->query( 'COMMIT' )->finish();
+		}
+		catch( \Exception $e )
+		{
+			$conn->close();
+		}
+
+		return $row['invoiceno'] ?? '';
 	}
 
 

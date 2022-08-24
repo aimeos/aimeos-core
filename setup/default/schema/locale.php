@@ -52,7 +52,7 @@ return array(
 			$table->smallint( 'level' )->default( 0 );
 			$table->decimal( 'rating', 4 )->default( 0 );
 			$table->int( 'ratings' )->default( 0 );
-			$table->bigint( 'invoiceno' )->default( 1 );
+			$table->int( 'invoiceno' )->default( 1 );
 			$table->int( 'nleft' );
 			$table->int( 'nright' );
 			$table->smallint( 'status' )->default( 1 );
