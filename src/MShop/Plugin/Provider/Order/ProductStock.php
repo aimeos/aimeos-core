@@ -125,28 +125,31 @@ class ProductStock
 	{
 		$outOfStock = [];
 		$products = $order->getProducts();
+		$siteIds = $this->context()->locale()->getSitePath();
 
 		foreach( $products as $pos => $orderProduct )
 		{
 			$stocklevel = 0;
-			$siteid = $orderProduct->getSiteId();
 			$type = $orderProduct->getStockType();
 			$prodid = $orderProduct->getProductId();
 
-			if( isset( $stockMap[$siteid][$prodid][$type] ) )
+			foreach( array_merge( $siteIds, [$orderProduct->getSiteId()] ) as $siteid )
 			{
-				$stockItem = $stockMap[$siteid][$prodid][$type];
-				$orderProduct->setTimeFrame( $stockItem->getTimeFrame() );
-
-				if( ( $stocklevel = $stockItem->getStockLevel() ) === null ) {
-					continue;
-				}
-
-				if( $stocklevel >= $orderProduct->getQuantity() )
+				if( isset( $stockMap[$siteid][$prodid][$type] ) )
 				{
-					$stock = $stockItem->getStockLevel() - $orderProduct->getQuantity();
-					$stockItem->setStockLevel( $stock );
-					continue;
+					$stockItem = $stockMap[$siteid][$prodid][$type];
+					$orderProduct->setTimeFrame( $stockItem->getTimeFrame() );
+
+					if( ( $stocklevel = $stockItem->getStockLevel() ) === null ) {
+						continue 2;
+					}
+
+					if( $stocklevel >= $orderProduct->getQuantity() )
+					{
+						$stock = $stockItem->getStockLevel() - $orderProduct->getQuantity();
+						$stockItem->setStockLevel( $stock );
+						continue 2;
+					}
 				}
 			}
 
