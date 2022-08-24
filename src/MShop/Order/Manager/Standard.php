@@ -1022,12 +1022,12 @@ class Standard
 			$conn->query( 'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE' )->finish();
 			$conn->query( 'START TRANSACTION' )->finish();
 
-			$stmt = $conn->query( 'SELECT "invoiceno" FROM "mshop_locale_site" where "siteid" = ?', [$siteId] );
+			$result = $conn->query( 'SELECT "invoiceno" FROM "mshop_locale_site" where "siteid" = ?', [$siteId] );
 			$row = $result->fetch();
 			$result->finish();
 
-			$stmt = $conn->create( 'UPDATE "mshop_locale_site" SET "invoice" = "invoice" + 1 WHERE "siteid" = ?' );
-			$stmt->bind( 1, $siteId )->execute()->finish();
+			$conn->create( 'UPDATE "mshop_locale_site" SET "invoice" = "invoice" + 1 WHERE "siteid" = ?' )
+				->bind( 1, $siteId )->execute()->finish();
 
 			$conn->query( 'COMMIT' )->finish();
 		}
