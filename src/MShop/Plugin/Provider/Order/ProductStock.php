@@ -84,15 +84,19 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
+		$context = $this->context();
+		$siteIds = $context->locale()->getSitePath();
+
+		$manager = \Aimeos\MShop::create( $context, 'stock' );
 		$filter = $manager->filter();
 		$expr = $stockMap = [];
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
 			$expr[] = $filter->and( [
+				// use stocks from parent sites if none for the site the product is from is available
+				$filter->is( 'stock.siteid', '==', array_merge( $siteIds, [$orderProduct->getSiteId()] ) ),
 				$filter->is( 'stock.productid', '==', $orderProduct->getProductId() ),
-				$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
 				$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
 			] );
 		}
