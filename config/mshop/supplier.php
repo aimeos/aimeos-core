@@ -12,7 +12,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_supplier_address"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -126,7 +126,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_supplier_list_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -241,7 +241,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_supplier_list"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -332,7 +332,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_supplier"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

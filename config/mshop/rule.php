@@ -12,7 +12,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_rule_type"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -99,7 +99,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_rule"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

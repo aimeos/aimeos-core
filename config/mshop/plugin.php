@@ -19,7 +19,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_plugin_type"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -106,7 +106,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_plugin"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_text_list_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -128,7 +128,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_text_list"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -220,7 +220,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_text_type"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -307,7 +307,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_text"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_product_list_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -128,7 +128,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_product_list"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -221,7 +221,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_product_property_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -308,7 +308,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_product_property"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -396,7 +396,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_product_type"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -483,7 +483,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_product"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

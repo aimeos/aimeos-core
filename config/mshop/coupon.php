@@ -12,7 +12,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_coupon_code"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -108,7 +108,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_coupon"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

@@ -58,7 +58,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_subscription"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'search' => array(

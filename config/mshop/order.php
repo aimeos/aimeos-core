@@ -41,7 +41,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_order_base_address"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -167,7 +167,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_order_base_coupon"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 						'
 				),
 				'insert' => array(
@@ -264,7 +264,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "mshop_order_base_product_attr"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
@@ -367,7 +367,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_order_base_product"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -509,7 +509,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "mshop_order_base_service_attr"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
@@ -612,7 +612,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_order_base_service"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -730,7 +730,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_order_base"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -816,7 +816,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_order_basket"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -927,7 +927,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_order_status"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -1042,7 +1042,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_order"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'search' => array(

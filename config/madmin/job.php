@@ -12,7 +12,7 @@ return array(
 			'ansi' => '
 				DELETE FROM "madmin_job"
 				WHERE :cond
-				AND "siteid" = ?
+				AND "siteid" LIKE ?
 			',
 		),
 		'insert' => array(

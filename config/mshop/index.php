@@ -12,7 +12,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_attribute"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -83,7 +83,7 @@ return array(
 			'cleanup' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_attribute"
-					WHERE "mtime" < ? AND "siteid" = ?
+					WHERE "mtime" < ? AND "siteid" LIKE ?
 				'
 			),
 			'optimize' => array(
@@ -98,7 +98,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_catalog"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -169,7 +169,7 @@ return array(
 			'cleanup' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_catalog"
-					WHERE "mtime" < ? AND "siteid" = ?
+					WHERE "mtime" < ? AND "siteid" LIKE ?
 				'
 			),
 			'optimize' => array(
@@ -184,7 +184,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_price"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -253,7 +253,7 @@ return array(
 			'cleanup' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_price"
-					WHERE "mtime" < ? AND "siteid" = ?
+					WHERE "mtime" < ? AND "siteid" LIKE ?
 				'
 			),
 			'optimize' => array(
@@ -268,7 +268,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_supplier"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -339,7 +339,7 @@ return array(
 			'cleanup' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_supplier"
-					WHERE "mtime" < ? AND "siteid" = ?
+					WHERE "mtime" < ? AND "siteid" LIKE ?
 				'
 			),
 			'optimize' => array(
@@ -354,7 +354,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_text"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -423,7 +423,7 @@ return array(
 			'cleanup' => array(
 				'ansi' => '
 					DELETE FROM "mshop_index_text"
-					WHERE "mtime" < ? AND "siteid" = ?
+					WHERE "mtime" < ? AND "siteid" LIKE ?
 				'
 			),
 			'optimize' => array(

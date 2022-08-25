@@ -898,7 +898,7 @@ abstract class Base
 		$stmt = $conn->create( $sql );
 
 		if( $siteid ) {
-			$stmt->bind( 1, $context->locale()->getSiteId() );
+			$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
 		}
 
 		$stmt->execute()->finish();

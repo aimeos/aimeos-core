@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_attribute_list_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -128,7 +128,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_attribute_list"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -221,7 +221,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_attribute_property_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -308,7 +308,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_attribute_property"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -396,7 +396,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_attribute_type"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -483,7 +483,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_attribute"
-				WHERE :cond AND siteid = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(

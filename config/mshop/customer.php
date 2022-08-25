@@ -12,7 +12,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer_address"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -125,7 +125,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer_group"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -210,7 +210,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_customer_list_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -325,7 +325,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer_list"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -418,7 +418,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "mshop_customer_property_type"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -505,7 +505,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer_property"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" LIKE ?
 				'
 			),
 			'insert' => array(
@@ -620,7 +620,7 @@ return array(
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_customer"
-				WHERE :cond AND "siteid" = ?
+				WHERE :cond AND "siteid" LIKE ?
 			'
 		),
 		'insert' => array(
