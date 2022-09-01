@@ -73,8 +73,12 @@ class MShop
 		if( empty( $name ) )
 		{
 			$subpath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
-			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
-			$name = $name ?: $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
+            if($subpath) {
+                $name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', 'Standard');
+            }
+            else {
+                $name = $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
+            }
 		}
 
 		$localClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
@@ -267,8 +271,17 @@ class MShop
 	 */
 	protected static function instantiate( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name )
 	{
-		$iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';
-		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $name;
+        $config = $context->config();
+
+        $iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';
+
+        if( !empty( $parts ) )
+        {
+            $classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
+        } else
+        {
+            $classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $name;
+        }
 
 		$manager = self::createManager( $context, $classname, $iface, $domain );
 
@@ -284,7 +297,7 @@ class MShop
 			$localName = $name;
 			$subpath .= $part . '/';
 
-			if( $part !== $last ) {
+            if( $part !== $last ) {
 				$localName = $context->config()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', 'Standard' );
 			}
 
