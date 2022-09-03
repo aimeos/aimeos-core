@@ -635,6 +635,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 			while( $this->isChild( $newNode, $node ) )
 			{
+				if( $newNode->__get( 'level' ) > $node->__get( 'level' ) + 1 ) {
+					continue 2;
+				}
+
 				$node->addChild( $newNode );
 
 				if( ( $newNode = $this->createTree( $result, $newNode ) ) === null ) {
