@@ -57,14 +57,14 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$this->config = [];
 
 		$this->config['search'] = array(
-			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
-			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'parentid', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
-			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'label', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
-			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'code', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
-			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'status', 'type' => 'boolean', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
-			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'level', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
-			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'nleft', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
-			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'nright', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'node.id', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'node.parentid', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'node.label', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'node.code', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'node.status', 'type' => 'boolean', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'node.level', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'node.nleft', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'node.nright', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
 
 		);
 
@@ -130,7 +130,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l1n1\', \'l1n1\', 1, 2, 7)';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l2n1\', \'l2n1\', 2, 3, 6)';
+		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (0, \'l2n1\', \'l2n1\', 2, 3, 6)';
 		$conn->create( $sql )->execute()->finish();
 
 		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l3n1\', \'l3n1\', 3, 4, 5)';
@@ -345,6 +345,21 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 3, count( $node->getChildren() ) );
 		$this->assertEquals( 1, count( $node->getChild( 0 )->getChildren() ) );
 		$this->assertEquals( 1, count( $node->getChild( 0 )->getChild( 0 )->getChildren() ) );
+		$this->assertEquals( 1, count( $node->getChild( 1 )->getChildren() ) );
+		$this->assertEquals( 2, count( $node->getChild( 1 )->getChild( 0 )->getChildren() ) );
+		$this->assertEquals( 0, count( $node->getChild( 2 )->getChildren() ) );
+	}
+
+
+	public function testGetNodeTreeCondition()
+	{
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm->get() );
+		$filter = $manager->createSearch()->add( 'tree.status', '==', 1 );
+
+		$node = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, $filter );
+
+		$this->assertEquals( 3, count( $node->getChildren() ) );
+		$this->assertEquals( 0, count( $node->getChild( 0 )->getChildren() ) );
 		$this->assertEquals( 1, count( $node->getChild( 1 )->getChildren() ) );
 		$this->assertEquals( 2, count( $node->getChild( 1 )->getChild( 0 )->getChildren() ) );
 		$this->assertEquals( 0, count( $node->getChild( 2 )->getChildren() ) );
