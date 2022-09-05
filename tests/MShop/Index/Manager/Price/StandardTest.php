@@ -75,6 +75,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$filter = $this->object->filter();
+		$filter->add( $filter->make( 'index.price:value', ['EUR'] ), '>=', '18.00' );
+
+		$iterator = $this->object->iterator( $filter );
+		$products1 = $this->object->iterate( $iterator, [], 10 );
+		$products2 = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 10, count( $products1 ) );
+		$this->assertEquals( 1, count( $products2 ) );
+
+		foreach( $products1 as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testRemove()
 	{
 		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );
@@ -93,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+		$this->assertEquals( 11, count( $result ) );
 	}
 
 

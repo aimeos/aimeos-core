@@ -64,6 +64,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$filter = $this->object->filter( true );
+		$filter->add( $filter->make( 'index.text:name', ['de'] ), '=~', 'Cafe' );
+
+		$iterator = $this->object->iterator( $filter );
+		$products = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 2, count( $products ) );
+
+		foreach( $products as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testRemove()
 	{
 		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );

@@ -189,6 +189,7 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/iterate/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/search/ansi
 		 */
@@ -274,6 +275,7 @@ class Standard
 		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/search/ansi
+		 * @see mshop/index/manager/iterate/ansi
 		 * @see mshop/index/manager/aggregate/ansi
 		 */
 		return $this->optimizeBase( 'mshop/index/manager/optimize' );
@@ -326,6 +328,77 @@ class Standard
 
 		$this->context()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
 		return $this;
+	}
+
+
+	/**
+	 * Creates a new iterator based on the filter criteria
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
+	 */
+	public function iterator( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Iterator\Iface
+	{
+		/** mshop/index/manager/iterate/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the order
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the ":order"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for iterate over items
+		 * @since 2022.10
+		 * @category Developer
+		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/search/ansi
+		 * @see mshop/index/manager/optimize/ansi
+		 * @see mshop/index/manager/aggregate/ansi
+		 */
+
+		return $this->iteratorIndexBase( $filter, 'mshop/index/manager/iterate' );
+	}
+
+
+	/**
+	 * Iterates over all matching items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int $count Maximum number of items which should be returned
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterate( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
+	{
+		return $this->iterateIndexBase( $iterator, $ref, $count );
 	}
 
 
@@ -461,6 +534,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/iterate/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/aggregate/ansi
 		 */
@@ -512,6 +586,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 * @see mshop/index/manager/search/ansi
+		 * @see mshop/index/manager/iterate/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/aggregate/ansi
 		 */

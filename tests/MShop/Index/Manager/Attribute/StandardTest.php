@@ -109,6 +109,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$attributeManager = \Aimeos\MShop::create( $this->context, 'attribute' );
+		$id = $attributeManager->find( '30', [], 'product', 'length' )->getId();
+
+		$filter = $this->object->filter()->add( 'index.attribute.id', '==', $id );
+
+		$iterator = $this->object->iterator( $filter );
+		$products = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 4, count( $products ) );
+
+		foreach( $products as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testRemove()
 	{
 		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );

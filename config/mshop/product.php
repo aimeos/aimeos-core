@@ -496,6 +496,30 @@ return array(
 				)
 			'
 		),
+		'iterate' => array(
+			'ansi' => '
+				SELECT :columns
+					mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
+					mpro."type" AS "product.type", mpro."code" AS "product.code",
+					mpro."label" AS "product.label", mpro."url" AS "product.url",
+					mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
+					mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
+					mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
+					mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
+					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
+					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
+					mpro."instock" AS "product.instock"
+				FROM "mshop_product" mpro
+				:joins
+				WHERE :cond
+				GROUP BY :columns :group
+					mpro."id", mpro."siteid", mpro."type", mpro."code", mpro."label", mpro."url",
+					mpro."target", mpro."dataset", mpro."scale", mpro."config", mpro."start", mpro."end",
+					mpro."status", mpro."ctime", mpro."mtime", mpro."editor", mpro."rating", mpro."ratings",
+					mpro."instock"
+				ORDER BY :order
+			',
+		),
 		'update' => array(
 			'ansi' => '
 				UPDATE "mshop_product"

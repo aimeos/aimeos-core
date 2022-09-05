@@ -69,6 +69,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
+
+		$filter = $this->object->filter( true );
+		$filter->add( $filter->make( 'index.supplier:position', ['default', $id] ), '>=', 0 );
+
+		$iterator = $this->object->iterator( $filter );
+		$products = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 2, count( $products ) );
+
+		foreach( $products as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testRemove()
 	{
 		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );

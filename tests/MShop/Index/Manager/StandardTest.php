@@ -164,6 +164,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$iterator = $this->object->iterator( $this->object->filter( true )->add( 'index.catalog.id', '!=', null ) );
+		$products = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 8, count( $products ) );
+
+		foreach( $products as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testSave()
 	{
 		$item = self::$products['CNE'];

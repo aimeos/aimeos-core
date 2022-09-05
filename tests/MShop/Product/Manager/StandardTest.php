@@ -142,6 +142,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$iterator = $this->object->iterator( $this->object->filter() );
+
+		$result1 = $this->object->iterate( $iterator, [], 10 );
+		$result2 = $this->object->iterate( $iterator, [], 10 );
+		$result3 = $this->object->iterate( $iterator, [], 10 );
+		$result4 = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 10, count( $result1 ) );
+		$this->assertEquals( 10, count( $result2 ) );
+		$this->assertLessThan( 10, count( $result3 ) );
+		$this->assertNull( $result4 );
+	}
+
+
 	public function testRate()
 	{
 		$item = $this->object->find( 'CNC' );

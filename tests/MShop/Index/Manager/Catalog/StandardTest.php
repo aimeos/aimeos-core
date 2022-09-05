@@ -64,6 +64,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIterate()
+	{
+		$filter = $this->object->filter()->add( 'index.catalog.id', '!=', null );
+
+		$iterator = $this->object->iterator( $filter );
+		$products = $this->object->iterate( $iterator, [], 10 );
+
+		$this->assertEquals( 9, count( $products ) );
+
+		foreach( $products as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
+	}
+
+
 	public function testRemove()
 	{
 		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );

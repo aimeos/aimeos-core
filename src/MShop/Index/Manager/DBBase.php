@@ -344,6 +344,67 @@ abstract class DBBase
 
 
 	/**
+	 * Iterates over all matching items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int $count Maximum number of items which should be returned
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterateIndexBase( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
+	{
+		if( !$iterator->valid() ) {
+			return null;
+		}
+
+		while( $count-- && ( $row = $iterator->current() ) !== null )
+		{
+			$ids[] = $row['id'];
+			$iterator->next();
+		}
+
+		if( !$iterator->valid() ) {
+			$iterator->close();
+		}
+
+		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
+		$prodSearch = $manager->filter()->add( 'product.id', '==', $ids )->slice( 0, count( $ids ) );
+		$items = $manager->search( $prodSearch, $ref );
+
+		foreach( $ids as $id )
+		{
+			if( isset( $items[$id] ) ) {
+				$list[$id] = $items[$id];
+			}
+		}
+
+		return map( $list );
+	}
+
+
+	/**
+	 * Returns iterator for rows matching the given criteria.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
+	 * @param string $cfgPathSearch Configuration path to the SQL statement for iterating over the results
+	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
+	 */
+	protected function iteratorIndexBase( \Aimeos\Base\Criteria\Iface $search, string $cfgPathSearch ) : \Aimeos\MShop\Common\Iterator\Iface
+	{
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName(), true );
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+
+		$total = null;
+		$result = $this->searchItemsBase( $conn, $search, $cfgPathSearch, '', ['product'], $total, $level );
+
+		return new \Aimeos\MShop\Common\Iterator\DB( $conn, $result );
+	}
+
+
+	/**
 	 * Optimizes the catalog customer index if necessary
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute
@@ -383,45 +444,45 @@ abstract class DBBase
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$required = array( 'product' );
+		$required = array( 'product' );
 
-			/** mshop/index/manager/sitemode
-			 * Mode how items from levels below or above in the site tree are handled
-			 *
-			 * By default, only items from the current site are fetched from the
-			 * storage. If the ai-sites extension is installed, you can create a
-			 * tree of sites. Then, this setting allows you to define for the
-			 * whole index domain if items from parent sites are inherited,
-			 * sites from child sites are aggregated or both.
-			 *
-			 * Available constants for the site mode are:
-			 * * 0 = only items from the current site
-			 * * 1 = inherit items from parent sites
-			 * * 2 = aggregate items from child sites
-			 * * 3 = inherit and aggregate items at the same time
-			 *
-			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/sitelevel) to one of the constants.
-			 * If you set it to the same value, it will work as described but you
-			 * can also use different modes. For example, if inheritance and
-			 * aggregation is configured the locale manager but only inheritance
-			 * in the domain manager because aggregating items makes no sense in
-			 * this domain, then items wil be only inherited. Thus, you have full
-			 * control over inheritance and aggregation in each domain.
-			 *
-			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-			 * @category Developer
-			 * @since 2018.01
-			 * @see mshop/locale/manager/sitelevel
-			 */
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+		/** mshop/index/manager/sitemode
+		 * Mode how items from levels below or above in the site tree are handled
+		 *
+		 * By default, only items from the current site are fetched from the
+		 * storage. If the ai-sites extension is installed, you can create a
+		 * tree of sites. Then, this setting allows you to define for the
+		 * whole index domain if items from parent sites are inherited,
+		 * sites from child sites are aggregated or both.
+		 *
+		 * Available constants for the site mode are:
+		 * * 0 = only items from the current site
+		 * * 1 = inherit items from parent sites
+		 * * 2 = aggregate items from child sites
+		 * * 3 = inherit and aggregate items at the same time
+		 *
+		 * You also need to set the mode in the locale manager
+		 * (mshop/locale/manager/sitelevel) to one of the constants.
+		 * If you set it to the same value, it will work as described but you
+		 * can also use different modes. For example, if inheritance and
+		 * aggregation is configured the locale manager but only inheritance
+		 * in the domain manager because aggregating items makes no sense in
+		 * this domain, then items wil be only inherited. Thus, you have full
+		 * control over inheritance and aggregation in each domain.
+		 *
+		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @category Developer
+		 * @since 2018.01
+		 * @see mshop/locale/manager/sitelevel
+		 */
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$ids[] = $row['id'];
-			}
+		while( ( $row = $results->fetch() ) !== null ) {
+			$ids[] = $row['id'];
+		}
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$prodSearch = $manager->filter();
