@@ -595,6 +595,8 @@ class Standard
 			return null;
 		}
 
+		$map = [];
+
 		while( $count-- && ( $row = $iterator->current() ) !== null )
 		{
 			if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )

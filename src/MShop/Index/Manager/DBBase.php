@@ -357,6 +357,8 @@ abstract class DBBase
 			return null;
 		}
 
+		$ids = $list = [];
+
 		while( $count-- && ( $row = $iterator->current() ) !== null )
 		{
 			$ids[] = $row['id'];
