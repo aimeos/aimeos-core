@@ -11,9 +11,9 @@ namespace Aimeos\Upscheme\Task;
 
 class ProductMigrateSupplier extends Base
 {
-	public function before() : array
+	public function after() : array
 	{
-		return ['Product', 'Supplier'];
+		return ['Product', 'Supplier', 'TablesMigrateListsKey'];
 	}
 
 
@@ -29,35 +29,47 @@ class ProductMigrateSupplier extends Base
 		$this->info( 'Migrating supplier references to product domain', 'vv' );
 
 		$insert = $db->stmt()->insert( 'mshop_product_list' )->values( [
-			'parentid' => '?', 'siteid' => '?', 'key' => '?', 'domain' => '?', 'type' => '?',
+			'parentid' => '?', 'siteid' => '?', $db->qi( 'key' ) => '?', 'domain' => '?', 'type' => '?',
 			'start' => '?', 'end' => '?', 'config' => '?', 'status' => '?', 'pos' => '?',
 			'refid' => '?', 'ctime' => '?', 'mtime' => '?', 'editor' => '?'
 		] );
 
+		$failed = 0;
+
 		do
 		{
+			$ids = [];
+
 			$result = $db2->stmt()->select( '*' )->from( 'mshop_supplier_list' )
 				->where( $db2->qi( 'key' ) . " LIKE 'product|%'" )
 				->setMaxResults( 1000 )->execute();
 
-			$ids = [];
 			while( $row = $result->fetchAssociative() )
 			{
-				$ids[] = $row['id'];
-				$insert->setParameter( 0, $row['refid'] )
-					->setParameter( 1, $row['siteid'] )
-					->setParameter( 2, 'supplier|' . $row['type'] . '|' . $row['parentid'] )
-					->setParameter( 3, 'supplier' )
-					->setParameter( 4, $row['type'] )
-					->setParameter( 5, $row['start'] )
-					->setParameter( 6, $row['end'] )
-					->setParameter( 7, $row['config'] )
-					->setParameter( 8, $row['status'] )
-					->setParameter( 9, $row['pos'] )
-					->setParameter( 10, $row['parentid'] )
-					->setParameter( 11, $row['ctime'] )
-					->setParameter( 12, $row['mtime'] )
-					->setParameter( 13, $row['editor'] );
+				try
+				{
+					$insert->setParameter( 0, $row['refid'] )
+						->setParameter( 1, $row['siteid'] )
+						->setParameter( 2, 'supplier|' . $row['type'] . '|' . $row['parentid'] )
+						->setParameter( 3, 'supplier' )
+						->setParameter( 4, $row['type'] )
+						->setParameter( 5, $row['start'] )
+						->setParameter( 6, $row['end'] )
+						->setParameter( 7, $row['config'] )
+						->setParameter( 8, $row['status'] )
+						->setParameter( 9, $row['pos'] )
+						->setParameter( 10, $row['parentid'] )
+						->setParameter( 11, $row['ctime'] )
+						->setParameter( 12, $row['mtime'] )
+						->setParameter( 13, $row['editor'] )
+						->execute();
+
+					$ids[] = $row['id'];
+				}
+				catch( \Exception $e )
+				{
+					$failed++;
+				}
 			}
 
 			if( $count = count( $ids ) )
@@ -68,5 +80,9 @@ class ProductMigrateSupplier extends Base
 			}
 		}
 		while( $count >= 1000 );
+
+		if( $failed ) {
+			$this->info( 'Failed product supplier migrations: ' . $failed );
+		}
 	}
 }
