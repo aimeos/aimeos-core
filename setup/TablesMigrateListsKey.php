@@ -50,7 +50,7 @@ class TablesMigrateListsKey extends Base
 			{
 				$db2 = $this->db( $rname, true );
 
-				$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
+				$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id = ?' );
 
 				$q = $db->stmt();
 				$result = $q->select( 'id', 'domain', 'type', 'refid' )->from( $table )
