@@ -353,20 +353,19 @@ abstract class DBBase
 	 */
 	public function iterateIndexBase( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
 	{
-		if( !$iterator->valid() ) {
-			return null;
-		}
-
 		$ids = $list = [];
 
-		while( $count-- && ( $row = $iterator->current() ) !== null )
+		while( $count-- && $iterator->valid() )
 		{
+			$row = $iterator->current();
 			$ids[] = $row['id'];
 			$iterator->next();
 		}
 
-		if( !$iterator->valid() ) {
+		if( empty( $ids ) )
+		{
 			$iterator->close();
+			return null;
 		}
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );

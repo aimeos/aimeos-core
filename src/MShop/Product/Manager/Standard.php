@@ -591,14 +591,12 @@ class Standard
 	 */
 	public function iterate( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
 	{
-		if( !$iterator->valid() ) {
-			return null;
-		}
-
 		$map = [];
 
-		while( $count-- && ( $row = $iterator->current() ) !== null )
+		while( $count-- && $iterator->valid() )
 		{
+			$row = $iterator->current();
+
 			if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )
 			{
 				$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
@@ -610,8 +608,10 @@ class Standard
 			$iterator->next();
 		}
 
-		if( !$iterator->valid() ) {
+		if( empty( $map ) )
+		{
 			$iterator->close();
+			return null;
 		}
 
 
