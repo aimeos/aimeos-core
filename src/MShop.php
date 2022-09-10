@@ -73,7 +73,8 @@ class MShop
 		if( empty( $name ) )
 		{
 			$subpath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
-			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', 'Standard' );
+			$name = $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
+			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', $name );
 		}
 
 		$localClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
@@ -285,7 +286,7 @@ class MShop
 			$subpath .= $part . '/';
 
 			if( $part !== $last ) {
-				$localName = $context->config()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', 'Standard' );
+				$localName = $context->config()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', $mname );
 			}
 
 			$localClass = str_replace( '/', '\\', ucwords( $subpath, '/' ) );
