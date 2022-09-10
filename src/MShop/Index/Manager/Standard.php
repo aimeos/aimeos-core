@@ -460,7 +460,6 @@ class Standard
 		 */
 		$domains = $config->get( 'mshop/index/manager/domains', [] );
 
-		$submanagers = $this->getSubManagers();
 		$items = map( $items );
 
 		if( !$items->isEmpty() )

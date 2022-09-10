@@ -508,7 +508,7 @@ class Standard
 	/**
 	 * Removes the products from the product index.
 	 *
-	 * @param array|string $ids Product ID or list of IDs
+	 * @param iterable|string $ids Product ID or list of IDs
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
