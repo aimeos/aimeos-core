@@ -20,12 +20,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public static function setUpBeforeClass() : void
 	{
 		$context = \TestHelper::context();
+		$domains = $context->config()->get( 'mshop/index/manager/domains', [] );
 
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
 		$productManager = \Aimeos\MShop::create( $context, 'product' );
 
 		$search = $productManager->filter()->add( ['product.code' => ['CNC', 'CNE']] );
-		$result = $productManager->search( $search, ['attribute', 'price', 'text', 'product'] );
+		$result = $productManager->search( $search, $domains );
 
 		if( count( $result ) !== 2 ) {
 			throw new \RuntimeException( 'Products not available' );
@@ -298,7 +299,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
-		$items = $manager->search( $search )->toArray();
+		$items = $manager->search( $search, $this->context->config()->get( 'mshop/index/manager/domains', [] ) );
 
 		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild( $items );
 

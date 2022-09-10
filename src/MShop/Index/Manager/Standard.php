@@ -435,7 +435,7 @@ class Standard
 		 * @see mshop/index/manager/subdomains
 		 * @see mshop/index/manager/submanagers
 		 */
-		$size = $config->get( 'mshop/index/manager/chunksize', 1000 );
+		$size = $config->get( 'mshop/index/manager/chunksize', 100 );
 
 		/** mshop/index/manager/domains
 		 * A list of domain names whose items should be retrieved together with the product
@@ -460,14 +460,24 @@ class Standard
 		 */
 		$domains = $config->get( 'mshop/index/manager/domains', [] );
 
-		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $manager->filter()->order( 'product.id' );
+		$submanagers = $this->getSubManagers();
+		$items = map( $items );
 
-		if( !( $prodIds = map( $items )->getId() )->isEmpty() ) { // don't rely on array keys
-			$search->add( 'product.id', '==', $prodIds->toArray() );
+		if( !$items->isEmpty() )
+		{
+			$context->cache()->deleteByTags( $this->index( $items )->getId()->prefix( 'product-' ) );
+			return $this;
 		}
 
-		$this->writeIndex( $search, $domains, $size );
+
+		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$iterator = $manager->iterator( $manager->filter() );
+
+		while( $items = $manager->iterate( $iterator, $domains, $size ) ) {
+			$this->index( $items );
+		}
+
+		$context->cache()->deleteByTags( ['product'] );
 		return $this;
 	}
 
@@ -597,11 +607,42 @@ class Standard
 
 
 	/**
+	 * Indexes all given product items
+	 *
+	 * @param \Aimeos\Map $items Product items with associated attributes, categories, media, prices, products, texts, etc.
+	 * @return \Aimeos\Map Indexed product items
+	 */
+	protected function index( \Aimeos\Map $items ) : \Aimeos\Map
+	{
+		try
+		{
+			$this->begin();
+
+			$this->remove( $items );
+
+			foreach( $this->getSubManagers() as $submanager ) {
+				$submanager->rebuild( $items );
+			}
+
+			$this->commit();
+		}
+		catch( \Exception $e )
+		{
+			$this->rollback();
+			throw $e;
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string[] $domains List of domains to be
 	 * @param int $size Size of a chunk of products to handle at a time
+	 * @deprecated 2023.01 Use index() instead
 	 */
 	protected function writeIndex( \Aimeos\Base\Criteria\Iface $search, array $domains, int $size )
 	{
