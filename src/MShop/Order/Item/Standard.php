@@ -108,7 +108,7 @@ class Standard
 	 */
 	public function getInvoiceNumber() : string
 	{
-		return $this->get( 'order.invoiceno', '' );
+		return (string) $this->get( 'order.invoiceno', '' );
 	}
 
 
@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function getChannel() : string
 	{
-		return $this->get( 'order.channel', '' );
+		return (string) $this->get( 'order.channel', '' );
 	}
 
 
@@ -254,7 +254,7 @@ class Standard
 	 */
 	public function getRelatedId() : string
 	{
-		return $this->get( 'order.relatedid', '' );
+		return (string) $this->get( 'order.relatedid', '' );
 	}
 
 
