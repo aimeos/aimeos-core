@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class PriceMigrateTaxrate extends Base
 {
-	public function before() : array
+	public function after() : array
 	{
 		return ['Price'];
 	}
@@ -19,12 +19,6 @@ class PriceMigrateTaxrate extends Base
 
 	public function up()
 	{
-		$db = $this->db( 'db-price' );
-
-		if( !$db->hasTable( 'mshop_price' ) ) {
-			return;
-		}
-
 		$this->info( 'Migrating taxrate column in price table', 'vv' );
 
 		$conn = $this->context()->db( 'db-price' );
