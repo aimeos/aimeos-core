@@ -774,7 +774,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			if( ( $userId = $this->getContext()->user() ) )
 			{
-				$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
+				$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
 				$custItems = $manager->search( $manager->filter()->add( ['customer.id' => $userId] ) );
 
 				if( $siteId = $custItems->getSiteId()->first() )
