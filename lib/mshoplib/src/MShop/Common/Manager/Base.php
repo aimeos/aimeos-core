@@ -774,11 +774,15 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			if( ( $userId = $this->getContext()->user() ) )
 			{
-				$siteId = \Aimeos\MShop::create( $this->getContext(), 'customer' )->get( $userId )->getSiteId();
+				$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
+				$custItems = $manager->search( $manager->filter()->add( ['customer.id' => $userId] ) );
 
-				$sites = $sites->filter( function( $item ) use ( $siteId ) {
-					return strncmp( $item, $siteId, strlen( $siteId ) );
-				} );
+				if( $siteId = $custItems->getSiteId()->first() )
+				{
+					$sites = $sites->filter( function( $item ) use ( $siteId ) {
+						return strncmp( $item, $siteId, strlen( $siteId ) );
+					} );
+				}
 			}
 
 			self::$siteInactive[$current] = $sites;
