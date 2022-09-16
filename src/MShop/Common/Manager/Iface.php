@@ -45,13 +45,12 @@ interface Iface
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
-	 * Creates a filter object.
+	 * Creates a new cursor based on the filter criteria
 	 *
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
 	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface;
+	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface;
 
 	/**
 	 * Deletes one or more items.
@@ -60,6 +59,15 @@ interface Iface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface;
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
+	 */
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface;
 
 	/**
 	 * Returns the item specified by its ID
@@ -102,6 +110,15 @@ interface Iface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
+
+	/**
+	 * Iterates over all matched items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map;
 
 	/**
 	 * Adds or updates an item object or a list of them.

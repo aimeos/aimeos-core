@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Product\Manager;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface,
-		\Aimeos\MShop\Common\Manager\Iterate\Iface, \Aimeos\MShop\Common\Manager\Rating\Iface
+		\Aimeos\MShop\Common\Manager\Rating\Iface
 {
 	/**
 	 * Updates if the product is in stock
