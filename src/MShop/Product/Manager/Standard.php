@@ -477,7 +477,6 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/iterate/ansi
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -582,139 +581,6 @@ class Standard
 
 
 	/**
-	 * Iterates over all matching items and returns the found ones
-	 *
-	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int $count Maximum number of items which should be returned
-	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 */
-	public function iterate( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
-	{
-		$map = [];
-
-		while( $count-- && $iterator->valid() )
-		{
-			$row = $iterator->current();
-
-			if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )
-			{
-				$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
-				$this->context()->logger()->warning( $msg, 'core/product' );
-			}
-
-			$map[$row['product.id']] = $row;
-
-			$iterator->next();
-		}
-
-		if( empty( $map ) )
-		{
-			$iterator->close();
-			return null;
-		}
-
-
-		$propItems = []; $name = 'product/property';
-		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
-		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'product', $propTypes );
-		}
-
-		if( isset( $ref['stock'] ) || in_array( 'stock', $ref, true ) )
-		{
-			foreach( $this->getStockItems( array_keys( $map ), $ref ) as $stockId => $stockItem )
-			{
-				if( isset( $map[$stockItem->getProductId()] ) ) {
-					$map[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
-				}
-			}
-		}
-
-		if( isset( $ref['locale/site'] ) || in_array( 'locale/site', $ref, true ) )
-		{
-			foreach( $this->getSiteItems( $map ) as $prodId => $item ) {
-				$map[$prodId]['.locale/site'] = $item;
-			}
-		}
-
-		return $this->buildItems( $map, $ref, 'product', $propItems );
-	}
-
-
-	/**
-	 * Creates a new iterator based on the filter criteria
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
-	 */
-	public function iterator( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Iterator\Iface
-	{
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName(), true );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
-
-		/** mshop/product/manager/iterate/ansi
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * Fetches the records matched by the given criteria from the product
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the SELECT statement can retrieve all records
-		 * from the current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * If the records that are retrieved should be ordered by one or more
-		 * columns, the generated string of column / sort direction pairs
-		 * replaces the ":order" placeholder. In case no ordering is required,
-		 * the complete ORDER BY part including the ":order"
-		 * markers is removed to speed up retrieving the records. Columns of
-		 * sub-managers can also be used for ordering the result set but then
-		 * no index can be used.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for searching items
-		 * @since 2022.10
-		 * @category Developer
-		 * @see mshop/product/manager/insert/ansi
-		 * @see mshop/product/manager/update/ansi
-		 * @see mshop/product/manager/newid/ansi
-		 * @see mshop/product/manager/delete/ansi
-		 * @see mshop/product/manager/count/ansi
-		 * @see mshop/product/manager/rate/ansi
-		 * @see mshop/product/manager/search/ansi
-		 * @see mshop/product/manager/stock/ansi
-		 */
-		$cfgPathSearch = 'mshop/product/manager/iterate';
-
-		$total = null;
-		$result = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, '', ['product'], $total, $level );
-
-		return new \Aimeos\MShop\Common\Iterator\DB( $conn, $result );
-	}
-
-
-	/**
 	 * Updates the rating of the item
 	 *
 	 * @param string $id ID of the item
@@ -750,7 +616,6 @@ class Standard
 		 * @param string SQL statement for update ratings
 		 * @since 2020.10
 		 * @category Developer
-		 * @see mshop/product/manager/iterate/ansi
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -809,7 +674,6 @@ class Standard
 		 * @param string SQL statement for update ratings
 		 * @since 2021.10
 		 * @category Developer
-		 * @see mshop/product/manager/iterate/ansi
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -885,7 +749,6 @@ class Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/product/manager/iterate/ansi
 			 * @see mshop/product/manager/update/ansi
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -925,7 +788,6 @@ class Standard
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/product/manager/iterate/ansi
 			 * @see mshop/product/manager/insert/ansi
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -1000,7 +862,6 @@ class Standard
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/product/manager/iterate/ansi
 			 * @see mshop/product/manager/insert/ansi
 			 * @see mshop/product/manager/update/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -1119,7 +980,6 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/iterate/ansi
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -1175,7 +1035,6 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/iterate/ansi
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi

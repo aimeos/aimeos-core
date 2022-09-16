@@ -76,8 +76,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$filter = $this->object->filter( true );
 		$filter->add( $filter->make( 'index.supplier:position', ['default', $id] ), '>=', 0 );
 
-		$iterator = $this->object->iterator( $filter );
-		$products = $this->object->iterate( $iterator, [], 10 );
+		$cursor = $this->object->cursor( $filter );
+		$products = $this->object->iterate( $cursor );
 
 		$this->assertEquals( 2, count( $products ) );
 

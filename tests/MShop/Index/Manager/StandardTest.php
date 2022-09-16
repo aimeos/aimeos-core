@@ -167,8 +167,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIterate()
 	{
-		$iterator = $this->object->iterator( $this->object->filter( true )->add( 'index.catalog.id', '!=', null ) );
-		$products = $this->object->iterate( $iterator, [], 10 );
+		$cursor = $this->object->cursor( $this->object->filter( true )->add( 'index.catalog.id', '!=', null ) );
+		$products = $this->object->iterate( $cursor );
 
 		$this->assertEquals( 8, count( $products ) );
 

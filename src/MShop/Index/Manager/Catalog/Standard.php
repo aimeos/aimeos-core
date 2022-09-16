@@ -363,32 +363,6 @@ class Standard
 
 
 	/**
-	 * Iterates over all matching items and returns the found ones
-	 *
-	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int $count Maximum number of items which should be returned
-	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 */
-	public function iterate( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
-	{
-		return $this->iterateIndexBase( $iterator, $ref, $count );
-	}
-
-
-	/**
-	 * Creates a new iterator based on the filter criteria
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
-	 */
-	public function iterator( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Iterator\Iface
-	{
-		return $this->iteratorIndexBase( $filter, 'mshop/index/manager/iterate' );
-	}
-
-
-	/**
 	 * Optimizes the index if necessary.
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.

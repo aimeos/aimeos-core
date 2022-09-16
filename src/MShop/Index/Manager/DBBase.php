@@ -139,6 +139,27 @@ abstract class DBBase
 
 
 	/**
+	 * Iterates over all matched items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map
+	{
+		if( $cursor->value() === '' ) {
+			return null;
+		}
+
+		$filter = $cursor->filter()->add( 'product.id', '>', (int) $cursor->value() )->order( 'product.id' );
+		$items = $this->search( $filter, $ref );
+
+		$cursor->setValue( $items->lastKey() ?: '' );
+		return $items;
+	}
+
+
+	/**
 	 * Updates the rating of the item
 	 *
 	 * @param string $id ID of the item
@@ -340,68 +361,6 @@ abstract class DBBase
 		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
 
 		return [$find, $replace];
-	}
-
-
-	/**
-	 * Iterates over all matching items and returns the found ones
-	 *
-	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int $count Maximum number of items which should be returned
-	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 */
-	public function iterateIndexBase( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map
-	{
-		$ids = $list = [];
-
-		while( $count-- && $iterator->valid() )
-		{
-			$row = $iterator->current();
-			$ids[] = $row['id'];
-			$iterator->next();
-		}
-
-		if( empty( $ids ) )
-		{
-			$iterator->close();
-			return null;
-		}
-
-		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
-		$prodSearch = $manager->filter()->add( 'product.id', '==', $ids )->slice( 0, count( $ids ) );
-		$items = $manager->search( $prodSearch, $ref );
-
-		foreach( $ids as $id )
-		{
-			if( isset( $items[$id] ) ) {
-				$list[$id] = $items[$id];
-			}
-		}
-
-		return map( $list );
-	}
-
-
-	/**
-	 * Returns iterator for rows matching the given criteria.
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
-	 * @param string $cfgPathSearch Configuration path to the SQL statement for iterating over the results
-	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
-	 */
-	protected function iteratorIndexBase( \Aimeos\Base\Criteria\Iface $search, string $cfgPathSearch ) : \Aimeos\MShop\Common\Iterator\Iface
-	{
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName(), true );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
-
-		$total = null;
-		$result = $this->searchItemsBase( $conn, $search, $cfgPathSearch, '', ['product'], $total, $level );
-
-		return new \Aimeos\MShop\Common\Iterator\DB( $conn, $result );
 	}
 
 

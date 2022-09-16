@@ -116,8 +116,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$filter = $this->object->filter()->add( 'index.attribute.id', '==', $id );
 
-		$iterator = $this->object->iterator( $filter );
-		$products = $this->object->iterate( $iterator, [], 10 );
+		$cursor = $this->object->cursor( $filter );
+		$products = $this->object->iterate( $cursor );
 
 		$this->assertEquals( 4, count( $products ) );
 

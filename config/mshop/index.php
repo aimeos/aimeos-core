@@ -462,16 +462,6 @@ return array(
 				GROUP BY :keys
 			'
 		),
-		'iterate' => array(
-			'ansi' => '
-				SELECT mpro."id" :mincols
-				FROM "mshop_product" mpro
-				:joins
-				WHERE :cond
-				GROUP BY mpro."id"
-				ORDER BY :order
-			',
-		),
 		'search' => array(
 			'ansi' => '
 				SELECT mpro."id" :mincols

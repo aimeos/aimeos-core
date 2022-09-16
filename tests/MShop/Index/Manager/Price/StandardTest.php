@@ -80,9 +80,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$filter = $this->object->filter();
 		$filter->add( $filter->make( 'index.price:value', ['EUR'] ), '>=', '18.00' );
 
-		$iterator = $this->object->iterator( $filter );
-		$products1 = $this->object->iterate( $iterator, [], 10 );
-		$products2 = $this->object->iterate( $iterator, [], 10 );
+		$cursor = $this->object->cursor( $filter->slice( 0, 10 ) );
+		$products1 = $this->object->iterate( $cursor );
+		$products2 = $this->object->iterate( $cursor );
 
 		$this->assertEquals( 10, count( $products1 ) );
 		$this->assertEquals( 1, count( $products2 ) );

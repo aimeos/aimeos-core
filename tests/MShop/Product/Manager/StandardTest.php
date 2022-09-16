@@ -144,12 +144,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIterate()
 	{
-		$iterator = $this->object->iterator( $this->object->filter() );
+		$cursor = $this->object->cursor( $this->object->filter()->slice( 0, 10 ) );
 
-		$result1 = $this->object->iterate( $iterator, [], 10 );
-		$result2 = $this->object->iterate( $iterator, [], 10 );
-		$result3 = $this->object->iterate( $iterator, [], 10 );
-		$result4 = $this->object->iterate( $iterator, [], 10 );
+		$result1 = $this->object->iterate( $cursor );
+		$result2 = $this->object->iterate( $cursor );
+		$result3 = $this->object->iterate( $cursor );
+		$result4 = $this->object->iterate( $cursor );
 
 		$this->assertEquals( 10, count( $result1 ) );
 		$this->assertEquals( 10, count( $result2 ) );

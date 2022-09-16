@@ -71,6 +71,18 @@ abstract class Base
 
 
 	/**
+	 * Creates a new cursor based on the filter criteria
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
+	 */
+	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface
+	{
+		return new \Aimeos\MShop\Common\Cursor\Standard( $filter );
+	}
+
+
+	/**
 	 * Creates a search critera object
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
@@ -96,6 +108,29 @@ abstract class Base
 		}
 
 		return $search;
+	}
+
+
+	/**
+	 * Iterates over all matched items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map
+	{
+		if( $cursor->value() === '' ) {
+			return null;
+		}
+
+		$prefix = str_replace( '/', '.', (string) current( $this->getResourceType( false ) ) );
+		$filter = $cursor->filter()->add( $prefix . '.id', '>', (int) $cursor->value() )->order( $prefix . '.id' );
+
+		$items = $this->search( $filter, $ref );
+		$cursor->setValue( $items->lastKey() ?: '' );
+
+		return !$items->isEmpty() ? $items : null;
 	}
 
 

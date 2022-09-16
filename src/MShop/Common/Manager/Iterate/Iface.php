@@ -20,20 +20,19 @@ namespace Aimeos\MShop\Common\Manager\Iterate;
 interface Iface
 {
 	/**
-	 * Creates a new iterator based on the filter criteria
+	 * Creates a new cursor based on the filter criteria
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @return \Aimeos\MShop\Common\Iterator\Iface Iterator object
+	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
 	 */
-	public function iterator( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Iterator\Iface;
+	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface;
 
 	/**
-	 * Iterates over all matching items and returns the found ones
+	 * Iterates over all matched items and returns the found ones
 	 *
-	 * @param \Aimeos\MShop\Common\Iterator\Iface $iterator Iterator object with conditions, sortations, etc.
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int $count Maximum number of items which should be returned
+	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
+	 * @param string[] $ref List of domains whose items should be fetched too
 	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function iterate( \Aimeos\MShop\Common\Iterator\Iface $iterator, array $ref = [], int $count = 100 ) : ?\Aimeos\Map;
+	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map;
 }
