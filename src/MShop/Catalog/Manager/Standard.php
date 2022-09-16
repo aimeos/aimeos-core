@@ -934,8 +934,6 @@ class Standard extends Base
 			{
 				$this->insert( $child, $item->getId() );
 			}
-
-			$this->saveChildren( $child );
 		}
 
 		return $item;
