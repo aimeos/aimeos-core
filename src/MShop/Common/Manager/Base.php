@@ -997,4 +997,7 @@ abstract class Base
 	{
 		return $values;
 	}
+
+
+	abstract public function getResourceType( bool $withsub = true ) : array;
 }
