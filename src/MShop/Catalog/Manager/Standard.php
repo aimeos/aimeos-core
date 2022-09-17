@@ -926,8 +926,8 @@ class Standard extends Base
 			{
 				$this->save( $child );
 
-				if( $child->getParentId() !== $item->getParentId() ) {
-					$this->move( $child->getId(), $item->getParentId(), $child->getParentId() );
+				if( $child->getParentId() !== $item->getId() ) {
+					$this->move( $child->getId(), $item->getId(), $child->getParentId() );
 				}
 			}
 			else
@@ -1018,7 +1018,7 @@ class Standard extends Base
 	 *
 	 * @param string $id Id of the record
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Catalog item
-	 * @param bool $case True if the record shoud be added or false for an update
+	 * @param bool $case True if the record should be added or false for an update
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
 	private function updateUsage( string $id, \Aimeos\MShop\Catalog\Item\Iface $item,
