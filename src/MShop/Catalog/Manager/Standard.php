@@ -927,7 +927,7 @@ class Standard extends Base
 				$this->save( $child );
 
 				if( $child->getParentId() !== $item->getId() ) {
-					$this->move( $child->getId(), $item->getId(), $child->getParentId() );
+					$this->move( $child->getId(), $item->getParentId(), $child->getParentId() );
 				}
 			}
 			else
