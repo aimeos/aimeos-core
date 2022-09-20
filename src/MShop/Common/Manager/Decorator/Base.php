@@ -101,6 +101,18 @@ abstract class Base
 
 
 	/**
+	 * Creates a new cursor based on the filter criteria
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
+	 */
+	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface
+	{
+		return $this->manager->cursor( $filter );
+	}
+
+
+	/**
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them
@@ -185,6 +197,18 @@ abstract class Base
 	public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->manager->getSubManager( $domain, $name );
+	}
+
+	/**
+	 * Iterates over all matched items and returns the found ones
+	 *
+	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map
+	{
+		return $this->manager->iterate( $cursor, $ref );
 	}
 
 
