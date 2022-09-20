@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->and( $expr ) );
-		$search->slice( 0, 1 );
+		$search->order( 'catalog.position' )->slice( 0, 1 );
 
 		$items = $this->object->search( $search, [], $total )->toArray();
 
