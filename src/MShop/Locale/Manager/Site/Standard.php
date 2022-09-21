@@ -63,6 +63,13 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
+		'locale.site.position' => array(
+			'code' => 'locale.site.position',
+			'internalcode' => 'mlocsi."id"',
+			'label' => 'Site position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+		),
 		'locale.site.level' => array(
 			'code' => 'locale.site.level',
 			'internalcode' => 'mlocsi."level"',
