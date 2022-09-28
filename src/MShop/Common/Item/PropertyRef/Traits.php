@@ -24,6 +24,9 @@ trait Traits
 	private $propMax = 0;
 
 
+	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
+
+
 	/**
 	 * Creates a deep clone of all objects
 	 */
@@ -53,6 +56,10 @@ trait Traits
 
 		unset( $this->propItems[$id] ); // append at the end
 		$this->propItems[$id] = $item;
+
+		if( $item->isModified() ) {
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -88,7 +95,8 @@ trait Traits
 		{
 			$this->propRmItems[$id] = $item;
 			unset( $this->propItems[$id] );
-			return $this;
+
+			return $this->setModified();
 		}
 
 		$id = '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
@@ -97,6 +105,8 @@ trait Traits
 		{
 			$this->propRmItems[$id] = $item;
 			unset( $this->propItems[$id] );
+
+			return $this->setModified();
 		}
 
 		return $this;

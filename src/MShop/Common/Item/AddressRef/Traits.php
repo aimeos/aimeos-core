@@ -25,6 +25,9 @@ trait Traits
 	private $addrSorted;
 
 
+	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
+
+
 	/**
 	 * Creates a deep clone of all objects
 	 */
@@ -52,6 +55,11 @@ trait Traits
 	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, string $key = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$key !== null ? $this->addrItems[$key] = $item : $this->addrItems[] = $item;
+
+		if( $item->isModified() ) {
+			$this->setModified();
+		}
+
 		return $this;
 	}
 
@@ -71,7 +79,7 @@ trait Traits
 				$this->addrRmItems[$item->getId()] = $item;
 				unset( $this->addrItems[$key] );
 
-				return $this;
+				return $this->setModified();
 			}
 		}
 
