@@ -28,9 +28,6 @@ trait Traits
 	private $listMax = 0;
 
 
-	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
-
-
 	/**
 	 * Creates a deep clone of all objects
 	 */
@@ -343,6 +340,14 @@ trait Traits
 	 * @return string|null ID of the item
 	 */
 	abstract public function getId() : ?string;
+
+
+	/**
+	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
 
 
 	/**
