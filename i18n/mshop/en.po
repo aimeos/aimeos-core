@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-05 12:22+0200\n"
+"POT-Creation-Date: 2022-10-05 07:26+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -426,6 +426,10 @@ msgstr ""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
 msgstr ""
 
 # error domain: order
