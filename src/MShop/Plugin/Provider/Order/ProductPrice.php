@@ -205,7 +205,8 @@ class ProductPrice
 		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $productManager->filter( true )->add( ['product.id' => $prodIds] )->slice( 0, count( $prodIds ) );
 
-		return $productManager->search( $search, ['price', 'attribute' => ['custom']] );
+		$items = $productManager->search( $search, ['price', 'attribute' => ['custom']] );
+		return \Aimeos\MShop::create( $this->context(), 'rule' )->apply( $items, 'catalog' );
 	}
 
 
