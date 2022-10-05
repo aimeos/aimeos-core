@@ -214,7 +214,7 @@ class ProductPrice
 		] ) );
 
 		$items = $productManager->search( $search, ['price', 'attribute' => ['custom']] )->col( null, 'product.code' );
-		return \Aimeos\MShop::create( $this->context(), 'rule' )->apply( $items, 'catalog' );
+		return \Aimeos\MShop::create( $this->getContext(), 'rule' )->apply( $items, 'catalog' );
 	}
 
 
