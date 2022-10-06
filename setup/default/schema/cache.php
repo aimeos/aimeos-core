@@ -27,6 +27,7 @@ return array(
 			$table->string( 'tname' );
 
 			$table->unique( ['tid', 'tname'], 'unq_macacta_tid_tname' );
+			$table->index( ['tname'], 'unq_macacta_tname' );
 
 			$table->foreign( 'tid', 'madmin_cache', 'id', 'fk_macacta_tid' );
 		},
