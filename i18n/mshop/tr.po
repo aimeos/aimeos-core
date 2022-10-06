@@ -375,7 +375,7 @@ msgstr "Geçersiz tedarikçi adı \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Geçersiz serileştirilmiş sepet. \"%1$s\", \"%2$s\" döndürdü."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
