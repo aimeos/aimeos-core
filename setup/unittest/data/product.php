@@ -473,7 +473,7 @@ return [
 		'product/CNC' => [
 			'product.type' => 'default', 'product.code' => 'CNC', 'product.label' => 'Cafe Noire Cappuccino',
 			'product.url' => 'cafe_noire_cappuccino', 'product.config' => ['css-class' => 'sale'],
-			'product.dataset' => 'Coffee', 'product.scale' => 0.1, 'product.instock' => 1,
+			'product.dataset' => 'Coffee', 'product.scale' => 0.1, 'product.instock' => 1, 'product.boost' => 2,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',
@@ -624,7 +624,7 @@ return [
 			'product.type' => 'default', 'product.code' => 'CNE', 'product.label' => 'Cafe Noire Expresso',
 			'product.url' => 'cafe_noire_expresso', 'product.config' => ['css-class' => 'top', 'size' => 1],
 			'product.dataset' => 'Coffee', 'product.scale' => 0.1, 'product.rating' => 4, 'product.ratings' => 1,
-			'product.instock' => 1,
+			'product.instock' => 1, 'product.boost' => 3.33,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',

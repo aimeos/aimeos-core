@@ -38,6 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.rating' => '4.80',
 			'product.ratings' => 5,
 			'product.instock' => 1,
+			'product.boost' => 1.5,
 			'additional' => 'value',
 		);
 
@@ -474,6 +475,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testBost()
+	{
+		$this->assertEquals( 1.5, $this->object->boost() );
+	}
+
+
+	public function testSetBoost()
+	{
+		$return = $this->object->setBoost( 1.25 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 1.25, $this->object->boost() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );
@@ -616,6 +633,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.scale' => '0.5',
 			'product.target' => 'ttarget',
 			'product.instock' => 1,
+			'product.boost' => 2.5,
 			'additional' => 'value',
 		);
 
@@ -635,6 +653,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
 		$this->assertEquals( $list['product.scale'], $item->getScale() );
 		$this->assertEquals( $list['product.instock'], $item->inStock() );
+		$this->assertEquals( $list['product.boost'], $item->boost() );
 		$this->assertEquals( $list['additional'], $item->additional );
 		$this->assertEquals( '', $item->getSiteId() );
 	}
@@ -659,6 +678,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['product.editor'] );
+		$this->assertEquals( $this->object->boost(), $arrayObject['product.boost'] );
 		$this->assertEquals( $this->object->getTarget(), $arrayObject['product.target'] );
 		$this->assertEquals( $this->object->getScale(), $arrayObject['product.scale'] );
 		$this->assertEquals( $this->object->getRating(), $arrayObject['product.rating'] );

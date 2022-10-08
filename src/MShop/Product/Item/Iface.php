@@ -143,4 +143,19 @@ interface Iface
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setInStock( int $value ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Returns the boost factor for that product.
+	 *
+	 * @return float Boost factor
+	 */
+	public function boost() : float;
+
+	/**
+	 * Sets the boost factor for that product.
+	 *
+	 * @param float $value Boost factor
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setBoost( float $value ) : \Aimeos\MShop\Product\Item\Iface;
 }

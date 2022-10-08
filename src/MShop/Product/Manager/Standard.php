@@ -224,6 +224,13 @@ class Standard
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
+		'product.boost' => array(
+			'code' => 'product.boost',
+			'internalcode' => 'mpro."boost"',
+			'label' => 'Boost factor',
+			'type' => 'float',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
+		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
@@ -817,6 +824,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getDateEnd() );
 		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
 		$stmt->bind( $idx++, $item->getTarget() );
+		$stmt->bind( $idx++, $item->boost() );
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );

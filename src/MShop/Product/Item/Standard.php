@@ -466,6 +466,27 @@ class Standard
 		return $this->set( 'product.instock', $value );
 	}
 
+	/**
+	 * Returns the boost factor for that product.
+	 *
+	 * @return float Boost factor
+	 */
+	public function boost() : float
+	{
+		return (float) $this->get( 'product.boost', 1 );
+	}
+
+	/**
+	 * Sets the boost factor for that product.
+	 *
+	 * @param float $value Boost factor
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setBoost( float $value ) : \Aimeos\MShop\Product\Item\Iface
+	{
+		return $this->set( 'product.boost', $value );
+	}
+
 
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
@@ -495,6 +516,7 @@ class Standard
 				case 'product.target': $item = $item->setTarget( $value ); break;
 				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
 				case 'product.instock': $item->setInStock( (bool) $value ); break;
+				case 'product.boost': $item->setBoost( (float) $value ); break;
 				default: continue 2;
 			}
 
@@ -530,6 +552,7 @@ class Standard
 		$list['product.ratings'] = $this->getRatings();
 		$list['product.rating'] = $this->getRating();
 		$list['product.instock'] = $this->inStock();
+		$list['product.boost'] = $this->boost();
 
 		return $list;
 	}

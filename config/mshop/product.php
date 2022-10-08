@@ -490,9 +490,9 @@ return array(
 			'ansi' => '
 				INSERT INTO "mshop_product" ( :names
 					"type", "code", "dataset", "label", "url", "instock", "status", "scale",
-					"start", "end", "config", "target", "editor", "mtime", "ctime", "siteid"
+					"start", "end", "config", "target", "boost", "editor", "mtime", "ctime", "siteid"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -502,7 +502,7 @@ return array(
 				SET :names
 					"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "url" = ?, "instock" = ?,
 					"status" = ?, "scale" = ?, "start" = ?, "end" = ?, "config" = ?, "target" = ?,
-					"editor" = ?, "mtime" = ?, "ctime" = ?
+					"boost" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
@@ -532,7 +532,7 @@ return array(
 					mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
 					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
-					mpro."instock" AS "product.instock"
+					mpro."instock" AS "product.instock", mpro."boost" AS "product.boost"
 				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond
@@ -540,7 +540,7 @@ return array(
 					mpro."id", mpro."siteid", mpro."type", mpro."code", mpro."label", mpro."url",
 					mpro."target", mpro."dataset", mpro."scale", mpro."config", mpro."start", mpro."end",
 					mpro."status", mpro."ctime", mpro."mtime", mpro."editor", mpro."rating", mpro."ratings",
-					mpro."instock"
+					mpro."instock", mpro."boost"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -555,7 +555,7 @@ return array(
 					mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
 					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
-					mpro."instock" AS "product.instock"
+					mpro."instock" AS "product.instock", mpro."boost" AS "product.boost"
 				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond

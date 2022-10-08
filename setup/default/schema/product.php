@@ -45,6 +45,7 @@ return array(
 			$table->int( 'ratings' )->default( 0 );
 			$table->smallint( 'instock' )->default( 0 );
 			$table->string( 'target' )->default( '' );
+			$table->float( 'boost' )->default( 1 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 

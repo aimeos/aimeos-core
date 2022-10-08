@@ -232,6 +232,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
 		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 		$this->assertEquals( $item->getScale(), $itemSaved->getScale() );
+		$this->assertEquals( $item->inStock(), $itemSaved->inStock() );
+		$this->assertEquals( $item->boost(), $itemSaved->boost() );
 
 		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -251,6 +253,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
 		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 		$this->assertEquals( $itemExp->getScale(), $itemUpd->getScale() );
+		$this->assertEquals( $itemExp->inStock(), $itemUpd->inStock() );
+		$this->assertEquals( $itemExp->boost(), $itemUpd->boost() );
 
 		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -368,6 +372,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '-', 'product.mtime', '1970-01-01 00:00 - 2100-01-01 00:00' );
 		$expr[] = $search->compare( '>=', 'product.editor', '' );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
+		$expr[] = $search->compare( '==', 'product.instock', 1 );
+		$expr[] = $search->compare( '>=', 'product.boost', 3 );
 
 		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getId()]];
 		$expr[] = $search->compare( '!=', $search->make( 'product:has', $param ), null );
