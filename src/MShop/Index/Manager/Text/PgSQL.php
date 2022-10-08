@@ -31,7 +31,7 @@ class PgSQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 ))',
+			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 )) * mpro."boost"',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,

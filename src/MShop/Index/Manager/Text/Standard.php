@@ -66,7 +66,7 @@ class Standard
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => '-POSITION( $2 IN mindte."content" )',
+			'internalcode' => '-POSITION( $2 IN mindte."content" ) * mpro."boost"',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,

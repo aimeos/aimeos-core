@@ -32,7 +32,7 @@ class MySQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',
+			'internalcode' => 'MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE ) * mpro."boost"',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,

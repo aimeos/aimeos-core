@@ -57,14 +57,14 @@ class SQLSrv
 				FROM CONTAINSTABLE("mshop_index_text", "content", $2) AS mindte_ft
 				WHERE mindte."id" = mindte_ft."KEY"
 			)';
-			$sort = 'mindte_ft.RANK';
+			$sort = 'mindte_ft.RANK * mpro."boost"';
 
 			$func = $this->getFunctionRelevance();
 		}
 		else
 		{
 			$search = ':site AND mindte."langid" = $1 AND CHARINDEX( $2, content )';
-			$sort = '-CHARINDEX( $2, content )';
+			$sort = '-CHARINDEX( $2, content ) * mpro."boost"';
 
 			$func = function( $source, array $params ) {
 
