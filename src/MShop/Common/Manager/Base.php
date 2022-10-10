@@ -447,7 +447,7 @@ abstract class Base
 		$filter = self::filter();
 
 		if( $default !== false ) {
-			$filter->add( [$domain . '.status' => 1], $default ? '==' : '>=' );
+			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
 		}
 
 		return $filter;

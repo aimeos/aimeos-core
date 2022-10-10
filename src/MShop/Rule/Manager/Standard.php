@@ -291,7 +291,7 @@ class Standard
 	{
 		if( $default !== false )
 		{
-			$filter = $this->filterBase( 'rule' );
+			$filter = $this->filterBase( 'rule', $default );
 
 			return $filter->add( $filter->and( [
 				$filter->or( [
