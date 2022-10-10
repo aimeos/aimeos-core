@@ -812,7 +812,7 @@ class Standard
 	{
 		if( $default !== false )
 		{
-			$object = $this->filterBase( 'service' );
+			$object = $this->filterBase( 'service', $default );
 
 			$expr = array( $object->getConditions() );
 
