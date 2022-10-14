@@ -754,7 +754,7 @@ class Standard
 		$fs = $context->fs( $item->getFileSystem() );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
-		if( !$force && $is && preg_match( '#^[a-zA-Z]{1,10}://#', $url ) !== 1
+		if( !$force && $is && preg_match( '#^[a-zA-Z]{2,6}:#', $url ) !== 1
 			&& date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified()
 		) {
 			return $item;
