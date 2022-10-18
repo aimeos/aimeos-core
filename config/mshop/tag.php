@@ -31,7 +31,7 @@ return array(
 					SET :names
 						"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -117,7 +117,7 @@ return array(
 				UPDATE "mshop_tag"
 				SET :names
 					"langid" = ?, "type" = ?, "domain" = ?, "label" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(

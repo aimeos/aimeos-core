@@ -122,9 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setPosition( 1 );
-		$itemExp->setCity( 'Berlin' );
-		$itemExp->setState( 'Berlin' );
+		$itemExp->setPosition( 1 )->setCity( 'Berlin' )->setState( 'Berlin' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 

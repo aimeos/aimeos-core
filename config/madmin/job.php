@@ -29,7 +29,7 @@ return array(
 				UPDATE "madmin_job"
 				SET :names
 					"label" = ?, "path" = ?, "status" = ?, "editor" = ?, "mtime" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			',
 		),
 		'search' => array(

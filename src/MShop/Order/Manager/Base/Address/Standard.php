@@ -733,11 +733,12 @@ class Standard
 			$stmt->bind( $idx++, $item->getBirthday() );
 			$stmt->bind( $idx++, $date );
 			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
+				$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
+				$stmt->bind( $idx++, $context->locale()->getSiteId() );
 				$stmt->bind( $idx++, $date ); // ctime
 			}
 

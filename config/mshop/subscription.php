@@ -52,7 +52,7 @@ return array(
 				SET :names
 					"baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
 					"productid" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'delete' => array(

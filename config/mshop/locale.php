@@ -317,7 +317,7 @@ return array(
 				SET :names
 					"langid" = ?, "currencyid" = ?, "pos" = ?,
 					"status" = ?, "mtime" = ?, "editor" = ?, "site_id" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(

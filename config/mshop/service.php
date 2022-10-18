@@ -32,7 +32,7 @@ return array(
 						SET :names
 							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -147,7 +147,7 @@ return array(
 					SET :names
 						"parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
 						"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -239,7 +239,7 @@ return array(
 					SET :names
 						"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -326,7 +326,7 @@ return array(
 				SET :names
 					"pos" = ?, "type" = ?, "code" = ?, "label" = ?, "provider" = ?, "start" = ?,
 					"end" = ?, "config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(

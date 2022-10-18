@@ -411,11 +411,12 @@ class Standard
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 			$stmt->bind( $idx++, $date ); // ctime
 		}
 

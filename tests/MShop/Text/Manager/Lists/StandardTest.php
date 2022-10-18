@@ -86,13 +86,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
-		$items = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
+		$search = $this->object->filter()->add( ['text.lists.editor' => $this->editor] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No item found' ) );
 
 		$item->setId( null );
 		$item->setDomain( 'unittest' );

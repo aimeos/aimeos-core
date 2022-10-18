@@ -690,12 +690,13 @@ class Standard
 		$stmt->bind( $idx++, $item->getPassword() );
 		$stmt->bind( $idx++, $date ); // Modification time
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$billingAddress->setId( $id ); // enforce ID to be present
 		} else {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 			$stmt->bind( $idx, $date ); // Creation time
 		}
 

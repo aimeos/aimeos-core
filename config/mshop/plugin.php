@@ -38,7 +38,7 @@ return array(
 					SET :names
 						"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -125,7 +125,7 @@ return array(
 				SET :names
 					"type" = ?, "label" = ?, "provider" = ?, "config" = ?,
 					"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(
