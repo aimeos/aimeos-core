@@ -66,7 +66,7 @@ return array(
 							"address3" = ?, "postal" = ?, "city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 							"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
 							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -184,7 +184,7 @@ return array(
 						UPDATE "mshop_order_base_coupon"
 						SET :names
 							"baseid" = ?, "ordprodid" = ?, "code" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -283,7 +283,7 @@ return array(
 							SET :names
 								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
 								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -393,7 +393,7 @@ return array(
 							"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
 							"taxflag" = ?, "flags" = ?, "statuspayment" = ?, "statusdelivery" = ?, "pos" = ?,
 							"mtime" = ?, "editor" = ?, "target" = ?, "qtyopen" = ?, "notes" = ?, "scale" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -528,7 +528,7 @@ return array(
 							SET :names
 								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
 								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -634,7 +634,7 @@ return array(
 							"name" = ?, "mediaurl" = ?, "currencyid" = ?, "price" = ?,
 							"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
 							"taxflag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -751,7 +751,7 @@ return array(
 						"customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
 						"price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
 						"customerref" = ?, "comment" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -944,7 +944,7 @@ return array(
 					UPDATE "mshop_order_status"
 					SET :names
 						"parentid" = ?, "type" = ?, "value" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -1036,7 +1036,7 @@ return array(
 				SET :names
 					"baseid" = ?, "invoiceno" = ?, "channel" = ?, "datepayment" = ?, "datedelivery" = ?,
 					"statusdelivery" = ?, "statuspayment" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'delete' => array(

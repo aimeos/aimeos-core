@@ -32,7 +32,7 @@ return array(
 						SET :names
 							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -147,7 +147,7 @@ return array(
 					SET :names
 						"parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
 						"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -240,7 +240,7 @@ return array(
 						SET :names
 							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -327,7 +327,7 @@ return array(
 					SET :names
 						"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 						"value" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -415,7 +415,7 @@ return array(
 					SET :names
 						"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -503,21 +503,21 @@ return array(
 					"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "url" = ?, "instock" = ?,
 					"status" = ?, "scale" = ?, "start" = ?, "end" = ?, "config" = ?, "target" = ?,
 					"boost" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'rate' => array(
 			'ansi' => '
 				UPDATE "mshop_product"
 				SET "rating" = ?, "ratings" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'stock' => array(
 			'ansi' => '
 				UPDATE "mshop_product"
 				SET "instock" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(

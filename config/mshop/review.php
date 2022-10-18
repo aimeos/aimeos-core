@@ -76,7 +76,7 @@ return array(
 				SET :names
 					"domain" = ?, "refid" = ?, "customerid" = ?, "ordprodid" = ?, "name" = ?,
 					"comment" = ?, "response" = ?, "rating" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'delete' => array(

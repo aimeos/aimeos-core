@@ -591,11 +591,12 @@ class Standard
 		$stmt->bind( $idx++, $item->getRelatedId(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 			$stmt->bind( $idx++, $date ); // ctime
 			$stmt->bind( $idx++, date( 'Y-m-d' ) ); // cdate
 			$stmt->bind( $idx++, date( 'Y-m' ) ); // cmonth

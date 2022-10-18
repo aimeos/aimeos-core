@@ -37,8 +37,8 @@ return array(
 						"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 						"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 						"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-						"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
-					WHERE "id" = ?
+						"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -142,7 +142,7 @@ return array(
 					UPDATE "mshop_customer_group"
 					SET :names
 						"code" = ?, "label" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -229,7 +229,7 @@ return array(
 						SET :names
 							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -344,7 +344,7 @@ return array(
 					SET :names
 						"parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
 						"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -437,7 +437,7 @@ return array(
 						SET :names
 							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -524,7 +524,7 @@ return array(
 					SET :names
 						"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 						"value" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -647,7 +647,7 @@ return array(
 					"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 					"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
 					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
 		'search' => array(

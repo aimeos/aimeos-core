@@ -28,7 +28,7 @@ return array(
 				UPDATE "madmin_log"
 				SET :names
 					"facility" = ?, "timestamp" = ?, "priority" = ?, "message" = ?, "request" = ?
-				WHERE "siteid" = ? AND "id" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
 			',
 		),
 		'search' => array(

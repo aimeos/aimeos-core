@@ -674,11 +674,12 @@ class Standard
 		$stmt->bind( $idx++, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 			$stmt->bind( $idx++, $date ); // ctime
 		}
 
