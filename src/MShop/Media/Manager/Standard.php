@@ -1082,12 +1082,16 @@ class Standard
 
 		foreach( $previews as $entry )
 		{
+			$force = $entry['force-size'] ?? 0;
 			$maxwidth = $entry['maxwidth'] ?? null;
 			$maxheight = $entry['maxwidth'] ?? null;
 
-			$file = $media->scale( $maxwidth, $maxheight, $entry['force-size'] ?? 0 );
-			$width = $file->getWidth();
-			$list[$width] = $file;
+			if( $this->call( 'filterPreviews', $media, $domain, $type, $maxwidth, $maxheight, $force ) )
+			{
+				$file = $media->scale( $maxwidth, $maxheight, $force );
+				$width = $file->getWidth();
+				$list[$width] = $file;
+			}
 		}
 
 		return $list;
@@ -1116,6 +1120,23 @@ class Standard
 		}
 
 		return $item;
+	}
+
+
+	/**
+	 * Tests if the preview image should be created
+	 *
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param string $domain Domain the item is from, e.g. product, catalog, etc.
+	 * @param string $type Type of the item within the given domain, e.g. default, stage, etc.
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
+	 */
+	protected function filterPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type,
+		?int $maxwidth, ?int $maxheight, int $force ) : bool
+	{
+		return true;
 	}
 
 
