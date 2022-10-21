@@ -596,7 +596,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 			$stmt->bind( $idx++, $date ); // ctime
 			$stmt->bind( $idx++, date( 'Y-m-d' ) ); // cdate
 			$stmt->bind( $idx++, date( 'Y-m' ) ); // cmonth

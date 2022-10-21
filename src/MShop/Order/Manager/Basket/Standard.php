@@ -201,7 +201,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getName() );
 		$stmt->bind( $idx++, $date ); //mtime
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
+		$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 		$stmt->bind( $idx++, $date ); //ctime
 		$stmt->bind( $idx++, $item->getId() );
 		// update

@@ -119,7 +119,7 @@ trait Site
 
 
 	/**
-	 * Returns the site ID that should be use based on the site level
+	 * Returns the site ID that should be used based on the site level
 	 *
 	 * @param string $siteId Site ID to check
 	 * @param int $sitelevel Site level to check against
