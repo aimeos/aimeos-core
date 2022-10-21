@@ -86,25 +86,7 @@ class Weight
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		$prodMap = [];
-
-		// basket can contain a product several times in different basket items
-		// product IDs are only those of articles, selections and bundles, not of the variants and bundled products
-		foreach( $basket->getProducts() as $orderProduct )
-		{
-			$qty = $orderProduct->getQuantity();
-			$code = $orderProduct->getProductCode();
-			$prodMap[$code] = ( isset( $prodMap[$code] ) ? $prodMap[$code] + $qty : $qty );
-
-			foreach( $orderProduct->getProducts() as $prodItem ) // calculate bundled products
-			{
-				$qty = $prodItem->getQuantity();
-				$code = $prodItem->getProductCode();
-				$prodMap[$code] = ( isset( $prodMap[$code] ) ? $prodMap[$code] + $qty : $qty );
-			}
-		}
-
-		if( $this->checkWeightScale( $this->getWeight( $prodMap ) ) === false ) {
+		if( $this->checkWeightScale( $this->getWeight( $this->getQuantities( $basket ) ) ) === false ) {
 			return false;
 		}
 
@@ -136,6 +118,33 @@ class Weight
 
 
 	/**
+	 * Returns the product quantities
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array Associative list of product codes as keys and quantities as values
+	 */
+	protected function getQuantities( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	{
+		$prodMap = [];
+
+		// basket can contain a product several times in different basket items
+		foreach( $basket->getProducts() as $orderProduct )
+		{
+			$code = $orderProduct->getProductCode();
+			$prodMap[$code] = ( $prodMap[$code] ?? 0 ) + $orderProduct->getQuantity();
+
+			foreach( $orderProduct->getProducts() as $prodItem ) // calculate bundled products
+			{
+				$code = $prodItem->getProductCode();
+				$prodMap[$code] = ( $prodMap[$code] ?? 0 ) + $prodItem->getQuantity();
+			}
+		}
+
+		return $prodMap;
+	}
+
+
+	/**
 	 * Returns the weight of the products
 	 *
 	 * @param array $prodMap Associative list of product codes as keys and quantities as values
@@ -144,22 +153,16 @@ class Weight
 	protected function getWeight( array $prodMap ) : float
 	{
 		$weight = 0;
-
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
-		$search = $manager->filter( true )->slice( 0, count( $prodMap ) );
-		$expr = array(
-			$search->compare( '==', 'product.code', array_keys( $prodMap ) ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
+		$search = $manager->filter()->add( ['product.code' => array_keys( $prodMap )] )->slice( 0, count( $prodMap ) );
 
-		foreach( $manager->search( $search, ['product/property'] ) as $product )
+		foreach( $manager->search( $search, ['product/property' => ['package-weight']] ) as $product )
 		{
-			foreach( $product->getPropertyItems( 'package-weight' ) as $property ) {
-				$weight += ( (float) $property->getValue() ) * $prodMap[$product->getCode()];
+			foreach( $product->getProperties( 'package-weight' ) as $value ) {
+				$weight += $value * $prodMap[$product->getCode()];
 			}
 		}
 
-		return (float) $weight;
+		return $weight;
 	}
 }
