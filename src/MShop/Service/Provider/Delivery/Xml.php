@@ -132,9 +132,9 @@ class Xml
 	{
 		$context = $this->context();
 		$logger = $context->logger();
-		$location = $this->getConfigValue( 'xml.updatedir' );
+		$location = $this->require( 'xml.updatedir' );
 
-		if( $location === '' || !file_exists( $location ) )
+		if( !file_exists( $location ) )
 		{
 			$msg = sprintf( 'File or directory "%1$s" doesn\'t exist', $location );
 			throw new \Aimeos\Controller\Jobs\Exception( $msg );

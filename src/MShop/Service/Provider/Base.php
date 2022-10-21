@@ -440,6 +440,25 @@ abstract class Base
 
 
 	/**
+	 * Returns the configuration value that matches given key
+	 *
+	 * @param string $key Key name
+	 * @return mixed Value for the key
+	 * @throws \Aimeos\MShop\Service\Exception If configuration key isn't found
+	 */
+	protected function require( string $key )
+	{
+		if( ( $value = $this->getConfigValue( $key ) ) === null )
+		{
+			$msg = $this->context()->translate( 'mshop', 'Missing configuration "%1$s"' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $key ) );
+		}
+
+		return $value;
+	}
+
+
+	/**
 	 * Saves the order item.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
