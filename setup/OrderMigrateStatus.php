@@ -23,6 +23,10 @@ class OrderMigrateStatus extends Base
 
 		$db = $this->db( 'db-order' );
 
+		if( $db->hasColumn( 'mshop_order', 'relatedid' ) ) {
+			$db->update( 'mshop_order', ['relatedid' => ''], ['relatedid' => null] );
+		}
+
 		if( $db->hasColumn( 'mshop_order', 'statuspayment' ) ) {
 			$db->update( 'mshop_order', ['statuspayment' => -1], ['statuspayment' => null] );
 		}
