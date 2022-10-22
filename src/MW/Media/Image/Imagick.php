@@ -43,6 +43,7 @@ class Imagick
 
 		try
 		{
+			$this->options = $options;
 			$this->image = new \Imagick();
 			$this->image->readImageBlob( $content );
 
@@ -67,8 +68,6 @@ class Imagick
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
-
-		$this->options = $options;
 	}
 
 
