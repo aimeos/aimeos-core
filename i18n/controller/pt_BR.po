@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bruno Rodrigues <brunojti@gmail.com>, 2016
+# Keite Clembet, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-05 07:41+0200\n"
 "PO-Revision-Date: 2015-09-29 12:30+0000\n"
-"Last-Translator: Bruno Rodrigues <brunojti@gmail.com>, 2016\n"
+"Last-Translator: Keite Clembet, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,15 +33,15 @@ msgstr "Classe \"%1$s\" não encontrada"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "O download do arquivo \"%1$s\" falhou"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Arquivo \"%1$s\" não encontrado"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"
-msgstr ""
+msgstr "O tipo de arquivo \"%1$s\" não é permitido"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
