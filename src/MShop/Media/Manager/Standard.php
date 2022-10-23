@@ -781,6 +781,8 @@ class Standard
 
 			$item = $this->deletePreviews( $item, $old );
 			$item->setPreviews( $previews );
+
+			$this->call( 'scaled', $item, $media );
 		}
 
 		return $item;
@@ -1318,6 +1320,18 @@ class Standard
 		}
 
 		return $paths;
+	}
+
+
+	/**
+	 * Called after the image has been scaled
+	 * Can be used to update the media item with image information.
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 */
+	protected function scaled( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media )
+	{
 	}
 
 
