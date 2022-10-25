@@ -222,8 +222,7 @@ abstract class Base
 	 * Returns a new manager for product extensions
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from
-	 * configuration (or Default) if null
+	 * @param string|null $name Name of the implementation, will be from configuration (or "Standard") if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g property types, property lists etc.
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface

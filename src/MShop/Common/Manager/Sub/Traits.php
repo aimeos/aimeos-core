@@ -143,7 +143,7 @@ trait Traits
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
 
-		$name = $name?: $this->context()->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
+		$name = $name ?: $this->context()->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		$key = $domain . $manager . $name;
 
 		if( !isset( $this->subManagers[$key] ) )
