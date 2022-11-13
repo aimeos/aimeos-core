@@ -36,6 +36,13 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 
 
 	/**
+	 * Returns the associated order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
+	 */
+	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface;
+
+	/**
 	 * Returns the ID of the base order
 	 *
 	 * @return string|null ID of the base order
