@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class OrderMigrateStatus extends Base
 {
-	public function before() : array
+	public function after() : array
 	{
 		return ['Order'];
 	}
