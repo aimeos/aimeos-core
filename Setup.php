@@ -119,6 +119,9 @@ class Setup
 		$dbm = \Aimeos\Base\DB\Factory::create( $conf, 'DBAL' );
 		$ctx->setDatabaseManager( $dbm );
 
+		$fsm = new \Aimeos\Base\Filesystem\Manager\Standard( $conf->get('resource', [] ) );
+		$ctx->setFilesystemManager( $fsm );
+
 		$logger = new \Aimeos\Base\Logger\Errorlog( \Aimeos\Base\Logger\Iface::INFO );
 		$ctx->setLogger( $logger );
 
