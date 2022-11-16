@@ -208,14 +208,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManagerInvalidType()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager( '$$$' );
+		$this->object->getSubManager( '%^unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidDefaultName()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager( 'attribute', '$$$' );
+		$this->object->getSubManager( 'attribute', '%^unknown' );
 	}
 
 

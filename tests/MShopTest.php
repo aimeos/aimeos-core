@@ -35,7 +35,7 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 	public function testCreateManagerInvalidName()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop::create( \TestHelper::context(), '%^' );
+		\Aimeos\MShop::create( \TestHelper::context(), '%^unknown' );
 	}
 
 

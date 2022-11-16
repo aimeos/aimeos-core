@@ -28,7 +28,7 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 	public function testCreateInvalidName()
 	{
 		$this->expectException( \Aimeos\MAdmin\Exception::class );
-		\Aimeos\MAdmin::create( \TestHelper::context(), '%^' );
+		\Aimeos\MAdmin::create( \TestHelper::context(), '%^unknown' );
 	}
 
 

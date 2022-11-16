@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManagerInvalidManager()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager( '$%^' );
+		$this->object->getSubManager( '$%^unknown' );
 	}
 
 
