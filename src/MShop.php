@@ -61,9 +61,8 @@ class MShop
 		if( self::$context !== null && self::$context !== $context ) {
 			self::$objects = []; // clear cached objects on context change
 		}
-		self::$context = $context;
 
-		$config = $context->config();
+		self::$context = $context;
 		$parts = explode( '/', $path );
 
 		if( ( $domain = array_shift( $parts ) ) === null ) {
