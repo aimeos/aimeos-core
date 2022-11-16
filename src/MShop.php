@@ -70,21 +70,13 @@ class MShop
 			throw new \Aimeos\MShop\Exception( sprintf( 'Manager path is empty', $path ) );
 		}
 
-		if( empty( $name ) )
-		{
-			$subpath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
-			$name = $config->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
-			$name = $config->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', $name );
-		}
+		$classname = self::classname( $context, $parts, $domain, $name );
 
-		$localClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
-		$finalClass = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $localClass . $name;
-
-		if( self::$cache === false || !isset( self::$objects[$finalClass] ) ) {
+		if( self::$cache === false || !isset( self::$objects[$classname] ) ) {
 			self::instantiate( $context, $parts, $domain, $name );
 		}
 
-		return self::$objects[$finalClass]->setObject( self::$objects[$finalClass] );
+		return self::$objects[$classname]->setObject( self::$objects[$classname] );
 	}
 
 
@@ -258,39 +250,57 @@ class MShop
 
 
 	/**
+	 * Returns the class name for the manager object
+	 *
+	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
+	 * @param array $parts List of sub-path parts (without domain)
+	 * @param string $domain Domain name (first part of the path)
+	 * @param string|null $name Name of the manager implementation
+	 * @return string Manager class name
+	 */
+	protected static function classname( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name = null ) : string
+	{
+		$subClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
+		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subClass;
+
+		$subPath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
+		$localName = $context->config()->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
+		$localName = $name ?: $context->config()->get( 'mshop/' . $domain . '/manager/' . $subPath . 'name', $localName );
+
+		if( class_exists( $classname . $localName ) ) {
+			return $classname . $localName;
+		}
+
+		return $classname . 'Standard';
+	}
+
+
+	/**
 	 * Instantiates the manager objects for all parts of the path
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context instance with necessary objects
 	 * @param array $parts List of sub-path parts (without domain)
 	 * @param string $domain Domain name (first part of the path)
-	 * @param string $name Name of the manager implementation
+	 * @param string|null $name Name of the manager implementation
 	 */
-	protected static function instantiate( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name )
+	protected static function instantiate( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name = null )
 	{
-		$mname = empty( $parts ) ? $name : $context->config()->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
-		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $mname;
+		$classname = self::classname( $context, [], $domain, $name );
 		$iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';
-
 		$manager = self::createManager( $context, $classname, $iface, $domain );
 
 		self::$objects[$classname] = $manager;
 		$paths = [$domain => $manager];
 
-		$subpath = '';
+		$subParts = [];
 		$tmppath = $domain;
 		$last = end( $parts );
 
 		foreach( $parts as $part )
 		{
-			$localName = $name;
-			$subpath .= $part . '/';
-
-			if( $part !== $last ) {
-				$localName = $context->config()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name', $mname );
-			}
-
-			$localClass = str_replace( '/', '\\', ucwords( $subpath, '/' ) );
-			$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $localClass . $localName;
+			$subParts[] = $part;
+			$localName = $part === $last ? $name : null;
+			$classname = self::classname( $context, $subParts, $domain, $localName );
 
 			$paths[$tmppath . '/' . $part] = $paths[$tmppath]->getSubManager( $part, $localName );
 			$tmppath .= '/' . $part;
