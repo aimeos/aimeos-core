@@ -79,7 +79,7 @@ class TestHelper
 	 */
 	public static function getDBManager()
 	{
-		return \Aimeos\Base\DB\Factory::create( self::getConfig(), 'DBAL' );
+		return \Aimeos\Base\DB\Factory::create( self::getConfig()->get( 'resource', [] ), 'DBAL' );
 	}
 
 
@@ -126,11 +126,11 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
-		$dbm = \Aimeos\Base\DB\Factory::create( $conf, 'PDO' );
+		$dbm = \Aimeos\Base\DB\Factory::create( $conf->get( 'resource', [] ), 'PDO' );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$fs = new \Aimeos\Base\Filesystem\Manager\Standard( $conf->get( 'resource' ) );
+		$fs = new \Aimeos\Base\Filesystem\Manager\Standard( $conf->get( 'resource', [] ) );
 		$ctx->setFilesystemManager( $fs );
 
 
