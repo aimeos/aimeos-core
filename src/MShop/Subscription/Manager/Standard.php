@@ -384,7 +384,7 @@ class Standard
 			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() && ( !$item->getBaseItem() || !$item->getBaseItem()->isModified() ) ) {
 			return $item;
 		}
 
@@ -545,6 +545,10 @@ class Standard
 		}
 
 		$item->setId( $id );
+
+		if( $baseItem = $item->getBaseItem() ) {
+			$this->object()->getSubManager( 'base' )->save( $baseItem );
+		}
 
 		return $item;
 	}

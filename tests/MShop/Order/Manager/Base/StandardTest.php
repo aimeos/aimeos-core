@@ -119,20 +119,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->getSubManager( 'product' );
-
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$search = $this->object->filter()->add( ['order.base.costs' => '1.50', 'order.base.editor' => $this->editor] );
 		$item = $this->object->search( $search, ['order/base/product'] )
 			->first( new \RuntimeException( 'No order base item found' ) );
 
 
-		$item->setId( null );
-		$item->setComment( 'Unittest1' );
+		$item->setId( null )->setComment( 'Unittest1' );
 		$resultSaved = $this->object->save( $item );
-
-		$product = $item->getProducts()->first()->setBaseId( $item->getId() )->setId( null );
-		$orderProductManager->save( $product );
 
 		$itemSaved = $this->object->get( $item->getId() );
 		$itemPrice = $item->getPrice();
@@ -626,13 +620,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStore()
+	public function testSave()
 	{
 		$item = $this->getOrderItem();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
 		$basket = $this->object->load( $item->getId(), $ref, true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 
 		$newBasketId = $basket->getId();
 
@@ -645,7 +639,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
 
-		$pos = 0;
+		$pos = 1;
 		$products = $basket->getProducts();
 		$this->assertEquals( 3, count( $products ) );
 
@@ -679,15 +673,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStoreExisting()
+	public function testSaveExisting()
 	{
 		$item = $this->getOrderItem();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
 		$basket = $this->object->load( $item->getId(), $ref, true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 		$newBasketId = $basket->getId();
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 		$newBasket = $this->object->load( $newBasketId );
 
 		$this->object->delete( $newBasketId );
@@ -706,14 +700,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStoreBundles()
+	public function testSaveBundles()
 	{
 		$search = $this->object->filter()->add( ['order.base.sitecode' => 'unittest', 'order.base.price' => 2400.00] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 		$basket = $this->object->load( $item->getId(), $ref, true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 
 		$newBasketId = $basket->getId();
 
@@ -723,7 +717,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
 		$this->assertEquals( $basket->locale()->getSiteId(), $basket->getSiteId() );
 
-		$pos = 0;
+		$pos = 1;
 		$products = $basket->getProducts();
 
 		$this->assertEquals( 2, count( $products ) );
@@ -739,12 +733,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStoreAddress()
+	public function testSaveAddress()
 	{
 		$item = $this->getOrderItem();
 
 		$basket = $this->object->load( $item->getId(), ['order/base/address'], true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 
 		$newBasketId = $basket->getId();
 
@@ -759,12 +753,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStoreProduct()
+	public function testSaveProduct()
 	{
 		$item = $this->getOrderItem();
 
 		$basket = $this->object->load( $item->getId(), ['order/base/product'], true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 
 		$newBasketId = $basket->getId();
 
@@ -779,12 +773,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStoreService()
+	public function testSaveService()
 	{
 		$item = $this->getOrderItem();
 
 		$basket = $this->object->load( $item->getId(), ['order/base/service'], true );
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 
 		$newBasketId = $basket->getId();
 
@@ -799,7 +793,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testLoadStoreCoupons()
+	public function testLoadSaveCoupons()
 	{
 		$search = $this->object->filter()->add( ['order.base.price' => '53.50'] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
@@ -817,7 +811,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$basket->addCoupon( '90AB' );
 		$this->assertEquals( 2, count( $basket->getCoupons() ) );
 
-		$this->object->store( $basket );
+		$this->object->save( $basket );
 		$newBasket = $this->object->load( $basket->getId() );
 		$this->object->delete( $newBasket->getId() );
 

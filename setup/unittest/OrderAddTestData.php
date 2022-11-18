@@ -90,7 +90,7 @@ class OrderAddTestData extends Base
 				$basket->setCoupon( $map['code'], $list );
 			}
 
-			$orderBaseManager->store( $basket );
+			$orderBaseManager->save( $basket );
 
 			$item = $orderManager->create()->fromArray( $entry, true );
 			$orderManager->save( $item->setBaseId( $basket->getId() ) );

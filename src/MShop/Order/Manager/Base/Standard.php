@@ -566,172 +566,172 @@ class Standard extends Base
 	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		if( !$item->isModified() && !$item->locale()->isModified() ) {
-			return $item;
+			return $this->saveBasket( $item );
 		}
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null )
-			{
-				/** mshop/order/manager/base/insert/mysql
-				 * Inserts a new order record into the database table
-				 *
-				 * @see mshop/order/manager/base/insert/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/order/manager/base/insert/mysql
+			 * Inserts a new order record into the database table
+			 *
+			 * @see mshop/order/manager/base/insert/ansi
+			 */
 
-				/** mshop/order/manager/base/insert/ansi
-				 * Inserts a new order record into the database table
-				 *
-				 * Items with no ID yet (i.e. the ID is NULL) will be created in
-				 * the database and the newly created ID retrieved afterwards
-				 * using the "newid" SQL statement.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the order item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the save() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/order/manager/base/update/ansi
-				 * @see mshop/order/manager/base/newid/ansi
-				 * @see mshop/order/manager/base/delete/ansi
-				 * @see mshop/order/manager/base/search/ansi
-				 * @see mshop/order/manager/base/count/ansi
-				 */
-				$path = 'mshop/order/manager/base/insert';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-			}
-			else
-			{
-				/** mshop/order/manager/base/update/mysql
-				 * Updates an existing order record in the database
-				 *
-				 * @see mshop/order/manager/base/update/ansi
-				 */
+			/** mshop/order/manager/base/insert/ansi
+			 * Inserts a new order record into the database table
+			 *
+			 * Items with no ID yet (i.e. the ID is NULL) will be created in
+			 * the database and the newly created ID retrieved afterwards
+			 * using the "newid" SQL statement.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the order item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/order/manager/base/update/ansi
+			 * @see mshop/order/manager/base/newid/ansi
+			 * @see mshop/order/manager/base/delete/ansi
+			 * @see mshop/order/manager/base/search/ansi
+			 * @see mshop/order/manager/base/count/ansi
+			 */
+			$path = 'mshop/order/manager/base/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/order/manager/base/update/mysql
+			 * Updates an existing order record in the database
+			 *
+			 * @see mshop/order/manager/base/update/ansi
+			 */
 
-				/** mshop/order/manager/base/update/ansi
-				 * Updates an existing order record in the database
-				 *
-				 * Items which already have an ID (i.e. the ID is not NULL) will
-				 * be updated in the database.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the order item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the save() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/order/manager/base/insert/ansi
-				 * @see mshop/order/manager/base/newid/ansi
-				 * @see mshop/order/manager/base/delete/ansi
-				 * @see mshop/order/manager/base/search/ansi
-				 * @see mshop/order/manager/base/count/ansi
-				 */
-				$path = 'mshop/order/manager/base/update';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/order/manager/base/update/ansi
+			 * Updates an existing order record in the database
+			 *
+			 * Items which already have an ID (i.e. the ID is not NULL) will
+			 * be updated in the database.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the order item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/order/manager/base/insert/ansi
+			 * @see mshop/order/manager/base/newid/ansi
+			 * @see mshop/order/manager/base/delete/ansi
+			 * @see mshop/order/manager/base/search/ansi
+			 * @see mshop/order/manager/base/count/ansi
+			 */
+			$path = 'mshop/order/manager/base/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$priceItem = $item->getPrice();
-			$localeItem = $context->locale();
+		$priceItem = $item->getPrice();
+		$localeItem = $context->locale();
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getCustomerId() );
-			$stmt->bind( $idx++, $localeItem->getSiteItem()->getCode() );
-			$stmt->bind( $idx++, $item->locale()->getLanguageId() );
-			$stmt->bind( $idx++, $priceItem->getCurrencyId() );
-			$stmt->bind( $idx++, $priceItem->getValue() );
-			$stmt->bind( $idx++, $priceItem->getCosts() );
-			$stmt->bind( $idx++, $priceItem->getRebate() );
-			$stmt->bind( $idx++, $priceItem->getTaxValue() );
-			$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getCustomerReference() );
-			$stmt->bind( $idx++, $item->getComment() );
-			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->editor() );
-			$stmt->bind( $idx++, $localeItem->getSiteId() );
+		$stmt->bind( $idx++, $item->getCustomerId() );
+		$stmt->bind( $idx++, $localeItem->getSiteItem()->getCode() );
+		$stmt->bind( $idx++, $item->locale()->getLanguageId() );
+		$stmt->bind( $idx++, $priceItem->getCurrencyId() );
+		$stmt->bind( $idx++, $priceItem->getValue() );
+		$stmt->bind( $idx++, $priceItem->getCosts() );
+		$stmt->bind( $idx++, $priceItem->getRebate() );
+		$stmt->bind( $idx++, $priceItem->getTaxValue() );
+		$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getCustomerReference() );
+		$stmt->bind( $idx++, $item->getComment() );
+		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $localeItem->getSiteId() );
 
-			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			} else {
-				$stmt->bind( $idx++, $date ); // ctime
-			}
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $date ); // ctime
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			if( $id === null && $fetch === true )
-			{
-				/** mshop/order/manager/base/newid/mysql
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * @see mshop/order/manager/base/newid/ansi
-				 */
+		if( $id === null && $fetch === true )
+		{
+			/** mshop/order/manager/base/newid/mysql
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * @see mshop/order/manager/base/newid/ansi
+			 */
 
-				/** mshop/order/manager/base/newid/ansi
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * As soon as a new record is inserted into the database table,
-				 * the database server generates a new and unique identifier for
-				 * that record. This ID can be used for retrieving, updating and
-				 * deleting that specific record from the table again.
-				 *
-				 * For MySQL:
-				 *  SELECT LAST_INSERT_ID()
-				 * For PostgreSQL:
-				 *  SELECT currval('seq_mord_id')
-				 * For SQL Server:
-				 *  SELECT SCOPE_IDENTITY()
-				 * For Oracle:
-				 *  SELECT "seq_mord_id".CURRVAL FROM DUAL
-				 *
-				 * There's no way to retrive the new ID by a SQL statements that
-				 * fits for most database servers as they implement their own
-				 * specific way.
-				 *
-				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/order/manager/base/insert/ansi
-				 * @see mshop/order/manager/base/update/ansi
-				 * @see mshop/order/manager/base/delete/ansi
-				 * @see mshop/order/manager/base/search/ansi
-				 * @see mshop/order/manager/base/count/ansi
-				 */
-				$path = 'mshop/order/manager/base/newid';
-				$id = $this->newId( $conn, $path );
-			}
+			/** mshop/order/manager/base/newid/ansi
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_mord_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_mord_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/order/manager/base/insert/ansi
+			 * @see mshop/order/manager/base/update/ansi
+			 * @see mshop/order/manager/base/delete/ansi
+			 * @see mshop/order/manager/base/search/ansi
+			 * @see mshop/order/manager/base/count/ansi
+			 */
+			$path = 'mshop/order/manager/base/newid';
+			$id = $this->newId( $conn, $path );
+		}
 
-			$item->setId( $id );
+		$item->setId( $id );
 
-		return $item;
+		return $this->saveBasket( $item );
 	}
 
 
@@ -1069,5 +1069,104 @@ class Standard extends Base
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
 			$values, $products, $addresses, $services, $coupons, $custItem );
+	}
+
+
+	/**
+	 * Saves the modified basket content
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket content
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Saved basket content
+	 */
+	protected function saveBasket( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface
+	{
+		$addresses = $basket->getAddresses()->flat( 1 );
+
+		foreach( $addresses as $address )
+		{
+			if( $address->getBaseId() != $basket->getId() ) {
+				$address->setId( null ); // create new item if copied
+			}
+
+			$address->setBaseId( $basket->getId() );
+		}
+
+		$this->object()->getSubManager( 'address' )->save( $addresses );
+
+
+		$services = $basket->getServices()->flat( 1 );
+
+		foreach( $services as $service )
+		{
+			if( $service->getBaseId() != $basket->getId() ) {
+				$service->setId( null ); // create new item if copied
+			}
+
+			$service->setBaseId( $basket->getId() );
+		}
+
+		$this->object()->getSubManager( 'service' )->save( $services );
+
+
+		$products = $basket->getProducts();
+		$pos = $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.base.product.position' );
+
+		foreach( $products as $product )
+		{
+			if( $product->getBaseId() != $basket->getId() ) {
+				$product->setId( null ); // create new item if copied
+			}
+
+			if( !$product->getPosition() ) {
+				$product->setPosition( ++$pos );
+			}
+
+			$product->setBaseId( $basket->getId() );
+
+			foreach( $product->getProducts() as $subProduct )
+			{
+				if( $subProduct->getBaseId() != $basket->getId() ) {
+					$subProduct->setId( null ); // create new item if copied
+				}
+
+				if( !$subProduct->getPosition() ) {
+					$subProduct->setPosition( ++$pos );
+				}
+
+				$subProduct->setBaseId( $basket->getId() );
+			}
+		}
+
+		$this->object()->getSubManager( 'product' )->save( $products );
+
+
+		$baseId = $basket->getId();
+		$manager = $this->object()->getSubManager( 'coupon' );
+		$filter = $manager->filter()->add( 'order.base.coupon.baseid', '==', $basket->getId() )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter )->groupBy( 'order.base.coupon.code' );
+
+		foreach( $basket->getCoupons() as $code => $products )
+		{
+			if( empty( $products ) )
+			{
+				$item = !empty( $items[$code] ) ? current( $items[$code] ) : $manager->create()->setBaseId( $baseId );
+				$manager->save( $item->setCode( $code ) );
+				continue;
+			}
+
+			foreach( $products as $product )
+			{
+				foreach( $items[$code] ?? [] as $prodItem )
+				{
+					if( $product->getId() === $prodItem->getId() ) {
+						continue 2;
+					}
+				}
+
+				$manager->save( $manager->create()->setBaseId( $baseId )->setCode( $code )->setProductId( $product->getId() ) );
+			}
+		}
+
+		return $basket;
 	}
 }

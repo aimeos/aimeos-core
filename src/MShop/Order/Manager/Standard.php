@@ -476,7 +476,7 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() && ( !$item->getBaseItem() || !$item->getBaseItem()->isModified() ) ) {
 			return $item;
 		}
 
@@ -652,6 +652,10 @@ class Standard
 		$item->setId( $id );
 
 		$this->addStatus( $item );
+
+		if( $baseItem = $item->getBaseItem() ) {
+			$this->object()->getSubManager( 'base' )->save( $baseItem );
+		}
 
 		return $item;
 	}
