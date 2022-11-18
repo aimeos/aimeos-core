@@ -69,12 +69,4 @@ interface Iface
 	 */
 	public function load( string $baseId, array $ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'],
 		bool $fresh = false, bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface;
-
-	/**
-	 * Saves the complete basket to the storage including the items attached.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
-	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface;
 }

@@ -556,88 +556,25 @@ abstract class Base
 
 
 	/**
-	 * Saves the ordered products to the storage.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing ordered products or bundles
-	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
-	 */
-	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
-	{
-		$position = 0;
-		$manager = $this->object()->getSubManager( 'product' );
-		$attrManager = $manager->getSubManager( 'attribute' );
-
-		foreach( $basket->getProducts() as $item )
-		{
-			$baseId = $basket->getId();
-			$item->setBaseId( $baseId );
-
-			if( ( $pos = $item->getPosition() ) === null ) {
-				$item = $item->setPosition( $position++ );
-			} else {
-				$position = ++$pos;
-			}
-
-			$item = $manager->save( $item );
-			$productId = $item->getId();
-
-			foreach( $item->getAttributeItems() as $attribute )
-			{
-				$attribute->setParentId( $productId );
-				$attrManager->save( $attribute );
-			}
-
-			// if the item is a bundle, it probably contains sub-products
-			foreach( $item->getProducts() as $subProduct )
-			{
-				$subProduct->setBaseId( $baseId );
-				$subProduct->setOrderProductId( $productId );
-
-				if( ( $pos = $subProduct->getPosition() ) === null ) {
-					$subProduct = $subProduct->setPosition( $position++ );
-				} else {
-					$position = ++$pos;
-				}
-
-				$subProduct = $manager->save( $subProduct );
-				$subProductId = $subProduct->getId();
-
-				foreach( $subProduct->getAttributeItems() as $attribute )
-				{
-					$attribute->setParentId( $subProductId );
-					$attrManager->save( $attribute );
-				}
-			}
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Saves the addresses of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing address items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
+	protected function saveAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
-		$position = 0;
-		$manager = $this->object()->getSubManager( 'address' );
+		$addresses = $basket->getAddresses()->flat( 1 );
 
-		foreach( $basket->getAddresses() as $type => $list )
+		foreach( $addresses as $address )
 		{
-			foreach( $list as $item )
-			{
-				if( ( $pos = $item->getPosition() ) === null ) {
-					$item = $item->setPosition( $position++ );
-				} else {
-					$position = ++$pos;
-				}
-
-				$manager->save( $item->setBaseId( $basket->getId() ) );
+			if( $address->getBaseId() != $basket->getId() ) {
+				$address->setId( null ); // create new item if copied
 			}
+
+			$address->setBaseId( $basket->getId() );
 		}
+
+		$this->object()->getSubManager( 'address' )->save( $addresses );
 
 		return $this;
 	}
@@ -649,31 +586,77 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing coupon items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
+	protected function saveCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
+		$baseId = $basket->getId();
 		$manager = $this->object()->getSubManager( 'coupon' );
-
-		$item = $manager->create();
-		$item->setBaseId( $basket->getId() );
+		$filter = $manager->filter()->add( 'order.base.coupon.baseid', '==', $basket->getId() )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter )->groupBy( 'order.base.coupon.code' );
 
 		foreach( $basket->getCoupons() as $code => $products )
 		{
-			$item->setCode( $code );
-
 			if( empty( $products ) )
 			{
-				$item->setId( null );
-				$manager->save( $item );
+				$item = !empty( $items[$code] ) ? current( $items[$code] ) : $manager->create()->setBaseId( $baseId );
+				$manager->save( $item->setCode( $code ) );
 				continue;
 			}
 
 			foreach( $products as $product )
 			{
-				$item->setId( null );
-				$item->setProductId( $product->getId() );
-				$manager->save( $item );
+				foreach( $items[$code] ?? [] as $prodItem )
+				{
+					if( $product->getId() === $prodItem->getId() ) {
+						continue 2;
+					}
+				}
+
+				$manager->save( $manager->create()->setBaseId( $baseId )->setCode( $code )->setProductId( $product->getId() ) );
 			}
 		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Saves the ordered products to the storage.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing ordered products or bundles
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
+	 */
+	protected function saveProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
+	{
+		$products = $basket->getProducts();
+		$pos = $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.base.product.position' );
+
+		foreach( $products as $product )
+		{
+			if( $product->getBaseId() != $basket->getId() ) {
+				$product->setId( null ); // create new item if copied
+			}
+
+			if( !$product->getPosition() ) {
+				$product->setPosition( ++$pos );
+			}
+
+			$product->setBaseId( $basket->getId() );
+
+			foreach( $product->getProducts() as $subProduct )
+			{
+				if( $subProduct->getBaseId() != $basket->getId() ) {
+					$subProduct->setId( null ); // create new item if copied
+				}
+
+				if( !$subProduct->getPosition() ) {
+					$subProduct->setPosition( ++$pos );
+				}
+
+				$subProduct->setBaseId( $basket->getId() );
+			}
+		}
+
+		$this->object()->getSubManager( 'product' )->save( $products );
 
 		return $this;
 	}
@@ -685,35 +668,20 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing service items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
+	protected function saveServices( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
-		$manager = $this->object()->getSubManager( 'service' );
-		$attrManager = $manager->getSubManager( 'attribute' );
-		$position = 0;
+		$services = $basket->getServices()->flat( 1 );
 
-		foreach( $basket->getServices() as $type => $list )
+		foreach( $services as $service )
 		{
-			foreach( $list as $item )
-			{
-				if( ( $pos = $item->getPosition() ) === null ) {
-					$item = $item->setPosition( $position++ );
-				} else {
-					$position = ++$pos;
-				}
-
-				$item = $item->setBaseId( $basket->getId() )->setType( $type );
-				$item = $manager->save( $item );
-
-				foreach( $item->getAttributeItems() as $attribute )
-				{
-					if( $attribute->getType() !== 'session' )
-					{
-						$attribute->setParentId( $item->getId() );
-						$attrManager->save( $attribute );
-					}
-				}
+			if( $service->getBaseId() != $basket->getId() ) {
+				$service->setId( null ); // create new item if copied
 			}
+
+			$service->setBaseId( $basket->getId() );
 		}
+
+		$this->object()->getSubManager( 'service' )->save( $services );
 
 		return $this;
 	}

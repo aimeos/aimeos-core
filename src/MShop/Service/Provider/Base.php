@@ -502,7 +502,7 @@ abstract class Base
 	 */
 	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order/base' )->store( $base );
+		return \Aimeos\MShop::create( $this->context, 'order/base' )->save( $base );
 	}
 
 

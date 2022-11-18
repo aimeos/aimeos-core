@@ -982,25 +982,6 @@ class Standard extends Base
 
 
 	/**
-	 * Saves the complete basket to the storage including the items attached.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
-	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface
-	{
-		$basket = $this->object()->save( $basket );
-
-		$this->storeProducts( $basket );
-		$this->storeCoupons( $basket );
-		$this->storeAddresses( $basket );
-		$this->storeServices( $basket );
-
-		return $basket;
-	}
-
-
-	/**
 	 * Creates the order base item objects from the map and adds the referenced items
 	 *
 	 * @param array $map Associative list of order base IDs as keys and list of price/locale/row as values
@@ -1080,92 +1061,10 @@ class Standard extends Base
 	 */
 	protected function saveBasket( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$addresses = $basket->getAddresses()->flat( 1 );
-
-		foreach( $addresses as $address )
-		{
-			if( $address->getBaseId() != $basket->getId() ) {
-				$address->setId( null ); // create new item if copied
-			}
-
-			$address->setBaseId( $basket->getId() );
-		}
-
-		$this->object()->getSubManager( 'address' )->save( $addresses );
-
-
-		$services = $basket->getServices()->flat( 1 );
-
-		foreach( $services as $service )
-		{
-			if( $service->getBaseId() != $basket->getId() ) {
-				$service->setId( null ); // create new item if copied
-			}
-
-			$service->setBaseId( $basket->getId() );
-		}
-
-		$this->object()->getSubManager( 'service' )->save( $services );
-
-
-		$products = $basket->getProducts();
-		$pos = $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.base.product.position' );
-
-		foreach( $products as $product )
-		{
-			if( $product->getBaseId() != $basket->getId() ) {
-				$product->setId( null ); // create new item if copied
-			}
-
-			if( !$product->getPosition() ) {
-				$product->setPosition( ++$pos );
-			}
-
-			$product->setBaseId( $basket->getId() );
-
-			foreach( $product->getProducts() as $subProduct )
-			{
-				if( $subProduct->getBaseId() != $basket->getId() ) {
-					$subProduct->setId( null ); // create new item if copied
-				}
-
-				if( !$subProduct->getPosition() ) {
-					$subProduct->setPosition( ++$pos );
-				}
-
-				$subProduct->setBaseId( $basket->getId() );
-			}
-		}
-
-		$this->object()->getSubManager( 'product' )->save( $products );
-
-
-		$baseId = $basket->getId();
-		$manager = $this->object()->getSubManager( 'coupon' );
-		$filter = $manager->filter()->add( 'order.base.coupon.baseid', '==', $basket->getId() )->slice( 0, 0x7fffffff );
-		$items = $manager->search( $filter )->groupBy( 'order.base.coupon.code' );
-
-		foreach( $basket->getCoupons() as $code => $products )
-		{
-			if( empty( $products ) )
-			{
-				$item = !empty( $items[$code] ) ? current( $items[$code] ) : $manager->create()->setBaseId( $baseId );
-				$manager->save( $item->setCode( $code ) );
-				continue;
-			}
-
-			foreach( $products as $product )
-			{
-				foreach( $items[$code] ?? [] as $prodItem )
-				{
-					if( $product->getId() === $prodItem->getId() ) {
-						continue 2;
-					}
-				}
-
-				$manager->save( $manager->create()->setBaseId( $baseId )->setCode( $code )->setProductId( $product->getId() ) );
-			}
-		}
+		$this->saveAddresses( $basket );
+		$this->saveServices( $basket );
+		$this->saveProducts( $basket );
+		$this->saveCoupons( $basket );
 
 		return $basket;
 	}
