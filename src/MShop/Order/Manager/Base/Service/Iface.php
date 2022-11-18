@@ -21,4 +21,11 @@ namespace Aimeos\MShop\Order\Manager\Base\Service;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
+	/**
+	 * Creates a new order service attribute item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface New order service attribute item object
+	 */
+	public function createAttributeItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
 }

@@ -85,6 +85,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $this->object->create() );
+	}
+
+
+	public function testCreateAttributeItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $this->object->createAttributeItem() );
+	}
+
+
 	public function testDeleteItems()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
@@ -105,12 +117,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $this->object->getSearchAttributes( true ) as $attribute ) {
 			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attribute );
 		}
-	}
-
-
-	public function testCreateItem()
-	{
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $this->object->create() );
 	}
 
 

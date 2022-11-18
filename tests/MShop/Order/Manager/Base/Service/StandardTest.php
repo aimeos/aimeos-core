@@ -73,6 +73,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItem()
+	{
+		$actual = $this->object->create();
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $actual );
+	}
+
+
+	public function testCreateAttributeItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $this->object->createAttributeItem() );
+	}
+
+
 	public function testDeleteItems()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
@@ -94,13 +107,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attribute );
 		}
-	}
-
-
-	public function testCreateItem()
-	{
-		$actual = $this->object->create();
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $actual );
 	}
 
 

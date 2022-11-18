@@ -320,6 +320,18 @@ class Standard
 
 
 	/**
+	 * Creates a new order service attribute item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface New order service attribute item object
+	 */
+	public function createAttributeItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->object()->getSubManager( 'attribute' )->create( $values );
+	}
+
+
+	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
