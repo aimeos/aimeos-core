@@ -119,9 +119,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$search = $this->object->filter()->add( ['order.base.costs' => '1.50', 'order.base.editor' => $this->editor] );
-		$item = $this->object->search( $search, ['order/base/product'] )
+		$filter = $this->object->filter()->add( ['order.base.costs' => '1.50', 'order.base.editor' => $this->editor] );
+		$item = $this->object->search( $filter, ['order/base/product'] )
 			->first( new \RuntimeException( 'No order base item found' ) );
 
 

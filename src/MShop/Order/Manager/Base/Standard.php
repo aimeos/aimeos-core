@@ -565,10 +565,6 @@ class Standard extends Base
 	 */
 	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		if( !$item->isModified() && !$item->locale()->isModified() ) {
-			return $this->saveBasket( $item );
-		}
-
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 

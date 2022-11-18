@@ -472,11 +472,17 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Order\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Iface
 	{
+		if( $baseItem = $item->getBaseItem() )
+		{
+			$this->object()->getSubManager( 'base' )->save( $baseItem );
+			$item->setBaseId( $baseItem->getId() );
+		}
+
 		if( $item->getBaseId() === null ) {
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );
 		}
 
-		if( !$item->isModified() && ( !$item->getBaseItem() || !$item->getBaseItem()->isModified() ) ) {
+		if( !$item->isModified() ) {
 			return $item;
 		}
 
@@ -652,10 +658,6 @@ class Standard
 		$item->setId( $id );
 
 		$this->addStatus( $item );
-
-		if( $baseItem = $item->getBaseItem() ) {
-			$this->object()->getSubManager( 'base' )->save( $baseItem );
-		}
 
 		return $item;
 	}
