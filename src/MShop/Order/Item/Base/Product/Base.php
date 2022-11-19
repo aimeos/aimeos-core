@@ -79,6 +79,24 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Adds new and replaces existing attribute items for the product.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, true );
+
+		foreach( $attributes as $attrItem ) {
+			$this->setAttributeItem( $attrItem );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value or list of values of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item

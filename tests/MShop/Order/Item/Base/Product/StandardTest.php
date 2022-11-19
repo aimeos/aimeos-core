@@ -645,6 +645,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAddAttributeItems()
+	{
+		$item = \Aimeos\MShop::create( \TestHelper::context(), 'order/base/product' )->createAttributeItem();
+
+		$return = $this->object->addAttributeItems( [$item] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 2, count( $this->object->getAttributeItems() ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetAttribute()
 	{
 		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );

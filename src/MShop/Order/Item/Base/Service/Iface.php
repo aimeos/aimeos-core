@@ -142,6 +142,14 @@ interface Iface
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 
 	/**
+	 * Adds new and replaces existing attribute items for the service.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+
+	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item

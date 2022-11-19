@@ -399,6 +399,14 @@ interface Iface
 	public function setStatusPayment( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
+	 * Adds new and replaces existing attribute items for the product.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
