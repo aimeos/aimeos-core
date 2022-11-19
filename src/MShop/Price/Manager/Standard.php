@@ -494,7 +494,7 @@ class Standard
 	 * @return \Aimeos\MShop\Price\Item\Iface Updated item including the generated ID
 	 * @throws \Aimeos\MShop\Price\Exception If price couldn't be saved
 	 */
-	public function saveItem( \Aimeos\MShop\Price\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Price\Item\Iface
+	protected function saveItem( \Aimeos\MShop\Price\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;

@@ -91,7 +91,7 @@ abstract class Base
 	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Type\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Type\Iface
+	protected function saveItem( \Aimeos\MShop\Common\Item\Type\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Type\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;

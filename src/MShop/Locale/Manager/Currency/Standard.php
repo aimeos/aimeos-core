@@ -129,7 +129,7 @@ class Standard
 	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Currency\Iface
+	protected function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Currency\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;

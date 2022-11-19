@@ -582,7 +582,7 @@ class Standard
 	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	protected function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		if( !$item->isModified() && !$item->getPrice()->isModified() ) {
 			return $this->saveAttributeItems( $item, $fetch );
