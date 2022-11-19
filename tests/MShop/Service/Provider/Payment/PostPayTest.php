@@ -24,8 +24,8 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 		$serviceItem->setCode( 'test' );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PostPay::class )
-			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
+			->setMethods( ['save'] )
 			->getMock();
 	}
 
@@ -54,8 +54,6 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderItem = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
-
-		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );
 
 		$result = $this->object->updateSync( $request, $orderItem );
 

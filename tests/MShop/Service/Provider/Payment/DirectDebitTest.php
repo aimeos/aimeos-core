@@ -25,8 +25,8 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$serviceItem->setCode( 'test' );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\DirectDebit::class )
-			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
+			->setMethods( ['save'] )
 			->getMock();
 	}
 
@@ -54,17 +54,15 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	public function testGetConfigFE()
 	{
 		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
 		$search = $orderManager->filter()->add( [
 			'order.channel' => 'web',
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
 		] );
 
-		$order = $orderManager->search( $search )->first( new \RuntimeException( 'No order found' ) );
-		$basket = $orderBaseManager->load( $order->getBaseId() );
+		$order = $orderManager->search( $search, ['order/base', 'order/base/address'] )
+			->first( new \RuntimeException( 'No order found' ) );
 
-		$config = $this->object->getConfigFE( $basket );
+		$config = $this->object->getConfigFE( $order->getBaseItem() );
 
 		$this->assertArrayHasKey( 'directdebit.accountowner', $config );
 		$this->assertArrayHasKey( 'directdebit.accountno', $config );
@@ -135,8 +133,6 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderItem = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
-
-		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );
 
 		$result = $this->object->updateSync( $request, $orderItem );
 

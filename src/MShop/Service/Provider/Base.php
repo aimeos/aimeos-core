@@ -377,46 +377,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the order item for the given ID.
-	 *
-	 * @param string $id Unique order ID
-	 * @return \Aimeos\MShop\Order\Item\Iface $item Order object
-	 */
-	protected function getOrder( string $id ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order' );
-
-		$search = $manager->filter();
-		$expr = [
-			$search->compare( '==', 'order.id', $id ),
-			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),
-		];
-		$search->setConditions( $search->and( $expr ) );
-
-		if( ( $item = $manager->search( $search )->first() ) === null )
-		{
-			$msg = $this->context->translate( 'mshop', 'No order for ID "%1$s" found' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $id ) );
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Returns the base order which is equivalent to the basket.
-	 *
-	 * @param string $baseId Order base ID stored in the order item
-	 * @param array $ref Basket parts that should be loaded too
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
-	 */
-	protected function getOrderBase( string $baseId, array $ref = ['order/base/service'] ) : \Aimeos\MShop\Order\Item\Base\Iface
-	{
-		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $ref );
-	}
-
-
-	/**
 	 * Logs the given message with the passed log level
 	 *
 	 * @param mixed $msg Message or object
@@ -459,18 +419,6 @@ abstract class Base
 
 
 	/**
-	 * Saves the order item.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
-	 * @return \Aimeos\MShop\Order\Item\Iface Order object including the generated ID
-	 */
-	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item );
-	}
-
-
-	/**
 	 * Returns the service related data from the customer account if available
 	 *
 	 * @param string $customerId Unique customer ID the service token belongs to
@@ -495,14 +443,14 @@ abstract class Base
 
 
 	/**
-	 * Saves the base order which is equivalent to the basket and its dependent objects.
+	 * Saves the order item.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order base item
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
+	 * @return \Aimeos\MShop\Order\Item\Iface Order object including the generated ID
 	 */
-	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Order\Item\Base\Iface
+	protected function save( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order/base' )->save( $base );
+		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item );
 	}
 
 

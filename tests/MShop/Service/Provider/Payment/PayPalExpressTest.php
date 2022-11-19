@@ -44,6 +44,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$ref = ['order/base', 'order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 		$this->order = $orderManager->search( $search, $ref )->first( new \RuntimeException( 'No order found' ) );
 
+		$attr = \Aimeos\MShop::create( $this->context, 'order/base/service' )->createAttributeItem();
+		$attr->setType( 'payment/paypal' )->setCode( 'TRANSACTIONID' )->setValue( '111111111' );
+		$this->order->getBaseItem()->getService( 'payment', 0 )->setAttributeItem( $attr );
+
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
@@ -115,29 +119,18 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$helperForm = $this->object->process( $this->order );
 
-		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
-		$attributes = $refOrderBase->getService( 'payment', 0 )->getAttributeItems();
-
-		$attributeList = [];
-		foreach( $attributes as $attribute ) {
-			$attributeList[$attribute->getCode()] = $attribute;
-		}
-
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( [], $helperForm->getValues() );
 
-		$testData = array(
-			'TOKEN' => 'UT-99999999'
-		);
-
-		foreach( $testData as $key => $value ) {
-			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
+		$attrs = [];
+		foreach( $this->order->getBaseItem()->getService( 'payment', 0 )->getAttributeItems() as $attrItem ) {
+			$attrs[$attrItem->getCode()] = $attrItem->getValue();
 		}
+
+		$this->assertEquals( 'UT-99999999', $attrs['TOKEN'] );
+		$this->assertEquals( '111111111', $attrs['TRANSACTIONID'] );
 	}
 
 
@@ -201,7 +194,11 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->with( $this->equalTo( 200 ) );
 
 		$cmpFcn = function( $subject ) {
-			return $subject->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+			$attrs = $subject->getBaseItem()->getService( 'payment', 0 )->getAttributeItems();
+			$attrs = $attrs->col( 'order.base.service.attribute.value', 'order.base.service.attribute.code' );
+			return $subject->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED
+				&& $attrs['TRANSACTIONID'] === '111111111'
+				&& $attrs['111111111'] === 'Completed';
 		};
 
 		$this->orderMock->expects( $this->once() )->method( 'save' )->with( $this->callback( $cmpFcn ) );
@@ -209,24 +206,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->updatePush( $request, $response );
 		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
-
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), ['order/base/service'] );
-		$attributes = $refOrderBase->getService( 'payment', 0 )->getAttributeItems();
-		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
-
-		$attributeList = [];
-		foreach( $attributes as $attribute ) {
-			//remove attr where txn ids as keys, because next test with same txn id would fail
-			if( $attribute->getCode() === '111111110' || $attribute->getCode() === '111111111' ) {
-				$attrManager->delete( $attribute->getId() );
-			}
-
-			$attributeList[$attribute->getCode()] = $attribute;
-		}
-
-		foreach( $testData as $key => $value ) {
-			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
-		}
 	}
 
 
@@ -239,16 +218,11 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->object->refund( $this->order );
 
 		$testData = array(
-			'TOKEN' => 'UT-99999999',
 			'TRANSACTIONID' => '111111111',
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
-		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
-		$attributes = $refOrderBase->getService( 'payment', 0 )->getAttributeItems();
+		$attributes = $this->order->getBaseItem()->getService( 'payment', 0 )->getAttributeItems();
 
 		$attributeList = [];
 		foreach( $attributes as $attribute ) {
