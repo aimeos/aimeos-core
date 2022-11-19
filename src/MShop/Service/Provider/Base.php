@@ -253,51 +253,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the criteria attribute items for the backend configuration
-	 *
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of criteria attribute items
-	 */
-	protected function getConfigItems( array $configList ) : array
-	{
-		$list = [];
-
-		foreach( $configList as $key => $config ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
-		}
-
-		return $list;
-	}
-
-
-	/**
-	 * Returns the configuration value that matches one of the given keys.
-	 *
-	 * The config of the service item and (optionally) the global config
-	 * is tested in the order of the keys. The first one that matches will
-	 * be returned.
-	 *
-	 * @param array|string $keys Key name or list of key names that should be tested for in the order to test
-	 * @param mixed $default Returned value if the key wasn't was found
-	 * @return mixed Value of the first key that matches or null if none was found
-	 */
-	protected function getConfigValue( $keys, $default = null )
-	{
-		foreach( (array) $keys as $key )
-		{
-			if( ( $value = $this->getServiceItem()->getConfigValue( $key ) ) !== null ) {
-				return $value;
-			}
-
-			if( isset( $this->beGlobalConfig[$key] ) ) {
-				return $this->beGlobalConfig[$key];
-			}
-		}
-
-		return $default;
-	}
-
-
-	/**
 	 * Returns the context item.
 	 *
 	 * @return \Aimeos\MShop\ContextIface Context item
@@ -305,6 +260,28 @@ abstract class Base
 	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
+	}
+
+
+	/**
+	 * Returns the service related data from the customer account if available
+	 *
+	 * @param string $customerId Unique customer ID the service token belongs to
+	 * @param string $key Key of the value that should be returned
+	 * @return array|string|null Service data or null if none is available
+	 */
+	protected function data( string $customerId, string $key )
+	{
+		if( $customerId )
+		{
+			$item = \Aimeos\MShop::create( $this->context, 'customer' )->get( $customerId, ['service'] );
+
+			if( $listItem = $item->getListItem( 'service', 'default', $this->getServiceItem()->getId() ) ) {
+				return $listItem->getConfigValue( $key );
+			}
+		}
+
+		return null;
 	}
 
 
@@ -366,13 +343,47 @@ abstract class Base
 
 
 	/**
-	 * Returns the first object of the decorator stack
+	 * Returns the criteria attribute items for the backend configuration
 	 *
-	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of criteria attribute items
 	 */
-	protected function object() : \Aimeos\MShop\Service\Provider\Iface
+	protected function getConfigItems( array $configList ) : array
 	{
-		return $this->object ?? $this;
+		$list = [];
+
+		foreach( $configList as $key => $config ) {
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Returns the configuration value that matches one of the given keys.
+	 *
+	 * The config of the service item and (optionally) the global config
+	 * is tested in the order of the keys. The first one that matches will
+	 * be returned.
+	 *
+	 * @param array|string $keys Key name or list of key names that should be tested for in the order to test
+	 * @param mixed $default Returned value if the key wasn't was found
+	 * @return mixed Value of the first key that matches or null if none was found
+	 */
+	protected function getConfigValue( $keys, $default = null )
+	{
+		foreach( (array) $keys as $key )
+		{
+			if( ( $value = $this->getServiceItem()->getConfigValue( $key ) ) !== null ) {
+				return $value;
+			}
+
+			if( isset( $this->beGlobalConfig[$key] ) ) {
+				return $this->beGlobalConfig[$key];
+			}
+		}
+
+		return $default;
 	}
 
 
@@ -400,6 +411,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the first object of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack
+	 */
+	protected function object() : \Aimeos\MShop\Service\Provider\Iface
+	{
+		return $this->object ?? $this;
+	}
+
+
+	/**
 	 * Returns the configuration value that matches given key
 	 *
 	 * @param string $key Key name
@@ -415,30 +437,6 @@ abstract class Base
 		}
 
 		return $value;
-	}
-
-
-	/**
-	 * Returns the service related data from the customer account if available
-	 *
-	 * @param string $customerId Unique customer ID the service token belongs to
-	 * @param string $type Type of the value that should be returned
-	 * @return array|string|null Service data or null if none is available
-	 */
-	protected function getCustomerData( string $customerId, string $type )
-	{
-		if( $customerId != null )
-		{
-			$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-			$item = $manager->get( $customerId, ['service'] );
-			$serviceId = $this->getServiceItem()->getId();
-
-			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId ) ) !== null ) {
-				return $listItem->getConfigValue( $type );
-			}
-		}
-
-		return null;
 	}
 
 
@@ -485,13 +483,13 @@ abstract class Base
 	 * Adds the service data to the customer account if available
 	 *
 	 * @param string $customerId Unique customer ID the service token belongs to
-	 * @param string $type Type of the value that should be added
+	 * @param string $key Key of the value that should be added
 	 * @param string|array $data Service data to store
 	 * @param \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
-	protected function setCustomerData( string $customerId, string $type, $data ) : \Aimeos\MShop\Service\Provider\Iface
+	protected function setData( string $customerId, string $key, $data ) : \Aimeos\MShop\Service\Provider\Iface
 	{
-		if( $customerId != null )
+		if( $customerId )
 		{
 			$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 			$item = $manager->get( $customerId, ['service'] );
@@ -500,11 +498,10 @@ abstract class Base
 			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 			{
 				$listManager = \Aimeos\MShop::create( $this->context, 'customer/lists' );
-				$listItem = $listManager->create()->setType( 'default' )->setRefId( $serviceId );
+				$listItem = $listManager->create()->setRefId( $serviceId );
 			}
 
-			$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );
-			$manager->save( $item->addListItem( 'service', $listItem ) );
+			$manager->save( $item->addListItem( 'service', $listItem->setConfigValue( $key, $data ) ) );
 		}
 
 		return $this;
