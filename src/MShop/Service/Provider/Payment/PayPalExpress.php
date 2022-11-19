@@ -245,7 +245,7 @@ class PayPalExpress
 
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
-		$this->setAttributes( $serviceItem, ['TOKEN' => $rvals['TOKEN']], 'payment/paypal' );
+		$serviceItem->addAttributeItems( $this->attributes( ['TOKEN' => $rvals['TOKEN']], 'payment/paypal' ) );
 
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $paypalUrl, 'POST', [] );
 	}
@@ -318,7 +318,7 @@ class PayPalExpress
 
 		// updates the transaction id
 		$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
 
 		return $order;
 	}
@@ -354,7 +354,7 @@ class PayPalExpress
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
-		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
 
 		return $order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 	}
@@ -426,8 +426,8 @@ class PayPalExpress
 			$status['PENDINGREASON'] = $params['pending_reason'];
 		}
 
-		$this->setAttributes( $serviceItem, array( $params['txn_id'] => $params['payment_status'] ), 'payment/paypal/txn' );
-		$this->setAttributes( $serviceItem, array( 'TRANSACTIONID' => $params['txn_id'] ), 'payment/paypal' );
+		$serviceItem->addAttributeItems( $this->attributes( ['TRANSACTIONID' => $params['txn_id']], 'payment/paypal' ) )
+			->addAttributeItems( $this->attributes( [$params['txn_id'] => $params['payment_status']], 'payment/paypal/txn' ) );
 
 		$manager->save( $this->setStatusPayment( $order, $status ) );
 
@@ -483,10 +483,11 @@ class PayPalExpress
 		if( isset( $rvals['TRANSACTIONID'] ) )
 		{
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-			$this->setAttributes( $serviceItem, array( $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS'] ), 'payment/paypal/txn' );
+			$attrs = [$rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS']];
+			$serviceItem->addAttributeItems( $this->attributes( $attrs, 'payment/paypal/txn' ) );
 		}
 
-		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
 		return $this->setStatusPayment( $orderItem, $rvals );
 	}
 

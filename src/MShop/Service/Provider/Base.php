@@ -238,6 +238,26 @@ abstract class Base
 
 
 	/**
+	 * Creates service attributes from the passed data
+	 *
+	 * @param array $map Attribute key/value pairs entered by the customer during the checkout process
+	 * @param string $type Type of the configuration values (delivery or payment)
+	 * @return array List of \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface objects
+	 */
+	protected function attributes( array $map, string $type ) : array
+	{
+		$list = [];
+		$manager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+
+		foreach( $map as $key => $value ) {
+			$list[] = $manager->createAttributeItem()->setType( $type )->setCode( $key )->setValue( $value );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Checks required fields and the types of the given data map
 	 *
 	 * @param array $criteria Multi-dimensional associative list of criteria configuration
@@ -449,33 +469,6 @@ abstract class Base
 	protected function save( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item );
-	}
-
-
-	/**
-	 * Sets the attributes in the given service item.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
-	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
-	 * @param string $type Type of the configuration values (delivery or payment)
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Modified order service item
-	 */
-	protected function setAttributes( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes,
-		string $type ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
-	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
-
-		foreach( $attributes as $key => $value )
-		{
-			$item = $manager->create();
-			$item->setCode( $key );
-			$item->setValue( $value );
-			$item->setType( $type );
-
-			$orderServiceItem->setAttributeItem( $item );
-		}
-
-		return $orderServiceItem;
 	}
 
 

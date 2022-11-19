@@ -179,11 +179,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'txn_id' => '111111111',
 			'payment_amount' => $amount
 		);
-		$testData = array(
-			'TRANSACTIONID' => '111111111',
-			'111111110' => 'Pending',
-			'111111111' => 'Completed'
-		);
 
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
