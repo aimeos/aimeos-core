@@ -19,7 +19,7 @@ class OrderMigrateStatus extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function getPreDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}
