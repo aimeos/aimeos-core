@@ -12,11 +12,6 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	public static function setUpBeforeClass() : void
 	{
 		self::$dbm = \TestHelper::getDBManager();
-
-		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
-			return;
-		}
-
 		$schema = new \Doctrine\DBAL\Schema\Schema();
 
 		$table = $schema->createTable( 'mw_tree_test' );
@@ -40,20 +35,13 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public static function tearDownAfterClass() : void
 	{
-		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
-		{
-			$conn = self::$dbm->get();
-			$conn->create( 'DROP TABLE "mw_tree_test"' )->execute()->finish();
-		}
+		$conn = self::$dbm->get();
+		$conn->create( 'DROP TABLE "mw_tree_test"' )->execute()->finish();
 	}
 
 
 	protected function setUp() : void
 	{
-		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
-			$this->markTestSkipped( 'No DBAL database manager configured' );
-		}
-
 		$this->config = [];
 
 		$this->config['search'] = array(
@@ -158,11 +146,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
-		{
-			$conn = self::$dbm->get();
-			$conn->create( 'DELETE FROM "mw_tree_test"' )->execute()->finish();
-		}
+		$conn = self::$dbm->get();
+		$conn->create( 'DELETE FROM "mw_tree_test"' )->execute()->finish();
 	}
 
 

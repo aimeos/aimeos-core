@@ -167,7 +167,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		if( !isset( $this->treeManagers[$siteid] ) )
 		{
 			$context = $this->context();
-			$conn = $context->db( 'db-catalog' );
+			$conn = $context->db( $this->getResourceName() );
 			$sitestr = '\'' . $conn->escape( $siteid ) . '\'';
 
 
