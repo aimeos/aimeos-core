@@ -122,7 +122,7 @@ class TestHelper
 		$ctx->setFilesystemManager( $fs );
 
 
-		$mq = new \Aimeos\Base\MQueue\Manager\Standard( $conf );
+		$mq = new \Aimeos\Base\MQueue\Manager\Standard( $conf->get( 'resource', [] ) );
 		$ctx->setMessageQueueManager( $mq );
 
 

@@ -210,7 +210,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMessageQueueManager()
 	{
-		$config = \TestHelper::context()->config();
+		$config = \TestHelper::context()->config()->get( 'resource' );
 		$mq = new \Aimeos\Base\MQueue\Manager\Standard( $config );
 		$return = $this->object->setMessageQueueManager( $mq );
 
