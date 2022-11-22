@@ -520,7 +520,7 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2023.01
-				 * @see mshop/order/manager/base/service/transaction/update/ansi
+			 * @see mshop/order/manager/base/service/transaction/update/ansi
 			 * @see mshop/order/manager/base/service/transaction/newid/ansi
 			 * @see mshop/order/manager/base/service/transaction/delete/ansi
 			 * @see mshop/order/manager/base/service/transaction/search/ansi
@@ -556,7 +556,7 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2023.01
-				 * @see mshop/order/manager/base/service/transaction/insert/ansi
+			 * @see mshop/order/manager/base/service/transaction/insert/ansi
 			 * @see mshop/order/manager/base/service/transaction/newid/ansi
 			 * @see mshop/order/manager/base/service/transaction/delete/ansi
 			 * @see mshop/order/manager/base/service/transaction/search/ansi
@@ -628,7 +628,7 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2023.01
-				 * @see mshop/order/manager/base/service/transaction/insert/ansi
+			 * @see mshop/order/manager/base/service/transaction/insert/ansi
 			 * @see mshop/order/manager/base/service/transaction/update/ansi
 			 * @see mshop/order/manager/base/service/transaction/delete/ansi
 			 * @see mshop/order/manager/base/service/transaction/search/ansi
