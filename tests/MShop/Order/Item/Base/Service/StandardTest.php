@@ -15,7 +15,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $values;
 	private $price;
-	private $attribute = [];
+	private $attributes;
+	private $transactions;
 
 
 	protected function setUp() : void
@@ -35,7 +36,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.attribute.editor' => 'unitTestUser'
 		);
 
-		$this->attribute = array( new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard( $attrValues ) );
+		$this->attributes = [new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard( $attrValues )];
+
+
+		$txValues = array(
+			'order.base.service.transaction.id' => 3,
+			'order.base.service.transaction.siteid' => 99,
+			'order.base.service.transaction.parentid' => 42,
+			'order.base.service.transaction.type' => 'payment',
+			'order.base.service.attribute.config' => [],
+			'order.base.service.attribute.status' => 6,
+			'order.base.service.attribute.mtime' => '2020-12-31 23:59:59',
+			'order.base.service.attribute.ctime' => '2011-01-01 00:00:01',
+			'order.base.service.attribute.editor' => 'unitTestUser'
+		);
+
+		$this->transactions = [new \Aimeos\MShop\Order\Item\Base\Service\Transaction\Standard( $this->price, $txValues )];
+
 
 		$this->values = array(
 			'order.base.service.id' => 1,
@@ -54,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$servItem = \Aimeos\MShop::create( \TestHelper::context(), 'service' )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard(
-			$this->price, $this->values, $this->attribute, $servItem
+			$this->price, $this->values, $this->attributes, $this->transactions, $servItem
 		);
 	}
 
@@ -403,13 +420,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItems()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems()->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems()->toArray() );
 	}
 
 
 	public function testGetAttributeItemsByType()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' )->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems( 'default' )->toArray() );
 	}
 
 
@@ -464,6 +481,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $return );
 		$this->assertEquals( $list, $this->object->getAttributeItems()->toArray() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetTransactions()
+	{
+		$this->assertEquals( $this->transactions, $this->object->getTransactions()->toArray() );
+	}
+
+
+	public function testSetTransactions()
+	{
+		$txValues = array(
+			'order.base.service.transaction.id' => 5,
+			'order.base.service.transaction.siteid' => 100,
+			'order.base.service.transaction.parentid' => 50,
+			'order.base.service.transaction.type' => 'refund',
+			'order.base.service.attribute.config' => ['tx' => '001'],
+			'order.base.service.attribute.status' => 3,
+			'order.base.service.attribute.mtime' => '2020-12-31 23:59:59',
+			'order.base.service.attribute.ctime' => '2011-01-01 00:00:01',
+			'order.base.service.attribute.editor' => 'unitTestUser'
+		);
+
+		$list = [new \Aimeos\MShop\Order\Item\Base\Service\Transaction\Standard( $this->price, $txValues )];
+		$result = $this->object->setTransactions( $list );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $result );
+		$this->assertEquals( $list, $this->object->getTransactions()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

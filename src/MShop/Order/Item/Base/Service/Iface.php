@@ -192,6 +192,30 @@ interface Iface
 	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 
 	/**
+	 * Adds a new transaction to the service.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface $item Transaction item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function addTransaction( \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+
+	/**
+	 * Returns the list of transactions items for the service.
+	 *
+	 * @param string|null $type Filters returned transactions by the given type or null for no filtering
+	 * @return \Aimeos\Map List of transaction items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 */
+	public function getTransactions( string $type = null ) : \Aimeos\Map;
+
+	/**
+	 * Sets the new list of transactions items for the service.
+	 *
+	 * @param iterable $list List of order service transaction items
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function setTransactions( iterable $list ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+
+	/**
 	 * Copys all data from a given service item.
 	 *
 	 * @param \Aimeos\MShop\Service\Item\Iface $service New service item

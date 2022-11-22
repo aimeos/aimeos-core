@@ -152,6 +152,7 @@ class OrderAddTestData extends Base
 		$list = [];
 		$priceManager = $this->getPriceManager();
 		$manager = $this->getOrderManager( 'base/service' );
+		$txManager = $this->getOrderManager( 'base/service/transaction' );
 		$attrManager = $this->getOrderManager( 'base/service/attribute' );
 
 		foreach( $data as $entry )
@@ -161,12 +162,18 @@ class OrderAddTestData extends Base
 				$attrs[] = $attrManager->create()->fromArray( $attr, true );
 			}
 
+			$trans = [];
+			foreach( $entry['transaction'] ?? [] as $tx ) {
+				$trans[] = $txManager->create()->fromArray( $tx, true );
+			}
+
 			$code = $entry['order.base.service.code'] ?? null;
 			$price = $priceManager->create()->fromArray( $entry, true );
 
 			$item = $manager->create()->fromArray( $entry, true )
 				->setAttributeItems( $attrs )->setPrice( $price )
-				->setServiceId( $services->get( $code ) ?: '' );
+				->setServiceId( $services->get( $code ) ?: '' )
+				->setTransactions( $trans );
 
 			$list[$item->getType()][] = $item;
 		}

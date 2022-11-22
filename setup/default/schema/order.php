@@ -36,7 +36,7 @@ return array(
 			$table->decimal( 'price', 12 )->default( '0.00' );
 			$table->decimal( 'costs', 12 )->default( '0.00' );
 			$table->decimal( 'rebate', 12 )->default( '0.00' );
-			$table->decimal( 'tax', 14, 4 )->default( '0.000' );
+			$table->decimal( 'tax', 14, 4 )->default( '0.0000' );
 			$table->smallint( 'taxflag' )->default( 1 );
 			$table->string( 'customerref' )->default( '' );
 			$table->text( 'comment' )->default( '' );
@@ -204,6 +204,27 @@ return array(
 			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaseat_oid_aid_ty_cd' );
 
 			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbaseat_parentid' );
+		},
+
+		'mshop_order_base_service_tx' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+
+			$table->engine = 'InnoDB';
+
+			$table->bigid()->primary( 'pk_msordbasetx_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' );
+			$table->string( 'type', 16 )->default( '' );
+			$table->string( 'currencyid', 3 );
+			$table->decimal( 'price', 12 )->default( '0.00' );
+			$table->decimal( 'costs', 12 )->default( '0.00' );
+			$table->decimal( 'rebate', 12 )->default( '0.00' );
+			$table->decimal( 'tax', 14, 4 )->default( '0.0000' );
+			$table->smallint( 'taxflag' )->default( 1 );
+			$table->smallint( 'status' )->default( -1 );
+			$table->text( 'config' )->default( '' );
+			$table->meta();
+
+			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbasetx_parentid' );
 		},
 
 		'mshop_order_base_coupon' => function( \Aimeos\Upscheme\Schema\Table $table ) {

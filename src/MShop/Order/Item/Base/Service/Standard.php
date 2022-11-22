@@ -26,15 +26,15 @@ class Standard extends Base implements Iface
 	/**
 	 * Initializes the order base service item
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
 	 * @param \Aimeos\MShop\Service\Item\Iface|null $serviceItem Service item
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
-		?\Aimeos\MShop\Service\Item\Iface $serviceItem = null )
+		array $transactions = [], ?\Aimeos\MShop\Service\Item\Iface $serviceItem = null )
 	{
-		parent::__construct( $price, $values, $attributes );
+		parent::__construct( $price, $values, $attributes, $transactions );
 
 		$this->serviceItem = $serviceItem;
 	}

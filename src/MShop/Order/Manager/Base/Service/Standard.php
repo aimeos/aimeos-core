@@ -584,8 +584,11 @@ class Standard
 	 */
 	protected function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		if( !$item->isModified() && !$item->getPrice()->isModified() ) {
-			return $this->saveAttributeItems( $item, $fetch );
+		if( !$item->isModified() && !$item->getPrice()->isModified() )
+		{
+			$this->saveAttributeItems( $item, $fetch );
+			$this->saveTransactions( $item, $fetch );
+			return $item;
 		}
 
 		$context = $this->context();
@@ -751,8 +754,11 @@ class Standard
 
 		$item->setId( $id );
 
-		return $this->saveAttributeItems( $item, $fetch );
-	}
+		$this->saveAttributeItems( $item, $fetch );
+		$this->saveTransactions( $item, $fetch );
+
+		return $item;
+}
 
 
 	/**
@@ -934,11 +940,14 @@ class Standard
 		}
 
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
+		$transactions = $this->getTransactions( array_keys( $map ) );
 
 		foreach( $map as $id => $list )
 		{
 			$servItem = $servItems[$list['item']['order.base.service.serviceid'] ?? null] ?? null;
-			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [], $servItem );
+			$item = $this->createItemBase(
+				$list['price'], $list['item'], $attributes[$id] ?? [], $transactions[$id] ?? [], $servItem
+			);
 
 			if( $item = $this->applyFilter( $item ) ) {
 				$items[$id] = $item;
@@ -955,13 +964,14 @@ class Standard
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
 	 * @param array $values Associative list of values from the database
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface[] $transactions List of order service transaction items
 	 * @param \Aimeos\MShop\Service\Item\Iface|null $servItem Original service item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
-		?\Aimeos\MShop\Service\Item\Iface $servItem = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+		array $transactions = [], ?\Aimeos\MShop\Service\Item\Iface $servItem = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Base\Service\Standard( $price, $values, $attributes, $servItem );
+		return new \Aimeos\MShop\Order\Item\Base\Service\Standard( $price, $values, $attributes, $transactions, $servItem );
 	}
 
 
@@ -977,6 +987,28 @@ class Standard
 		$manager = $this->object()->getSubManager( 'attribute' );
 		$search = $manager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
+
+		$result = [];
+		foreach( $manager->search( $search ) as $item ) {
+			$result[$item->getParentId()][$item->getId()] = $item;
+		}
+
+		return $result;
+	}
+
+
+	/**
+	 * Searches for transaction items connected with order service item.
+	 *
+	 * @param string[] $ids List of order service item IDs
+	 * @return array Associative list of order service IDs as keys and order service transaction items
+	 *  implementing \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface as values
+	 */
+	protected function getTransactions( array $ids ) : array
+	{
+		$manager = $this->object()->getSubManager( 'transaction' );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'order.base.service.transaction.parentid', $ids ) );
 
 		$result = [];
 		foreach( $manager->search( $search ) as $item ) {
@@ -1014,6 +1046,31 @@ class Standard
 		}
 
 		$this->object()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
+		return $item;
+	}
+
+
+	/**
+	 * Saves the transaction items included in the order service item
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $item Order service item with transaction items
+	 * @param bool $fetch True if the new ID should be set in the transaction item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Object with saved transaction items and IDs
+	 */
+	protected function saveTransactions( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, bool $fetch ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	{
+		$list = $item->getTransactions();
+
+		foreach( $list as $key => $txItem )
+		{
+			if( $txItem->getParentId() != $item->getId() ) {
+				$txItem->setId( null ); // create new property item if copied
+			}
+
+			$txItem->setParentId( $item->getId() );
+		}
+
+		$this->object()->getSubManager( 'transaction' )->save( $list, $fetch );
 		return $item;
 	}
 }

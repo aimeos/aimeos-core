@@ -157,7 +157,14 @@ return [[
 				'order.base.service.attribute.type' => 'payment', 'order.base.service.attribute.name' => 'unitpaymentcode alias value',
 				'order.base.service.attribute.code' => 'unitpaymentcode-alias-value', 'order.base.service.attribute.value' => 'aliasValue',
 				'order.base.service.attribute.quantity' => 1
-			]]
+			]],
+			'transaction' => [[
+				'order.base.service.transaction.type' => 'payment',
+				'order.base.service.transaction.currencyid' => 'EUR',
+				'order.base.service.transaction.price' => '18.00',
+				'order.base.service.transaction.status' => 6,
+				'order.base.service.transaction.config' => ['tx' => '1-789'],
+			]],
 		], [
 			'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '5.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.service.type' => 'delivery', 'order.base.service.code' => 'unitdeliverycode',
@@ -223,7 +230,14 @@ return [[
 			'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.service.type' => 'payment', 'order.base.service.code' => 'unitpaymentcode',
 			'order.base.service.name' => 'unitpaymentcode', 'order.base.service.currencyid' => 'EUR',
-			'order.base.service.mediaurl' => 'somewhere/thump1.jpg'
+			'order.base.service.mediaurl' => 'somewhere/thump1.jpg',
+			'transaction' => [[
+				'order.base.service.transaction.type' => 'payment',
+				'order.base.service.transaction.currencyid' => 'EUR',
+				'order.base.service.transaction.price' => '672.00',
+				'order.base.service.transaction.status' => 6,
+				'order.base.service.transaction.config' => ['tx' => '2-456'],
+			]],
 		], [
 			'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '5.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.service.type' => 'delivery', 'order.base.service.code' => 'unitdeliverycode',
@@ -304,7 +318,14 @@ return [[
 			'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.service.type' => 'payment', 'order.base.service.code' => 'directdebit-test',
 			'order.base.service.name' => 'DirectDebit', 'order.base.service.currencyid' => 'EUR',
-			'order.base.service.mediaurl' => 'somewhere/thump1.jpg'
+			'order.base.service.mediaurl' => 'somewhere/thump1.jpg',
+			'transaction' => [[
+				'order.base.service.transaction.type' => 'payment',
+				'order.base.service.transaction.currencyid' => 'EUR',
+				'order.base.service.transaction.price' => '2465.00',
+				'order.base.service.transaction.status' => 6,
+				'order.base.service.transaction.config' => ['tx' => '3-123'],
+			]],
 		], [
 			'price.value' => '0.00', 'price.costs' => '5.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 			'order.base.service.type' => 'delivery', 'order.base.service.code' => 'unitdeliverycode',

@@ -32,6 +32,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 	private $attributes;
 	private $attributesMap;
+	private $transactions;
 	private $price;
 
 
@@ -41,13 +42,16 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param \Aimeos\MShop\Price\Item\Iface $price
 	 * @param array $values Values to be set on initialisation
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface[] $attributes List of order service transaction items
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [],
+		array $attributes = [], array $transactions = [] )
 	{
 		parent::__construct( 'order.base.service.', $values );
 
 		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, true );
 
+		$this->transactions = $transactions;
 		$this->attributes = $attributes;
 		$this->price = $price;
 	}
@@ -60,6 +64,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	{
 		foreach( $this->attributes as $key => $item ) {
 			$this->attributes[$key] = clone $item;
+		}
+
+		foreach( $this->transactions as $key => $item ) {
+			$this->transactions[$key] = clone $item;
 		}
 
 		$this->price = clone $this->price;
@@ -242,6 +250,48 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 			$this->price = $price;
 			$this->setModified();
 		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Adds a new transaction to the service.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface $item Transaction item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function addTransaction( \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	{
+		$this->transactions[] = $item;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the list of transactions items for the service.
+	 *
+	 * @param string|null $type Filters returned transactions by the given type or null for no filtering
+	 * @return \Aimeos\Map List of transaction items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 */
+	public function getTransactions( string $type = null ) : \Aimeos\Map
+	{
+		return map( $this->transactions );
+	}
+
+
+	/**
+	 * Sets the new list of transactions items for the service.
+	 *
+	 * @param iterable $list List of order service transaction items
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function setTransactions( iterable $list ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	{
+		$this->transactions = $list;
+		$this->setModified();
 
 		return $this;
 	}
