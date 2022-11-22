@@ -135,6 +135,7 @@ class Standard
 	use \Aimeos\Base\Logger\Traits;
 
 
+	private $conn;
 	private $loglevel;
 	private $requestid;
 
@@ -278,6 +279,164 @@ class Standard
 
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		/** madmin/log/manager/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see madmin/log/manager/delete/ansi
+		 */
+
+		/** madmin/log/manager/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the log database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see madmin/log/manager/insert/ansi
+		 * @see madmin/log/manager/update/ansi
+		 * @see madmin/log/manager/newid/ansi
+		 * @see madmin/log/manager/search/ansi
+		 * @see madmin/log/manager/count/ansi
+		 */
+		$path = 'madmin/log/manager/delete';
+
+		return $this->deleteItemsBase( $itemIds, $path );
+	}
+
+
+	/**
+	 * Creates the log object for the given log id.
+	 *
+	 * @param string $id Log ID to fetch log object for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
+	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
+	 */
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$criteria = $this->object()->filter( $default );
+		$expr = [
+			$criteria->compare( '==', 'log.id', $id ),
+			$criteria->getConditions()
+		];
+		$criteria->setConditions( $criteria->and( $expr ) );
+
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			return $item;
+		}
+
+		$msg = $this->context()->translate( 'mshop', 'Log entry with ID "%1$s" not found' );
+		throw new \Aimeos\MAdmin\Log\Exception( sprintf( $msg, $id ) );
+	}
+
+
+	/**
+	 * Returns the available manager types
+	 *
+	 * @param bool $withsub Return also the resource type of sub-managers if true
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( bool $withsub = true ) : array
+	{
+		$path = 'madmin/log/manager/submanagers';
+		return $this->getResourceTypeBase( 'log', $path, [], $withsub );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] Returns a list of search attributes
+	 */
+	public function getSearchAttributes( bool $withsub = true ) : array
+	{
+		/** madmin/log/manager/submanagers
+		 * List of manager names that can be instantiated by the log manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'madmin/log/manager/submanagers';
+
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+	}
+
+
+	/**
+	 * Returns a new manager for log extensions
+	 *
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
+	 */
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return $this->getSubManagerBase( 'log', $manager, $name );
+	}
+
+
+	/**
+	 * Writes a message to the configured log facility.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param int $priority Priority of the message for filtering
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\Base\Logger\Iface Logger object for method chaining
+	 */
+	public function log( $message, int $priority = \Aimeos\Base\Logger\Iface::ERR, string $facility = 'message' ) : \Aimeos\Base\Logger\Iface
+	{
+		if( $priority <= $this->loglevel )
+		{
+			if( !is_scalar( $message ) ) {
+				$message = json_encode( $message );
+			}
+
+			$item = $this->object()->create();
+
+			$item->setFacility( $facility );
+			$item->setPriority( $priority );
+			$item->setMessage( $message );
+			$item->setRequest( $this->requestid );
+
+			$this->object()->save( $item );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Adds a new log to the storage.
 	 *
 	 * @param \Aimeos\MAdmin\Log\Item\Iface $item Log item that should be saved to the storage
@@ -290,16 +449,14 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
 		try {
-			$siteid = $context->locale()->getSiteId();
+			$siteid = $this->context()->locale()->getSiteId();
 		} catch( \Exception $e ) {
 			$siteid = '';
 		}
 
 		$id = $item->getId();
+		$conn = $this->getConnection();
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -449,77 +606,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		/** madmin/log/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see madmin/log/manager/delete/ansi
-		 */
-
-		/** madmin/log/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the log database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see madmin/log/manager/insert/ansi
-		 * @see madmin/log/manager/update/ansi
-		 * @see madmin/log/manager/newid/ansi
-		 * @see madmin/log/manager/search/ansi
-		 * @see madmin/log/manager/count/ansi
-		 */
-		$path = 'madmin/log/manager/delete';
-
-		return $this->deleteItemsBase( $itemIds, $path );
-	}
-
-
-	/**
-	 * Creates the log object for the given log id.
-	 *
-	 * @param string $id Log ID to fetch log object for
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
-	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$criteria = $this->object()->filter( $default );
-		$expr = [
-			$criteria->compare( '==', 'log.id', $id ),
-			$criteria->getConditions()
-		];
-		$criteria->setConditions( $criteria->and( $expr ) );
-
-		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
-			return $item;
-		}
-
-		$msg = $this->context()->translate( 'mshop', 'Log entry with ID "%1$s" not found' );
-		throw new \Aimeos\MAdmin\Log\Exception( sprintf( $msg, $id ) );
-	}
-
-
-	/**
 	 * Search for log entries based on the given criteria.
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search object containing the conditions
@@ -533,188 +619,131 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$required = array( 'log' );
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+		$required = array( 'log' );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
-			/** madmin/log/manager/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see madmin/log/manager/search/ansi
-			 */
-
-			/** madmin/log/manager/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the log
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/log/manager/insert/ansi
-			 * @see madmin/log/manager/update/ansi
-			 * @see madmin/log/manager/newid/ansi
-			 * @see madmin/log/manager/delete/ansi
-			 * @see madmin/log/manager/count/ansi
-			 */
-			$cfgPathSearch = 'madmin/log/manager/search';
-
-			/** madmin/log/manager/count/mysql
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * @see madmin/log/manager/count/ansi
-			 */
-
-			/** madmin/log/manager/count/ansi
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * Counts all records matched by the given criteria from the log
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the statement can count all records from the
-			 * current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Both, the strings for ":joins" and for ":cond" are the same as for
-			 * the "search" SQL statement.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for counting items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/log/manager/insert/ansi
-			 * @see madmin/log/manager/update/ansi
-			 * @see madmin/log/manager/newid/ansi
-			 * @see madmin/log/manager/delete/ansi
-			 * @see madmin/log/manager/search/ansi
-			 */
-			$cfgPathCount = 'madmin/log/manager/count';
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row['log.id']] = $item;
-				}
-			}
-
-		return map( $items );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'madmin/log/manager/submanagers';
-		return $this->getResourceTypeBase( 'log', $path, [], $withsub );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] Returns a list of search attributes
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		/** madmin/log/manager/submanagers
-		 * List of manager names that can be instantiated by the log manager
+		/** madmin/log/manager/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
+		 * @see madmin/log/manager/search/ansi
+		 */
+
+		/** madmin/log/manager/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
+		 * Fetches the records matched by the given criteria from the log
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
 		 *
-		 * @param array List of sub-manager names
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
+		 * @see madmin/log/manager/insert/ansi
+		 * @see madmin/log/manager/update/ansi
+		 * @see madmin/log/manager/newid/ansi
+		 * @see madmin/log/manager/delete/ansi
+		 * @see madmin/log/manager/count/ansi
 		 */
-		$path = 'madmin/log/manager/submanagers';
+		$cfgPathSearch = 'madmin/log/manager/search';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
-	}
+		/** madmin/log/manager/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see madmin/log/manager/count/ansi
+		 */
 
+		/** madmin/log/manager/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the log
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see madmin/log/manager/insert/ansi
+		 * @see madmin/log/manager/update/ansi
+		 * @see madmin/log/manager/newid/ansi
+		 * @see madmin/log/manager/delete/ansi
+		 * @see madmin/log/manager/search/ansi
+		 */
+		$cfgPathCount = 'madmin/log/manager/count';
 
-	/**
-	 * Returns a new manager for log extensions
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'log', $manager, $name );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+		while( ( $row = $results->fetch() ) !== null )
+		{
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row['log.id']] = $item;
+			}
+		}
+
+		return map( $items );
 	}
 
 
@@ -731,31 +760,16 @@ class Standard
 
 
 	/**
-	 * Writes a message to the configured log facility.
+	 * Returns the connection for logging
 	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param int $priority Priority of the message for filtering
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\Base\Logger\Iface Logger object for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Database connection
 	 */
-	public function log( $message, int $priority = \Aimeos\Base\Logger\Iface::ERR, string $facility = 'message' ) : \Aimeos\Base\Logger\Iface
+	protected function getConnection() : \Aimeos\Base\DB\Connection\Iface
 	{
-		if( $priority <= $this->loglevel )
-		{
-			if( !is_scalar( $message ) ) {
-				$message = json_encode( $message );
-			}
-
-			$item = $this->object()->create();
-
-			$item->setFacility( $facility );
-			$item->setPriority( $priority );
-			$item->setMessage( $message );
-			$item->setRequest( $this->requestid );
-
-			$this->object()->save( $item );
+		if( !isset( $this->conn ) ) {
+			$this->conn = $this->context()->db( $this->getResourceName(), true );
 		}
 
-		return $this;
+		return $this->conn;
 	}
 }
