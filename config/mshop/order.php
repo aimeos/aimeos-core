@@ -581,6 +581,110 @@ return array(
 						'sqlanywhere' => 'SELECT @@IDENTITY',
 					),
 				),
+				'transaction' => array(
+					'aggregate' => array(
+						'ansi' => '
+							SELECT :keys, :type("val") AS "value"
+							FROM (
+								SELECT :acols, :type(:val) AS "val"
+								FROM "mshop_order_base_service_tx" mordbasetx
+								:joins
+								WHERE :cond
+								GROUP BY mordbasetx.id, :cols
+								ORDER BY mordbasetx.id DESC
+								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+							) AS list
+							GROUP BY :keys
+						',
+						'mysql' => '
+							SELECT :keys, :type("val") AS "value"
+							FROM (
+								SELECT :acols, :type(:val) AS "val"
+								FROM "mshop_order_base_service_tx" mordbasetx
+								:joins
+								WHERE :cond
+								GROUP BY mordbasetx.id, :cols
+								ORDER BY mordbasetx.id DESC
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY :keys
+						'
+					),
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "mshop_order_base_service_tx"
+							WHERE :cond AND "siteid" LIKE ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "mshop_order_base_service_tx" ( :names
+								"parentid", "type", "currencyid", "price", "costs", "rebate", "tax", "taxflag",
+								"status", "config", "mtime", "editor", "siteid", "ctime"
+							) VALUES ( :values
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "mshop_order_base_service_tx"
+							SET :names
+								"parentid" = ?, "type" = ?, "currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
+								"tax" = ?, "taxflag" = ?, "status" = ?, "config" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT :columns
+								mordbasetx."id" AS "order.base.service.transaction.id", mordbasetx."siteid" AS "order.base.service.transaction.siteid",
+								mordbasetx."parentid" AS "order.base.service.transaction.parentid", mordbasetx."type" AS "order.base.service.transaction.type",
+								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
+								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
+								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
+								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."mtime" AS "order.base.service.transaction.mtime",
+								mordbasetx."ctime" AS "order.base.service.transaction.ctime", mordbasetx."editor" AS "order.base.service.transaction.editor"
+							FROM "mshop_order_base_service_tx" mordbasetx
+							:joins
+							WHERE :cond
+							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						',
+						'mysql' => '
+							SELECT :columns
+								mordbasetx."id" AS "order.base.service.transaction.id", mordbasetx."siteid" AS "order.base.service.transaction.siteid",
+								mordbasetx."parentid" AS "order.base.service.transaction.parentid", mordbasetx."type" AS "order.base.service.transaction.type",
+								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
+								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
+								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
+								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."mtime" AS "order.base.service.transaction.mtime",
+								mordbasetx."ctime" AS "order.base.service.transaction.ctime", mordbasetx."editor" AS "order.base.service.transaction.editor"
+							FROM "mshop_order_base_service_tx" mordbasetx
+							:joins
+							WHERE :cond
+							ORDER BY :order
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT( DISTINCT mordbasetx."id" ) AS "count"
+							FROM "mshop_order_base_service_tx" mordbasetx
+							:joins
+							WHERE :cond
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT mshop_order_base_service_tx_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT @@IDENTITY',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
 				'aggregate' => array(
 					'ansi' => '
 						SELECT :keys, :type("val") AS "value"
