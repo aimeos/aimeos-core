@@ -328,9 +328,11 @@ class PayPalExpress
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @param \Aimeos\MShop\Price\Item\Iface|null $price Price item with the amount to refund or NULL for whole order
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order, \Aimeos\MShop\Price\Item\Iface $price = null
+		) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$baseItem = $order->getBaseItem();
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;

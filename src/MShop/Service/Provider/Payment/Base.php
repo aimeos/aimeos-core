@@ -122,9 +122,11 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @param \Aimeos\MShop\Price\Item\Iface|null $price Price item with the amount to refund or NULL for whole order
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order, \Aimeos\MShop\Price\Item\Iface $price = null
+		) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
 		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'refund' ) );
