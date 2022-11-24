@@ -61,23 +61,6 @@ abstract class Base
 
 
 	/**
-	 * Counts the number items that are available for the values of the given key.
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
-	 * @param array|string $key Search key or list of keys to aggregate items for
-	 * @param string|null $value Search key for aggregating the value column
-	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
-	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
-	 * @deprecated 2023.01
-	 */
-	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
-	{
-		$required = [trim( $this->prefix, '.' )];
-		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required, $value, $type );
-	}
-
-
-	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with

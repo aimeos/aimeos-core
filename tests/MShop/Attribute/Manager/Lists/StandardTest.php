@@ -32,23 +32,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAggregate()
-	{
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'attribute.lists.editor', 'core' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		$result = $this->object->aggregate( $search, 'attribute.lists.domain' )->toArray();
-
-		$this->assertEquals( 3, count( $result ) );
-		$this->assertArrayHasKey( 'text', $result );
-		$this->assertEquals( 24, $result['text'] );
-	}
-
-
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );

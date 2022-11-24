@@ -46,23 +46,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAggregate()
-	{
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'media.lists.editor', 'core' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		$result = $this->object->aggregate( $search, 'media.lists.domain' )->toArray();
-
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( 'attribute', $result );
-		$this->assertEquals( 11, $result['attribute'] );
-	}
-
-
 	public function testCreateItem()
 	{
 		$item = $this->object->create();
