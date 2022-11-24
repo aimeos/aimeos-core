@@ -53,18 +53,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testCancel()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
-
-		$this->expectException( \Aimeos\MShop\Service\Exception::class );
-		$this->object->cancel( $item );
+		$this->assertSame( $item, $this->object->cancel( $item ) );
 	}
 
 
 	public function testCapture()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
-
-		$this->expectException( \Aimeos\MShop\Service\Exception::class );
-		$this->object->capture( $item );
+		$this->assertSame( $item, $this->object->capture( $item ) );
 	}
 
 	public function testProcess()
@@ -80,18 +76,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testRefund()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
-
-		$this->expectException( \Aimeos\MShop\Service\Exception::class );
-		$this->object->refund( $item );
+		$this->assertSame( $item, $this->object->refund( $item ) );
 	}
 
 
 	public function testRepay()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
-
-		$this->expectException( \Aimeos\MShop\Service\Exception::class );
-		$this->object->repay( $item );
+		$this->assertSame( $item, $this->object->repay( $item ) );
 	}
 
 
@@ -107,9 +99,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testTransfer()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
-
-		$this->expectException( \Aimeos\MShop\Service\Exception::class );
-		$this->object->transfer( $item );
+		$this->assertSame( $item, $this->object->transfer( $item ) );
 	}
 }
 

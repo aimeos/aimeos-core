@@ -84,8 +84,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'cancel' ) );
+		return $order;
 	}
 
 
@@ -97,8 +96,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'capture' ) );
+		return $order;
 	}
 
 
@@ -126,8 +124,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'refund' ) );
+		return $order;
 	}
 
 
@@ -140,8 +137,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'repay' ) );
+		return $order;
 	}
 
 
@@ -167,7 +163,6 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function transfer( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for provider not available' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'transfer' ) );
+		return $order;
 	}
 }
