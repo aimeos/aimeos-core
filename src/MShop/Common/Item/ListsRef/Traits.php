@@ -90,10 +90,6 @@ trait Traits
 			$this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] = $listItem;
 		}
 
-		if( $listItem->isModified() || $refItem && $refItem->isModified() ) {
-			$this->setModified();
-		}
-
 		return $this;
 	}
 
@@ -115,8 +111,6 @@ trait Traits
 
 			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
 			unset( $this->listItems[$domain][$key] );
-
-			return $this->setModified();
 		}
 
 		return $this;
