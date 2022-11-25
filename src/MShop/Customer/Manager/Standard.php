@@ -565,8 +565,11 @@ class Standard
 	{
 		$item = $this->addGroups( $item );
 
-		if( !$item->isModified() ) {
-			return $item;
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'customer', $fetch );
+			$item = $this->saveAddressItems( $item, 'customer', $fetch );
+			return $this->saveListItems( $item, 'customer', $fetch );
 		}
 
 		$context = $this->context();

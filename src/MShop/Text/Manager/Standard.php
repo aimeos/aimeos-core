@@ -308,7 +308,7 @@ class Standard
 	protected function saveItem( \Aimeos\MShop\Text\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Text\Item\Iface
 	{
 		if( !$item->isModified() ) {
-			return $item;
+			return $this->saveListItems( $item, 'text', $fetch );
 		}
 
 		$context = $this->context();

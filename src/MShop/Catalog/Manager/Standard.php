@@ -586,7 +586,9 @@ class Standard extends Base
 	 */
 	protected function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->saveListItems( $item, 'catalog', $fetch );
 			return $this->saveChildren( $item );
 		}
 

@@ -426,8 +426,10 @@ class Standard
 	 */
 	protected function saveItem( \Aimeos\MShop\Attribute\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Attribute\Item\Iface
 	{
-		if( !$item->isModified() ) {
-			return $item;
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'attribute', $fetch );
+			return $this->saveListItems( $item, 'attribute', $fetch );
 		}
 
 		$context = $this->context();

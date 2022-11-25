@@ -567,8 +567,10 @@ class Standard
 	 */
 	protected function saveItem( \Aimeos\MShop\Media\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( !$item->isModified() ) {
-			return $item;
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'media', $fetch );
+			return $this->saveListItems( $item, 'media', $fetch );
 		}
 
 		$context = $this->context();
