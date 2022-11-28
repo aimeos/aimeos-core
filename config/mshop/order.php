@@ -643,8 +643,9 @@ return array(
 								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
 								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
 								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
-								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."mtime" AS "order.base.service.transaction.mtime",
-								mordbasetx."ctime" AS "order.base.service.transaction.ctime", mordbasetx."editor" AS "order.base.service.transaction.editor"
+								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."status" AS "order.base.service.transaction.status",
+								mordbasetx."mtime" AS "order.base.service.transaction.mtime", mordbasetx."ctime" AS "order.base.service.transaction.ctime",
+								mordbasetx."editor" AS "order.base.service.transaction.editor"
 							FROM "mshop_order_base_service_tx" mordbasetx
 							:joins
 							WHERE :cond
@@ -658,8 +659,9 @@ return array(
 								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
 								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
 								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
-								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."mtime" AS "order.base.service.transaction.mtime",
-								mordbasetx."ctime" AS "order.base.service.transaction.ctime", mordbasetx."editor" AS "order.base.service.transaction.editor"
+								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."status" AS "order.base.service.transaction.status",
+								mordbasetx."mtime" AS "order.base.service.transaction.mtime", mordbasetx."ctime" AS "order.base.service.transaction.ctime",
+								mordbasetx."editor" AS "order.base.service.transaction.editor"
 							FROM "mshop_order_base_service_tx" mordbasetx
 							:joins
 							WHERE :cond

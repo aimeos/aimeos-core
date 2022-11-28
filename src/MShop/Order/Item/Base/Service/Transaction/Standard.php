@@ -167,7 +167,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'order.base.service.transaction.status', 1 );
+		return $this->get( 'order.base.service.transaction.status', -1 );
 	}
 
 
