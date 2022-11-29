@@ -332,6 +332,18 @@ class Standard
 
 
 	/**
+	 * Creates a new order service transaction item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface New order service transaction item object
+	 */
+	public function createTransaction( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->object()->getSubManager( 'transaction' )->create( $values );
+	}
+
+
+	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria

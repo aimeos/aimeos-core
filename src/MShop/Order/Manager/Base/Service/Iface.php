@@ -28,4 +28,12 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface New order service attribute item object
 	 */
 	public function createAttributeItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Creates a new order service transaction item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Transaction\Iface New order service transaction item object
+	 */
+	public function createTransaction( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
 }
