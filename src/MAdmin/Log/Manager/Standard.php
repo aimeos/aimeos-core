@@ -246,6 +246,16 @@ class Standard
 
 
 	/**
+	 * Remove open database connections
+	 */
+	public function __sleep()
+	{
+		unset( $this->conn );
+		return get_object_vars( $this );
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
