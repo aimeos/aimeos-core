@@ -9,7 +9,7 @@
 namespace Aimeos\Upscheme\Task;
 
 
-class OrderMergeBase extends Base
+class OrderRenameTables extends Base
 {
 	public function before() : array
 	{
@@ -22,7 +22,7 @@ class OrderMergeBase extends Base
 
 	public function up()
 	{
-		$this->info( 'Merge order base table into order', 'vv' );
+		$this->info( 'Rename mshop_order_order_base_* tables', 'vv' );
 
 		$this->constraints()->indexes()->tables();
 	}
