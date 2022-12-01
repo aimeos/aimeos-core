@@ -23,16 +23,28 @@ return array(
 			$table->index( ['mtime'], 'idx_msordca_mtime' );
 		},
 
-		'mshop_order_base' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordba_id' );
+			$table->bigid()->primary( 'pk_msord_id' );
 			$table->string( 'siteid' );
-			$table->refid( 'customerid' )->default( '' );
 			$table->code( 'sitecode' )->length( 255 )->default( '' );
-			$table->string( 'langid', 5 );
-			$table->string( 'currencyid', 3 );
+			$table->refid( 'customerid' )->default( '' );
+			$table->refid( 'relatedid' )->default( '' );
+			$table->string( 'channel', 16 )->default( '' );
+			$table->string( 'invoiceno', 32 )->default( '' );
+			$table->datetime( 'datepayment' )->null( true );
+			$table->datetime( 'datedelivery' )->null( true );
+			$table->smallint( 'statuspayment' )->default( -1 );
+			$table->smallint( 'statusdelivery' )->default( -1 );
+			$table->string( 'cdate', 10 )->default( '' );
+			$table->string( 'cmonth', 7 )->default( '' );
+			$table->string( 'cweek', 7 )->default( '' );
+			$table->string( 'cwday', 1 )->default( '' );
+			$table->string( 'chour', 2 )->default( '' );
+			$table->string( 'langid', 5 )->default( '' );
+			$table->string( 'currencyid', 3 )->default( '' );
 			$table->decimal( 'price', 12 )->default( '0.00' );
 			$table->decimal( 'costs', 12 )->default( '0.00' );
 			$table->decimal( 'rebate', 12 )->default( '0.00' );
@@ -42,18 +54,30 @@ return array(
 			$table->text( 'comment' )->default( '' );
 			$table->meta();
 
-			$table->index( ['customerid', 'sitecode'], 'idx_msordba_custid_scode' );
-			$table->index( ['customerid', 'siteid'], 'idx_msordba_custid_sid' );
-			$table->index( ['ctime', 'siteid'], 'idx_msordba_ctime_sid' );
+			$table->index( ['channel', 'siteid'], 'idx_msord_channel_sid' );
+			$table->index( ['customerid', 'siteid'], 'idx_msord_custid_sid' );
+			$table->index( ['customerid', 'sitecode'], 'idx_msord_custid_scode' );
+			$table->index( ['ctime', 'statuspayment', 'siteid'], 'idx_msord_ctime_pstat_sid' );
+			$table->index( ['mtime', 'statuspayment', 'siteid'], 'idx_msord_mtime_pstat_sid' );
+			$table->index( ['mtime', 'statusdelivery', 'siteid'], 'idx_msord_mtime_dstat_sid' );
+			$table->index( ['statusdelivery', 'siteid'], 'idx_msord_dstat_sid' );
+			$table->index( ['datedelivery', 'siteid'], 'idx_msord_ddate_sid' );
+			$table->index( ['datepayment', 'siteid'], 'idx_msord_pdate_sid' );
+			$table->index( ['editor', 'siteid'], 'idx_msord_editor_sid' );
+			$table->index( ['cdate', 'siteid'], 'idx_msord_cdate_sid' );
+			$table->index( ['cmonth', 'siteid'], 'idx_msord_cmonth_sid' );
+			$table->index( ['cweek', 'siteid'], 'idx_msord_cweek_sid' );
+			$table->index( ['cwday', 'siteid'], 'idx_msord_cwday_sid' );
+			$table->index( ['chour', 'siteid'], 'idx_msord_chour_sid' );
 		},
 
 		'mshop_order_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbaad_id' );
+			$table->bigid()->primary( 'pk_msordad_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
+			$table->bigint( 'parentid' );
 			$table->refid( 'addrid' )->default( '' );
 			$table->type();
 			$table->string( 'salutation', 8 )->default( '' );
@@ -80,23 +104,23 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->unique( ['baseid', 'type'], 'unq_msordbaad_bid_type' );
-			$table->index( ['baseid', 'lastname'], 'idx_msordbaad_bid_lname' );
-			$table->index( ['baseid', 'address1'], 'idx_msordbaad_bid_addr1' );
-			$table->index( ['baseid', 'postal'], 'idx_msordbaad_bid_postal' );
-			$table->index( ['baseid', 'city'], 'idx_msordbaad_bid_city' );
-			$table->index( ['baseid', 'email'], 'idx_msordbaad_bid_email' );
+			$table->unique( ['parentid', 'type'], 'unq_msordad_pid_type' );
+			$table->index( ['parentid', 'lastname'], 'idx_msordad_pid_lname' );
+			$table->index( ['parentid', 'address1'], 'idx_msordad_pid_addr1' );
+			$table->index( ['parentid', 'postal'], 'idx_msordad_pid_postal' );
+			$table->index( ['parentid', 'city'], 'idx_msordad_pid_city' );
+			$table->index( ['parentid', 'email'], 'idx_msordad_pid_email' );
 
-			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaad_baseid' );
+			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordad_parentid' );
 		},
 
 		'mshop_order_product' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbapr_id' );
+			$table->bigid()->primary( 'pk_msordpr_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
+			$table->bigint( 'parentid' );
 			$table->bigint( 'ordprodid' )->null( true );
 			$table->bigint( 'ordaddrid' )->null( true );
 			$table->type();
@@ -127,20 +151,20 @@ return array(
 			$table->text( 'notes' )->default( '' );
 			$table->meta();
 
-			$table->unique( ['baseid', 'pos'], 'unq_msordbapr_bid_pos' );
-			$table->index( ['baseid', 'prodid'], 'idx_msordbapr_bid_pid' );
-			$table->index( ['baseid', 'prodcode'], 'idx_msordbapr_bid_pcd' );
-			$table->index( ['baseid', 'qtyopen'], 'idx_msordbapr_bid_qtyo' );
-			$table->index( ['ctime', 'prodid', 'baseid'], 'idx_msordbapr_ct_pid_bid' );
+			$table->unique( ['parentid', 'pos'], 'unq_msordpr_pid_pos' );
+			$table->index( ['parentid', 'prodid'], 'idx_msordpr_pid_prid' );
+			$table->index( ['parentid', 'prodcode'], 'idx_msordpr_pid_pcd' );
+			$table->index( ['parentid', 'qtyopen'], 'idx_msordpr_pid_qtyo' );
+			$table->index( ['ctime', 'prodid', 'parentid'], 'idx_msordpr_ct_prid_pid' );
 
-			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbapr_baseid' );
+			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordpr_parentid' );
 		},
 
 		'mshop_order_product_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbaprat_id' );
+			$table->bigid()->primary( 'pk_msordprat_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' );
 			$table->refid( 'attrid' )->default( '' );
@@ -152,7 +176,7 @@ return array(
 			$table->text( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordprat_oid_aid_ty_cd' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordprat_pid_aid_ty_cd' );
 
 			$table->foreign( 'parentid', 'mshop_order_product', 'id', 'fk_msordprat_parentid' );
 		},
@@ -161,9 +185,9 @@ return array(
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbase_id' );
+			$table->bigid()->primary( 'pk_msordse_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
+			$table->bigint( 'parentid' );
 			$table->refid( 'servid' )->default( '' );
 			$table->type();
 			$table->code();
@@ -179,17 +203,17 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->unique( ['baseid', 'code', 'type', 'siteid'], 'unq_msordbase_bid_cd_typ_sid' );
-			$table->index( ['code', 'type', 'siteid'], 'idx_msordbase_code_type_sid' );
+			$table->unique( ['parentid', 'code', 'type', 'siteid'], 'unq_msordse_pid_cd_typ_sid' );
+			$table->index( ['code', 'type', 'siteid'], 'idx_msordse_code_type_sid' );
 
-			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbase_baseid' );
+			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordse_parentid' );
 		},
 
 		'mshop_order_service_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbaseat_id' );
+			$table->bigid()->primary( 'pk_msordseat_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' );
 			$table->refid( 'attrid' )->default( '' );
@@ -201,7 +225,7 @@ return array(
 			$table->text( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordseat_oid_aid_ty_cd' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordseat_pid_aid_ty_cd' );
 
 			$table->foreign( 'parentid', 'mshop_order_service', 'id', 'fk_msordseat_parentid' );
 		},
@@ -210,7 +234,7 @@ return array(
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbasetx_id' );
+			$table->bigid()->primary( 'pk_msordsetx_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' );
 			$table->string( 'type', 16 )->default( '' );
@@ -231,54 +255,16 @@ return array(
 
 			$table->engine = 'InnoDB';
 
-			$table->bigid()->primary( 'pk_msordbaco_id' );
+			$table->bigid()->primary( 'pk_msordco_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
+			$table->bigint( 'parentid' );
 			$table->bigint( 'ordprodid' )->null( true );
 			$table->code();
 			$table->meta();
 
-			$table->index( ['baseid', 'code'], 'idx_msordbaco_bid_code' );
+			$table->index( ['parentid', 'code'], 'idx_msordco_pid_code' );
 
-			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaco_baseid' );
-		},
-
-		'mshop_order' => function( \Aimeos\Upscheme\Schema\Table $table ) {
-
-			$table->engine = 'InnoDB';
-
-			$table->bigid()->primary( 'pk_msord_id' );
-			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
-			$table->refid( 'relatedid' )->default( '' );
-			$table->string( 'channel', 16 )->default( '' );
-			$table->string( 'invoiceno', 32 )->default( '' );
-			$table->datetime( 'datepayment' )->null( true );
-			$table->datetime( 'datedelivery' )->null( true );
-			$table->smallint( 'statuspayment' )->default( -1 );
-			$table->smallint( 'statusdelivery' )->default( -1 );
-			$table->string( 'cdate', 10 )->default( '' );
-			$table->string( 'cmonth', 7 )->default( '' );
-			$table->string( 'cweek', 7 )->default( '' );
-			$table->string( 'cwday', 1 )->default( '' );
-			$table->string( 'chour', 2 )->default( '' );
-			$table->meta();
-
-			$table->index( ['channel', 'siteid'], 'idx_msord_channel_sid' );
-			$table->index( ['ctime', 'statuspayment', 'siteid'], 'idx_msord_ctime_pstat_sid' );
-			$table->index( ['mtime', 'statuspayment', 'siteid'], 'idx_msord_mtime_pstat_sid' );
-			$table->index( ['mtime', 'statusdelivery', 'siteid'], 'idx_msord_mtime_dstat_sid' );
-			$table->index( ['statusdelivery', 'siteid'], 'idx_msord_dstat_sid' );
-			$table->index( ['datedelivery', 'siteid'], 'idx_msord_ddate_sid' );
-			$table->index( ['datepayment', 'siteid'], 'idx_msord_pdate_sid' );
-			$table->index( ['editor', 'siteid'], 'idx_msord_editor_sid' );
-			$table->index( ['cdate', 'siteid'], 'idx_msord_cdate_sid' );
-			$table->index( ['cmonth', 'siteid'], 'idx_msord_cmonth_sid' );
-			$table->index( ['cweek', 'siteid'], 'idx_msord_cweek_sid' );
-			$table->index( ['cwday', 'siteid'], 'idx_msord_cwday_sid' );
-			$table->index( ['chour', 'siteid'], 'idx_msord_chour_sid' );
-
-			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msord_baseid' );
+			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordco_parentid' );
 		},
 
 		'mshop_order_status' => function( \Aimeos\Upscheme\Schema\Table $table ) {

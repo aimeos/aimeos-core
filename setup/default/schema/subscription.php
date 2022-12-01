@@ -16,7 +16,7 @@ return array(
 
 			$table->bigid()->primary( 'pk_mssub_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'baseid' );
+			$table->bigint( 'orderid' );
 			$table->bigint( 'ordprodid' );
 			$table->date( 'next' )->null( true );
 			$table->date( 'end' )->null( true );
@@ -30,7 +30,7 @@ return array(
 			$table->index( ['productid', 'period', 'siteid'], 'idx_mssub_pid_period_sid' );
 			$table->index( ['next', 'status', 'siteid'], 'idx_mssub_next_stat_sid' );
 			$table->index( ['ordprodid'], 'idx_mssub_opid' );
-			$table->index( ['baseid'], 'idx_mssub_baseid' );
+			$table->index( ['orderid'], 'idx_mssub_oid' );
 		},
 	),
 );

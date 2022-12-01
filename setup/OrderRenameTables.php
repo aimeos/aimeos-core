@@ -22,8 +22,6 @@ class OrderRenameTables extends Base
 
 	public function up()
 	{
-		$this->info( 'Rename mshop_order_order_base_* tables', 'vv' );
-
 		$this->constraints()->indexes()->tables();
 	}
 
@@ -42,6 +40,20 @@ class OrderRenameTables extends Base
 	protected function indexes()
 	{
 		$this->db( 'db-order' )
+			->dropIndex( 'mshop_order_base_address', 'unq_msordbaad_bid_type' )
+			->dropIndex( 'mshop_order_base_address', 'idx_msordbaad_bid_lname' )
+			->dropIndex( 'mshop_order_base_address', 'idx_msordbaad_bid_addr1' )
+			->dropIndex( 'mshop_order_base_address', 'idx_msordbaad_bid_postal' )
+			->dropIndex( 'mshop_order_base_address', 'idx_msordbaad_bid_city' )
+			->dropIndex( 'mshop_order_base_address', 'idx_msordbaad_bid_email' )
+			->dropIndex( 'mshop_order_base_coupon', 'idx_msordbaco_bid_code' )
+			->dropIndex( 'mshop_order_base_product', 'unq_msordbapr_bid_pos' )
+			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_bid_pid' )
+			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_bid_pcd' )
+			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_bid_qtyo' )
+			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_ct_pid_bid' )
+			->dropIndex( 'mshop_order_base_service', 'unq_msordbase_bid_cd_typ_sid' )
+			->dropIndex( 'mshop_order_base_service', 'idx_msordbase_code_type_sid' )
 			->dropIndex( 'mshop_order_base_product_attr', 'unq_msordbaprat_oid_aid_ty_cd' )
 			->dropIndex( 'mshop_order_base_product_attr', 'idx_msordbaprat_si_cd_va' )
 			->dropIndex( 'mshop_order_base_service_attr', 'unq_msordbaseat_oid_aid_ty_cd' )
