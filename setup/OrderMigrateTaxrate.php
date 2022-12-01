@@ -19,13 +19,11 @@ class OrderMigrateTaxrate extends Base
 
 	public function up()
 	{
-		$dbdomain = 'db-order';
-		$db = $this->db( $dbdomain );
-
 		$this->info( 'Migrating taxrate columns in order tables', 'vv' );
-		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );
 
-		$conn = $this->context()->db( $dbdomain );
+		$conn = $this->context()->db( 'db-order' );
+
+		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );
 
 		$select = 'SELECT "id", "taxrate" FROM "mshop_order_product" WHERE "taxrate" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_order_product" SET "taxrate" = ? WHERE "id" = ?';
@@ -43,8 +41,6 @@ class OrderMigrateTaxrate extends Base
 
 
 		$this->info( 'Migrating taxrate column in order base service table', 'vv', 1 );
-
-		$conn = $this->context()->db( $dbdomain );
 
 		$select = 'SELECT "id", "taxrate" FROM "mshop_order_service" WHERE "taxrate" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_order_service" SET "taxrate" = ? WHERE "id" = ?';
