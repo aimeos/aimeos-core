@@ -15,11 +15,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_address" mordbaad
+							FROM "mshop_order_address" mordad
 							:joins
 							WHERE :cond
-							GROUP BY mordbaad.id, :cols
-							ORDER BY mordbaad.id DESC
+							GROUP BY mordad.id, :cols
+							ORDER BY mordad.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -28,11 +28,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_address" mordbaad
+							FROM "mshop_order_address" mordad
 							:joins
 							WHERE :cond
-							GROUP BY mordbaad.id, :cols
-							ORDER BY mordbaad.id DESC
+							GROUP BY mordad.id, :cols
+							ORDER BY mordad.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -40,13 +40,13 @@ return array(
 				),
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_order_base_address"
+						DELETE FROM "mshop_order_address"
 						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_base_address" ( :names
+						INSERT INTO "mshop_order_address" ( :names
 							"baseid", "addrid", "type", "company", "vatid", "salutation",
 							"title", "firstname", "lastname", "address1", "address2",
 							"address3", "postal", "city", "state", "countryid", "langid",
@@ -59,7 +59,7 @@ return array(
 				),
 				'update' => array(
 					'ansi' => '
-						UPDATE "mshop_order_base_address"
+						UPDATE "mshop_order_address"
 						SET :names
 							"baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?, "address2" = ?,
@@ -72,22 +72,22 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mordbaad."id" AS "order.base.address.id", mordbaad."baseid" AS "order.base.address.baseid",
-							mordbaad."siteid" AS "order.base.address.siteid", mordbaad."addrid" AS "order.base.address.addressid",
-							mordbaad."type" AS "order.base.address.type", mordbaad."company" AS "order.base.address.company",
-							mordbaad."vatid" AS "order.base.address.vatid", mordbaad."salutation" AS "order.base.address.salutation",
-							mordbaad."title" AS "order.base.address.title", mordbaad."firstname" AS "order.base.address.firstname",
-							mordbaad."lastname" AS "order.base.address.lastname", mordbaad."address1" AS "order.base.address.address1",
-							mordbaad."address2" AS "order.base.address.address2", mordbaad."address3" AS "order.base.address.address3",
-							mordbaad."postal" AS "order.base.address.postal", mordbaad."city" AS "order.base.address.city",
-							mordbaad."state" AS "order.base.address.state", mordbaad."countryid" AS "order.base.address.countryid",
-							mordbaad."langid" AS "order.base.address.languageid", mordbaad."telephone" AS "order.base.address.telephone",
-							mordbaad."email" AS "order.base.address.email", mordbaad."telefax" AS "order.base.address.telefax",
-							mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
-							mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
-							mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
-							mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
-						FROM "mshop_order_base_address" mordbaad
+							mordad."id" AS "order.base.address.id", mordad."baseid" AS "order.base.address.baseid",
+							mordad."siteid" AS "order.base.address.siteid", mordad."addrid" AS "order.base.address.addressid",
+							mordad."type" AS "order.base.address.type", mordad."company" AS "order.base.address.company",
+							mordad."vatid" AS "order.base.address.vatid", mordad."salutation" AS "order.base.address.salutation",
+							mordad."title" AS "order.base.address.title", mordad."firstname" AS "order.base.address.firstname",
+							mordad."lastname" AS "order.base.address.lastname", mordad."address1" AS "order.base.address.address1",
+							mordad."address2" AS "order.base.address.address2", mordad."address3" AS "order.base.address.address3",
+							mordad."postal" AS "order.base.address.postal", mordad."city" AS "order.base.address.city",
+							mordad."state" AS "order.base.address.state", mordad."countryid" AS "order.base.address.countryid",
+							mordad."langid" AS "order.base.address.languageid", mordad."telephone" AS "order.base.address.telephone",
+							mordad."email" AS "order.base.address.email", mordad."telefax" AS "order.base.address.telefax",
+							mordad."website" AS "order.base.address.website", mordad."longitude" AS "order.base.address.longitude",
+							mordad."latitude" AS "order.base.address.latitude", mordad."pos" AS "order.base.address.position",
+							mordad."mtime" AS "order.base.address.mtime", mordad."editor" AS "order.base.address.editor",
+							mordad."ctime" AS "order.base.address.ctime", mordad."birthday" AS "order.base.address.birthday"
+						FROM "mshop_order_address" mordad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -95,22 +95,22 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mordbaad."id" AS "order.base.address.id", mordbaad."baseid" AS "order.base.address.baseid",
-							mordbaad."siteid" AS "order.base.address.siteid", mordbaad."addrid" AS "order.base.address.addressid",
-							mordbaad."type" AS "order.base.address.type", mordbaad."company" AS "order.base.address.company",
-							mordbaad."vatid" AS "order.base.address.vatid", mordbaad."salutation" AS "order.base.address.salutation",
-							mordbaad."title" AS "order.base.address.title", mordbaad."firstname" AS "order.base.address.firstname",
-							mordbaad."lastname" AS "order.base.address.lastname", mordbaad."address1" AS "order.base.address.address1",
-							mordbaad."address2" AS "order.base.address.address2", mordbaad."address3" AS "order.base.address.address3",
-							mordbaad."postal" AS "order.base.address.postal", mordbaad."city" AS "order.base.address.city",
-							mordbaad."state" AS "order.base.address.state", mordbaad."countryid" AS "order.base.address.countryid",
-							mordbaad."langid" AS "order.base.address.languageid", mordbaad."telephone" AS "order.base.address.telephone",
-							mordbaad."email" AS "order.base.address.email", mordbaad."telefax" AS "order.base.address.telefax",
-							mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
-							mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
-							mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
-							mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
-						FROM "mshop_order_base_address" mordbaad
+							mordad."id" AS "order.base.address.id", mordad."baseid" AS "order.base.address.baseid",
+							mordad."siteid" AS "order.base.address.siteid", mordad."addrid" AS "order.base.address.addressid",
+							mordad."type" AS "order.base.address.type", mordad."company" AS "order.base.address.company",
+							mordad."vatid" AS "order.base.address.vatid", mordad."salutation" AS "order.base.address.salutation",
+							mordad."title" AS "order.base.address.title", mordad."firstname" AS "order.base.address.firstname",
+							mordad."lastname" AS "order.base.address.lastname", mordad."address1" AS "order.base.address.address1",
+							mordad."address2" AS "order.base.address.address2", mordad."address3" AS "order.base.address.address3",
+							mordad."postal" AS "order.base.address.postal", mordad."city" AS "order.base.address.city",
+							mordad."state" AS "order.base.address.state", mordad."countryid" AS "order.base.address.countryid",
+							mordad."langid" AS "order.base.address.languageid", mordad."telephone" AS "order.base.address.telephone",
+							mordad."email" AS "order.base.address.email", mordad."telefax" AS "order.base.address.telefax",
+							mordad."website" AS "order.base.address.website", mordad."longitude" AS "order.base.address.longitude",
+							mordad."latitude" AS "order.base.address.latitude", mordad."pos" AS "order.base.address.position",
+							mordad."mtime" AS "order.base.address.mtime", mordad."editor" AS "order.base.address.editor",
+							mordad."ctime" AS "order.base.address.ctime", mordad."birthday" AS "order.base.address.birthday"
+						FROM "mshop_order_address" mordad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -119,8 +119,8 @@ return array(
 				),
 				'count' => array(
 					'ansi' => '
-						SELECT COUNT( DISTINCT mordbaad."id" ) AS "count"
-						FROM "mshop_order_base_address" mordbaad
+						SELECT COUNT( DISTINCT mordad."id" ) AS "count"
+						FROM "mshop_order_address" mordad
 						:joins
 						WHERE :cond
 					'
@@ -128,7 +128,7 @@ return array(
 				'newid' => array(
 					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_base_address_seq.CURRVAL FROM DUAL',
+					'oracle' => 'SELECT mshop_order_address_seq.CURRVAL FROM DUAL',
 					'pgsql' => 'SELECT lastval()',
 					'sqlite' => 'SELECT last_insert_rowid()',
 					'sqlsrv' => 'SELECT @@IDENTITY',
@@ -141,11 +141,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_coupon" mordbaco
+							FROM "mshop_order_coupon" mordco
 							:joins
 							WHERE :cond
-							GROUP BY mordbaco.id, :cols
-							ORDER BY mordbaco.id DESC
+							GROUP BY mordco.id, :cols
+							ORDER BY mordco.id DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -154,11 +154,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_coupon" mordbaco
+							FROM "mshop_order_coupon" mordco
 							:joins
 							WHERE :cond
-							GROUP BY mordbaco.id, :cols
-							ORDER BY mordbaco.id DESC
+							GROUP BY mordco.id, :cols
+							ORDER BY mordco.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -166,13 +166,13 @@ return array(
 				),
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_order_base_coupon"
+						DELETE FROM "mshop_order_coupon"
 						WHERE :cond AND "siteid" LIKE ?
 						'
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_base_coupon" ( :names
+						INSERT INTO "mshop_order_coupon" ( :names
 							"baseid", "ordprodid", "code", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?
@@ -181,7 +181,7 @@ return array(
 				),
 				'update' => array(
 					'ansi' => '
-						UPDATE "mshop_order_base_coupon"
+						UPDATE "mshop_order_coupon"
 						SET :names
 							"baseid" = ?, "ordprodid" = ?, "code" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" LIKE ? AND "id" = ?
@@ -190,11 +190,11 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mordbaco."id" AS "order.base.coupon.id", mordbaco."baseid" AS "order.base.coupon.baseid",
-							mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
-							mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
-							mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
-						FROM "mshop_order_base_coupon" mordbaco
+							mordco."id" AS "order.base.coupon.id", mordco."baseid" AS "order.base.coupon.baseid",
+							mordco."siteid" AS "order.base.coupon.siteid", mordco."ordprodid" AS "order.base.coupon.ordprodid",
+							mordco."code" AS "order.base.coupon.code", mordco."mtime" AS "order.base.coupon.mtime",
+							mordco."editor" AS "order.base.coupon.editor", mordco."ctime" AS "order.base.coupon.ctime"
+						FROM "mshop_order_coupon" mordco
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -202,11 +202,11 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mordbaco."id" AS "order.base.coupon.id", mordbaco."baseid" AS "order.base.coupon.baseid",
-							mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
-							mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
-							mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
-						FROM "mshop_order_base_coupon" mordbaco
+							mordco."id" AS "order.base.coupon.id", mordco."baseid" AS "order.base.coupon.baseid",
+							mordco."siteid" AS "order.base.coupon.siteid", mordco."ordprodid" AS "order.base.coupon.ordprodid",
+							mordco."code" AS "order.base.coupon.code", mordco."mtime" AS "order.base.coupon.mtime",
+							mordco."editor" AS "order.base.coupon.editor", mordco."ctime" AS "order.base.coupon.ctime"
+						FROM "mshop_order_coupon" mordco
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -215,8 +215,8 @@ return array(
 				),
 				'count' => array(
 					'ansi' => '
-						SELECT COUNT( DISTINCT mordbaco."id" ) AS "count"
-						FROM "mshop_order_base_coupon" mordbaco
+						SELECT COUNT( DISTINCT mordco."id" ) AS "count"
+						FROM "mshop_order_coupon" mordco
 						:joins
 						WHERE :cond
 					'
@@ -224,7 +224,7 @@ return array(
 				'newid' => array(
 					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_base_coupon_seq.CURRVAL FROM DUAL',
+					'oracle' => 'SELECT mshop_order_coupon_seq.CURRVAL FROM DUAL',
 					'pgsql' => 'SELECT lastval()',
 					'sqlite' => 'SELECT last_insert_rowid()',
 					'sqlsrv' => 'SELECT @@IDENTITY',
@@ -238,11 +238,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_product_attr" mordbaprat
+								FROM "mshop_order_product_attr" mordprat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaprat.id, :cols
-								ORDER BY mordbaprat.id DESC
+								GROUP BY mordprat.id, :cols
+								ORDER BY mordprat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
 							GROUP BY :keys
@@ -251,11 +251,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_product_attr" mordbaprat
+								FROM "mshop_order_product_attr" mordprat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaprat.id, :cols
-								ORDER BY mordbaprat.id DESC
+								GROUP BY mordprat.id, :cols
+								ORDER BY mordprat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
 							GROUP BY :keys
@@ -263,13 +263,13 @@ return array(
 					),
 					'delete' => array(
 						'ansi' => '
-							DELETE FROM "mshop_order_base_product_attr"
+							DELETE FROM "mshop_order_product_attr"
 							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_product_attr" ( :names
+							INSERT INTO "mshop_order_product_attr" ( :names
 								"attrid", "parentid", "type", "code", "value",
 								"quantity", "price", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
@@ -279,7 +279,7 @@ return array(
 					),
 					'update' => array(
 						'ansi' => '
-							UPDATE "mshop_order_base_product_attr"
+							UPDATE "mshop_order_product_attr"
 							SET :names
 								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
 								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
@@ -289,14 +289,14 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								mordbaprat."id" AS "order.base.product.attribute.id", mordbaprat."siteid" AS "order.base.product.attribute.siteid",
-								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."parentid" AS "order.base.product.attribute.parentid",
-								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
-								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
-								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
-								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime",
-								mordbaprat."price" AS "order.base.product.attribute.price"
-							FROM "mshop_order_base_product_attr" mordbaprat
+								mordprat."id" AS "order.base.product.attribute.id", mordprat."siteid" AS "order.base.product.attribute.siteid",
+								mordprat."attrid" AS "order.base.product.attribute.attributeid", mordprat."parentid" AS "order.base.product.attribute.parentid",
+								mordprat."type" AS "order.base.product.attribute.type", mordprat."code" AS "order.base.product.attribute.code",
+								mordprat."value" AS "order.base.product.attribute.value", mordprat."quantity" AS "order.base.product.attribute.quantity",
+								mordprat."name" AS "order.base.product.attribute.name", mordprat."mtime" AS "order.base.product.attribute.mtime",
+								mordprat."editor" AS "order.base.product.attribute.editor", mordprat."ctime" AS "order.base.product.attribute.ctime",
+								mordprat."price" AS "order.base.product.attribute.price"
+							FROM "mshop_order_product_attr" mordprat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -304,14 +304,14 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								mordbaprat."id" AS "order.base.product.attribute.id", mordbaprat."siteid" AS "order.base.product.attribute.siteid",
-								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."parentid" AS "order.base.product.attribute.parentid",
-								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
-								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
-								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
-								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime",
-								mordbaprat."price" AS "order.base.product.attribute.price"
-							FROM "mshop_order_base_product_attr" mordbaprat
+								mordprat."id" AS "order.base.product.attribute.id", mordprat."siteid" AS "order.base.product.attribute.siteid",
+								mordprat."attrid" AS "order.base.product.attribute.attributeid", mordprat."parentid" AS "order.base.product.attribute.parentid",
+								mordprat."type" AS "order.base.product.attribute.type", mordprat."code" AS "order.base.product.attribute.code",
+								mordprat."value" AS "order.base.product.attribute.value", mordprat."quantity" AS "order.base.product.attribute.quantity",
+								mordprat."name" AS "order.base.product.attribute.name", mordprat."mtime" AS "order.base.product.attribute.mtime",
+								mordprat."editor" AS "order.base.product.attribute.editor", mordprat."ctime" AS "order.base.product.attribute.ctime",
+								mordprat."price" AS "order.base.product.attribute.price"
+							FROM "mshop_order_product_attr" mordprat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -320,8 +320,8 @@ return array(
 					),
 					'count' => array(
 						'ansi' => '
-							SELECT COUNT( DISTINCT mordbaprat."id" ) AS "count"
-							FROM "mshop_order_base_product_attr" mordbaprat
+							SELECT COUNT( DISTINCT mordprat."id" ) AS "count"
+							FROM "mshop_order_product_attr" mordprat
 							:joins
 							WHERE :cond
 						'
@@ -329,7 +329,7 @@ return array(
 					'newid' => array(
 						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 						'mysql' => 'SELECT LAST_INSERT_ID()',
-						'oracle' => 'SELECT mshop_order_base_product_attr_seq.CURRVAL FROM DUAL',
+						'oracle' => 'SELECT mshop_order_product_attr_seq.CURRVAL FROM DUAL',
 						'pgsql' => 'SELECT lastval()',
 						'sqlite' => 'SELECT last_insert_rowid()',
 						'sqlsrv' => 'SELECT @@IDENTITY',
@@ -341,11 +341,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_product" mordbapr
+							FROM "mshop_order_product" mordpr
 							:joins
 							WHERE :cond
-							GROUP BY mordbapr.id, :cols
-							ORDER BY mordbapr.id DESC
+							GROUP BY mordpr.id, :cols
+							ORDER BY mordpr.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -354,11 +354,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_product" mordbapr
+							FROM "mshop_order_product" mordpr
 							:joins
 							WHERE :cond
-							GROUP BY mordbapr.id, :cols
-							ORDER BY mordbapr.id DESC
+							GROUP BY mordpr.id, :cols
+							ORDER BY mordpr.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -366,13 +366,13 @@ return array(
 				),
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_order_base_product"
+						DELETE FROM "mshop_order_product"
 						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_base_product" ( :names
+						INSERT INTO "mshop_order_product" ( :names
 							"baseid", "ordprodid", "ordaddrid", "type", "parentprodid", "prodid", "prodcode",
 							"vendor", "stocktype", "name", "description", "mediaurl", "timeframe",
 							"quantity", "currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
@@ -385,7 +385,7 @@ return array(
 				),
 				'update' => array(
 					'ansi' => '
-						UPDATE "mshop_order_base_product"
+						UPDATE "mshop_order_product"
 						SET :names
 							"baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?, "parentprodid" = ?,
 							"prodid" = ?, "prodcode" = ?, "vendor" = ?, "stocktype" = ?,
@@ -399,69 +399,69 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
-							mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.orderproductid",
-							mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
-							mordbapr."description" AS "order.base.product.description", mordbapr."stocktype" AS "order.base.product.stocktype",
-							mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
-							mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."timeframe" AS "order.base.product.timeframe",
-							mordbapr."quantity" AS "order.base.product.quantity", mordbapr."currencyid" AS "order.base.product.currencyid",
-							mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
-							mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
-							mordbapr."taxrate" AS "order.base.product.taxrates", mordbapr."taxflag" AS "order.base.product.taxflag",
-							mordbapr."flags" AS "order.base.product.flags", mordbapr."statusdelivery" AS "order.base.product.statusdelivery",
-							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
-							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
-							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-							mordbapr."vendor" AS "order.base.product.vendor", mordbapr."scale" AS "order.base.product.scale",
-							mordbapr."qtyopen" AS "order.base.product.qtyopen", mordbapr."notes" AS "order.base.product.notes",
-							mordbapr."statuspayment" AS "order.base.product.statuspayment", mordbapr."parentprodid" AS "order.base.product.parentproductid"
-						FROM "mshop_order_base_product" mordbapr
+							mordpr."id" AS "order.base.product.id", mordpr."baseid" AS "order.base.product.baseid",
+							mordpr."siteid" AS "order.base.product.siteid", mordpr."ordprodid" AS "order.base.product.orderproductid",
+							mordpr."prodid" AS "order.base.product.productid", mordpr."prodcode" AS "order.base.product.prodcode",
+							mordpr."description" AS "order.base.product.description", mordpr."stocktype" AS "order.base.product.stocktype",
+							mordpr."type" AS "order.base.product.type", mordpr."name" AS "order.base.product.name",
+							mordpr."mediaurl" AS "order.base.product.mediaurl", mordpr."timeframe" AS "order.base.product.timeframe",
+							mordpr."quantity" AS "order.base.product.quantity", mordpr."currencyid" AS "order.base.product.currencyid",
+							mordpr."price" AS "order.base.product.price", mordpr."costs" AS "order.base.product.costs",
+							mordpr."rebate" AS "order.base.product.rebate", mordpr."tax" AS "order.base.product.taxvalue",
+							mordpr."taxrate" AS "order.base.product.taxrates", mordpr."taxflag" AS "order.base.product.taxflag",
+							mordpr."flags" AS "order.base.product.flags", mordpr."statusdelivery" AS "order.base.product.statusdelivery",
+							mordpr."pos" AS "order.base.product.position", mordpr."mtime" AS "order.base.product.mtime",
+							mordpr."editor" AS "order.base.product.editor", mordpr."ctime" AS "order.base.product.ctime",
+							mordpr."target" AS "order.base.product.target", mordpr."ordaddrid" AS "order.base.product.orderaddressid",
+							mordpr."vendor" AS "order.base.product.vendor", mordpr."scale" AS "order.base.product.scale",
+							mordpr."qtyopen" AS "order.base.product.qtyopen", mordpr."notes" AS "order.base.product.notes",
+							mordpr."statuspayment" AS "order.base.product.statuspayment", mordpr."parentprodid" AS "order.base.product.parentproductid"
+						FROM "mshop_order_product" mordpr
 						:joins
 						WHERE :cond
 						GROUP BY :columns :group
-							mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."prodid",
-							mordbapr."prodcode", mordbapr."description", mordbapr."stocktype", mordbapr."type",
-							mordbapr."name", mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity",
-							mordbapr."currencyid", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax",
-							mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."statusdelivery", mordbapr."pos",
-							mordbapr."mtime", mordbapr."editor", mordbapr."ctime", mordbapr."target", mordbapr."ordaddrid",
-							mordbapr."vendor", mordbapr."qtyopen", mordbapr."notes", mordbapr."scale",
-							mordbapr."statuspayment", mordbapr."parentprodid"
+							mordpr."id", mordpr."baseid", mordpr."siteid", mordpr."ordprodid", mordpr."prodid",
+							mordpr."prodcode", mordpr."description", mordpr."stocktype", mordpr."type",
+							mordpr."name", mordpr."mediaurl", mordpr."timeframe", mordpr."quantity",
+							mordpr."currencyid", mordpr."price", mordpr."costs", mordpr."rebate", mordpr."tax",
+							mordpr."taxrate", mordpr."taxflag", mordpr."flags", mordpr."statusdelivery", mordpr."pos",
+							mordpr."mtime", mordpr."editor", mordpr."ctime", mordpr."target", mordpr."ordaddrid",
+							mordpr."vendor", mordpr."qtyopen", mordpr."notes", mordpr."scale",
+							mordpr."statuspayment", mordpr."parentprodid"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
 						SELECT :columns
-							mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
-							mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.orderproductid",
-							mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
-							mordbapr."description" AS "order.base.product.description", mordbapr."stocktype" AS "order.base.product.stocktype",
-							mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
-							mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."timeframe" AS "order.base.product.timeframe",
-							mordbapr."quantity" AS "order.base.product.quantity", mordbapr."currencyid" AS "order.base.product.currencyid",
-							mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
-							mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
-							mordbapr."taxrate" AS "order.base.product.taxrates", mordbapr."taxflag" AS "order.base.product.taxflag",
-							mordbapr."flags" AS "order.base.product.flags", mordbapr."statusdelivery" AS "order.base.product.statusdelivery",
-							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
-							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
-							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-							mordbapr."vendor" AS "order.base.product.vendor", mordbapr."scale" AS "order.base.product.scale",
-							mordbapr."qtyopen" AS "order.base.product.qtyopen", mordbapr."notes" AS "order.base.product.notes",
-							mordbapr."statuspayment" AS "order.base.product.statuspayment", mordbapr."parentprodid" AS "order.base.product.parentproductid"
-						FROM "mshop_order_base_product" mordbapr
+							mordpr."id" AS "order.base.product.id", mordpr."baseid" AS "order.base.product.baseid",
+							mordpr."siteid" AS "order.base.product.siteid", mordpr."ordprodid" AS "order.base.product.orderproductid",
+							mordpr."prodid" AS "order.base.product.productid", mordpr."prodcode" AS "order.base.product.prodcode",
+							mordpr."description" AS "order.base.product.description", mordpr."stocktype" AS "order.base.product.stocktype",
+							mordpr."type" AS "order.base.product.type", mordpr."name" AS "order.base.product.name",
+							mordpr."mediaurl" AS "order.base.product.mediaurl", mordpr."timeframe" AS "order.base.product.timeframe",
+							mordpr."quantity" AS "order.base.product.quantity", mordpr."currencyid" AS "order.base.product.currencyid",
+							mordpr."price" AS "order.base.product.price", mordpr."costs" AS "order.base.product.costs",
+							mordpr."rebate" AS "order.base.product.rebate", mordpr."tax" AS "order.base.product.taxvalue",
+							mordpr."taxrate" AS "order.base.product.taxrates", mordpr."taxflag" AS "order.base.product.taxflag",
+							mordpr."flags" AS "order.base.product.flags", mordpr."statusdelivery" AS "order.base.product.statusdelivery",
+							mordpr."pos" AS "order.base.product.position", mordpr."mtime" AS "order.base.product.mtime",
+							mordpr."editor" AS "order.base.product.editor", mordpr."ctime" AS "order.base.product.ctime",
+							mordpr."target" AS "order.base.product.target", mordpr."ordaddrid" AS "order.base.product.orderaddressid",
+							mordpr."vendor" AS "order.base.product.vendor", mordpr."scale" AS "order.base.product.scale",
+							mordpr."qtyopen" AS "order.base.product.qtyopen", mordpr."notes" AS "order.base.product.notes",
+							mordpr."statuspayment" AS "order.base.product.statuspayment", mordpr."parentprodid" AS "order.base.product.parentproductid"
+						FROM "mshop_order_product" mordpr
 						:joins
 						WHERE :cond
-						GROUP BY :group mordbapr."id"
+						GROUP BY :group mordpr."id"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
 				'count' => array(
 					'ansi' => '
-						SELECT COUNT( DISTINCT mordbapr."id" ) AS "count"
-						FROM "mshop_order_base_product" mordbapr
+						SELECT COUNT( DISTINCT mordpr."id" ) AS "count"
+						FROM "mshop_order_product" mordpr
 						:joins
 						WHERE :cond
 					'
@@ -469,7 +469,7 @@ return array(
 				'newid' => array(
 					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_base_product_seq.CURRVAL FROM DUAL',
+					'oracle' => 'SELECT mshop_order_product_seq.CURRVAL FROM DUAL',
 					'pgsql' => 'SELECT lastval()',
 					'sqlite' => 'SELECT last_insert_rowid()',
 					'sqlsrv' => 'SELECT @@IDENTITY',
@@ -483,11 +483,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_service_attr" mordbaseat
+								FROM "mshop_order_service_attr" mordseat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaseat.id, :cols
-								ORDER BY mordbaseat.id DESC
+								GROUP BY mordseat.id, :cols
+								ORDER BY mordseat.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
 							GROUP BY :keys
@@ -496,11 +496,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_service_attr" mordbaseat
+								FROM "mshop_order_service_attr" mordseat
 								:joins
 								WHERE :cond
-								GROUP BY mordbaseat.id, :cols
-								ORDER BY mordbaseat.id DESC
+								GROUP BY mordseat.id, :cols
+								ORDER BY mordseat.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
 							GROUP BY :keys
@@ -508,13 +508,13 @@ return array(
 					),
 					'delete' => array(
 						'ansi' => '
-							DELETE FROM "mshop_order_base_service_attr"
+							DELETE FROM "mshop_order_service_attr"
 							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_service_attr" ( :names
+							INSERT INTO "mshop_order_service_attr" ( :names
 								"attrid", "parentid", "type", "code", "value",
 								"quantity", "price", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
@@ -524,7 +524,7 @@ return array(
 					),
 					'update' => array(
 						'ansi' => '
-							UPDATE "mshop_order_base_service_attr"
+							UPDATE "mshop_order_service_attr"
 							SET :names
 								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
 								"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
@@ -534,14 +534,14 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
-								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."parentid" AS "order.base.service.attribute.parentid",
-								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
-								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
-								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
-								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor",
-								mordbaseat."price" AS "order.base.service.attribute.price"
-							FROM "mshop_order_base_service_attr" mordbaseat
+								mordseat."id" AS "order.base.service.attribute.id", mordseat."siteid" AS "order.base.service.attribute.siteid",
+								mordseat."attrid" AS "order.base.service.attribute.attributeid", mordseat."parentid" AS "order.base.service.attribute.parentid",
+								mordseat."type" AS "order.base.service.attribute.type", mordseat."code" AS "order.base.service.attribute.code",
+								mordseat."value" AS "order.base.service.attribute.value", mordseat."quantity" AS "order.base.service.attribute.quantity",
+								mordseat."name" AS "order.base.service.attribute.name", mordseat."mtime" AS "order.base.service.attribute.mtime",
+								mordseat."ctime" AS "order.base.service.attribute.ctime", mordseat."editor" AS "order.base.service.attribute.editor",
+								mordseat."price" AS "order.base.service.attribute.price"
+							FROM "mshop_order_service_attr" mordseat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -549,14 +549,14 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
-								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."parentid" AS "order.base.service.attribute.parentid",
-								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
-								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
-								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
-								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor",
-								mordbaseat."price" AS "order.base.service.attribute.price"
-							FROM "mshop_order_base_service_attr" mordbaseat
+								mordseat."id" AS "order.base.service.attribute.id", mordseat."siteid" AS "order.base.service.attribute.siteid",
+								mordseat."attrid" AS "order.base.service.attribute.attributeid", mordseat."parentid" AS "order.base.service.attribute.parentid",
+								mordseat."type" AS "order.base.service.attribute.type", mordseat."code" AS "order.base.service.attribute.code",
+								mordseat."value" AS "order.base.service.attribute.value", mordseat."quantity" AS "order.base.service.attribute.quantity",
+								mordseat."name" AS "order.base.service.attribute.name", mordseat."mtime" AS "order.base.service.attribute.mtime",
+								mordseat."ctime" AS "order.base.service.attribute.ctime", mordseat."editor" AS "order.base.service.attribute.editor",
+								mordseat."price" AS "order.base.service.attribute.price"
+							FROM "mshop_order_service_attr" mordseat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -565,8 +565,8 @@ return array(
 					),
 					'count' => array(
 						'ansi' => '
-							SELECT COUNT( DISTINCT mordbaseat."id" ) AS "count"
-							FROM "mshop_order_base_service_attr" mordbaseat
+							SELECT COUNT( DISTINCT mordseat."id" ) AS "count"
+							FROM "mshop_order_service_attr" mordseat
 							:joins
 							WHERE :cond
 						'
@@ -574,7 +574,7 @@ return array(
 					'newid' => array(
 						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 						'mysql' => 'SELECT LAST_INSERT_ID()',
-						'oracle' => 'SELECT mshop_order_base_service_attr_seq.CURRVAL FROM DUAL',
+						'oracle' => 'SELECT mshop_order_service_attr_seq.CURRVAL FROM DUAL',
 						'pgsql' => 'SELECT lastval()',
 						'sqlite' => 'SELECT last_insert_rowid()',
 						'sqlsrv' => 'SELECT @@IDENTITY',
@@ -587,11 +587,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_service_tx" mordbasetx
+								FROM "mshop_order_service_tx" mordsetx
 								:joins
 								WHERE :cond
-								GROUP BY mordbasetx.id, :cols
-								ORDER BY mordbasetx.id DESC
+								GROUP BY mordsetx.id, :cols
+								ORDER BY mordsetx.id DESC
 								OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 							) AS list
 							GROUP BY :keys
@@ -600,11 +600,11 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :type(:val) AS "val"
-								FROM "mshop_order_base_service_tx" mordbasetx
+								FROM "mshop_order_service_tx" mordsetx
 								:joins
 								WHERE :cond
-								GROUP BY mordbasetx.id, :cols
-								ORDER BY mordbasetx.id DESC
+								GROUP BY mordsetx.id, :cols
+								ORDER BY mordsetx.id DESC
 								LIMIT :size OFFSET :start
 							) AS list
 							GROUP BY :keys
@@ -612,13 +612,13 @@ return array(
 					),
 					'delete' => array(
 						'ansi' => '
-							DELETE FROM "mshop_order_base_service_tx"
+							DELETE FROM "mshop_order_service_tx"
 							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_service_tx" ( :names
+							INSERT INTO "mshop_order_service_tx" ( :names
 								"parentid", "type", "currencyid", "price", "costs", "rebate", "tax", "taxflag",
 								"status", "config", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
@@ -628,7 +628,7 @@ return array(
 					),
 					'update' => array(
 						'ansi' => '
-							UPDATE "mshop_order_base_service_tx"
+							UPDATE "mshop_order_service_tx"
 							SET :names
 								"parentid" = ?, "type" = ?, "currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
 								"tax" = ?, "taxflag" = ?, "status" = ?, "config" = ?, "mtime" = ?, "editor" = ?
@@ -638,15 +638,15 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								mordbasetx."id" AS "order.base.service.transaction.id", mordbasetx."siteid" AS "order.base.service.transaction.siteid",
-								mordbasetx."parentid" AS "order.base.service.transaction.parentid", mordbasetx."type" AS "order.base.service.transaction.type",
-								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
-								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
-								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
-								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."status" AS "order.base.service.transaction.status",
-								mordbasetx."mtime" AS "order.base.service.transaction.mtime", mordbasetx."ctime" AS "order.base.service.transaction.ctime",
-								mordbasetx."editor" AS "order.base.service.transaction.editor"
-							FROM "mshop_order_base_service_tx" mordbasetx
+								mordsetx."id" AS "order.base.service.transaction.id", mordsetx."siteid" AS "order.base.service.transaction.siteid",
+								mordsetx."parentid" AS "order.base.service.transaction.parentid", mordsetx."type" AS "order.base.service.transaction.type",
+								mordsetx."currencyid" AS "order.base.service.transaction.currencyid", mordsetx."price" AS "order.base.service.transaction.price",
+								mordsetx."costs" AS "order.base.service.transaction.costs", mordsetx."rebate" AS "order.base.service.transaction.rebate",
+								mordsetx."tax" AS "order.base.service.transaction.taxvalue", mordsetx."taxflag" AS "order.base.service.transaction.taxflag",
+								mordsetx."config" AS "order.base.service.transaction.config", mordsetx."status" AS "order.base.service.transaction.status",
+								mordsetx."mtime" AS "order.base.service.transaction.mtime", mordsetx."ctime" AS "order.base.service.transaction.ctime",
+								mordsetx."editor" AS "order.base.service.transaction.editor"
+							FROM "mshop_order_service_tx" mordsetx
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -654,15 +654,15 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								mordbasetx."id" AS "order.base.service.transaction.id", mordbasetx."siteid" AS "order.base.service.transaction.siteid",
-								mordbasetx."parentid" AS "order.base.service.transaction.parentid", mordbasetx."type" AS "order.base.service.transaction.type",
-								mordbasetx."currencyid" AS "order.base.service.transaction.currencyid", mordbasetx."price" AS "order.base.service.transaction.price",
-								mordbasetx."costs" AS "order.base.service.transaction.costs", mordbasetx."rebate" AS "order.base.service.transaction.rebate",
-								mordbasetx."tax" AS "order.base.service.transaction.taxvalue", mordbasetx."taxflag" AS "order.base.service.transaction.taxflag",
-								mordbasetx."config" AS "order.base.service.transaction.config", mordbasetx."status" AS "order.base.service.transaction.status",
-								mordbasetx."mtime" AS "order.base.service.transaction.mtime", mordbasetx."ctime" AS "order.base.service.transaction.ctime",
-								mordbasetx."editor" AS "order.base.service.transaction.editor"
-							FROM "mshop_order_base_service_tx" mordbasetx
+								mordsetx."id" AS "order.base.service.transaction.id", mordsetx."siteid" AS "order.base.service.transaction.siteid",
+								mordsetx."parentid" AS "order.base.service.transaction.parentid", mordsetx."type" AS "order.base.service.transaction.type",
+								mordsetx."currencyid" AS "order.base.service.transaction.currencyid", mordsetx."price" AS "order.base.service.transaction.price",
+								mordsetx."costs" AS "order.base.service.transaction.costs", mordsetx."rebate" AS "order.base.service.transaction.rebate",
+								mordsetx."tax" AS "order.base.service.transaction.taxvalue", mordsetx."taxflag" AS "order.base.service.transaction.taxflag",
+								mordsetx."config" AS "order.base.service.transaction.config", mordsetx."status" AS "order.base.service.transaction.status",
+								mordsetx."mtime" AS "order.base.service.transaction.mtime", mordsetx."ctime" AS "order.base.service.transaction.ctime",
+								mordsetx."editor" AS "order.base.service.transaction.editor"
+							FROM "mshop_order_service_tx" mordsetx
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -671,8 +671,8 @@ return array(
 					),
 					'count' => array(
 						'ansi' => '
-							SELECT COUNT( DISTINCT mordbasetx."id" ) AS "count"
-							FROM "mshop_order_base_service_tx" mordbasetx
+							SELECT COUNT( DISTINCT mordsetx."id" ) AS "count"
+							FROM "mshop_order_service_tx" mordsetx
 							:joins
 							WHERE :cond
 						'
@@ -680,7 +680,7 @@ return array(
 					'newid' => array(
 						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 						'mysql' => 'SELECT LAST_INSERT_ID()',
-						'oracle' => 'SELECT mshop_order_base_service_tx_seq.CURRVAL FROM DUAL',
+						'oracle' => 'SELECT mshop_order_service_tx_seq.CURRVAL FROM DUAL',
 						'pgsql' => 'SELECT lastval()',
 						'sqlite' => 'SELECT last_insert_rowid()',
 						'sqlsrv' => 'SELECT @@IDENTITY',
@@ -692,11 +692,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_service" mordbase
+							FROM "mshop_order_service" mordse
 							:joins
 							WHERE :cond
-							GROUP BY mordbase.id, :cols
-							ORDER BY mordbase.id DESC
+							GROUP BY mordse.id, :cols
+							ORDER BY mordse.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -705,11 +705,11 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
-							FROM "mshop_order_base_service" mordbase
+							FROM "mshop_order_service" mordse
 							:joins
 							WHERE :cond
-							GROUP BY mordbase.id, :cols
-							ORDER BY mordbase.id DESC
+							GROUP BY mordse.id, :cols
+							ORDER BY mordse.id DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -717,13 +717,13 @@ return array(
 				),
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_order_base_service"
+						DELETE FROM "mshop_order_service"
 						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_base_service" ( :names
+						INSERT INTO "mshop_order_service" ( :names
 							"baseid", "servid", "type", "code", "name", "mediaurl",
 							"currencyid", "price", "costs", "rebate", "tax", "taxrate",
 							"taxflag", "pos", "mtime", "editor", "siteid", "ctime"
@@ -734,7 +734,7 @@ return array(
 				),
 				'update' => array(
 					'ansi' => '
-						UPDATE "mshop_order_base_service"
+						UPDATE "mshop_order_service"
 						SET :names
 							"baseid" = ?, "servid" = ?, "type" = ?, "code" = ?,
 							"name" = ?, "mediaurl" = ?, "currencyid" = ?, "price" = ?,
@@ -746,51 +746,51 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mordbase."id" AS "order.base.service.id", mordbase."baseid" AS "order.base.service.baseid",
-							mordbase."siteid" AS "order.base.service.siteid", mordbase."servid" AS "order.base.service.serviceid",
-							mordbase."type" AS "order.base.service.type", mordbase."code" AS "order.base.service.code",
-							mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
-							mordbase."currencyid" AS "order.base.service.currencyid", mordbase."price" AS "order.base.service.price",
-							mordbase."costs" AS "order.base.service.costs", mordbase."rebate" AS "order.base.service.rebate",
-							mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrates",
-							mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
-							mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
-							mordbase."ctime" AS "order.base.service.ctime"
-						FROM "mshop_order_base_service" mordbase
+							mordse."id" AS "order.base.service.id", mordse."baseid" AS "order.base.service.baseid",
+							mordse."siteid" AS "order.base.service.siteid", mordse."servid" AS "order.base.service.serviceid",
+							mordse."type" AS "order.base.service.type", mordse."code" AS "order.base.service.code",
+							mordse."name" AS "order.base.service.name", mordse."mediaurl" AS "order.base.service.mediaurl",
+							mordse."currencyid" AS "order.base.service.currencyid", mordse."price" AS "order.base.service.price",
+							mordse."costs" AS "order.base.service.costs", mordse."rebate" AS "order.base.service.rebate",
+							mordse."tax" AS "order.base.service.taxvalue", mordse."taxrate" AS "order.base.service.taxrates",
+							mordse."taxflag" AS "order.base.service.taxflag", mordse."pos" AS "order.base.service.position",
+							mordse."mtime" AS "order.base.service.mtime", mordse."editor" AS "order.base.service.editor",
+							mordse."ctime" AS "order.base.service.ctime"
+						FROM "mshop_order_service" mordse
 						:joins
 						WHERE :cond
 						GROUP BY :columns :group
-							mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid", mordbase."type",
-							mordbase."code", mordbase."name", mordbase."mediaurl", mordbase."currencyid", mordbase."price",
-							mordbase."costs", mordbase."rebate", mordbase."tax", mordbase."taxrate", mordbase."taxflag",
-							mordbase."pos", mordbase."mtime", mordbase."editor", mordbase."ctime"
+							mordse."id", mordse."baseid", mordse."siteid", mordse."servid", mordse."type",
+							mordse."code", mordse."name", mordse."mediaurl", mordse."currencyid", mordse."price",
+							mordse."costs", mordse."rebate", mordse."tax", mordse."taxrate", mordse."taxflag",
+							mordse."pos", mordse."mtime", mordse."editor", mordse."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
 						SELECT :columns
-							mordbase."id" AS "order.base.service.id", mordbase."baseid" AS "order.base.service.baseid",
-							mordbase."siteid" AS "order.base.service.siteid", mordbase."servid" AS "order.base.service.serviceid",
-							mordbase."type" AS "order.base.service.type", mordbase."code" AS "order.base.service.code",
-							mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
-							mordbase."currencyid" AS "order.base.service.currencyid", mordbase."price" AS "order.base.service.price",
-							mordbase."costs" AS "order.base.service.costs", mordbase."rebate" AS "order.base.service.rebate",
-							mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrates",
-							mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
-							mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
-							mordbase."ctime" AS "order.base.service.ctime"
-						FROM "mshop_order_base_service" mordbase
+							mordse."id" AS "order.base.service.id", mordse."baseid" AS "order.base.service.baseid",
+							mordse."siteid" AS "order.base.service.siteid", mordse."servid" AS "order.base.service.serviceid",
+							mordse."type" AS "order.base.service.type", mordse."code" AS "order.base.service.code",
+							mordse."name" AS "order.base.service.name", mordse."mediaurl" AS "order.base.service.mediaurl",
+							mordse."currencyid" AS "order.base.service.currencyid", mordse."price" AS "order.base.service.price",
+							mordse."costs" AS "order.base.service.costs", mordse."rebate" AS "order.base.service.rebate",
+							mordse."tax" AS "order.base.service.taxvalue", mordse."taxrate" AS "order.base.service.taxrates",
+							mordse."taxflag" AS "order.base.service.taxflag", mordse."pos" AS "order.base.service.position",
+							mordse."mtime" AS "order.base.service.mtime", mordse."editor" AS "order.base.service.editor",
+							mordse."ctime" AS "order.base.service.ctime"
+						FROM "mshop_order_service" mordse
 						:joins
 						WHERE :cond
-						GROUP BY :group mordbase."id"
+						GROUP BY :group mordse."id"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
 				'count' => array(
 					'ansi' => '
-						SELECT COUNT( DISTINCT mordbase."id" ) AS "count"
-						FROM "mshop_order_base_service" mordbase
+						SELECT COUNT( DISTINCT mordse."id" ) AS "count"
+						FROM "mshop_order_service" mordse
 						:joins
 						WHERE :cond
 					'
@@ -798,7 +798,7 @@ return array(
 				'newid' => array(
 					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_base_service_seq.CURRVAL FROM DUAL',
+					'oracle' => 'SELECT mshop_order_service_seq.CURRVAL FROM DUAL',
 					'pgsql' => 'SELECT lastval()',
 					'sqlite' => 'SELECT last_insert_rowid()',
 					'sqlsrv' => 'SELECT @@IDENTITY',

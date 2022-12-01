@@ -29,18 +29,18 @@ class Order extends Base
 
 		$db->up();
 
-		if( !$db->hasIndex( 'mshop_order_base_product_attr', 'idx_msordbaprat_si_cd_va' ) )
+		if( !$db->hasIndex( 'mshop_order_product_attr', 'idx_msordprat_si_cd_va' ) )
 		{
-			$db->for( 'mysql', 'CREATE INDEX `idx_msordbaprat_si_cd_va` ON `mshop_order_base_product_attr` (`siteid`, `code`, `value`(16))' );
-			$db->for( 'postgresql', 'CREATE INDEX "idx_msordbaprat_si_cd_va" ON "mshop_order_base_product_attr" ("siteid", "code", left("value", 16))' );
-			$db->for( 'mssql', 'CREATE INDEX "idx_msordbaprat_si_cd_va" ON "mshop_order_base_product_attr" ("siteid", "code")' );
+			$db->for( 'mysql', 'CREATE INDEX `idx_msordprat_si_cd_va` ON `mshop_order_product_attr` (`siteid`, `code`, `value`(16))' );
+			$db->for( 'postgresql', 'CREATE INDEX "idx_msordprat_si_cd_va" ON "mshop_order_product_attr" ("siteid", "code", left("value", 16))' );
+			$db->for( 'mssql', 'CREATE INDEX "idx_msordprat_si_cd_va" ON "mshop_order_product_attr" ("siteid", "code")' );
 		}
 
-		if( !$db->hasIndex( 'mshop_order_base_service_attr', 'idx_msordbaseat_si_cd_va' ) )
+		if( !$db->hasIndex( 'mshop_order_service_attr', 'idx_msordseat_si_cd_va' ) )
 		{
-			$db->for( 'mysql', 'CREATE INDEX `idx_msordbaseat_si_cd_va` ON `mshop_order_base_service_attr` (`siteid`, `code`, `value`(16))' );
-			$db->for( 'postgresql', 'CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", left("value", 16))' );
-			$db->for( 'mssql', 'CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code")' );
+			$db->for( 'mysql', 'CREATE INDEX `idx_msordseat_si_cd_va` ON `mshop_order_service_attr` (`siteid`, `code`, `value`(16))' );
+			$db->for( 'postgresql', 'CREATE INDEX "idx_msordseat_si_cd_va" ON "mshop_order_service_attr" ("siteid", "code", left("value", 16))' );
+			$db->for( 'mssql', 'CREATE INDEX "idx_msordseat_si_cd_va" ON "mshop_order_service_attr" ("siteid", "code")' );
 		}
 	}
 }

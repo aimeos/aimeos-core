@@ -25,46 +25,40 @@ class OrderMigrateTaxrate extends Base
 		$this->info( 'Migrating taxrate columns in order tables', 'vv' );
 		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );
 
-		if( $db->hasTable( 'mshop_order_base_product' ) )
+		$conn = $this->context()->db( $dbdomain );
+
+		$select = 'SELECT "id", "taxrate" FROM "mshop_order_product" WHERE "taxrate" NOT LIKE \'{%\'';
+		$update = 'UPDATE "mshop_order_product" SET "taxrate" = ? WHERE "id" = ?';
+
+		$stmt = $conn->create( $update );
+		$result = $conn->create( $select )->execute();
+
+		while( ( $row = $result->fetch() ) !== null )
 		{
-			$conn = $this->context()->db( $dbdomain );
+			$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
+			$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
-			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_product" WHERE "taxrate" NOT LIKE \'{%\'';
-			$update = 'UPDATE "mshop_order_base_product" SET "taxrate" = ? WHERE "id" = ?';
-
-			$stmt = $conn->create( $update );
-			$result = $conn->create( $select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
-				$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-
-				$stmt->execute()->finish();
-			}
+			$stmt->execute()->finish();
 		}
 
 
 		$this->info( 'Migrating taxrate column in order base service table', 'vv', 1 );
 
-		if( $db->hasTable( 'mshop_order_base_service' ) )
+		$conn = $this->context()->db( $dbdomain );
+
+		$select = 'SELECT "id", "taxrate" FROM "mshop_order_service" WHERE "taxrate" NOT LIKE \'{%\'';
+		$update = 'UPDATE "mshop_order_service" SET "taxrate" = ? WHERE "id" = ?';
+
+		$stmt = $conn->create( $update );
+
+		$result = $conn->create( $select )->execute();
+
+		while( ( $row = $result->fetch() ) !== null )
 		{
-			$conn = $this->context()->db( $dbdomain );
+			$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
+			$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
-			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_service" WHERE "taxrate" NOT LIKE \'{%\'';
-			$update = 'UPDATE "mshop_order_base_service" SET "taxrate" = ? WHERE "id" = ?';
-
-			$stmt = $conn->create( $update );
-
-			$result = $conn->create( $select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
-				$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-
-				$stmt->execute()->finish();
-			}
+			$stmt->execute()->finish();
 		}
 	}
 }

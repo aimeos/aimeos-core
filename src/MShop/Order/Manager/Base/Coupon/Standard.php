@@ -25,8 +25,8 @@ class Standard
 	private $searchConfig = array(
 		'order.base.coupon.id' => array(
 			'code' => 'order.base.coupon.id',
-			'internalcode' => 'mordbaco."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_coupon" AS mordbaco ON ( mordba."id" = mordbaco."baseid" )' ),
+			'internalcode' => 'mordco."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_coupon" AS mordco ON ( mordba."id" = mordco."baseid" )' ),
 			'label' => 'Coupon ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -34,7 +34,7 @@ class Standard
 		),
 		'order.base.coupon.siteid' => array(
 			'code' => 'order.base.coupon.siteid',
-			'internalcode' => 'mordbaco."siteid"',
+			'internalcode' => 'mordco."siteid"',
 			'label' => 'Coupon site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'order.base.coupon.baseid' => array(
 			'code' => 'order.base.coupon.baseid',
-			'internalcode' => 'mordbaco."baseid"',
+			'internalcode' => 'mordco."baseid"',
 			'label' => 'Order ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.coupon.ordprodid' => array(
 			'code' => 'order.base.coupon.productid',
-			'internalcode' => 'mordbaco."ordprodid"',
+			'internalcode' => 'mordco."ordprodid"',
 			'label' => 'Coupon product ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -58,14 +58,14 @@ class Standard
 		),
 		'order.base.coupon.code' => array(
 			'code' => 'order.base.coupon.code',
-			'internalcode' => 'mordbaco."code"',
+			'internalcode' => 'mordco."code"',
 			'label' => 'Coupon code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.coupon.ctime' => array(
 			'code' => 'order.base.coupon.ctime',
-			'internalcode' => 'mordbaco."ctime"',
+			'internalcode' => 'mordco."ctime"',
 			'label' => 'Coupon create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -73,7 +73,7 @@ class Standard
 		),
 		'order.base.coupon.mtime' => array(
 			'code' => 'order.base.coupon.mtime',
-			'internalcode' => 'mordbaco."mtime"',
+			'internalcode' => 'mordco."mtime"',
 			'label' => 'Coupon modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -81,7 +81,7 @@ class Standard
 		),
 		'order.base.coupon.editor' => array(
 			'code' => 'order.base.coupon.editor',
-			'internalcode' => 'mordbaco."editor"',
+			'internalcode' => 'mordco."editor"',
 			'label' => 'Coupon editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,

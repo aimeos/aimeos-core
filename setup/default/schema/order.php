@@ -47,7 +47,7 @@ return array(
 			$table->index( ['ctime', 'siteid'], 'idx_msordba_ctime_sid' );
 		},
 
-		'mshop_order_base_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -90,7 +90,7 @@ return array(
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaad_baseid' );
 		},
 
-		'mshop_order_base_product' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_product' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -136,7 +136,7 @@ return array(
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbapr_baseid' );
 		},
 
-		'mshop_order_base_product_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_product_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -152,12 +152,12 @@ return array(
 			$table->text( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaprat_oid_aid_ty_cd' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordprat_oid_aid_ty_cd' );
 
-			$table->foreign( 'parentid', 'mshop_order_base_product', 'id', 'fk_msordbaprat_parentid' );
+			$table->foreign( 'parentid', 'mshop_order_product', 'id', 'fk_msordprat_parentid' );
 		},
 
-		'mshop_order_base_service' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_service' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -185,7 +185,7 @@ return array(
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbase_baseid' );
 		},
 
-		'mshop_order_base_service_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_service_attr' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -201,12 +201,12 @@ return array(
 			$table->text( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaseat_oid_aid_ty_cd' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordseat_oid_aid_ty_cd' );
 
-			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbaseat_parentid' );
+			$table->foreign( 'parentid', 'mshop_order_service', 'id', 'fk_msordseat_parentid' );
 		},
 
-		'mshop_order_base_service_tx' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_service_tx' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
@@ -224,10 +224,10 @@ return array(
 			$table->text( 'config' )->default( '' );
 			$table->meta();
 
-			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbasetx_parentid' );
+			$table->foreign( 'parentid', 'mshop_order_service', 'id', 'fk_msordsetx_parentid' );
 		},
 
-		'mshop_order_base_coupon' => function( \Aimeos\Upscheme\Schema\Table $table ) {
+		'mshop_order_coupon' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 

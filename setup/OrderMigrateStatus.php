@@ -35,12 +35,12 @@ class OrderMigrateStatus extends Base
 			$db->update( 'mshop_order', ['statusdelivery' => -1], ['statusdelivery' => null] );
 		}
 
-		if( $db->hasColumn( 'mshop_order_base_product', 'statuspayment' ) ) {
-			$db->update( 'mshop_order_base_product', ['statuspayment' => -1], ['statuspayment' => null] );
+		if( $db->hasColumn( 'mshop_order_product', 'statuspayment' ) ) {
+			$db->update( 'mshop_order_product', ['statuspayment' => -1], ['statuspayment' => null] );
 		}
 
-		if( $db->hasColumn( 'mshop_order_base_product', 'statusdelivery' ) ) {
-			$db->update( 'mshop_order_base_product', ['statusdelivery' => -1], ['statusdelivery' => null] );
+		if( $db->hasColumn( 'mshop_order_product', 'statusdelivery' ) ) {
+			$db->update( 'mshop_order_product', ['statusdelivery' => -1], ['statusdelivery' => null] );
 		}
 	}
 }

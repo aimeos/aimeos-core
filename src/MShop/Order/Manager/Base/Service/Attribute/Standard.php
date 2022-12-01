@@ -25,8 +25,8 @@ class Standard
 	private $searchConfig = array(
 		'order.base.service.attribute.id' => array(
 			'code' => 'order.base.service.attribute.id',
-			'internalcode' => 'mordbaseat."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service_attr" AS mordbaseat ON ( mordbase."id" = mordbaseat."parentid" )' ),
+			'internalcode' => 'mordseat."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_service_attr" AS mordseat ON ( mordse."id" = mordseat."parentid" )' ),
 			'label' => 'Service attribute ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -34,7 +34,7 @@ class Standard
 		),
 		'order.base.service.attribute.siteid' => array(
 			'code' => 'order.base.service.attribute.siteid',
-			'internalcode' => 'mordbaseat."siteid"',
+			'internalcode' => 'mordseat."siteid"',
 			'label' => 'Service attribute site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'order.base.service.attribute.attributeid' => array(
 			'code' => 'order.base.service.attribute.attributeid',
-			'internalcode' => 'mordbaseat."attrid"',
+			'internalcode' => 'mordseat."attrid"',
 			'label' => 'Service attribute original ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.service.attribute.parentid' => array(
 			'code' => 'order.base.service.attribute.parentid',
-			'internalcode' => 'mordbaseat."parentid"',
+			'internalcode' => 'mordseat."parentid"',
 			'label' => 'Service ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -58,49 +58,49 @@ class Standard
 		),
 		'order.base.service.attribute.name' => array(
 			'code' => 'order.base.service.attribute.name',
-			'internalcode' => 'mordbaseat."name"',
+			'internalcode' => 'mordseat."name"',
 			'label' => 'Service attribute name',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.attribute.value' => array(
 			'code' => 'order.base.service.attribute.value',
-			'internalcode' => 'mordbaseat."value"',
+			'internalcode' => 'mordseat."value"',
 			'label' => 'Service attribute value',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.attribute.code' => array(
 			'code' => 'order.base.service.attribute.code',
-			'internalcode' => 'mordbaseat."code"',
+			'internalcode' => 'mordseat."code"',
 			'label' => 'Service attribute code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.attribute.type' => array(
 			'code' => 'order.base.service.attribute.type',
-			'internalcode' => 'mordbaseat."type"',
+			'internalcode' => 'mordseat."type"',
 			'label' => 'Service attribute type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.attribute.quantity' => array(
 			'code' => 'order.base.service.attribute.quantity',
-			'internalcode' => 'mordbaseat."quantity"',
+			'internalcode' => 'mordseat."quantity"',
 			'label' => 'Service attribute quantity',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.service.attribute.price' => array(
 			'code' => 'order.base.service.attribute.price',
-			'internalcode' => 'mordbaseat."price"',
+			'internalcode' => 'mordseat."price"',
 			'label' => 'Service attribute price',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.attribute.ctime' => array(
 			'code' => 'order.base.service.attribute.ctime',
-			'internalcode' => 'mordbaseat."ctime"',
+			'internalcode' => 'mordseat."ctime"',
 			'label' => 'Service attribute create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -108,7 +108,7 @@ class Standard
 		),
 		'order.base.service.attribute.mtime' => array(
 			'code' => 'order.base.service.attribute.mtime',
-			'internalcode' => 'mordbaseat."mtime"',
+			'internalcode' => 'mordseat."mtime"',
 			'label' => 'Service attribute modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -116,7 +116,7 @@ class Standard
 		),
 		'order.base.service.attribute.editor' => array(
 			'code' => 'order.base.service.attribute.editor',
-			'internalcode' => 'mordbaseat."editor"',
+			'internalcode' => 'mordseat."editor"',
 			'label' => 'Service attribute editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -793,7 +793,7 @@ class Standard
 
 					if( ( $row['order.base.service.attribute.value'] = json_decode( $config, true ) ) === null && $config !== 'null' )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_service_attribute.value', $id, $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_service_attribute.value', $id, $config );
 						$this->context()->logger()->warning( $msg, 'core/order' );
 					}
 

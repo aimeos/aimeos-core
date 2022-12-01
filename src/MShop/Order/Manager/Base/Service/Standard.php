@@ -25,8 +25,8 @@ class Standard
 	private $searchConfig = array(
 		'order.base.service.id' => array(
 			'code' => 'order.base.service.id',
-			'internalcode' => 'mordbase."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service" AS mordbase ON ( mordba."id" = mordbase."baseid" )' ),
+			'internalcode' => 'mordse."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_service" AS mordse ON ( mordba."id" = mordse."baseid" )' ),
 			'label' => 'Service ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -34,7 +34,7 @@ class Standard
 		),
 		'order.base.service.siteid' => array(
 			'code' => 'order.base.service.siteid',
-			'internalcode' => 'mordbase."siteid"',
+			'internalcode' => 'mordse."siteid"',
 			'label' => 'Service site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'order.base.service.baseid' => array(
 			'code' => 'order.base.service.baseid',
-			'internalcode' => 'mordbase."baseid"',
+			'internalcode' => 'mordse."baseid"',
 			'label' => 'Order ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.service.serviceid' => array(
 			'code' => 'order.base.service.serviceid',
-			'internalcode' => 'mordbase."servid"',
+			'internalcode' => 'mordse."servid"',
 			'label' => 'Service original service ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -58,77 +58,77 @@ class Standard
 		),
 		'order.base.service.name' => array(
 			'code' => 'order.base.service.name',
-			'internalcode' => 'mordbase."name"',
+			'internalcode' => 'mordse."name"',
 			'label' => 'Service name',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.code' => array(
 			'code' => 'order.base.service.code',
-			'internalcode' => 'mordbase."code"',
+			'internalcode' => 'mordse."code"',
 			'label' => 'Service code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.type' => array(
 			'code' => 'order.base.service.type',
-			'internalcode' => 'mordbase."type"',
+			'internalcode' => 'mordse."type"',
 			'label' => 'Service type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.currencyid' => array(
 			'code' => 'order.base.service.currencyid',
-			'internalcode' => 'mordbase."currencyid"',
+			'internalcode' => 'mordse."currencyid"',
 			'label' => 'Service currencyid code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
-			'internalcode' => 'mordbase."price"',
+			'internalcode' => 'mordse."price"',
 			'label' => 'Service price',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.costs' => array(
 			'code' => 'order.base.service.costs',
-			'internalcode' => 'mordbase."costs"',
+			'internalcode' => 'mordse."costs"',
 			'label' => 'Service shipping',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.rebate' => array(
 			'code' => 'order.base.service.rebate',
-			'internalcode' => 'mordbase."rebate"',
+			'internalcode' => 'mordse."rebate"',
 			'label' => 'Service rebate',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxrates' => array(
 			'code' => 'order.base.service.taxrates',
-			'internalcode' => 'mordbase."taxrate"',
+			'internalcode' => 'mordse."taxrate"',
 			'label' => 'Service taxrates',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxvalue' => array(
 			'code' => 'order.base.service.taxvalue',
-			'internalcode' => 'mordbase."tax"',
+			'internalcode' => 'mordse."tax"',
 			'label' => 'Service tax value',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxflag' => array(
 			'code' => 'order.base.service.taxflag',
-			'internalcode' => 'mordbase."taxflag"',
+			'internalcode' => 'mordse."taxflag"',
 			'label' => 'Service tax flag (0=net, 1=gross)',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.service.mediaurl' => array(
 			'code' => 'order.base.service.mediaurl',
-			'internalcode' => 'mordbase."mediaurl"',
+			'internalcode' => 'mordse."mediaurl"',
 			'label' => 'Service media url',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -136,7 +136,7 @@ class Standard
 		),
 		'order.base.service.position' => array(
 			'code' => 'order.base.service.position',
-			'internalcode' => 'mordbase."pos"',
+			'internalcode' => 'mordse."pos"',
 			'label' => 'Service position',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -144,7 +144,7 @@ class Standard
 		),
 		'order.base.service.ctime' => array(
 			'code' => 'order.base.service.ctime',
-			'internalcode' => 'mordbase."ctime"',
+			'internalcode' => 'mordse."ctime"',
 			'label' => 'Service create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -152,7 +152,7 @@ class Standard
 		),
 		'order.base.service.mtime' => array(
 			'code' => 'order.base.service.mtime',
-			'internalcode' => 'mordbase."mtime"',
+			'internalcode' => 'mordse."mtime"',
 			'label' => 'Service modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -160,7 +160,7 @@ class Standard
 		),
 		'order.base.service.editor' => array(
 			'code' => 'order.base.service.editor',
-			'internalcode' => 'mordbase."editor"',
+			'internalcode' => 'mordse."editor"',
 			'label' => 'Service editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -915,7 +915,7 @@ class Standard
 				{
 					if( ( $row['order.base.service.taxrates'] = json_decode( $config = $row['order.base.service.taxrates'], true ) ) === null )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_service.taxrates', $row['order.base.service.id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_service.taxrates', $row['order.base.service.id'], $config );
 						$this->context()->logger()->warning( $msg, 'core/order' );
 					}
 

@@ -25,8 +25,8 @@ class Standard
 	private $searchConfig = array(
 		'order.base.product.attribute.id' => array(
 			'code' => 'order.base.product.attribute.id',
-			'internalcode' => 'mordbaprat."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."parentid" )' ),
+			'internalcode' => 'mordprat."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_product_attr" AS mordprat ON ( mordpr."id" = mordprat."parentid" )' ),
 			'label' => 'Product attribute ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -34,7 +34,7 @@ class Standard
 		),
 		'order.base.product.attribute.siteid' => array(
 			'code' => 'order.base.product.attribute.siteid',
-			'internalcode' => 'mordbaprat."siteid"',
+			'internalcode' => 'mordprat."siteid"',
 			'label' => 'Product attribute site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'order.base.product.attribute.attributeid' => array(
 			'code' => 'order.base.product.attribute.attributeid',
-			'internalcode' => 'mordbaprat."attrid"',
+			'internalcode' => 'mordprat."attrid"',
 			'label' => 'Product attribute original ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.product.attribute.parentid' => array(
 			'code' => 'order.base.product.attribute.parentid',
-			'internalcode' => 'mordbaprat."parentid"',
+			'internalcode' => 'mordprat."parentid"',
 			'label' => 'Product ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -58,49 +58,49 @@ class Standard
 		),
 		'order.base.product.attribute.name' => array(
 			'code' => 'order.base.product.attribute.name',
-			'internalcode' => 'mordbaprat."name"',
+			'internalcode' => 'mordprat."name"',
 			'label' => 'Product attribute name',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.value' => array(
 			'code' => 'order.base.product.attribute.value',
-			'internalcode' => 'mordbaprat."value"',
+			'internalcode' => 'mordprat."value"',
 			'label' => 'Product attribute value',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.code' => array(
 			'code' => 'order.base.product.attribute.code',
-			'internalcode' => 'mordbaprat."code"',
+			'internalcode' => 'mordprat."code"',
 			'label' => 'Product attribute code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.type' => array(
 			'code' => 'order.base.product.attribute.type',
-			'internalcode' => 'mordbaprat."type"',
+			'internalcode' => 'mordprat."type"',
 			'label' => 'Product attribute type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.quantity' => array(
 			'code' => 'order.base.product.attribute.quantity',
-			'internalcode' => 'mordbaprat."quantity"',
+			'internalcode' => 'mordprat."quantity"',
 			'label' => 'Product attribute quantity',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.attribute.price' => array(
 			'code' => 'order.base.product.attribute.price',
-			'internalcode' => 'mordbaprat."price"',
+			'internalcode' => 'mordprat."price"',
 			'label' => 'Product attribute price',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.ctime' => array(
 			'code' => 'order.base.product.attribute.ctime',
-			'internalcode' => 'mordbaprat."ctime"',
+			'internalcode' => 'mordprat."ctime"',
 			'label' => 'Product attribute create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -108,7 +108,7 @@ class Standard
 		),
 		'order.base.product.attribute.mtime' => array(
 			'code' => 'order.base.product.attribute.mtime',
-			'internalcode' => 'mordbaprat."mtime"',
+			'internalcode' => 'mordprat."mtime"',
 			'label' => 'Product attribute modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -116,7 +116,7 @@ class Standard
 		),
 		'order.base.product.attribute.editor' => array(
 			'code' => 'order.base.product.attribute.editor',
-			'internalcode' => 'mordbaprat."editor"',
+			'internalcode' => 'mordprat."editor"',
 			'label' => 'Product attribute editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -793,7 +793,7 @@ class Standard
 
 					if( ( $row['order.base.product.attribute.value'] = json_decode( $config, true ) ) === null && $config !== 'null' )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product_attribute.value', $id, $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_product_attribute.value', $id, $config );
 						$this->context()->logger()->warning( $msg, 'core/order' );
 					}
 

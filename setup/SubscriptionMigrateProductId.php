@@ -25,7 +25,7 @@ class SubscriptionMigrateProductId extends Base
 			UPDATE mshop_subscription
 			SET productid = (
 				SELECT obp.prodid
-				FROM mshop_order_base_product AS obp
+				FROM mshop_order_product AS obp
 				WHERE mshop_subscription.ordprodid = obp.id
 			) WHERE productid = \'\'
 		' );
