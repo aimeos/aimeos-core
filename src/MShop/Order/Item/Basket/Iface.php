@@ -20,17 +20,17 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the basket object.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null $basket Basket object
+	 * @return \Aimeos\MShop\Order\Item\Iface|null $basket Basket object
 	 */
-	public function getItem() : ?\Aimeos\MShop\Order\Item\Base\Iface;
+	public function getItem() : ?\Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Sets the basket object.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setItem( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface;
+	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface;
 
 	/**
 	 * Returns the ID of the customer who owns the basket.

@@ -583,7 +583,7 @@ class Standard
 		{
 			$basket = unserialize( base64_decode( $row['order.basket.content'] ) );
 
-			if( !( $basket instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+			if( !( $basket instanceof \Aimeos\MShop\Order\Item\Iface ) )
 			{
 				$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $row['order.basket.content'] );
 				$context->logger()->warning( $msg, 'core/order' );
@@ -602,10 +602,10 @@ class Standard
 	 * Creates a new order basket object.
 	 *
 	 * @param array $values List of attributes for the order basket object
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface|null $basket Basket object
 	 * @return \Aimeos\MShop\Order\Item\Basket\Iface New order basket object
 	 */
-	protected function createItemBase( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $basket = null ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Order\Item\Iface $basket = null ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
 		return new \Aimeos\MShop\Order\Item\Basket\Standard( $values, $basket );
 	}

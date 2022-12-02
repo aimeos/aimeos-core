@@ -137,7 +137,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 
 	/**
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface
+	 * @return \Aimeos\MShop\Order\Item\Iface
 	 */
 	protected function getOrderBaseItem( $paydate )
 	{
@@ -151,7 +151,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order item found' );
 		}
 
-		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		return $baseManager->load( $item->getBaseId() );
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order' );
+		return $baseManager->load( $item->getId() );
 	}
 }

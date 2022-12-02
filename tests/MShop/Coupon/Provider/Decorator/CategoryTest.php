@@ -29,11 +29,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
-		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()->setQuantity( 2 );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create()->setQuantity( 2 );
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $this->context->locale() );
 		$this->orderBase->addProduct( $orderProduct );
 	}
 

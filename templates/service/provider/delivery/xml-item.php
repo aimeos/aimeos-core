@@ -7,14 +7,12 @@
 
 /* Available data:
  * - orderItems : List of order items
- * - baseItems : List of order base items
  */
 
 $enc = $this->encoder();
-$baseItems = $this->get( 'baseItems', [] );
 
 ?>
-<?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : $baseItem = $item->getBaseItem() ?>
+<?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : ?>
 
 	<orderitem ref="<?= $enc->attr( $id ) ?>">
 		<order.ordernumber><![CDATA[<?= $item->getOrderNumber() ?>]]></order.ordernumber>
@@ -23,12 +21,8 @@ $baseItems = $this->get( 'baseItems', [] );
 			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 		<?php endforeach ?>
 
-		<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
-			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-		<?php endforeach ?>
-
 		<address>
-			<?php foreach( $baseItem->getAddresses() as $type => $list ) : ?>
+			<?php foreach( $item->getAddresses() as $type => $list ) : ?>
 				<?php foreach( $list as $addressItem ) : ?>
 					<addressitem type="<?= $enc->attr( $addressItem->getType() ) ?>" position="<?= $enc->attr( $addressItem->getPosition() ) ?>">
 						<?php foreach( $addressItem->toArray() as $key => $value ) : ?>
@@ -40,7 +34,7 @@ $baseItems = $this->get( 'baseItems', [] );
 		</address>
 
 		<product>
-			<?php foreach( $baseItem->getProducts() as $productItem ) : ?>
+			<?php foreach( $item->getProducts() as $productItem ) : ?>
 				<productitem position="<?= $enc->attr( $productItem->getPosition() ) ?>">
 					<?php foreach( $productItem->toArray() as $key => $value ) : ?>
 						<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
@@ -79,7 +73,7 @@ $baseItems = $this->get( 'baseItems', [] );
 		</product>
 
 		<service>
-			<?php foreach( $baseItem->getServices() as $type => $list ) : ?>
+			<?php foreach( $item->getServices() as $type => $list ) : ?>
 				<?php foreach( $list as $serviceItem ) : ?>
 					<serviceitem type="<?= $enc->attr( $serviceItem->getType() ) ?>" position="<?= $enc->attr( $serviceItem->getPosition() ) ?>">
 						<?php foreach( $serviceItem->toArray() as $key => $value ) : ?>
@@ -100,7 +94,7 @@ $baseItems = $this->get( 'baseItems', [] );
 		</service>
 
 		<coupon>
-			<?php foreach( $baseItem->getCoupons() as $coupon => $list ) : ?>
+			<?php foreach( $item->getCoupons() as $coupon => $list ) : ?>
 				<couponitem>
 					<order.base.coupon.code><![CDATA[<?= $coupon ?>]]></order.base.coupon.code>
 				</couponitem>

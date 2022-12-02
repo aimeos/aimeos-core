@@ -45,11 +45,11 @@ abstract class Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @param array $options Selected options by customer from frontend
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->provider->calcPrice( $basket, $options );
 	}
@@ -97,10 +97,10 @@ abstract class Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		return $this->provider->getConfigFE( $basket );
 	}
@@ -133,10 +133,10 @@ abstract class Base
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		return $this->provider->isAvailable( $basket );
 	}
@@ -244,12 +244,12 @@ abstract class Base
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
-		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		return $this->provider->setConfigFE( $orderServiceItem, $attributes );
 	}

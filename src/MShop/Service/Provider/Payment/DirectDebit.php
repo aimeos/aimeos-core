@@ -66,16 +66,16 @@ class DirectDebit
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		$feconfig = $this->feConfig;
 
 		try
 		{
-			$address = $basket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, 0 );
+			$address = $basket->getAddress( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT, 0 );
 
 			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
 				$feconfig['directdebit.accountowner']['default'] = $fn . ' ' . $ln;
@@ -103,12 +103,12 @@ class DirectDebit
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
-		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		$orderServiceItem->addAttributeItems( $this->attributes( $attributes, 'payment' ) );
 

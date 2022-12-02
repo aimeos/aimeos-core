@@ -249,11 +249,11 @@ class Standard
 	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
 		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
+		$manager = \Aimeos\MShop::create( $context, 'order/coupon' );
 		$couponCodeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
 
 		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.coupon.baseid', $orderItem->getBaseId() ) );
+		$search->setConditions( $search->compare( '==', 'order.coupon.parentid', $orderItem->getId() ) );
 
 		$start = 0;
 
@@ -325,10 +325,10 @@ class Standard
 	{
 		$context = $this->context();
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
-		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.product.baseid', $orderItem->getBaseId() ) );
+		$search->setConditions( $search->compare( '==', 'order.product.parentid', $orderItem->getId() ) );
 
 		$start = 0;
 

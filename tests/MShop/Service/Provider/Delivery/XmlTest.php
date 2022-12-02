@@ -78,7 +78,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
 		$this->assertGreaterThan( 0, (string) $xml->orderitem[0]->{'order.ordernumber'} );
 		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
+		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.sitecode'} );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
@@ -100,7 +100,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $orders ) );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getStatusDelivery()->first() );
 		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
+		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.sitecode'} );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
@@ -116,8 +116,12 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->create();
+		$locale = \Aimeos\MShop::create( $this->context, 'locale' )->create();
+
 		$itemMock = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->setMethods( ['setStatusDelivery', 'setStatusPayment', 'setDateDelivery', 'setDatePayment'] )
+			->setConstructorArgs( [$price, $locale, []] )
 			->getMock();
 
 		$itemMock->expects( $this->once() )->method( 'setStatusDelivery' )->will( $this->returnSelf() );
@@ -146,7 +150,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->filter()->add( 'order.datepayment', '==', '2008-02-15 12:34:56' );
-		$ref = ['order/base', 'order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
 
 		return $manager->search( $search, $ref )
 			->first( new \RuntimeException( sprintf( 'No order item for payment date "%1$s" found', '2008-02-15 12:34:56' ) ) );

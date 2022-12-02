@@ -67,7 +67,7 @@ class Coupon
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$notAvailable = false;
 		$context = $this->context();

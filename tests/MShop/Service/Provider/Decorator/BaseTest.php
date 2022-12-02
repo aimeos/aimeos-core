@@ -48,7 +48,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPrice()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
 
@@ -82,7 +82,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
@@ -100,7 +100,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'order' )->getSubManager( 'base' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -177,8 +177,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->getSubManager( 'service' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order/service' )->create();
 
 		$this->mock->expects( $this->once() )->method( 'setConfigFE' );
 

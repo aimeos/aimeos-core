@@ -22,7 +22,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 	}
@@ -48,7 +48,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateOk()
 	{
-		$part = ['order/base/product'];
+		$part = ['order/product'];
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
 
@@ -59,7 +59,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+			$this->object->update( $this->order, 'check.after', ['order/product'] );
 			throw new \RuntimeException( 'Expected exception not thrown' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
@@ -76,7 +76,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+			$this->object->update( $this->order, 'check.after', ['order/product'] );
 			throw new \RuntimeException( 'Expected exception not thrown' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
@@ -89,7 +89,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockUnlimited()
 	{
-		$part = ['order/base/product'];
+		$part = ['order/product'];
 		$this->order->addProduct( $this->getOrderProduct( 'MNOP' )->setStockType( 'unitstock' ) );
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
@@ -100,13 +100,13 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	 * Returns an order product item
 	 *
 	 * @param string $code Unique product code
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
 	 */
 	protected function getOrderProduct( $code )
 	{
 		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->find( $code );
 
-		return \Aimeos\MShop::create( $this->context, 'order/base/product' )
+		return \Aimeos\MShop::create( $this->context, 'order/product' )
 			->create()->copyFrom( $productItem );
 	}
 }

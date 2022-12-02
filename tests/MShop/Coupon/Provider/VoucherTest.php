@@ -26,7 +26,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem->setConfig( array( 'voucher.productcode' => 'U:MD' ) );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $this->context->locale() );
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Voucher( $this->context, $this->couponItem, '90AB' );
 	}
@@ -42,7 +42,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->orderBase->addProduct( $this->getOrderProduct() );
 
-		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create();
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create();
 		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
 		$orderProduct->getPrice()->setValue( '100.00' );
 
@@ -87,20 +87,13 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFilterOrderBaseIds()
+	public function testFilterOrderIds()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$search = $manager->filter()->add( 'order.editor', '==', 'core' );
+		$list = $manager->search( $search )->getId()->sort()->all();
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core' ) );
-
-		$list = [];
-		foreach( $manager->search( $search )->toArray() as $item ) {
-			$list[] = $item->getBaseId();
-		}
-		sort( $list );
-
-		$actual = $this->access( 'filterOrderBaseIds' )->invokeArgs( $this->object, [$list + [-1]] );
+		$actual = $this->access( 'filterOrderIds' )->invokeArgs( $this->object, [$list + [-1]] );
 		sort( $actual );
 
 		$this->assertEquals( $list, $actual );
@@ -140,12 +133,12 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	protected function getOrderProduct()
 	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order/product' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->and( array(
-			$search->compare( '==', 'order.base.product.prodcode', 'CNE' ),
-			$search->compare( '==', 'order.base.product.price', '36.00' )
+			$search->compare( '==', 'order.product.prodcode', 'CNE' ),
+			$search->compare( '==', 'order.product.price', '36.00' )
 		) ) );
 		$items = $manager->search( $search )->toArray();
 

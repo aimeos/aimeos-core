@@ -64,7 +64,7 @@ class ServicesUpdate
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$services = $order->getServices();
 
@@ -121,7 +121,7 @@ class ServicesUpdate
 	/**
 	 * Returns the service items for the given order services
 	 *
-	 * @param \Aimeos\Map $services List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface with IDs as keys
+	 * @param \Aimeos\Map $services List of items implementing \Aimeos\MShop\Order\Item\Service\Iface with IDs as keys
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Service\Item\Iface with IDs as keys
 	 */
 	protected function getServiceItems( \Aimeos\Map $services ) : \Aimeos\Map

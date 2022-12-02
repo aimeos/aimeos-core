@@ -60,7 +60,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create();
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $order ) );
 	}
 
@@ -88,21 +88,21 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		}
 		$price = $price->setValue( 10.00 );
 
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
 		$product = $orderBaseProductManager->create()->copyFrom( $products['CNE'] )->setPrice( $price );
 		$product2 = $orderBaseProductManager->create()->copyFrom( $products['CNC'] )->setPrice( $price );
 		$product3 = $orderBaseProductManager->create()->copyFrom( $products['IJKL'] )->setPrice( $price );
 
-		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/service' );
 		$serviceSearch = $orderBaseServiceManager->filter();
 		$exp = array(
-			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
-			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
+			$serviceSearch->compare( '==', 'order.service.type', 'delivery' ),
+			$serviceSearch->compare( '==', 'order.service.costs', '5.00' )
 		);
 		$serviceSearch->setConditions( $serviceSearch->and( $exp ) );
 		$delivery = $orderBaseServiceManager->search( $serviceSearch )->first();
 
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off(); // remove event listeners
 
 		$order = $order->addService( $delivery, 'delivery' )
 			->addProduct( $product )->addProduct( $product2 )->addProduct( $product3 );

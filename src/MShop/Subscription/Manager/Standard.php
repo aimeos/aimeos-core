@@ -137,30 +137,30 @@ class Standard
 	private $searchConfig = array(
 		'subscription.id' => array(
 			'code' => 'subscription.id',
-			'internalcode' => 'mord."id"',
+			'internalcode' => 'msub."id"',
 			'label' => 'Subscription ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.siteid' => array(
 			'code' => 'subscription.siteid',
-			'internalcode' => 'mord."siteid"',
+			'internalcode' => 'msub."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'subscription.ordbaseid' => array(
-			'code' => 'subscription.ordbaseid',
-			'internalcode' => 'mord."baseid"',
-			'label' => 'Order base ID',
+		'subscription.orderid' => array(
+			'code' => 'subscription.orderid',
+			'internalcode' => 'msub."orderid"',
+			'label' => 'Order ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'subscription.ordprodid' => array(
 			'code' => 'subscription.ordprodid',
-			'internalcode' => 'mord."ordprodid"',
+			'internalcode' => 'msub."ordprodid"',
 			'label' => 'Order product ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
@@ -168,56 +168,56 @@ class Standard
 		),
 		'subscription.datenext' => array(
 			'code' => 'subscription.datenext',
-			'internalcode' => 'mord."next"',
+			'internalcode' => 'msub."next"',
 			'label' => 'Next renewal date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.dateend' => array(
 			'code' => 'subscription.dateend',
-			'internalcode' => 'mord."end"',
+			'internalcode' => 'msub."end"',
 			'label' => 'End of subscription',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.interval' => array(
 			'code' => 'subscription.interval',
-			'internalcode' => 'mord."interval"',
+			'internalcode' => 'msub."interval"',
 			'label' => 'Renewal interval',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.reason' => array(
 			'code' => 'subscription.reason',
-			'internalcode' => 'mord."reason"',
+			'internalcode' => 'msub."reason"',
 			'label' => 'Subscription end reason',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.period' => array(
 			'code' => 'subscription.period',
-			'internalcode' => 'mord."period"',
+			'internalcode' => 'msub."period"',
 			'label' => 'Subscription period count',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.productid' => array(
 			'code' => 'subscription.productid',
-			'internalcode' => 'mord."productid"',
+			'internalcode' => 'msub."productid"',
 			'label' => 'Subscription product ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
-			'internalcode' => 'mord."status"',
+			'internalcode' => 'msub."status"',
 			'label' => 'Subscription status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.ctime' => array(
 			'code' => 'subscription.ctime',
-			'internalcode' => 'mord."ctime"',
+			'internalcode' => 'msub."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -225,7 +225,7 @@ class Standard
 		),
 		'subscription.mtime' => array(
 			'code' => 'subscription.mtime',
-			'internalcode' => 'mord."mtime"',
+			'internalcode' => 'msub."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -233,7 +233,7 @@ class Standard
 		),
 		'subscription.editor' => array(
 			'code' => 'subscription.editor',
-			'internalcode' => 'mord."editor"',
+			'internalcode' => 'msub."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
@@ -364,7 +364,7 @@ class Standard
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$search->add( $this->siteCondition( 'order.base.product.siteid', $level ) );
+			$search->add( $this->siteCondition( 'order.product.siteid', $level ) );
 		}
 
 		return $search;
@@ -384,7 +384,11 @@ class Standard
 			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
 		}
 
-		if( !$item->isModified() && ( !$item->getBaseItem() || !$item->getBaseItem()->isModified() ) ) {
+		if( $orderItem = $item->getOrderItem() ) {
+			\Aimeos\MShop::create( $this->context(), 'order' )->save( $orderItem );
+		}
+
+		if( !$item->isModified() ) {
 			return $item;
 		}
 
@@ -480,7 +484,7 @@ class Standard
 			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 		}
 
-		$stmt->bind( $idx++, $item->getOrderBaseId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getOrderId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getDateNext() );
 		$stmt->bind( $idx++, $item->getDateEnd() );
@@ -544,13 +548,7 @@ class Standard
 			$id = $this->newId( $conn, $path );
 		}
 
-		$item->setId( $id );
-
-		if( $baseItem = $item->getBaseItem() ) {
-			$this->object()->getSubManager( 'base' )->save( $baseItem );
-		}
-
-		return $item;
+		return $item->setId( $id );
 	}
 
 
@@ -653,7 +651,7 @@ class Standard
 		 */
 		$path = 'mshop/subscription/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['base'], $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address', 'coupon', 'product', 'service'], $withsub );
 	}
 
 
@@ -669,188 +667,187 @@ class Standard
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
-		$map = $items = $baseItems = [];
+		$map = $items = $orderItems = [];
 
-			$required = array( 'subscription', 'order.base' );
+		$required = array( 'subscription', 'order' );
 
-			/** mshop/subscription/manager/sitemode
-			 * Mode how items from levels below or above in the site tree are handled
-			 *
-			 * By default, only items from the current site are fetched from the
-			 * storage. If the ai-sites extension is installed, you can create a
-			 * tree of sites. Then, this setting allows you to define for the
-			 * whole subscription domain if items from parent sites are inherited,
-			 * sites from child sites are aggregated or both.
-			 *
-			 * Available constants for the site mode are:
-			 * * 0 = only items from the current site
-			 * * 1 = inherit items from parent sites
-			 * * 2 = aggregate items from child sites
-			 * * 3 = inherit and aggregate items at the same time
-			 *
-			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/sitelevel) to one of the constants.
-			 * If you set it to the same value, it will work as described but you
-			 * can also use different modes. For example, if inheritance and
-			 * aggregation is configured the locale manager but only inheritance
-			 * in the domain manager because aggregating items makes no sense in
-			 * this domain, then items wil be only inherited. Thus, you have full
-			 * control over inheritance and aggregation in each domain.
-			 *
-			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-			 * @category Developer
-			 * @since 2018.04
-			 * @see mshop/locale/manager/sitelevel
-			 */
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$level = $context->config()->get( 'mshop/subscription/manager/sitemode', $level );
+		/** mshop/subscription/manager/sitemode
+		 * Mode how items from levels below or above in the site tree are handled
+		 *
+		 * By default, only items from the current site are fetched from the
+		 * storage. If the ai-sites extension is installed, you can create a
+		 * tree of sites. Then, this setting allows you to define for the
+		 * whole subscription domain if items from parent sites are inherited,
+		 * sites from child sites are aggregated or both.
+		 *
+		 * Available constants for the site mode are:
+		 * * 0 = only items from the current site
+		 * * 1 = inherit items from parent sites
+		 * * 2 = aggregate items from child sites
+		 * * 3 = inherit and aggregate items at the same time
+		 *
+		 * You also need to set the mode in the locale manager
+		 * (mshop/locale/manager/sitelevel) to one of the constants.
+		 * If you set it to the same value, it will work as described but you
+		 * can also use different modes. For example, if inheritance and
+		 * aggregation is configured the locale manager but only inheritance
+		 * in the domain manager because aggregating items makes no sense in
+		 * this domain, then items wil be only inherited. Thus, you have full
+		 * control over inheritance and aggregation in each domain.
+		 *
+		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @category Developer
+		 * @since 2018.04
+		 * @see mshop/locale/manager/sitelevel
+		 */
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+		$level = $context->config()->get( 'mshop/subscription/manager/sitemode', $level );
 
-			/** mshop/subscription/manager/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/subscription/manager/search/ansi
-			 */
+		/** mshop/subscription/manager/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/subscription/manager/search/ansi
+		 */
 
-			/** mshop/subscription/manager/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the subscription
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be subscriptioned by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":subscription" placeholder. In case no subscriptioning is required,
-			 * the complete ORDER BY part including the "\/*-subscriptionby*\/...\/*subscriptionby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for subscriptioning the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2018.04
-			 * @category Developer
-			 * @see mshop/subscription/manager/insert/ansi
-			 * @see mshop/subscription/manager/update/ansi
-			 * @see mshop/subscription/manager/newid/ansi
-			 * @see mshop/subscription/manager/delete/ansi
-			 * @see mshop/subscription/manager/count/ansi
-			 */
-			$cfgPathSearch = 'mshop/subscription/manager/search';
+		/** mshop/subscription/manager/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the subscription
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be subscriptioned by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":subscription" placeholder. In case no subscriptioning is required,
+		 * the complete ORDER BY part including the "\/*-subscriptionby*\/...\/*subscriptionby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for subscriptioning the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2018.04
+		 * @category Developer
+		 * @see mshop/subscription/manager/insert/ansi
+		 * @see mshop/subscription/manager/update/ansi
+		 * @see mshop/subscription/manager/newid/ansi
+		 * @see mshop/subscription/manager/delete/ansi
+		 * @see mshop/subscription/manager/count/ansi
+		 */
+		$cfgPathSearch = 'mshop/subscription/manager/search';
 
-			/** mshop/subscription/manager/count/mysql
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * @see mshop/subscription/manager/count/ansi
-			 */
+		/** mshop/subscription/manager/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/subscription/manager/count/ansi
+		 */
 
-			/** mshop/subscription/manager/count/ansi
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * Counts all records matched by the given criteria from the subscription
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the statement can count all records from the
-			 * current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Both, the strings for ":joins" and for ":cond" are the same as for
-			 * the "search" SQL statement.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for counting items
-			 * @since 2018.04
-			 * @category Developer
-			 * @see mshop/subscription/manager/insert/ansi
-			 * @see mshop/subscription/manager/update/ansi
-			 * @see mshop/subscription/manager/newid/ansi
-			 * @see mshop/subscription/manager/delete/ansi
-			 * @see mshop/subscription/manager/search/ansi
-			 */
-			$cfgPathCount = 'mshop/subscription/manager/count';
+		/** mshop/subscription/manager/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the subscription
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2018.04
+		 * @category Developer
+		 * @see mshop/subscription/manager/insert/ansi
+		 * @see mshop/subscription/manager/update/ansi
+		 * @see mshop/subscription/manager/newid/ansi
+		 * @see mshop/subscription/manager/delete/ansi
+		 * @see mshop/subscription/manager/search/ansi
+		 */
+		$cfgPathCount = 'mshop/subscription/manager/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$required, $total, $level );
 
-			try
-			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$map[$row['subscription.id']] = $row;
-				}
+		try
+		{
+			while( ( $row = $results->fetch() ) !== null ) {
+				$map[$row['subscription.id']] = $row;
 			}
-			catch( \Exception $e )
-			{
-				$results->finish();
-				throw $e;
-			}
+		}
+		catch( \Exception $e )
+		{
+			$results->finish();
+			throw $e;
+		}
 
 
-		if( in_array( 'order/base', $ref ) )
+		if( in_array( 'order', $ref ) )
 		{
 			$ids = [];
 			foreach( $map as $row ) {
-				$ids[] = $row['subscription.ordbaseid'];
+				$ids[] = $row['subscription.orderid'];
 			}
 
-			$manager = $this->object()->getSubManager( 'base' );
-			$search = $manager->filter()->slice( 0, count( $ids ) );
-			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
-			$baseItems = $manager->search( $search, $ref );
+			$manager = \Aimeos\MShop::create( $this->context(), 'order' );
+			$search = $manager->filter()->add( 'order.id', '==', $ids )->slice( 0, count( $ids ) );
+			$orderItems = $manager->search( $search, $ref );
 		}
 
 		foreach( $map as $id => $row )
 		{
-			$baseItem = $baseItems[$row['subscription.ordbaseid']] ?? null;
+			$orderItem = $orderItems[$row['subscription.orderid']] ?? null;
 
-			if( $item = $this->applyFilter( $this->createItemBase( $row, $baseItem ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( $row, $orderItem ) ) ) {
 				$items[$id] = $item;
 			}
 		}
@@ -876,11 +873,11 @@ class Standard
 	 * Creates a new subscription item.
 	 *
 	 * @param array $values List of attributes for subscription item
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if requested and available
+	 * @param \Aimeos\MShop\Order\Item\Iface|null $order Order basket if requested and available
 	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item
 	 */
-	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null ) : \Aimeos\MShop\Subscription\Item\Iface
+	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $order = null ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return new \Aimeos\MShop\Subscription\Item\Standard( $values, $baseItem );
+		return new \Aimeos\MShop\Subscription\Item\Standard( $values, $order );
 	}
 }

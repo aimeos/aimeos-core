@@ -28,8 +28,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Category::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->create();
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Category( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -202,7 +201,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->find( $code );
 
-		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
 		$orderProduct = $orderProductManager->create()->copyFrom( $product )->setStockType( 'default' );
 
 		return $orderProduct;

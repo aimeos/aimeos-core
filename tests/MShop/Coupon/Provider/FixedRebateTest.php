@@ -25,7 +25,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$couponItem->setConfig( array( 'fixedrebate.productcode' => 'U:MD', 'fixedrebate.rebate' => ['EUR' => '2.50'] ) );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 	}
 
@@ -198,12 +198,12 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProducts()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/base/product' );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/product' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->and( array(
-			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
-			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
+			$search->compare( '==', 'order.product.prodcode', array( 'CNE', 'CNC' ) ),
+			$search->compare( '==', 'order.product.price', array( '600.00', '36.00' ) )
 		) ) );
 		$items = $manager->search( $search )->toArray();
 

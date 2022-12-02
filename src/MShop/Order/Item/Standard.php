@@ -25,19 +25,62 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Base
 	implements \Aimeos\MShop\Order\Item\Iface
 {
-	private $baseItem;
+	// protected is a workaround for serialize problem
+	protected $price;
+	protected $locale;
+	protected $customer;
+	protected $recalc = false;
 
 
 	/**
-	 * Initializes the object with the given values.
+	 * Initializes the shopping basket.
 	 *
-	 * @param array $values Associative list of values from database
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if available
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
+	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of ordered product items
+	 * @param \Aimeos\MShop\Order\Item\Address\Iface[] $addresses List of order address items
+	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $services List of order service items
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $coupons Associative list of coupon codes as keys and order product items as values
+	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object
 	 */
-	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
+		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
+		?\Aimeos\MShop\Customer\Item\Iface $custItem = null )
 	{
-		parent::__construct( 'order.', $values );
-		$this->baseItem = $baseItem;
+		parent::__construct( $price, $locale, $values, $products, $addresses, $services, $coupons );
+
+		$this->price = $price;
+		$this->locale = $locale;
+		$this->customer = $custItem;
+	}
+
+
+	/**
+	 * Clones internal objects of the order base item.
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+
+		$this->price = clone $this->price;
+		$this->locale = clone $this->locale;
+	}
+
+
+	/**
+	 * Specifies the data which should be serialized to JSON by json_encode().
+	 *
+	 * @return array<string,mixed> Data to serialize to JSON
+	 */
+	#[\ReturnTypeWillChange]
+	public function jsonSerialize()
+	{
+		return parent::jsonSerialize() + [
+			'price' => $this->price,
+			'locale' => $this->locale,
+			'customer' => $this->customer,
+		];
 	}
 
 
@@ -55,51 +98,6 @@ class Standard
 		return (string) $this->getId();
 	}
 
-
-	/**
-	 * Returns the associated order base item
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
-	 */
-	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface
-	{
-		return $this->baseItem;
-	}
-
-
-	/**
-	 * Sets the associated order base item
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item
-	 */
-	public function setBaseItem( \Aimeos\MShop\Order\Item\Base\Iface $baseItem ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$this->baseItem = $baseItem;
-		return $this;
-	}
-
-
-	/**
-	 * Returns the basic order ID.
-	 *
-	 * @return string|null Basic order ID
-	 */
-	public function getBaseId() : ?string
-	{
-		return $this->get( 'order.baseid' );
-	}
-
-
-	/**
-	 * Sets the ID of the basic order item which contains the order details.
-	 *
-	 * @param string $id ID of the basic order item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
-	 */
-	public function setBaseId( string $id ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		return $this->set( 'order.baseid', $id );
-	}
 
 	/**
 	 * Returns the number of the invoice.
@@ -271,6 +269,178 @@ class Standard
 	}
 
 
+	/**
+	 * Returns the associated customer item
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item
+	 */
+	public function getCustomerItem() : ?\Aimeos\MShop\Customer\Item\Iface
+	{
+		return $this->customer;
+	}
+
+
+	/**
+	 * Returns the code of the site the item is stored.
+	 *
+	 * @return string Site code (or empty string if not available)
+	 */
+	public function getSiteCode() : string
+	{
+		return $this->get( 'order.sitecode', '' );
+	}
+
+
+	/**
+	 * Returns the comment field of the order item.
+	 *
+	 * @return string Comment for the order
+	 */
+	public function getComment() : string
+	{
+		return $this->get( 'order.comment', '' );
+	}
+
+
+	/**
+	 * Sets the comment field of the order item
+	 *
+	 * @param string $comment Comment for the order
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 */
+	public function setComment( ?string $comment ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		return $this->set( 'order.comment', (string) $comment );
+	}
+
+
+	/**
+	 * Returns the customer ID of the customer who has ordered.
+	 *
+	 * @return string Unique ID of the customer
+	 */
+	public function getCustomerId() : string
+	{
+		return $this->get( 'order.customerid', '' );
+	}
+
+
+	/**
+	 * Sets the customer ID of the customer who has ordered.
+	 *
+	 * @param string $customerid Unique ID of the customer
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 */
+	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		if( (string) $customerid !== $this->getCustomerId() )
+		{
+			$this->notify( 'setCustomerId.before', (string) $customerid );
+			$this->set( 'order.customerid', (string) $customerid );
+			$this->notify( 'setCustomerId.after', (string) $customerid );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the customer reference field of the order item
+	 *
+	 * @return string Customer reference for the order
+	 */
+	public function getCustomerReference() : string
+	{
+		return $this->get( 'order.customerref', '' );
+	}
+
+
+	/**
+	 * Sets the customer reference field of the order item
+	 *
+	 * @param string $value Customer reference for the order
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 */
+	public function setCustomerReference( ?string $value ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		return $this->set( 'order.customerref', (string) $value );
+	}
+
+
+	/**
+	 * Returns the locales for the basic order item.
+	 *
+	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
+	 *  about site, language, country and currency
+	 */
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface
+	{
+		return $this->locale;
+	}
+
+
+	/**
+	 * Sets the locales for the basic order item.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information
+	 *  about site, language, country and currency
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 */
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		$this->notify( 'setLocale.before', $locale );
+
+		$this->locale = clone $locale;
+		$this->setModified();
+
+		$this->notify( 'setLocale.after', $locale );
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns a price item with amounts calculated for the products, costs, etc.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate the customer has to pay
+	 */
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
+	{
+		if( $this->recalc )
+		{
+			$price = $this->price->clear();
+
+			foreach( $this->getServices() as $list )
+			{
+				foreach( $list as $service ) {
+					$price = $price->addItem( $service->getPrice() );
+				}
+			}
+
+			foreach( $this->getProducts() as $product ) {
+				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+			}
+
+			$this->price = $price;
+			$this->recalc = false;
+		}
+
+		return $this->price;
+	}
+
+
+	/**
+	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Order base item for method chaining
+	 */
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface
+	{
+		$this->recalc = true;
+		return parent::setModified();
+	}
+
+
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
@@ -281,26 +451,30 @@ class Standard
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
+		$locale = $item->locale();
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
 				case 'order.channel': $item = $item->setChannel( $value ); break;
-				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.invoiceno': !$private ?: $item = $item->setInvoiceNumber( $value ); break;
 				case 'order.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
 				case 'order.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
 				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
+				case 'order.customerid': $item = $item->setCustomerId( $value ); break;
+				case 'order.languageid': $locale = $locale->setLanguageId( $value ); break;
+				case 'order.customerref': $item = $item->setCustomerReference( $value ); break;
+				case 'order.comment': $item = $item->setComment( $value ); break;
 				default: continue 2;
 			}
 
 			unset( $list[$key] );
 		}
 
-		return $item;
+		return $item->setLocale( $locale );
 	}
 
 
@@ -312,6 +486,9 @@ class Standard
 	 */
 	public function toArray( bool $private = false ) : array
 	{
+		$price = $this->getPrice();
+		$locale = $this->locale();
+
 		$list = parent::toArray( $private );
 
 		$list['order.channel'] = $this->getChannel();
@@ -321,10 +498,17 @@ class Standard
 		$list['order.datedelivery'] = $this->getDateDelivery();
 		$list['order.datepayment'] = $this->getDatePayment();
 		$list['order.relatedid'] = $this->getRelatedId();
-
-		if( $private === true ) {
-			$list['order.baseid'] = $this->getBaseId();
-		}
+		$list['order.sitecode'] = $this->getSiteCode();
+		$list['order.customerid'] = $this->getCustomerId();
+		$list['order.languageid'] = $locale->getLanguageId();
+		$list['order.currencyid'] = $price->getCurrencyId();
+		$list['order.price'] = $price->getValue();
+		$list['order.costs'] = $price->getCosts();
+		$list['order.rebate'] = $price->getRebate();
+		$list['order.taxflag'] = $price->getTaxFlag();
+		$list['order.taxvalue'] = $price->getTaxValue();
+		$list['order.customerref'] = $this->getCustomerReference();
+		$list['order.comment'] = $this->getComment();
 
 		return $list;
 	}

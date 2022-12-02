@@ -13,7 +13,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 {
 	private $provider;
 	private $object;
-	private $orderBase;
+	private $order;
 
 
 	protected function setUp() : void
@@ -21,8 +21,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::context();
 		$item = \Aimeos\MShop::create( $context, 'coupon' )->create();
 
-		$this->orderBase = \Aimeos\MShop::create( $context, 'order' )
-			->getSubmanager( 'base' )->create()->off();
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
 
 		$this->provider = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\None::class )
 			->setConstructorArgs( [$context, $item, 'abcd'] )
@@ -35,20 +34,20 @@ class NotTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->provider, $this->orderBase );
+		unset( $this->object, $this->provider, $this->order );
 	}
 
 
 	public function testIsAvailableFalse()
 	{
 		$this->provider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
-		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertFalse( $this->object->isAvailable( $this->order ) );
 	}
 
 
 	public function testIsAvailableTrue()
 	{
 		$this->provider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( false ) );
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 }

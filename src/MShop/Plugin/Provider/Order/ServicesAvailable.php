@@ -109,11 +109,11 @@ class ServicesAvailable
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( !in_array( 'order/base/service', (array) $value ) ) {
+		if( !in_array( 'order/service', (array) $value ) ) {
 			return $value;
 		}
 
-		map( $order ) ->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( $order ) ->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$problems = [];
 		$services = $order->getServices();

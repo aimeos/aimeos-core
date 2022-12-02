@@ -99,11 +99,11 @@ class FreeProduct
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
-		map( [$value] )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
+		map( [$value] )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		$code = $this->getConfigValue( 'productcode' );
-		$addresses = $order->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$addresses = $order->getAddress( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
 
 		if( $value->getProductCode() !== $code || ( $address = current( $addresses ) ) === false ) {
 			return $value;
@@ -117,13 +117,13 @@ class FreeProduct
 
 		$search = $manager->filter();
 		$expr = [
-			$search->compare( '==', 'order.base.address.email', $email ),
-			$search->compare( '==', 'order.base.product.prodcode', $code ),
+			$search->compare( '==', 'order.address.email', $email ),
+			$search->compare( '==', 'order.product.prodcode', $code ),
 			$search->compare( '>=', 'order.statuspayment', $status ),
 		];
 		$search->setConditions( $search->and( $expr ) );
 
-		$result = $manager->aggregate( $search, 'order.base.address.email', 'order.base.product.quantity', 'sum' );
+		$result = $manager->aggregate( $search, 'order.address.email', 'order.product.quantity', 'sum' );
 
 		if( isset( $result[$email] ) && $result[$email] < $count ) {
 			$value->setPrice( $value->getPrice()->setRebate( $value->getPrice()->getValue() )->setValue( '0.00' ) );

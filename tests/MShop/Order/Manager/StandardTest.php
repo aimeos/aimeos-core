@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAvg()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( '784.75', round( $result->first(), 2 ) );
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$cols = ['order.cmonth', 'order.statuspayment'];
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
-		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'avg' );
+		$result = $this->object->aggregate( $search, $cols, 'order.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 5, $result->first() );
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateSum()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( '3139.00', $result->first() );
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$cols = ['order.cmonth', 'order.statuspayment'];
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
-		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'sum' );
+		$result = $this->object->aggregate( $search, $cols, 'order.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 5, $result->first() );
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAddress()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
-		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
+		$result = $this->object->aggregate( $search, 'order.address.countryid' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'DE', $result );
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddressMultiple()
 	{
-		$cols = ['order.base.address.countryid', 'order.statuspayment'];
+		$cols = ['order.address.countryid', 'order.statuspayment'];
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols )->toArray();
 
@@ -161,13 +161,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertContains( 'order', $result );
 		$this->assertContains( 'order/status', $result );
-		$this->assertContains( 'order/base', $result );
-		$this->assertContains( 'order/base/address', $result );
-		$this->assertContains( 'order/base/coupon', $result );
-		$this->assertContains( 'order/base/product', $result );
-		$this->assertContains( 'order/base/product/attribute', $result );
-		$this->assertContains( 'order/base/service', $result );
-		$this->assertContains( 'order/base/service/attribute', $result );
+		$this->assertContains( 'order/address', $result );
+		$this->assertContains( 'order/coupon', $result );
+		$this->assertContains( 'order/product', $result );
+		$this->assertContains( 'order/product/attribute', $result );
+		$this->assertContains( 'order/service', $result );
+		$this->assertContains( 'order/service/attribute', $result );
 	}
 
 
@@ -179,33 +178,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$status = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+		$search = $this->object->filter()->slice( 0, 1 )
+			->add( ['order.price' => '672.00', 'order.editor' => $this->editor] );
 
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'order.statuspayment', $status ),
-			$search->compare( '==', 'order.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
-		}
+		$actual = $this->object->get( $item->getId() );
 
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $actual );
+		$this->assertEquals( '32.00', $item->getPrice()->getCosts() );
+		$this->assertEquals( '5.00', $item->getPrice()->getRebate() );
+		$this->assertEquals( '112.4034', $item->getPrice()->getTaxValue() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'order.channel', 'phone' ),
-			$search->compare( '==', 'order.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->slice( 0, 1 )
+			->add( ['order.channel' => 'phone', 'order.editor' => $this->editor] );
+
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order item found' ) );
 
 		$item->setId( null );
@@ -220,10 +211,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->delete( $itemSaved->getId() );
 
 
+		$itemPrice = $item->getPrice();
+		$itemSavedPrice = $itemSaved->getPrice();
+
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
 		$this->assertEquals( $item->getChannel(), $itemSaved->getChannel() );
 		$this->assertEquals( $item->getDatePayment(), $itemSaved->getDatePayment() );
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
@@ -231,14 +224,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatusDelivery(), $itemSaved->getStatusDelivery() );
 		$this->assertEquals( $item->getInvoiceNumber(), $itemSaved->getInvoiceNumber() );
 		$this->assertEquals( $item->getRelatedId(), $itemSaved->getRelatedId() );
+		$this->assertEquals( $item->getCustomerId(), $itemSaved->getCustomerId() );
+		$this->assertEquals( $item->locale()->getLanguageId(), $itemSaved->locale()->getLanguageId() );
+		$this->assertEquals( $item->getCustomerReference(), $itemSaved->getCustomerReference() );
+		$this->assertEquals( $item->getComment(), $itemSaved->getComment() );
+		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
+		$this->assertEquals( $itemPrice->getValue(), $itemSavedPrice->getValue() );
+		$this->assertEquals( $itemPrice->getCosts(), $itemSavedPrice->getCosts() );
+		$this->assertEquals( $itemPrice->getRebate(), $itemSavedPrice->getRebate() );
+		$this->assertEquals( $itemPrice->getTaxValue(), $itemSavedPrice->getTaxValue() );
+		$this->assertEquals( $itemPrice->getCurrencyId(), $itemSavedPrice->getCurrencyId() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
+		$itemExpPrice = $itemExp->getPrice();
+		$itemUpdPrice = $itemUpd->getPrice();
+
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
 		$this->assertEquals( $itemExp->getChannel(), $itemUpd->getChannel() );
 		$this->assertEquals( $itemExp->getDatePayment(), $itemUpd->getDatePayment() );
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
@@ -246,6 +251,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatusDelivery(), $itemUpd->getStatusDelivery() );
 		$this->assertEquals( $itemExp->getInvoiceNumber(), $itemUpd->getInvoiceNumber() );
 		$this->assertEquals( $itemExp->getRelatedId(), $itemUpd->getRelatedId() );
+		$this->assertEquals( $itemExp->getCustomerId(), $itemUpd->getCustomerId() );
+		$this->assertEquals( $itemExp->locale()->getLanguageId(), $itemUpd->locale()->getLanguageId() );
+		$this->assertEquals( $itemExp->getCustomerReference(), $itemUpd->getCustomerReference() );
+		$this->assertEquals( $itemExp->getComment(), $itemUpd->getComment() );
+		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
+		$this->assertEquals( $itemExpPrice->getValue(), $itemUpdPrice->getValue() );
+		$this->assertEquals( $itemExpPrice->getCosts(), $itemUpdPrice->getCosts() );
+		$this->assertEquals( $itemExpPrice->getRebate(), $itemUpdPrice->getRebate() );
+		$this->assertEquals( $itemExpPrice->getTaxValue(), $itemUpdPrice->getTaxValue() );
+		$this->assertEquals( $itemExpPrice->getCurrencyId(), $itemUpdPrice->getCurrencyId() );
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -365,8 +380,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearchDefault()
 	{
-		$result = $this->object->filter( true );
-		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
+		$search = $this->object->filter( true );
+
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $search );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $search->getConditions() );
+
+		$list = $search->getConditions()->getExpressions();
+		$this->assertArrayHasKey( 0, $list );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $list[0] );
 	}
 
 
@@ -388,7 +409,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.baseid', null );
 		$expr[] = $search->compare( '==', 'order.channel', 'web' );
 		$expr[] = $search->compare( '==', 'order.invoiceno', 'UINV-001' );
 		$expr[] = $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' );
@@ -396,6 +416,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$expr[] = $search->compare( '==', 'order.statusdelivery', 4 );
 		$expr[] = $search->compare( '==', 'order.relatedid', '' );
+		$expr[] = $search->compare( '==', 'order.sitecode', 'unittest' );
+		$expr[] = $search->compare( '>=', 'order.customerid', '' );
+		$expr[] = $search->compare( '==', 'order.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'order.currencyid', 'EUR' );
+		$expr[] = $search->compare( '==', 'order.price', '53.50' );
+		$expr[] = $search->compare( '==', 'order.costs', '1.50' );
+		$expr[] = $search->compare( '==', 'order.rebate', '14.50' );
+		$expr[] = $search->compare( '~=', 'order.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.editor', $this->editor );
@@ -410,110 +438,96 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.status.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.status.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.id', null );
-		$expr[] = $search->compare( '==', 'order.base.siteid', $siteid );
-		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
-		$expr[] = $search->compare( '>=', 'order.base.customerid', '' );
-		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
-		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
-		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
-		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
-		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
-		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.address.id', null );
+		$expr[] = $search->compare( '==', 'order.address.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.address.parentid', null );
+		$expr[] = $search->compare( '==', 'order.address.type', 'payment' );
+		$expr[] = $search->compare( '==', 'order.address.company', 'Example company' );
+		$expr[] = $search->compare( '==', 'order.address.vatid', 'DE999999999' );
+		$expr[] = $search->compare( '==', 'order.address.salutation', 'mr' );
+		$expr[] = $search->compare( '==', 'order.address.title', '' );
+		$expr[] = $search->compare( '==', 'order.address.firstname', 'Our' );
+		$expr[] = $search->compare( '==', 'order.address.lastname', 'Unittest' );
+		$expr[] = $search->compare( '==', 'order.address.address1', 'Durchschnitt' );
+		$expr[] = $search->compare( '==', 'order.address.address2', '1' );
+		$expr[] = $search->compare( '==', 'order.address.address3', '' );
+		$expr[] = $search->compare( '==', 'order.address.postal', '20146' );
+		$expr[] = $search->compare( '==', 'order.address.city', 'Hamburg' );
+		$expr[] = $search->compare( '==', 'order.address.state', 'Hamburg' );
+		$expr[] = $search->compare( '==', 'order.address.countryid', 'DE' );
+		$expr[] = $search->compare( '==', 'order.address.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'order.address.telephone', '055544332211' );
+		$expr[] = $search->compare( '==', 'order.address.email', 'test@example.com' );
+		$expr[] = $search->compare( '==', 'order.address.telefax', '055544332213' );
+		$expr[] = $search->compare( '==', 'order.address.website', 'www.example.net' );
+		$expr[] = $search->compare( '>=', 'order.address.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.address.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.address.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.address.id', null );
-		$expr[] = $search->compare( '==', 'order.base.address.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.address.baseid', null );
-		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
-		$expr[] = $search->compare( '==', 'order.base.address.company', 'Example company' );
-		$expr[] = $search->compare( '==', 'order.base.address.vatid', 'DE999999999' );
-		$expr[] = $search->compare( '==', 'order.base.address.salutation', 'mr' );
-		$expr[] = $search->compare( '==', 'order.base.address.title', '' );
-		$expr[] = $search->compare( '==', 'order.base.address.firstname', 'Our' );
-		$expr[] = $search->compare( '==', 'order.base.address.lastname', 'Unittest' );
-		$expr[] = $search->compare( '==', 'order.base.address.address1', 'Durchschnitt' );
-		$expr[] = $search->compare( '==', 'order.base.address.address2', '1' );
-		$expr[] = $search->compare( '==', 'order.base.address.address3', '' );
-		$expr[] = $search->compare( '==', 'order.base.address.postal', '20146' );
-		$expr[] = $search->compare( '==', 'order.base.address.city', 'Hamburg' );
-		$expr[] = $search->compare( '==', 'order.base.address.state', 'Hamburg' );
-		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'DE' );
-		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );
-		$expr[] = $search->compare( '==', 'order.base.address.telefax', '055544332213' );
-		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.example.net' );
-		$expr[] = $search->compare( '>=', 'order.base.address.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.coupon.id', null );
+		$expr[] = $search->compare( '==', 'order.coupon.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.coupon.parentid', null );
+		$expr[] = $search->compare( '!=', 'order.coupon.productid', null );
+		$expr[] = $search->compare( '==', 'order.coupon.code', 'OPQR' );
+		$expr[] = $search->compare( '>=', 'order.coupon.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.coupon.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.coupon.editor', '' );
 
-		$expr[] = $search->compare( '!=', 'order.base.coupon.id', null );
-		$expr[] = $search->compare( '==', 'order.base.coupon.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.coupon.baseid', null );
-		$expr[] = $search->compare( '!=', 'order.base.coupon.productid', null );
-		$expr[] = $search->compare( '==', 'order.base.coupon.code', 'OPQR' );
-		$expr[] = $search->compare( '>=', 'order.base.coupon.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.coupon.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.coupon.editor', '' );
+		$expr[] = $search->compare( '!=', 'order.product.id', null );
+		$expr[] = $search->compare( '==', 'order.product.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.product.parentid', null );
+		$expr[] = $search->compare( '!=', 'order.product.productid', null );
+		$expr[] = $search->compare( '==', 'order.product.prodcode', 'CNE' );
+		$expr[] = $search->compare( '==', 'order.product.vendor', 'Test vendor' );
+		$expr[] = $search->compare( '==', 'order.product.name', 'Cafe Noire Expresso' );
+		$expr[] = $search->compare( '==', 'order.product.mediaurl', 'somewhere/thump1.jpg' );
+		$expr[] = $search->compare( '==', 'order.product.quantity', 9 );
+		$expr[] = $search->compare( '==', 'order.product.price', '4.50' );
+		$expr[] = $search->compare( '==', 'order.product.costs', '0.00' );
+		$expr[] = $search->compare( '==', 'order.product.rebate', '0.00' );
+		$expr[] = $search->compare( '=~', 'order.product.taxrates', '{' );
+		$expr[] = $search->compare( '==', 'order.product.flags', 0 );
+		$expr[] = $search->compare( '==', 'order.product.position', 1 );
+		$expr[] = $search->compare( '==', 'order.product.statuspayment', 5 );
+		$expr[] = $search->compare( '==', 'order.product.statusdelivery', 1 );
+		$expr[] = $search->compare( '>=', 'order.product.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.product.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.product.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.product.id', null );
-		$expr[] = $search->compare( '==', 'order.base.product.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.product.baseid', null );
-		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
-		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
-		$expr[] = $search->compare( '==', 'order.base.product.vendor', 'Test vendor' );
-		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
-		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
-		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
-		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
-		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
-		$expr[] = $search->compare( '=~', 'order.base.product.taxrates', '{' );
-		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
-		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
-		$expr[] = $search->compare( '==', 'order.base.product.statuspayment', 5 );
-		$expr[] = $search->compare( '==', 'order.base.product.statusdelivery', 1 );
-		$expr[] = $search->compare( '>=', 'order.base.product.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.product.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.product.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.product.attribute.id', null );
+		$expr[] = $search->compare( '==', 'order.product.attribute.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.product.attribute.parentid', null );
+		$expr[] = $search->compare( '==', 'order.product.attribute.code', 'width' );
+		$expr[] = $search->compare( '==', 'order.product.attribute.value', '33' );
+		$expr[] = $search->compare( '==', 'order.product.attribute.name', '33' );
+		$expr[] = $search->compare( '==', 'order.product.attribute.quantity', 1 );
+		$expr[] = $search->compare( '>=', 'order.product.attribute.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.product.attribute.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.product.attribute.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.product.attribute.parentid', null );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.code', 'width' );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.quantity', 1 );
-		$expr[] = $search->compare( '>=', 'order.base.product.attribute.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.product.attribute.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.service.id', null );
+		$expr[] = $search->compare( '==', 'order.service.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.service.parentid', null );
+		$expr[] = $search->compare( '==', 'order.service.type', 'payment' );
+		$expr[] = $search->compare( '==', 'order.service.code', 'unitpaymentcode' );
+		$expr[] = $search->compare( '==', 'order.service.name', 'unitpaymentcode' );
+		$expr[] = $search->compare( '==', 'order.service.price', '0.00' );
+		$expr[] = $search->compare( '==', 'order.service.costs', '0.00' );
+		$expr[] = $search->compare( '==', 'order.service.rebate', '0.00' );
+		$expr[] = $search->compare( '=~', 'order.service.taxrates', '{' );
+		$expr[] = $search->compare( '>=', 'order.service.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.service.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.service.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
-		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
-		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
-		$expr[] = $search->compare( '==', 'order.base.service.code', 'unitpaymentcode' );
-		$expr[] = $search->compare( '==', 'order.base.service.name', 'unitpaymentcode' );
-		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
-		$expr[] = $search->compare( '=~', 'order.base.service.taxrates', '{' );
-		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.service.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.service.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'order.base.service.attribute.id', null );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.service.attribute.parentid', null );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.code', 'NAME' );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.value', '"CreditCard"' );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.quantity', 1 );
-		$expr[] = $search->compare( '>=', 'order.base.service.attribute.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.base.service.attribute.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'order.service.attribute.id', null );
+		$expr[] = $search->compare( '==', 'order.service.attribute.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.service.attribute.parentid', null );
+		$expr[] = $search->compare( '==', 'order.service.attribute.code', 'NAME' );
+		$expr[] = $search->compare( '==', 'order.service.attribute.value', '"CreditCard"' );
+		$expr[] = $search->compare( '==', 'order.service.attribute.quantity', 1 );
+		$expr[] = $search->compare( '>=', 'order.service.attribute.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.service.attribute.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'order.service.attribute.editor', $this->editor );
 
 
 
@@ -554,20 +568,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
+		$item = $this->object->search( $search, ['order/product'], $total )->first();
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
-		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );
+		$this->assertEquals( 4, count( $item->getProducts() ) );
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'base' ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'base', 'Standard' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'address', 'Standard' ) );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'coupon' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'coupon', 'Standard' ) );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'product' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'product', 'Standard' ) );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'service' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'service', 'Standard' ) );
+
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'status' ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'status', 'Standard' ) );
-
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
@@ -577,7 +599,430 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManagerInvalidName()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager( 'base', 'unknown' );
+		$this->object->getSubManager( 'status', 'unknown' );
 	}
 
+
+	public function testLoad()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId() );
+
+
+		foreach( $order->getAddresses() as $addresses )
+		{
+			foreach( $addresses as $address )
+			{
+				$this->assertNotEquals( '', $address->getId() );
+				$this->assertNotEquals( '', $address->getId() );
+				$this->assertNotEquals( '', $address->getParentId() );
+			}
+		}
+
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
+
+		foreach( $order->getCoupons() as $code => $products )
+		{
+			$this->assertNotEquals( '', $code );
+
+			foreach( $products as $product ) {
+				$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Iface::class, $product );
+			}
+		}
+
+		foreach( $order->getProducts() as $product )
+		{
+			$this->assertNotEquals( '', $product->getId() );
+			$this->assertNotEquals( '', $product->getId() );
+			$this->assertNotEquals( '', $product->getParentId() );
+			$this->assertGreaterThan( 0, $product->getPosition() );
+		}
+
+		foreach( $order->getServices() as $list )
+		{
+			foreach( $list as $service )
+			{
+				$this->assertNotEquals( '', $service->getId() );
+				$this->assertNotEquals( '', $service->getId() );
+				$this->assertNotEquals( '', $service->getParentId() );
+			}
+		}
+	}
+
+
+	public function testLoadNone()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), [] );
+
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+	}
+
+
+	public function testLoadAddress()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/address'] );
+
+		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+	}
+
+
+	public function testLoadProduct()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/product'] );
+
+		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+	}
+
+
+	public function testLoadCoupon()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/coupon'] );
+
+		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
+		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+	}
+
+
+	public function testLoadService()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/service'] );
+
+		$this->assertGreaterThan( 0, count( $order->getServices() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+	}
+
+
+	public function testLoadFresh()
+	{
+		$item = $this->getOrderItem();
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$order = $this->object->load( $item->getId(), $ref, true );
+
+
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
+
+		foreach( $order->getAddresses() as $list )
+		{
+			foreach( $list as $address )
+			{
+				$this->assertEquals( null, $address->getId() );
+				$this->assertEquals( null, $address->getParentId() );
+			}
+		}
+
+		foreach( $order->getProducts() as $product )
+		{
+			$this->assertEquals( null, $product->getId() );
+			$this->assertEquals( null, $product->getParentId() );
+			$this->assertEquals( null, $product->getPosition() );
+		}
+
+		foreach( $order->getServices() as $list )
+		{
+			foreach( $list as $service )
+			{
+				$this->assertEquals( null, $service->getId() );
+				$this->assertEquals( null, $service->getParentId() );
+			}
+		}
+	}
+
+
+	public function testLoadFreshNone()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), [], true );
+
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+	}
+
+
+	public function testLoadFreshAddress()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/address'], true );
+
+		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+	}
+
+
+	public function testLoadFreshProduct()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/product'], true );
+
+		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+	}
+
+
+	public function testLoadFreshCoupon()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/coupon'], true );
+
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+	}
+
+
+	public function testLoadFreshService()
+	{
+		$item = $this->getOrderItem();
+		$order = $this->object->load( $item->getId(), ['order/service'], true );
+
+		$this->assertGreaterThan( 0, count( $order->getServices() ) );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+	}
+
+
+	public function testSave()
+	{
+		$item = $this->getOrderItem();
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+
+		$basket = $this->object->load( $item->getId(), $ref, true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$basket = $this->object->load( $newBasketId );
+		$this->object->delete( $newBasketId );
+
+
+		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
+		$this->assertEquals( $basket->locale()->getSiteId(), $basket->getSiteId() );
+
+		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
+
+		$pos = 1;
+		$products = $basket->getProducts();
+		$this->assertEquals( 3, count( $products ) );
+
+		foreach( $products as $product )
+		{
+			if( $product->getProductCode() == 'U:MD' ) {
+				continue;
+			}
+			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributeItems() ) );
+			$this->assertEquals( $pos++, $product->getPosition() );
+		}
+
+		$this->assertEquals( 2, count( $basket->getAddresses() ) );
+
+		$services = $basket->getServices();
+		$this->assertEquals( 2, count( $services ) );
+
+		$attributes = [];
+		foreach( $services as $list )
+		{
+			foreach( $list as $service ) {
+				$attributes[$service->getCode()] = $service->getAttributeItems();
+			}
+		}
+
+		$this->assertEquals( 9, count( $attributes['unitpaymentcode'] ) );
+		$this->assertEquals( 0, count( $attributes['unitdeliverycode'] ) );
+
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->get( $newBasketId );
+	}
+
+
+	public function testSaveExisting()
+	{
+		$item = $this->getOrderItem();
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+
+		$basket = $this->object->load( $item->getId(), $ref, true );
+		$this->object->save( $basket );
+		$newBasketId = $basket->getId();
+		$this->object->save( $basket );
+		$newBasket = $this->object->load( $newBasketId );
+
+		$this->object->delete( $newBasketId );
+
+		foreach( $basket->getAddresses() as $type => $list )
+		{
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getAddress( $type ) )->getId() ) );
+		}
+
+		$this->assertTrue( $basket->getProducts()->getId()->equals( $newBasket->getProducts()->getId() ) );
+
+		foreach( $basket->getServices() as $type => $list )
+		{
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getService( $type ) )->getId() ) );
+		}
+	}
+
+
+	public function testSaveBundles()
+	{
+		$search = $this->object->filter()->add( ['order.sitecode' => 'unittest', 'order.price' => 2400.00] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
+
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$basket = $this->object->load( $item->getId(), $ref, true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$basket = $this->object->load( $newBasketId );
+		$this->object->delete( $newBasketId );
+
+		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
+		$this->assertEquals( $basket->locale()->getSiteId(), $basket->getSiteId() );
+
+		$pos = 1;
+		$products = $basket->getProducts();
+
+		$this->assertEquals( 2, count( $products ) );
+		foreach( $products as $product )
+		{
+			$this->assertEquals( 2, count( $product->getProducts() ) );
+			$this->assertEquals( $pos, $product->getPosition() );
+			$pos += 3; // two sub-products in between
+		}
+
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->get( $newBasketId );
+	}
+
+
+	public function testSaveAddress()
+	{
+		$item = $this->getOrderItem();
+
+		$basket = $this->object->load( $item->getId(), ['order/address'], true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
+		$this->object->delete( $newBasketId );
+
+		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
+		$this->assertEquals( [], $basket->getProducts()->toArray() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getServices()->toArray() );
+	}
+
+
+	public function testSaveProduct()
+	{
+		$item = $this->getOrderItem();
+
+		$basket = $this->object->load( $item->getId(), ['order/product'], true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
+		$this->object->delete( $newBasketId );
+
+		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
+		$this->assertEquals( [], $basket->getAddresses()->toArray() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getServices()->toArray() );
+	}
+
+
+	public function testSaveService()
+	{
+		$item = $this->getOrderItem();
+
+		$basket = $this->object->load( $item->getId(), ['order/service'], true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
+		$this->object->delete( $newBasketId );
+
+		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
+		$this->assertEquals( [], $basket->getProducts()->toArray() );
+		$this->assertEquals( [], $basket->getAddresses()->toArray() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+	}
+
+
+	public function testLoadSaveCoupons()
+	{
+		$search = $this->object->filter()->add( ['order.price' => '53.50'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
+
+		$basket = $this->object->load( $item->getId(), ['order/product'], true );
+
+		$this->assertEquals( '58.50', $basket->getPrice()->getValue() );
+		$this->assertEquals( '1.50', $basket->getPrice()->getCosts() );
+		$this->assertEquals( 0, count( $basket->getCoupons() ) );
+
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
+		$productBasket = $this->object->load( $item->getId(), $ref, true );
+
+		$basket->addCoupon( 'CDEF' );
+		$basket->addCoupon( '90AB' );
+		$this->assertEquals( 2, count( $basket->getCoupons() ) );
+
+		$this->object->save( $basket );
+		$newBasket = $this->object->load( $basket->getId() );
+		$this->object->delete( $newBasket->getId() );
+
+		$this->assertEquals( '52.50', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '1.50', $newBasket->getPrice()->getCosts() );
+		$this->assertEquals( '6.00', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
+	}
+
+
+	/**
+	 * Returns an order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item
+	 * @throws \Exception If no found
+	 */
+	protected function getOrderItem()
+	{
+		$search = $this->object->filter()->add( [
+			'order.sitecode' => 'unittest',
+			'order.price' => 53.50,
+			'order.rebate' => 14.50,
+			'order.editor' => $this->editor
+		] );
+
+		return $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
+	}
 }

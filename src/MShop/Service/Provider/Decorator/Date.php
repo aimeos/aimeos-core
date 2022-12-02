@@ -78,17 +78,17 @@ class Date
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		$feconfig = $this->feConfig;
 
 		try
 		{
 			$days = $this->getConfigValue( 'date.minimumdays', 0 );
-			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+			$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_DELIVERY;
 			$service = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'date.value', 'delivery' ) ) == '' ) {

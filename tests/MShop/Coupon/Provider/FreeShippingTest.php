@@ -32,8 +32,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$delPrice->setCurrencyId( 'EUR' );
 
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$manager = \Aimeos\MShop::create( $context, 'order' )
-			->getSubManager( 'base' )->getSubManager( 'service' );
+		$manager = \Aimeos\MShop::create( $context, 'order/service' );
 
 		$delivery = $manager->create();
 		$delivery->setCode( 'test' );
@@ -41,7 +40,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$delivery->setPrice( $delPrice );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
 		$this->orderBase->addService( $delivery, 'delivery' );
 	}
 

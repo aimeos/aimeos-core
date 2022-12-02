@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'subscription.id', null );
 		$expr[] = $search->compare( '==', 'subscription.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'subscription.ordbaseid', null );
+		$expr[] = $search->compare( '!=', 'subscription.orderid', null );
 		$expr[] = $search->compare( '!=', 'subscription.ordprodid', null );
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
@@ -198,9 +198,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'subscription.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'subscription.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'order.base.address.id', null );
-		$expr[] = $search->compare( '==', 'order.base.address.siteid', $siteid );
-		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
+		$expr[] = $search->compare( '!=', 'order.address.id', null );
+		$expr[] = $search->compare( '==', 'order.address.siteid', $siteid );
+		$expr[] = $search->compare( '==', 'order.address.type', 'payment' );
 
 
 		$search->setConditions( $search->and( $expr ) );
@@ -232,10 +232,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
-		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
+		$item = $this->object->search( $search, ['order', 'order/product'], $total )->first();
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
-		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $item->getOrderItem() );
+		$this->assertEquals( 4, count( $item->getOrderItem()->getProducts() ) );
 	}
 
 

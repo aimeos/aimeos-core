@@ -13,11 +13,11 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_subscription" mord
+					FROM "mshop_subscription" msub
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
+					GROUP BY msub.id, :cols, :val
+					ORDER BY msub.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
 				GROUP BY :keys
@@ -26,11 +26,11 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_subscription" mord
+					FROM "mshop_subscription" msub
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
+					GROUP BY msub.id, :cols, :val
+					ORDER BY msub.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
 				GROUP BY :keys
@@ -39,7 +39,7 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_subscription" ( :names
-					"baseid", "ordprodid", "next", "end", "interval", "productid", "period",
+					"orderid", "ordprodid", "next", "end", "interval", "productid", "period",
 					"reason", "status", "mtime", "editor", "siteid", "ctime"
 				) VALUES ( :values
 					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -50,7 +50,7 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_subscription"
 				SET :names
-					"baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
+					"orderid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
 					"productid" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" LIKE ? AND "id" = ?
 			'
@@ -64,36 +64,38 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mord."id" AS "subscription.id", mord."baseid" AS "subscription.ordbaseid",
-					mord."ordprodid" AS "subscription.ordprodid", mord."siteid" AS "subscription.siteid",
-					mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
-					mord."interval" AS "subscription.interval", mord."reason" AS "subscription.reason",
-					mord."productid" AS "subscription.productid", mord."period" AS "subscription.period",
-					mord."status" AS "subscription.status", mord."ctime" AS "subscription.ctime",
-					mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor"
-				FROM "mshop_subscription" mord
+					msub."id" AS "subscription.id", msub."orderid" AS "subscription.orderid",
+					msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
+					msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
+					msub."interval" AS "subscription.interval", msub."reason" AS "subscription.reason",
+					msub."productid" AS "subscription.productid", msub."period" AS "subscription.period",
+					msub."status" AS "subscription.status", msub."ctime" AS "subscription.ctime",
+					msub."mtime" AS "subscription.mtime", msub."editor" AS "subscription.editor"
+				FROM "mshop_subscription" msub
+				JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
-					mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
-					mord."interval", mord."reason", mord."productid", mord."period", mord."status", mord."ctime",
-					mord."mtime", mord."editor"
+					msub."id", msub."orderid", msub."ordprodid", msub."siteid", msub."next", msub."end",
+					msub."interval", msub."reason", msub."productid", msub."period", msub."status", msub."ctime",
+					msub."mtime", msub."editor"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mord."id" AS "subscription.id", mord."baseid" AS "subscription.ordbaseid",
-					mord."ordprodid" AS "subscription.ordprodid", mord."siteid" AS "subscription.siteid",
-					mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
-					mord."interval" AS "subscription.interval", mord."reason" AS "subscription.reason",
-					mord."productid" AS "subscription.productid", mord."period" AS "subscription.period",
-					mord."status" AS "subscription.status", mord."ctime" AS "subscription.ctime",
-					mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor"
-				FROM "mshop_subscription" mord
+					msub."id" AS "subscription.id", msub."orderid" AS "subscription.orderid",
+					msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
+					msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
+					msub."interval" AS "subscription.interval", msub."reason" AS "subscription.reason",
+					msub."productid" AS "subscription.productid", msub."period" AS "subscription.period",
+					msub."status" AS "subscription.status", msub."ctime" AS "subscription.ctime",
+					msub."mtime" AS "subscription.mtime", msub."editor" AS "subscription.editor"
+				FROM "mshop_subscription" msub
+				JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 				:joins
 				WHERE :cond
-				GROUP BY :group mord."id"
+				GROUP BY :group msub."id"
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'
@@ -102,24 +104,26 @@ return array(
 			'ansi' => '
 				SELECT COUNT(*) AS "count"
 				FROM (
-					SELECT mord."id"
-					FROM "mshop_subscription" mord
+					SELECT msub."id"
+					FROM "mshop_subscription" msub
+					JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 					:joins
 					WHERE :cond
-					GROUP BY mord."id"
-					ORDER BY mord."id"
+					GROUP BY msub."id"
+					ORDER BY msub."id"
 					OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 				) AS list
 			',
 			'mysql' => '
 				SELECT COUNT(*) AS "count"
 				FROM (
-					SELECT mord."id"
-					FROM "mshop_subscription" mord
+					SELECT msub."id"
+					FROM "mshop_subscription" msub
+					JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 					:joins
 					WHERE :cond
-					GROUP BY mord."id"
-					ORDER BY mord."id"
+					GROUP BY msub."id"
+					ORDER BY msub."id"
 					LIMIT 10000 OFFSET 0
 				) AS list
 			'

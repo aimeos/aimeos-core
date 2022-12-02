@@ -26,7 +26,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$this->coupon->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $this->coupon, '90AB' );
 	}
 
@@ -206,18 +206,18 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Return the order products.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[]
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface[]
 	 * @throws \Exception
 	 */
 	protected function getOrderProducts()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/base/product' );
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/product' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->and( array(
-			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
-			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
+			$search->compare( '==', 'order.product.prodcode', array( 'CNE', 'CNC' ) ),
+			$search->compare( '==', 'order.product.price', array( '600.00', '36.00' ) )
 		) ) );
 		$items = $manager->search( $search )->toArray();
 

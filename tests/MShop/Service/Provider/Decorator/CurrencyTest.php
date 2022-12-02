@@ -28,8 +28,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Currency::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->create();
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Currency( $this->mockProvider, $this->context, $this->servItem );
 	}

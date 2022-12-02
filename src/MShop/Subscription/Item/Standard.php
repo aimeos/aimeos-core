@@ -21,53 +21,53 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Subscription\Item\Iface
 {
-	private $baseItem;
+	private $orderItem;
 
 
 	/**
 	 * Initializes the object with the given values.
 	 *
 	 * @param array $values Associative list of values from database
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if available
+	 * @param \Aimeos\MShop\Order\Item\Iface|null $orderItem Order if available
 	 */
-	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null )
+	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $orderItem = null )
 	{
 		parent::__construct( 'subscription.', $values );
-		$this->baseItem = $baseItem;
+		$this->orderItem = $orderItem;
 	}
 
 
 	/**
-	 * Returns the associated order base item
+	 * Returns the associated order item
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item
 	 */
-	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface
+	public function getOrderItem() : ?\Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->baseItem;
+		return $this->orderItem;
 	}
 
 
 	/**
-	 * Returns the ID of the base order
+	 * Returns the ID of the order
 	 *
-	 * @return string|null ID of the base order
+	 * @return string|null ID of the order
 	 */
-	public function getOrderBaseId() : ?string
+	public function getOrderId() : ?string
 	{
-		return $this->get( 'subscription.ordbaseid' );
+		return $this->get( 'subscription.orderid' );
 	}
 
 
 	/**
-	 * Sets the ID of the base order item which the customer bought
+	 * Sets the ID of the order item which the customer bought
 	 *
-	 * @param string $id ID of the base order
+	 * @param string $id ID of the order
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setOrderBaseId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setOrderId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return $this->set( 'subscription.ordbaseid', $id );
+		return $this->set( 'subscription.orderid', $id );
 	}
 
 
@@ -287,7 +287,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'subscription.ordbaseid': $item = $item->setOrderBaseId( $value ); break;
+				case 'subscription.orderid': $item = $item->setOrderId( $value ); break;
 				case 'subscription.ordprodid': $item = $item->setOrderProductId( $value ); break;
 				case 'subscription.productid': $item = $item->setProductId( $value ); break;
 				case 'subscription.datenext': $item = $item->setDateNext( $value ); break;
@@ -316,7 +316,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['subscription.ordbaseid'] = $this->getOrderBaseId();
+		$list['subscription.orderid'] = $this->getOrderId();
 		$list['subscription.ordprodid'] = $this->getOrderProductId();
 		$list['subscription.productid'] = $this->getProductId();
 		$list['subscription.datenext'] = $this->getDateNext();

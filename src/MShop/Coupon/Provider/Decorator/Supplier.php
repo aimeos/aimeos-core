@@ -49,10 +49,10 @@ class Supplier
 	 * The result depends on the configured restrictions and it must be less or
 	 * equal to the passed price.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		if( $this->getConfigValue( 'supplier.only' ) == true )
 		{
@@ -124,10 +124,10 @@ class Supplier
 	/**
 	 * Checks for requirements.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return bool True if the requirements are met, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool
 	{
 		if( ( $codes = $this->getConfigValue( 'supplier.code' ) ) !== null )
 		{

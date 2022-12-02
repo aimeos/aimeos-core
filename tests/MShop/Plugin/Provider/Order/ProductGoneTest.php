@@ -27,9 +27,9 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$newProduct = $manager->find( 'CNE' )->setId( null )->setLabel( 'Bad Product' )->setCode( 'WTF' );
 		$this->product = $manager->save( $newProduct );
 
-		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 		$search = $manager->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'order.base.price', 672.00 ) );
+		$search->setConditions( $search->compare( '==', 'order.price', 672.00 ) );
 		$items = $manager->search( $search )->toArray();
 
 		if( ( $this->order = reset( $items ) ) === false ) {
@@ -63,26 +63,26 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateOk()
 	{
-		$type = ['order/base/product'];
+		$type = ['order/product'];
 		$this->assertEquals( $type, $this->object->update( $this->order, 'check.after', $type ) );
 	}
 
 
 	public function testUpdateProductDeleted()
 	{
-		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()
+		$badItem = \Aimeos\MShop::create( $this->context, 'order/product' )->create()
 			->setProductId( -13 )->setProductCode( 'NONE' );
 
 		$this->order->addProduct( $badItem );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
 	public function testUpdateProductEnded()
 	{
-		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
+		$badItem = \Aimeos\MShop::create( $this->context, 'order/product' )
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateEnd( '1999-12-31 23:59:59' );
@@ -91,13 +91,13 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $badItem );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
 	public function testUpdateProductNotStarted()
 	{
-		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
+		$badItem = \Aimeos\MShop::create( $this->context, 'order/product' )
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateStart( '2100-12-31 23:59:59' );
@@ -106,13 +106,13 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $badItem );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
 	public function testUpdateProductDeactivated()
 	{
-		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
+		$badItem = \Aimeos\MShop::create( $this->context, 'order/product' )
 			->create()->copyFrom( $this->product );
 
 		\Aimeos\MShop::create( $this->context, 'product' )->save( $this->product->setStatus( 0 ) );
@@ -121,6 +121,6 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$badItemPosition = $this->order->getProducts()->firstKey();
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 }

@@ -110,7 +110,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableFailureNoArticle()
 	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 		$this->servItem->setConfig( array( 'download.all' => '0' ) );
 
 		$this->assertFalse( $this->object->isAvailable( $manager->create() ) );
@@ -120,7 +120,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns an order base item
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item
 	 */
 	protected function getOrderBaseItem()
 	{
@@ -134,7 +134,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order item found' );
 		}
 
-		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		return $baseManager->load( $item->getBaseId() );
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order' );
+		return $baseManager->load( $item->getId() );
 	}
 }

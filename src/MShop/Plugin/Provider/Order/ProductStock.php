@@ -59,11 +59,11 @@ class ProductStock
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( !in_array( 'order/base/product', (array) $value ) ) {
+		if( !in_array( 'order/product', (array) $value ) ) {
 			return $value;
 		}
 
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		if( !$order->getProducts()->isEmpty() && ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{
@@ -82,7 +82,7 @@ class ProductStock
 	 * @return array Associative list of basket product positions as keys and the error codes as values
 	 * @todo 2022.01 Store product ID and article ID separately in order product
 	 */
-	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
+	protected function checkStock( \Aimeos\MShop\Order\Item\Iface $order ) : array
 	{
 		$context = $this->context();
 		$siteIds = $context->locale()->getSitePath();
@@ -121,7 +121,7 @@ class ProductStock
 	 * @param array $stockMap Multi-dimensional associative list of product ID / stock type as keys and stock level as values
 	 * @return array Associative list of basket positions as keys and error codes as values
 	 */
-	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap ) : array
+	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Iface $order, array $stockMap ) : array
 	{
 		$outOfStock = [];
 		$products = $order->getProducts();

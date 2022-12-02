@@ -90,7 +90,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->filter()->add( 'order.datepayment', '==', '2008-02-15 12:34:56' );
-		$ref = ['order/base', 'order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
 
 		return $manager->search( $search, $ref )
 			->first( new \RuntimeException( sprintf( 'No order item for payment date "%1$s" found', '2008-02-15 12:34:56' ) ) );

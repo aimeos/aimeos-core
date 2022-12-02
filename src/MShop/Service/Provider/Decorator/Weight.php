@@ -81,10 +81,10 @@ class Weight
 	/**
 	 * Checks if the the basket weight is ok for the service provider.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		if( $this->checkWeightScale( $this->getWeight( $this->getQuantities( $basket ) ) ) === false ) {
 			return false;
@@ -120,10 +120,10 @@ class Weight
 	/**
 	 * Returns the product quantities
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return array Associative list of product codes as keys and quantities as values
 	 */
-	protected function getQuantities( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	protected function getQuantities( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		$prodMap = [];
 

@@ -19,13 +19,13 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off(); // remove event listeners
 
-		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/product' );
 		$search = $orderBaseProductManager->filter();
 		$search->setConditions( $search->and( array(
-			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
-			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
+			$search->compare( '==', 'order.product.prodcode', array( 'CNE', 'CNC' ) ),
+			$search->compare( '==', 'order.product.price', array( '600.00', '36.00' ) )
 		) ) );
 		$items = $orderBaseProductManager->search( $search )->toArray();
 
@@ -101,7 +101,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$value = ['order/base/product'];
+		$value = ['order/product'];
 		$this->products['CNE']->setQuantity( 4 );
 		$this->order->addProduct( $this->products['CNE'] );
 
@@ -114,7 +114,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
@@ -124,7 +124,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNE'] );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
@@ -133,7 +133,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNE'] );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 
 
@@ -143,6 +143,6 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
+		$this->object->update( $this->order, 'check.after', ['order/product'] );
 	}
 }

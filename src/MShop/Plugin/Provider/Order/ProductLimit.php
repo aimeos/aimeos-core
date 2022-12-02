@@ -128,10 +128,10 @@ class ProductLimit
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$list = map( $value );
-		$list->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+		$list->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		foreach( $list as $entry )
 		{
@@ -146,12 +146,12 @@ class ProductLimit
 	/**
 	 * Checks for the product limits when the configuration doesn't contain limits per currency.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $value Order product item
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $value Order product item
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one limit is exceeded
 	 */
-	protected function checkWithoutCurrency( \Aimeos\MShop\Order\Item\Base\Iface $order,
-		\Aimeos\MShop\Order\Item\Base\Product\Iface $value )
+	protected function checkWithoutCurrency( \Aimeos\MShop\Order\Item\Iface $order,
+		\Aimeos\MShop\Order\Item\Product\Iface $value )
 	{
 		$config = $this->getItemBase()->getConfig();
 
@@ -185,12 +185,12 @@ class ProductLimit
 	/**
 	 * Checks for the product limits when the configuration contains limits per currency.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $value Order product item
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $value Order product item
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one limit is exceeded
 	 */
-	protected function checkWithCurrency( \Aimeos\MShop\Order\Item\Base\Iface $order,
-		\Aimeos\MShop\Order\Item\Base\Product\Iface $value )
+	protected function checkWithCurrency( \Aimeos\MShop\Order\Item\Iface $order,
+		\Aimeos\MShop\Order\Item\Product\Iface $value )
 	{
 		$config = $this->getItemBase()->getConfig();
 		$currencyId = $value->getPrice()->getCurrencyId();

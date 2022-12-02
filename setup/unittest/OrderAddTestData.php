@@ -37,8 +37,8 @@ class OrderAddTestData extends Base
 		$context->setEditor( 'core' );
 		$context->locale()->setCurrencyId( 'EUR' );
 
-		$manager = $this->getOrderManager( 'base' );
-		$filter = $manager->filter()->add( ['order.base.sitecode' => 'unittest'] );
+		$manager = $this->getOrderManager();
+		$filter = $manager->filter()->add( ['order.sitecode' => 'unittest'] );
 		$manager->delete( $manager->search( $filter ) );
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -57,8 +57,7 @@ class OrderAddTestData extends Base
 	protected function import( array $data, string $customerId )
 	{
 		$orderManager = $this->getOrderManager();
-		$orderBaseManager = $this->getOrderManager( 'base' );
-		$orderStatusManager = $this->getOrderManager( 'status' );
+		$orderStatusManager = $this->getOrderManager( 'order/status' );
 
 		$attributes = $this->getAttributes();
 		$products = $this->getProducts();
@@ -66,18 +65,14 @@ class OrderAddTestData extends Base
 
 		foreach( $data as $entry )
 		{
-			if( !isset( $entry['base'] ) ) {
-				throw new \RuntimeException( 'No base data found for ' . print_r( $entry, true ) );
-			}
+			$basket = $orderManager->create()->off()
+				->fromArray( $entry, true )->setCustomerId( $customerId );
 
-			$basket = $orderBaseManager->create()->off()
-				->fromArray( $entry['base'], true )->setCustomerId( $customerId );
+			$basket->setAddresses( $this->createAddresses( $entry['address'] ?? [] ) );
+			$basket->setProducts( $this->createProducts( $entry['product'] ?? [], $products, $attributes ) );
+			$basket->setServices( $this->createServices( $entry['service'] ?? [], $services ) );
 
-			$basket->setAddresses( $this->createAddresses( $entry['base']['address'] ?? [] ) );
-			$basket->setProducts( $this->createProducts( $entry['base']['product'] ?? [], $products, $attributes ) );
-			$basket->setServices( $this->createServices( $entry['base']['service'] ?? [], $services ) );
-
-			foreach( $entry['base']['coupon'] ?? [] as $map )
+			foreach( $entry['coupon'] ?? [] as $map )
 			{
 				$list = [];
 
@@ -90,13 +85,10 @@ class OrderAddTestData extends Base
 				$basket->setCoupon( $map['code'], $list );
 			}
 
-			$orderBaseManager->save( $basket );
-
-			$item = $orderManager->create()->fromArray( $entry, true );
-			$orderManager->save( $item->setBaseId( $basket->getId() ) );
+			$orderManager->save( $basket );
 
 			foreach( $entry['status'] ?? [] as $map ) {
-				$orderStatusManager->save( $orderStatusManager->create()->fromArray( $map )->setParentId( $item->getId() ) );
+				$orderStatusManager->save( $orderStatusManager->create()->fromArray( $map )->setParentId( $basket->getId() ) );
 			}
 		}
 	}
@@ -105,7 +97,7 @@ class OrderAddTestData extends Base
 	protected function createAddresses( array $data ) : array
 	{
 		$list = [];
-		$manager = $this->getOrderManager( 'base/address' );
+		$manager = $this->getOrderManager( 'order/address' );
 
 		foreach( $data as $entry )
 		{
@@ -121,20 +113,20 @@ class OrderAddTestData extends Base
 	{
 		$list = [];
 		$priceManager = $this->getPriceManager();
-		$manager = $this->getOrderManager( 'base/product' );
-		$attrManager = $this->getOrderManager( 'base/product/attribute' );
+		$manager = $this->getOrderManager( 'order/product' );
+		$attrManager = $this->getOrderManager( 'order/product/attribute' );
 
 		foreach( $data as $entry )
 		{
 			$attrs = [];
 			foreach( $entry['attribute'] ?? [] as $attr )
 			{
-				$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
+				$key = $attr['order.product.attribute.code'] . '/' . $attr['order.product.attribute.value'];
 				$attrs[] = $attrManager->create()->fromArray( $attr, true )
 					->setAttributeId( $attributes->get( $key ) );
 			}
 
-			$code = $entry['order.base.product.prodcode'] ?? null;
+			$code = $entry['order.product.prodcode'] ?? null;
 			$price = $priceManager->create()->fromArray( $entry, true );
 
 			$list[] = $manager->create()->fromArray( $entry, true )
@@ -151,9 +143,9 @@ class OrderAddTestData extends Base
 	{
 		$list = [];
 		$priceManager = $this->getPriceManager();
-		$manager = $this->getOrderManager( 'base/service' );
-		$txManager = $this->getOrderManager( 'base/service/transaction' );
-		$attrManager = $this->getOrderManager( 'base/service/attribute' );
+		$manager = $this->getOrderManager( 'order/service' );
+		$txManager = $this->getOrderManager( 'order/service/transaction' );
+		$attrManager = $this->getOrderManager( 'order/service/attribute' );
 
 		foreach( $data as $entry )
 		{
@@ -167,7 +159,7 @@ class OrderAddTestData extends Base
 				$trans[] = $txManager->create()->fromArray( $tx, true );
 			}
 
-			$code = $entry['order.base.service.code'] ?? null;
+			$code = $entry['order.service.code'] ?? null;
 			$price = $priceManager->create()->fromArray( $entry, true );
 
 			$item = $manager->create()->fromArray( $entry, true )
@@ -214,18 +206,9 @@ class OrderAddTestData extends Base
 	}
 
 
-	protected function getOrderManager( $path = null ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function getOrderManager( $path = 'order' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' );
-
-		if( $path )
-		{
-			foreach( explode( '/', $path ) as $part ) {
-				$manager = $manager->getSubManager( $part );
-			}
-		}
-
-		return $manager;
+		return \Aimeos\MShop::create( $this->context(), $path, 'Standard' );
 	}
 
 

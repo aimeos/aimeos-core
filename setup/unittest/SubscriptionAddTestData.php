@@ -59,7 +59,7 @@ class SubscriptionAddTestData extends Base
 			$ordProdItem = $this->getOrderProductItem( $entry['ordprodid'] );
 
 			$list[] = $manager->create()->fromArray( $entry, true )
-				->setOrderBaseId( $ordProdItem->getBaseId() )
+				->setOrderId( $ordProdItem->getParentId() )
 				->setOrderProductId( $ordProdItem->getId() )
 				->setProductId( $ordProdItem->getProductId() );
 		}
@@ -74,12 +74,11 @@ class SubscriptionAddTestData extends Base
 	 * Returns the order product ID for the given test data key
 	 *
 	 * @param string $key Test data key
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' )
-			->getSubManager( 'base' )->getSubManager( 'product' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/product', 'Standard' );
 
 		$parts = explode( '/', $key );
 
@@ -88,8 +87,8 @@ class SubscriptionAddTestData extends Base
 		}
 
 		$search = $manager->filter()->add( [
-			'order.base.product.prodcode' => $parts[0],
-			'order.base.product.price' => $parts[1],
+			'order.product.prodcode' => $parts[0],
+			'order.product.price' => $parts[1],
 		] );
 
 		return $manager->search( $search )->first( new \RuntimeException( 'No order product item found for ' . $key ) );

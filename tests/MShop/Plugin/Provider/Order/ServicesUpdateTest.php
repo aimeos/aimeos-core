@@ -24,7 +24,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$this->context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $this->context, $this->plugin );
 	}
@@ -48,8 +48,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $this->context, 'locale' );
 		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/service' );
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
@@ -59,7 +59,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
@@ -103,8 +103,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $this->context, 'locale' );
 		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/service' );
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
@@ -114,7 +114,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
@@ -156,8 +156,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $this->context, 'locale' );
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/service' );
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
@@ -167,7 +167,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( -2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->setConstructorArgs( [$priceItem, $localeItem] )
 			->setMethods( ['getProducts'] )->getMock();
 
@@ -188,7 +188,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateNoProducts()
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
-		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/service' );
 
 		$priceItem = $priceManager->create()->setCosts( '5.00' );
 

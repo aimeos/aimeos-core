@@ -24,11 +24,11 @@ class Nocosts
 	/**
 	 * Returns the costs per item as negative value to get no costs at all.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @param array $options Selected options by customer from frontend
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$costs = 0;
 		$price = $this->getProvider()->calcPrice( $basket, $options );

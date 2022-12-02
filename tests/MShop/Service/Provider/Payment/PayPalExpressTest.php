@@ -41,12 +41,12 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'order.channel' => 'web',
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
 		] );
-		$ref = ['order/base', 'order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
 		$this->order = $orderManager->search( $search, $ref )->first( new \RuntimeException( 'No order found' ) );
 
-		$attr = \Aimeos\MShop::create( $this->context, 'order/base/service' )->createAttributeItem();
+		$attr = \Aimeos\MShop::create( $this->context, 'order/service' )->createAttributeItem();
 		$attr->setType( 'payment/paypal' )->setCode( 'TRANSACTIONID' )->setValue( '111111111' );
-		$this->order->getBaseItem()->getService( 'payment', 0 )->setAttributeItem( $attr );
+		$this->order->getService( 'payment', 0 )->setAttributeItem( $attr );
 
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -125,7 +125,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $helperForm->getValues() );
 
 		$attrs = [];
-		foreach( $this->order->getBaseItem()->getService( 'payment', 0 )->getAttributeItems() as $attrItem ) {
+		foreach( $this->order->getService( 'payment', 0 )->getAttributeItems() as $attrItem ) {
 			$attrs[$attrItem->getCode()] = $attrItem->getValue();
 		}
 
@@ -163,10 +163,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	public function testUpdatePush()
 	{
 		//IPN Call
-		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-		$price = $orderBaseManager->get( $this->order->getBaseId() )->getPrice();
+		$price = $this->order->getPrice();
 		$amount = $price->getValue() + $price->getCosts();
 
 		$params = array(
@@ -189,8 +186,8 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->with( $this->equalTo( 200 ) );
 
 		$cmpFcn = function( $subject ) {
-			$attrs = $subject->getBaseItem()->getService( 'payment', 0 )->getAttributeItems();
-			$attrs = $attrs->col( 'order.base.service.attribute.value', 'order.base.service.attribute.code' );
+			$attrs = $subject->getService( 'payment', 0 )->getAttributeItems();
+			$attrs = $attrs->col( 'order.service.attribute.value', 'order.service.attribute.code' );
 			return $subject->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED
 				&& $attrs['TRANSACTIONID'] === '111111111'
 				&& $attrs['111111111'] === 'Completed';
@@ -217,7 +214,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
-		$attributes = $this->order->getBaseItem()->getService( 'payment', 0 )->getAttributeItems();
+		$attributes = $this->order->getService( 'payment', 0 )->getAttributeItems();
 
 		$attributeList = [];
 		foreach( $attributes as $attribute ) {

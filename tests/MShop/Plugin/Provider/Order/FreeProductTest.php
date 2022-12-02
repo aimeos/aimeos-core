@@ -20,13 +20,13 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
-		$address = \Aimeos\MShop::create( $context, 'order/base/address' )->create()->setEmail( 'test@example.com' );
+		$address = \Aimeos\MShop::create( $context, 'order/address' )->create()->setEmail( 'test@example.com' );
 
-		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 		$this->orderProduct = $manager->create()->setProductCode( 'ABCD' );
 		$this->orderProduct = $this->orderProduct->setPrice( $this->orderProduct->getPrice()->setValue( '100.00' ) );
 
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off(); // remove event listeners
 		$this->order->addAddress( $address, 'payment' )->addProduct( $this->orderProduct );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\FreeProduct( $context, $this->plugin );

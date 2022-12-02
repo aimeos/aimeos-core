@@ -21,11 +21,11 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelper::context();
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->create();
 
-		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		$search = $orderBaseManager->filter()->add( ['order.base.price' => '2400.00'] );
+		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order' );
+		$search = $orderBaseManager->filter()->add( ['order.price' => '2400.00'] );
 		$basket = $orderBaseManager->search( $search )->first( new \RuntimeException( 'No order base item found' ) );
 
-		$this->orderBase = $orderBaseManager->load( $basket->getId(), ['order/base/address'] );
+		$this->orderBase = $orderBaseManager->load( $basket->getId(), ['order/address'] );
 	}
 
 

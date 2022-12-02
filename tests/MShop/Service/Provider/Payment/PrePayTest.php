@@ -81,7 +81,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop::create( \TestHelper::context(), 'order/base/service' )->create();
+		$item = \Aimeos\MShop::create( \TestHelper::context(), 'order/service' )->create();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributeItems() ) );

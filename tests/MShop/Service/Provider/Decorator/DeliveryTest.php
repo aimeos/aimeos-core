@@ -28,8 +28,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Date::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->create();
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Delivery( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -108,7 +107,6 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	public function testGetConfigFE()
 	{
 		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->filter();
 		$expr = array(
 			$search->compare( '==', 'order.channel', 'web' ),
@@ -124,7 +122,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
-		$basket = $orderBaseManager->load( $order->getBaseId(), ['order/base/service'] );
+		$basket = $orderManager->load( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertIsArray( $config['delivery.type']->getDefault() );

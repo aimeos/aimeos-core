@@ -83,12 +83,11 @@ class ReviewAddTestData extends Base
 	 * Returns the order product ID for the given test data key
 	 *
 	 * @param string $key Test data key
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'order', 'Standard' )
-			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/product', 'Standard' );
 
 		$parts = explode( '/', $key );
 
@@ -98,8 +97,8 @@ class ReviewAddTestData extends Base
 
 		$search = $manager->filter();
 		$expr = [
-			$search->compare( '==', 'order.base.product.prodcode', $parts[0] ),
-			$search->compare( '==', 'order.base.product.price', $parts[1] ),
+			$search->compare( '==', 'order.product.prodcode', $parts[0] ),
+			$search->compare( '==', 'order.product.price', $parts[1] ),
 		];
 		$search->setConditions( $search->and( $expr ) );
 		$result = $manager->search( $search );

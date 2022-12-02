@@ -25,7 +25,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 	}
 

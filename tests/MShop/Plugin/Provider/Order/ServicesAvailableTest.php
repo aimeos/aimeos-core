@@ -22,8 +22,8 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
-		$this->service = \Aimeos\MShop::create( $context, 'order/base/service' )->create();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
+		$this->service = \Aimeos\MShop::create( $context, 'order/service' )->create();
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
 	}
@@ -78,7 +78,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateEmptyConfig()
 	{
-		$part = ['order/base/service'];
+		$part = ['order/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -95,7 +95,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'delivery' => false,
 				'payment' => false
 		) );
-		$part = ['order/base/service'];
+		$part = ['order/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -128,7 +128,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 			'delivery' => false,
 			'payment' => false
 		) );
-		$part = ['order/base/service'];
+		$part = ['order/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -158,7 +158,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'delivery' => null,
 				'payment' => null
 		) );
-		$part = ['order/base/service'];
+		$part = ['order/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 

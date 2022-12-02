@@ -107,7 +107,7 @@ class PropertyMatch
 		}
 
 		$list = map( $value );
-		$list->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+		$list->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		if( $this->getProductItems( $list->getProductId()->unique(), $map )->count() !== count( $list ) )
 		{

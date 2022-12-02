@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 class BasketValuesTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 	private $serviceItem;
 
 
@@ -26,9 +26,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\BasketValues( $provider, $context, $this->serviceItem );
 		$this->object->setObject( $this->object );
 
-		$orderManager = \Aimeos\MShop::create( $context, 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
+		$orderProductManager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$productManager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $productManager->filter();
@@ -48,15 +46,15 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
-		$this->orderBase->addProduct( $orderProducts['CNC'] );
+		$this->order = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
+		$this->order->addProduct( $orderProducts['CNC'] );
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 		unset( $this->serviceItem );
 	}
 
@@ -102,7 +100,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->serviceItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertTrue( $result );
 	}
@@ -116,7 +114,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->serviceItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertFalse( $result );
 	}
@@ -130,7 +128,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->serviceItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertFalse( $result );
 	}

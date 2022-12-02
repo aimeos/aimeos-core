@@ -202,20 +202,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
-		$parentIds = [];
+		$parentids = [];
 
 		foreach( $items as $item ) {
-			$parentIds[] = $item->getId();
+			$parentids[] = $item->getId();
 		}
 
-		if( count( $parentIds ) != 2 ) {
+		if( count( $parentids ) != 2 ) {
 			throw new \RuntimeException( 'Not all categories found!' );
 		}
 
-		$parentIds[] = 0;
+		$parentids[] = 0;
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
+		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentids ) );
 
 		$tree = $this->object->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, $search );
 
@@ -280,12 +280,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->find( 'root', ['text'] );
 
-		$parentId = $item->getId();
+		$parentid = $item->getId();
 		$item->setId( null );
 		$item->setLabel( 'Root child' );
 		$item->setCode( 'new-root' );
-		$resultInsert = $this->object->insert( $item, $parentId );
-		$this->object->move( $item->getId(), $parentId, $parentId );
+		$resultInsert = $this->object->insert( $item, $parentid );
+		$this->object->move( $item->getId(), $parentid, $parentid );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;

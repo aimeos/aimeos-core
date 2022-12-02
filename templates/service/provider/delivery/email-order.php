@@ -12,19 +12,18 @@ $csv = function( string $type, string $id, array $data ) {
 
 foreach( $this->get( 'orderItems', [] ) as $orderItem )
 {
-	$baseItem = $orderItem->getBaseItem();
-	$data = ['order.ordernumber' => $orderItem->getOrderNumber()] + $orderItem->toArray() + $baseItem->toArray();
+	$data = ['order.ordernumber' => $orderItem->getOrderNumber()] + $orderItem->toArray();
 
 	echo $csv( 'invoice', $orderItem->getId(), $data );
 
-	foreach( $baseItem->getAddresses()->krsort() as $type => $addresses )
+	foreach( $orderItem->getAddresses()->krsort() as $type => $addresses )
 	{
 		foreach( $addresses as $address ) {
 			echo $csv( 'address', $orderItem->getId(), $address->toArray() );
 		}
 	}
 
-	foreach( $baseItem->getProducts() as $product )
+	foreach( $orderItem->getProducts() as $product )
 	{
 		$list = $product->toArray();
 
@@ -43,7 +42,7 @@ foreach( $this->get( 'orderItems', [] ) as $orderItem )
 		echo $csv( 'product', $orderItem->getId(), $list );
 	}
 
-	foreach( $baseItem->getServices()->krsort() as $type => $services )
+	foreach( $orderItem->getServices()->krsort() as $type => $services )
 	{
 		foreach( $services as $service )
 		{

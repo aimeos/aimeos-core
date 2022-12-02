@@ -167,8 +167,8 @@ class TestBase
 	extends \Aimeos\MShop\Service\Provider\Base
 	implements \Aimeos\MShop\Service\Provider\Iface
 {
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
-		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		return $orderServiceItem;
 	}

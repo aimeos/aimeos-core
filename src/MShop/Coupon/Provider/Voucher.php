@@ -62,10 +62,10 @@ class Voucher
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
+	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$context = $this->context();
 
@@ -115,7 +115,7 @@ class Voucher
 
 		$search = $manager->filter();
 		$expr = [
-			$search->compare( '==', 'order.base.product.id', $orderProductId ),
+			$search->compare( '==', 'order.product.id', $orderProductId ),
 			$search->compare( '==', 'order.statuspayment', $status ),
 		];
 		$search->setConditions( $search->and( $expr ) );
@@ -129,28 +129,19 @@ class Voucher
 
 
 	/**
-	 * Filters the order base IDs and removes those order which aren't payed
+	 * Filters the order IDs and removes those order which aren't payed
 	 *
-	 * @param string[] $baseIds List of order base IDs to check
-	 * @return string[] List of filtered order base IDs
+	 * @param string[] $ids List of order IDs to check
+	 * @return string[] List of filtered order IDs
 	 */
-	protected function filterOrderBaseIds( array $baseIds ) : array
+	protected function filterOrderIds( array $ids ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
-		$search = $manager->filter();
-		$expr = [
-			$search->compare( '==', 'order.baseid', $baseIds ),
-			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
-		];
-		$search->setConditions( $search->and( $expr ) );
+		$search = $manager->filter()->add( 'order.id', '==', $ids )
+			->add( 'order.statuspayment', '>=', \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
-		$list = [];
-		foreach( $manager->search( $search ) as $orderItem ) {
-			$list[] = $orderItem->getBaseId();
-		}
-
-		return $list;
+		return $manager->search( $search )->getId()->all();
 	}
 
 
@@ -159,13 +150,13 @@ class Voucher
 	 *
 	 * @param string $orderProductId Unique ID of the ordered product
 	 * @param string $currencyId Three letter ISO currecy code
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
 	 * @throws \Aimeos\MShop\Coupon\Exception If there's a mismatch between the currency IDs (order product vs. given one)
 	 */
-	protected function getOrderProductItem( string $orderProductId, string $currencyId ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	protected function getOrderProductItem( string $orderProductId, string $currencyId ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
 		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$orderProduct = $manager->get( $orderProductId );
 		$currency = $orderProduct->getPrice()->getCurrencyId();
@@ -189,27 +180,27 @@ class Voucher
 	protected function getUsedRebate( string $code ) : float
 	{
 		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
+		$manager = \Aimeos\MShop::create( $context, 'order/coupon' );
 
 		$search = $manager->filter()->slice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', $code ) );
+		$search->setConditions( $search->compare( '==', 'order.coupon.code', $code ) );
 
-		$baseIds = $prodIds = [];
+		$orderIds = $prodIds = [];
 		foreach( $manager->search( $search ) as $orderCouponItem )
 		{
 			$prodIds[] = $orderCouponItem->getProductId();
-			$baseIds[] = $orderCouponItem->getBaseId();
+			$orderIds[] = $orderCouponItem->getParentId();
 		}
-		$baseIds = $this->filterOrderBaseIds( $baseIds );
+		$orderIds = $this->filterOrderIds( $orderIds );
 
 
 
-		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$search = $manager->filter();
 		$expr = [
-			$search->compare( '==', 'order.base.product.id', $prodIds ),
-			$search->compare( '==', 'order.base.product.baseid', $baseIds ),
+			$search->compare( '==', 'order.product.id', $prodIds ),
+			$search->compare( '==', 'order.product.parentid', $orderIds ),
 		];
 		$search->setConditions( $search->and( $expr ) );
 
@@ -225,13 +216,13 @@ class Voucher
 	/**
 	 * Adds an attribute with the remaining rebate to the order products
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts Order product items
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $orderProducts Order product items
 	 * @param float $remaining Remaining rebate
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Modified order product items
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] Modified order product items
 	 */
 	protected function setOrderAttributeRebate( array $orderProducts, float $remaining ) : array
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'order/base/product/attribute' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/product/attribute' );
 
 		$orderAttrItem = $manager->create();
 		$orderAttrItem->setValue( number_format( $remaining, 2, '.', '' ) );

@@ -172,10 +172,10 @@ class ProductFreeOptions
 
 	/** Updates the price of the product
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Ordered product for updating the price
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Ordered product with updated price
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $product Ordered product for updating the price
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Ordered product with updated price
 	 */
-	protected function updatePrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	protected function updatePrice( \Aimeos\MShop\Order\Item\Product\Iface $product ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
 		$attrQtys = $attrTypes = [];
 		$context = $this->context();

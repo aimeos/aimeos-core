@@ -89,10 +89,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'order' )
-			->getSubManager( 'base' )->getSubManager( 'service' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'order/service' )->create();
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
 	}
 
 

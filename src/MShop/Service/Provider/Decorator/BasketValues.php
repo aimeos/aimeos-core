@@ -71,10 +71,10 @@ class BasketValues
 	/**
 	 * Checks for the min/max order value.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return bool True if the basket matches the constraints, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool
 	{
 		$price = $base->getPrice();
 		$currency = $price->getCurrencyId();

@@ -61,13 +61,13 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->getSubManager( 'base' );
-		$search = $orderBaseManager->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
-		$result = $orderBaseManager->search( $search )->toArray();
+		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
+		$search = $orderManager->filter();
+		$search->setConditions( $search->compare( '==', 'order.price', '672.00' ) );
+		$result = $orderManager->search( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found' );
+			throw new \RuntimeException( 'No order item found' );
 		}
 
 		$price = $this->object->calcPrice( $item );
@@ -79,21 +79,21 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$orderBaseManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/base' );
+		$orderManager = \Aimeos\MShop::create( \TestHelper::context(), 'order' );
 		$localeManager = \Aimeos\MShop::create( \TestHelper::context(), 'locale' );
 
 		$localeItem = $localeManager->create();
 
-		$orderBaseDeItem = $orderBaseManager->create();
+		$orderDeItem = $orderManager->create();
 		$localeItem->setLanguageId( 'de' );
-		$orderBaseDeItem->setLocale( $localeItem );
+		$orderDeItem->setLocale( $localeItem );
 
-		$orderBaseEnItem = $orderBaseManager->create();
+		$orderEnItem = $orderManager->create();
 		$localeItem->setLanguageId( 'en' );
-		$orderBaseEnItem->setLocale( $localeItem );
+		$orderEnItem->setLocale( $localeItem );
 
-		$this->assertFalse( $this->object->isAvailable( $orderBaseDeItem ) );
-		$this->assertTrue( $this->object->isAvailable( $orderBaseEnItem ) );
+		$this->assertFalse( $this->object->isAvailable( $orderDeItem ) );
+		$this->assertTrue( $this->object->isAvailable( $orderEnItem ) );
 	}
 
 	public function testIsImplemented()

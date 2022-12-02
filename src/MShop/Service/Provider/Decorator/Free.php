@@ -65,10 +65,10 @@ class Free
 	/**
 	 * Checks if the service provider should be available.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		$value = $basket->getPrice()->getValue();
 

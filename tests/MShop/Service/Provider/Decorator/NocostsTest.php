@@ -29,7 +29,7 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()->getMock();
 
 		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
-		$this->basket = $orderManager->getSubManager( 'base' )->create()->off(); // remove plugins
+		$this->basket = $orderManager->create()->off(); // remove plugins
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Nocosts( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -58,13 +58,13 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns an order product item
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
 	 */
 	protected function getOrderProduct()
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
 
 		$price = $priceManager->create();
 		$price->setValue( '20.00' )->setCosts( '5.00' );

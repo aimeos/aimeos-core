@@ -47,10 +47,10 @@ abstract class Base
 	 * The result depends on the configured restrictions and it must be less or
 	 * equal to the passed price.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->provider->calcPrice( $base );
 	}
@@ -59,10 +59,10 @@ abstract class Base
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
+	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		if( $this->object()->isAvailable( $base ) ) {
 			$this->provider->update( $base );
@@ -77,10 +77,10 @@ abstract class Base
 	/**
 	 * Tests if a coupon should be granted.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
 	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool
 	{
 		return $this->provider->isAvailable( $base );
 	}

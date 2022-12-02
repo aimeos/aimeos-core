@@ -81,7 +81,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailable()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '1' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -92,7 +92,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableNotZero()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '1' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
 		$basket->getPrice()->setValue( '0.01' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
@@ -104,7 +104,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	public function testIsNotAvailableHidden()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '0' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
 
 		$this->assertFalse( $this->object->isAvailable( $basket ) );
 	}
@@ -113,7 +113,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableHiddenNotZero()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '0' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
 		$basket->getPrice()->setValue( '0.01' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );

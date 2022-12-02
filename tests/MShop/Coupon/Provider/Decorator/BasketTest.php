@@ -29,9 +29,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Basket( $provider, $context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
-		$orderManager = \Aimeos\MShop::create( $context, 'order' );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
+		$orderProductManager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$productManager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $productManager->filter();
@@ -51,7 +49,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 

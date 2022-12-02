@@ -110,7 +110,7 @@ class Taxrates
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$addrpay = $order->getAddress( 'payment' );
 		$addrship = $order->getAddress( 'delivery' );
@@ -127,7 +127,7 @@ class Taxrates
 
 		$taxrate = $staterates[$address->getState()] ?? $taxrates[$address->getCountryId()];
 
-		if( $value instanceof \Aimeos\MShop\Order\Item\Base\Product\Iface )
+		if( $value instanceof \Aimeos\MShop\Order\Item\Product\Iface )
 		{
 			$value->getPrice()->setTaxrate( $taxrate );
 			return $value;

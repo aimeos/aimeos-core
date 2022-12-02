@@ -23,10 +23,10 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create()->setConfig( ['single-number-max' => 10] );
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off(); // remove event listeners
 
 		$this->products = [];
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/product' );
 
 		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'product' );
 		$search = $manager->filter();

@@ -79,10 +79,10 @@ class Product
 	/**
 	 * Checks if the products are withing the allowed code is allowed for the service provider.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		$codes = $this->getProductCodes( $basket );
 
@@ -116,10 +116,10 @@ class Product
 	/**
 	 * Returns the products codes for the products in the basket
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object with ordered products included
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object with ordered products included
 	 * @return array List of product codes
 	 */
-	protected function getProductCodes( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	protected function getProductCodes( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		$codes = [];
 

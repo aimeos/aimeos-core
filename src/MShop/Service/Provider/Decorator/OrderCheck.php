@@ -81,10 +81,10 @@ class OrderCheck
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		$context = $this->context();
 		$config = $this->getServiceItem()->getConfig();
@@ -99,7 +99,7 @@ class OrderCheck
 		{
 			$search = $manager->filter( true );
 			$expr = array(
-				$search->compare( '==', 'order.base.customerid', $customerId ),
+				$search->compare( '==', 'order.customerid', $customerId ),
 				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED ),
 				$search->getConditions(),
 			);
@@ -117,7 +117,7 @@ class OrderCheck
 
 			$search = $manager->filter( true );
 			$expr = array(
-				$search->compare( '==', 'order.base.customerid', $customerId ),
+				$search->compare( '==', 'order.customerid', $customerId ),
 				$search->compare( '>=', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
 				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 				$search->getConditions(),

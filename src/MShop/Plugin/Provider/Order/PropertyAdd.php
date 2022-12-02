@@ -56,7 +56,7 @@ class PropertyAdd
 	{
 		parent::__construct( $context, $item );
 
-		$this->orderAttrManager = \Aimeos\MShop::create( $context, 'order/base/product/attribute' );
+		$this->orderAttrManager = \Aimeos\MShop::create( $context, 'order/product/attribute' );
 	}
 
 
@@ -119,7 +119,7 @@ class PropertyAdd
 		}
 
 		$map = map( $value );
-		$map->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+		$map->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		$products = $this->getProductItems( $map->getProductId()->unique()->all() );
 
@@ -138,13 +138,13 @@ class PropertyAdd
 	/**
 	 * Adds the product properties as attribute items to the order product item
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Order product containing attributes
 	 * @param \Aimeos\Map $products List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
 	 * @param string[] $types List of property types to add
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Modified order product item
 	 */
-	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
-	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	protected function addAttributes( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct,
+	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
 		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
 			return $orderProduct;

@@ -47,11 +47,11 @@ abstract class Base
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @param array $options Selected options by customer from frontend
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $basket, array $options = [] ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
@@ -102,10 +102,10 @@ abstract class Base
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Iface $basket ) : array
 	{
 		return [];
 	}
@@ -148,10 +148,10 @@ abstract class Base
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, RMS, etc. -> in separate decorators
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		return true;
 	}
@@ -242,12 +242,12 @@ abstract class Base
 	 *
 	 * @param array $map Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
-	 * @return array List of \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface objects
+	 * @return array List of \Aimeos\MShop\Order\Item\Service\Attribute\Iface objects
 	 */
 	protected function attributes( array $map, string $type ) : array
 	{
 		$list = [];
-		$manager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order/service' );
 
 		foreach( $map as $key => $value ) {
 			$list[] = $manager->createAttributeItem()->setType( $type )->setCode( $key )->setValue( $value );
@@ -345,14 +345,14 @@ abstract class Base
 	/**
 	 * Returns the order service matching the given code from the basket
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param string $code Code of the service item that should be returned
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order service item
 	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
 	 */
-	protected function getBasketService( \Aimeos\MShop\Order\Item\Base\Iface $basket, string $type,
-		string $code ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	protected function getBasketService( \Aimeos\MShop\Order\Item\Iface $basket, string $type,
+		string $code ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		$msg = $this->context->translate( 'mshop', 'Service not available' );
 

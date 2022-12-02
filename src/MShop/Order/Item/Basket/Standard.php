@@ -27,9 +27,9 @@ class Standard
 	 * Initializes the object
 	 *
 	 * @param array $values Associative list of key/value pairs with order status properties
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $item Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface|null $item Basket object
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $item = null )
+	public function __construct( array $values = [], \Aimeos\MShop\Order\Item\Iface $item = null )
 	{
 		parent::__construct( 'order.basket.', $values );
 		$this->item = $item;
@@ -51,9 +51,9 @@ class Standard
 	/**
 	 * Returns the basket object.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null $basket Basket object
+	 * @return \Aimeos\MShop\Order\Item\Iface|null $basket Basket object
 	 */
-	public function getItem() : ?\Aimeos\MShop\Order\Item\Base\Iface
+	public function getItem() : ?\Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->item;
 	}
@@ -62,10 +62,10 @@ class Standard
 	/**
 	 * Sets the basket object.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
 	 */
-	public function setItem( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface
 	{
 		$this->item = $basket;
 		return $this->setModified();

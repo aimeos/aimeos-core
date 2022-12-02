@@ -32,7 +32,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create();
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $order ) );
 	}
 
@@ -42,9 +42,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$prodManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
-		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create();
-		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->create();
+		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+		$product = \Aimeos\MShop::create( $this->context, 'order/product' )->create();
+		$attribute = \Aimeos\MShop::create( $this->context, 'order/product/attribute' )->create();
 
 		$attribute = $attribute->setQuantity( 2 )->setCode( 'size' )->setType( 'config' )
 			->setAttributeId( $attrManager->find( 'xs', [], 'product', 'size' )->getId() );

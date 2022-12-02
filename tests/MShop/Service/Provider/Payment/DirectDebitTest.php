@@ -20,7 +20,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
-		$this->ordServItem = \Aimeos\MShop::create( $context, 'order/base/service' )->create();
+		$this->ordServItem = \Aimeos\MShop::create( $context, 'order/service' )->create();
 		$serviceItem = \Aimeos\MShop::create( $context, 'service' )->create();
 		$serviceItem->setCode( 'test' );
 
@@ -59,10 +59,10 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
 		] );
 
-		$order = $orderManager->search( $search, ['order/base', 'order/base/address'] )
+		$order = $orderManager->search( $search, ['order/address'] )
 			->first( new \RuntimeException( 'No order found' ) );
 
-		$config = $this->object->getConfigFE( $order->getBaseItem() );
+		$config = $this->object->getConfigFE( $order );
 
 		$this->assertArrayHasKey( 'directdebit.accountowner', $config );
 		$this->assertArrayHasKey( 'directdebit.accountno', $config );
@@ -120,11 +120,11 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attrItem );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attrItem );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
 

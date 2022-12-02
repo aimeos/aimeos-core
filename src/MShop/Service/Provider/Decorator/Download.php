@@ -75,10 +75,10 @@ class Download
 	 * attribute resp. if "download.all" is "0" and at least one product
 	 * contains no download attribute.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
 		if( (bool) $this->getConfigValue( 'download.all' ) === true )
 		{

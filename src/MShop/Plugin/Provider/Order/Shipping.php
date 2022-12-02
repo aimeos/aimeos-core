@@ -111,11 +111,11 @@ class Shipping
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$services = $order->getServices();
 		$currency = $order->getPrice()->getCurrencyId();
-		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_DELIVERY;
 		$threshold = $this->getItemBase()->getConfigValue( 'threshold/' . $currency );
 
 		if( $threshold && ( $serviceItems = $services->get( $type ) ) )
@@ -141,7 +141,7 @@ class Shipping
 	/**
 	 * Tests if the shipping threshold is reached and updates the price accordingly
 	 *
-	 * @param \Aimeos\Map $orderProducts List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param \Aimeos\Map $orderProducts List of ordered products implementing \Aimeos\MShop\Order\Item\Product\Iface
 	 * @param string $threshold Threshold for the actual currency
 	 * @return bool True if threshold is reached, false if not
 	 */
@@ -151,7 +151,7 @@ class Shipping
 
 		foreach( $orderProducts as $product )
 		{
-			if( ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) === 0 ) {
+			if( ( $product->getFlags() & \Aimeos\MShop\Order\Item\Product\Base::FLAG_IMMUTABLE ) === 0 ) {
 				$sum = $sum->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 		}

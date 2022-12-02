@@ -98,13 +98,13 @@ class Postal
 	/**
 	 * Checks if the postal code is allowed for the service provider.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
-		$paymentType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
-		$deliveryType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
+		$paymentType = \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT;
+		$deliveryType = \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY;
 
 
 		if( ( $addresses = $basket->getAddress( $deliveryType ) ) !== [] )

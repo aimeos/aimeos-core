@@ -22,9 +22,9 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off(); // remove event listeners
 
-		$this->address = \Aimeos\MShop::create( $context, 'order/base/address' )
+		$this->address = \Aimeos\MShop::create( $context, 'order/address' )
 			->create()->setLastName( 'Available' );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( $context, $this->plugin );
@@ -75,12 +75,12 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testEmptyConfig()
 	{
-		$value = ['order/base/address'];
+		$value = ['order/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
-		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
+		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY );
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 	}
@@ -89,23 +89,23 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateAddressesNotAvailable()
 	{
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => false,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => false
 		) );
-		$value = ['order/base/address'];
+		$value = ['order/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => null,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => null
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => null,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => null
 		) );
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => true,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => true,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => true
 		) );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
@@ -115,27 +115,27 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateAddressesAvailable()
 	{
-		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
+		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY );
 
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => null,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => null
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => null,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => null
 		) );
-		$value = ['order/base/address'];
+		$value = ['order/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => true,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => true,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => true
 		) );
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
-				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY => false,
+				\Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT => false
 		) );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );

@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$locale = \TestHelper::context()->locale();
 		$price = new \Aimeos\MShop\Price\Item\Standard();
 
-		$this->basket = new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale, [] );
+		$this->basket = new \Aimeos\MShop\Order\Item\Standard( $price, $locale, [] );
 		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values, $this->basket );
 	}
 
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $this->object->getItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $this->object->getItem() );
 	}
 
 

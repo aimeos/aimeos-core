@@ -112,11 +112,11 @@ class ProductPrice
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( !in_array( 'order/base/product', (array) $value ) ) {
+		if( !in_array( 'order/product', (array) $value ) ) {
 			return $value;
 		}
 
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$changedProducts = [];
 		$attrIds = $prodIds = map();
@@ -124,7 +124,7 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE
+			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Product\Base::FLAG_IMMUTABLE
 				|| $this->getConfigValue( 'ignore-modified' ) && $item->getPrice()->isModified()
 			) {
 				unset( $orderProducts[$pos] );
@@ -213,14 +213,14 @@ class ProductPrice
 	/**
 	 * Returns the actual price for the given order product.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Ordered product
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Ordered product
 	 * @param \Aimeos\MShop\Product\Item\Iface $product Product with prices
 	 * @param \Aimeos\MShop\Product\Item\Iface|null $parent Parent product with prices on NULL if no parent is available
 	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
 	 * @param int $pos Position of the product in the basket
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
-	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
+	private function getPrice( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct,
 		\Aimeos\MShop\Product\Item\Iface $product, ?\Aimeos\MShop\Product\Item\Iface $parent,
 		\Aimeos\Map $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
 	{

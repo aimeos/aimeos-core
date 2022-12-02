@@ -36,26 +36,26 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 
 
 	/**
-	 * Returns the associated order base item
+	 * Returns the associated order item
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item
 	 */
-	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface;
+	public function getOrderItem() : ?\Aimeos\MShop\Order\Item\Iface;
 
 	/**
-	 * Returns the ID of the base order
+	 * Returns the ID of the order
 	 *
-	 * @return string|null ID of the base order
+	 * @return string|null ID of the order
 	 */
-	public function getOrderBaseId() : ?string;
+	public function getOrderId() : ?string;
 
 	/**
-	 * Sets the ID of the base order item which the customer bought
+	 * Sets the ID of the order item which the customer bought
 	 *
-	 * @param string $id ID of the base order
+	 * @param string $id ID of the order
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setOrderBaseId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setOrderId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the ID of the ordered product
