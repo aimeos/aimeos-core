@@ -651,7 +651,10 @@ class Standard
 		 */
 		$path = 'mshop/subscription/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address', 'coupon', 'product', 'service'], $withsub );
+		$list = $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+		$list += \Aimeos\MShop::create( $this->context(), 'order' )->getSearchAttributes();
+
+		return $list;
 	}
 
 
@@ -865,7 +868,7 @@ class Standard
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'order', $manager, $name );
+		return $this->getSubManagerBase( 'subscription', $manager, $name );
 	}
 
 
