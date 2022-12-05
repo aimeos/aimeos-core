@@ -1033,7 +1033,7 @@ class Standard extends Base
 		) {
 			$manager = \Aimeos\MShop::create( $context, 'customer' );
 			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['customer.id' => $ids] );
-			$custItems = $manager->search( $search, $ref );
+			$custItems = $manager->search( $search, $ref )->all();
 		}
 
 		foreach( $map as $id => $row )
