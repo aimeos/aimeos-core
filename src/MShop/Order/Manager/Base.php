@@ -626,7 +626,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
 	{
 		$products = $basket->getProducts();
-		$pos = $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.product.position' );
+		$pos = (int) $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.product.position' );
 
 		foreach( $products as $product )
 		{
