@@ -840,7 +840,7 @@ abstract class Base
 	 */
 	protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item )
 	{
-		$price = clone $this->price;
+		$price = clone $this->getPrice();
 		$price->addItem( $item );
 	}
 

@@ -11,7 +11,7 @@
 
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
-use \Aimeos\MShop\Order\Item\Address;
+use \Aimeos\MShop\Order\Item\Address\Base;
 
 
 /**

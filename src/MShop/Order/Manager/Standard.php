@@ -865,7 +865,7 @@ class Standard extends Base
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
-		$map = $items = $custItems = [];
+		$map = $custItems = [];
 		$required = ['order'];
 
 		/** mshop/order/manager/sitemode
