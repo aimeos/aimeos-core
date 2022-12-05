@@ -61,8 +61,6 @@ abstract class Base
 	}
 
 
-
-
 	/**
 	 * Returns the company name.
 	 *
