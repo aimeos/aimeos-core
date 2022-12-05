@@ -44,9 +44,9 @@ class Standard extends Base
 	/**
 	 * Returns the type of the price.
 	 *
-	 * @return string|null Type of the price
+	 * @return string Type of the price
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'price.type', 'default' );
 	}

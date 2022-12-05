@@ -38,9 +38,9 @@ class Standard
 	/**
 	 * Returns the type of the rule.
 	 *
-	 * @return string|null Rule type
+	 * @return string Rule type
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'rule.type', 'catalog' );
 	}

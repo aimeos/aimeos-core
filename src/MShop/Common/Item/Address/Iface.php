@@ -30,23 +30,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 
 
 	/**
-	 * Returns the order base ID the address belongs to.
-	 *
-	 * @return string|null Base ID
-	 */
-	public function getParentId() : ?string;
-
-
-	/**
-	 * Sets the order base ID the address belongs to.
-	 *
-	 * @param string|null $value New base ID
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
-	 */
-	public function setParentId( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
-
-
-	/**
 	 * Returns the company name.
 	 *
 	 * @return string Company name

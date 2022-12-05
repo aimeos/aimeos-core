@@ -71,11 +71,11 @@ class Standard
 	/**
 	 * Returns the type of the text item.
 	 *
-	 * @return string|null Type of the text item
+	 * @return string Type of the text item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
-		return $this->get( 'text.type' );
+		return $this->get( 'text.type', '' );
 	}
 
 

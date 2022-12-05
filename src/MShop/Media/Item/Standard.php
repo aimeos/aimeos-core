@@ -120,9 +120,9 @@ class Standard
 	/**
 	 * Returns the type code of the media item.
 	 *
-	 * @return string|null Type code of the media item
+	 * @return string Type code of the media item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'media.type', 'default' );
 	}

@@ -98,11 +98,11 @@ class Standard
 	/**
 	 * Returns the type code of the attribute item.
 	 *
-	 * @return string|null Type code of the attribute item
+	 * @return string Type code of the attribute item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
-		return $this->get( 'attribute.type' );
+		return $this->get( 'attribute.type', '' );
 	}
 
 

@@ -39,9 +39,9 @@ class Standard
 	/**
 	 * Returns the type of the plugin.
 	 *
-	 * @return string|null Plugin type
+	 * @return string Plugin type
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'plugin.type', 'order' );
 	}

@@ -25,7 +25,7 @@ class OrderConnectTables extends Base
 
 	protected function address()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_address', 'baseid' ) ) {
 			return $this;
@@ -51,7 +51,7 @@ class OrderConnectTables extends Base
 
 	protected function coupon()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_coupon', 'baseid' ) ) {
 			return $this;
@@ -76,7 +76,7 @@ class OrderConnectTables extends Base
 
 	protected function product()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_product', 'baseid' ) ) {
 			return $this;
@@ -102,7 +102,7 @@ class OrderConnectTables extends Base
 
 	protected function service()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_service', 'baseid' ) ) {
 			return $this;
@@ -128,7 +128,7 @@ class OrderConnectTables extends Base
 
 	protected function subscription()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_subscription', 'baseid' ) ) {
 			return $this;

@@ -87,11 +87,11 @@ class Standard
 	/**
 	 * Returns the type code of the product tag item.
 	 *
-	 * @return string|null Type code of the product tag item
+	 * @return string Type code of the product tag item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
-		return $this->get( 'tag.type' );
+		return $this->get( 'tag.type', '' );
 	}
 
 

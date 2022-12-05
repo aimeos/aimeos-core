@@ -104,9 +104,9 @@ class Standard
 	/**
 	 * Returns the type of the product item.
 	 *
-	 * @return string|null Type of the product item
+	 * @return string Type of the product item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'product.type', 'default' );
 	}

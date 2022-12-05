@@ -59,9 +59,9 @@ class Standard
 	/**
 	 * Returns the type code of the product stock item.
 	 *
-	 * @return string|null Type code of the product stock item
+	 * @return string Type code of the product stock item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( 'stock.type', 'default' );
 	}

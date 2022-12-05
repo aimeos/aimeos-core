@@ -71,11 +71,11 @@ class Standard
 	/**
 	 * Returns the type of the service item if available.
 	 *
-	 * @return string|null Service item type
+	 * @return string Service item type
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
-		return $this->get( 'service.type' );
+		return $this->get( 'service.type', '' );
 	}
 
 
