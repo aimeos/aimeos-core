@@ -22,10 +22,9 @@ interface Iface
 	/**
 	 * Returns the type of the item.
 	 *
-	 * @return string|null Type of the item
-	 * @todo 2022.01 Remove NULL from return
+	 * @return string Type of the item
 	 */
-	public function getType() : ?string;
+	public function getType() : string;
 
 	/**
 	 * Sets the new type of the item.

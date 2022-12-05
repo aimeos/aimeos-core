@@ -120,67 +120,65 @@ abstract class Base
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-			$path = $this->getConfigPath();
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$path = $this->getConfigPath();
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null ) {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-			} else {
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-			}
+		if( $id === null ) {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
+		} else {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+		}
 
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getCompany() );
-			$stmt->bind( $idx++, $item->getVatId() );
-			$stmt->bind( $idx++, $item->getSalutation() );
-			$stmt->bind( $idx++, $item->getTitle() );
-			$stmt->bind( $idx++, $item->getFirstname() );
-			$stmt->bind( $idx++, $item->getLastname() );
-			$stmt->bind( $idx++, $item->getAddress1() );
-			$stmt->bind( $idx++, $item->getAddress2() );
-			$stmt->bind( $idx++, $item->getAddress3() );
-			$stmt->bind( $idx++, $item->getPostal() );
-			$stmt->bind( $idx++, $item->getCity() );
-			$stmt->bind( $idx++, $item->getState() );
-			$stmt->bind( $idx++, $item->getCountryId() );
-			$stmt->bind( $idx++, $item->getLanguageId() );
-			$stmt->bind( $idx++, $item->getTelephone() );
-			$stmt->bind( $idx++, $item->getEmail() );
-			$stmt->bind( $idx++, $item->getTelefax() );
-			$stmt->bind( $idx++, $item->getWebsite() );
-			$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getBirthday() );
-			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getCompany() );
+		$stmt->bind( $idx++, $item->getVatId() );
+		$stmt->bind( $idx++, $item->getSalutation() );
+		$stmt->bind( $idx++, $item->getTitle() );
+		$stmt->bind( $idx++, $item->getFirstname() );
+		$stmt->bind( $idx++, $item->getLastname() );
+		$stmt->bind( $idx++, $item->getAddress1() );
+		$stmt->bind( $idx++, $item->getAddress2() );
+		$stmt->bind( $idx++, $item->getAddress3() );
+		$stmt->bind( $idx++, $item->getPostal() );
+		$stmt->bind( $idx++, $item->getCity() );
+		$stmt->bind( $idx++, $item->getState() );
+		$stmt->bind( $idx++, $item->getCountryId() );
+		$stmt->bind( $idx++, $item->getLanguageId() );
+		$stmt->bind( $idx++, $item->getTelephone() );
+		$stmt->bind( $idx++, $item->getEmail() );
+		$stmt->bind( $idx++, $item->getTelefax() );
+		$stmt->bind( $idx++, $item->getWebsite() );
+		$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+		$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getBirthday() );
+		$stmt->bind( $idx++, $date ); //mtime
+		$stmt->bind( $idx++, $context->editor() );
 
-			if( $id !== null ) {
-				$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			} else {
-				$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-				$stmt->bind( $idx++, $date ); // ctime
-			}
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
+			$stmt->bind( $idx++, $date ); // ctime
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			if( $id === null && $fetch === true ) {
-				$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-			}
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
+		}
 
-			$item->setId( $id );
-
-		return $item;
+		return $item->setId( $id );
 	}
 
 
