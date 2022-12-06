@@ -485,18 +485,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPositionReset()
 	{
-		$return = $this->object->setPosition( null );
+		$return = $this->object->setPosition( 0 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Address\Iface::class, $return );
-		$this->assertEquals( null, $this->object->getPosition() );
+		$this->assertEquals( 0, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testSetPositionInvalid()
-	{
-		$this->expectException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->setPosition( -1 );
 	}
 
 

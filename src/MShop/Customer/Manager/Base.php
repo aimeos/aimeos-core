@@ -213,7 +213,7 @@ abstract class Base
 		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$helper = $this->getPasswordHelper();
-		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
 
 		return new \Aimeos\MShop\Customer\Item\Standard(
 			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $this->salt

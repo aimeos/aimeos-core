@@ -34,29 +34,6 @@ class Standard
 
 
 	/**
-	 * Returns the order base ID the address belongs to.
-	 *
-	 * @return string|null Base ID
-	 */
-	public function getParentId() : ?string
-	{
-		return $this->get( 'order.address.parentid' );
-	}
-
-
-	/**
-	 * Sets the order base ID the address belongs to.
-	 *
-	 * @param string|null $value New base ID
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
-	 */
-	public function setParentId( ?string $value ) : \Aimeos\MShop\Order\Item\Address\Iface
-	{
-		return $this->set( 'order.address.parentid', $value );
-	}
-
-
-	/**
 	 * Returns the original customer address ID.
 	 *
 	 * @return string Customer address ID
@@ -76,38 +53,6 @@ class Standard
 	public function setAddressId( string $addrid ) : \Aimeos\MShop\Order\Item\Address\Iface
 	{
 		return $this->set( 'order.address.addressid', $addrid );
-	}
-
-
-	/**
-	 * Returns the position of the address in the order.
-	 *
-	 * @return integer|null Address position in the order from 0-n
-	 */
-	public function getPosition() : ?int
-	{
-		if( ( $result = $this->get( 'order.address.position' ) ) !== null ) {
-			return $result;
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Sets the position of the address within the list of ordered addresses
-	 *
-	 * @param int|null $value Address position in the order from 0-n or null for resetting the position
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
-	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
-	 */
-	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Address\Iface
-	{
-		if( $value < 0 ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );
-		}
-
-		return $this->set( 'order.address.position', $value );
 	}
 
 
@@ -166,9 +111,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.address.parentid': !$private ?: $item = $item->setParentId( $value ); break;
 				case 'order.address.addressid': $item = $item->setAddressId( $value ); break;
-				case 'order.address.position': $item = $item->setPosition( $value ); break;
 				case 'order.address.type': $item = $item->setType( $value ); break;
 				default: continue 2;
 			}
@@ -191,12 +134,7 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['order.address.type'] = $this->getType();
-		$list['order.address.position'] = $this->getPosition();
 		$list['order.address.addressid'] = $this->getAddressId();
-
-		if( $private === true ) {
-			$list['order.address.parentid'] = $this->getParentId();
-		}
 
 		return $list;
 	}

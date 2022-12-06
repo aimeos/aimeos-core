@@ -53,7 +53,7 @@ abstract class Base
 	 * @param string $prefix Key prefix that should be used for toArray()/fromArray() like "customer.address."
 	 * @param array $values Associative list of key/value pairs containing address data
 	 */
-	public function __construct( string $prefix, array $values )
+	public function __construct( string $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -565,6 +565,52 @@ abstract class Base
 
 
 	/**
+	 * Returns the customer ID this address belongs to
+	 *
+	 * @return string|null Customer ID of the address
+	 */
+	public function getParentId() : ?string
+	{
+		return $this->get( $this->prefix . 'parentid' );
+	}
+
+
+	/**
+	 * Sets the new customer ID this address belongs to
+	 *
+	 * @param string|null $parentid New customer ID of the address
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 */
+	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( $this->prefix . 'parentid', $parentid );
+	}
+
+
+	/**
+	 * Returns the position of the address item.
+	 *
+	 * @return int Position of the address item
+	 */
+	public function getPosition() : int
+	{
+		return $this->get( $this->prefix . 'position', 0 );
+	}
+
+
+	/**
+	 * Sets the Position of the address item.
+	 *
+	 * @param int $position Position of the address item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 */
+	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( $this->prefix . 'position', $position );
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -630,6 +676,7 @@ abstract class Base
 
 			switch( $key )
 			{
+				case 'parentid': !$private ?: $item = $item->setParentId( $value ); break;
 				case 'salutation': $item = $item->setSalutation( $value ); break;
 				case 'company': $item = $item->setCompany( $value ); break;
 				case 'vatid': $item = $item->setVatID( $value ); break;
@@ -651,6 +698,7 @@ abstract class Base
 				case 'longitude': $item = $item->setLongitude( $value ); break;
 				case 'latitude': $item = $item->setLatitude( $value ); break;
 				case 'birthday': $item = $item->setBirthday( $value ); break;
+				case 'position': $item = $item->setPosition( $value ); break;
 				default: continue 2;
 			}
 
@@ -692,6 +740,11 @@ abstract class Base
 		$list[$this->prefix . 'longitude'] = $this->getLongitude();
 		$list[$this->prefix . 'latitude'] = $this->getLatitude();
 		$list[$this->prefix . 'birthday'] = $this->getBirthday();
+		$list[$this->prefix . 'position'] = $this->getPosition();
+
+		if( $private === true ) {
+			$list[$this->prefix . 'parentid'] = $this->getParentId();
+		}
 
 		return $list;
 	}
