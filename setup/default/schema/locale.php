@@ -46,7 +46,7 @@ return array(
 			$table->string( 'label' )->default( '' );
 			$table->string( 'icon' )->default( '' );
 			$table->string( 'logo' )->default( '{}' );
-			$table->text( 'config' )->default( '{}' );
+			$table->config();
 			$table->refid( 'refid' )->default( '' );
 			$table->string( 'theme', 32 )->null( true );
 			$table->smallint( 'level' )->default( 0 );

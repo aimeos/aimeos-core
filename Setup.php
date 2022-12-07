@@ -205,6 +205,13 @@ class Setup
 				->default( '' );
 		} );
 
+		\Aimeos\Upscheme\Schema\Table::macro( 'config', function( string $name = 'config' ) {
+			return $this->text( $name )
+				->opt( 'charset', 'utf8mb4', 'mysql' )
+				->opt( 'collation', 'utf8mb4_general_ci', 'mysql' )
+				->default( '{}' );
+		} );
+
 		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) {
 			return $this->string( $name, 64 )
 				->opt( 'charset', 'utf8mb3', 'mysql' )

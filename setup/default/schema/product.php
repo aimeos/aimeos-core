@@ -38,7 +38,7 @@ return array(
 			$table->code( 'code' );
 			$table->string( 'label' )->default( '' );
 			$table->string( 'url' )->default( '' );
-			$table->text( 'config' )->default( '' );
+			$table->config();
 			$table->startend();
 			$table->float( 'scale' )->default( 0 );
 			$table->decimal( 'rating', 4 )->default( 0 );
@@ -90,7 +90,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' )->default( '' );
+			$table->config();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();

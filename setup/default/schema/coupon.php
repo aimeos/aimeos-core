@@ -17,7 +17,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'label' )->default( '' );
 			$table->string( 'provider' );
-			$table->text( 'config' )->default( '{}' );
+			$table->config();
 			$table->startend();
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();

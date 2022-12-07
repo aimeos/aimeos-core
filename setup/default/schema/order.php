@@ -245,7 +245,7 @@ return array(
 			$table->decimal( 'tax', 14, 4 )->default( '0.0000' );
 			$table->smallint( 'taxflag' )->default( 1 );
 			$table->smallint( 'status' )->default( -1 );
-			$table->text( 'config' )->default( '' );
+			$table->config();
 			$table->meta();
 
 			$table->foreign( 'parentid', 'mshop_order_service', 'id', 'fk_msordsetx_parentid' );

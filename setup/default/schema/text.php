@@ -78,7 +78,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' )->default( '{}' );
+			$table->config();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();

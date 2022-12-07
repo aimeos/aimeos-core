@@ -38,7 +38,7 @@ return array(
 			$table->string( 'provider' );
 			$table->string( 'label' )->default( '' );
 			$table->startend();
-			$table->text( 'config' )->default( '{}' );
+			$table->config();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
