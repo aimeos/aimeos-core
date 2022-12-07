@@ -1109,5 +1109,11 @@ return array(
 			'sqlsrv' => 'SELECT @@IDENTITY',
 			'sqlanywhere' => 'SELECT @@IDENTITY',
 		),
+		'subdomains' => [
+			'order/address' => 'order/address',
+			'order/coupon' => 'order/coupon',
+			'order/product' => 'order/product',
+			'order/service' => 'order/service',
+		],
 	),
 );

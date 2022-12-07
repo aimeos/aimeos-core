@@ -131,6 +131,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setRelatedId( ?string $id ) : \Aimeos\MShop\Order\Item\Iface;
+
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
