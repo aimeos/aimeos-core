@@ -135,7 +135,6 @@ class Standard
 	use \Aimeos\Base\Logger\Traits;
 
 
-	private $conn;
 	private $loglevel;
 	private $requestid;
 
@@ -242,16 +241,6 @@ class Standard
 		 */
 		$this->loglevel = $config->get( 'madmin/log/manager/loglevel', \Aimeos\Base\Logger\Iface::NOTICE );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
-	}
-
-
-	/**
-	 * Remove open database connections
-	 */
-	public function __sleep()
-	{
-		unset( $this->conn );
-		return get_object_vars( $this );
 	}
 
 
@@ -466,8 +455,8 @@ class Standard
 		}
 
 		$id = $item->getId();
-		$conn = $this->getConnection();
 		$columns = $this->object()->getSaveAttributes();
+		$conn = $this->context()->db( $this->getResourceName(), true );
 
 		if( $id === null )
 		{
@@ -609,9 +598,9 @@ class Standard
 			$id = $this->newId( $conn, 'madmin/log/manager/newid' );
 		}
 
-		$item->setId( $id );
+		$conn->close();
 
-		return $item;
+		return $item->setId( $id );
 	}
 
 
@@ -766,20 +755,5 @@ class Standard
 	protected function createItemBase( array $values = [] ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
 		return new \Aimeos\MAdmin\Log\Item\Standard( $values );
-	}
-
-
-	/**
-	 * Returns the connection for logging
-	 *
-	 * @return \Aimeos\Base\DB\Connection\Iface Database connection
-	 */
-	protected function getConnection() : \Aimeos\Base\DB\Connection\Iface
-	{
-		if( !isset( $this->conn ) ) {
-			$this->conn = $this->context()->db( $this->getResourceName(), true );
-		}
-
-		return $this->conn;
 	}
 }
