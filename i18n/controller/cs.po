@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-05 07:41+0200\n"
+"POT-Creation-Date: 2022-12-07 11:38+0100\n"
 "PO-Revision-Date: 2015-09-29 12:30+0000\n"
 "Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>, 2016\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Soubor %1$s nenalezen"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"
