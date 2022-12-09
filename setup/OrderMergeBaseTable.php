@@ -32,18 +32,53 @@ class OrderMergeBaseTable extends Base
 		}
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_order' ) . ' AS dest, ( SELECT * FROM ' . $db->qi( 'mshop_order_base' ) . ' ) AS src
-			SET dest.' . $db->qi( 'customerid' ) . ' = src.' . $db->qi( 'customerid' ) . ',
-				dest.' . $db->qi( 'langid' ) . ' = src.' . $db->qi( 'langid' ) . ',
-				dest.' . $db->qi( 'currencyid' ) . ' = src.' . $db->qi( 'currencyid' ) . ',
-				dest.' . $db->qi( 'price' ) . ' = src.' . $db->qi( 'price' ) . ',
-				dest.' . $db->qi( 'costs' ) . ' = src.' . $db->qi( 'costs' ) . ',
-				dest.' . $db->qi( 'rebate' ) . ' = src.' . $db->qi( 'rebate' ) . ',
-				dest.' . $db->qi( 'tax' ) . ' = src.' . $db->qi( 'tax' ) . ',
-				dest.' . $db->qi( 'taxflag' ) . ' = src.' . $db->qi( 'taxflag' ) . ',
-				dest.' . $db->qi( 'customerref' ) . ' = src.' . $db->qi( 'customerref' ) . ',
-				dest.' . $db->qi( 'comment' ) . ' = src.' . $db->qi( 'comment' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			UPDATE ' . $db->qi( 'mshop_order' ) . ' AS dest
+			SET ' . $db->qi( 'customerid' ) . ' = (
+				SELECT ' . $db->qi( 'customerid' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'langid' ) . ' = (
+				SELECT ' . $db->qi( 'langid' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'currencyid' ) . ' = (
+				SELECT ' . $db->qi( 'currencyid' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'price' ) . ' = (
+				SELECT ' . $db->qi( 'price' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'costs' ) . ' = (
+				SELECT ' . $db->qi( 'costs' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'rebate' ) . ' = (
+				SELECT ' . $db->qi( 'rebate' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'tax' ) . ' = (
+				SELECT ' . $db->qi( 'tax' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'taxflag' ) . ' = (
+				SELECT ' . $db->qi( 'taxflag' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'customerref' ) . ' = (
+				SELECT ' . $db->qi( 'customerref' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			),' . $db->qi( 'comment' ) . ' = (
+				SELECT ' . $db->qi( 'comment' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order_base' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'id' ) . '
+			)
 		' );
 
 		$db->dropForeign( 'mshop_order', 'fk_msord_baseid' )

@@ -37,10 +37,17 @@ class OrderConnectTables extends Base
 		$db->table( 'mshop_order_base_address' )->bigint( 'parentid' )->null( true )->up();
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_order_base_address' ) . ' AS dest,
-				( SELECT * FROM ' . $db->qi( 'mshop_order' ) . ' ) AS src
-			SET dest.' . $db->qi( 'parentid' ) . ' = src.' . $db->qi( 'id' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			UPDATE ' . $db->qi( 'mshop_order_base_address' ) . ' AS dest
+			SET ' . $db->qi( 'parentid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
 		' );
 
 		$db->dropColumn( 'mshop_order_base_address', 'baseid' );
@@ -62,10 +69,17 @@ class OrderConnectTables extends Base
 		$db->table( 'mshop_order_base_coupon' )->bigint( 'parentid' )->null( true )->up();
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_order_base_coupon' ) . ' AS dest,
-				( SELECT * FROM ' . $db->qi( 'mshop_order' ) . ' ) AS src
-			SET dest.' . $db->qi( 'parentid' ) . ' = src.' . $db->qi( 'id' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			UPDATE ' . $db->qi( 'mshop_order_base_coupon' ) . ' AS dest
+			SET ' . $db->qi( 'parentid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
 		' );
 
 		$db->dropColumn( 'mshop_order_base_coupon', 'baseid' );
@@ -88,10 +102,17 @@ class OrderConnectTables extends Base
 		$db->table( 'mshop_order_base_product' )->bigint( 'parentid' )->null( true )->up();
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_order_base_product' ) . ' AS dest,
-				( SELECT * FROM ' . $db->qi( 'mshop_order' ) . ' ) AS src
-			SET dest.' . $db->qi( 'parentid' ) . ' = src.' . $db->qi( 'id' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			UPDATE ' . $db->qi( 'mshop_order_base_product' ) . ' AS dest
+			SET ' . $db->qi( 'parentid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
 		' );
 
 		$db->dropColumn( 'mshop_order_base_product', 'baseid' );
@@ -102,7 +123,7 @@ class OrderConnectTables extends Base
 
 	protected function service()
 	{
-		$db = $this->db( 'db-order' );
+		$db =$this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_service', 'baseid' ) ) {
 			return $this;
@@ -114,10 +135,17 @@ class OrderConnectTables extends Base
 		$db->table( 'mshop_order_base_service' )->bigint( 'parentid' )->null( true )->up();
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_order_base_service' ) . ' AS dest,
-				( SELECT * FROM ' . $db->qi( 'mshop_order' ) . ' ) AS src
-			SET dest.' . $db->qi( 'parentid' ) . ' = src.' . $db->qi( 'id' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			UPDATE ' . $db->qi( 'mshop_order_base_service' ) . ' AS dest
+			SET ' . $db->qi( 'parentid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
 		' );
 
 		$db->dropColumn( 'mshop_order_base_service', 'baseid' );
@@ -128,7 +156,7 @@ class OrderConnectTables extends Base
 
 	protected function subscription()
 	{
-		$db = $this->db( 'db-order' );
+		$db =$this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_subscription', 'baseid' ) ) {
 			return $this;
@@ -139,10 +167,17 @@ class OrderConnectTables extends Base
 		$db->table( 'mshop_subscription' )->bigint( 'orderid' )->null( true )->up();
 
 		$db->exec( '
-			UPDATE ' . $db->qi( 'mshop_subscription' ) . ' AS dest,
-				( SELECT * FROM ' . $db->qi( 'mshop_order' ) . ' ) AS src
-			SET dest.' . $db->qi( 'orderid' ) . ' = src.' . $db->qi( 'id' ) . '
-			WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			UPDATE ' . $db->qi( 'mshop_subscription' ) . ' AS dest
+			SET ' . $db->qi( 'orderid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
+			WHERE dest.' . $db->qi( 'baseid' ) . ' = (
+				SELECT ' . $db->qi( 'id' ) . '
+				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
+				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+			)
 		' );
 
 		$db->dropColumn( 'mshop_subscription', 'baseid' );
