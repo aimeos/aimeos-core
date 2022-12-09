@@ -387,7 +387,7 @@ return array(
 			'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 			'mysql' => "DO GET_LOCK('aimeos.catalog', -1)", // LOCK TABLE implicit commits transactions
 			'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
-			'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN EXCLUSIVE MODE',
+			'pgsql' => 'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE',
 			'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 			'sqlsrv' => "EXEC sp_getapplock @Resource = 'aimeos.catalog', @LockMode = 'Exclusive'",
 		),
