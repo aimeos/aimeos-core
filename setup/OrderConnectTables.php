@@ -123,7 +123,7 @@ class OrderConnectTables extends Base
 
 	protected function service()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_order_base_service', 'baseid' ) ) {
 			return $this;
@@ -156,7 +156,7 @@ class OrderConnectTables extends Base
 
 	protected function subscription()
 	{
-		$db =$this->db( 'db-order' );
+		$db = $this->db( 'db-order' );
 
 		if( !$db->hasColumn( 'mshop_subscription', 'baseid' ) ) {
 			return $this;
