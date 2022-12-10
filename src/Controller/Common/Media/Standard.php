@@ -480,7 +480,7 @@ class Standard
 		$siteId = $this->context->locale()->getSiteId();
 
 		// the "d" after {siteid} is the required extension for Windows (no dots at the and allowed)
-		return "${siteId}d/${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
+		return "{$siteId}d/{$type}/{$filename[0]}/{$filename[1]}/{$filename}{$ext}";
 	}
 
 
