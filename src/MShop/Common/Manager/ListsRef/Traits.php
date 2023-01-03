@@ -168,33 +168,30 @@ trait Traits
 			$prefix . '.lists.type'
 		] );
 
-		if( is_array( $domains ) )
-		{
-			$list = [];
-			$expr = [$search->compare( '==', $prefix . '.lists.parentid', $ids )];
+		$list = [];
+		$len = strlen( $prefix );
+		$expr = [$search->compare( '==', $prefix . '.lists.parentid', $ids )];
 
-			foreach( $domains as $key => $domain )
+		foreach( $domains as $key => $domain )
+		{
+			if( is_array( $domain ) )
 			{
-				if( is_array( $domain ) )
-				{
-					$list[] = $search->and( [
-						$search->compare( '==', $prefix . '.lists.domain', $key ),
-						$search->compare( '==', $prefix . '.lists.type', $domain ),
-					] );
-				}
-				else
-				{
-					$list[] = $search->compare( '==', $prefix . '.lists.domain', $domain );
-				}
-			}
+				$key = !strncmp( $key, $prefix . '/', $len + 1 ) ? [$key, substr( $key, $len + 1 )] : $key; // remove prefix
 
-			$expr[] = $search->or( $list );
-			$search->setConditions( $search->and( $expr ) );
+				$list[] = $search->and( [
+					$search->compare( '==', $prefix . '.lists.domain', $key ),
+					$search->compare( '==', $prefix . '.lists.type', $domain ),
+				] );
+			}
+			else
+			{
+				$domain = !strncmp( $domain, $prefix . '/', $len + 1 ) ? [$domain, substr( $domain, $len + 1 )] : $domain; // remove prefix
+				$list[] = $search->compare( '==', $prefix . '.lists.domain', $domain );
+			}
 		}
-		else
-		{
-			$search->setConditions( $search->compare( '==', $prefix . '.lists.parentid', $ids ) );
-		}
+
+		$expr[] = $search->or( $list );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $manager->search( $search, $domains );
 	}

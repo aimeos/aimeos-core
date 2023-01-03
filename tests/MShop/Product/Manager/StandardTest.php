@@ -433,12 +433,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$item = $this->object->find( 'CNC', ['catalog', 'locale/site', 'supplier', 'stock'] );
+		$item = $this->object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
 		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
 		$this->assertEquals( 1, count( $item->getStockItems() ) );
+	}
+
+
+	public function testSearchItemsDomains()
+	{
+		$item = $this->object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
+		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
+		$this->assertEquals( 0, count( $item->getStockItems() ) );
 	}
 
 
