@@ -31,12 +31,14 @@ abstract class Base
 	 * @param \Aimeos\Map $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param float $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
+	 * @param string|null $siteId Site ID of the prices which should be used
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
-	public function getLowestPrice( \Aimeos\Map $priceItems, float $quantity, string $currencyId = null ) : \Aimeos\MShop\Price\Item\Iface
+	public function getLowestPrice( \Aimeos\Map $priceItems, float $quantity, string $currencyId = null,
+		string $siteId = null ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$priceList = $this->getPriceList( $priceItems, $currencyId );
+		$priceList = $this->getPriceList( $priceItems, $currencyId, $siteId );
 
 		if( ( $price = $priceList->first() ) === null )
 		{
@@ -82,18 +84,34 @@ abstract class Base
 	 *
 	 * @param \Aimeos\Map $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
+	 * @param string|null $siteId Site ID of the prices which should be used
 	 * @return \Aimeos\Map Associative list of quantity as keys and price item as value
 	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item
 	 */
-	protected function getPriceList( \Aimeos\Map $priceItems, ?string $currencyId ) : \Aimeos\Map
+	protected function getPriceList( \Aimeos\Map $priceItems, ?string $currencyId, ?string $siteId ) : \Aimeos\Map
 	{
 		$list = map();
+		$siteIds = $this->context()->locale()->getSitePath();
 		$priceItems->implements( \Aimeos\MShop\Price\Item\Iface::class, true );
 
 		foreach( $priceItems as $priceItem )
 		{
-			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
+			if( $currencyId && $currencyId !== $priceItem->getCurrencyId() ) {
 				continue;
+			}
+
+			if( $siteId )
+			{
+				if( in_array( $siteId, $siteIds ) ) // if product is inherited, inherit price too
+				{
+					if( !in_array( $priceItem->getSiteId(), $siteIds ) ) {
+						continue;
+					}
+				}
+				elseif( $priceItem->getSiteId() !== $siteId ) // Use price from specific site originally passed as parameter
+				{
+					continue;
+				}
 			}
 
 			$qty = (string) $priceItem->getQuantity();
