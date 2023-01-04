@@ -231,17 +231,9 @@ class ProductPrice
 			$prodPrices = $parent->getRefItems( 'price', 'default', 'default' );
 		}
 
-		if( $prodPrices->isEmpty() )
-		{
-			$pid = $orderProduct->getProductId();
-			$ppid = $orderProduct->getParentProductId();
-			$codes = ['product' => [$pos => 'product.price']];
-
-			$msg = $this->context()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
-		}
-
 		$currency = $orderProduct->getPrice()->getCurrencyId();
+		$prodPrices = $this->getPrices( $orderProduct, $prodPrices );
+
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 		$price = clone $priceManager->getLowestPrice( $prodPrices, $orderProduct->getQuantity(), $currency );
 
@@ -260,5 +252,44 @@ class ProductPrice
 
 		// reset product rebates like in the basket controller
 		return $price->setRebate( '0.00' );
+	}
+
+
+	/**
+	 * Returns the available prices for the ordered product
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Ordered product
+	 * @param \Aimeos\Map $prodPrices List of all product prices (also from different sites)
+	 */
+	protected function getPrices( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct, \Aimeos\Map $prodPrices ) : \Aimeos\Map
+	{
+		$siteIds = $this->context()->locale()->getSitePath();
+
+		if( in_array( $orderProduct->getSiteId(), $siteIds ) )
+		{
+			// if product is inherited, inherit price too
+			$prices = $prodPrices->filter( function( $item ) use ( $siteIds ) {
+				return in_array( $item->getSiteId(), $siteIds );
+			} );
+		}
+		else
+		{
+			// Use price from specific site originally passed as parameter
+			$prices = $prodPrices->filter( function( $item ) use ( $orderProduct ) {
+				return $item->getSiteId() === $orderProduct->getSiteId();
+			} );
+		}
+
+		if( $prices->isEmpty() )
+		{
+			$pid = $orderProduct->getProductId();
+			$ppid = $orderProduct->getParentProductId();
+			$codes = ['product' => [$pos => 'product.price']];
+
+			$msg = $this->context()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
+		}
+
+		return $prices;
 	}
 }
