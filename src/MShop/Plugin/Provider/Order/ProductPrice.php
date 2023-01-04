@@ -215,7 +215,7 @@ class ProductPrice
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Ordered product
 	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
-	 * @param \Aimeos\Map List of available product prices
+	 * @param \Aimeos\Map $prices List of available product prices
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
 	private function getPrice( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct,
@@ -267,7 +267,7 @@ class ProductPrice
 		{
 			$codes = ['product' => [$pos => 'product.price']];
 			$msg = $this->context()->translate( 'mshop', 'No price for product available' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
 		return $prices;
