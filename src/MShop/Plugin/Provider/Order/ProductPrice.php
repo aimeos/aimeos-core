@@ -150,8 +150,8 @@ class ProductPrice
 				continue; // Product isn't available or excluded
 			}
 
-			// fetch prices of articles/sub-products
-			$price = $this->getPrice( $orderProduct, $product, $parent, $attributes, $pos );
+			// fetch price of articles/sub-products
+			$price = $this->getPrice( $orderProduct, $attributes, $this->prices( $product, $parent, $pos ) );
 
 			if( $orderProduct->getPrice()->compare( $price ) === false )
 			{
@@ -214,28 +214,18 @@ class ProductPrice
 	 * Returns the actual price for the given order product.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Ordered product
-	 * @param \Aimeos\MShop\Product\Item\Iface $product Product with prices
-	 * @param \Aimeos\MShop\Product\Item\Iface|null $parent Parent product with prices on NULL if no parent is available
 	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
-	 * @param int $pos Position of the product in the basket
+	 * @param \Aimeos\Map List of available product prices
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
 	private function getPrice( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct,
-		\Aimeos\MShop\Product\Item\Iface $product, ?\Aimeos\MShop\Product\Item\Iface $parent,
-		\Aimeos\Map $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
+		\Aimeos\Map $attributes, \Aimeos\Map $prices ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$prodPrices = $product->getRefItems( 'price', 'default', 'default' );
-
-		// fetch prices of selection/parent products
-		if( $parent && $prodPrices->isEmpty() ) {
-			$prodPrices = $parent->getRefItems( 'price', 'default', 'default' );
-		}
-
+		$siteId = $orderProduct->getSiteId();
 		$currency = $orderProduct->getPrice()->getCurrencyId();
-		$prodPrices = $this->getPrices( $orderProduct, $prodPrices );
 
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-		$price = clone $priceManager->getLowestPrice( $prodPrices, $orderProduct->getQuantity(), $currency );
+		$price = clone $priceManager->getLowestPrice( $prices, $orderProduct->getQuantity(), $currency, $siteId );
 
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
@@ -245,7 +235,7 @@ class ProductPrice
 
 			if( !$attrPrices->isEmpty() )
 			{
-				$lowPrice = $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity() );
+				$lowPrice = $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity(), $currency, $siteId );
 				$price = $price->addItem( $lowPrice, $orderAttribute->getQuantity() );
 			}
 		}
@@ -258,35 +248,25 @@ class ProductPrice
 	/**
 	 * Returns the available prices for the ordered product
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface $orderProduct Ordered product
-	 * @param \Aimeos\Map $prodPrices List of all product prices (also from different sites)
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product with prices
+	 * @param \Aimeos\MShop\Product\Item\Iface|null $parent Parent product with prices on NULL if no parent is available
+	 * @param int $pos Position of the product in the basket
+	 * @return \Aimeos\Map List of available product prices
 	 */
-	protected function getPrices( \Aimeos\MShop\Order\Item\Product\Iface $orderProduct, \Aimeos\Map $prodPrices ) : \Aimeos\Map
+	protected function prices( \Aimeos\MShop\Product\Item\Iface $product,
+		?\Aimeos\MShop\Product\Item\Iface $parent, int $pos ) : \Aimeos\Map
 	{
-		$siteIds = $this->context()->locale()->getSitePath();
+		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-		if( in_array( $orderProduct->getSiteId(), $siteIds ) )
-		{
-			// if product is inherited, inherit price too
-			$prices = $prodPrices->filter( function( $item ) use ( $siteIds ) {
-				return in_array( $item->getSiteId(), $siteIds );
-			} );
-		}
-		else
-		{
-			// Use price from specific site originally passed as parameter
-			$prices = $prodPrices->filter( function( $item ) use ( $orderProduct ) {
-				return $item->getSiteId() === $orderProduct->getSiteId();
-			} );
+		// fetch prices of selection/parent products
+		if( $parent && $prices->isEmpty() ) {
+			$prices = $parent->getRefItems( 'price', 'default', 'default' );
 		}
 
 		if( $prices->isEmpty() )
 		{
-			$pid = $orderProduct->getProductId();
-			$ppid = $orderProduct->getParentProductId();
 			$codes = ['product' => [$pos => 'product.price']];
-
-			$msg = $this->context()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
+			$msg = $this->context()->translate( 'mshop', 'No price for product available' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
 		}
 
