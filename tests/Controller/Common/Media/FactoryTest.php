@@ -5,7 +5,7 @@ namespace Aimeos\Controller\Common\Media;
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2016-2022
+ * @copyright Aimeos (aimeos.org), 2016-2023
  */
 class FactoryTest extends \PHPUnit\Framework\TestCase
 {
