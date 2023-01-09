@@ -959,6 +959,7 @@ class Standard
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_media.previews', $row['media.id'], $config );
 					$this->context()->logger()->warning( $msg, 'core/media' );
+					$row['media.previews'] = [];
 				}
 				$map[$row['media.id']] = $row;
 			}

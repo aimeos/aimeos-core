@@ -1063,6 +1063,7 @@ class Standard
 			{
 				$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
 				$this->context()->logger()->warning( $msg, 'core/product' );
+				$row['product.config'] = [];
 			}
 
 			$map[$row['product.id']] = $row;

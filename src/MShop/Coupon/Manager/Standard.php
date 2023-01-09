@@ -712,6 +712,7 @@ class Standard
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_coupon.config', $row['id'], $config );
 						$context->logger()->warning( $msg, 'core/coupon' );
+						$row['coupon.config'] = [];
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
