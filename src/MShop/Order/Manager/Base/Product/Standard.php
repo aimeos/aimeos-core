@@ -1034,6 +1034,7 @@ class Standard
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product.taxrates', $row['order.base.product.id'], $config );
 						$this->context()->logger()->warning( $msg, 'core/order' );
+						$row['order.base.product.taxrates'] = [];
 					}
 
 					$price = $priceManager->create( [

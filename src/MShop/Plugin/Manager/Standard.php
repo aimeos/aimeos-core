@@ -732,6 +732,7 @@ class Standard
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['plugin.id'], $config );
 					$this->context()->logger()->warning( $msg, 'core/plugin' );
+					$row['plugin.config'] = [];
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
