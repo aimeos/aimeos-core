@@ -98,28 +98,14 @@ class Email
 
 
 	/**
-	 * Sends the email and updates the delivery status
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
-	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
-	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$this->send( [$order] );
-		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
-	}
-
-
-	/**
 	 * Sends the email with several orders and updates the delivery status
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
 	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
 	 */
-	public function processBatch( iterable $orders ) : \Aimeos\Map
+	public function push( iterable $orders ) : \Aimeos\Map
 	{
-		$this->send( $orders );
-		return map( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		return $this->send( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
 
@@ -157,8 +143,9 @@ class Email
 	 * Sends an e-mail for the given orders
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
+	 * @return \Aimeos\Map List of order items
 	 */
-	protected function send( iterable $orderItems )
+	protected function send( iterable $orderItems ) : \Aimeos\Map
 	{
 		$this->context()->mail()->create()
 			->to( (string) $this->getConfigValue( 'email.to' ) )
@@ -167,5 +154,7 @@ class Email
 			->attach( $this->getOrderContent( $orderItems ), 'orders.csv', 'text/plain' )
 			->text( $this->getEmailContent( $orderItems ) )
 			->send();
+
+		return map( $orderItems );
 	}
 }

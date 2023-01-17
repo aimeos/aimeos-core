@@ -197,9 +197,9 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
 	 * @return \Aimeos\Map Updated order item objects
 	 */
-	public function processBatch( iterable $orders ) : \Aimeos\Map
+	public function push( iterable $orders ) : \Aimeos\Map
 	{
-		return $this->provider->processBatch( $orders );
+		return $this->provider->push( $orders );
 	}
 
 

@@ -27,8 +27,8 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
+	public function push( iterable $orders ) : \Aimeos\Map
 	{
-		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PENDING );
+		return map( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PENDING );
 	}
 }

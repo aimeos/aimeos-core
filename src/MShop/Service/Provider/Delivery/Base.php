@@ -28,22 +28,6 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 
 
 	/**
-	 * Sends the details of all orders to the ERP system for further processing
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
-	 * @return \Aimeos\Map Updated order items
-	 */
-	public function processBatch( iterable $orders ) : \Aimeos\Map
-	{
-		foreach( $orders as $key => $order ) {
-			$orders[$key] = $this->object()->process( $order );
-		}
-
-		return map( $orders );
-	}
-
-
-	/**
 	 * Sets the delivery attributes in the given service.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem Order service item that will be added to the basket

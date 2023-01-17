@@ -68,31 +68,9 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testProcess()
+	public function testPush()
 	{
-		$order = $this->object->process( $this->getOrderItem() );
-		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
-		$xml = simplexml_load_file( $file );
-		unlink( $file );
-
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
-		$this->assertGreaterThan( 0, (string) $xml->orderitem[0]->{'order.ordernumber'} );
-		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.sitecode'} );
-		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
-		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
-		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
-		$this->assertEquals( 3, (string) $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->service->serviceitem[0]['type'] );
-		$this->assertEquals( 0, (string) $xml->orderitem[0]->service->serviceitem[0]['position'] );
-		$this->assertEquals( 9, (string) $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 2, (string) $xml->orderitem[0]->coupon->couponitem->count() );
-	}
-
-
-	public function testProcessBatch()
-	{
-		$orders = $this->object->processBatch( [$this->getOrderItem()] );
+		$orders = $this->object->push( [$this->getOrderItem()] );
 		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
 		$xml = simplexml_load_file( $file );
 		unlink( $file );

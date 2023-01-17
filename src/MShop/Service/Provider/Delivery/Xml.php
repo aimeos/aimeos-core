@@ -91,25 +91,12 @@ class Xml
 
 
 	/**
-	 * Creates the XML files and updates the delivery status
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
-	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
-	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$this->createFile( $this->createXml( [$order] ) );
-		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
-	}
-
-
-	/**
 	 * Sends the details of all orders to the ERP system for further processing
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
 	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
 	 */
-	public function processBatch( iterable $orders ) : \Aimeos\Map
+	public function push( iterable $orders ) : \Aimeos\Map
 	{
 		$this->createFile( $this->createXml( $orders ) );
 

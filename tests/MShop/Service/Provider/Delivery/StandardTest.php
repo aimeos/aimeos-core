@@ -46,23 +46,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testProcess()
+	public function testPush()
 	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order' );
-		$order = $manager->create();
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
-		$result = $this->object->process( $order );
-
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, $result->getStatusDelivery() );
-	}
-
-
-	public function testProcessBatch()
-	{
-		$manager = \Aimeos\MShop::create( $this->context, 'order' );
-		$order = $manager->create();
-
-		$result = $this->object->processBatch( [$order] );
+		$result = $this->object->push( [$order] );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, $result->getStatusDelivery()->first() );
 	}
