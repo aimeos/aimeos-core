@@ -164,7 +164,7 @@ class Standard
 			'code' => 'attribute.type',
 			'internalcode' => 'matt."type"',
 			'label' => 'Type',
-			'type' => 'integer',
+			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
