@@ -189,7 +189,7 @@ class Standard
 			'code' => 'coupon.config',
 			'internalcode' => 'mcou."config"',
 			'label' => 'Configuration',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

@@ -220,7 +220,7 @@ class Standard extends Base
 			'code' => 'catalog.config',
 			'internalcode' => 'mcat."config"',
 			'label' => 'Config',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

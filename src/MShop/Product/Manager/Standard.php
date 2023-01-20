@@ -227,8 +227,8 @@ class Standard
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
-			'label' => 'Config',
-			'type' => 'string',
+			'label' => 'Configuration',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
