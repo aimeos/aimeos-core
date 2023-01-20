@@ -202,6 +202,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
+		'media.previews' => array(
+			'label' => 'Preview URLs as JSON encoded string',
+			'code' => 'media.previews',
+			'internalcode' => 'mmed."previews"',
+			'type' => 'json',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
 		'media.filesystem' => array(
 			'label' => 'File sytem name',
 			'code' => 'media.filesystem',
