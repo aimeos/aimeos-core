@@ -190,7 +190,7 @@ class Standard
 			'label' => 'Config',
 			'code' => 'plugin.config',
 			'internalcode' => 'mplu."config"',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

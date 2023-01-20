@@ -189,7 +189,7 @@ class Standard
 			'label' => 'Config',
 			'code' => 'rule.config',
 			'internalcode' => 'mrul."config"',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

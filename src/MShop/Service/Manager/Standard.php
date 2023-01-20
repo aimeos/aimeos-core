@@ -209,8 +209,8 @@ class Standard
 		'service.config' => array(
 			'code' => 'service.config',
 			'internalcode' => 'mser."config"',
-			'label' => 'Config',
-			'type' => 'string',
+			'label' => 'Configuration',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

@@ -107,7 +107,7 @@ class Standard
 			'code' => 'attribute.lists.config',
 			'internalcode' => 'mattli."config"',
 			'label' => 'List config',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

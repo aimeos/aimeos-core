@@ -107,7 +107,7 @@ class Standard
 			'code' => 'product.lists.config',
 			'internalcode' => 'mproli."config"',
 			'label' => 'List config',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

@@ -101,7 +101,7 @@ class Standard
 			'code' => 'order.service.transaction.config',
 			'internalcode' => 'mordsetx."config"',
 			'label' => 'Transaction data',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.status' => array(
