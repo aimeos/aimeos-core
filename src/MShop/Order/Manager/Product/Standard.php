@@ -276,8 +276,8 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.product.count' => array(
-			'code' => 'order.product.count()',
+		'order.product:count' => array(
+			'code' => 'order.product:count()',
 			'internalcode' => '( SELECT COUNT(*) FROM mshop_order_product AS mordpr_count
 				WHERE mordpr."parentid" = mordpr_count."parentid" AND mordpr_count."prodid" = $1 )',
 			'label' => 'Order base product count, parameter(<product IDs>)',
@@ -285,8 +285,8 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.product.total' => array(
-			'code' => 'order.product.total()',
+		'order.product:total' => array(
+			'code' => 'order.product:total()',
 			'internalcode' => 'mordpr."quantity" * mordpr."price"',
 			'label' => 'Product price total',
 			'type' => 'float',
