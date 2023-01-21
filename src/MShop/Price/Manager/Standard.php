@@ -209,7 +209,7 @@ class Standard
 			'code' => 'price.taxrate',
 			'internalcode' => 'mpri."taxrate"',
 			'label' => 'Price tax rates as JSON encoded string',
-			'type' => 'string',
+			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.status' => array(
