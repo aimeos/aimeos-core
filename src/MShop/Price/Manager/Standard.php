@@ -212,6 +212,20 @@ class Standard
 			'type' => 'json',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
+		'price.taxrates' => array(
+			'code' => 'price.taxrates',
+			'internalcode' => 'mpri."taxrate"',
+			'label' => 'Price tax rates as JSON encoded string',
+			'type' => 'json',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'price.taxflag' => array(
+			'code' => 'price.taxflag',
+			'internalcode' => 'mpri."taxflag"',
+			'label' => 'If net (=0) or gross (=1) price',
+			'type' => 'boolean',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+		),
 		'price.status' => array(
 			'code' => 'price.status',
 			'internalcode' => 'mpri."status"',
