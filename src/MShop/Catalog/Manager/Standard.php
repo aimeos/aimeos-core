@@ -224,13 +224,6 @@ class Standard extends Base
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.position' => array(
-			'code' => 'catalog.position',
-			'internalcode' => 'mcat."nleft"',
-			'label' => 'Category position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
-		),
 		'catalog.ctime' => array(
 			'label' => 'Create date/time',
 			'code' => 'catalog.ctime',
@@ -262,6 +255,14 @@ class Standard extends Base
 			'label' => 'Catalog has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
+			'public' => false,
+		),
+		'sort:catalog:position' => array(
+			'code' => 'sort:catalog:position',
+			'internalcode' => 'mcat."nleft"',
+			'label' => 'Category position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
