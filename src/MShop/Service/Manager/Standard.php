@@ -196,8 +196,8 @@ class Standard
 			'code' => 'service.position',
 			'internalcode' => 'mser."pos"',
 			'label' => 'Position',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'type' => 'integer',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'service.status' => array(
 			'code' => 'service.status',
