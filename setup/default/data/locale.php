@@ -9,7 +9,7 @@
 return [
 
 	'locale/site' => [
-		'default' => ['locale.site.code' => 'default', 'locale.site.label' => 'Default'],
+		'default' => ['locale.site.code' => 'default', 'locale.site.label' => 'Aimeos'],
 	],
 
 	'locale' => [
