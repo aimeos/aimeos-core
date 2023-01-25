@@ -152,7 +152,7 @@ class Standard extends Base
 			'code' => 'order.invoiceno',
 			'internalcode' => 'mord."invoiceno"',
 			'label' => 'Invoice number',
-			'type' => 'integer',
+			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.relatedid' => array(
