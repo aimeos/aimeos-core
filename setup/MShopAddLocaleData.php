@@ -61,7 +61,6 @@ class MShopAddLocaleData extends Base
 		try
 		{
 			$localeItem = $localeManager->create();
-			$localeItem->set( 'site_id', $siteItem->getId() );
 			$localeItem->setSiteId( $siteItem->getSiteId() );
 			$localeItem->setLanguageId( 'en' );
 			$localeItem->setCurrencyId( 'EUR' );
@@ -166,7 +165,6 @@ class MShopAddLocaleData extends Base
 			}
 
 			$item = $localeManager->create()->fromArray( $dataset, true )
-				->set( 'site_id', $siteIds[$dataset['site']]['id'] )
 				->setSiteId( $siteIds[$dataset['site']]['site'] );
 
 			try {

@@ -484,6 +484,7 @@ class Standard
 
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$siteIds = explode( '.', trim( $item->getSiteId(), '.' ) );
 
 		foreach( $columns as $name => $entry ) {
 			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
@@ -495,7 +496,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $item->get( 'site_id' ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, end( $siteIds ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getSiteId() );
 
 		if( $id !== null ) {
