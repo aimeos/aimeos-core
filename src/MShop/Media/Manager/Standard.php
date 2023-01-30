@@ -359,7 +359,6 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
 	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
-	 * @todo 2023.01 Add to media manager interface
 	 */
 	public function copy( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface
 	{
@@ -765,7 +764,6 @@ class Standard
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param bool $force True to enforce creating new preview images
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
-	 * @todo 2023.01 Add to media manager interface
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{

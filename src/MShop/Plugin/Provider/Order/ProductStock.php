@@ -80,7 +80,6 @@ class ProductStock
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
 	 * @return array Associative list of basket product positions as keys and the error codes as values
-	 * @todo 2022.01 Store product ID and article ID separately in order product
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Iface $order ) : array
 	{

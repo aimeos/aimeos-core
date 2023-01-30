@@ -62,10 +62,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Returns the property values for the given type
 	 *
 	 * @param string $type Type of the properties
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\Map List of property values
-	 * @todo 2023.01 Add $active parameter to interface
 	 */
-	public function getProperties( string $type ) : \Aimeos\Map;
+	public function getProperties( string $type, bool $active = true ) : \Aimeos\Map;
 
 	/**
 	 * Returns the property item for the given type, language and value

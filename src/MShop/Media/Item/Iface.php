@@ -92,12 +92,12 @@ interface Iface
 	public function getPreview( $width = false ) : string;
 
 	/**
-	 * Returns all preview urls of the media item
+	 * Returns all preview urls for images of different sizes.
 	 *
+	 * @param bool $version TRUE to add file version as parameter, FALSE for path only
 	 * @return array Associative list of widths in pixels as keys and urls as values
-	 * @todo 2023.01 Add version parameter
 	 */
-	public function getPreviews() : array;
+	public function getPreviews( bool $version = false ) : array;
 
 	/**
 	 * Sets the new preview url of the media item.
@@ -118,10 +118,10 @@ interface Iface
 	/**
 	 * Returns the url of the media item.
 	 *
-	 * @return string|null URL of the media file
-	 * @todo 2023.01 Add version parameter
+	 * @param bool $version TRUE to add file version as parameter, FALSE for path only
+	 * @return string URL of the media file
 	 */
-	public function getUrl() : string;
+	public function getUrl( bool $version = false ) : string;
 
 	/**
 	 * Sets the new url of the media item.
