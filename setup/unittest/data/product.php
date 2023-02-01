@@ -597,7 +597,7 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 3,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'url', 'text.domain' => 'product',
-					'text.label' => 'cnc_metatitle', 'text.content' => 'Cafe-Noire-Cappuccino'
+					'text.label' => 'cnc_url', 'text.content' => 'Cafe-Noire-Cappuccino'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
@@ -776,7 +776,7 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 3,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'url', 'text.domain' => 'product',
-					'text.label' => 'cne_metatitle', 'text.content' => 'Cafe-Noire-Expresso'
+					'text.label' => 'cne_url', 'text.content' => 'Cafe-Noire-Expresso'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
