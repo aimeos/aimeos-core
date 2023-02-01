@@ -31,7 +31,7 @@ msgstr "Arquivado"
 
 #. Item status
 msgid "status:-1"
-msgstr "Revisado"
+msgstr "Review"
 
 #. Item status
 msgid "status:0"

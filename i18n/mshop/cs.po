@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Lukáš Bek, 2022
 # Martin Vyšohlíd <vysohlidm@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-05 07:41+0200\n"
+"POT-Creation-Date: 2022-12-07 11:38+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>, 2016\n"
+"Last-Translator: Lukáš Bek, 2022\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,15 +75,15 @@ msgstr "Adresa pro doménu \"%1$s\" není k dispozici"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa typu %1$s není dostupná"
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Adresa pro odstranění není dostupná"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adresa není dostupná"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -98,7 +99,7 @@ msgstr "Typ adresy \"%1$s\" mimo povolený rozsah"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Minimálně jeden znak je potřeba pro agregaci"
 
 #, php-format
 msgid "Basket empty"
@@ -106,7 +107,7 @@ msgstr "Košík je prázdný"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Koupený voucher je v měně %1$s, košík používá %2$s"
 
 #, php-format
 msgid "Cache object not available"
@@ -126,7 +127,7 @@ msgstr ""
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Kontrola dostupných adres v košíku se nezdařila"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
@@ -154,23 +155,23 @@ msgstr ""
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Kód obsahuje neplatné znaky: %1$s"
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Kód je příliš dlouhý"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Kód nesmí být delší než 255 znaků."
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Kód nesmí být delší než 32 znaků."
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Nastavení pro %1$s chybí."
 
 #, php-format
 msgid "Configuration invalid"
@@ -178,7 +179,7 @@ msgstr ""
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Nastavení není dostupné"
 
 #, php-format
 msgid "Configuration object not available"
@@ -190,10 +191,10 @@ msgstr ""
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Kupón v košíku již není platný"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Kupón již není platný"
 
 #, php-format
 msgid "Curl could not be initialized"
@@ -209,7 +210,7 @@ msgstr ""
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Hodnota datumu před %1$s"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
@@ -217,11 +218,11 @@ msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Duplicitní kód kupónu"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Duplicitní kód kupónu %1$s"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
@@ -229,23 +230,23 @@ msgstr ""
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Soubor %1$s nenalezen"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Soubor nebo složka %1$s neexistuje"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "objekt souboru systému není dostupný"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Status vložen z ukončené objednávky %1$s"
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Status vložen z ukončené objednávky %1$s"
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
@@ -257,7 +258,7 @@ msgstr ""
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID posledního vloženého záznamu databáze není dostupné"
 
 #. / Locale ID %1$s
 #, php-format
@@ -266,23 +267,23 @@ msgstr ""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Neplatný kód ISO země"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Neplatný kód ISO země %1$s"
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Neplatný kód ISO měny"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Neplatný kód ISO měny %1$s"
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Neplatný kód ISO jazyku"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -391,11 +392,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Špatná adrese stránky URL %1$s"
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Věc nemůže být smazána. ID stránky věci je jiné, než aktuální ID stránky."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
@@ -581,19 +582,19 @@ msgstr ""
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Není řetězec"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Není čas"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Není pravda/lež hodnota"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Není celé číslo"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
@@ -601,7 +602,7 @@ msgstr ""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operace není podporovaná"
 
 #, php-format
 msgid ""
@@ -653,7 +654,7 @@ msgstr ""
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Heslo objektu není dostupné"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
@@ -684,7 +685,7 @@ msgid "PayPal Express: Wrong receiver email \"%1$s\""
 msgstr ""
 
 msgid "Payment costs"
-msgstr ""
+msgstr "Platební náklady"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
@@ -706,7 +707,7 @@ msgstr ""
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Cena není dostupná"
 
 #, php-format
 msgid "Process object not available"
@@ -714,7 +715,7 @@ msgstr ""
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Produkt není dostupný"
 
 #, php-format
 msgid ""
@@ -732,7 +733,7 @@ msgstr ""
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Produkt není dostupný"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
@@ -740,11 +741,11 @@ msgstr ""
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Produkt v košíku není dostupný"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Produkt není skladem"
 
 #, php-format
 msgid "Property item for removal not found"
@@ -792,11 +793,11 @@ msgstr ""
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Konfigurace vyhledávače není dostupná"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Odeslání objednávky selhalo: %1$s"
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
@@ -808,7 +809,7 @@ msgstr ""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Servis není dostupný"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
@@ -816,7 +817,7 @@ msgstr ""
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Objekt relace není k dispozici"
 
 #, php-format
 msgid ""
@@ -828,11 +829,11 @@ msgstr ""
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Stránka nemůže být přesunuta. ID stránky je jiné než předtím, ID stránky již existuje s jinou stránkou, nebo ID stránky již má nová."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Stránka kódu %1$s nenalezena"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
@@ -852,7 +853,7 @@ msgstr ""
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Maximální množství produktu je %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
@@ -860,23 +861,23 @@ msgstr ""
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Maximum produktů je %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Maximum všech produktů je %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Maximum pro vložení produktu je %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Minimální množství v košíku je %1$s"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Minimální množství je %1$d"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
@@ -892,7 +893,7 @@ msgstr ""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Celkový výsledek hodnoty nenalezen"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
@@ -908,7 +909,7 @@ msgstr "Nelze nazvat metodu \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Není možné vytvořit objednávku XML souboru %1$s"
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
@@ -920,7 +921,7 @@ msgstr ""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Neznámí vyhledávání slova %1$s"
 
 #, php-format
 msgid ""
@@ -930,4 +931,4 @@ msgstr ""
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Zobrazení objektu není dostupné"
