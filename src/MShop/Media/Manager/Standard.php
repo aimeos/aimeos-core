@@ -1093,7 +1093,7 @@ class Standard
 		foreach( $previews as $entry )
 		{
 			$maxwidth = $entry['maxwidth'] ?? null;
-			$maxheight = $entry['maxwidth'] ?? null;
+			$maxheight = $entry['maxheight'] ?? null;
 
 			$file = $media->scale( $maxwidth, $maxheight, $entry['force-size'] ?? 0 );
 			$width = $file->getWidth();
