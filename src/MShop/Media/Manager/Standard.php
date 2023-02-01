@@ -1105,7 +1105,7 @@ class Standard
 		{
 			$force = $entry['force-size'] ?? 0;
 			$maxwidth = $entry['maxwidth'] ?? null;
-			$maxheight = $entry['maxwidth'] ?? null;
+			$maxheight = $entry['maxheight'] ?? null;
 
 			if( $this->call( 'filterPreviews', $media, $domain, $type, $maxwidth, $maxheight, $force ) )
 			{
