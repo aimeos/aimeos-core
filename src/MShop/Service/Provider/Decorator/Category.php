@@ -110,7 +110,10 @@ class Category
 		}
 
 		$configCatalogIds = $this->getCatalogIds( explode( ',', $codes ) );
-		$treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds );
+
+		if( empty( $treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds ) ) ) {
+			return false;
+		}
 
 		$types = ['default', 'promotion'];
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
