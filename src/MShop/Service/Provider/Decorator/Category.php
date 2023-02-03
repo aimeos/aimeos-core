@@ -118,7 +118,8 @@ class Category
 		$types = ['default', 'promotion'];
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$filter = $manager->filter( true )->slice( 0, 1 );
+		// Fetch hidden product too (null for filter)
+		$filter = $manager->filter( null )->slice( 0, 1 );
 		$filter->add( 'product.id', '==', $prodIds )
 			->add( $filter->make( 'product:has', ['catalog', $types, $treeCatalogIds] ), '!=', null );
 
@@ -134,8 +135,9 @@ class Category
 	 */
 	protected function getCatalogIds( array $codes ) : array
 	{
+		// Fetch hidden categories too (null for filter)
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
-		$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
+		$filter = $manager->filter( null )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
 
 		return $manager->search( $filter )->keys()->all();
 	}
