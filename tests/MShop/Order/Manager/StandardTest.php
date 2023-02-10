@@ -568,9 +568,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$item = $this->object->search( $search, ['order/product'], $total )->first();
+		$item = $this->object->search( $search, ['order/address', 'order/coupon', 'order/product', 'order/service'], $total )->first();
 
+		$this->assertEquals( 2, count( $item->getAddresses() ) );
+		$this->assertEquals( 2, count( $item->getCoupons() ) );
 		$this->assertEquals( 4, count( $item->getProducts() ) );
+		$this->assertEquals( 2, count( $item->getServices() ) );
 	}
 
 
