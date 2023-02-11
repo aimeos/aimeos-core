@@ -359,11 +359,9 @@ class Standard
 	 */
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( is_map( $items ) ) { $items = $items->toArray(); }
-		if( !is_array( $items ) ) { $items = [$items]; }
 		if( empty( $items ) ) { return $this; }
 
-		$this->getCache()->deleteMultiple( $items );
+		$this->getCache()->deleteMultiple( map( $items ) );
 		return $this;
 	}
 
