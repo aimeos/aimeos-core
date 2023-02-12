@@ -115,19 +115,9 @@ class MShop
 			}
 
 			$classname = $classprefix . $name;
-
-			if( class_exists( $classname ) === false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not found', $classname ), 404 );
-			}
-
 			$interface = \Aimeos\MShop\Common\Manager\Decorator\Iface::class;
-			$manager = new $classname( $manager, $context );
 
-			if( !( $manager instanceof $interface ) )
-			{
-				$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface );
-				throw new \Aimeos\MShop\Exception( $msg, 400 );
-			}
+			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
 		return $manager;
@@ -232,17 +222,7 @@ class MShop
 			return self::$objects[$classname];
 		}
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
-		}
-
-		$manager = new $classname( $context );
-
-		if( !( $manager instanceof $interface ) )
-		{
-			$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface );
-			throw new \Aimeos\MShop\Exception( $msg, 400 );
-		}
+		$manager = \Aimeos\Utils::create( $classname, [$context], $interface );
 
 		return self::addManagerDecorators( $context, $manager, $domain );
 	}

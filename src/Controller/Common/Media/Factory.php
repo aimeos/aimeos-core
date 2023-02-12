@@ -75,24 +75,14 @@ class Factory
 			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = \Aimeos\Controller\Common\Media\Iface::class;
 		$classname = 'Aimeos\Controller\Common\Media\\' . $name;
+		$interface = \Aimeos\Controller\Common\Media\Iface::class;
 
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
 		}
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$controller = new $classname( $context );
-
-		if( !( $controller instanceof $iface ) ) {
-			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-		}
-
-		return $controller;
+		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 
 

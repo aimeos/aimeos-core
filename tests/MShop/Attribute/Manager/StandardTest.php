@@ -79,14 +79,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 

@@ -70,38 +70,31 @@ abstract class Base
 	public function getProvider( \Aimeos\MShop\Rule\Item\Iface $item, string $type ) : \Aimeos\MShop\Rule\Provider\Iface
 	{
 		$type = ucwords( $type );
+		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
 		if( ctype_alnum( $type ) === false )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $provider ) );
 		}
 
 		$classname = '\Aimeos\MShop\Rule\Provider\\' . $type . '\\' . $provider;
+		$interface = \Aimeos\MShop\Rule\Provider\Factory\Iface::class;
 
-		if( class_exists( $classname ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
-		}
-
-		$context = $this->context();
-		$provider = new $classname( $context, $item );
-
-		self::checkClass( \Aimeos\MShop\Rule\Provider\Factory\Iface::class, $provider );
+		$provider = \Aimeos\Utils::create( $classname, [$context, $item], $interface );
 		$provider = $this->addRuleDecorators( $item, $provider, $names, $type );
 
 		return $provider->setObject( $provider );
@@ -119,6 +112,7 @@ abstract class Base
 	protected function addRuleDecorators( \Aimeos\MShop\Rule\Item\Iface $ruleItem,
 		\Aimeos\MShop\Rule\Provider\Iface $provider, array $names, string $type ) : \Aimeos\MShop\Rule\Provider\Iface
 	{
+		$context = $this->context();
 		$classprefix = '\Aimeos\MShop\Rule\Provider\\' . $type . '\Decorator\\';
 
 		foreach( $names as $name )
@@ -126,20 +120,13 @@ abstract class Base
 			if( ctype_alnum( $name ) === false )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $name ) );
+				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
+			$interface = $classprefix . 'Iface';
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
-			}
-
-			$provider = new $classname( $this->context(), $ruleItem, $provider );
-
-			self::checkClass( $classprefix . 'Iface', $provider );
+			$provider = \Aimeos\Utils::create( $classname, [$context, $ruleItem, $provider], $interface );
 		}
 
 		return $provider;

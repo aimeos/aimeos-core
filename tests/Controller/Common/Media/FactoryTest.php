@@ -23,7 +23,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateControllerInvalidImplementation()
 	{
-		$this->expectException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\Controller\Common\Media\Factory::create( \TestHelper::context(), 'Invalid' );
 	}
 
@@ -37,7 +37,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateControllerNotExisting()
 	{
-		$this->expectException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\Controller\Common\Media\Factory::create( \TestHelper::context(), 'unknown' );
 	}
 }

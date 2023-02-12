@@ -34,39 +34,31 @@ abstract class Base
 	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, string $type ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$type = ucwords( $type );
+		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
 		if( ctype_alnum( $type ) === false )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $provider ) );
 		}
 
 		$classname = '\Aimeos\MShop\Plugin\Provider\\' . $type . '\\' . $provider;
+		$interface = \Aimeos\MShop\Plugin\Provider\Factory\Iface::class;
 
-		if( class_exists( $classname ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $classname ) );
-		}
-
-		$context = $this->context();
-		$config = $context->config();
-		$provider = new $classname( $context, $item );
-
-		self::checkClass( \Aimeos\MShop\Plugin\Provider\Factory\Iface::class, $provider );
+		$provider = \Aimeos\Utils::create( $classname, [$context, $item], $interface );
 
 		/** mshop/plugin/provider/order/decorators
 		 * Adds a list of decorators to all order plugin provider objects automatcally
@@ -90,7 +82,7 @@ abstract class Base
 		 * @category Developer
 		 * @see mshop/plugin/provider/order/decorators
 		 */
-		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
+		$decorators = $context->config()->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
 
 		$provider = $this->addPluginDecorators( $item, $provider, $names );
 		$provider = $this->addPluginDecorators( $item, $provider, $decorators );
@@ -145,27 +137,21 @@ abstract class Base
 	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $pluginItem,
 		\Aimeos\MShop\Plugin\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
+		$context = $this->context();
 		$classprefix = '\Aimeos\MShop\Plugin\Provider\Decorator\\';
 
 		foreach( $names as $name )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $name ) );
 			}
 
 			$classname = $classprefix . $name;
+			$interface = \Aimeos\MShop\Plugin\Provider\Decorator\Iface::class;
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $classname ) );
-			}
-
-			$provider = new $classname( $this->context(), $pluginItem, $provider );
-
-			self::checkClass( \Aimeos\MShop\Plugin\Provider\Decorator\Iface::class, $provider );
+			$provider = \Aimeos\Utils::create( $classname, [$context, $pluginItem, $provider], $interface );
 		}
 
 		return $provider;

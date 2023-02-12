@@ -30,32 +30,25 @@ abstract class Base
 	 */
 	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, string $code ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
+		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
 		if( ( $providername = array_shift( $names ) ) === null )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $providername ) === false )
 		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $providername ) );
 		}
 
 		$classname = '\Aimeos\MShop\Coupon\Provider\\' . $providername;
+		$interface = \Aimeos\MShop\Coupon\Provider\Factory\Iface::class;
 
-		if( class_exists( $classname ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $classname ) );
-		}
-
-		$context = $this->context();
-		$provider = new $classname( $context, $item, $code );
-
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Factory\Iface::class, $provider );
+		$provider = \Aimeos\Utils::create( $classname, [$context, $item, $code], $interface );
 
 		/** mshop/coupon/provider/decorators
 		 * Adds a list of decorators to all coupon provider objects automatcally
@@ -103,27 +96,21 @@ abstract class Base
 	protected function addCouponDecorators( \Aimeos\MShop\Coupon\Item\Iface $item, string $code,
 		\Aimeos\MShop\Coupon\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
+		$context = $this->context();
 		$classprefix = '\Aimeos\MShop\Coupon\Provider\Decorator\\';
 
 		foreach( $names as $name )
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $name ) );
 			}
 
 			$classname = $classprefix . $name;
+			$interface = \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class;
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $classname ) );
-			}
-
-			$provider = new $classname( $provider, $this->context(), $item, $code );
-
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class, $provider );
+			$provider = \Aimeos\Utils::create( $classname, [$provider, $context, $item, $code], $interface );
 		}
 
 		return $provider;

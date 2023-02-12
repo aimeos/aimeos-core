@@ -58,16 +58,9 @@ abstract class Base
 			}
 
 			$classname = $classprefix . $name;
+			$interface = \Aimeos\MShop\Common\Manager\Decorator\Iface::class;
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $context->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
-			}
-
-			$manager = new $classname( $manager, $context );
-
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Manager\Decorator\Iface::class, $manager );
+			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
 		return $manager;
@@ -148,16 +141,6 @@ abstract class Base
 			return self::$objects[$classname];
 		}
 
-		if( class_exists( $classname ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Class "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
-		}
-
-		$manager = new $classname( $context );
-
-		\Aimeos\MW\Common\Base::checkClass( $interface, $manager );
-
-		return $manager;
+		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 }

@@ -41,14 +41,14 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MShop::create( \TestHelper::context(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MShop::create( \TestHelper::context(), 'attribute/unknown' );
 	}
 

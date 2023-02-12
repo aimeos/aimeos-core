@@ -281,23 +281,12 @@ abstract class Base
 		if( ctype_alnum( $name ) === false )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ), 400 );
 		}
 
 		$classname = '\Aimeos\MShop\Common\Helper\Password\\' . $name;
+		$interface = \Aimeos\MShop\Common\Helper\Password\Iface::class;
 
-		if( class_exists( $classname ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
-		}
-
-		$helper = new $classname( $options );
-
-		self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
-
-		$this->helper = $helper;
-
-		return $helper;
+		return $this->helper = \Aimeos\Utils::create( $classname, [$options], $interface );
 	}
 }

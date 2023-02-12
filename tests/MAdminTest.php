@@ -34,7 +34,7 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateNotExisting()
 	{
-		$this->expectException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MAdmin::create( \TestHelper::context(), 'unknown' );
 	}
 

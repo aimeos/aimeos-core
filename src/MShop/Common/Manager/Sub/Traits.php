@@ -51,16 +51,9 @@ trait Traits
 			}
 
 			$classname = $classprefix . $name;
+			$interface = \Aimeos\MShop\Common\Manager\Decorator\Iface::class;
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
-			}
-
-			$manager = new $classname( $manager, $context );
-
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Manager\Decorator\Iface::class, $manager );
+			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
 		return $manager;
@@ -140,29 +133,30 @@ trait Traits
 	 */
 	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
+		$context = $this->context();
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
 
-		$name = $name ?: $this->context()->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
+		$name = $name ?: $context->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		$key = $domain . $manager . $name;
 
 		if( !isset( $this->subManagers[$key] ) )
 		{
 			if( empty( $domain ) || ctype_alnum( $domain ) === false )
 			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $domain ) );
 			}
 
 			if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 )
 			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $manager ) );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false )
 			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 			}
 
@@ -172,13 +166,8 @@ trait Traits
 			$classname = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
 			$interface = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
-			if( class_exists( $classname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
-			}
+			$subManager = \Aimeos\Utils::create( $classname, [$context], $interface );
 
-			$subManager = \Aimeos\MW\Common\Base::checkClass( $interface, new $classname( $this->context() ) );
 			$subManager = $this->addManagerDecorators( $subManager, $manager, $domain );
 			$this->subManagers[$key] = $subManager->setObject( $subManager );
 		}

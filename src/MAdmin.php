@@ -130,19 +130,9 @@ class MAdmin
 			}
 
 			$classname = $classprefix . $name;
-
-			if( class_exists( $classname ) === false ) {
-				throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not found', $classname ), 404 );
-			}
-
 			$interface = \Aimeos\MShop\Common\Manager\Decorator\Iface::class;
-			$manager = new $classname( $manager, $context );
 
-			if( !( $manager instanceof $interface ) )
-			{
-				$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface );
-				throw new \Aimeos\MAdmin\Exception( $msg, 400 );
-			}
+			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
 		return $manager;
@@ -224,18 +214,6 @@ class MAdmin
 			return self::$objects[$classname];
 		}
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
-		}
-
-		$manager = new $classname( $context );
-
-		if( !( $manager instanceof $interface ) )
-		{
-			$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface );
-			throw new \Aimeos\MAdmin\Exception( $msg, 400 );
-		}
-
-		return $manager;
+		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 }
