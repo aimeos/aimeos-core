@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2023
  * @package MShop
  * @subpackage Common
@@ -11,8 +10,6 @@
 
 namespace Aimeos\MShop\Common\Manager;
 
-use \Aimeos\MShop\Locale\Manager\Base as Locale;
-
 
 /**
  * Provides common methods required by most of the manager classes.
@@ -20,18 +17,15 @@ use \Aimeos\MShop\Locale\Manager\Base as Locale;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base
-	extends \Aimeos\MW\Common\Manager\Base
-	implements \Aimeos\Macro\Iface
+abstract class Base implements \Aimeos\Macro\Iface
 {
-	use \Aimeos\MShop\Common\Manager\Sub\Traits;
 	use \Aimeos\Macro\Macroable;
+	use Sub\Traits;
+	use Methods;
 	use Site;
 
 
 	private $context;
-	private $object;
-	private $resourceName;
 	private $stmts = [];
 	private $search;
 
@@ -44,185 +38,6 @@ abstract class Base
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$this->context = $context;
-	}
-
-
-	/**
-	 * Returns the class names of the manager and used decorators.
-	 *
-	 * @return array List of class names
-	 */
-	public function classes() : array
-	{
-		return [get_class( $this )];
-	}
-
-
-	/**
-	 * Removes old entries from the storage.
-	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this;
-	}
-
-
-	/**
-	 * Creates a new cursor based on the filter criteria
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
-	 */
-	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface
-	{
-		return new \Aimeos\MShop\Common\Cursor\Standard( $filter );
-	}
-
-
-	/**
-	 * Creates a search critera object
-	 *
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\Base\Criteria\Iface New search criteria object
-	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
-	{
-		$db = $this->getResourceName();
-		$conn = $this->context->db( $db );
-		$config = $this->context->config();
-
-		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
-			$adapter = $config->get( 'resource/db/adapter' );
-		}
-
-		switch( $adapter )
-		{
-			case 'pgsql':
-				$search = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
-			default:
-				$search = new \Aimeos\Base\Criteria\SQL( $conn ); break;
-		}
-
-		return $search;
-	}
-
-
-	/**
-	 * Iterates over all matched items and returns the found ones
-	 *
-	 * @param \Aimeos\MShop\Common\Cursor\Iface $cursor Cursor object with filter, domains and cursor
-	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @return \Aimeos\Map|null List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 */
-	public function iterate( \Aimeos\MShop\Common\Cursor\Iface $cursor, array $ref = [] ) : ?\Aimeos\Map
-	{
-		if( $cursor->value() === '' ) {
-			return null;
-		}
-
-		$prefix = str_replace( '/', '.', (string) current( $this->getResourceType( false ) ) );
-		$filter = $cursor->filter()->add( $prefix . '.id', '>', (int) $cursor->value() )->order( $prefix . '.id' );
-
-		$items = $this->search( $filter, $ref );
-		$cursor->setValue( $items->lastKey() ?: '' );
-
-		return !$items->isEmpty() ? $items : null;
-	}
-
-
-	/**
-	 * Adds or updates an item object or a list of them.
-	 *
-	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
-	 */
-	public function save( $items, bool $fetch = true )
-	{
-		if( is_iterable( $items ) )
-		{
-			foreach( $items as $id => $item ) {
-				$items[$id] = $this->saveItem( $item, $fetch );
-			}
-			return map( $items );
-		}
-
-		return $this->saveItem( $items, $fetch );
-	}
-
-
-	/**
-	 * Searches for all items matching the given critera.
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 */
-	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
-	{
-		return map();
-	}
-
-
-	/**
-	 * Starts a database transaction on the connection identified by the given name
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function begin() : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->beginTransation( $this->getResourceName() );
-	}
-
-
-	/**
-	 * Commits the running database transaction on the connection identified by the given name
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->commitTransaction( $this->getResourceName() );
-	}
-
-
-	/**
-	 * Rolls back the running database transaction on the connection identified by the given name
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function rollback() : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->rollbackTransaction( $this->getResourceName() );
-	}
-
-
-	/**
-	 * Returns the additional column/search definitions
-	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
-	 */
-	public function getSaveAttributes() : array
-	{
-		return [];
-	}
-
-
-	/**
-	 * Injects the reference of the outmost object
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$this->object = $object;
-		return $this;
 	}
 
 
@@ -364,29 +179,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the newly created ID for the last record which was inserted.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection used to insert the new record
-	 * @param string $cfgpath Configuration path to the SQL statement for retrieving the new ID of the last inserted record
-	 * @return string ID of the last record that was inserted by using the given connection
-	 * @throws \Aimeos\MShop\Exception if there's no ID of the last record available
-	 */
-	protected function newId( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgpath ) : string
-	{
-		$result = $conn->create( $this->getSqlConfig( $cfgpath ) )->execute();
-
-		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'ID of last inserted database record not available' );
-			throw new \Aimeos\MShop\Exception( $msg );
-		}
-		$result->finish();
-
-		return $row[0];
-	}
-
-
-	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
@@ -417,6 +209,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\ContextIface Context object
+	 */
+	protected function context() : \Aimeos\MShop\ContextIface
+	{
+		return $this->context;
+	}
+
+
+	/**
 	 * Creates the criteria attribute items from the list of entries
 	 *
 	 * @param array $list Associative array of code as key and array with properties as values
@@ -435,48 +238,64 @@ abstract class Base
 
 
 	/**
-	 * Sets the base criteria "status".
-	 * (setConditions overwrites the base criteria)
+	 * Deletes items.
 	 *
-	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
-	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
-	 * @return \Aimeos\Base\Criteria\Iface Search critery object
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
+	 * @param string $cfgpath Configuration path to the SQL statement
+	 * @param bool $siteid If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
+		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$filter = self::filter();
-
-		if( $default !== false ) {
-			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
+		if( map( $items )->isEmpty() ) {
+			return $this;
 		}
 
-		return $filter;
-	}
+		$search = $this->object()->filter();
+		$search->setConditions( $search->compare( '==', $name, $items ) );
 
+		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$translations = array( $name => '"' . $name . '"' );
 
-	/**
-	 * Returns the context object.
-	 *
-	 * @return \Aimeos\MShop\ContextIface Context object
-	 */
-	protected function context() : \Aimeos\MShop\ContextIface
-	{
-		return $this->context;
-	}
+		$cond = $search->getConditionSource( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-	/**
-	 * Returns the outmost decorator of the decorator stack
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
-	 */
-	protected function object() : \Aimeos\MShop\Common\Manager\Iface
-	{
-		if( $this->object !== null ) {
-			return $this->object;
+		$stmt = $conn->create( $sql );
+
+		if( $siteid ) {
+			$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
 		}
+
+		$stmt->execute()->finish();
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns a sorted list of required criteria keys.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $criteria Search criteria object
+	 * @param string[] $required List of prefixes of required search conditions
+	 * @return string[] Sorted list of criteria keys
+	 */
+	protected function getCriteriaKeyList( \Aimeos\Base\Criteria\Iface $criteria, array $required ) : array
+	{
+		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
+
+		foreach( $criteria->getSortations() as $sortation ) {
+			$keys = array_merge( $keys, $this->getCriteriaKeys( $required, $sortation ) );
+		}
+
+		$keys = array_unique( array_merge( $required, $keys ) );
+		sort( $keys );
+
+		return $keys;
 	}
 
 
@@ -504,6 +323,32 @@ abstract class Base
 		}
 
 		return $attr;
+	}
+
+
+	/**
+	 * Returns the attribute helper functions for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and helper function
+	 */
+	protected function getSearchFunctions( array $attributes ) : array
+	{
+		$list = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$list[$item->getCode()] = $item->getFunction();
+			} else if( isset( $item['code'] ) ) {
+				$list[$item['code']] = $item['function'] ?? null;
+			} else {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $list;
 	}
 
 
@@ -540,6 +385,58 @@ abstract class Base
 
 
 	/**
+	 * Returns the attribute translations for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and internal attribute code
+	 */
+	protected function getSearchTranslations( array $attributes ) : array
+	{
+		$translations = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$translations[$item->getCode()] = $item->getInternalCode();
+			} else if( isset( $item['code'] ) ) {
+				$translations[$item['code']] = $item['internalcode'];
+			} else {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $translations;
+	}
+
+
+	/**
+	 * Returns the attribute types for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and internal attribute type
+	 */
+	protected function getSearchTypes( array $attributes ) : array
+	{
+		$types = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$types[$item->getCode()] = $item->getInternalType();
+			} else if( isset( $item['code'] ) ) {
+				$types[$item['code']] = $item['internaltype'];
+			} else {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $types;
+	}
+
+
+	/**
 	 * Returns the SQL statement for the given config path
 	 *
 	 * If available, the database specific SQL statement is returned, otherwise
@@ -555,6 +452,26 @@ abstract class Base
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
 		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
+	}
+
+
+	/**
+	 * Sets the base criteria "status".
+	 * (setConditions overwrites the base criteria)
+	 *
+	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
+	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
+	 * @return \Aimeos\Base\Criteria\Iface Search critery object
+	 */
+	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		$filter = self::filter();
+
+		if( $default !== false ) {
+			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
+		}
+
+		return $filter;
 	}
 
 
@@ -654,8 +571,7 @@ abstract class Base
 	private function getJoins( array $attributes, string $prefix ) : array
 	{
 		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
-		$sep = $this->getKeySeparator();
-		$name = $prefix . $sep . 'id';
+		$name = $prefix . '.id';
 
 		if( isset( $attributes[$prefix] ) && $attributes[$prefix] instanceof $iface ) {
 			return $attributes[$prefix]->getInternalDeps();
@@ -696,41 +612,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the name of the resource or of the default resource.
-	 *
-	 * @return string Name of the resource
-	 */
-	protected function getResourceName() : string
-	{
-		if( $this->resourceName === null ) {
-			$this->resourceName = $this->context->config()->get( 'resource/default', 'db' );
-		}
-
-		return $this->resourceName;
-	}
-
-
-	/**
-	 * Sets the name of the database resource that should be used.
-	 *
-	 * @param string $name Name of the resource
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$config = $this->context->config();
-
-		if( $config->get( 'resource/' . $name ) === null ) {
-			$this->resourceName = $config->get( 'resource/default', 'db' );
-		} else {
-			$this->resourceName = $name;
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns a search object singleton
 	 *
 	 * @return \Aimeos\Base\Criteria\Iface Search object
@@ -746,26 +627,6 @@ abstract class Base
 
 
 	/**
-	 * Replaces the given marker with an expression
-	 *
-	 * @param string $column Name (including alias) of the column
-	 * @param mixed $value Value used in the expression
-	 * @param string $op Operator used in the expression
-	 * @param int $type Type constant from \Aimeos\Base\DB\Statement\Base class
-	 * @return string Created expression
-	 */
-	protected function toExpression( string $column, $value, string $op = '==',
-		int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : string
-	{
-		$types = ['marker' => $type];
-		$translations = ['marker' => $column];
-		$value = ( is_array( $value ) ? array_unique( $value ) : $value );
-
-		return $this->getSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
-	}
-
-
-	/**
 	 * Returns the site coditions for the search request
 	 *
 	 * @param string[] $keys Sorted list of criteria keys
@@ -777,11 +638,10 @@ abstract class Base
 	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
 	{
 		$list = [];
-		$sep = $this->getKeySeparator();
 
 		foreach( $keys as $key )
 		{
-			$name = $key . $sep . 'siteid';
+			$name = $key . '.siteid';
 
 			if( isset( $attributes[$name] ) ) {
 				$list[] = $this->siteCondition( $name, $sitelevel );
@@ -834,6 +694,29 @@ abstract class Base
 		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations, $funcs ) ) . ', ';
 
 		return [$find, $replace];
+	}
+
+
+	/**
+	 * Returns the newly created ID for the last record which was inserted.
+	 *
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection used to insert the new record
+	 * @param string $cfgpath Configuration path to the SQL statement for retrieving the new ID of the last inserted record
+	 * @return string ID of the last record that was inserted by using the given connection
+	 * @throws \Aimeos\MShop\Exception if there's no ID of the last record available
+	 */
+	protected function newId( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgpath ) : string
+	{
+		$result = $conn->create( $this->getSqlConfig( $cfgpath ) )->execute();
+
+		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false )
+		{
+			$msg = $this->context()->translate( 'mshop', 'ID of last inserted database record not available' );
+			throw new \Aimeos\MShop\Exception( $msg );
+		}
+		$result->finish();
+
+		return $row[0];
 	}
 
 
@@ -903,87 +786,22 @@ abstract class Base
 
 
 	/**
-	 * Deletes items.
+	 * Replaces the given marker with an expression
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
-	 * @param string $cfgpath Configuration path to the SQL statement
-	 * @param bool $siteid If siteid should be used in the statement
-	 * @param string $name Name of the ID column
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @param string $column Name (including alias) of the column
+	 * @param mixed $value Value used in the expression
+	 * @param string $op Operator used in the expression
+	 * @param int $type Type constant from \Aimeos\Base\DB\Statement\Base class
+	 * @return string Created expression
 	 */
-	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
-		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function toExpression( string $column, $value, string $op = '==',
+		int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : string
 	{
-		if( map( $items )->isEmpty() ) {
-			return $this;
-		}
+		$types = ['marker' => $type];
+		$translations = ['marker' => $column];
+		$value = ( is_array( $value ) ? array_unique( $value ) : $value );
 
-		$search = $this->object()->filter();
-		$search->setConditions( $search->compare( '==', $name, $items ) );
-
-		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
-		$translations = array( $name => '"' . $name . '"' );
-
-		$cond = $search->getConditionSource( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$stmt = $conn->create( $sql );
-
-		if( $siteid ) {
-			$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
-		}
-
-		$stmt->execute()->finish();
-
-		return $this;
-	}
-
-
-	/**
-	 * Starts a database transaction on the connection identified by the given name.
-	 *
-	 * @param string $dbname Name of the database settings in the resource configuration
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function beginTransation( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$conn = $this->context->db( $dbname );
-		$conn->begin();
-
-		return $this;
-	}
-
-
-	/**
-	 * Commits the running database transaction on the connection identified by the given name.
-	 *
-	 * @param string $dbname Name of the database settings in the resource configuration
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function commitTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$conn = $this->context->db( $dbname );
-		$conn->commit();
-
-		return $this;
-	}
-
-
-	/**
-	 * Rolls back the running database transaction on the connection identified by the given name.
-	 *
-	 * @param string $dbname Name of the database settings in the resource configuration
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function rollbackTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$conn = $this->context->db( $dbname );
-		$conn->rollback();
-
-		return $this;
+		return $this->getSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
 	}
 
 
@@ -999,5 +817,107 @@ abstract class Base
 	}
 
 
-	abstract public function getResourceType( bool $withsub = true ) : array;
+	/**
+	 * Cuts the last part separated by a dot repeatedly and returns the list of resulting string.
+	 *
+	 * @param string[] $prefix Required base prefixes of the search keys
+	 * @param string $string String containing parts separated by dots
+	 * @return array List of resulting strings
+	 */
+	private function cutNameTail( array $prefix, string $string ) : array
+	{
+		$result = [];
+		$noprefix = true;
+		$strlen = strlen( $string );
+
+		foreach( $prefix as $key )
+		{
+			$len = strlen( $key );
+
+			if( strncmp( $string, $key, $len ) === 0 )
+			{
+				if( $strlen > $len && ( $pos = strrpos( $string, '.' ) ) !== false )
+				{
+					$result[] = $string = substr( $string, 0, $pos );
+					$result = array_merge( $result, $this->cutNameTail( $prefix, $string ) );
+					$noprefix = false;
+				}
+
+				break;
+			}
+		}
+
+		if( $noprefix )
+		{
+			if( ( $pos = strrpos( $string, ':' ) ) !== false ) {
+				$result[] = substr( $string, 0, $pos );
+				$result[] = $string;
+			} elseif( ( $pos = strrpos( $string, '.' ) ) !== false ) {
+				$result[] = substr( $string, 0, $pos );
+			} else {
+				$result[] = $string;
+			}
+		}
+
+		return $result;
+	}
+
+
+	/**
+	 * Returns a list of unique criteria names shortend by the last element after the ''
+	 *
+	 * @param string[] $prefix Required base prefixes of the search keys
+	 * @param \Aimeos\Base\Criteria\Expression\Iface|null Criteria object
+	 * @return array List of shortend criteria names
+	 */
+	private function getCriteriaKeys( array $prefix, \Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
+	{
+		if( $expr === null ) { return []; }
+
+		$result = [];
+
+		foreach( $this->getCriteriaNames( $expr ) as $item )
+		{
+			if( strncmp( $item, 'sort:', 5 ) === 0 ) {
+				$item = substr( $item, 5 );
+			}
+
+			if( ( $pos = strpos( $item, '(' ) ) !== false ) {
+				$item = substr( $item, 0, $pos );
+			}
+
+			$result = array_merge( $result, $this->cutNameTail( $prefix, $item ) );
+		}
+
+		return $result;
+	}
+
+
+	/**
+	 * Returns a list of criteria names from a expression and its sub-expressions.
+	 *
+	 * @param \Aimeos\Base\Criteria\Expression\Iface Criteria object
+	 * @return array List of criteria names
+	 */
+	private function getCriteriaNames( \Aimeos\Base\Criteria\Expression\Iface $expr ) : array
+	{
+		if( $expr instanceof \Aimeos\Base\Criteria\Expression\Compare\Iface ) {
+			return array( $expr->getName() );
+		}
+
+		if( $expr instanceof \Aimeos\Base\Criteria\Expression\Combine\Iface )
+		{
+			$list = [];
+			foreach( $expr->getExpressions() as $item ) {
+				$list = array_merge( $list, $this->getCriteriaNames( $item ) );
+			}
+			return $list;
+		}
+
+		if( $expr instanceof \Aimeos\Base\Criteria\Expression\Sort\Iface ) {
+			return array( $expr->getName() );
+		}
+
+		return [];
+	}
 }
