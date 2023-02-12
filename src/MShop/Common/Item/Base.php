@@ -18,9 +18,7 @@ namespace Aimeos\MShop\Common\Item;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base
-	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
+abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
 	use \Aimeos\Macro\Macroable;
 

@@ -16,6 +16,6 @@ namespace Aimeos\MShop;
  *
  * @package MShop
  */
-class Exception extends \Aimeos\MW\Common\Exception
+class Exception extends \Exception
 {
 }

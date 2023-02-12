@@ -18,7 +18,7 @@ namespace Aimeos\MW\Tree\Manager;
  * @package MW
  * @subpackage Tree
  */
-abstract class Base extends \Aimeos\MW\Common\Manager\Base implements \Aimeos\MW\Tree\Manager\Iface
+abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 {
 	/**
 	 * Returns only the requested node
@@ -37,6 +37,82 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base implements \Aimeos\MW
 
 
 	private $readOnly = false;
+	/**
+	 * Returns the attribute helper functions for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and helper function
+	 */
+	protected function getSearchFunctions( array $attributes ) : array
+	{
+		$list = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$list[$item->getCode()] = $item->getFunction();
+			} else if( isset( $item['code'] ) ) {
+				$list[$item['code']] = $item['function'] ?? null;
+			} else {
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Returns the attribute translations for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and internal attribute code
+	 */
+	protected function getSearchTranslations( array $attributes ) : array
+	{
+		$translations = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$translations[$item->getCode()] = $item->getInternalCode();
+			} else if( isset( $item['code'] ) ) {
+				$translations[$item['code']] = $item['internalcode'];
+			} else {
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $translations;
+	}
+
+
+	/**
+	 * Returns the attribute types for searching defined by the manager.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
+	 * @return array Associative array of attribute code and internal attribute type
+	 */
+	protected function getSearchTypes( array $attributes ) : array
+	{
+		$types = [];
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$types[$item->getCode()] = $item->getInternalType();
+			} else if( isset( $item['code'] ) ) {
+				$types[$item['code']] = $item['internaltype'];
+			} else {
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $types;
+	}
 
 
 	/**
