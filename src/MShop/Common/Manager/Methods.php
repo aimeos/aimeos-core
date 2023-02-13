@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Manager;
 trait Methods
 {
 	private $filterFcn = [];
-    private $resourceName;
+	private $resourceName;
 	private $object;
 
 
@@ -79,7 +79,7 @@ trait Methods
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-        throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
+		throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
 	}
 
 
@@ -103,8 +103,8 @@ trait Methods
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-        return $this;
-    }
+		return $this;
+	}
 
 	/**
 	 * Creates a search critera object
@@ -115,7 +115,7 @@ trait Methods
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-        $context = $this->context();
+		$context = $this->context();
 		$db = $this->getResourceName();
 		$conn = $context->db( $db );
 		$config = $context->config();
@@ -148,9 +148,9 @@ trait Methods
 	 */
 	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-    {
-        throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
-    }
+	{
+		throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
+	}
 
 
 	/**
@@ -164,7 +164,7 @@ trait Methods
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-        throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
+		throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
 	}
 
 
@@ -175,9 +175,9 @@ trait Methods
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( bool $withsub = true ) : array
-    {
-        return [];
-    }
+	{
+		return [];
+	}
 
 
 	/**
@@ -198,9 +198,9 @@ trait Methods
 	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of attribute items
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
-    {
-        return [];
-    }
+	{
+		return [];
+	}
 
 
 	/**
@@ -212,7 +212,7 @@ trait Methods
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-        throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
+		throw new \Aimeos\MShop\Exception( $this->context()->translate( 'mshop', 'Not implemented' ) );
 	}
 
 
