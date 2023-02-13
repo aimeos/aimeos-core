@@ -44,10 +44,8 @@ trait Traits
 	{
 		foreach( $decorators as $name )
 		{
-			if( ctype_alnum( $name ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
+			if( ctype_alnum( $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
@@ -110,10 +108,8 @@ trait Traits
 
 		foreach( $names as $key => $subname )
 		{
-			if( empty( $subname ) || ctype_alnum( $subname ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $manager ) );
+			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $manager ), 400 );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -130,6 +126,7 @@ trait Traits
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
+	 * @throws \LogicException If class isn't found
 	 */
 	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
@@ -142,22 +139,16 @@ trait Traits
 
 		if( !isset( $this->subManagers[$key] ) )
 		{
-			if( empty( $domain ) || ctype_alnum( $domain ) === false )
-			{
-				$msg = $context->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $domain ) );
+			if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in domain name "%1$s"', $domain ), 400 );
 			}
 
-			if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 )
-			{
-				$msg = $context->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $manager ) );
+			if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 ) {
+				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $manager ), 400 );
 			}
 
-			if( empty( $name ) || ctype_alnum( $name ) === false )
-			{
-				$msg = $context->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
+			if( empty( $name ) || ctype_alnum( $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $name ), 400 );
 			}
 
 			$domainname = ucfirst( $domain );

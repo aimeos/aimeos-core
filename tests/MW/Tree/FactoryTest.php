@@ -23,7 +23,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testFactoryFail()
 	{
-		$this->expectException( \Aimeos\MW\Tree\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MW\Tree\Factory::create( 'invalid', [], null );
 	}
 }

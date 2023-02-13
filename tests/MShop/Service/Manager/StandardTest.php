@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Service\Provider\Decorator\Example::class, $provider );
 
 
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		$this->object->getProvider( $this->object->create(), 'payment' );
 	}
 

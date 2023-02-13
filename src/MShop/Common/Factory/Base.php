@@ -45,16 +45,15 @@ abstract class Base
 	 * @param array $decorators List of decorator names that should be wrapped around the manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 * @throws \LogicException If class isn't found
 	 */
 	protected static function addDecorators( \Aimeos\MShop\ContextIface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
 		{
-			if( ctype_alnum( $name ) === false )
-			{
-				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
+			if( ctype_alnum( $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;

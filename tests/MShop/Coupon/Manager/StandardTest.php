@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManagerInvalidManager()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( '$%^unknown' );
 	}
 
@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $provider );
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Decorator\Not::class, $provider );
 
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \LogicException::class );
 		$this->object->getProvider( $this->object->create(), '' );
 	}
 

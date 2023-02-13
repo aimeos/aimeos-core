@@ -494,7 +494,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			if( $value === null )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Required value for "%1$s" is missing' );
-				throw new \Aimeos\MShop\Exception( $msg );
+				throw new \Aimeos\MShop\Exception( sprintf( $msg, $key ) );
 			}
 			$expr[] = $criteria->compare( '==', $key, $value );
 		}

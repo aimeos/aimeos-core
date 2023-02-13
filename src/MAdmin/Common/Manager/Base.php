@@ -87,6 +87,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
+	 * @throws \LogicException If class isn't found
 	 */
 	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
@@ -95,20 +96,16 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$manager = strtolower( $manager );
 
 
-		if( empty( $domain ) || ctype_alnum( $domain ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
-			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $domain ) );
+		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in domain name "%1$s"', $domain ), 400 );
 		}
 
 		if( $name === null ) {
 			$name = $context->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		}
 
-		if( empty( $name ) || ctype_alnum( $name ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
-			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $name ) );
+		if( empty( $name ) || ctype_alnum( $name ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $name ), 400 );
 		}
 
 		$domainname = ucfirst( $domain );

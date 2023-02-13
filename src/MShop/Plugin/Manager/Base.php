@@ -29,7 +29,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
 	 * @param string $type Plugin type code
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
-	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
+	 * @throws \LogicException If provider couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, string $type ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
@@ -37,22 +37,16 @@ abstract class Base
 		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
-		if( ctype_alnum( $type ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $type ) );
+		if( ctype_alnum( $type ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in type name "%1$s"', $type ), 400 );
 		}
 
-		if( ( $provider = array_shift( $names ) ) === null )
-		{
-			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $item->getProvider() ) );
+		if( ( $provider = array_shift( $names ) ) === null ) {
+			throw new \LogicException( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ), 400 );
 		}
 
-		if( ctype_alnum( $provider ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $provider ) );
+		if( ctype_alnum( $provider ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in provider name "%1$s"', $provider ), 400 );
 		}
 
 		$classname = '\Aimeos\MShop\Plugin\Provider\\' . $type . '\\' . $provider;

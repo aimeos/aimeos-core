@@ -26,23 +26,19 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item interface
 	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Returns a coupon provider instance
-	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
+	 * @throws \LogicException If coupon provider couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, string $code ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
-		if( ( $providername = array_shift( $names ) ) === null )
-		{
-			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $item->getProvider() ) );
+		if( ( $providername = array_shift( $names ) ) === null ) {
+			throw new \LogicException( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ), 400 );
 		}
 
-		if( ctype_alnum( $providername ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $providername ) );
+		if( ctype_alnum( $providername ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in provider name "%1$s"', $providername ), 400 );
 		}
 
 		$classname = '\Aimeos\MShop\Coupon\Provider\\' . $providername;
@@ -91,26 +87,22 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider object
 	 * @param string[] $names List of decorator names
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider wrapped by one or more coupon decorators
-	 * @throws \Aimeos\MShop\Coupon\Exception If a coupon decorator couldn't be instantiated
+	 * @throws \LogicException If a coupon decorator couldn't be instantiated
 	 */
 	protected function addCouponDecorators( \Aimeos\MShop\Coupon\Item\Iface $item, string $code,
 		\Aimeos\MShop\Coupon\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$context = $this->context();
 		$classprefix = '\Aimeos\MShop\Coupon\Provider\Decorator\\';
+		$interface = \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class;
 
 		foreach( $names as $name )
 		{
-			if( ctype_alnum( $name ) === false )
-			{
-				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $name ) );
+			if( ctype_alnum( $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 			}
 
-			$classname = $classprefix . $name;
-			$interface = \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class;
-
-			$provider = \Aimeos\Utils::create( $classname, [$provider, $context, $item, $code], $interface );
+			$provider = \Aimeos\Utils::create( $classprefix . $name, [$provider, $context, $item, $code], $interface );
 		}
 
 		return $provider;

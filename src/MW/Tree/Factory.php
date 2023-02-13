@@ -27,29 +27,17 @@ class Factory
 	 * @param array $config Associative list of configuration strings for managing the tree
 	 * @param \Aimeos\Base\DB\Connection\Iface|null $resource Reference to the resource which should be used for managing the tree
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager object of the requested type
-	 * @throws \Aimeos\MW\Tree\Exception if class isn't found
+	 * @throws \LogicException If class isn't found
 	 */
 	public static function create( string $name, array $config, $resource )
 	{
-		if( ctype_alnum( $name ) === false )
-		{
-			$msg = sprintf( 'Invalid characters in class name "%1$s"', '\Aimeos\MW\Tree\Manager\\' . $name );
-			throw new \Aimeos\MW\Tree\Exception( $msg );
+		if( ctype_alnum( $name ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 		}
 
-		$iface = \Aimeos\MW\Tree\Manager\Iface::class;
+		$interface = \Aimeos\MW\Tree\Manager\Iface::class;
 		$classname = '\Aimeos\MW\Tree\Manager\\' . $name;
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MW\Tree\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$manager = new $classname( $config, $resource );
-
-		if( !( $manager instanceof $iface ) ) {
-			throw new \Aimeos\MW\Tree\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-		}
-
-		return $manager;
+		return \Aimeos\Utils::create( $classname, [$config, $resource], $interface );
 	}
 }

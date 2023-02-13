@@ -31,7 +31,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateControllerInvalidName()
 	{
-		$this->expectException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\Controller\Common\Order\Factory::create( \TestHelper::context(), '%^unknown' );
 	}
 

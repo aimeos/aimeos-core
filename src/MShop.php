@@ -66,7 +66,7 @@ class MShop
 		$parts = explode( '/', $path );
 
 		if( ( $domain = array_shift( $parts ) ) === null ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Manager path is empty', $path ) );
+			throw new \LogicException( sprintf( 'Manager path is empty', $path ), 400 );
 		}
 
 		$classname = self::classname( $context, $parts, $domain, $name );
@@ -102,16 +102,15 @@ class MShop
 	 * @param array $decorators List of decorator names that should be wrapped around the manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 * @throws \LogicException If class isn't found
 	 */
 	protected static function addDecorators( \Aimeos\MShop\ContextIface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
 		{
-			if( ctype_alnum( $name ) === false )
-			{
-				$classname = is_string( $name ) ? $classprefix . $name : '<not a string>';
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid class name "%1$s"', $classname ), 400 );
+			if( ctype_alnum( $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid class name "%1$s"', $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
@@ -195,11 +194,11 @@ class MShop
 		$path = trim( $path, '/' );
 
 		if( empty( $path ) ) {
-			throw new \Aimeos\MShop\Exception( 'Manager path is empty', 400 );
+			throw new \LogicException( 'Manager path is empty', 400 );
 		}
 
 		if( preg_match( '/^[a-z0-9\/]+$/', $path ) !== 1 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid component path "%1$s"', $path, 400 ) );
+			throw new \LogicException( sprintf( 'Invalid component path "%1$s"', $path, 400 ) );
 		}
 
 		return $path;

@@ -30,27 +30,13 @@ class Factory
 	 */
 	public static function getContainer( string $resourcepath, string $type, string $format, array $options = [] )
 	{
-		if( ctype_alnum( $type ) === false )
-		{
-			$msg = sprintf( 'Invalid characters in class name "%1$s"', '\Aimeos\MW\Container\\' . $type );
-			throw new \Aimeos\MW\Container\Exception( $msg );
+		if( ctype_alnum( $type ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $type ), 400 );
 		}
 
-		$iface = \Aimeos\MW\Container\Iface::class;
+		$interface = \Aimeos\MW\Container\Iface::class;
 		$classname = '\Aimeos\MW\Container\\' . $type;
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MW\Container\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$object = new $classname( $resourcepath, $format, $options );
-
-		if( !( $object instanceof $iface ) )
-		{
-			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );
-			throw new \Aimeos\MW\Container\Exception( $msg );
-		}
-
-		return $object;
+		return \Aimeos\Utils::create( $classname, [$resourcepath, $format, $options], $interface );
 	}
 }

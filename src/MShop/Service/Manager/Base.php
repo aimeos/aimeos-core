@@ -30,7 +30,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Service\Item\Iface $item Delivery or payment service item object
 	 * @param string $type Service type code
 	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
-	 * @throws \Aimeos\MShop\Service\Exception If provider couldn't be found
+	 * @throws \LogicException If provider couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item, string $type ) : \Aimeos\MShop\Service\Provider\Iface
 	{
@@ -38,22 +38,16 @@ abstract class Base
 		$context = $this->context();
 		$names = explode( ',', $item->getProvider() );
 
-		if( ctype_alnum( $type ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $type ) );
+		if( ctype_alnum( $type ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in type name "%1$s"', $type ), 400 );
 		}
 
-		if( ( $provider = array_shift( $names ) ) === null )
-		{
-			$msg = $context->translate( 'mshop', 'Provider in "%1$s" not available' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $item->getProvider() ) );
+		if( ( $provider = array_shift( $names ) ) === null ) {
+			throw new \LogicException( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ), 400 );
 		}
 
-		if( ctype_alnum( $provider ) === false )
-		{
-			$msg = $context->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $provider ) );
+		if( ctype_alnum( $provider ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in provider name "%1$s"', $provider ), 400 );
 		}
 
 		$classname = '\Aimeos\MShop\Service\Provider\\' . $type . '\\' . $provider;

@@ -20,7 +20,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testFactoryFail()
 	{
-		$this->expectException( \Aimeos\MW\Container\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MW\Container\Factory::getContainer( 'tempfile', 'notDefined', 'invalid' );
 	}
 }

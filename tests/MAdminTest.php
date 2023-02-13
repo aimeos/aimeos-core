@@ -20,14 +20,14 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateEmpty()
 	{
-		$this->expectException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MAdmin::create( \TestHelper::context(), "\n" );
 	}
 
 
 	public function testCreateInvalidName()
 	{
-		$this->expectException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \LogicException::class );
 		\Aimeos\MAdmin::create( \TestHelper::context(), '%^unknown' );
 	}
 

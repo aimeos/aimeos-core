@@ -80,25 +80,13 @@ class Factory
 		}
 
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MW\Media\\' . $type . '\\' . $name : '<not a string>';
-			throw new \Aimeos\MW\Container\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		if( ctype_alnum( $name ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 
-		$iface = \Aimeos\MW\Media\Iface::class;
+		$interface = \Aimeos\MW\Media\Iface::class;
 		$classname = '\Aimeos\MW\Media\\' . $type . '\\' . $name;
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$object = new $classname( $content, $mimetype, $options );
-
-		if( !( $object instanceof $iface ) ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-		}
-
-		return $object;
+		return \Aimeos\Utils::create( $classname, [$content, $mimetype, $options], $interface );
 	}
 }

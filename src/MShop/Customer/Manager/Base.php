@@ -237,7 +237,7 @@ abstract class Base
 	 * Returns a password helper object based on the configuration.
 	 *
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
-	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
+	 * @throws \LogicException If the name is invalid or the class isn't found
 	 */
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
@@ -278,10 +278,8 @@ abstract class Base
 		 */
 		$options = $config->get( 'mshop/customer/manager/password/options', [] );
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ), 400 );
+		if( ctype_alnum( $name ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 		}
 
 		$classname = '\Aimeos\MShop\Common\Helper\Password\\' . $name;

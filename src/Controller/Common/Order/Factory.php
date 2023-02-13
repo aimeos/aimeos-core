@@ -29,7 +29,7 @@ class Factory
 	 * @param \Aimeos\MShop\ContextIface $context Context object required by controllers
 	 * @param string|null $name Name of the controller or "Standard" if null
 	 * @return \Aimeos\Controller\Common\Order\Iface New order controller object
-	 * @throws \Aimeos\Controller\Common\Exception
+	 * @throws \LogicException If class isn't found
 	 */
 	public static function create( \Aimeos\MShop\ContextIface $context, $name = null ) : Iface
 	{
@@ -70,10 +70,8 @@ class Factory
 			$name = $context->config()->get( 'controller/common/order/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\Controller\Common\Order\\' . $name : '<not a string>';
-			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		if( ctype_alnum( $name ) === false ) {
+			throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
 		}
 
 		$classname = 'Aimeos\Controller\Common\Order\\' . $name;
