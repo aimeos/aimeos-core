@@ -55,7 +55,7 @@ abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 			} else if( isset( $item['code'] ) ) {
 				$list[$item['code']] = $item['function'] ?? null;
 			} else {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
 		}
 
@@ -81,7 +81,7 @@ abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 			} else if( isset( $item['code'] ) ) {
 				$translations[$item['code']] = $item['internalcode'];
 			} else {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
 		}
 
@@ -107,7 +107,7 @@ abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 			} else if( isset( $item['code'] ) ) {
 				$types[$item['code']] = $item['internaltype'];
 			} else {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
 		}
 

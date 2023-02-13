@@ -867,7 +867,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param string[] $prefix Required base prefixes of the search keys
-	 * @param \Aimeos\Base\Criteria\Expression\Iface|null Criteria object
+	 * @param \Aimeos\Base\Criteria\Expression\Iface|null $expr Criteria object
 	 * @return array List of shortend criteria names
 	 */
 	private function getCriteriaKeys( array $prefix, \Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
