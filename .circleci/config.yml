@@ -5,100 +5,13 @@
 version: 2.1
 
 jobs:
-  "php71-mariadb10":
+  "php80-mssql2019":
     docker:
-      - image: aimeos/ci-php:7.1
-      - image: cimg/mariadb:10.3
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: aimeos
-          MYSQL_USER: aimeos
-          MYSQL_PASSWORD: aimeos
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - php71-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php71-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test
-
-  "php72-mysql57":
-    docker:
-      - image: aimeos/ci-php:7.2
-      - image: cimg/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: aimeos
-          MYSQL_USER: aimeos
-          MYSQL_PASSWORD: aimeos
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - php72-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php72-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test check
-
-  "php73-pgsql14":
-    docker:
-      - image: aimeos/ci-php:7.3
-      - image: cimg/postgres:14.0
-        environment:
-          POSTGRES_PASSWORD: aimeos
-          POSTGRES_USER: aimeos
-          POSTGRES_DB: aimeos
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - php73-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php73-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test
-
-  "php74-mssql2019":
-    docker:
-      - image: aimeos/ci-php:7.4
+      - image: aimeos/ci-php:8.0
       - image: mcr.microsoft.com/mssql/server:2019-latest
         environment:
           SA_PASSWORD: S3c0r3P4ss
           ACCEPT_EULA: Y
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - php74-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php74-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: echo "CREATE DATABASE aimeos;" > sqlserver.sql; for i in `seq 1 5`; do /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P 'S3c0r3P4ss' -i sqlserver.sql && exit 0; sleep 3; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test
-
-  "php80-mysql80":
-    docker:
-      - image: aimeos/ci-php:8.0
-      - image: cimg/mysql:8.0
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: aimeos
-          MYSQL_USER: aimeos
-          MYSQL_PASSWORD: aimeos
     steps:
       - checkout
       - restore_cache:
@@ -108,19 +21,18 @@ jobs:
       - save_cache:
           key: php80-{{ checksum "composer.json" }}
           paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
+      - run: echo "CREATE DATABASE aimeos;" > sqlserver.sql; for i in `seq 1 5`; do /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P 'S3c0r3P4ss' -i sqlserver.sql && exit 0; sleep 3; done
+      - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php81-mysql80":
+  "php81-pgsql14":
     docker:
       - image: aimeos/ci-php:8.1
-      - image: cimg/mysql:8.0
+      - image: cimg/postgres:14.0
         environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: aimeos
-          MYSQL_USER: aimeos
-          MYSQL_PASSWORD: aimeos
+          POSTGRES_PASSWORD: aimeos
+          POSTGRES_USER: aimeos
+          POSTGRES_DB: aimeos
     steps:
       - checkout
       - restore_cache:
@@ -130,10 +42,9 @@ jobs:
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
           paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup coverage
-      - run: ./vendor/bin/php-coveralls -o coveralls.json -vvv -x tests/coverage.xml
+      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
+      - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
+      - run: ./vendor/bin/phing setup test
 
   "php82-mysql80":
     docker:
@@ -162,10 +73,6 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php71-mariadb10"
-      - "php72-mysql57"
-      - "php73-pgsql14"
-      - "php74-mssql2019"
-      - "php80-mysql80"
-      - "php81-mysql80"
+      - "php80-mssql2019"
+      - "php81-pgsql14"
       - "php82-mysql80"
