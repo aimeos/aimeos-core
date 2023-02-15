@@ -13,7 +13,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "~7.1||^8.0.11",
+		"php": "^8.0.11",
 		"composer-runtime-api": "^2.1",
 		"ext-curl": "*",
 		"ext-dom": "*",
@@ -38,7 +38,7 @@
 	"require-dev": {
 		"php-coveralls/php-coveralls": "~2.0",
 		"squizlabs/php_codesniffer": "~3.0",
-		"phpunit/phpunit": "~7.0||~8.0||~9.0",
+		"phpunit/phpunit": "~9.0",
 		"phing/phing": "~2.4"
 	},
 	"autoload": {
