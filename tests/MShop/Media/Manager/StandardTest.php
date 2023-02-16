@@ -315,6 +315,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testScale()
 	{
+		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
+
 		$object = $this->getMockBuilder( \Aimeos\MShop\Media\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )
 			->setMethods( ['getContent', 'store'] )
@@ -325,14 +327,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object->expects( $this->any() )->method( 'store' );
 
-		$item = $this->object->create()->setUrl( 'test.gif' )->setPreview( 'preview.gif' )
+		$item = $this->object->create()->setUrl( 'test.gif' )
 			->setMimeType( 'image/gif' )->setDomain( 'product' );
 
 		$result = $object->scale( $item, true );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
 		$this->assertEquals( 'test.gif', $result->getUrl() );
-		$this->assertNotEquals( 'preview.gif', $result->getPreview() );
+		$this->assertNotEquals( '', $result->getPreview() );
 	}
 
 
