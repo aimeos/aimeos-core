@@ -768,13 +768,17 @@ class Standard
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$url = $item->getUrl();
-		$context = $this->context();
 
+		if( empty( $url ) || \Aimeos\Base\Str::starts( $url, 'data:' ) ) {
+			return $item->setPreview( $url );
+		}
+
+		$context = $this->context();
 		$fs = $context->fs( $item->getFileSystem() );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
-		if( !$force && $is && preg_match( '#^[a-zA-Z]{2,6}:#', $url ) !== 1
-			&& date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified()
+		if( !$force && !empty( $item->getPreviews() ) && preg_match( '#^[a-zA-Z]{2,6}://#', $url ) !== 1
+			&& $is && date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified() || !$fs->has( $url )
 		) {
 			return $item;
 		}
