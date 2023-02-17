@@ -48,7 +48,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\Voucher::class )
 			->setConstructorArgs( [$this->context, $this->couponItem, '90AB'] )
-			->setMethods( ['checkVoucher', 'getOrderProductItem', 'getUsedRebate'] )
+			->onlyMethods( ['checkVoucher', 'getOrderProductItem', 'getUsedRebate'] )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getOrderProductItem' )

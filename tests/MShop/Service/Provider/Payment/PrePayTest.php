@@ -25,7 +25,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PrePay::class )
 			->setConstructorArgs( array( $context, $serviceItem ) )
-			->setMethods( ['save'] )
+			->onlyMethods( ['save'] )
 			->getMock();
 	}
 

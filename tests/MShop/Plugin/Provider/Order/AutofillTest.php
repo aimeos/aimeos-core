@@ -133,7 +133,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderBaseAddressStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Address\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
+			->setConstructorArgs( [$this->context] )->onlyMethods( ['search'] )->getMock();
 
 		$item1 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY );
 		$item2 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
@@ -163,7 +163,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Service\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
+			->setConstructorArgs( [$this->context] )->onlyMethods( ['search'] )->getMock();
 
 		$item1 = $orderBaseServiceStub->create()->setCode( 'unitdeliverycode' )
 			->setType( \Aimeos\MShop\Order\Item\Service\Base::TYPE_DELIVERY );

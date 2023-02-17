@@ -21,10 +21,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelper::context();
 		$serviceItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setId( -1 );
 
-		$this->object = $this->getMockBuilder( TestBase::class )
-			->setConstructorArgs( [$this->context, $serviceItem] )
-			->setMethods( ['test'] )
-			->getMock();
+		$this->object = new TestBase( $this->context, $serviceItem );
 
 		\Aimeos\MShop::cache( true );
 	}
@@ -55,7 +52,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCall()
 	{
-		$this->object::macro( 'hasSomething', function( $name ) {
+		TestBase::macro( 'hasSomething', function( $name ) {
 			return $this->getConfigValue( $name ) ? true : false;
 		} );
 
@@ -131,7 +128,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$stub = $this->getMockBuilder( \Aimeos\MShop\Customer\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )
-			->setMethods( ['save'] )
+			->onlyMethods( ['save'] )
 			->getMock();
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Customer\Manager\Standard::class, $stub );

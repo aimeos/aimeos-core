@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetTimeModified()
 	{
 		$regexp = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
-		$this->assertRegExp( $regexp, $this->object->getTimeModified() );
+		$this->assertMatchesRegularExpression( $regexp, $this->object->getTimeModified() );
 	}
 
 

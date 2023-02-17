@@ -26,7 +26,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\DirectDebit::class )
 			->setConstructorArgs( array( $context, $serviceItem ) )
-			->setMethods( ['save'] )
+			->onlyMethods( ['save'] )
 			->getMock();
 	}
 

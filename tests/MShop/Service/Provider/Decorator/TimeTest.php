@@ -130,7 +130,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 		$basket = $orderManager->load( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
 
-		$this->assertRegExp( '/[0-2][0-9]:[0-5][0-9]/', $config['time.hourminute']->getDefault() );
+		$this->assertMatchesRegularExpression( '/[0-2][0-9]:[0-5][0-9]/', $config['time.hourminute']->getDefault() );
 	}
 
 

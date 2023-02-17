@@ -40,14 +40,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$stub = $this->getMockBuilder( \Aimeos\MShop\Product\Manager\Standard::class )
 			->disableOriginalConstructor()
-			->setMethods( ['invalid'] )
 			->getMock();
 
 		$object = $this->getMockBuilder( \Aimeos\MShop\Common\Manager\Decorator\Base::class )
 			->setConstructorArgs( [$stub, $this->context] )
 			->getMockForAbstractClass();
 
-		$stub->expects( $this->once() )->method( 'invalid' )->will( $this->returnValue( true ) );
+		$stub->expects( $this->once() )->method( '__call' )->will( $this->returnValue( true ) );
 
 		$this->assertTrue( $object->invalid() );
 	}

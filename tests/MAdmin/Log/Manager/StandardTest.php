@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$mock = $this->getMockBuilder( \Aimeos\MAdmin\Log\Manager\Standard::class )
 			->setConstructorArgs( array( \TestHelper::context() ) )
-			->setMethods( array( 'save' ) )
+			->onlyMethods( array( 'save' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )->method( 'save' );

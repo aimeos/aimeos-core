@@ -25,7 +25,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PostPay::class )
 			->setConstructorArgs( array( $context, $serviceItem ) )
-			->setMethods( ['save'] )
+			->onlyMethods( ['save'] )
 			->getMock();
 	}
 

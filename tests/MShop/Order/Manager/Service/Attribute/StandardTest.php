@@ -185,8 +185,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 
 		$this->assertEquals( $this->editor, $itemSaved->editor() );
-		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
-		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
+		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
+		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
-		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
+		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );

@@ -23,12 +23,12 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
 
 		$this->logger = $this->getMockBuilder( '\Aimeos\Base\Logger\Errorlog' )
 			->setConstructorArgs( [\Aimeos\Base\Logger\Iface::NOTICE] )
-			->setMethods( ['notice'] )
+			->onlyMethods( ['notice'] )
 			->getMock();
 
 		$this->mock = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Standard' )
 			->setConstructorArgs( [$this->context] )
-			->setMethods( ['delete', 'save'] )
+			->onlyMethods( ['delete', 'save'] )
 			->getMock();
 
 		$this->context->setLogger( $this->logger );

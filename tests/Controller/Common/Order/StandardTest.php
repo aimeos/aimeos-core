@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'updateStatus' ) )
+			->onlyMethods( array( 'updateStatus' ) )
 			->getMock();
 
 		$object->expects( $this->exactly( 2 ) )->method( 'updateStatus' )
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'updateStatus' ) )
+			->onlyMethods( array( 'updateStatus' ) )
 			->getMock();
 
 		$object->expects( $this->exactly( 2 ) )->method( 'updateStatus' )
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'block' ) )
+			->onlyMethods( array( 'block' ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'block' )->with( $this->equalTo( $orderItem ) );
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'unblock' ) )
+			->onlyMethods( array( 'unblock' ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'unblock' )->with( $this->equalTo( $orderItem ) );
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$statusStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Status\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'save' ) )
+			->onlyMethods( array( 'save' ) )
 			->getMock();
 
 		$statusStub->expects( $this->once() )->method( 'save' );
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'increase' ) )
+			->onlyMethods( array( 'increase' ) )
 			->getMock();
 
 		$couponCodeStub->expects( $this->once() )->method( 'increase' );
@@ -245,7 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
@@ -256,7 +256,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'increase' ) )
+			->onlyMethods( array( 'increase' ) )
 			->getMock();
 
 		$couponCodeStub->expects( $this->once() )->method( 'increase' )
@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'addStatusItem', 'getLastStatusItem' ) )
+			->onlyMethods( array( 'addStatusItem', 'getLastStatusItem' ) )
 			->getMock();
 
 		$object->expects( $this->never() )->method( 'addStatusItem' );
@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateStock' ) )
+			->onlyMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateStock' ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
@@ -332,7 +332,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateCoupons' ) )
+			->onlyMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateCoupons' ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
@@ -356,7 +356,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
@@ -367,7 +367,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'decrease' ) )
+			->onlyMethods( array( 'decrease' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
@@ -377,7 +377,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
+			->onlyMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
 
 		$object->expects( $this->never() )->method( 'updateStockBundle' );
@@ -399,7 +399,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderProductItem = $orderProductStub->create();
@@ -413,7 +413,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'decrease' ) )
+			->onlyMethods( array( 'decrease' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
@@ -423,7 +423,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
+			->onlyMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'updateStockBundle' );
@@ -445,7 +445,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderProductItem = $orderProductStub->create();
@@ -459,7 +459,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'decrease' ) )
+			->onlyMethods( array( 'decrease' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'decrease' );
@@ -469,7 +469,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
+			->onlyMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
 
 		$object->expects( $this->never() )->method( 'updateStockBundle' );
@@ -491,7 +491,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( ['search'] )
+			->onlyMethods( ['search'] )
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
@@ -518,7 +518,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'save' ) )
+			->onlyMethods( array( 'save' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'save' )->with( $this->callback( function( $item ) {
@@ -545,7 +545,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( [$context] )
-			->setMethods( ['getBundleMap', 'getStockItems'] )
+			->onlyMethods( ['getBundleMap', 'getStockItems'] )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getBundleMap' )
@@ -573,7 +573,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'save' ) )
+			->onlyMethods( array( 'save' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'save' )->with( $this->callback( function( $item ) {

@@ -60,10 +60,10 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
+			->setConstructorArgs( [$priceItem, $localeItem] )->onlyMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
+			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
@@ -77,7 +77,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( [$this->context, $serviceStub->create()] )
-			->setMethods( ['isAvailable'] )->getMock();
+			->onlyMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->any() )->method( 'getProducts' )
 			->will( $this->returnValue( map( [$orderProduct] ) ) );
@@ -115,10 +115,10 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
+			->setConstructorArgs( [$priceItem, $localeItem] )->onlyMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
+			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
@@ -132,7 +132,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( [$this->context, $serviceStub->create()] )
-			->setMethods( ['isAvailable'] )->getMock();
+			->onlyMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( map( [$orderProduct] ) ) );
@@ -169,7 +169,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->setConstructorArgs( [$priceItem, $localeItem] )
-			->setMethods( ['getProducts'] )->getMock();
+			->onlyMethods( ['getProducts'] )->getMock();
 
 
 		$orderStub->addService( $serviceDelivery, 'delivery' );

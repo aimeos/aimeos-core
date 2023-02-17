@@ -30,7 +30,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PrePay::class )
 			->setConstructorArgs( array( $this->context, $item ) )
-			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
+			->onlyMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
 				'cancel', 'capture', 'process', 'refund', 'repay', 'setConfigFE',
 				'updateAsync', 'updatePush', 'updateSync' ) )

@@ -137,7 +137,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'search' ) )
+			->onlyMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
@@ -161,7 +161,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'search' ) )
+			->onlyMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
@@ -181,7 +181,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'search' ) )
+			->onlyMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
@@ -205,7 +205,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'search' ) )
+			->onlyMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )

@@ -23,7 +23,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->stub = $this->getMockBuilder( \Aimeos\MShop\Rule\Provider\Catalog\Percent::class )
 			->setConstructorArgs( [$this->context, $this->item] )
-			->setMethods( ['apply'] )
+			->onlyMethods( ['apply'] )
 			->getMock();
 	}
 

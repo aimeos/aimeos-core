@@ -31,7 +31,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class )
 			->setConstructorArgs( [$this->context, $this->serviceItem] )
-			->setMethods( ['send'] )
+			->onlyMethods( ['send'] )
 			->getMock();
 
 
@@ -51,7 +51,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'save' ) )
+			->onlyMethods( array( 'save' ) )
 			->getMock();
 
 		$this->orderMock->expects( $this->any() )->method( 'save' )->will( $this->returnArgument( 0 ) );

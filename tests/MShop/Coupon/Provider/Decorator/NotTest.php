@@ -25,7 +25,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 
 		$this->provider = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\None::class )
 			->setConstructorArgs( [$context, $item, 'abcd'] )
-			->setMethods( ['isAvailable'] )
+			->onlyMethods( ['isAvailable'] )
 			->getMock();
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Not( $this->provider, $context, $item, 'abcd' );

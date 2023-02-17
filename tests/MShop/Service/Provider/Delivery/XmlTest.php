@@ -98,7 +98,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$locale = \Aimeos\MShop::create( $this->context, 'locale' )->create();
 
 		$itemMock = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setMethods( ['setStatusDelivery', 'setStatusPayment', 'setDateDelivery', 'setDatePayment'] )
+			->onlyMethods( ['setStatusDelivery', 'setStatusPayment', 'setDateDelivery', 'setDatePayment'] )
 			->setConstructorArgs( [$price, $locale, []] )
 			->getMock();
 
@@ -108,7 +108,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
-			->setMethods( ['save', 'search'] )
+			->onlyMethods( ['save', 'search'] )
 			->setConstructorArgs( [$this->context] )
 			->getMock();
 

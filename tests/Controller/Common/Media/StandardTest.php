@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAdd()
 	{
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'checkFileUpload', 'store' ) )
+			->onlyMethods( array( 'checkFileUpload', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
@@ -60,7 +60,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setConstructorArgs( [$this->context] )
-			->setMethods( ['checkFileUpload'] )
+			->onlyMethods( ['checkFileUpload'] )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		touch( 'tmp/unknown.png' );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'checkFileUpload', 'store' ) )
+			->onlyMethods( array( 'checkFileUpload', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
@@ -109,12 +109,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCopy()
 	{
 		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
-			->setMethods( array( 'get' ) )
+			->onlyMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
-			->setMethods( array( 'has', 'copy' ) )
+			->onlyMethods( array( 'has', 'copy' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -138,12 +138,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testDelete()
 	{
 		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
-			->setMethods( array( 'get' ) )
+			->onlyMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
-			->setMethods( array( 'has', 'rm' ) )
+			->onlyMethods( array( 'has', 'rm' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'getFileContent', 'store' ) )
+			->onlyMethods( array( 'getFileContent', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'getFileContent', 'store' ) )
+			->onlyMethods( array( 'getFileContent', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 

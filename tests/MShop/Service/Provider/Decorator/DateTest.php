@@ -118,7 +118,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 		$basket = $orderManager->load( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
 
-		$this->assertRegExp( '/[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]/', $config['date.value']->getDefault() );
+		$this->assertMatchesRegularExpression( '/[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]/', $config['date.value']->getDefault() );
 	}
 
 
