@@ -1,6 +1,9 @@
-coverage/
-*.junit.xml
+.phpunit.result.cache
+.phpunit.cache
+coveralls.json
+coverage.xml
 *.log
+*.ser
 
 .buildpath
 .project

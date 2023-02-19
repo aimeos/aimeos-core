@@ -4,13 +4,13 @@
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />
-		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml ."
+		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml --display-warnings --display-notices"
 			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="coverage" description="Generates code coverage report" depends="clean">
 		<echo msg="Generating code coverage report" />
-		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml ."
+		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml --display-warnings --display-notices"
 			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 

@@ -1,5 +1,5 @@
+config/resource.php
 composer.lock
-/config/resource.php
 
 Packages/
 public/
@@ -10,9 +10,10 @@ misc/confdoc/
 
 tests/tmp/
 .phpunit.result.cache
+.phpunit.cache
 coveralls.json
 coverage.xml
-confdoc.ser
+*.ser
 *.log
 
 .buildpath
