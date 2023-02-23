@@ -46,7 +46,7 @@ class MShopAddCatalogDataDefault extends Base
 		{
 			try {
 				$manager->find( $entry['catalog.code'] );
-			} catch( \Aimeos\MW\Exception $e ) {
+			} catch( \Exception $e ) {
 				$manager->insert( $manager->create()->fromArray( $entry ) );
 			}
 		}
