@@ -135,7 +135,7 @@ class Standard
 	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'text.id' => array(
 			'code' => 'text.id',
 			'internalcode' => 'mtex."id"',
@@ -229,7 +229,7 @@ class Standard
 		),
 	);
 
-	private $languageId;
+	private ?string $languageId;
 
 
 	/**

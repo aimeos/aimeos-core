@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Order\Item\Service;
  */
 class Standard extends Base implements Iface
 {
-	private $serviceItem;
+	private ?\Aimeos\MShop\Service\Item\Iface $serviceItem;
 
 
 	/**

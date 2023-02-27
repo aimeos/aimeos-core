@@ -21,7 +21,7 @@ class Category
 	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'category.code' => array(
 			'code' => 'category.code',
 			'internalcode' => 'category.code',

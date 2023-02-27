@@ -20,9 +20,9 @@ namespace Aimeos\MW\Tree\Node;
  */
 class Standard implements \Aimeos\MW\Tree\Node\Iface, \Countable
 {
-	private $values;
-	private $children;
-	private $modified = false;
+	private array $values;
+	private array $children;
+	private bool $modified = false;
 
 
 	/**

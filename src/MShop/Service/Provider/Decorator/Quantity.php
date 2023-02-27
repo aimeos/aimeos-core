@@ -26,7 +26,7 @@ class Quantity
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'quantity.packagesize' => array(
 			'code' => 'quantity.packagesize',
 			'internalcode' => 'quantity.packagesize',

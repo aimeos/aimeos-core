@@ -20,7 +20,7 @@ namespace Aimeos\Controller\Common\Media;
 class Standard
 	implements \Aimeos\Controller\Common\Media\Iface
 {
-	private $context;
+	private \Aimeos\MShop\ContextIface $context;
 
 
 	/**

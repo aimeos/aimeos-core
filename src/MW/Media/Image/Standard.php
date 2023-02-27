@@ -24,9 +24,9 @@ class Standard
 {
 	private static $watermark;
 
-	private $options;
+	private string $mimetype;
+	private array $options;
 	private $image;
-	private $mimetype;
 
 
 	/**

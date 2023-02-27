@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Tag\Item\Iface
 {
-	private $langid;
+	private ?string $langid;
 
 
 	/**
@@ -34,7 +34,7 @@ class Standard
 	{
 		parent::__construct( 'tag.', $values );
 
-		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
+		$this->langid = $values['.languageid'] ?? null;
 	}
 
 

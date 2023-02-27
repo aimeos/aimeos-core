@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Manager\Sub;
  */
 trait Traits
 {
-	private $subManagers = [];
+	private array $subManagers = [];
 
 
 	/**

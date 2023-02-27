@@ -33,7 +33,7 @@ class ProductLimit
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'single-number-max' => array(
 			'code' => 'single-number-max',
 			'internalcode' => 'single-number-max',

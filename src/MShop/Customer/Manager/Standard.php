@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'ID',
 			'code' => 'customer.id',

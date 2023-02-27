@@ -23,8 +23,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 
 
-	private $searchConfig;
-	private $treeManagers = [];
+	private array $searchConfig;
+	private array $treeManagers = [];
 
 
 	/**

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Helper\Config;
  */
 class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 {
-	private $criteria;
+	private array $criteria;
 
 
 	/**

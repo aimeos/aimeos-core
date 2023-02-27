@@ -21,7 +21,7 @@ class Free
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = [
+	private array $beConfig = [
 		'free.show' => [
 			'code' => 'free.show',
 			'internalcode' => 'free.show',

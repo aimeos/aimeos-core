@@ -132,7 +132,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'rule.id' => array(
 			'label' => 'ID',
 			'code' => 'rule.id',
@@ -233,7 +233,7 @@ class Standard
 		),
 	);
 
-	private $date;
+	private string $date;
 
 
 	/**

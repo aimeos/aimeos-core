@@ -20,7 +20,7 @@ class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
 	implements \Aimeos\MShop\Index\Manager\Supplier\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.supplier.id' => array(
 			'code' => 'index.supplier.id',
 			'internalcode' => 'mindsu."supid"',
@@ -66,7 +66,7 @@ class Standard
 		)
 	);
 
-	private $subManagers;
+	private ?array $subManagers = null;
 
 
 	/**

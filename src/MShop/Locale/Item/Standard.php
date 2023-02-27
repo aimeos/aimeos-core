@@ -24,8 +24,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Iface
 {
-	private $siteItem;
-	private $sites;
+	private ?\Aimeos\MShop\Locale\Item\Site\Iface $siteItem;
+	private array $sites;
 
 
 	/**

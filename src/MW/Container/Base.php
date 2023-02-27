@@ -20,8 +20,8 @@ namespace Aimeos\MW\Container;
  */
 abstract class Base
 {
-	private $options;
-	private $name;
+	private array $options;
+	private string $name;
 
 
 	/**

@@ -151,13 +151,6 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testConstructorNoDatabaseManager()
-	{
-		$this->expectException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, null );
-	}
-
-
 	public function testConstructorNoConfig()
 	{
 		$this->expectException( \Aimeos\MW\Tree\Exception::class );

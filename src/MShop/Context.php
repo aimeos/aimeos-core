@@ -17,25 +17,25 @@ namespace Aimeos\MShop;
  */
 class Context implements \Aimeos\MShop\ContextIface
 {
-	private $cache;
-	private $config;
-	private $datetime;
-	private $db;
-	private $fs;
-	private $locale;
-	private $logger;
-	private $mail;
-	private $nonce;
-	private $queue;
-	private $password;
-	private $process;
-	private $session;
-	private $token;
-	private $view;
-	private $user;
-	private $groups;
-	private $editor = '';
-	private $i18n = [];
+	private ?\Aimeos\Base\Cache\Iface $cache = null;
+	private ?\Aimeos\Base\Config\Iface $config = null;
+	private ?\Aimeos\Base\DB\Manager\Iface $db = null;
+	private ?\Aimeos\Base\Filesystem\Manager\Iface $fs = null;
+	private ?\Aimeos\MShop\Locale\Item\Iface $locale = null;
+	private ?\Aimeos\Base\Logger\Iface $logger = null;
+	private ?\Aimeos\Base\Mail\Iface $mail = null;
+	private ?\Aimeos\Base\MQueue\Manager\Iface $queue = null;
+	private ?\Aimeos\Base\Password\Iface $password = null;
+	private ?\Aimeos\Base\Process\Iface $process = null;
+	private ?\Aimeos\Base\Session\Iface $session = null;
+	private ?\Aimeos\Base\View\Iface $view = null;
+	private ?string $datetime = null;
+	private ?string $nonce = null;
+	private ?string $token = null;
+	private string $editor = '';
+	private array $i18n = [];
+	private $groups = null;
+	private $user = null;
 
 
 	/**

@@ -21,7 +21,7 @@ abstract class Base
 	extends \Aimeos\MShop\Rule\Provider\Base
 	implements Iface
 {
-	private $provider;
+	private \Aimeos\MShop\Rule\Provider\Iface $provider;
 
 
 	/**

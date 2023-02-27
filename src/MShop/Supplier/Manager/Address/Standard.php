@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Address\Base
 	implements \Aimeos\MShop\Supplier\Manager\Address\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'supplier.address.id' => array(
 			'code' => 'supplier.address.id',
 			'internalcode' => 'msupad."id"',

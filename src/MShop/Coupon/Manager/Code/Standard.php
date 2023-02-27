@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Coupon\Manager\Code\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'coupon.code.id' => array(
 			'code' => 'coupon.code.id',
 			'internalcode' => 'mcouco."id"',
@@ -109,7 +109,7 @@ class Standard
 		),
 	);
 
-	private $date;
+	private string $date;
 
 
 	/**

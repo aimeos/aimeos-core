@@ -26,10 +26,10 @@ class Standard
 	implements \Aimeos\MShop\Order\Item\Iface
 {
 	// protected is a workaround for serialize problem
-	protected $price;
-	protected $locale;
-	protected $customer;
-	protected $recalc = false;
+	protected ?\Aimeos\MShop\Customer\Item\Iface $customer;
+	protected \Aimeos\MShop\Locale\Item\Iface $locale;
+	protected \Aimeos\MShop\Price\Item\Iface $price;
+	protected bool $recalc = false;
 
 
 	/**

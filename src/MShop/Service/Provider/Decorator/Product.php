@@ -26,7 +26,7 @@ class Product
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'product.include' => array(
 			'code' => 'product.include',
 			'internalcode' => 'product.include',

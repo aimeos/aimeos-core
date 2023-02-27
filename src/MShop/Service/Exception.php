@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Service;
  */
 class Exception extends \Aimeos\MShop\Exception
 {
-	private $errorCodes = [];
+	private array $errorCodes = [];
 
 
 	/**

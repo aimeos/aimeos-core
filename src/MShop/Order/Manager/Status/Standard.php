@@ -20,7 +20,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Order\Manager\Status\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'order.status.id' => array(
 			'code' => 'order.status.id',
 			'internalcode' => 'mordst."id"',

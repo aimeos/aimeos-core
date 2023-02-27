@@ -22,10 +22,10 @@ class Zip
 	extends \Aimeos\MW\Container\Base
 	implements \Aimeos\MW\Container\Iface
 {
-	private $container;
-	private $classname;
-	private $position = 0;
-	private $content = [];
+	private \ZipArchive $container;
+	private string $classname;
+	private int $position = 0;
+	private array $content = [];
 	private $resourcepath;
 
 

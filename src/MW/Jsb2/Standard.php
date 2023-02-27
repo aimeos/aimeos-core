@@ -21,9 +21,9 @@ namespace Aimeos\MW\Jsb2;
  */
 class Standard
 {
-	private $registeredPackages = [];
-	private $baseURL = '';
-	private $basePath = '';
+	private array $registeredPackages;
+	private string $basePath;
+	private string $baseURL;
 
 
 	/**

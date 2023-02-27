@@ -25,7 +25,7 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
-	private $children;
+	private array $children;
 
 
 	/**

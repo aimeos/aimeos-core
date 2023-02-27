@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Customer\Manager\Group\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.group.id' => array(
 			'code' => 'customer.group.id',
 			'internalcode' => 'mcusgr."id"',

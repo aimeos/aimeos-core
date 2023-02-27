@@ -23,10 +23,10 @@ abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\If
 	use \Aimeos\Macro\Macroable;
 
 	// protected due to PHP serialization
-	protected $available = true;
-	protected $modified = false;
-	protected $bprefix;
-	protected $bdata;
+	protected bool $available = true;
+	protected bool $modified = false;
+	protected string $bprefix;
+	protected array $bdata;
 
 
 	/**

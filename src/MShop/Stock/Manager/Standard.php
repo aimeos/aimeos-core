@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'stock.id' => array(
 			'code' => 'stock.id',
 			'internalcode' => 'msto."id"',

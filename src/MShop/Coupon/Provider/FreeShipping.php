@@ -22,7 +22,7 @@ class FreeShipping
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
 	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'freeshipping.productcode' => array(
 			'code' => 'freeshipping.productcode',
 			'internalcode' => 'freeshipping.productcode',

@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'service.id' => array(
 			'code' => 'service.id',
 			'internalcode' => 'mser."id"',
@@ -249,7 +249,7 @@ class Standard
 		),
 	);
 
-	private $date;
+	private string $date;
 
 
 	/**

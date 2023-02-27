@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
 	implements \Aimeos\MShop\Customer\Manager\Lists\Type\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.lists.type.id' => array(
 			'code' => 'customer.lists.type.id',
 			'internalcode' => 'mcuslity."id"',

@@ -39,7 +39,7 @@ class ProductPrice
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'warn' => array(
 			'code' => 'warn',
 			'internalcode' => 'warn',

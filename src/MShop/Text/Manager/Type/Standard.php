@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
 	implements \Aimeos\MShop\Text\Manager\Type\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'text.type.id' => array(
 			'code' => 'text.type.id',
 			'internalcode' => 'mtexty."id"',

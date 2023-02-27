@@ -23,7 +23,7 @@ class Standard
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
-	private $price;
+	private \Aimeos\MShop\Price\Item\Iface $price;
 
 
 	/**

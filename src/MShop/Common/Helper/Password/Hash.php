@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  */
 class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
-	private $options = [];
+	private array $options = [];
 
 
 	/**

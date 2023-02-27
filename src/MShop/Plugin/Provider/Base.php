@@ -23,9 +23,9 @@ abstract class Base
 {
 	use \Aimeos\Macro\Macroable;
 
-	private $item;
-	private $context;
-	private $object;
+	private \Aimeos\MShop\ContextIface $context;
+	private \Aimeos\MShop\Plugin\Item\Iface $item;
+	private ?\Aimeos\MShop\Plugin\Provider\Iface $object = null;
 
 
 	/**

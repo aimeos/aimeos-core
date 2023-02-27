@@ -26,7 +26,7 @@ class Weight
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'weight.min' => array(
 			'code' => 'weight.min',
 			'internalcode' => 'weight.min',

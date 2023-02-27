@@ -21,8 +21,8 @@ class Imagick
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $image;
-	private $options;
+	private \Imagick $image;
+	private array $options;
 
 	private static $wmimg;
 	private static $wmpath;

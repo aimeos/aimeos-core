@@ -21,8 +21,8 @@ namespace Aimeos\MShop\Common\Manager\Address;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	private $prefix;
-	private $searchConfig;
+	private string $prefix;
+	private array $searchConfig;
 
 
 	/**
@@ -50,7 +50,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
-		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false )
+		if( empty( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );

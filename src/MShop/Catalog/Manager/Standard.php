@@ -132,7 +132,7 @@ class Standard extends Base
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'id' => array(
 			'code' => 'catalog.id',
 			'internalcode' => 'mcat."id"',

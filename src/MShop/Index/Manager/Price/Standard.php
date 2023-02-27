@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
 	implements \Aimeos\MShop\Index\Manager\Price\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		// @deprecated Removed 2019.01
 		'index.price.id' => array(
 			'code' => 'index.price.id',
@@ -58,7 +58,7 @@ class Standard
 		),
 	);
 
-	private $subManagers;
+	private ?array $subManagers = null;
 
 
 	/**

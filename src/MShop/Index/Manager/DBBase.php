@@ -21,7 +21,7 @@ abstract class DBBase
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Product\Manager\Iface
 {
-	private $manager;
+	private \Aimeos\MShop\Common\Manager\Iface $manager;
 
 
 	/**

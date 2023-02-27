@@ -25,9 +25,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	use Site;
 
 
-	private $context;
-	private $stmts = [];
-	private $search;
+	private \Aimeos\MShop\ContextIface $context;
+	private ?\Aimeos\Base\Criteria\Iface $search;
+	private array $stmts = [];
 
 
 	/**

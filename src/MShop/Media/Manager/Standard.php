@@ -137,7 +137,7 @@ class Standard
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'media.id' => array(
 			'label' => 'ID',
 			'code' => 'media.id',
@@ -267,7 +267,7 @@ class Standard
 		),
 	);
 
-	private $languageId;
+	private ?string $languageId;
 
 
 	/**

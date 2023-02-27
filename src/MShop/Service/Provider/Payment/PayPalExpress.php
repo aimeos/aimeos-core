@@ -22,9 +22,9 @@ class PayPalExpress
 	extends \Aimeos\MShop\Service\Provider\Payment\Base
 	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
-	private $apiendpoint;
+	private string $apiendpoint;
 
-	private $beConfig = array(
+	private array $beConfig = array(
 		'paypalexpress.ApiUsername' => array(
 			'code' => 'paypalexpress.ApiUsername',
 			'internalcode' => 'paypalexpress.ApiUsername',

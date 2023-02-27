@@ -21,7 +21,7 @@ class Delivery
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'delivery.partial' => array(
 			'code' => 'delivery.partial',
 			'internalcode' => 'delivery.partial',
@@ -42,7 +42,7 @@ class Delivery
 		),
 	);
 
-	private $feConfig = array(
+	private array $feConfig = array(
 		'delivery.type' => array(
 			'code' => 'delivery.type',
 			'internalcode' => 'type',

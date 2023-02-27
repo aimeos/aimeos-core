@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Locale\Manager\Currency\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'locale.currency.id' => array(
 			'code' => 'locale.currency.id',
 			'internalcode' => 'mloccu."id"',

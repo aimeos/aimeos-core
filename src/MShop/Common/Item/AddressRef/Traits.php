@@ -19,10 +19,9 @@ namespace Aimeos\MShop\Common\Item\AddressRef;
  */
 trait Traits
 {
-	private $addrMax = 0;
-	private $addrItems = [];
-	private $addrRmItems = [];
-	private $addrSorted;
+	private int $addrMax = 0;
+	private array $addrItems = [];
+	private array $addrRmItems = [];
 
 
 	/**

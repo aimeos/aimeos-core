@@ -21,7 +21,7 @@ class MySQL
 	extends \Aimeos\MShop\Index\Manager\Standard
 	implements \Aimeos\MShop\Index\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $subManagers;
+	private ?array $subManagers = null;
 
 
 	/**

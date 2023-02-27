@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Order\Manager\Product\Attribute\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'order.product.attribute.id' => array(
 			'code' => 'order.product.attribute.id',
 			'internalcode' => 'mordprat."id"',

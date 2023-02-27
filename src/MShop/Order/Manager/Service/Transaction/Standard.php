@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Order\Manager\Service\Transaction\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'order.service.transaction.id' => array(
 			'code' => 'order.service.transaction.id',
 			'internalcode' => 'mordsetx."id"',

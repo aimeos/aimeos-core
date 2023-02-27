@@ -19,7 +19,7 @@ namespace Aimeos\MW\Observer\Publisher;
  */
 trait Traits
 {
-	protected $listeners = [];
+	protected array $listeners = [];
 
 
 	/**

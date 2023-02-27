@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Index\Manager\Supplier;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Supplier\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.supplier.id' => array(
 			'code' => 'index.supplier.id',
 			'internalcode' => 'mindsu."supid"',

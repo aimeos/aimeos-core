@@ -26,7 +26,7 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 
-	private $date;
+	private ?string $date;
 
 
 	/**
@@ -40,7 +40,7 @@ class Standard
 	{
 		parent::__construct( 'service.', $values );
 
-		$this->date = ( isset( $values['.date'] ) ? $values['.date'] : null );
+		$this->date = $values['.date'] ?? null;
 		$this->initListItems( $listItems, $refItems );
 	}
 

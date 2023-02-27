@@ -20,7 +20,7 @@ namespace Aimeos\MW\Media;
  */
 class Base
 {
-	private $mimetype;
+	private string $mimetype;
 
 
 	/**

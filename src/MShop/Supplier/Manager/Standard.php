@@ -137,7 +137,7 @@ class Standard
 	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'supplier.id' => array(
 			'code' => 'supplier.id',
 			'internalcode' => 'msup."id"',

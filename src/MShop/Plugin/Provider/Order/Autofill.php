@@ -43,7 +43,7 @@ class Autofill
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'address' => array(
 			'code' => 'address',
 			'internalcode' => 'address',

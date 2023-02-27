@@ -22,7 +22,7 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Common\Manager\Decorator\Iface
 {
-	private $manager;
+	private \Aimeos\MShop\Common\Manager\Iface $manager;
 
 
 	/**

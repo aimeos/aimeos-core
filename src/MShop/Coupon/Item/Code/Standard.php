@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Coupon\Item\Code\Iface
 {
-	private $date;
+	private string $date;
 
 
 	/**
@@ -34,7 +34,7 @@ class Standard
 	{
 		parent::__construct( 'coupon.code.', $values );
 
-		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
+		$this->date = $values['.date'] ?? date( 'Y-m-d H:i:s' );
 	}
 
 

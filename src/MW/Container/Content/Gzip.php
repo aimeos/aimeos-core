@@ -22,8 +22,8 @@ class Gzip
 	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $fh;
-	private $data;
-	private $position = 0;
+	private int $position = 0;
+	private ?string $data = null;
 
 
 	/**

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  */
 class Bcrypt implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
-	private $options = [];
+	private array $options = [];
 
 
 	/**

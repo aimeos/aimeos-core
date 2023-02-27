@@ -31,7 +31,7 @@ class PropertyAdd
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'types' => array(
 			'code' => 'types',
 			'internalcode' => 'types',
@@ -43,7 +43,7 @@ class PropertyAdd
 		),
 	);
 
-	private $orderAttrManager;
+	private \Aimeos\MShop\Common\Manager\Iface $orderAttrManager;
 
 
 	/**

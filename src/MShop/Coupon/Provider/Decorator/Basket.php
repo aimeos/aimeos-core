@@ -22,7 +22,7 @@ class Basket
 	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'basket.total-value-min' => array(
 			'code' => 'basket.total-value-min',
 			'internalcode' => 'basket.total-value-min',

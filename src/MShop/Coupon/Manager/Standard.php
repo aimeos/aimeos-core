@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'coupon.id' => array(
 			'code' => 'coupon.id',
 			'internalcode' => 'mcou."id"',
@@ -219,7 +219,7 @@ class Standard
 		),
 	);
 
-	private $date;
+	private string $date;
 
 
 	/**

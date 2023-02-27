@@ -21,7 +21,7 @@ class Singleton
 	extends \Aimeos\MShop\Plugin\Provider\Decorator\Base
 	implements \Aimeos\MShop\Plugin\Provider\Decorator\Iface
 {
-	private $singleton = false;
+	private bool $singleton = false;
 
 
 	/**

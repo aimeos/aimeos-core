@@ -35,8 +35,8 @@ abstract class Base
 	}
 
 
-	private $billingaddress;
-	private $data;
+	private \Aimeos\MShop\Common\Item\Address\Iface $billingaddress;
+	private array $data;
 
 
 	/**

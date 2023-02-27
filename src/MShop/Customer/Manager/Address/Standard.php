@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Address\Base
 	implements \Aimeos\MShop\Customer\Manager\Address\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.address.id' => array(
 			'label' => 'Address ID',
 			'code' => 'customer.address.id',

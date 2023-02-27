@@ -21,8 +21,8 @@ class Category
 	extends \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Base
 	implements \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Iface
 {
-	private $codes;
-	private $beConfig = [
+	private array $codes;
+	private array $beConfig = [
 		'category.code' => [
 			'code' => 'category.code',
 			'internalcode' => 'category.code',

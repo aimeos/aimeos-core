@@ -132,7 +132,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'job.id' => array(
 			'code' => 'job.id',
 			'internalcode' => 'majob."id"',

@@ -22,7 +22,7 @@ class Reduction
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'reduction.percent' => array(
 			'code' => 'reduction.percent',
 			'internalcode' => 'reduction.percent',

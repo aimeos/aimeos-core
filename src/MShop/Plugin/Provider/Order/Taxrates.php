@@ -30,7 +30,7 @@ class Taxrates
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'country-taxrates' => array(
 			'code' => 'country-taxrates',
 			'internalcode' => 'country-taxrates',

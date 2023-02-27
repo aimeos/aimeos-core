@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 abstract class Base
 	extends \Aimeos\MShop\Service\Provider\Base
 {
-	private $provider;
+	private \Aimeos\MShop\Service\Provider\Iface $provider;
 
 
 	/**

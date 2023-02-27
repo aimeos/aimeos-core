@@ -21,8 +21,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Property\Iface
 {
-	private $langid;
-	private $prefix;
+	private ?string $langid;
+	private string $prefix;
 
 
 	/**
@@ -35,7 +35,7 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->langid = isset( $values['.languageid'] ) ? $values['.languageid'] : null;
+		$this->langid = $values['.languageid'] ?? null;
 		$this->prefix = $prefix;
 	}
 

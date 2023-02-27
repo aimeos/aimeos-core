@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  */
 class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
-	private $password;
+	private \Aimeos\Base\Password\Iface $password;
 
 
 	/**

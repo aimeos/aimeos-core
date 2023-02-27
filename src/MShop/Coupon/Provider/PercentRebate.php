@@ -22,7 +22,7 @@ class PercentRebate
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
 	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'percentrebate.productcode' => array(
 			'code' => 'percentrebate.productcode',
 			'internalcode' => 'percentrebate.productcode',

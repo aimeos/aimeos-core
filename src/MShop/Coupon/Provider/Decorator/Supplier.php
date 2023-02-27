@@ -21,7 +21,7 @@ class Supplier
 	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'supplier.code' => array(
 			'code' => 'supplier.code',
 			'internalcode' => 'supplier.code',

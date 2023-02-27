@@ -20,9 +20,9 @@ namespace Aimeos\MW\Tree\Manager;
  */
 class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 {
-	private $searchConfig = [];
-	private $config;
-	private $conn;
+	private array $searchConfig = [];
+	private array $config;
+	private \Aimeos\Base\DB\Connection\Iface $conn;
 
 
 	/**
@@ -70,12 +70,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param array $config Associative array holding the SQL statements
 	 * @param \Aimeos\Base\DB\Connection\Iface $resource Database connection
 	 */
-	public function __construct( array $config, $resource )
+	public function __construct( array $config, \Aimeos\Base\DB\Connection\Iface $resource )
 	{
-		if( !( $resource instanceof \Aimeos\Base\DB\Connection\Iface ) ) {
-			throw new \Aimeos\MW\Tree\Exception( 'Given resource isn\'t a database connection object' );
-		}
-
 		if( !isset( $config['search'] ) ) {
 			throw new \Aimeos\MW\Tree\Exception( 'Search config is missing' );
 		}

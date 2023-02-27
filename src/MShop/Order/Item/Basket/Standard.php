@@ -20,7 +20,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Basket\Iface
 {
-	private $item;
+	private ?\Aimeos\MShop\Order\Item\Iface $item;
 
 
 	/**

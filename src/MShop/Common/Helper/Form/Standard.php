@@ -20,11 +20,11 @@ namespace Aimeos\MShop\Common\Helper\Form;
  */
 class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 {
-	private $url;
-	private $method;
-	private $values;
-	private $external;
-	private $html;
+	private string $url;
+	private string $html;
+	private string $method;
+	private array $values;
+	private bool $external;
 
 
 	/**

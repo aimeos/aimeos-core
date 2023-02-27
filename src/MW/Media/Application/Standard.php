@@ -22,8 +22,8 @@ class Standard
 	extends \Aimeos\MW\Media\Base
 	implements \Aimeos\MW\Media\Application\Iface
 {
-	private $content;
-	private $options;
+	private string $content;
+	private array $options;
 
 
 	/**

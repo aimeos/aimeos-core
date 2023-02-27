@@ -20,9 +20,9 @@ namespace Aimeos\MW\Container\Content;
  */
 abstract class Base
 {
-	private $resource;
-	private $options;
-	private $name;
+	private array $options;
+	private string $resource;
+	private string $name;
 
 
 	/**

@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
 			'internalcode' => ':site AND mindte."langid" = $1 AND MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',

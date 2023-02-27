@@ -22,10 +22,10 @@ abstract class Base
 {
 	use \Aimeos\Macro\Macroable;
 
-	private $item;
-	private $context;
-	private $object;
-	private $beConfig = [
+	private \Aimeos\MShop\ContextIface $context;
+	private \Aimeos\MShop\Rule\Item\Iface $item;
+	private ?\Aimeos\MShop\Rule\Provider\Iface $object = null;
+	private array $beConfig = [
 		'last-rule' => [
 			'code' => 'last-rule',
 			'internalcode' => 'last-rule',

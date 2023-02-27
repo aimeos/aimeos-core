@@ -26,8 +26,8 @@ abstract class Base
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private $salt;
-	private $helper;
+	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
+	private ?string $salt;
 
 
 	/**

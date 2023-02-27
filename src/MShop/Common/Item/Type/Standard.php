@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Type\Iface
 {
-	private $prefix;
+	private string $prefix;
 
 
 	/**

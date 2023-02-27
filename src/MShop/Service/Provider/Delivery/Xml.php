@@ -21,9 +21,9 @@ class Xml
 	extends \Aimeos\MShop\Service\Provider\Delivery\Base
 	implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
-	private $num = 0;
+	private int $num = 0;
 
-	private $beConfig = [
+	private array $beConfig = [
 		'xml.backupdir' => [
 			'code' => 'xml.backupdir',
 			'internalcode' => 'xml.backupdir',

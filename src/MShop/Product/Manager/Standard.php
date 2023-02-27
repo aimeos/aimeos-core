@@ -138,7 +138,7 @@ class Standard
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'product.id' => array(
 			'code' => 'product.id',
 			'internalcode' => 'mpro."id"',
@@ -307,7 +307,7 @@ class Standard
 		),
 	);
 
-	private $date;
+	private string $date;
 
 
 	/**

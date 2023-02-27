@@ -20,8 +20,8 @@ namespace Aimeos\MShop\Price\Item;
  */
 class Standard extends Base
 {
-	private $currencyid;
-	private $tax;
+	private ?string $currencyid;
+	private ?string $tax;
 
 
 	/**

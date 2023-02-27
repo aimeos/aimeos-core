@@ -22,13 +22,13 @@ class CSV
 	extends \Aimeos\MW\Container\Content\Base
 	implements \Aimeos\MW\Container\Content\Iface
 {
-	private $separator;
-	private $enclosure;
-	private $escape;
-	private $lineend;
 	private $fh;
-	private $data;
-	private $position = 0;
+	private string $separator;
+	private string $enclosure;
+	private string $escape;
+	private string $lineend;
+	private ?array $data;
+	private int $position = 0;
 
 
 	/**
@@ -193,7 +193,7 @@ class CSV
 	 *
 	 * @return array|null List of values
 	 */
-	protected function getData()
+	protected function getData() : ?array
 	{
 		do
 		{

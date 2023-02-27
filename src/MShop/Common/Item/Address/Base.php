@@ -44,7 +44,7 @@ abstract class Base
 	const SALUTATION_MR = 'mr';
 
 
-	private $prefix;
+	private string $prefix;
 
 
 	/**

@@ -23,7 +23,7 @@ class Svg
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $svg;
+	private \SimpleXMLElement $svg;
 
 
 	/**
@@ -48,9 +48,11 @@ class Svg
 			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file: ' . print_r( $sanitizer->getXmlIssues(), true ) );
 		}
 
-		if( ( $this->svg = @simplexml_load_string( $content ) ) === false ) {
+		if( ( $svg = @simplexml_load_string( $content ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file' );
 		}
+
+		$this->svg = $svg;
 	}
 
 

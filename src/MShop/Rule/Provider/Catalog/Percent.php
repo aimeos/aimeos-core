@@ -21,7 +21,7 @@ class Percent
 	extends \Aimeos\MShop\Rule\Provider\Base
 	implements \Aimeos\MShop\Rule\Provider\Catalog\Iface, \Aimeos\MShop\Rule\Provider\Factory\Iface
 {
-	private $beConfig = [
+	private array $beConfig = [
 		'percent' => [
 			'code' => 'percent',
 			'internalcode' => 'percent',

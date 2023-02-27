@@ -134,7 +134,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'review.id' => array(
 			'code' => 'review.id',
 			'internalcode' => 'mrev."id"',

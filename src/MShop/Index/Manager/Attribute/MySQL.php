@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Index\Manager\Attribute;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Attribute\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.attribute.id' => array(
 			'code' => 'index.attribute.id',
 			'internalcode' => 'mindat."attrid"',

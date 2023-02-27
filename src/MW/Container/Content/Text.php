@@ -22,10 +22,10 @@ class Text
 	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $fh;
-	private $data;
-	private $position = 0;
-	private $lineend;
-	private $size;
+	private int $size;
+	private int $position = 0;
+	private ?string $data = null;
+	private string $lineend;
 
 
 	/**

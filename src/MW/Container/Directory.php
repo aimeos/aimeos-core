@@ -21,8 +21,8 @@ class Directory
 	extends \Aimeos\MW\Container\Base
 	implements \Aimeos\MW\Container\Iface
 {
-	private $content = [];
-	private $classname;
+	private array $content = [];
+	private string $classname;
 	private $resource;
 
 

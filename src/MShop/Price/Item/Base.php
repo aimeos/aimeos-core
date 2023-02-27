@@ -31,7 +31,7 @@ abstract class Base
 	}
 
 
-	private $precision;
+	private int $precision;
 
 
 	/**
@@ -47,7 +47,7 @@ abstract class Base
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->precision = $this->get( '.precision', 2 );
+		$this->precision = (int) $this->get( '.precision', 2 );
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
 	}

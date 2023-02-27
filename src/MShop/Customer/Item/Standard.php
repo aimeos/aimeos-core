@@ -20,9 +20,9 @@ namespace Aimeos\MShop\Customer\Item;
  */
 class Standard extends Base implements Iface
 {
-	private $groups;
-	private $helper;
-	private $salt;
+	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
+	private ?array $groups = null;
+	private ?string $salt;
 
 
 	/**

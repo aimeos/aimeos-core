@@ -21,7 +21,7 @@ class Time
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'time.start' => array(
 			'code' => 'time.start',
 			'internalcode' => 'time.start',
@@ -51,7 +51,7 @@ class Time
 		),
 	);
 
-	private $feConfig = array(
+	private array $feConfig = array(
 		'time.hourminute' => array(
 			'code' => 'time.hourminute',
 			'internalcode' => 'hourminute',

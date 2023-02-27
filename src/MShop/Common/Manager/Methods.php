@@ -19,9 +19,9 @@ namespace Aimeos\MShop\Common\Manager;
  */
 trait Methods
 {
-	private $filterFcn = [];
-	private $resourceName;
-	private $object;
+	private array $filterFcn = [];
+	private ?string $resourceName = null;
+	private ?\Aimeos\MShop\Common\Manager\Iface $object = null;
 
 
 	/**

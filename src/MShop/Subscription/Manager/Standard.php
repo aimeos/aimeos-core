@@ -134,7 +134,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'subscription.id' => array(
 			'code' => 'subscription.id',
 			'internalcode' => 'msub."id"',

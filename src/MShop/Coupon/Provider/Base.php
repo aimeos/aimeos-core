@@ -23,10 +23,10 @@ abstract class Base
 {
 	use \Aimeos\Macro\Macroable;
 
-	private $context;
-	private $object;
-	private $item;
-	private $code;
+	private ?\Aimeos\MShop\Coupon\Provider\Iface $object = null;
+	private \Aimeos\MShop\Coupon\Item\Iface $item;
+	private \Aimeos\MShop\ContextIface $context;
+	private string $code;
 
 	/**
 	 * Initializes the coupon model.

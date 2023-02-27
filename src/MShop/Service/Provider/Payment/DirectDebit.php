@@ -22,7 +22,7 @@ class DirectDebit
 	extends \Aimeos\MShop\Service\Provider\Payment\Base
 	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
-	private $feConfig = array(
+	private array $feConfig = array(
 		'directdebit.accountowner' => array(
 			'code' => 'directdebit.accountowner',
 			'internalcode' => 'accountowner',

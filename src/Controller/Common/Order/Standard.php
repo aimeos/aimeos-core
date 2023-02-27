@@ -21,7 +21,7 @@ namespace Aimeos\Controller\Common\Order;
 class Standard
 	implements \Aimeos\Controller\Common\Order\Iface
 {
-	private $context;
+	private \Aimeos\MShop\ContextIface $context;
 
 
 	/**

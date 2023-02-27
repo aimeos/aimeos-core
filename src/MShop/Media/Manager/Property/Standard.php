@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Property\Base
 	implements \Aimeos\MShop\Media\Manager\Property\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'media.property.id' => array(
 			'code' => 'media.property.id',
 			'internalcode' => 'mmedpr."id"',

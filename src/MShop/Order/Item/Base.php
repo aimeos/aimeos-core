@@ -146,10 +146,10 @@ abstract class Base
 
 
 	// protected is a workaround for serialize problem
-	protected $coupons;
-	protected $products;
-	protected $services = [];
-	protected $addresses = [];
+	protected array $coupons;
+	protected array $products;
+	protected array $services = [];
+	protected array $addresses = [];
 
 
 	/**

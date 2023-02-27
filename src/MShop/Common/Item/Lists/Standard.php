@@ -25,9 +25,9 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
-	private $date;
-	private $prefix;
-	private $refItem;
+	private string $date;
+	private string $prefix;
+	private ?\Aimeos\MShop\Common\Item\Iface $refItem = null;
 
 
 	/**

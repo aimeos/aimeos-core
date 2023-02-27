@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 abstract class Base
 	extends \Aimeos\MShop\Coupon\Provider\Base
 {
-	private $provider;
+	private \Aimeos\MShop\Coupon\Provider\Iface $provider;
 
 
 	/**

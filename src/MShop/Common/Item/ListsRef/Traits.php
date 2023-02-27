@@ -19,13 +19,13 @@ namespace Aimeos\MShop\Common\Item\ListsRef;
  */
 trait Traits
 {
-	private $listItems = [];
-	private $listRefItems = [];
-	private $listRmItems = [];
-	private $listPrepared = false;
-	private $listRmMap = [];
-	private $listMap = [];
-	private $listMax = 0;
+	private bool $listPrepared = false;
+	private array $listItems = [];
+	private array $listRefItems = [];
+	private array $listRmItems = [];
+	private array $listRmMap = [];
+	private array $listMap = [];
+	private int $listMax = 0;
 
 
 	/**

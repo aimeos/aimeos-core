@@ -27,7 +27,7 @@ class Postal
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'postal.billing-include' => array(
 			'code' => 'postal.billing-include',
 			'internalcode' => 'postal.billing-include',

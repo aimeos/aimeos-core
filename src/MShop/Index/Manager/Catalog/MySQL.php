@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Index\Manager\Catalog;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Catalog\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.catalog.id' => array(
 			'code' => 'index.catalog.id',
 			'internalcode' => 'mindca."catid"',

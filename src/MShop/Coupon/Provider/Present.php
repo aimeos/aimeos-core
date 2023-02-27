@@ -22,7 +22,7 @@ class Present
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
 	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'present.productcode' => array(
 			'code' => 'present.productcode',
 			'internalcode' => 'present.productcode',

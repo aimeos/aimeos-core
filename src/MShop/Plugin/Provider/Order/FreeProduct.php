@@ -27,7 +27,7 @@ class FreeProduct
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'productcode' => array(
 			'code' => 'productcode',
 			'internalcode' => 'productcode',

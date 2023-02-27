@@ -30,10 +30,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	const TYPE_PAYMENT = 'payment';
 
 
-	private $attributes;
-	private $attributesMap;
-	private $transactions;
-	private $price;
+	private array $attributes;
+	private array $transactions;
+	private ?array $attributesMap = null;
+	private \Aimeos\MShop\Price\Item\Iface $price;
 
 
 	/**

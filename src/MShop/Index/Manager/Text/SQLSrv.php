@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class SQLSrv
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',

@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Subscription\Item\Iface
 {
-	private $orderItem;
+	private ?\Aimeos\MShop\Order\Item\Iface $orderItem;
 
 
 	/**

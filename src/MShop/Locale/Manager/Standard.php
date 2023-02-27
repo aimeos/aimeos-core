@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'locale.id' => array(
 			'code' => 'locale.id',
 			'internalcode' => 'mloc."id"',

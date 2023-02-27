@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Index\Manager\Price;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Price\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.price.id' => array(
 			'code' => 'index.price.id',
 			'internalcode' => 'mindpr."priceid"',

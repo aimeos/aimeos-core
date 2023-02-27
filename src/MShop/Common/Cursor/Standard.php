@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Cursor;
  */
 class Standard implements Iface
 {
-	private $filter;
+	private \Aimeos\Base\Criteria\Iface $filter;
 	private $value;
 
 

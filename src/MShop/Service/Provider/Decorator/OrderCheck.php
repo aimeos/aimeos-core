@@ -27,7 +27,7 @@ class OrderCheck
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'ordercheck.total-number-min' => array(
 			'code' => 'ordercheck.total-number-min',
 			'internalcode' => 'ordercheck.total-number-min',

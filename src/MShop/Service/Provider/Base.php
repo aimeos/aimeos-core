@@ -23,10 +23,10 @@ abstract class Base
 {
 	use \Aimeos\Macro\Macroable;
 
-	private $object;
-	private $context;
-	private $serviceItem;
-	private $beGlobalConfig;
+	private \Aimeos\MShop\ContextIface $context;
+	private \Aimeos\MShop\Service\Item\Iface $serviceItem;
+	private ?\Aimeos\MShop\Service\Provider\Iface $object;
+	private array $beGlobalConfig;
 
 
 	/**

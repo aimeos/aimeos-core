@@ -21,9 +21,9 @@ class File
 	extends \Aimeos\MW\Container\Base
 	implements \Aimeos\MW\Container\Iface
 {
-	private $content;
-	private $classname;
-	private $pointer = true;
+	private ?\Aimeos\MW\Container\Content\Iface $content = null;
+	private bool $pointer = true;
+	private string $classname;
 
 
 	/**

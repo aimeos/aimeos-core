@@ -20,7 +20,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
 	implements \Aimeos\MShop\Attribute\Manager\Property\Type\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'attribute.property.type.id' => array(
 			'code' => 'attribute.property.type.id',
 			'internalcode' => 'mattprty."id"',

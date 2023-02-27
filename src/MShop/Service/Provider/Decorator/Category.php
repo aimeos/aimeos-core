@@ -26,7 +26,7 @@ class Category
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'category.include' => array(
 			'code' => 'category.include',
 			'internalcode' => 'category.include',

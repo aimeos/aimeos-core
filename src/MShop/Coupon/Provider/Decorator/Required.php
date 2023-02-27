@@ -22,7 +22,7 @@ class Required
 	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'required.productcode' => array(
 			'code' => 'required.productcode',
 			'internalcode' => 'required.productcode',

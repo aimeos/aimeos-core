@@ -33,7 +33,7 @@ class Standard
 	}
 
 
-	private $langid;
+	private ?string $langid;
 
 
 	/**
@@ -53,7 +53,7 @@ class Standard
 
 		parent::__construct( 'media.', $values );
 
-		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
+		$this->langid = $values['.languageid'] ?? null;
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
 	}

@@ -22,9 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Locale\Manager\Site\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $cache = [];
+	private array $cache = [];
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'locale.site.id' => array(
 			'code' => 'locale.site.id',
 			'internalcode' => 'mlocsi."id"',

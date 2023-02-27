@@ -19,9 +19,9 @@ namespace Aimeos\MShop\Common\Item\PropertyRef;
  */
 trait Traits
 {
-	private $propItems = [];
-	private $propRmItems = [];
-	private $propMax = 0;
+	private array $propItems = [];
+	private array $propRmItems = [];
+	private int $propMax = 0;
 
 
 	/**

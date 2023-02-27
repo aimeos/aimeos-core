@@ -22,9 +22,9 @@ class Binary
 	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $fh;
-	private $data;
-	private $position = 0;
-	private $size;
+	private ?string $data;
+	private int $position = 0;
+	private int $size;
 
 
 	/**

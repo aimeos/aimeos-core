@@ -22,7 +22,7 @@ class Costs
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'costs.percent' => array(
 			'code' => 'costs.percent',
 			'internalcode' => 'costs.percent',

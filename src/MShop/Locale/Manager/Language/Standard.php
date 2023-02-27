@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Locale\Manager\Language\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'locale.language.id' => array(
 			'code' => 'locale.language.id',
 			'internalcode' => 'mlocla."id"',

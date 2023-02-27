@@ -31,9 +31,9 @@ class Standard
 	}
 
 
-	private $node;
-	private $children;
-	private $deletedItems = [];
+	private \Aimeos\MW\Tree\Node\Iface $node;
+	private array $deletedItems = [];
+	private array $children;
 
 
 	/**

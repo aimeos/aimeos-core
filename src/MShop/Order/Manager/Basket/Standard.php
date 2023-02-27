@@ -19,7 +19,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Order\Manager\Basket\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'order.basket.id' => array(
 			'code' => 'order.basket.id',
 			'internalcode' => 'mordba."id"',
@@ -204,7 +204,7 @@ class Standard
 		$sql = $this->getSqlConfig( 'mshop/order/manager/basket/insert' );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		$serialized = base64_encode( serialize( clone $item->getItem() ) );
+		$serialized = serialize( clone $item->getItem() );
 		$idx = 1;
 
 		// insert
@@ -593,7 +593,7 @@ class Standard
 
 		while( $row = $results->fetch() )
 		{
-			$basket = unserialize( base64_decode( $row['order.basket.content'] ) );
+			$basket = unserialize( $row['order.basket.content'] );
 
 			if( !( $basket instanceof \Aimeos\MShop\Order\Item\Iface ) )
 			{

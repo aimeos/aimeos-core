@@ -34,10 +34,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	const FLAG_IMMUTABLE = 1;
 
 
-	private $attributes;
-	private $attributesMap;
-	private $products;
-	private $price;
+	private array $products;
+	private array $attributes;
+	private ?array $attributesMap = null;
+	private \Aimeos\MShop\Price\Item\Iface $price;
 
 
 	/**

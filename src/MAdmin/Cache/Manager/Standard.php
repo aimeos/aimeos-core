@@ -132,10 +132,10 @@ class Standard
 	 */
 
 
-	private $conn;
-	private $object;
+	private ?\Aimeos\Base\Cache\Iface $object = null;
+	private ?\Aimeos\Base\DB\Connection\Iface $conn = null;
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'cache.id' => array(
 			'code' => 'cache.id',
 			'internalcode' => '"id"',

@@ -36,7 +36,9 @@ abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 	const LEVEL_TREE = 3;
 
 
-	private $readOnly = false;
+	private bool $readOnly = false;
+
+
 	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *

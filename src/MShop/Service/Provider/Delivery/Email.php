@@ -21,7 +21,7 @@ class Email
 	extends \Aimeos\MShop\Service\Provider\Delivery\Base
 	implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
-	private $beConfig = [
+	private array $beConfig = [
 		'email.from' => [
 			'code' => 'email.from',
 			'internalcode' => 'email.from',

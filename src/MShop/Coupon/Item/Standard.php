@@ -25,7 +25,7 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
-	private $date;
+	private string $date;
 
 
 	/**
@@ -38,7 +38,7 @@ class Standard
 	{
 		parent::__construct( 'coupon.', $values );
 
-		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
+		$this->date = $values['.date'] ?? date( 'Y-m-d H:i:s' );
 	}
 
 

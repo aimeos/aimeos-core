@@ -135,7 +135,7 @@ class Standard
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'attribute.id' => array(
 			'code' => 'attribute.id',
 			'internalcode' => 'matt."id"',

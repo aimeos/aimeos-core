@@ -26,7 +26,7 @@ class Currency
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'currency.include' => array(
 			'code' => 'currency.include',
 			'internalcode' => 'currency.include',

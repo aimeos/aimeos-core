@@ -132,7 +132,7 @@ class Standard
 	 */
 
 
-	private $subManagers;
+	private ?array $subManagers = null;
 
 
 	/**

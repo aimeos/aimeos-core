@@ -22,7 +22,7 @@ class Example
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'country' => array(
 			'code' => 'country',
 			'internalcode' => 'country',

@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Manager\Decorator;
 class Depth
 	extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
-	private $level = 0;
+	private int $level = 0;
 
 
 	/**

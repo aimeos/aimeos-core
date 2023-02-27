@@ -25,7 +25,7 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 
-	private $langid;
+	private ?string $langid;
 
 
 	/**

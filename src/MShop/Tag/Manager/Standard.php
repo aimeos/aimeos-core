@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'tag.id' => array(
 			'code' => 'tag.id',
 			'internalcode' => 'mtag."id"',
@@ -203,7 +203,7 @@ class Standard
 		),
 	);
 
-	private $languageId;
+	private ?string $languageId;
 
 
 	/**

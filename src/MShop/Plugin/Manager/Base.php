@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Plugin\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	private $plugins = [];
+	private array $plugins = [];
 
 	/**
 	 * Returns the plugin provider which is responsible for the plugin item.

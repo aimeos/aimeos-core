@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Rule\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	private $rules = [];
+	private array $rules = [];
 
 
 	/**

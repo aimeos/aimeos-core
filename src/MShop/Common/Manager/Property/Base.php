@@ -20,9 +20,9 @@ namespace Aimeos\MShop\Common\Manager\Property;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	private $languageId;
-	private $searchConfig;
-	private $prefix;
+	private array $searchConfig;
+	private ?string $languageId;
+	private string $prefix;
 
 
 	/**
@@ -49,7 +49,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
-		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false )
+		if( empty( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );

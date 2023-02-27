@@ -36,7 +36,7 @@ class Shipping
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'threshold' => array(
 			'code' => 'threshold',
 			'internalcode' => 'threshold',

@@ -21,7 +21,7 @@ class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
 	implements \Aimeos\MShop\Index\Manager\Catalog\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'index.catalog.id' => array(
 			'code' => 'index.catalog.id',
 			'internalcode' => 'mindca."catid"',
@@ -49,7 +49,7 @@ class Standard
 		)
 	);
 
-	private $subManagers;
+	private ?array $subManagers = null;
 
 
 	/**

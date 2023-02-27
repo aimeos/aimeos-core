@@ -21,7 +21,7 @@ class Date
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'date.minimumdays' => array(
 			'code' => 'date.minimumdays',
 			'internalcode' => 'date.minimumdays',
@@ -33,7 +33,7 @@ class Date
 		),
 	);
 
-	private $feConfig = array(
+	private array $feConfig = array(
 		'date.value' => array(
 			'code' => 'date.value',
 			'internalcode' => 'value',

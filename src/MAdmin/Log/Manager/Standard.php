@@ -135,10 +135,10 @@ class Standard
 	use \Aimeos\Base\Logger\Traits;
 
 
-	private $loglevel;
-	private $requestid;
+	private int $loglevel;
+	private string $requestid;
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'log.id' => array(
 			'code' => 'log.id',
 			'internalcode' => 'malog."id"',

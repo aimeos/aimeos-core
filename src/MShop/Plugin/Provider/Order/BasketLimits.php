@@ -34,7 +34,7 @@ class BasketLimits
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $beConfig = array(
+	private array $beConfig = array(
 		'min-value' => array(
 			'code' => 'min-value',
 			'internalcode' => 'min-value',

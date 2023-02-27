@@ -133,7 +133,7 @@ class Standard
 	 */
 
 
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'price.id' => array(
 			'code' => 'price.id',
 			'internalcode' => 'mpri."id"',
@@ -274,9 +274,9 @@ class Standard
 		),
 	);
 
-	private $currencyId;
-	private $precision;
-	private $taxflag;
+	private ?string $currencyId;
+	private int $precision;
+	private bool $taxflag;
 
 
 	/**
