@@ -193,20 +193,22 @@ class Setup
 		} );
 
 
+		$codelen = $this->config['codelength'] ?? 64;
+
 		\Aimeos\Upscheme\Schema\Table::macro( 'startend', function() {
 			$this->datetime( 'start' )->null( true );
 			return $this->datetime( 'end' )->null( true );
 		} );
 
-		\Aimeos\Upscheme\Schema\Table::macro( 'code', function( string $name = 'code' ) {
-			return $this->string( $name, 64 )
+		\Aimeos\Upscheme\Schema\Table::macro( 'code', function( string $name = 'code' ) use ( $codelen ) {
+			return $this->string( $name, $codelen )
 				->opt( 'charset', 'utf8mb3', 'mysql' )
 				->opt( 'collation', 'utf8mb3_bin', 'mysql' )
 				->default( '' );
 		} );
 
-		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) {
-			return $this->string( $name, 64 )
+		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) use ( $codelen ) {
+			return $this->string( $name, $codelen )
 				->opt( 'charset', 'utf8mb3', 'mysql' )
 				->opt( 'collation', 'utf8mb3_bin', 'mysql' )
 				->default( '' );
