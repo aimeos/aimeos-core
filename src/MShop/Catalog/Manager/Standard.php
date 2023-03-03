@@ -332,48 +332,48 @@ class Standard extends Base
 
 		$conn = $context->db( $this->getResourceName() );
 
-			/** mshop/catalog/manager/cleanup/mysql
-			 * Deletes the categories for the given site from the database
-			 *
-			 * @see mshop/catalog/manager/cleanup/ansi
-			 */
+		/** mshop/catalog/manager/cleanup/mysql
+		 * Deletes the categories for the given site from the database
+		 *
+		 * @see mshop/catalog/manager/cleanup/ansi
+		 */
 
-			/** mshop/catalog/manager/cleanup/ansi
-			 * Deletes the categories for the given site from the database
-			 *
-			 * Removes the records matched by the given site ID from the catalog
-			 * database.
-			 *
-			 * The ":siteid" placeholder is replaced by the name and value of the
-			 * site ID column and the given ID or list of IDs.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for removing the records
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/catalog/manager/delete/ansi
-			 * @see mshop/catalog/manager/insert/ansi
-			 * @see mshop/catalog/manager/update/ansi
-			 * @see mshop/catalog/manager/newid/ansi
-			 * @see mshop/catalog/manager/search/ansi
-			 * @see mshop/catalog/manager/count/ansi
-			 */
-			$path = 'mshop/catalog/manager/cleanup';
-			$sql = $this->getSqlConfig( $path );
+		/** mshop/catalog/manager/cleanup/ansi
+		 * Deletes the categories for the given site from the database
+		 *
+		 * Removes the records matched by the given site ID from the catalog
+		 * database.
+		 *
+		 * The ":siteid" placeholder is replaced by the name and value of the
+		 * site ID column and the given ID or list of IDs.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for removing the records
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/catalog/manager/delete/ansi
+		 * @see mshop/catalog/manager/insert/ansi
+		 * @see mshop/catalog/manager/update/ansi
+		 * @see mshop/catalog/manager/newid/ansi
+		 * @see mshop/catalog/manager/search/ansi
+		 * @see mshop/catalog/manager/count/ansi
+		 */
+		$path = 'mshop/catalog/manager/cleanup';
+		$sql = $this->getSqlConfig( $path );
 
-			$types = array( 'siteid' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
-			$translations = array( 'siteid' => '"siteid"' );
+		$types = array( 'siteid' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$translations = array( 'siteid' => '"siteid"' );
 
-			$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
-			$sql = str_replace( ':siteid', $search->getConditionSource( $types, $translations ), $sql );
+		$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
+		$sql = str_replace( ':siteid', $search->getConditionSource( $types, $translations ), $sql );
 
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->execute()->finish();
+		$stmt = $conn->create( $sql );
+		$stmt->bind( 1, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->execute()->finish();
 
 		return $this;
 	}
@@ -1095,7 +1095,6 @@ class Standard extends Base
 			 * @see mshop/catalog/manager/insert-usage/ansi
 			 */
 			$path = 'mshop/catalog/manager/update-usage';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 		else
 		{
@@ -1141,11 +1140,11 @@ class Standard extends Base
 			 * @see mshop/catalog/manager/update-usage/ansi
 			 */
 			$path = 'mshop/catalog/manager/insert-usage';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
-		$idx = 1;
+		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
 
 		foreach( $columns as $name => $entry ) {
 			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );

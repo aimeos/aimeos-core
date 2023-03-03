@@ -418,58 +418,58 @@ class Standard
 		$siteid = $context->locale()->getSiteId();
 		$conn = $context->db( $this->getResourceName() );
 
-			/** mshop/index/manager/catalog/insert/mysql
-			 * Inserts a new catalog record into the product index database
-			 *
-			 * @see mshop/index/manager/catalog/insert/ansi
-			 */
+		/** mshop/index/manager/catalog/insert/mysql
+		 * Inserts a new catalog record into the product index database
+		 *
+		 * @see mshop/index/manager/catalog/insert/ansi
+		 */
 
-			/** mshop/index/manager/catalog/insert/ansi
-			 * Inserts a new catalog record into the product index database
-			 *
-			 * During the product index rebuild, categories related to a
-			 * product will be stored in the index for this product. All
-			 * records are deleted before the new ones are inserted.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the order item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The order of the columns must correspond to the
-			 * order in the rebuild() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/index/manager/catalog/cleanup/ansi
-			 * @see mshop/index/manager/catalog/delete/ansi
-			 * @see mshop/index/manager/catalog/search/ansi
-			 * @see mshop/index/manager/catalog/count/ansi
-			 */
-			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/catalog/insert' );
+		/** mshop/index/manager/catalog/insert/ansi
+		 * Inserts a new catalog record into the product index database
+		 *
+		 * During the product index rebuild, categories related to a
+		 * product will be stored in the index for this product. All
+		 * records are deleted before the new ones are inserted.
+		 *
+		 * The SQL statement must be a string suitable for being used as
+		 * prepared statement. It must include question marks for binding
+		 * the values from the order item to the statement before they are
+		 * sent to the database server. The number of question marks must
+		 * be the same as the number of columns listed in the INSERT
+		 * statement. The order of the columns must correspond to the
+		 * order in the rebuild() method, so the correct values are
+		 * bound to the columns.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for inserting records
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/index/manager/catalog/cleanup/ansi
+		 * @see mshop/index/manager/catalog/delete/ansi
+		 * @see mshop/index/manager/catalog/search/ansi
+		 * @see mshop/index/manager/catalog/count/ansi
+		 */
+		$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/catalog/insert' );
 
-			foreach( $items as $id => $item )
+		foreach( $items as $id => $item )
+		{
+			foreach( $item->getListItems( 'catalog' ) as $listItem )
 			{
-				foreach( $item->getListItems( 'catalog' ) as $listItem )
-				{
-					$stmt->bind( 1, $listItem->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 2, $listItem->getRefId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 3, $listItem->getType() );
-					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 5, $date ); //mtime
-					$stmt->bind( 6, $siteid );
+				$stmt->bind( 1, $listItem->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $listItem->getRefId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $listItem->getType() );
+				$stmt->bind( 4, $listItem->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $date ); //mtime
+				$stmt->bind( 6, $siteid );
 
-					try {
-						$stmt->execute()->finish();
-					} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
-				}
+				try {
+					$stmt->execute()->finish();
+				} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 			}
+		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuild( $items );
