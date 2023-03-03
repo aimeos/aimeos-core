@@ -74,7 +74,8 @@ abstract class Base
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
 	public function getTree( string $id = null, array $ref = [],
-		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $criteria = null )
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}

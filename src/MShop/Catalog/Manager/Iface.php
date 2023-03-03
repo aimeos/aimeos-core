@@ -40,7 +40,9 @@ interface Iface
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
 	public function getTree( string $id = null, array $ref = [],
-		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $criteria = null );
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		\Aimeos\Base\Criteria\Iface $criteria = null
+	) : \Aimeos\MShop\Catalog\Item\Iface;
 
 
 	/**
