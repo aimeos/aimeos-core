@@ -14,9 +14,6 @@ return [
 		'ai-controller-jobs',
 		'ai-controller-frontend',
 	],
-	'include' => [
-		'src',
-	],
 	'i18n' => [
 		'admin' => 'i18n',
 		'client' => 'i18n',
