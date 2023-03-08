@@ -242,8 +242,7 @@ class MShop
 		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subClass;
 
 		$subPath = !empty( $parts ) ? join( '/', $parts ) . '/' : '';
-		$localName = $context->config()->get( 'mshop/' . $domain . '/manager/name', 'Standard' );
-		$localName = $name ?: $context->config()->get( 'mshop/' . $domain . '/manager/' . $subPath . 'name', $localName );
+		$localName = $name ?: $context->config()->get( 'mshop/' . $domain . '/manager/' . $subPath . 'name', 'Standard' );
 
 		if( class_exists( $classname . $localName ) ) {
 			return $classname . $localName;
