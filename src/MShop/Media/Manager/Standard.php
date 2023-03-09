@@ -1311,8 +1311,9 @@ class Standard
 		 */
 		$default = [
 			'image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
-			'application/pdf', 'application/zip',
-			'video/mp4', 'video/webm'
+			'application/epub+zip', 'application/pdf', 'application/zip',
+			'video/mp4', 'video/webm',
+			'audio/mpeg', 'audio/ogg', 'audio/weba'
 		];
 		$allowed = $config->get( 'controller/common/media/preview/allowedtypes', $default );
 
