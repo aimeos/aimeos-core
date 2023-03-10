@@ -18,6 +18,7 @@ return [
 				'application/vnd.oasis.opendocument.presentation' => 'odp',
 				'application/vnd.oasis.opendocument.spreadsheet' => 'ods',
 				'application/vnd.oasis.opendocument.text' => 'odt',
+				'application/epub+zip' => 'epub',
 				'application/x-gzip' => 'gz',
 				'application/zip' => 'zip',
 				'image/bmp' => 'bmp',
@@ -30,6 +31,10 @@ return [
 				'text/csv' => 'csv',
 				'video/mp4' => 'mp4',
 				'video/webm' => 'webm',
+				'audio/mpeg' => 'mpeg',
+				'audio/ogg' => 'ogg',
+				'audio/ogg' => 'ogg',
+				'audio/webm' => 'weba',
 			],
 			'previews' => [[
 				'force-size' => 0,
