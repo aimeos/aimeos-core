@@ -450,8 +450,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 	{
 		$config = $this->context()->config();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
+		switch( $adapter )
+		{
+			case 'pdo_mysql': $mapped_adapter = 'mysql'; break;
+			case 'pdo_oci': $mapped_adapter = 'oracle'; break;
+			case 'pdo_pgsql': $mapped_adapter = 'pgsql'; break;
+			case 'pdo_sqlite': $mapped_adapter = 'sqlite'; break;
+			case 'pdo_sqlsrv': $mapped_adapter = 'sqlsrv'; break;
+			default: $mapped_adapter = $adapter;
+		}
 
-		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
+		return $config->get( $path . '/' . $mapped_adapter, $config->get( $path . '/ansi', $path ) );
 	}
 
 
