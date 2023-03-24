@@ -142,16 +142,8 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderBaseItem( $paydate )
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$filter = $manager->filter()->add( 'order.datepayment', '==', $paydate );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'order.datepayment', $paydate ) );
-		$result = $manager->search( $search )->toArray();
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No order item found' );
-		}
-
-		$baseManager = \Aimeos\MShop::create( $this->context, 'order' );
-		return $baseManager->load( $item->getId() );
+		return $manager->search( $filter, ['order/product'] )->first( new \RuntimeException( 'No order item found' ) );
 	}
 }

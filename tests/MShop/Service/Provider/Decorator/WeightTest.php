@@ -123,16 +123,8 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderBaseItem()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$filter = $manager->filter()->add( 'order.datepayment', '==', '2008-02-15 12:34:56' );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
-		$result = $manager->search( $search )->toArray();
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No order item found' );
-		}
-
-		$baseManager = \Aimeos\MShop::create( $this->context, 'order' );
-		return $baseManager->load( $item->getId() );
+		return $manager->search( $filter, ['order/product'] )->first( new \RuntimeException( 'No order item found' ) );
 	}
 }

@@ -1135,12 +1135,12 @@ class Standard extends Base
 			$addressMap = $this->getAddresses( $baseIds );
 		}
 
-		if( in_array( 'order/product', $ref ) ) {
+		if( in_array( 'order/product', $ref ) || in_array( 'order/coupon', $ref ) ) {
 			$productMap = $this->getProducts( $baseIds );
 		}
 
 		if( in_array( 'order/coupon', $ref ) ) {
-			$couponMap = $this->getCoupons( $baseIds, false, $productMap );
+			$couponMap = $this->getCoupons( $baseIds, $productMap );
 		}
 
 		if( in_array( 'order/service', $ref ) ) {
@@ -1222,76 +1222,6 @@ class Standard extends Base
 	{
 		return new \Aimeos\MShop\Order\Item\Standard( $price, $locale,
 			$values, $products, $addresses, $services, $coupons, $custItem );
-	}
-
-
-	/**
-	 * Creates a new basket containing the items from the order excluding the coupons.
-	 * If the last parameter is ture, the items will be marked as new and
-	 * modified so an additional order is stored when the basket is saved.
-	 *
-	 * @param string $id Base ID of the order to load
-	 * @param array $ref Basket parts that should be loaded too
-	 * @param bool $fresh Create a new basket by copying the existing one and remove IDs
-	 * @param bool $default True to use default criteria, false for no limitation
-	 * @return \Aimeos\MShop\Order\Item\Iface Basket including all items
-	 */
-	public function load( string $id, array $ref = ['order/address', 'order/coupon', 'order/product', 'order/service'],
-		bool $fresh = false, bool $default = false ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$search = $this->object()->filter( $default );
-		$expr = [
-			$search->compare( '==', 'order.id', $id ),
-			$search->getConditions(),
-		];
-		$search->setConditions( $search->and( $expr ) );
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$sitelevel = $context->config()->get( 'mshop/order/manager/sitemode', $sitelevel );
-
-		$cfgPathSearch = 'mshop/order/manager/search';
-		$cfgPathCount = 'mshop/order/manager/count';
-		$required = array( 'order' );
-		$total = null;
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
-
-		if( ( $row = $results->fetch() ) === null )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Order item with order ID "%1$s" not found' );
-			throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
-		}
-		$results->finish();
-
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
-
-		$price = $priceManager->create( [
-			'price.currencyid' => $row['order.currencyid'],
-			'price.value' => $row['order.price'],
-			'price.costs' => $row['order.costs'],
-			'price.rebate' => $row['order.rebate'],
-			'price.taxflag' => $row['order.taxflag'],
-			'price.taxvalue' => $row['order.taxvalue'],
-		] );
-
-		// you may need the site object! take care!
-		$localeItem = $localeManager->create( [
-			'locale.languageid' => $row['order.languageid'],
-			'locale.currencyid' => $row['order.currencyid'],
-			'locale.siteid' => $row['order.siteid'],
-		] );
-
-		if( $fresh === false ) {
-			$basket = $this->loadItems( $id, $price, $localeItem, $row, $ref );
-		} else {
-			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $ref );
-		}
-
-		return $basket;
 	}
 
 

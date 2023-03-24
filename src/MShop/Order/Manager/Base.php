@@ -198,10 +198,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Returns the address item map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order IDs as keys and order address type/item pairs as values
 	 */
-	protected function getAddresses( array $ids, bool $fresh = false ) : array
+	protected function getAddresses( array $ids ) : array
 	{
 		$items = [];
 		$manager = $this->object()->getSubManager( 'address' );
@@ -209,14 +208,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.address.parentid', $ids ) );
 
-		foreach( $manager->search( $criteria ) as $item )
-		{
-			if( $fresh === true )
-			{
-				$item->setParentId( null );
-				$item->setId( null );
-			}
-
+		foreach( $manager->search( $criteria ) as $item ) {
 			$items[$item->getParentId()][] = $item;
 		}
 
@@ -228,11 +220,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Returns the coupon map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array $products Associative list of IDs and order product ID/item pairs as values
 	 * @return array Multi-dimensional associative list of order IDs as keys and coupons with product items as values
 	 */
-	protected function getCoupons( array $ids, bool $fresh = false, array $products = [] ) : array
+	protected function getCoupons( array $ids, array $products = [] ) : array
 	{
 		$map = $productMap = [];
 		$manager = $this->object()->getSubManager( 'coupon' );
@@ -243,16 +234,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$productMap[$id] = [];
 			}
 
-			foreach( $list as $key => $product )
-			{
+			foreach( $list as $key => $product ) {
 				$productMap[$id][$product->getId()] = $product;
-
-				if( $fresh === true )
-				{
-					$product->setPosition( null );
-					$product->setParentId( null );
-					$product->setId( null );
-				}
 			}
 		}
 
@@ -278,11 +261,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Retrieves the ordered products from the storage.
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
 	 */
-	protected function getProducts( array $ids, bool $fresh = false ) : array
+	protected function getProducts( array $ids ) : array
 	{
 		$map = $attributes = $subProducts = [];
 		$manager = $this->object()->getSubManager( 'product' );
@@ -295,18 +277,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$search = $attrManager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.product.attribute.parentid', $items->keys()->toArray() ) );
 
-		foreach( $attrManager->search( $search ) as $id => $attribute )
-		{
-			if( $fresh === true )
-			{
-				$attributes[$attribute->getParentId()][] = $attribute;
-				$attribute->setParentId( null );
-				$attribute->setId( null );
-			}
-			else
-			{
-				$attributes[$attribute->getParentId()][$id] = $attribute;
-			}
+		foreach( $attrManager->search( $search ) as $id => $attribute ) {
+			$attributes[$attribute->getParentId()][$id] = $attribute;
 		}
 
 		foreach( $items as $id => $item )
@@ -327,13 +299,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			{	// in case it's a sub-product
 				$subProducts[$item->getPosition()] = $item;
 			}
-
-			if( $fresh === true )
-			{
-				$item->setPosition( null );
-				$item->setParentId( null );
-				$item->setId( null );
-			}
 		}
 
 		foreach( $map as $key => $list ) {
@@ -348,10 +313,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Retrieves the order services from the storage.
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order IDs as keys and service type/items pairs as values
 	 */
-	protected function getServices( array $ids, bool $fresh = false ) : array
+	protected function getServices( array $ids ) : array
 	{
 		$map = [];
 		$manager = $this->object()->getSubManager( 'service' );
@@ -359,198 +323,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.service.parentid', $ids ) );
 
-		foreach( $manager->search( $criteria ) as $item )
-		{
-			if( $fresh === true )
-			{
-				foreach( $item->getAttributeItems() as $attribute )
-				{
-						$attribute->setId( null );
-						$attribute->setParentId( null );
-				}
-
-				$item->setParentId( null );
-				$item->setId( null );
-			}
-
+		foreach( $manager->search( $criteria ) as $item ) {
 			$map[$item->getParentId()][] = $item;
 		}
 
 		return $map;
-	}
-
-
-	/**
-	 * Load the basket item for the given ID.
-	 *
-	 * @param string $id Unique order ID
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
-	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
-	 * @param array $row Array of values with all relevant order information
-	 * @param array $ref Basket parts that should be loaded too
-	 * @return \Aimeos\MShop\Order\Item\Iface The loaded order item for the given ID
-	 */
-	protected function loadItems( string $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, array $ref )
-	{
-		$products = $coupons = $addresses = $services = [];
-
-		if( in_array( 'order/product', $ref ) || in_array( 'order/coupon', $ref ) ) {
-			$products = $this->loadProducts( $id, false );
-		}
-
-		if( in_array( 'order/coupon', $ref ) ) {
-			$coupons = $this->loadCoupons( $id, false, $products );
-		}
-
-		if( in_array( 'order/address', $ref ) ) {
-			$addresses = $this->loadAddresses( $id, false );
-		}
-
-		if( in_array( 'order/service', $ref ) ) {
-			$services = $this->loadServices( $id, false );
-		}
-
-		$basket = $this->createItemBase( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
-
-		\Aimeos\MShop::create( $this->context(), 'plugin' )->register( $basket, 'order' );
-
-		return $basket;
-	}
-
-
-	/**
-	 * Create a new basket item as a clone from an existing order ID.
-	 *
-	 * @param string $id Unique order ID
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
-	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
-	 * @param array $row Array of values with all relevant order information
-	 * @param array $ref Basket parts that should be loaded
-	 * @return \Aimeos\MShop\Order\Item\Standard The loaded order item for the given ID
-	 */
-	protected function loadFresh( string $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, array $ref )
-	{
-		$products = $coupons = $addresses = $services = [];
-
-		if( in_array( 'order/product', $ref ) ) {
-			$products = $this->loadProducts( $id, true );
-		}
-
-		if( in_array( 'order/coupon', $ref ) ) {
-			// load coupons with product array containing product ids for coupon/product matching
-			// not very efficient, a better solution might be considered for 2020.01 release
-			// see https://github.com/aimeos/aimeos-core/pull/175 for discussion
-			$coupons = $this->loadCoupons( $id, true, $this->loadProducts( $id, false ) );
-		}
-
-		if( in_array( 'order/address', $ref ) ) {
-			$addresses = $this->loadAddresses( $id, true );
-		}
-
-		if( in_array( 'order/service', $ref ) ) {
-			$services = $this->loadServices( $id, true );
-		}
-
-		$basket = $this->createItemBase( $price, $localeItem, $row );
-		$basket->setId( null );
-
-		\Aimeos\MShop::create( $this->context(), 'plugin' )->register( $basket, 'order' );
-
-		foreach( $services as $item ) {
-			$basket->addService( $item, $item->getType() );
-		}
-
-		foreach( $addresses as $item ) {
-			$basket->addAddress( $item, $item->getType() );
-		}
-
-		foreach( $products as $item )
-		{
-			if( !( $item->getFlags() & \Aimeos\MShop\Order\Item\Product\Base::FLAG_IMMUTABLE ) ) {
-				$basket->addProduct( $item );
-			}
-		}
-
-		foreach( $coupons as $code => $items ) {
-			$basket->addCoupon( $code );
-		}
-
-		return $basket;
-	}
-
-
-	/**
-	 * Retrieves the addresses of the order from the storage.
-	 *
-	 * @param string $id Order ID
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface[] List of order address items
-	 */
-	protected function loadAddresses( string $id, bool $fresh ) : array
-	{
-		$map = $this->getAddresses( [$id], $fresh );
-
-		if( ( $items = reset( $map ) ) !== false ) {
-			return $items;
-		}
-
-		return [];
-	}
-
-
-	/**
-	 * Retrieves the coupons of the order from the storage.
-	 *
-	 * @param string $id Order ID
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
-	 * @param array $products Multi-dimensional associative list of order IDs as keys and order product
-	 *	IDs/items pairs in reversed order as values
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] Associative list of coupon codes as keys and items as values
-	 */
-	protected function loadCoupons( string $id, bool $fresh, array $products ) : array
-	{
-		$map = $this->getCoupons( [$id], $fresh, [$id => $products] );
-
-		if( ( $items = reset( $map ) ) !== false ) {
-			return $items;
-		}
-
-		return [];
-	}
-
-
-	/**
-	 * Retrieves the ordered products from the storage.
-	 *
-	 * @param string $id Order ID
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] List of product items
-	 */
-	protected function loadProducts( string $id, bool $fresh ) : array
-	{
-		$items = current( $this->getProducts( [$id], $fresh ) );
-		return $items ?: [];
-	}
-
-
-	/**
-	 * Retrieves the services of the order from the storage.
-	 *
-	 * @param string $id Order ID
-	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface[] List of order service items
-	 */
-	protected function loadServices( string $id, bool $fresh ) : array
-	{
-		$map = $this->getServices( [$id], $fresh );
-
-		if( ( $items = reset( $map ) ) !== false ) {
-			return $items;
-		}
-
-		return [];
 	}
 
 
