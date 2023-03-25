@@ -11,7 +11,7 @@ return [
 	// Single article
 	[
 		'product.code' => 'demo-article', 'product.type' => 'default',
-		'product.label' => 'Demo article', 'product.status' => 1,
+		'product.label' => 'Dark grey dress', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 0
 		], [
@@ -26,37 +26,37 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel',
+				'text.label' => 'Demo name/de', 'text.content' => 'Dunkelgraues Kleid',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Elastisches Kleid in dunkelgrau',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Das elastische Kleid in der Modefarbe dunkelgrau unterstreicht Ihre Figur',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Dark grey dress',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Elastic dress in dark grey',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'The elastic dress in fashion color dark gray emphasizes your figure',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -109,31 +109,31 @@ return [
 		],
 		'attribute' => [
 			[
-				'attribute.code' => 'demo-black', 'attribute.label' => 'Demo: Black',
+				'attribute.code' => 'demo-black', 'attribute.label' => 'Demo: Dark',
 				'attribute.type' => 'color', 'attribute.position' => 1, 'attribute.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
 				'text' => [
 					[
-						'text.label' => 'Demo name/de: Schwarz',
-						'text.content' => 'Schwarz',
+						'text.label' => 'Demo name/de',
+						'text.content' => 'Dunkel',
 						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 					[
-						'text.label' => 'Demo name/en: Black',
-						'text.content' => 'Black',
+						'text.label' => 'Demo name/en',
+						'text.content' => 'Dark',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 					[
-						'text.label' => 'Demo url/de: Schwarz',
-						'text.content' => 'Schwarz',
+						'text.label' => 'Demo url/de',
+						'text.content' => 'dunkel',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 					[
-						'text.label' => 'Demo url/en: Black',
-						'text.content' => 'Black',
+						'text.label' => 'Demo url/en',
+						'text.content' => 'dark',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
@@ -167,7 +167,7 @@ return [
 					],
 					[
 						'text.label' => 'Demo url/de: Kleiner Aufdruck',
-						'text.content' => 'Kleiner-Aufdruck',
+						'text.content' => 'kleiner-aufdruck',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
@@ -212,7 +212,7 @@ return [
 					],
 					[
 						'text.label' => 'Demo url/de: Grosser Aufdruck',
-						'text.content' => 'Grosser-Aufdruck',
+						'text.content' => 'grosser-aufdruck',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
@@ -251,7 +251,7 @@ return [
 					],
 					[
 						'text.label' => 'Demo name/en: Small print',
-						'text.content' => 'print text',
+						'text.content' => 'Text print',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
@@ -425,27 +425,27 @@ return [
 		'product.label' => 'Demo variant article 2', 'product.status' => 1,
 		'attribute' => [
 			[
-				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Light',
 				'attribute.type' => 'color', 'attribute.position' => 0, 'attribute.status' => 1,
 				'product.lists.type' => 'variant', 'product.lists.position' => 0,
 				'text' => [
 					[
-						'text.label' => 'Demo name/de: Beige', 'text.content' => 'Beige',
+						'text.label' => 'Demo name/de', 'text.content' => 'Hell',
 						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 					[
-						'text.label' => 'Demo name/en: Beige', 'text.content' => 'Beige',
+						'text.label' => 'Demo name/en: Light', 'text.content' => 'Light',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					],
 					[
-						'text.label' => 'Demo url/de: Beige', 'text.content' => 'Beige',
+						'text.label' => 'Demo url/de: Light', 'text.content' => 'Hell',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 					[
-						'text.label' => 'Demo url/en: Beige', 'text.content' => 'beige',
+						'text.label' => 'Demo url/en: Light', 'text.content' => 'beige',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					],
@@ -514,7 +514,7 @@ return [
 		'product.label' => 'Demo variant article 3', 'product.status' => 1,
 		'attribute' => [
 			[
-				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Light',
 				'attribute.type' => 'color', 'attribute.position' => 2, 'attribute.status' => 1,
 				'product.lists.type' => 'variant', 'product.lists.position' => 0,
 			],
@@ -538,7 +538,7 @@ return [
 		'product.label' => 'Demo variant article 4', 'product.status' => 1,
 		'attribute' => [
 			[
-				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Light',
 				'attribute.type' => 'color', 'attribute.position' => 2, 'attribute.status' => 1,
 				'product.lists.type' => 'variant', 'product.lists.position' => 0,
 			],
@@ -559,7 +559,7 @@ return [
 	],
 	[
 		'product.code' => 'demo-selection-article', 'product.type' => 'select',
-		'product.label' => 'Demo selection article', 'product.status' => 1,
+		'product.label' => 'Black shirt', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		], [
@@ -569,44 +569,44 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel mit Auswahl',
-				'text.content' => 'Demoartikel mit Auswahl',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Schwarzes T-Shirt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo url/de: Demoartikel mit Auswahl',
-				'text.content' => 'Demoartikel-mit-Auswahl',
+				'text.label' => 'Demo url/de',
+				'text.content' => 'black-shirt',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Auswahl',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Stylisches, schwarzes T-Shirt für Männer',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Auswahl, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses schwarzes T-Shirt für Männer ist ein must-have in jedem Kleiderschrank!',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo selection article',
-				'text.content' => 'Demo selection article',
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Black shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the selection demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Stylish black shirt for men',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the selection demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This black t-shirt for men is a must-have in every men\'s closet!',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -705,7 +705,7 @@ return [
 	// bundle article
 	[
 		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
-		'product.label' => 'Demo bundle article', 'product.status' => 1,
+		'product.label' => 'Shirt & cap', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 2
 		], [
@@ -718,44 +718,44 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel mit Bundle',
-				'text.content' => 'Demoartikel mit Bundle',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Shirt & Mütze',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo url/de: Demoartikel mit Bundle',
-				'text.content' => 'Demoartikel-mit-Bundle',
+				'text.label' => 'Demo url/de',
+				'text.content' => 'shirt-muetze',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Bundle',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Coole Kombination aus T-Shirt und Mütze',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Bundle, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Lässige Kombination aus cooler Mütze mit trendigem T-Shirt in dunkelgrau',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo bundle article',
-				'text.content' => 'Demo bundle article',
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Shirt & cap',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the bundle demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Cool combination of shirt and cap',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the bundle demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Casual combination of cool cap with trendy t-shirt in dark gray',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -806,26 +806,28 @@ return [
 		],
 		'media' => [
 			[
-				'media.label' => 'Demo: Bundle article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.webp',
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_08_A-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_03_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_03_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_03_A-big.webp',
+					240 => 'https://aimeos.org/media/default/product_08_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_08_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_08_A-big.webp',
 				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			],
 			[
-				'media.label' => 'Demo: Bundle article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.webp',
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_08_B-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_03_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_03_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_03_B-big.webp',
+					240 => 'https://aimeos.org/media/default/product_08_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_08_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_08_B-big.webp',
 				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			],
 		],
 		'attribute' => [
@@ -938,45 +940,43 @@ return [
 	// Voucher product
 	[
 		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
-		'product.label' => 'Demo voucher', 'product.status' => 1,
+		'product.label' => 'Gift voucher', 'product.status' => 1,
 		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 0
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 9
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Gutschein',
-				'text.content' => 'Demo-Gutschein',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Gutschein',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Gutscheins',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Geschenk-Gutschein für Freunde',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Gutscheins, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Schenken Sie Ihren Freunden Freude mit einem Gutschein',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo voucher',
+				'text.label' => 'Demo name/en', 'text.content' => 'Gift certificate',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo voucher.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'A gift for your friends',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo voucher that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Give joy to your friends with a gift certificate',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1062,55 +1062,51 @@ return [
 	// event article
 	[
 		'product.code' => 'demo-event-article', 'product.type' => 'event',
-		'product.label' => 'Demo event article', 'product.status' => 1,
+		'product.label' => 'Fashion week', 'product.status' => 1,
 		'product.datestart' => '2100-01-01 08:00:00', 'product.dateend' => '2100-01-01 16:00:00',
 		'catalog' => [[
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 3
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 10
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoevent article',
-				'text.content' => 'Demoevent article',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Fashion Week',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo url/de: Demoevent article',
-				'text.content' => 'Demoevent article',
+				'text.label' => 'Demo url/de',
+				'text.content' => 'fashion-week',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoevents',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Ticket zum Event des Jahres',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Demoevents, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Erhalten Sie Eintritt zu diesjährigen Fashion Week in Paris, dem exklusiven Event der Modebranche!',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demoevent article',
-				'text.content' => 'Demo event article',
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Fashion week',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the event demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Ticket for the event of the year',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the event demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Get entry to this year\'s Fashion Week in Paris, the exclusive event of the fashion industry!',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1156,7 +1152,7 @@ return [
 	// group article
 	[
 		'product.code' => 'demo-group-article', 'product.type' => 'group',
-		'product.label' => 'Demo group article', 'product.status' => 1,
+		'product.label' => 'Shirts for women', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		], [
@@ -1166,44 +1162,44 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demo-Gruppenartikel',
-				'text.content' => 'Demo-Gruppenartikel',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Shirts für Frauen',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo url/de: Demo-Gruppenartikel',
-				'text.content' => 'Demo-Gruppenartikel',
+				'text.label' => 'Demo url/de',
+				'text.content' => 'shirts-fuer-frauen',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Gruppenartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Alle Shirts für Frauen',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Gruppenartikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Unsere Angebote an Shirts für Frauen im Überblick',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo group article',
-				'text.content' => 'Demo group article',
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Shirts for women',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the group demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'All shirts for women',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the group demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Our offers of shirts for women at a glance',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1216,13 +1212,13 @@ return [
 		],
 		'price' => [
 			[
-				'price.label' => 'Demo: Event article from 1',
+				'price.label' => 'Demo: Group article from 1',
 				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
 				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'price.label' => 'Demo: Event article from 1',
+				'price.label' => 'Demo: Group article from 1',
 				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
 				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
@@ -1230,40 +1226,46 @@ return [
 		],
 		'media' => [
 			[
-				'media.label' => 'Demo: Bundle article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_10_A-big.webp',
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_10_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_10_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_10_A-big.webp',
+					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
 				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			],
 			[
-				'media.label' => 'Demo: Bundle article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_10_B-big.webp',
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_10_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_10_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_10_B-big.webp',
+					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
 				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			],
 		],
 		'product' => [
 			[
-				'product.code' => 'demo-article',
+				'product.code' => 'demo-article-3',
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'product.code' => 'demo-event-article',
+				'product.code' => 'demo-article-5',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'product.code' => 'demo-article-6',
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
 				'product.code' => 'demo-bundle-article',
-				'product.lists.type' => 'default', 'product.lists.position' => 0
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 		],
 		'stock' => [
@@ -1274,11 +1276,11 @@ return [
 	// Rebate product
 	[
 		'product.code' => 'demo-rebate', 'product.type' => 'default',
-		'product.label' => 'Demo rebate', 'product.status' => 1,
+		'product.label' => 'Discount', 'product.status' => 1,
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Rabatt',
-				'text.content' => 'Demorabatt',
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Rabatt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
@@ -1291,7 +1293,7 @@ return [
 	// Single articles
 	[
 		'product.code' => 'demo-article-2', 'product.type' => 'default',
-		'product.label' => 'Demo article 2', 'product.status' => 1,
+		'product.label' => 'Red T-Shirt', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
 		], [
@@ -1303,36 +1305,36 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 2',
+				'text.label' => 'Demo name/de', 'text.content' => 'Rotes T-Shirt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Basic Shirt für Männer in rot',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses eng anliegende T-Shirt in rot lenkt die Aufmerksamkeit auf den Oberkörper und betont ihn',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 2',
+				'text.label' => 'Demo name/en', 'text.content' => 'Red T-Shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Basic Shirt for men in red',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This tight fitting t-shirt in red draws attention to the upper body and emphasizes it',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1390,7 +1392,7 @@ return [
 
 	[
 		'product.code' => 'demo-article-3', 'product.type' => 'default',
-		'product.label' => 'Demo article 3', 'product.status' => 1,
+		'product.label' => 'Black shirt', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
@@ -1400,36 +1402,36 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 3',
+				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes Shirt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Schwarzes Basic-Shirt für Frauen',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses schwarze Basic-Shirt für Frauen ist ein zeitloses Kleidungsstück, das in jedem Kleiderschrank zu finden sein sollte',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 3',
+				'text.label' => 'Demo name/en', 'text.content' => 'Black shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Black basic shirt for women',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This basic black shirt for women is a timeless garment that should be in every women\'s closet',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1487,42 +1489,42 @@ return [
 
 	[
 		'product.code' => 'demo-article-4', 'product.type' => 'default',
-		'product.label' => 'Demo article 4', 'product.status' => 1,
+		'product.label' => 'Black T-Shirt', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 4',
+				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes T-Shirt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Basic T-Shirt für Männer in schwarz',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses schwarze Basic-T-Shirt für Männer ist ein unverzichtbares Kleidungsstück, das in jeder Garderobe zu finden sein sollte',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 4',
+				'text.label' => 'Demo name/en', 'text.content' => 'Demo article 4',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
+				'text.label' => 'Demo short/en',
 				'text.content' => 'This is the short description of the demo article.',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This basic black t-shirt for men is an essential garment that should be in every wardrobe',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1580,7 +1582,7 @@ return [
 
 	[
 		'product.code' => 'demo-article-5', 'product.type' => 'default',
-		'product.label' => 'Demo article 5', 'product.status' => 1,
+		'product.label' => 'Short-sleeved shirt', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		], [
@@ -1592,36 +1594,36 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 5',
+				'text.label' => 'Demo name/de', 'text.content' => 'Kurzarm-Shirt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Trendiges Kurzarm-Shirt in schwarz/weiß',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Das trendige Kurzarm-Shirt in Schwarz-Weiß ist ein absoluter Hingucker und ein Muss für jeden, der gerne modisch und stylisch gekleidet sein möchte',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 5',
+				'text.label' => 'Demo name/en', 'text.content' => 'Short-sleeved shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Trendy short-sleeved shirt in black/white',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'The trendy short-sleeved shirt in black and white is an absolute eye-catcher and a must for everyone who likes to be fashionable and stylishly dressed',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1679,7 +1681,7 @@ return [
 
 	[
 		'product.code' => 'demo-article-6', 'product.type' => 'default',
-		'product.label' => 'Demo article 6', 'product.status' => 1,
+		'product.label' => 'Sexy top', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 2,
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 6
@@ -1690,36 +1692,36 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 6',
+				'text.label' => 'Demo name/de', 'text.content' => 'Sexy Top',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Tank-top in beige mit weitem Ausschnitt',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Das Tank-Top in Beige mit weitem Ausschnitt ist ein perfektes Kleidungsstück für warme Tage, da es nicht nur luftig und bequem ist, sondern auch einen stilvollen Look bietet',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 6',
+				'text.label' => 'Demo name/en', 'text.content' => 'Sexy top',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Tank top in beige with wide neckline',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Beige tank top with wide neckline is a perfect garment for warm days, as it is not only airy and comfortable, but also offers a stylish look',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],
@@ -1746,28 +1748,26 @@ return [
 		],
 		'media' => [
 			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_08_A-big.webp',
+				'media.label' => 'Demo: Bundle article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_08_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_08_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_08_A-big.webp',
+					240 => 'https://aimeos.org/media/default/product_03_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_03_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_03_A-big.webp',
 				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			],
 			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_08_B-big.webp',
+				'media.label' => 'Demo: Bundle article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_08_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_08_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_08_B-big.webp',
+					240 => 'https://aimeos.org/media/default/product_03_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_03_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_03_B-big.webp',
 				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			],
 		],
 		'stock' => [
@@ -1777,7 +1777,7 @@ return [
 
 	[
 		'product.code' => 'demo-article-7', 'product.type' => 'default',
-		'product.label' => 'Demo article 7', 'product.status' => 1,
+		'product.label' => 'Tank-Top in black', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
@@ -1787,36 +1787,36 @@ return [
 		]],
 		'text' => [
 			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 7',
+				'text.label' => 'Demo name/de', 'text.content' => 'Tank-Top in schwarz',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Stylishes Tank-Top für Männer',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Mit seinem ärmellosen Design und dem bequemen Schnitt bietet es nicht nur eine hohe Bewegungsfreiheit, sondern auch ein modernes und stylisches Aussehen',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 7',
+				'text.label' => 'Demo name/en', 'text.content' => 'Tank-Top in black',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
 			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Stylish tank top for men',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			],
 			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.label' => 'Demo long/en',
+				'text.content' => 'With its sleeveless design and comfortable cut, it offers not only a high freedom of movement, but also a modern and stylish look',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			],

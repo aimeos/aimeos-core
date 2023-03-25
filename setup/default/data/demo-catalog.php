@@ -10,41 +10,41 @@ return [
 	'catalog.code' => 'home', 'catalog.label' => 'Home', 'catalog.config' => ['css-class' => 'megamenu'],
 	'text' => [
 		[
-			'label' => 'Demo name/de: Start', 'content' => 'Start',
+			'label' => 'Demo name/de', 'content' => 'Start',
 			'type' => 'name', 'languageid' => 'de', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 		[
-			'label' => 'Demo url/de: Start', 'content' => 'Start',
+			'label' => 'Demo url/de', 'content' => 'Start',
 			'type' => 'url', 'languageid' => 'de', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 		[
-			'label' => 'Demo short/de: Dies ist der Kurztext',
-			'content' => 'Dies ist der Kurztext für die Hauptkategorie ihres neuen Webshops.',
+			'label' => 'Demo short/de',
+			'content' => 'Hohe Qualität, niedrige Preise!',
 			'type' => 'short', 'languageid' => 'de', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 		[
-			'label' => 'Demo short/en: This is the short text',
-			'content' => 'This is the short text for the main category of your new web shop.',
+			'label' => 'Demo short/en',
+			'content' => 'High quality, low prices!',
 			'type' => 'short', 'languageid' => 'en', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 		[
-			'label' => 'Demo long/de: Hier kann eine ausführliche Einleitung',
-			'content' => 'Hier kann eine ausführliche Einleitung für ihre Hauptkategorie stehen.',
+			'label' => 'Demo long/de',
+			'content' => 'Hier finden Sie eine fantastische Auswahl zu günstigesten Preisen!',
 			'type' => 'long', 'languageid' => 'de', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 		[
-			'label' => 'Demo long/en: Here you can add a long introduction',
-			'content' => 'Here you can add a long introduction for you main category.',
+			'label' => 'Demo long/en',
+			'content' => 'Find a fantastic selection of products for the cheapest price!',
 			'type' => 'long', 'languageid' => 'en', 'status' => 1,
 			'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
