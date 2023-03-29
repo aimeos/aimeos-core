@@ -22,7 +22,7 @@ return [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'supplier' => [[
-			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
+			'supplier.code' => 'demo-hr', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'text' => [
 			[
@@ -306,6 +306,965 @@ return [
 			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
+
+	[
+		'product.code' => 'demo-article-2', 'product.type' => 'default',
+		'product.label' => 'Red T-Shirt', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
+		], [
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 6
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 4
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 2
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-hr', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Rotes T-Shirt',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Basic Shirt für Männer in rot',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses eng anliegende T-Shirt in rot lenkt die Aufmerksamkeit auf den Oberkörper und betont ihn',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Red T-Shirt',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Basic Shirt for men in red',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This tight fitting t-shirt in red draws attention to the upper body and emphasizes it',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_02_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_02_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_02_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_02_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	[
+		'product.code' => 'demo-article-3', 'product.type' => 'default',
+		'product.label' => 'Black shirt', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 2
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-ballroom', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes Shirt',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Schwarzes Basic-Shirt für Frauen',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses schwarze Basic-Shirt für Frauen ist ein zeitloses Kleidungsstück, das in jedem Kleiderschrank zu finden sein sollte',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Black shirt',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Black basic shirt for women',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This basic black shirt for women is a timeless garment that should be in every women\'s closet',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '69.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '79.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_05_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_05_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_05_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_05_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_05_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_05_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_05_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_05_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	[
+		'product.code' => 'demo-article-4', 'product.type' => 'default',
+		'product.label' => 'Black T-Shirt', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 4
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-ballroom', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes T-Shirt',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Basic T-Shirt für Männer in schwarz',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Dieses schwarze Basic-T-Shirt für Männer ist ein unverzichtbares Kleidungsstück, das in jeder Garderobe zu finden sein sollte',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Demo article 4',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'This is the short description of the demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'This basic black t-shirt for men is an essential garment that should be in every wardrobe',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '29.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '36.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_06_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_06_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_06_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_06_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_06_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_06_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_06_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_06_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	[
+		'product.code' => 'demo-article-5', 'product.type' => 'default',
+		'product.label' => 'Short-sleeved shirt', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		], [
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 8
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 4
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-cstory', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Kurzarm-Shirt',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Trendiges Kurzarm-Shirt in schwarz/weiß',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Das trendige Kurzarm-Shirt in Schwarz-Weiß ist ein absoluter Hingucker und ein Muss für jeden, der gerne modisch und stylisch gekleidet sein möchte',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Short-sleeved shirt',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Trendy short-sleeved shirt in black/white',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'The trendy short-sleeved shirt in black and white is an absolute eye-catcher and a must for everyone who likes to be fashionable and stylishly dressed',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '79.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '99.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_07_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_07_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_07_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_07_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	[
+		'product.code' => 'demo-article-6', 'product.type' => 'default',
+		'product.label' => 'Sexy top', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 2,
+			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 6
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-hr', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Sexy Top',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Tank-top in beige mit weitem Ausschnitt',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Das Tank-Top in Beige mit weitem Ausschnitt ist ein perfektes Kleidungsstück für warme Tage, da es nicht nur luftig und bequem ist, sondern auch einen stilvollen Look bietet',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Sexy top',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Tank top in beige with wide neckline',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Beige tank top with wide neckline is a perfect garment for warm days, as it is not only airy and comfortable, but also offers a stylish look',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '19.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '22.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Bundle article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_03_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_03_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_03_A-big.webp',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
+			],
+			[
+				'media.label' => 'Demo: Bundle article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_03_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_03_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_03_B-big.webp',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	[
+		'product.code' => 'demo-article-7', 'product.type' => 'default',
+		'product.label' => 'Tank-Top in black', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		], [
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 9
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 3
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-cstory', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de', 'text.content' => 'Tank-Top in schwarz',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Stylishes Tank-Top für Männer',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Mit seinem ärmellosen Design und dem bequemen Schnitt bietet es nicht nur eine hohe Bewegungsfreiheit, sondern auch ein modernes und stylisches Aussehen',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Tank-Top in black',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Stylish tank top for men',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'With its sleeveless design and comfortable cut, it offers not only a high freedom of movement, but also a modern and stylish look',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_09_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_09_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_09_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_09_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_09_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_09_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_09_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_09_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	// bundle article
+	[
+		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
+		'product.label' => 'Shirt & cap', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 2
+		], [
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 3
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-sb', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Shirt & Mütze',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo url/de',
+				'text.content' => 'shirt-muetze',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Coole Kombination aus T-Shirt und Mütze',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Lässige Kombination aus cooler Mütze mit trendigem T-Shirt in dunkelgrau',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Shirt & cap',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'Cool combination of shirt and cap',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Casual combination of cool cap with trendy t-shirt in dark gray',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Bundle article from 1',
+				'price.value' => '250.00', 'price.costs' => '10.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Bundle article from 5',
+				'price.value' => '235.00', 'price.costs' => '10.00', 'price.rebate' => '15.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'price.label' => 'Demo: Bundle article from 10',
+				'price.value' => '220.00', 'price.costs' => '10.00', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'price.label' => 'Demo: Bundle article from 1',
+				'price.value' => '250.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'price.label' => 'Demo: Bundle article from 5',
+				'price.value' => '225.00', 'price.costs' => '15.00', 'price.rebate' => '25.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'price.label' => 'Demo: Bundle article from 10',
+				'price.value' => '200.00', 'price.costs' => '15.00', 'price.rebate' => '50.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_08_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_08_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_08_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_08_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_08_B-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_08_B-low.webp',
+					720 => 'https://aimeos.org/media/default/product_08_B-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_08_B-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'attribute' => [
+			[
+				'attribute.code' => 'demo-sticker-small', 'attribute.label' => 'Demo: Small sticker',
+				'attribute.type' => 'sticker', 'attribute.position' => 2, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 1,
+				'text' => [
+					[
+						'text.label' => 'Demo name/de: Kleines Etikett',
+						'text.content' => 'Kleines Etikett',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo name/en: Small sticker',
+						'text.content' => 'Small sticker',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo url/de: Kleines Etikett',
+						'text.content' => 'Kleines-Etikett',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo url/en: Small sticker',
+						'text.content' => 'small-sticker',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+				],
+				'price' => [
+					[
+						'price.label' => 'Demo: Small sticker',
+						'price.value' => '2.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'price.label' => 'Demo: Small sticker',
+						'price.value' => '3.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
+					],
+				],
+			],
+			[
+				'attribute.code' => 'demo-sticker-large', 'attribute.label' => 'Demo: Large sticker',
+				'attribute.type' => 'sticker', 'attribute.position' => 3, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 2,
+				'text' => [
+					[
+						'text.label' => 'Demo name/de: Grosses Etikett',
+						'text.content' => 'Großes Etikett',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo name/en: Large sticker',
+						'text.content' => 'Large sticker',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo url/de: Grosses Etikett',
+						'text.content' => 'Grosses-Etikett',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo url/en: Large sticker',
+						'text.content' => 'large-sticker',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+				],
+				'price' => [
+					[
+						'price.label' => 'Demo: Large sticker',
+						'price.value' => '5.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'price.label' => 'Demo: Large sticker',
+						'price.value' => '7.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
+					],
+				],
+			],
+		],
+		'product' => [
+			[
+				'product.code' => 'demo-article-3',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'product.code' => 'demo-voucher',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	// group article
+	[
+		'product.code' => 'demo-group-article', 'product.type' => 'group',
+		'product.label' => 'Shirts for women', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Shirts für Frauen',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo url/de',
+				'text.content' => 'shirts-fuer-frauen',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Alle Shirts für Frauen',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Unsere Angebote an Shirts für Frauen im Überblick',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en',
+				'text.content' => 'Shirts for women',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'All shirts for women',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Our offers of shirts for women at a glance',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Group article from 1',
+				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Group article from 1',
+				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+		],
+		'product' => [
+			[
+				'product.code' => 'demo-article-3',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'product.code' => 'demo-article-5',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'product.code' => 'demo-article-6',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'product.code' => 'demo-bundle-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
 
 	// Selection articles
 	[
@@ -922,962 +1881,6 @@ return [
 				'text.content' => 'Rabatt',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	// Single articles
-	[
-		'product.code' => 'demo-article-2', 'product.type' => 'default',
-		'product.label' => 'Red T-Shirt', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 6
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Rotes T-Shirt',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Basic Shirt für Männer in rot',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Dieses eng anliegende T-Shirt in rot lenkt die Aufmerksamkeit auf den Oberkörper und betont ihn',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Red T-Shirt',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Basic Shirt for men in red',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'This tight fitting t-shirt in red draws attention to the upper body and emphasizes it',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_02_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_02_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_02_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_02_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-3', 'product.type' => 'default',
-		'product.label' => 'Black shirt', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes Shirt',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Schwarzes Basic-Shirt für Frauen',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Dieses schwarze Basic-Shirt für Frauen ist ein zeitloses Kleidungsstück, das in jedem Kleiderschrank zu finden sein sollte',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Black shirt',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Black basic shirt for women',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'This basic black shirt for women is a timeless garment that should be in every women\'s closet',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '69.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '79.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_05_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_05_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_05_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_05_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_05_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_05_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_05_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_05_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-4', 'product.type' => 'default',
-		'product.label' => 'Black T-Shirt', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes T-Shirt',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Basic T-Shirt für Männer in schwarz',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Dieses schwarze Basic-T-Shirt für Männer ist ein unverzichtbares Kleidungsstück, das in jeder Garderobe zu finden sein sollte',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Demo article 4',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'This is the short description of the demo article.',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'This basic black t-shirt for men is an essential garment that should be in every wardrobe',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '29.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '36.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_06_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_06_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_06_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_06_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_06_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_06_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_06_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_06_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-5', 'product.type' => 'default',
-		'product.label' => 'Short-sleeved shirt', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 8
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Kurzarm-Shirt',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Trendiges Kurzarm-Shirt in schwarz/weiß',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Das trendige Kurzarm-Shirt in Schwarz-Weiß ist ein absoluter Hingucker und ein Muss für jeden, der gerne modisch und stylisch gekleidet sein möchte',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Short-sleeved shirt',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Trendy short-sleeved shirt in black/white',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'The trendy short-sleeved shirt in black and white is an absolute eye-catcher and a must for everyone who likes to be fashionable and stylishly dressed',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '79.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '99.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_07_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_07_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_07_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_07_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-6', 'product.type' => 'default',
-		'product.label' => 'Sexy top', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 2,
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 6
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Sexy Top',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Tank-top in beige mit weitem Ausschnitt',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Das Tank-Top in Beige mit weitem Ausschnitt ist ein perfektes Kleidungsstück für warme Tage, da es nicht nur luftig und bequem ist, sondern auch einen stilvollen Look bietet',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Sexy top',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Tank top in beige with wide neckline',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'Beige tank top with wide neckline is a perfect garment for warm days, as it is not only airy and comfortable, but also offers a stylish look',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '19.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '22.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Bundle article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_03_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_03_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_03_A-big.webp',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
-			],
-			[
-				'media.label' => 'Demo: Bundle article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_03_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_03_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_03_B-big.webp',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-7', 'product.type' => 'default',
-		'product.label' => 'Tank-Top in black', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 9
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de', 'text.content' => 'Tank-Top in schwarz',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Stylishes Tank-Top für Männer',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Mit seinem ärmellosen Design und dem bequemen Schnitt bietet es nicht nur eine hohe Bewegungsfreiheit, sondern auch ein modernes und stylisches Aussehen',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Tank-Top in black',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Stylish tank top for men',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'With its sleeveless design and comfortable cut, it offers not only a high freedom of movement, but also a modern and stylish look',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_09_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_09_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_09_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_09_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_09_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_09_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_09_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_09_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	// bundle article
-	[
-		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
-		'product.label' => 'Shirt & cap', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		]],
-		'supplier' => [[
-			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de',
-				'text.content' => 'Shirt & Mütze',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo url/de',
-				'text.content' => 'shirt-muetze',
-				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Coole Kombination aus T-Shirt und Mütze',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Lässige Kombination aus cooler Mütze mit trendigem T-Shirt in dunkelgrau',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en',
-				'text.content' => 'Shirt & cap',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'Cool combination of shirt and cap',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'Casual combination of cool cap with trendy t-shirt in dark gray',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Bundle article from 1',
-				'price.value' => '250.00', 'price.costs' => '10.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Bundle article from 5',
-				'price.value' => '235.00', 'price.costs' => '10.00', 'price.rebate' => '15.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'price.label' => 'Demo: Bundle article from 10',
-				'price.value' => '220.00', 'price.costs' => '10.00', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'price.label' => 'Demo: Bundle article from 1',
-				'price.value' => '250.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'price.label' => 'Demo: Bundle article from 5',
-				'price.value' => '225.00', 'price.costs' => '15.00', 'price.rebate' => '25.00', 'price.taxrate' => '5.00',
-				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'price.label' => 'Demo: Bundle article from 10',
-				'price.value' => '200.00', 'price.costs' => '15.00', 'price.rebate' => '50.00', 'price.taxrate' => '5.00',
-				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_08_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_08_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_08_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_08_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_08_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_08_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_08_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_08_B-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'attribute' => [
-			[
-				'attribute.code' => 'demo-sticker-small', 'attribute.label' => 'Demo: Small sticker',
-				'attribute.type' => 'sticker', 'attribute.position' => 2, 'attribute.status' => 1,
-				'product.lists.type' => 'config', 'product.lists.position' => 1,
-				'text' => [
-					[
-						'text.label' => 'Demo name/de: Kleines Etikett',
-						'text.content' => 'Kleines Etikett',
-						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo name/en: Small sticker',
-						'text.content' => 'Small sticker',
-						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/de: Kleines Etikett',
-						'text.content' => 'Kleines-Etikett',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Small sticker',
-						'text.content' => 'small-sticker',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-				],
-				'price' => [
-					[
-						'price.label' => 'Demo: Small sticker',
-						'price.value' => '2.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'price.label' => 'Demo: Small sticker',
-						'price.value' => '3.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
-						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
-					],
-				],
-			],
-			[
-				'attribute.code' => 'demo-sticker-large', 'attribute.label' => 'Demo: Large sticker',
-				'attribute.type' => 'sticker', 'attribute.position' => 3, 'attribute.status' => 1,
-				'product.lists.type' => 'config', 'product.lists.position' => 2,
-				'text' => [
-					[
-						'text.label' => 'Demo name/de: Grosses Etikett',
-						'text.content' => 'Großes Etikett',
-						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo name/en: Large sticker',
-						'text.content' => 'Large sticker',
-						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/de: Grosses Etikett',
-						'text.content' => 'Grosses-Etikett',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Large sticker',
-						'text.content' => 'large-sticker',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-				],
-				'price' => [
-					[
-						'price.label' => 'Demo: Large sticker',
-						'price.value' => '5.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'price.label' => 'Demo: Large sticker',
-						'price.value' => '7.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
-						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
-					],
-				],
-			],
-		],
-		'product' => [
-			[
-				'product.code' => 'demo-article-3',
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'product.code' => 'demo-voucher',
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	// group article
-	[
-		'product.code' => 'demo-group-article', 'product.type' => 'group',
-		'product.label' => 'Shirts for women', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de',
-				'text.content' => 'Shirts für Frauen',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo url/de',
-				'text.content' => 'shirts-fuer-frauen',
-				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Alle Shirts für Frauen',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Unsere Angebote an Shirts für Frauen im Überblick',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en',
-				'text.content' => 'Shirts for women',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'All shirts for women',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'Our offers of shirts for women at a glance',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Group article from 1',
-				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Group article from 1',
-				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'product' => [
-			[
-				'product.code' => 'demo-article-3',
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'product.code' => 'demo-article-5',
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'product.code' => 'demo-article-6',
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'product.code' => 'demo-bundle-article',
-				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 		],
 		'stock' => [
