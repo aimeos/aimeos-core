@@ -1393,7 +1393,7 @@ return [
 		'product.code' => 'demo-selection-article-1', 'product.type' => 'default',
 		'product.label' => 'Demo variant article 1', 'product.status' => 1,
 		'supplier' => [[
-			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
+			'supplier.code' => 'demo-cstory', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		]],
 		'attribute' => [
 			[
