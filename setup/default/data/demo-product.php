@@ -906,6 +906,128 @@ return [
 		],
 	],
 
+	// Voucher product
+	[
+		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
+		'product.label' => 'Gift voucher', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 9
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de',
+				'text.content' => 'Gutschein',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de',
+				'text.content' => 'Geschenk-Gutschein für Freunde',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de',
+				'text.content' => 'Schenken Sie Ihren Freunden Freude mit einem Gutschein',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en', 'text.content' => 'Gift certificate',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en',
+				'text.content' => 'A gift for your friends',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en',
+				'text.content' => 'Give joy to your friends with a gift certificate',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Voucher',
+				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Voucher',
+				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+		],
+		'attribute' => [
+			[
+				'attribute.code' => 'custom', 'attribute.label' => 'Custom price',
+				'attribute.type' => 'price', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'custom', 'product.lists.position' => 1,
+				'text' => [
+					[
+						'text.label' => 'name/de: Gutscheinwert',
+						'text.content' => 'Gutscheinwert',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'name/en: Voucher value',
+						'text.content' => 'Voucher value',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+				],
+			],
+			[
+				'attribute.code' => 'demo-custom-date', 'attribute.label' => 'Demo: Custom date',
+				'attribute.type' => 'date', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'custom', 'product.lists.position' => 2,
+				'text' => [
+					[
+						'text.label' => 'Demo name/de: Kundendatum',
+						'text.content' => 'Kundendatum',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+					[
+						'text.label' => 'Demo name/en: Customer date',
+						'text.content' => 'Customer date',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
+					],
+				],
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Voucher 0.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/voucher-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/voucher-low.webp',
+					720 => 'https://aimeos.org/media/default/voucher-med.webp',
+					1350 => 'https://aimeos.org/media/default/voucher-big.webp',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
 	// bundle article
 	[
 		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
@@ -1656,128 +1778,6 @@ return [
 		],
 		'stock' => [
 			['stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	// Voucher product
-	[
-		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
-		'product.label' => 'Gift voucher', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 9
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de',
-				'text.content' => 'Gutschein',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de',
-				'text.content' => 'Geschenk-Gutschein für Freunde',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de',
-				'text.content' => 'Schenken Sie Ihren Freunden Freude mit einem Gutschein',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en', 'text.content' => 'Gift certificate',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en',
-				'text.content' => 'A gift for your friends',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en',
-				'text.content' => 'Give joy to your friends with a gift certificate',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Voucher',
-				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Voucher',
-				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-		],
-		'attribute' => [
-			[
-				'attribute.code' => 'custom', 'attribute.label' => 'Custom price',
-				'attribute.type' => 'price', 'attribute.position' => 0, 'attribute.status' => 1,
-				'product.lists.type' => 'custom', 'product.lists.position' => 1,
-				'text' => [
-					[
-						'text.label' => 'name/de: Gutscheinwert',
-						'text.content' => 'Gutscheinwert',
-						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'name/en: Voucher value',
-						'text.content' => 'Voucher value',
-						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-				],
-			],
-			[
-				'attribute.code' => 'demo-custom-date', 'attribute.label' => 'Demo: Custom date',
-				'attribute.type' => 'date', 'attribute.position' => 0, 'attribute.status' => 1,
-				'product.lists.type' => 'custom', 'product.lists.position' => 2,
-				'text' => [
-					[
-						'text.label' => 'Demo name/de: Kundendatum',
-						'text.content' => 'Kundendatum',
-						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo name/en: Customer date',
-						'text.content' => 'Customer date',
-						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-				],
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Voucher 0.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/voucher-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/voucher-low.webp',
-					720 => 'https://aimeos.org/media/default/voucher-med.webp',
-					1350 => 'https://aimeos.org/media/default/voucher-big.webp',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
