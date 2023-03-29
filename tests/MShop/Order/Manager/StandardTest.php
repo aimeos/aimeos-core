@@ -812,11 +812,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns the basket object
 	 *
+	 * @param string|null $id Unique order ID
+	 * @param array $ref List of items that should be fetched too
+	 * @param bool $fresh TRUE to return items without IDs
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item
 	 * @throws \Exception If no found
 	 */
-	protected function getBasket( string $id, array $ref = [], $fresh = false )
+	protected function getBasket( ?string $id, array $ref = [], bool $fresh = false )
 	{
+		if( $id === null ) {
+			throw new \Exception( 'ID can not be NULL' );
+		}
+
 		$basket = $this->object->get( $id, $ref );
 
 		if( $fresh )
