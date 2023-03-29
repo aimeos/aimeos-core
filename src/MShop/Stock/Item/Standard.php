@@ -40,19 +40,19 @@ class Standard
 	 */
 	public function getDateBack() : ?string
 	{
-		return $this->get( 'stock.backdate' );
+		return $this->get( 'stock.dateback' );
 	}
 
 
 	/**
 	 * Sets the product back in stock date.
 	 *
-	 * @param string|null $backdate New back in stock date of the product
+	 * @param string|null $dateback New back in stock date of the product
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setDateBack( ?string $backdate ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.backdate', $this->checkDateFormat( $backdate ) );
+		return $this->set( 'stock.dateback', $this->checkDateFormat( $dateback ) );
 	}
 
 

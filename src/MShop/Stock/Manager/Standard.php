@@ -936,7 +936,7 @@ class Standard
 	/**
 	 * Creates new stock item object.
 	 *
-	 * @param array $values Possible optional array keys can be given: id, parentid, siteid, type, stocklevel, backdate
+	 * @param array $values Possible optional array keys can be given: id, parentid, siteid, type, stocklevel, dateback
 	 * @return \Aimeos\MShop\Stock\Item\Standard New stock item object
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Stock\Item\Iface
