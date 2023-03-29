@@ -312,8 +312,6 @@ return [
 		'product.code' => 'demo-selection-article-1', 'product.type' => 'default',
 		'product.label' => 'Demo variant article 1', 'product.status' => 1,
 		'supplier' => [[
-			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		], [
 			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		]],
 		'attribute' => [
@@ -1303,6 +1301,9 @@ return [
 		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 2
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de', 'text.content' => 'Rotes T-Shirt',
@@ -1493,6 +1494,9 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de', 'text.content' => 'Schwarzes T-Shirt',
@@ -1592,6 +1596,9 @@ return [
 		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de', 'text.content' => 'Kurzarm-Shirt',
@@ -1690,6 +1697,9 @@ return [
 		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de', 'text.content' => 'Sexy Top',
@@ -1784,6 +1794,9 @@ return [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 9
 		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 3
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'text' => [
 			[

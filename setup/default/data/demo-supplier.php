@@ -7,7 +7,7 @@
 
 return array(
 	array(
-		'supplier.code' => 'demo-test1', 'supplier.label' => 'Test supplier 1', 'supplier.status' => 1,
+		'supplier.code' => 'demo-test1', 'supplier.label' => 'H&R', 'supplier.status' => 1,
 		'address' => array(
 			array(
 				'supplier.address.salutation' => 'company', 'company' => 'Test company',
@@ -75,7 +75,7 @@ return array(
 		),
 	),
 	array(
-		'supplier.code' => 'demo-test2', 'supplier.label' => 'Test supplier 2', 'supplier.status' => 1,
+		'supplier.code' => 'demo-test2', 'supplier.label' => 'Ballroom', 'supplier.status' => 1,
 		'address' => array(
 			array(
 				'supplier.address.salutation' => 'company', 'supplier.address.company' => 'Test company',
