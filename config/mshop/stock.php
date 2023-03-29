@@ -126,7 +126,7 @@ return array(
 				SELECT :columns
 					msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
 					msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
-					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
+					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.dateback",
 					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
 					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 				FROM "mshop_stock" msto
@@ -139,7 +139,7 @@ return array(
 				SELECT :columns
 					msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
 					msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
-					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
+					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.dateback",
 					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
 					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 				FROM "mshop_stock" msto

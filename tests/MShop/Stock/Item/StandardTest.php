@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'stock.type' => 'default',
 			'stock.stocklevel' => 1000,
 			'stock.timeframe' => '2-3d',
-			'stock.backdate' => '2010-01-01 11:55:00',
+			'stock.dateback' => '2010-01-01 11:55:00',
 			'stock.mtime' => '2011-01-01 00:00:02',
 			'stock.ctime' => '2011-01-01 00:00:01',
 			'stock.editor' => 'unitTestUser'

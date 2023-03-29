@@ -61,10 +61,10 @@ interface Iface
 	/**
 	 * Sets the stock back in stock date.
 	 *
-	 * @param string|null $backdate New back in stock date of the stock
+	 * @param string|null $dateback New back in stock date of the stock
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setDateBack( ?string $backdate ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the expected delivery time frame
