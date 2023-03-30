@@ -429,6 +429,12 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
+				'text.label' => 'Demo url/de',
+				'text.content' => 'black-shirt-frauen',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
 				'text.label' => 'Demo short/de',
 				'text.content' => 'Schwarzes Basic-Shirt für Frauen',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
@@ -444,6 +450,12 @@ return [
 				'text.label' => 'Demo name/en', 'text.content' => 'Black shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo url/en',
+				'text.content' => 'black-shirt-women',
+				'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
 				'text.label' => 'Demo short/en',
@@ -1341,23 +1353,47 @@ return [
 		'media' => [
 			[
 				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_02_A-big.webp',
+				'media.url' => 'https://aimeos.org/media/default/product_05_A-big.webp',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_02_A-low.webp',
-					720 => 'https://aimeos.org/media/default/product_02_A-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_02_A-big.webp',
+					240 => 'https://aimeos.org/media/default/product_05_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_05_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_05_A-big.webp',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			],
 			[
-				'media.label' => 'Demo: Article 1.webp', 'media.mimetype' => 'image/webp',
+				'media.label' => 'Demo: Article 2.webp', 'media.mimetype' => 'image/webp',
 				'media.url' => 'https://aimeos.org/media/default/product_07_A-big.webp',
 				'media.previews' => [
 					240 => 'https://aimeos.org/media/default/product_07_A-low.webp',
 					720 => 'https://aimeos.org/media/default/product_07_A-med.webp',
 					1350 => 'https://aimeos.org/media/default/product_07_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 3.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_03_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_03_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_03_A-big.webp',
+				],
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
+			],
+			[
+				'media.label' => 'Demo: Article 4.webp', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_08_A-big.webp',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_08_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_08_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_08_A-big.webp',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
@@ -1646,6 +1682,9 @@ return [
 		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 6
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-ballroom', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de',
@@ -1655,7 +1694,7 @@ return [
 			],
 			[
 				'text.label' => 'Demo url/de',
-				'text.content' => 'black-shirt',
+				'text.content' => 'schwarzes-shirt-maenner',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
@@ -1676,6 +1715,12 @@ return [
 				'text.content' => 'Black shirt',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo url/en',
+				'text.content' => 'black-shirt-men',
+				'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			],
 			[
 				'text.label' => 'Demo short/en',
@@ -1745,17 +1790,6 @@ return [
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
-			],
-			[
-				'media.label' => 'Demo: Selection article 2.webp', 'media.mimetype' => 'image/webp',
-				'media.url' => 'https://aimeos.org/media/default/product_04_B-big.webp',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_04_B-low.webp',
-					720 => 'https://aimeos.org/media/default/product_04_B-med.webp',
-					1350 => 'https://aimeos.org/media/default/product_04_B-big.webp',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			],
 		],
 		'product' => [
