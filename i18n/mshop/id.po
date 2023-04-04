@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-05 07:26+0200\n"
+"POT-Creation-Date: 2023-04-04 11:11+0200\n"
 "PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Indonesian (https://www.transifex.com/aimeos/aimeos-core/language/id/)\n"
@@ -283,6 +283,10 @@ msgstr ""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr ""
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
 msgstr ""
 
 #, php-format

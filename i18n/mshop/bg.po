@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-07 11:38+0100\n"
+"POT-Creation-Date: 2023-04-04 11:11+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Plamen Petkov <mcplamen@gmail.com>, 2016\n"
-"Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
+"Language-Team: Bulgarian (http://app.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,6 +292,10 @@ msgstr "Невалиден ISO код на език \"%1$s\""
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr "Невалиден JSON като резултат от търсенето за ID \"%2$s\" в \"%1$s\": %3$s"
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""

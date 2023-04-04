@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-07 11:38+0100\n"
+"POT-Creation-Date: 2023-04-04 11:11+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: jerzys <jerzy.skalski@gmail.com>, 2014\n"
-"Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
+"Language-Team: Polish (http://app.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -214,7 +214,7 @@ msgstr ""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Pobieranie pliku \"%1$s\" nie powiodło się"
 
 #, php-format
 msgid "Duplicate coupon code"
@@ -230,7 +230,7 @@ msgstr ""
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Nie znaleziono pliku \"%1$s\" "
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
@@ -292,6 +292,10 @@ msgstr "Niepoprawny kod języka ISO \"%1$s\""
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr "Niepoprawny JSON jako wynik szukania ID \"%2$s\" w \"%1$s\": %3$s"
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
