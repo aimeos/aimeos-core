@@ -50,7 +50,7 @@ class TestHelper
 		if( !isset( self::$aimeos ) )
 		{
 			require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
-			self::$aimeos = new \Aimeos\Bootstrap( [], false );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
