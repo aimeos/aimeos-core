@@ -632,124 +632,124 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$attributes = $this->object()->getSearchAttributes();
-			$translations = $this->getSearchTranslations( $attributes );
-			$types = $this->getSearchTypes( $attributes );
-			$columns = $this->object()->getSaveAttributes();
-			$sortcols = $search->translate( $search->getSortations(), $translations );
+		$attributes = $this->object()->getSearchAttributes();
+		$translations = $this->getSearchTranslations( $attributes );
+		$types = $this->getSearchTypes( $attributes );
+		$columns = $this->object()->getSaveAttributes();
+		$sortcols = $search->translate( $search->getSortations(), $translations );
 
-			$colstring = '';
-			foreach( $columns as $name => $entry ) {
-				$colstring .= $entry->getInternalCode() . ', ';
-			}
+		$colstring = '';
+		foreach( $columns as $name => $entry ) {
+			$colstring .= $entry->getInternalCode() . ', ';
+		}
 
-			$find = array( ':columns', ':cond', ':order', ':start', ':size' );
-			$replace = array(
-				$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
-				$search->getConditionSource( $types, $translations ),
-				$search->getSortationSource( $types, $translations ),
-				$search->getOffset(),
-				$search->getLimit(),
-			);
+		$find = array( ':columns', ':cond', ':order', ':start', ':size' );
+		$replace = array(
+			$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
+			$search->getConditionSource( $types, $translations ),
+			$search->getSortationSource( $types, $translations ),
+			$search->getOffset(),
+			$search->getLimit(),
+		);
 
-			/** mshop/locale/manager/site/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/locale/manager/site/search/ansi
-			 */
+		/** mshop/locale/manager/site/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/locale/manager/site/search/ansi
+		 */
 
-			/** mshop/locale/manager/site/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the attribute
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/locale/manager/site/insert/ansi
-			 * @see mshop/locale/manager/site/update/ansi
-			 * @see mshop/locale/manager/site/delete/ansi
-			 * @see mshop/locale/manager/site/count/ansi
-			 * @see mshop/locale/manager/site/newid/ansi
-			 * @see mshop/locale/manager/site/rate/ansi
-			 */
-			$path = 'mshop/locale/manager/site/search';
+		/** mshop/locale/manager/site/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the attribute
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/insert/ansi
+		 * @see mshop/locale/manager/site/update/ansi
+		 * @see mshop/locale/manager/site/delete/ansi
+		 * @see mshop/locale/manager/site/count/ansi
+		 * @see mshop/locale/manager/site/newid/ansi
+		 * @see mshop/locale/manager/site/rate/ansi
+		 */
+		$path = 'mshop/locale/manager/site/search';
 
-			$sql = $this->getSqlConfig( $path );
-			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+		$sql = $this->getSqlConfig( $path );
+		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
-			try
+		try
+		{
+			while( ( $row = $results->fetch() ) !== null )
 			{
-				while( ( $row = $results->fetch() ) !== null )
+				$id = $row['locale.site.id'];
+				$logos = $row['locale.site.logo'] ?? '{}';
+				$config = $row['locale.site.config'] ?? '{}';
+
+				if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
 				{
-					$id = $row['locale.site.id'];
-					$logos = $row['locale.site.logo'] ?? '{}';
-					$config = $row['locale.site.config'] ?? '{}';
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
+					$this->context()->logger()->warning( $msg, 'core/locale/site' );
+				}
 
-					if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
-					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
-						$this->context()->logger()->warning( $msg, 'core/locale/site' );
-					}
+				if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
+					$this->context()->logger()->warning( $msg, 'core/locale/site' );
+					$row['locale.site.config'] = [];
+				}
 
-					if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
-					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
-						$this->context()->logger()->warning( $msg, 'core/locale/site' );
-						$row['locale.site.config'] = [];
-					}
-
-					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-						$items[$row['locale.site.id']] = $item;
-					}
+				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+					$items[$row['locale.site.id']] = $item;
 				}
 			}
-			catch( \Exception $e )
-			{
-				$results->finish();
-				throw $e;
-			}
+		}
+		catch( \Exception $e )
+		{
+			$results->finish();
+			throw $e;
+		}
 
-			if( $total !== null ) {
-				$total = $this->getTotal( $conn, $find, $replace );
-			}
+		if( $total !== null ) {
+			$total = $this->getTotal( $conn, $find, $replace );
+		}
 
 		return map( $items );
 	}
