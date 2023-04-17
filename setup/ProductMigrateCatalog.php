@@ -29,9 +29,10 @@ class ProductMigrateCatalog extends Base
 		$this->info( 'Migrating category references to product domain', 'vv' );
 
 		$insert = $db->stmt()->insert( 'mshop_product_list' )->values( [
-			'parentid' => '?', 'siteid' => '?', $db->qi( 'key' ) => '?', 'domain' => '?', 'type' => '?',
-			'start' => '?', $db->qi('end') => '?', 'config' => '?', 'status' => '?', 'pos' => '?',
-			'refid' => '?', 'ctime' => '?', 'mtime' => '?', 'editor' => '?'
+			$db->qi( 'parentid' ) => '?', $db->qi( 'siteid' ) => '?', $db->qi( 'key' ) => '?', $db->qi( 'domain' ) => '?',
+			$db->qi( 'type' ) => '?', $db->qi( 'start' ) => '?', $db->qi( 'end' ) => '?', $db->qi( 'config' ) => '?',
+			$db->qi( 'status' ) => '?', $db->qi( 'pos' ) => '?', $db->qi( 'refid' ) => '?', $db->qi( 'ctime' ) => '?',
+			$db->qi( 'mtime' ) => '?', $db->qi( 'editor' ) => '?'
 		] );
 
 		$failed = 0;
