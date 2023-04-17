@@ -106,6 +106,10 @@ class Standard
 	 */
 	public function getInvoiceNumber() : string
 	{
+		if( $fcn = self::macro( 'invoicenumber' ) ) {
+			return (string) $fcn( $this );
+		}
+
 		return (string) $this->get( 'order.invoiceno', '' );
 	}
 
