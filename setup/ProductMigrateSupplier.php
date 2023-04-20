@@ -30,7 +30,7 @@ class ProductMigrateSupplier extends Base
 
 		$insert = $db->stmt()->insert( 'mshop_product_list' )->values( [
 			$db->qi( 'parentid' ) => '?', $db->qi( 'siteid' ) => '?', $db->qi( 'key' ) => '?', $db->qi( 'domain' ) => '?',
-			$db->qi( 'type' ) => '?', $db->qi( 'start' ) => '?', $db->qi('end') => '?', $db->qi( 'config' ) => '?',
+			$db->qi( 'type' ) => '?', $db->qi( 'start' ) => '?', $db->qi( 'end' ) => '?', $db->qi( 'config' ) => '?',
 			$db->qi( 'status' ) => '?', $db->qi( 'pos' ) => '?', $db->qi( 'refid' ) => '?', $db->qi( 'ctime' ) => '?',
 			$db->qi( 'mtime' ) => '?', $db->qi( 'editor' ) => '?'
 		] );
