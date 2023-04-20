@@ -254,7 +254,7 @@ class MShopConfigDocTask extends Task
 			$dir = $fs->getDir( $project )->getPath();
 
 			foreach( $files as $file ) {
-				$this->extractFile( $dir . DIRECTORY_SEPARATOR . $file, $options );
+				$options = $this->extractFile( $dir . DIRECTORY_SEPARATOR . $file, $options );
 			}
 		}
 
@@ -266,9 +266,9 @@ class MShopConfigDocTask extends Task
 	 * Extracts the configuration documentation from the file and adds it to the options array.
 	 *
 	 * @param string $filename Absolute name of the file
-	 * @param array &$options Associative list of extracted configuration options
+	 * @param array $options Associative list of extracted configuration options
 	 */
-	protected function extractFile( $filename, array &$options )
+	protected function extractFile( $filename, array $options )
 	{
 		$matches = array();
 
@@ -290,8 +290,12 @@ class MShopConfigDocTask extends Task
 				throw new BuildException( 'Invalid replace pattern' );
 			}
 
+			if( !isset( $options[$key] ) ) {
+				$options[$key] = [];
+			}
+
 			$num = 0;
-			$desc = array();
+			$desc = [];
 
 			foreach( $list as $line )
 			{
@@ -326,6 +330,8 @@ class MShopConfigDocTask extends Task
 				$options[$key]['long'] = str_replace( '\\/', '/', $desc );
 			}
 		}
+
+		return $options;
 	}
 
 
