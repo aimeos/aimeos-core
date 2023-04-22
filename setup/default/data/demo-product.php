@@ -12,6 +12,7 @@ return [
 	[
 		'product.code' => 'demo-article', 'product.type' => 'default',
 		'product.label' => 'Dark grey dress', 'product.status' => 1,
+		'rating' => '4.8', 'ratings' => 20,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 0
 		], [
@@ -310,6 +311,7 @@ return [
 	[
 		'product.code' => 'demo-article-2', 'product.type' => 'default',
 		'product.label' => 'Red T-Shirt', 'product.status' => 1,
+		'rating' => '4.6', 'ratings' => 15,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
 		], [
@@ -412,6 +414,7 @@ return [
 	[
 		'product.code' => 'demo-article-3', 'product.type' => 'default',
 		'product.label' => 'Black shirt', 'product.status' => 1,
+		'rating' => '4.9', 'ratings' => 10,
 		'catalog' => [[
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
@@ -524,6 +527,7 @@ return [
 	[
 		'product.code' => 'demo-article-4', 'product.type' => 'default',
 		'product.label' => 'Black T-Shirt', 'product.status' => 1,
+		'rating' => '4.5', 'ratings' => 4,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		]],
@@ -620,6 +624,7 @@ return [
 	[
 		'product.code' => 'demo-article-5', 'product.type' => 'default',
 		'product.label' => 'Short-sleeved shirt', 'product.status' => 1,
+		'rating' => '4.75', 'ratings' => 8,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		], [
@@ -722,6 +727,7 @@ return [
 	[
 		'product.code' => 'demo-article-6', 'product.type' => 'default',
 		'product.label' => 'Sexy top', 'product.status' => 1,
+		'rating' => '4.2', 'ratings' => 25,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 2,
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 6
@@ -821,6 +827,7 @@ return [
 	[
 		'product.code' => 'demo-article-7', 'product.type' => 'default',
 		'product.label' => 'Tank-Top in black', 'product.status' => 1,
+		'rating' => '4.5', 'ratings' => 12,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
@@ -922,6 +929,7 @@ return [
 	[
 		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
 		'product.label' => 'Gift voucher', 'product.status' => 1,
+		'rating' => '5.0', 'ratings' => 7,
 		'catalog' => [[
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 9
 		]],
@@ -1044,6 +1052,7 @@ return [
 	[
 		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
 		'product.label' => 'Shirt & cap', 'product.status' => 1,
+		'rating' => '4.3', 'ratings' => 10,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 2
 		], [
@@ -1279,6 +1288,7 @@ return [
 	[
 		'product.code' => 'demo-group-article', 'product.type' => 'group',
 		'product.label' => 'Shirts for women', 'product.status' => 1,
+		'rating' => '4.0', 'ratings' => 13,
 		'catalog' => [[
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		], [
@@ -1675,6 +1685,7 @@ return [
 	[
 		'product.code' => 'demo-selection-article', 'product.type' => 'select',
 		'product.label' => 'Black shirt', 'product.status' => 1,
+		'rating' => '4.4', 'ratings' => 25,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		], [
@@ -1820,6 +1831,7 @@ return [
 		'product.code' => 'demo-event-article', 'product.type' => 'event',
 		'product.label' => 'Fashion week', 'product.status' => 1,
 		'product.datestart' => '2100-01-01 08:00:00', 'product.dateend' => '2100-01-01 16:00:00',
+		'rating' => '0', 'ratings' => 0,
 		'catalog' => [[
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 10
 		]],

@@ -110,6 +110,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 			$this->addPropertyItems( $item, $entry );
 
 			$manager->save( $item );
+			$manager->rate( $item->getId(), $entry['rating'] ?? 0, $entry['ratings'] ?? 0 );
 
 			if( isset( $entry['stock'] ) ) {
 				$this->addStockItems( $item->getId(), $entry['stock'] );
