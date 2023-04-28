@@ -7,6 +7,7 @@ return [
 	],
 	'depends' => [
 		'aimeos-core',
+		'ai-admin-graphql',
 		'ai-admin-jqadm',
 		'ai-admin-jsonadm',
 		'ai-client-html',
