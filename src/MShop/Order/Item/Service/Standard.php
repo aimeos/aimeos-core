@@ -326,6 +326,10 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
+		if( $fcn = self::macro( 'copyFrom' ) ) {
+			return $fcn( $product );
+		}
+
 		$values = $service->toArray();
 		$this->fromArray( $values );
 
