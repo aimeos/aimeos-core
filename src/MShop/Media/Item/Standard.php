@@ -308,7 +308,7 @@ class Standard
 			$path .= '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() );
 		}
 
-		return $path;
+		return (string) $path;
 	}
 
 
