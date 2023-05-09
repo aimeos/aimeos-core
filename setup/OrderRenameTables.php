@@ -11,12 +11,19 @@ namespace Aimeos\Upscheme\Task;
 
 class OrderRenameTables extends Base
 {
-	public function before() : array
+	public function after() : array
 	{
 		return [
 			'OrderAddProductParentid', 'OrderAddBaseServiceCurrencyid', 'OrderAddBaseProductCurrencyid',
-			'OrderRenameAttributeParentid', 'OrderRenameProductStatus', 'OrderRenameProductSupplier'
+			'OrderRenameAttributeParentid', 'OrderRenameProductStatus', 'OrderRenameProductSupplier',
+			'OrderConnectTables'
 		];
+	}
+
+
+	public function before() : array
+	{
+		return ['Order'];
 	}
 
 
