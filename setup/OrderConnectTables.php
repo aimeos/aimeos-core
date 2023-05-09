@@ -13,7 +13,7 @@ class OrderConnectTables extends Base
 {
 	public function before() : array
 	{
-		return ['OrderRenameTables'];
+		return ['Order'];
 	}
 
 

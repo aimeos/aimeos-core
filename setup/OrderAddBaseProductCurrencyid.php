@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class OrderAddBaseProductCurrencyid extends Base
 {
-	public function after() : array
+	public function before() : array
 	{
 		return ['Order'];
 	}
