@@ -115,7 +115,7 @@ class OrderConnectTables extends Base
 		}
 
 		$db->dropForeign( 'mshop_order_base_service', 'fk_msordbase_baseid' );
-		$db->dropIndex( 'mshop_order_base_service', ['unq_msordbase_bid_cd_typ_sid','unq_msordbase_bid_sid_cd_typ'] );
+		$db->dropIndex( 'mshop_order_base_service', ['unq_msordbase_bid_cd_typ_sid', 'unq_msordbase_bid_sid_cd_typ'] );
 
 		$db->table( 'mshop_order_base_service' )->bigint( 'parentid' )->null( true )->up();
 
