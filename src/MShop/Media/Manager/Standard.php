@@ -778,7 +778,7 @@ class Standard
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
 		if( !$force && !empty( $item->getPreviews() ) && preg_match( '#^[a-zA-Z]{2,6}://#', $url ) !== 1
-			&& $is && date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified() || !$fs->has( $url )
+			&& ( $is && date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified() || !$fs->has( $url ) )
 		) {
 			return $item;
 		}
