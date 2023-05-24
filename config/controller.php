@@ -33,7 +33,6 @@ return [
 				'video/webm' => 'webm',
 				'audio/mpeg' => 'mpeg',
 				'audio/ogg' => 'ogg',
-				'audio/ogg' => 'ogg',
 				'audio/webm' => 'weba',
 			],
 			'previews' => [[
