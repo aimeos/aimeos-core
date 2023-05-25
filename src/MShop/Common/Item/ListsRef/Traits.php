@@ -400,7 +400,9 @@ trait Traits
 				}
 			}
 
-			uasort( $this->listItems[$domain], fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() );
+			uasort( $this->listItems[$domain], function( $a, $b ) {
+				return $a->getPosition() < $b->getPosition() ? -1 : 1;
+			} );
 		}
 
 		$this->listPrepared = true;
