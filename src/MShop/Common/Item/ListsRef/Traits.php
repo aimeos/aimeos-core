@@ -224,6 +224,7 @@ trait Traits
 	{
 		$result = [];
 		$this->prepareListItems();
+		$fcn = static::macro( 'listFilter' );
 
 		$iface = \Aimeos\MShop\Common\Item\TypeRef\Iface::class;
 		$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
@@ -235,6 +236,8 @@ trait Traits
 			if( is_array( $domain ) && !in_array( $dname, $domain ) || is_string( $domain ) && $dname !== $domain ) {
 				continue;
 			}
+
+			$set = [];
 
 			foreach( $list as $id => $item )
 			{
@@ -252,8 +255,10 @@ trait Traits
 					continue;
 				}
 
-				$result[$id] = $item;
+				$set[$id] = $item;
 			}
+
+			$result = array_replace( $result, $fcn ? $fcn( $set ) : $set );
 		}
 
 		return map( $result );
@@ -288,11 +293,7 @@ trait Traits
 			return map( $list );
 		}
 
-		if( isset( $list[$domain] ) ) {
-			return map( $list[$domain] );
-		}
-
-		return map();
+		return map( $list[$domain] ?? [] );
 	}
 
 
@@ -353,20 +354,13 @@ trait Traits
 
 
 	/**
-	 * Compares the positions of two items for sorting.
+	 * Registers a custom macro that has access to the class properties if called non-static
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Position\Iface $a First item
-	 * @param \Aimeos\MShop\Common\Item\Position\Iface $b Second item
-	 * @return int -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
+	 * @param string $name Macro name
+	 * @param \Closure|null $function Anonymous function
+	 * @return \Closure|null Registered function
 	 */
-	protected function comparePosition( \Aimeos\MShop\Common\Item\Position\Iface $a, \Aimeos\MShop\Common\Item\Position\Iface $b ) : int
-	{
-		if( $a->getPosition() === $b->getPosition() ) {
-			return 0;
-		}
-
-		return ( $a->getPosition() < $b->getPosition() ) ? -1 : 1;
-	}
+	abstract public static function macro( string $name, \Closure $function = null ) : ?\Closure;
 
 
 	/**
@@ -406,7 +400,7 @@ trait Traits
 				}
 			}
 
-			uasort( $this->listItems[$domain], array( $this, 'comparePosition' ) );
+			uasort( $this->listItems[$domain], fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() );
 		}
 
 		$this->listPrepared = true;
