@@ -29,7 +29,6 @@ class Standard
 			'label' => 'Product index category ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',

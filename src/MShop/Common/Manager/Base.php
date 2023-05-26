@@ -117,7 +117,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$search->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$attrList = $this->object()->getSearchAttributes();
+		$attrList = array_filter( $this->object()->getSearchAttributes(), function( $item ) {
+			return $item->isPublic() || strncmp( $item->getCode(), 'agg:', 4 ) === 0;
+		} );
 
 		if( $value === null && ( $value = key( $attrList ) ) === null )
 		{

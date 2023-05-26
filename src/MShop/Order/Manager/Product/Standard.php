@@ -70,7 +70,6 @@ class Standard
 			'label' => 'Parent product ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.product.productid' => array(
 			'code' => 'order.product.productid',
@@ -78,7 +77,6 @@ class Standard
 			'label' => 'Product original ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.product.name' => array(
 			'code' => 'order.product.name',
@@ -226,7 +224,6 @@ class Standard
 			'label' => 'Product media url',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.product.target' => array(
 			'code' => 'order.product.target',
@@ -234,7 +231,6 @@ class Standard
 			'label' => 'Product url target',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.product.notes' => array(
 			'code' => 'order.product.notes',
@@ -242,7 +238,6 @@ class Standard
 			'label' => 'Product notes',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.product.flags' => array(
 			'code' => 'order.product.flags',
@@ -250,7 +245,6 @@ class Standard
 			'label' => 'Product flags',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 		'order.product.ctime' => array(
 			'code' => 'order.product.ctime',
@@ -276,8 +270,8 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.product:count' => array(
-			'code' => 'order.product:count()',
+		'agg:order.product:count' => array(
+			'code' => 'agg:order.product:count()',
 			'internalcode' => '( SELECT COUNT(*) FROM mshop_order_product AS mordpr_count
 				WHERE mordpr."parentid" = mordpr_count."parentid" AND mordpr_count."prodid" = $1 )',
 			'label' => 'Order base product count, parameter(<product IDs>)',
@@ -285,8 +279,8 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.product:total' => array(
-			'code' => 'order.product:total()',
+		'agg:order.product:total' => array(
+			'code' => 'agg:order.product:total()',
 			'internalcode' => 'mordpr."quantity" * mordpr."price"',
 			'label' => 'Product price total',
 			'type' => 'float',
