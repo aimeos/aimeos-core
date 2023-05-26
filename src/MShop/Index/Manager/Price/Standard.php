@@ -22,7 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Price\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = array(
-		// @deprecated Removed 2019.01
 		'index.price.id' => array(
 			'code' => 'index.price.id',
 			'internalcode' => 'mindpr."prodid"',
@@ -30,7 +29,6 @@ class Standard
 			'label' => 'Product index price ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'index.price:value' => array(
 			'code' => 'index.price:value()',

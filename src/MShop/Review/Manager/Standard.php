@@ -172,7 +172,6 @@ class Standard
 			'label' => 'Domain',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'review.refid' => array(
 			'code' => 'review.refid',
@@ -180,7 +179,6 @@ class Standard
 			'label' => 'ID from the referenced domain',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'review.name' => array(
 			'code' => 'review.name',

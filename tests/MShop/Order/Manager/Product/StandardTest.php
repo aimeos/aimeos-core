@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.product.editor', 'core' ) );
-		$result = $this->object->aggregate( $search, 'order.product.type', 'order.product:total()', 'sum' )->toArray();
+		$result = $this->object->aggregate( $search, 'order.product.type', 'agg:order.product:total()', 'sum' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );

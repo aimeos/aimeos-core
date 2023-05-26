@@ -22,7 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Text\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = array(
-		// @deprecated Removed 2019.01
 		'index.text.id' => array(
 			'code' => 'index.text.id',
 			'internalcode' => 'mindte."prodid"',
@@ -30,7 +29,6 @@ class Standard
 			'label' => 'Product index text ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',

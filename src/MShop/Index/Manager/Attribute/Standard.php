@@ -29,7 +29,6 @@ class Standard
 			'label' => 'Product index attribute ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'index.attribute:allof' => array(
 			'code' => 'index.attribute:allof()',
