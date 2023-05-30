@@ -28,7 +28,6 @@ class MySQL
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
-			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',

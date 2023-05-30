@@ -29,7 +29,6 @@ class MySQL
 			'label' => 'Product index category ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 	);
 
