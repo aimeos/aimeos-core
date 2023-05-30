@@ -28,7 +28,6 @@ class MySQL
 			'label' => 'Product index supplier ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 	);
 
