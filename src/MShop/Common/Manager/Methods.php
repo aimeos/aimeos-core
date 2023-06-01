@@ -106,6 +106,7 @@ trait Methods
 		return $this;
 	}
 
+
 	/**
 	 * Creates a search critera object
 	 *
