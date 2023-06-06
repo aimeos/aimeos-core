@@ -64,7 +64,7 @@ class BasketValues
 	 */
 	public function getConfigBE() : array
 	{
-		return $this->getConfigItems( $this->beConfig );
+		return array_replace( parent::getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
 
 

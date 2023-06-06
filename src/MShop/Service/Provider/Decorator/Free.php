@@ -58,7 +58,7 @@ class Free
 	 */
 	public function getConfigBE() : array
 	{
-		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
+		return array_replace( parent::getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
 
 
