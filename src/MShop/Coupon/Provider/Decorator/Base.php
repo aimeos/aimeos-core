@@ -57,6 +57,18 @@ abstract class Base
 
 
 	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\Base\Critera\Attribute\Iface
+	 */
+	public function getConfigBE() : array
+	{
+		return $this->provider->getConfigBE();
+	}
+
+
+	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
