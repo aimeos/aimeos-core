@@ -298,6 +298,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetNameUrl()
+	{
+		$this->assertEquals( 'unitproduct', $this->object->getName( 'url' ) );
+	}
+
+
 	public function testSetName()
 	{
 		$return = $this->object->setName( 'Testname2' );
