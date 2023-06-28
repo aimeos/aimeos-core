@@ -49,7 +49,7 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['code', 'siteid'], 'unq_mspro_siteid_code_sid' );
+			$table->unique( ['code', 'siteid'], 'unq_mspro_code_sid' );
 			$table->index( ['id', 'status', 'start', 'end', 'rating', 'siteid'], 'idx_mspro_id_stat_st_end_rt_sid' );
 			$table->index( ['status', 'start', 'end', 'rating', 'siteid'], 'idx_mspro_stat_st_end_rt_sid' );
 			$table->index( ['rating', 'siteid'], 'idx_mspro_rating_sid' );
