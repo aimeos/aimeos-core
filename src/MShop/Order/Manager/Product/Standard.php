@@ -755,7 +755,7 @@ class Standard
 	 */
 	protected function saveItem( \Aimeos\MShop\Order\Item\Product\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		if( !$item->isModified() ) {
+		if( !$item->isModified() && !$item->getPrice()->isModified() ) {
 			return $this->saveAttributeItems( $item, $fetch );
 		}
 
