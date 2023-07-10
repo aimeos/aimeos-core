@@ -217,6 +217,8 @@ class Standard
 		),
 	);
 
+	private array $cacheTags = [];
+
 
 	/**
 	 * Initializes the object.
@@ -281,6 +283,22 @@ class Standard
 
 
 	/**
+	 * Commits the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	{
+		parent::commit();
+
+		$this->context()->cache()->deleteByTags( $this->cacheTags );
+		$this->cacheTags = [];
+
+		return $this;
+	}
+
+
+	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -340,10 +358,10 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Supplier\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/supplier/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -377,7 +395,10 @@ class Standard
 		 */
 		$path = 'mshop/supplier/manager/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
+		$this->deleteItemsBase( $items, $path )->deleteRefItems( $items );
+		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->cast()->prefix( 'supplier-' )->all() );
+
+		return $this;
 	}
 
 
@@ -410,6 +431,27 @@ class Standard
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'supplier.id', $id, $ref, $default );
+	}
+
+
+	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		$items = parent::save( $items, $fetch );
+
+		if( ( $ids = map( $items )->getId()->filter() )->count() === map( $items )->count() ) {
+			$this->cacheTags = array_merge( $this->cacheTags, map( $ids )->prefix( 'supplier-' )->all() );
+		} else {
+			$this->cacheTags[] = 'supplier';
+		}
+
+		return $items;
 	}
 
 
