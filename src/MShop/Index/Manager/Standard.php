@@ -561,53 +561,6 @@ class Standard
 
 
 	/**
-	 * Re-writes the index entries for all products that are search result of given criteria
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
-	 * @param string[] $domains List of domains to be
-	 * @param int $size Size of a chunk of products to handle at a time
-	 * @deprecated 2023.01 Use index() instead
-	 */
-	protected function writeIndex( \Aimeos\Base\Criteria\Iface $search, array $domains, int $size )
-	{
-		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$submanagers = $this->getSubManagers();
-		$start = 0;
-
-		do
-		{
-			$search->slice( $start, $size );
-			$products = $manager->search( $search, $domains );
-
-			try
-			{
-				$this->begin();
-
-				$this->remove( $products );
-
-				foreach( $submanagers as $submanager ) {
-					$submanager->rebuild( $products );
-				}
-
-				$this->commit();
-			}
-			catch( \Exception $e )
-			{
-				$this->rollback();
-				throw $e;
-			}
-
-			$context->cache()->deleteByTags( $products->keys()->prefix( 'product-' )->all() );
-
-			$count = count( $products );
-			$start += $count;
-		}
-		while( $count == $search->getLimit() );
-	}
-
-
-	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
 	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
