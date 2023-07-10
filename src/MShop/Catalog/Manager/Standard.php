@@ -267,6 +267,8 @@ class Standard extends Base
 		),
 	);
 
+	private array $cacheTags = [];
+
 
 	/**
 	 * Initializes the object.
@@ -380,6 +382,22 @@ class Standard extends Base
 
 
 	/**
+	 * Commits the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	{
+		parent::commit();
+
+		$this->context()->cache()->deleteByTags( $this->cacheTags );
+		$this->cacheTags = [];
+
+		return $this;
+	}
+
+
+	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -427,6 +445,8 @@ class Standard extends Base
 			foreach( $items as $item ) {
 				$this->createTreeManager( $siteid )->deleteNode( (string) $item );
 			}
+
+			$this->cacheTags = array_merge( $this->cacheTags, map( $items )->cast()->prefix( 'catalog-' )->all() );
 
 			$this->unlock();
 			$this->commit();
@@ -539,6 +559,9 @@ class Standard extends Base
 
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
+
+			$this->cacheTags[] = 'catalog';
+
 			$this->unlock();
 			$this->commit();
 		}
@@ -576,6 +599,9 @@ class Standard extends Base
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
+
+			$this->cacheTags[] = 'catalog';
+
 			$this->unlock();
 			$this->commit();
 		}
@@ -587,6 +613,23 @@ class Standard extends Base
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		$items = parent::save( $items, $fetch );
+
+		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->getId()->prefix( 'catalog-' )->all() );
+
+		return $items;
 	}
 
 
