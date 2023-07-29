@@ -7,7 +7,7 @@
 
 return [
 	'locale/site' => [
-		'unitperf' => ['locale.site.code' => 'unitperf', 'locale.site.label' => 'Performance test site', 'locale.site.status' => 0]
+		'unitperf' => ['locale.site.code' => 'unitperf', 'locale.site.label' => 'Performance test site', 'locale.site.status' => 1]
 	],
 
 	'locale' => [

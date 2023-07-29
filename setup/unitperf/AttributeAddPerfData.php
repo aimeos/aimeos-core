@@ -177,7 +177,7 @@ class AttributeAddPerfData extends Base
 			$item = clone $attrItem;
 			$item->setPosition( $pos++ )
 				->setLabel( $option )
-				->setCode( $option );
+				->setCode( str_replace( ' ', '-', $option ) );
 
 			$refItem = clone $priceItem;
 			$refItem->setLabel( $option )->setValue( $price );
@@ -216,7 +216,7 @@ class AttributeAddPerfData extends Base
 				$item = clone $attrItem;
 				$item->setPosition( $pos )
 					->setLabel( $value )
-					->setCode( $value );
+					->setCode( str_replace( ' ', '-', $value ) );
 
 				$attrManager->save( $item );
 			}

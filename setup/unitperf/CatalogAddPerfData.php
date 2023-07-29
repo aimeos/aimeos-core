@@ -131,20 +131,19 @@ class CatalogAddPerfData extends Base
 
 	protected function addCatalogProducts( array $catItems, array $items, $num )
 	{
-		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
-		$defListItem = $catalogManager->createListItem();
+		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
+		$defListItem = $manager->createListItem();
 		$start = 0;
 
 		foreach( $catItems as $idx => $catItem )
 		{
-			$catItem = clone $catItem; // forget stored product references afterwards
 			$fraction = pow( 10, $idx );
 
 			foreach( $items as $item )
 			{
 				if( $item->pos % $fraction === 0 )
 				{
-					$litem = ( clone $defListItem )->setRefId( $item->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
+					$litem = ( clone $defListItem )->setRefId( $catItem->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
 					$item->addListItem( 'catalog', $litem );
 				}
 			}
@@ -495,8 +494,7 @@ class CatalogAddPerfData extends Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
-		$search = $manager->filter()->slice( 0, 0x7fffffff );
-		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
+		$search = $manager->filter()->slice( 0, 0x7fffffff )->order( 'attribute.position' );
 
 		foreach( $manager->search( $search ) as $id => $item ) {
 			$this->attributes[$item->getType()][$id] = $item->getLabel();
