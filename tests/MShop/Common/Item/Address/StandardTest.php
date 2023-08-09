@@ -37,8 +37,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.address.countryid' => 'DE',
 			'common.address.languageid' => 'de',
 			'common.address.telephone' => '05554433221',
-			'common.address.email' => 'test@example.com',
 			'common.address.telefax' => '05554433222',
+			'common.address.mobile' => '05554433223',
+			'common.address.email' => 'test@example.com',
 			'common.address.website' => 'www.example.com',
 			'common.address.longitude' => '10.0',
 			'common.address.latitude' => '50.0',
@@ -331,6 +332,38 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTelefax()
+	{
+		$this->assertEquals( '05554433222', $this->object->getTelefax() );
+	}
+
+
+	public function testSetTelefax()
+	{
+		$return = $this->object->setTelefax( '55512345' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
+		$this->assertEquals( '55512345', $this->object->getTelefax() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetMobile()
+	{
+		$this->assertEquals( '05554433223', $this->object->getMobile() );
+	}
+
+
+	public function testSetMobile()
+	{
+		$return = $this->object->setMobile( '555123456' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
+		$this->assertEquals( '555123456', $this->object->getMobile() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetEmail()
 	{
 		$this->assertEquals( 'test@example.com', $this->object->getEmail() );
@@ -347,22 +380,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setEmail( 'unittest.de' );
-	}
-
-
-	public function testGetTelefax()
-	{
-		$this->assertEquals( '05554433222', $this->object->getTelefax() );
-	}
-
-
-	public function testSetTelefax()
-	{
-		$return = $this->object->setTelefax( '55512345' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
-		$this->assertEquals( '55512345', $this->object->getTelefax() );
-		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -499,6 +516,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.address.languageid' => 'de',
 			'common.address.telephone' => '01234',
 			'common.address.telefax' => '02345',
+			'common.address.mobile' => '03456',
 			'common.address.email' => 'a@b.com',
 			'common.address.website' => 'example.com',
 			'common.address.longitude' => '10.0',
@@ -528,6 +546,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['common.address.languageid'], $object->getLanguageId() );
 		$this->assertEquals( $list['common.address.telephone'], $object->getTelephone() );
 		$this->assertEquals( $list['common.address.telefax'], $object->getTelefax() );
+		$this->assertEquals( $list['common.address.mobile'], $object->getMobile() );
 		$this->assertEquals( $list['common.address.email'], $object->getEmail() );
 		$this->assertEquals( $list['common.address.website'], $object->getWebsite() );
 		$this->assertEquals( $list['common.address.longitude'], $object->getLongitude() );
@@ -560,6 +579,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getCountryId(), $arrayObject['common.address.countryid'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['common.address.languageid'] );
 		$this->assertEquals( $this->object->getTelephone(), $arrayObject['common.address.telephone'] );
+		$this->assertEquals( $this->object->getMobile(), $arrayObject['common.address.mobile'] );
 		$this->assertEquals( $this->object->getEmail(), $arrayObject['common.address.email'] );
 		$this->assertEquals( $this->object->getTelefax(), $arrayObject['common.address.telefax'] );
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['common.address.website'] );

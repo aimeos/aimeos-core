@@ -154,6 +154,7 @@ abstract class Base
 		$stmt->bind( $idx++, $item->getCountryId() );
 		$stmt->bind( $idx++, $item->getLanguageId() );
 		$stmt->bind( $idx++, $item->getTelephone() );
+		$stmt->bind( $idx++, $item->getMobile() );
 		$stmt->bind( $idx++, $item->getEmail() );
 		$stmt->bind( $idx++, $item->getTelefax() );
 		$stmt->bind( $idx++, $item->getWebsite() );

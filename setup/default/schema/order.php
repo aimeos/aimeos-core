@@ -94,6 +94,7 @@ return array(
 			$table->string( 'state', 200 )->default( '' );
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'mobile', 32 )->default( '' );
 			$table->string( 'telephone', 32 )->default( '' );
 			$table->string( 'telefax', 32 )->default( '' );
 			$table->string( 'email' )->default( '' );

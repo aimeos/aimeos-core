@@ -21,10 +21,10 @@ return array(
 						"parentid", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
-						"email", "telefax", "website", "longitude", "latitude",
+						"mobile", "email", "telefax", "website", "longitude", "latitude",
 						"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -35,7 +35,7 @@ return array(
 						"parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 						"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 						"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
-						"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
+						"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?, "mobile" = ?,
 						"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
 						"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" LIKE ? AND "id" = ?
@@ -57,7 +57,8 @@ return array(
 						msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 						msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 						msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
-						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
+						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday",
+						msupad."mobile" AS "supplier.address.mobile"
 					FROM "mshop_supplier_address" msupad
 					:joins
 					WHERE :cond
@@ -79,7 +80,8 @@ return array(
 						msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 						msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 						msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
-						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
+						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday",
+						msupad."mobile" AS "supplier.address.mobile"
 					FROM "mshop_supplier_address" msupad
 					:joins
 					WHERE :cond

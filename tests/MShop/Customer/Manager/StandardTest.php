@@ -150,8 +150,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'de', $payAddr->getLanguageId() );
 		$this->assertEquals( 'DE', $payAddr->getCountryId() );
 		$this->assertEquals( '055544332211', $payAddr->getTelephone() );
-		$this->assertEquals( 'test@example.com', $payAddr->getEMail() );
 		$this->assertEquals( '055544332212', $payAddr->getTelefax() );
+		$this->assertEquals( '055544332213', $payAddr->getMobile() );
+		$this->assertEquals( 'test@example.com', $payAddr->getEMail() );
 		$this->assertEquals( 'www.example.com', $payAddr->getWebsite() );
 		$this->assertEquals( '10.0', $payAddr->getLongitude() );
 		$this->assertEquals( '50.0', $payAddr->getLatitude() );
@@ -297,8 +298,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'customer.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'customer.mobile', '055544332213' );
+		$expr[] = $search->compare( '==', 'customer.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
 		$expr[] = $search->compare( '>=', 'customer.latitude', '50.0' );
@@ -339,8 +341,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'customer.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'customer.address.mobile', '055544332213' );
+		$expr[] = $search->compare( '==', 'customer.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.address.latitude', '50.0' );

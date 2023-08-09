@@ -21,10 +21,10 @@ return array(
 						"parentid", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
-						"email", "telefax", "website", "longitude", "latitude", "pos",
-						"birthday", "mtime", "editor", "siteid", "ctime"
+						"mobile", "email", "telefax", "website", "longitude", "latitude",
+						"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -36,8 +36,9 @@ return array(
 						"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 						"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 						"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
-						"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-						"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
+						"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
+						"longitude" = ?, "latitude" = ?, "pos" = ?, "birthday" = ?,
+						"mtime" = ?, "editor" = ?
 					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
@@ -57,7 +58,8 @@ return array(
 						mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
+						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday",
+						mcusad."mobile" AS "customer.address.mobile"
 					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
@@ -79,7 +81,8 @@ return array(
 						mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
+						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday",
+						mcusad."mobile" AS "customer.address.mobile"
 					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
@@ -629,10 +632,10 @@ return array(
 					"label", "code", "company", "vatid", "salutation", "title",
 					"firstname", "lastname", "address1", "address2", "address3",
 					"postal", "city", "state", "countryid", "langid", "telephone",
-					"email", "telefax", "website", "longitude", "latitude", "birthday",
+					"mobile", "email", "telefax", "website", "longitude", "latitude", "birthday",
 					"status", "vdate", "password", "mtime", "editor", "siteid", "ctime"
 				) VALUES ( :values
-					?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+					?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 				)
 			'
 		),
@@ -643,8 +646,8 @@ return array(
 					"label" = ?, "code" = ?, "company" = ?, "vatid" = ?,
 					"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 					"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
-					"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
-					"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
+					"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
+					"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 					"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
 					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" LIKE ? AND "id" = ?
@@ -668,8 +671,8 @@ return array(
 					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
 					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-					mcus."editor" AS "customer.editor"
-				FROM "mshop_customer" mcus
+					mcus."editor" AS "customer.editor", mcus."mobile" AS "customer.mobile"
+					FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -678,7 +681,7 @@ return array(
 					mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state",
 					mcus."countryid", mcus."langid", mcus."telephone", mcus."email", mcus."telefax",
 					mcus."website", mcus."longitude", mcus."latitude", mcus."birthday", mcus."status",
-					mcus."vdate", mcus."password", mcus."ctime", mcus."mtime", mcus."editor"
+					mcus."vdate", mcus."password", mcus."ctime", mcus."mtime", mcus."editor", mcus."mobile"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -699,7 +702,7 @@ return array(
 					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
 					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-					mcus."editor" AS "customer.editor"
+					mcus."editor" AS "customer.editor", mcus."mobile" AS "customer.mobile"
 				FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond

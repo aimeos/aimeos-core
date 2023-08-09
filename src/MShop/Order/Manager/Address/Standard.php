@@ -168,17 +168,24 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
-		'order.address.email' => array(
-			'code' => 'order.address.email',
-			'internalcode' => 'mordad."email"',
-			'label' => 'Address email',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-		),
 		'order.address.telefax' => array(
 			'code' => 'order.address.telefax',
 			'internalcode' => 'mordad."telefax"',
 			'label' => 'Address telefax',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'order.address.mobile' => array(
+			'code' => 'order.address.mobile',
+			'internalcode' => 'mordad."mobile"',
+			'label' => 'Address mobile number',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'order.address.email' => array(
+			'code' => 'order.address.email',
+			'internalcode' => 'mordad."email"',
+			'label' => 'Address email',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
@@ -736,6 +743,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getCountryId() );
 		$stmt->bind( $idx++, $item->getLanguageId() );
 		$stmt->bind( $idx++, $item->getTelephone() );
+		$stmt->bind( $idx++, $item->getMobile() );
 		$stmt->bind( $idx++, $item->getEmail() );
 		$stmt->bind( $idx++, $item->getTelefax() );
 		$stmt->bind( $idx++, $item->getWebsite() );

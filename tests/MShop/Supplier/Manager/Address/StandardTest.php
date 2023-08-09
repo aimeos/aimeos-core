@@ -122,6 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCountryId(), $itemSaved->getCountryId() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getTelephone(), $itemSaved->getTelephone() );
+		$this->assertEquals( $item->getMobile(), $itemSaved->getMobile() );
 		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
@@ -152,6 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getCountryId(), $itemUpd->getCountryId() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getTelephone(), $itemUpd->getTelephone() );
+		$this->assertEquals( $itemExp->getMobile(), $itemUpd->getMobile() );
 		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
@@ -201,8 +203,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'DE' );
 		$conditions[] = $search->compare( '==', 'supplier.address.languageid', 'de' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
-		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
+		$conditions[] = $search->compare( '==', 'supplier.address.mobile', '055544332213' );
+		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.longitude', '13.0' );
 		$conditions[] = $search->compare( '==', 'supplier.address.latitude', '52.5' );

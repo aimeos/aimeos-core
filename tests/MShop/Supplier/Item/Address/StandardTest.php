@@ -36,8 +36,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.countryid' => 'DE',
 			'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '05554433221',
-			'supplier.address.email' => 'test@example.com',
 			'supplier.address.telefax' => '05554433222',
+			'supplier.address.mobile' => '05554433223',
+			'supplier.address.email' => 'test@example.com',
 			'supplier.address.website' => 'www.example.com',
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '50.0',
@@ -330,6 +331,38 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTelefax()
+	{
+		$this->assertEquals( '05554433222', $this->object->getTelefax() );
+	}
+
+
+	public function testSetTelefax()
+	{
+		$return = $this->object->setTelefax( '55512345' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Address\Iface::class, $return );
+		$this->assertEquals( '55512345', $this->object->getTelefax() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetMobile()
+	{
+		$this->assertEquals( '05554433223', $this->object->getMobile() );
+	}
+
+
+	public function testSetMobile()
+	{
+		$return = $this->object->setMobile( '555123456' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
+		$this->assertEquals( '555123456', $this->object->getMobile() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetEmail()
 	{
 		$this->assertEquals( 'test@example.com', $this->object->getEmail() );
@@ -346,22 +379,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setEmail( 'unittest.de' );
-	}
-
-
-	public function testGetTelefax()
-	{
-		$this->assertEquals( '05554433222', $this->object->getTelefax() );
-	}
-
-
-	public function testSetTelefax()
-	{
-		$return = $this->object->setTelefax( '55512345' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Address\Iface::class, $return );
-		$this->assertEquals( '55512345', $this->object->getTelefax() );
-		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -496,6 +513,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '01234',
 			'supplier.address.telefax' => '02345',
+			'supplier.address.mobile' => '03456',
 			'supplier.address.email' => 'a@b.com',
 			'supplier.address.website' => 'example.com',
 			'supplier.address.longitude' => '10.0',
@@ -527,6 +545,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['supplier.address.languageid'], $object->getLanguageId() );
 		$this->assertEquals( $list['supplier.address.telephone'], $object->getTelephone() );
 		$this->assertEquals( $list['supplier.address.telefax'], $object->getTelefax() );
+		$this->assertEquals( $list['supplier.address.mobile'], $object->getMobile() );
 		$this->assertEquals( $list['supplier.address.email'], $object->getEmail() );
 		$this->assertEquals( $list['supplier.address.website'], $object->getWebsite() );
 		$this->assertEquals( $list['supplier.address.longitude'], $object->getLongitude() );
@@ -560,8 +579,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getCountryId(), $arrayObject['supplier.address.countryid'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['supplier.address.languageid'] );
 		$this->assertEquals( $this->object->getTelephone(), $arrayObject['supplier.address.telephone'] );
-		$this->assertEquals( $this->object->getEmail(), $arrayObject['supplier.address.email'] );
 		$this->assertEquals( $this->object->getTelefax(), $arrayObject['supplier.address.telefax'] );
+		$this->assertEquals( $this->object->getMobile(), $arrayObject['supplier.address.mobile'] );
+		$this->assertEquals( $this->object->getEmail(), $arrayObject['supplier.address.email'] );
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['supplier.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['supplier.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['supplier.address.latitude'] );

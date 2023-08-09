@@ -49,10 +49,10 @@ return array(
 						"parentid", "addrid", "type", "company", "vatid", "salutation",
 						"title", "firstname", "lastname", "address1", "address2",
 						"address3", "postal", "city", "state", "countryid", "langid",
-						"telephone", "email", "telefax", "website", "longitude", "latitude",
+						"telephone", "mobile", "email", "telefax", "website", "longitude", "latitude",
 						"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
-						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
 				'
 			),
@@ -63,8 +63,8 @@ return array(
 						"parentid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 						"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?, "address2" = ?,
 						"address3" = ?, "postal" = ?, "city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
-						"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-						"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
+						"telephone" = ?, "mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
+						"longitude" = ?, "latitude" = ?, "pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" LIKE ? AND "id" = ?
 				'
 			),
@@ -85,7 +85,8 @@ return array(
 						mordad."website" AS "order.address.website", mordad."longitude" AS "order.address.longitude",
 						mordad."latitude" AS "order.address.latitude", mordad."pos" AS "order.address.position",
 						mordad."mtime" AS "order.address.mtime", mordad."editor" AS "order.address.editor",
-						mordad."ctime" AS "order.address.ctime", mordad."birthday" AS "order.address.birthday"
+						mordad."ctime" AS "order.address.ctime", mordad."birthday" AS "order.address.birthday",
+						mordad."mobile" AS "order.address.mobile"
 					FROM "mshop_order_address" mordad
 					:joins
 					WHERE :cond
@@ -108,7 +109,8 @@ return array(
 						mordad."website" AS "order.address.website", mordad."longitude" AS "order.address.longitude",
 						mordad."latitude" AS "order.address.latitude", mordad."pos" AS "order.address.position",
 						mordad."mtime" AS "order.address.mtime", mordad."editor" AS "order.address.editor",
-						mordad."ctime" AS "order.address.ctime", mordad."birthday" AS "order.address.birthday"
+						mordad."ctime" AS "order.address.ctime", mordad."birthday" AS "order.address.birthday",
+						mordad."mobile" AS "order.address.mobile"
 					FROM "mshop_order_address" mordad
 					:joins
 					WHERE :cond

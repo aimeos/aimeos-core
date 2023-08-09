@@ -24,7 +24,8 @@ return [[
 		'order.address.city' => 'Hamburg', 'order.address.state' => 'Hamburg',
 		'order.address.countryid' => 'de', 'order.languageid' => 'de',
 		'order.address.telephone' => '055544332211', 'order.address.email' => 'test@example.com',
-		'order.address.telefax' => '055544332213', 'order.address.website' => 'www.example.net',
+		'order.address.telefax' => '055544332212', 'order.address.mobile' => '055544332213',
+		'order.address.website' => 'www.example.net',
 		'order.address.longitude' => '11.0', 'order.address.latitude' => '52.0',
 		'order.address.birthday' => '2001-01-01',
 	], [
@@ -37,7 +38,8 @@ return [[
 		'order.address.city' => 'Hamburg', 'order.address.state' => 'Hamburg',
 		'order.address.countryid' => 'de', 'order.languageid' => 'de',
 		'order.address.telephone' => '055544332211', 'order.address.email' => 'test@example.com',
-		'order.address.telefax' => '055544332212', 'order.address.website' => 'www.example.com',
+		'order.address.telefax' => '055544332212', 'order.address.mobile' => '055544332213',
+		'order.address.website' => 'www.example.com',
 		'order.address.longitude' => '10.0', 'order.address.latitude' => '50.0',
 	]],
 	'product' => [[

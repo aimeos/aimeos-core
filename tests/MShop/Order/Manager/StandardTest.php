@@ -457,8 +457,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.address.telephone', '055544332211' );
+		$expr[] = $search->compare( '==', 'order.address.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'order.address.mobile', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.address.email', 'test@example.com' );
-		$expr[] = $search->compare( '==', 'order.address.telefax', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.address.website', 'www.example.net' );
 		$expr[] = $search->compare( '>=', 'order.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.address.ctime', '1970-01-01 00:00:00' );

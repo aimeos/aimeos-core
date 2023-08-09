@@ -49,6 +49,7 @@ return array(
 			$table->string( 'countryid', 2 )->null( true );
 			$table->string( 'telephone', 32 )->default( '' );
 			$table->string( 'telefax', 32 )->default( '' );
+			$table->string( 'mobile', 32 )->default( '' );
 			$table->string( 'email' )->default( '' );
 			$table->string( 'website' )->default( '' );
 			$table->float( 'longitude' )->null( true );

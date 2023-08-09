@@ -158,6 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCountryId(), $itemSaved->getCountryId() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getTelephone(), $itemSaved->getTelephone() );
+		$this->assertEquals( $item->getMobile(), $itemSaved->getMobile() );
 		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
@@ -190,6 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getCountryId(), $itemUpd->getCountryId() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getTelephone(), $itemUpd->getTelephone() );
+		$this->assertEquals( $itemExp->getMobile(), $itemUpd->getMobile() );
 		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
@@ -238,8 +240,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.address.telephone', '055544332211' );
+		$expr[] = $search->compare( '==', 'order.address.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'order.address.mobile', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.address.email', 'test@example.com' );
-		$expr[] = $search->compare( '==', 'order.address.telefax', '055544332213' );
 		$expr[] = $search->compare( '==', 'order.address.website', 'www.example.net' );
 		$expr[] = $search->compare( '==', 'order.address.longitude', '11.0' );
 		$expr[] = $search->compare( '==', 'order.address.latitude', '52.0' );
