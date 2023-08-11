@@ -171,6 +171,7 @@ abstract class Base
 		$list['customer.languageid'] = $this->getPaymentAddress()->getLanguageId();
 		$list['customer.countryid'] = $this->getPaymentAddress()->getCountryId();
 		$list['customer.telephone'] = $this->getPaymentAddress()->getTelephone();
+		$list['customer.mobile'] = $this->getPaymentAddress()->getMobile();
 		$list['customer.email'] = $this->getPaymentAddress()->getEmail();
 		$list['customer.telefax'] = $this->getPaymentAddress()->getTelefax();
 		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
