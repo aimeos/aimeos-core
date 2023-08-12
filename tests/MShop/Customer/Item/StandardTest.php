@@ -43,8 +43,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.countryid' => 'DE',
 			'customer.languageid' => 'de',
 			'customer.telephone' => '05554433221',
-			'customer.email' => 'test@example.com',
 			'customer.telefax' => '05554433222',
+			'customer.mobile' => '05554433223',
+			'customer.email' => 'test@example.com',
 			'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0',
 			'customer.latitude' => '50.0',
@@ -237,8 +238,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $address->getCountryId(), 'DE' );
 		$this->assertEquals( $address->getLanguageId(), 'de' );
 		$this->assertEquals( $address->getTelephone(), '05554433221' );
-		$this->assertEquals( $address->getEmail(), 'test@example.com' );
 		$this->assertEquals( $address->getTelefax(), '05554433222' );
+		$this->assertEquals( $address->getMobile(), '05554433223' );
+		$this->assertEquals( $address->getEmail(), 'test@example.com' );
 		$this->assertEquals( $address->getWebsite(), 'www.example.com' );
 		$this->assertEquals( $address->getLongitude(), '10.0' );
 		$this->assertEquals( $address->getLatitude(), '50.0' );
@@ -331,8 +333,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.countryid' => 'DE',
 			'customer.languageid' => 'de',
 			'customer.telephone' => '05554433221',
-			'customer.email' => 'test@example.com',
 			'customer.telefax' => '05554433222',
+			'customer.mobile' => '05554433223',
+			'customer.email' => 'test@example.com',
 			'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0',
 			'customer.latitude' => '53.5',
@@ -368,8 +371,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['customer.countryid'], $address->getCountryId() );
 		$this->assertEquals( $list['customer.languageid'], $address->getLanguageId() );
 		$this->assertEquals( $list['customer.telephone'], $address->getTelephone() );
-		$this->assertEquals( $list['customer.email'], $address->getEmail() );
 		$this->assertEquals( $list['customer.telefax'], $address->getTelefax() );
+		$this->assertEquals( $list['customer.mobile'], $address->getMobile() );
+		$this->assertEquals( $list['customer.email'], $address->getEmail() );
 		$this->assertEquals( $list['customer.website'], $address->getWebsite() );
 		$this->assertEquals( $list['customer.longitude'], $address->getLongitude() );
 		$this->assertEquals( $list['customer.latitude'], $address->getLatitude() );
@@ -410,8 +414,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $address->getCountryId(), $arrayObject['customer.countryid'] );
 		$this->assertEquals( $address->getLanguageId(), $arrayObject['customer.languageid'] );
 		$this->assertEquals( $address->getTelephone(), $arrayObject['customer.telephone'] );
-		$this->assertEquals( $address->getEmail(), $arrayObject['customer.email'] );
 		$this->assertEquals( $address->getTelefax(), $arrayObject['customer.telefax'] );
+		$this->assertEquals( $address->getMobile(), $arrayObject['customer.mobile'] );
+		$this->assertEquals( $address->getEmail(), $arrayObject['customer.email'] );
 		$this->assertEquals( $address->getWebsite(), $arrayObject['customer.website'] );
 		$this->assertEquals( $address->getLongitude(), $arrayObject['customer.longitude'] );
 		$this->assertEquals( $address->getLatitude(), $arrayObject['customer.latitude'] );
