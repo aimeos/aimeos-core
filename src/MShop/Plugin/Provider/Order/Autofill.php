@@ -192,7 +192,7 @@ class Autofill
 			$search = $orderManager->filter()->add( ['order.customerid' => $userid] )
 				->order( '-order.ctime' )->slice( 0, 1 );
 
-			if( ( $item = $orderManager->search( $search )->first() ) !== null )
+			if( ( $item = $orderManager->search( $search, ['order/address', 'order/service', 'service'] )->first() ) !== null )
 			{
 				$this->setAddresses( $order, $item );
 				$this->setServices( $order, $item );
@@ -253,15 +253,13 @@ class Autofill
 	{
 		if( $order->getAddresses()->isEmpty() && (bool) $this->getConfigValue( 'orderaddress', true ) === true )
 		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'order/address' );
-			$search = $manager->filter()->add( ['order.address.parentid' => $item->getId()] );
-			$addresses = [];
+			$map = $item->getAddresses();
 
-			foreach( $manager->search( $search ) as $address ) {
-				$addresses[$address->getType()][] = $address->setId( null );
+			foreach( $map as $type => $list ) {
+				map( $list )->setId( null );
 			}
 
-			$order->setAddresses( $addresses );
+			$order->setAddresses( $map );
 		}
 
 		return $order;
@@ -280,20 +278,34 @@ class Autofill
 	{
 		if( $order->getServices()->isEmpty() && $this->getConfigValue( 'orderservice', true ) == true )
 		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'order/service' );
-			$search = $manager->filter()->add( 'order.service.parentid', '==', $item->getId() );
-			$services = [];
+			$map = $item->getServices();
+			$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
 
-			foreach( $manager->search( $search ) as $service )
+			foreach( $map as $type => $list )
 			{
-				$type = $service->getType();
+				foreach( $list as $key => $service )
+				{
+					if( $serviceItem = $service->getServiceItem() )
+					{
+						$provider = $serviceManager->getProvider( $service->getServiceItem(), $service->getType() );
 
-				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
-					$services[$type][] = $item->setAttributeItems( [] )->setId( null );
+						if( $provider->isAvailable( $order ) === true )
+						{
+							$attrItems = $service->getAttributeItems()->filter( function( $attr ) {
+								return in_array( $attrItem->getType(), ['', 'hidden'] );
+							} );
+
+							$service->setId( null )->setAttributeItems( $attrItems->setId( null ) );
+						}
+						else
+						{
+							unset( $map[$type][$key] );
+						}
+					}
 				}
 			}
 
-			$order->setServices( $services );
+			$order->setServices( $map );
 		}
 
 		return $order;

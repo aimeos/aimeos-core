@@ -131,19 +131,6 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
-
-		$orderBaseAddressStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Address\Standard::class )
-			->setConstructorArgs( [$this->context] )->onlyMethods( ['search'] )->getMock();
-
-		$item1 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY );
-		$item2 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
-
-		$orderBaseAddressStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$item1, $item2] ) ) );
-
-		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Address\Standard::class, $orderBaseAddressStub );
-
-
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
 			'orderaddress' => '1',
@@ -151,7 +138,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( 2, count( $this->order->getAddresses() ) );
+		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
 		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
 
@@ -160,22 +147,6 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
-
-
-		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Service\Standard::class )
-			->setConstructorArgs( [$this->context] )->onlyMethods( ['search'] )->getMock();
-
-		$item1 = $orderBaseServiceStub->create()->setCode( 'unitdeliverycode' )
-			->setType( \Aimeos\MShop\Order\Item\Service\Base::TYPE_DELIVERY );
-		$item2 = $orderBaseServiceStub->create()->setCode( 'unitpaymentcode' )
-			->setType( \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT )
-			->setAttributeItems( [new \Aimeos\MShop\Order\Item\Service\Attribute\Standard()] );
-
-		$orderBaseServiceStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$item1, $item2] ) ) );
-
-		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Service\Standard::class, $orderBaseServiceStub );
-
 
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
@@ -187,10 +158,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
 		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 
-		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT ) as $item )
-		{
-			$this->assertEquals( 0, count( $item->getAttributeItems() ) );
-			$this->assertNull( $item->getId() );
+		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT ) as $item ) {
+			$this->assertEquals( 4, count( $item->getAttributeItems() ) );
 		}
 	}
 
