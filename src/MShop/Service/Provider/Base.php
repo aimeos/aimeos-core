@@ -244,7 +244,7 @@ abstract class Base
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 * @return array List of \Aimeos\MShop\Order\Item\Service\Attribute\Iface objects
 	 */
-	protected function attributes( array $map, string $type ) : array
+	protected function attributes( array $map, string $type = '' ) : array
 	{
 		$list = [];
 		$manager = \Aimeos\MShop::create( $this->context, 'order/service' );

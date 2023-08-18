@@ -243,7 +243,7 @@ class PayPalExpress
 
 		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $order, $type, $this->getServiceItem()->getCode() );
-		$serviceItem->addAttributeItems( $this->attributes( ['TOKEN' => $rvals['TOKEN']], 'payment/paypal' ) );
+		$serviceItem->addAttributeItems( $this->attributes( ['TOKEN' => $rvals['TOKEN']], 'tx' ) );
 
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $paypalUrl, 'POST', [] );
 	}
@@ -257,7 +257,7 @@ class PayPalExpress
 	 */
 	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( ( $tid = $this->getOrderServiceItem( $order )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $this->getOrderServiceItem( $order )->getAttribute( 'TRANSACTIONID', 'tx' ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
@@ -286,7 +286,7 @@ class PayPalExpress
 		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $order, $type, $this->getServiceItem()->getCode() );
 
-		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'tx' ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
@@ -315,7 +315,7 @@ class PayPalExpress
 
 		// updates the transaction id
 		$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 
 		return $order;
 	}
@@ -334,7 +334,7 @@ class PayPalExpress
 		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $order, $type, $this->getServiceItem()->getCode() );
 
-		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'tx' ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
@@ -352,7 +352,7 @@ class PayPalExpress
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
-		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 
 		return $order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 	}
@@ -366,7 +366,7 @@ class PayPalExpress
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( ( $tid = $this->getOrderServiceItem( $order )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
+		if( ( $tid = $this->getOrderServiceItem( $order )->getAttribute( 'TRANSACTIONID', 'tx' ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
@@ -424,8 +424,8 @@ class PayPalExpress
 			$status['PENDINGREASON'] = $params['pending_reason'];
 		}
 
-		$serviceItem->addAttributeItems( $this->attributes( ['TRANSACTIONID' => $params['txn_id']], 'payment/paypal' ) )
-			->addAttributeItems( $this->attributes( [$params['txn_id'] => $params['payment_status']], 'payment/paypal/txn' ) );
+		$serviceItem->addAttributeItems( $this->attributes( ['TRANSACTIONID' => $params['txn_id']], 'tx' ) )
+			->addAttributeItems( $this->attributes( [$params['txn_id'] => $params['payment_status']], 'paypal/txn' ) );
 
 		$manager->save( $this->setStatusPayment( $order, $status ) );
 
@@ -480,10 +480,10 @@ class PayPalExpress
 		{
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
 			$attrs = [$rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS']];
-			$serviceItem->addAttributeItems( $this->attributes( $attrs, 'payment/paypal/txn' ) );
+			$serviceItem->addAttributeItems( $this->attributes( $attrs, 'paypal/txn' ) );
 		}
 
-		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'payment/paypal' ) );
+		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 		return $this->setStatusPayment( $orderItem, $rvals );
 	}
 

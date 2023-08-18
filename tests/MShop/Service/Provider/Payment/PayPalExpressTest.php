@@ -45,7 +45,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->order = $orderManager->search( $search, $ref )->first( new \RuntimeException( 'No order found' ) );
 
 		$attr = \Aimeos\MShop::create( $this->context, 'order/service' )->createAttributeItem();
-		$attr->setType( 'payment/paypal' )->setCode( 'TRANSACTIONID' )->setValue( '111111111' );
+		$attr->setType( 'tx' )->setCode( 'TRANSACTIONID' )->setValue( '111111111' );
 		$this->order->getService( 'payment', 0 )->setAttributeItem( $attr );
 
 

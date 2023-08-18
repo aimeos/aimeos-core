@@ -119,11 +119,11 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
-		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
+		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno' );
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
-		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
+		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'hidden' );
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}

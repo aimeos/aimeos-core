@@ -35,14 +35,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$expr = array(
-			$search->compare( '==', 'order.service.attribute.type', 'payment' ),
+			$search->compare( '==', 'order.service.attribute.type', '' ),
 			$search->compare( '==', 'order.service.attribute.editor', 'core' ),
 		);
 		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'order.service.attribute.code' )->toArray();
 
-		$this->assertEquals( 9, count( $result ) );
+		$this->assertEquals( 13, count( $result ) );
 		$this->assertArrayHasKey( 'ACOWNER', $result );
 		$this->assertEquals( 1, $result['ACOWNER'] );
 	}
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.service.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.service.attribute.attributeid', null );
 		$expr[] = $search->compare( '!=', 'order.service.attribute.parentid', null );
-		$expr[] = $search->compare( '!=', 'order.service.attribute.type', '' );
+		$expr[] = $search->compare( '==', 'order.service.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.service.attribute.code', 'NAME' );
 		$expr[] = $search->compare( '==', 'order.service.attribute.price', '1.00' );
 		$expr[] = $search->compare( '==', 'order.service.attribute.value', '"CreditCard"' );

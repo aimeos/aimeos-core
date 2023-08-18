@@ -123,39 +123,39 @@ return [[
 		'order.service.name' => 'unitpaymentcode', 'order.service.currencyid' => 'EUR',
 		'order.service.mediaurl' => 'somewhere/thump1.jpg',
 		'attribute' => [[
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'account owner',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account owner',
 			'order.service.attribute.code' => 'ACOWNER', 'order.service.attribute.value' => 'test user',
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'account number',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account number',
 			'order.service.attribute.code' => 'ACSTRING', 'order.service.attribute.value' => 9876543,
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'payment method',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'payment method',
 			'order.service.attribute.code' => 'NAME', 'order.service.attribute.value' => 'CreditCard',
 			'order.service.attribute.quantity' => 1, 'order.service.attribute.price' => '1.00',
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'reference id',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'reference id',
 			'order.service.attribute.code' => 'REFID', 'order.service.attribute.value' => 12345678,
 			'order.service.attribute.quantity' => 1, 'order.service.attribute.price' => '0.50',
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'transaction date',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'transaction date',
 			'order.service.attribute.code' => 'TXDATE', 'order.service.attribute.value' => '2009-08-18',
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'transaction account',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'transaction account',
 			'order.service.attribute.code' => 'X-ACCOUNT', 'order.service.attribute.value' => 'Kraft02',
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'transaction status',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'transaction status',
 			'order.service.attribute.code' => 'X-STATUS', 'order.service.attribute.value' => 9,
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'unitpaymentcode alias name',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'unitpaymentcode alias name',
 			'order.service.attribute.code' => 'unitpaymentcode-alias-name', 'order.service.attribute.value' => 'aliasName',
 			'order.service.attribute.quantity' => 1
 		], [
-			'order.service.attribute.type' => 'payment', 'order.service.attribute.name' => 'unitpaymentcode alias value',
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'unitpaymentcode alias value',
 			'order.service.attribute.code' => 'unitpaymentcode-alias-value', 'order.service.attribute.value' => 'aliasValue',
 			'order.service.attribute.quantity' => 1
 		]],
@@ -316,6 +316,19 @@ return [[
 		'order.service.type' => 'payment', 'order.service.code' => 'directdebit-test',
 		'order.service.name' => 'DirectDebit', 'order.service.currencyid' => 'EUR',
 		'order.service.mediaurl' => 'somewhere/thump1.jpg',
+		'attribute' => [[
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account owner',
+			'order.service.attribute.code' => 'directdebit.accountowner', 'order.service.attribute.value' => 'test user',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account number',
+			'order.service.attribute.code' => 'directdebit.accountno', 'order.service.attribute.value' => '1122334455',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'payment method',
+			'order.service.attribute.code' => 'directdebit.bankcode', 'order.service.attribute.value' => 'BXX123456',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'reference id',
+			'order.service.attribute.code' => 'directdebit.bankname', 'order.service.attribute.value' => 'test bank',
+		]],
 		'transaction' => [[
 			'order.service.transaction.type' => 'payment',
 			'order.service.transaction.currencyid' => 'EUR',
