@@ -287,12 +287,12 @@ class Autofill
 				{
 					if( $serviceItem = $service->getServiceItem() )
 					{
-						$provider = $serviceManager->getProvider( $service->getServiceItem(), $service->getType() );
+						$provider = $serviceManager->getProvider( $serviceItem, $service->getType() );
 
 						if( $provider->isAvailable( $order ) === true )
 						{
 							$attrItems = $service->getAttributeItems()->filter( function( $attr ) {
-								return in_array( $attrItem->getType(), ['', 'hidden'] );
+								return in_array( $attr->getType(), ['', 'hidden'] );
 							} );
 
 							$service->setId( null )->setAttributeItems( $attrItems->setId( null ) );
