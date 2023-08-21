@@ -190,7 +190,7 @@ class Autofill
 			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
 			$search = $orderManager->filter()->add( ['order.customerid' => $userid] )
-				->order( '-order.ctime' )->slice( 0, 1 );
+				->order( '-order.id' )->slice( 0, 1 );
 
 			if( ( $item = $orderManager->search( $search, ['order/address', 'order/service', 'service'] )->first() ) !== null )
 			{

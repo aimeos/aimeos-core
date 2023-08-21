@@ -37,10 +37,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$orderManager = \Aimeos\MShop::create( $this->context, 'order' );
 
-		$search = $orderManager->filter()->add( [
-			'order.channel' => 'web',
-			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
-		] );
+		$search = $orderManager->filter()->add( 'order.invoiceno', '==', 'UINV-003' );
 		$ref = ['order/address', 'order/coupon', 'order/product', 'order/service'];
 		$this->order = $orderManager->search( $search, $ref )->first( new \RuntimeException( 'No order found' ) );
 
@@ -308,7 +305,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$method->invokeArgs( $this->object, array( $this->order, [] ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getStatusPayment() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getStatusPayment() );
 	}
 
 
@@ -356,6 +353,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Invalid' ) ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getStatusPayment() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getStatusPayment() );
 	}
 }

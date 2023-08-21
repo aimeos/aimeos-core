@@ -313,29 +313,9 @@ return [[
 	]],
 	'service' => [[
 		'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
-		'order.service.type' => 'payment', 'order.service.code' => 'directdebit-test',
-		'order.service.name' => 'DirectDebit', 'order.service.currencyid' => 'EUR',
-		'order.service.mediaurl' => 'somewhere/thump1.jpg',
-		'attribute' => [[
-			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account owner',
-			'order.service.attribute.code' => 'directdebit.accountowner', 'order.service.attribute.value' => 'test user',
-		], [
-			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account number',
-			'order.service.attribute.code' => 'directdebit.accountno', 'order.service.attribute.value' => '1122334455',
-		], [
-			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'payment method',
-			'order.service.attribute.code' => 'directdebit.bankcode', 'order.service.attribute.value' => 'BXX123456',
-		], [
-			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'reference id',
-			'order.service.attribute.code' => 'directdebit.bankname', 'order.service.attribute.value' => 'test bank',
-		]],
-		'transaction' => [[
-			'order.service.transaction.type' => 'payment',
-			'order.service.transaction.currencyid' => 'EUR',
-			'order.service.transaction.price' => '2465.00',
-			'order.service.transaction.status' => 6,
-			'order.service.transaction.config' => ['tx' => '3-123'],
-		]],
+		'order.service.type' => 'payment', 'order.service.code' => 'paypalexpress',
+		'order.service.name' => 'paypal', 'order.service.currencyid' => 'EUR',
+		'order.service.mediaurl' => 'somewhere/thump1.jpg'
 	], [
 		'price.value' => '0.00', 'price.costs' => '5.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 		'order.service.type' => 'delivery', 'order.service.code' => 'unitdeliverycode',
@@ -410,9 +390,29 @@ return [[
 	]],
 	'service' => [[
 		'price.value' => '0.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
-		'order.service.type' => 'payment', 'order.service.code' => 'paypalexpress',
-		'order.service.name' => 'paypal', 'order.service.currencyid' => 'EUR',
-		'order.service.mediaurl' => 'somewhere/thump1.jpg'
+		'order.service.type' => 'payment', 'order.service.code' => 'directdebit-test',
+		'order.service.name' => 'DirectDebit', 'order.service.currencyid' => 'EUR',
+		'order.service.mediaurl' => 'somewhere/thump1.jpg',
+		'attribute' => [[
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account owner',
+			'order.service.attribute.code' => 'directdebit.accountowner', 'order.service.attribute.value' => 'test user',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'account number',
+			'order.service.attribute.code' => 'directdebit.accountno', 'order.service.attribute.value' => '1122334455',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'payment method',
+			'order.service.attribute.code' => 'directdebit.bankcode', 'order.service.attribute.value' => 'BXX123456',
+		], [
+			'order.service.attribute.type' => '', 'order.service.attribute.name' => 'reference id',
+			'order.service.attribute.code' => 'directdebit.bankname', 'order.service.attribute.value' => 'test bank',
+		]],
+		'transaction' => [[
+			'order.service.transaction.type' => 'payment',
+			'order.service.transaction.currencyid' => 'EUR',
+			'order.service.transaction.price' => '2465.00',
+			'order.service.transaction.status' => 6,
+			'order.service.transaction.config' => ['tx' => '3-123'],
+		]],
 	], [
 		'price.value' => '0.00', 'price.costs' => '5.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '0.00'],
 		'order.service.type' => 'delivery', 'order.service.code' => 'unitdeliverycode',
