@@ -137,7 +137,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			'orderservice' => '0'
 		) );
 
-		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
+		$result = $this->object->update( $this->order, 'addProduct.after' );
+		print_r( $this->order->getAddresses() );
+
+		$this->assertEquals( null, $result );
 		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
 		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
@@ -154,7 +157,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			'orderservice' => '1'
 		) );
 
-		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
+		$result = $this->object->update( $this->order, 'addProduct.after' );
+		print_r( $this->order->getServices() );
+
+		$this->assertEquals( null, $result );
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
 		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 
