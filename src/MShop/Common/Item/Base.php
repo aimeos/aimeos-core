@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Common\Item;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
+class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
 	use \Aimeos\Macro\Macroable;
 
@@ -26,6 +26,7 @@ abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\If
 	protected bool $available = true;
 	protected bool $modified = false;
 	protected string $bprefix;
+	protected string $type;
 	protected array $bdata;
 
 
@@ -34,11 +35,13 @@ abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\If
 	 *
 	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative list of key/value pairs of the item properties
+	 * @param string $type Item resource type
 	 */
-	public function __construct( string $prefix, array $values )
+	public function __construct( string $prefix, array $values, string $type = 'custom' )
 	{
 		$this->bprefix = $prefix;
 		$this->bdata = $values;
+		$this->type = $type;
 	}
 
 
@@ -353,6 +356,17 @@ abstract class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\If
 	{
 		$this->modified = true;
 		return $this;
+	}
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return string Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType() : string
+	{
+		return $this->type;
 	}
 
 
