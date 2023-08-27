@@ -61,7 +61,7 @@ class Standard
 			'label' => 'Address salutation',
 			'code' => 'customer.address.salutation',
 			'internalcode' => 'mcusad."salutation"',
-			'type' => 'int',
+			'type' => 'string',
 		),
 		'customer.address.title' => array(
 			'label' => 'Address title',
