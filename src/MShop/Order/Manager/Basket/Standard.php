@@ -25,7 +25,6 @@ class Standard
 			'internalcode' => 'mordba."id"',
 			'label' => 'Basket ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.basket.siteid' => array(
@@ -33,7 +32,6 @@ class Standard
 			'internalcode' => 'mordba."siteid"',
 			'label' => 'Basket site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.basket.customerid' => array(
@@ -41,7 +39,6 @@ class Standard
 			'internalcode' => 'mordba."customerid"',
 			'label' => 'Basket customer ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.basket.name' => array(
@@ -49,21 +46,18 @@ class Standard
 			'internalcode' => 'mordba."name"',
 			'label' => 'Basket name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.basket.content' => array(
 			'code' => 'order.basket.content',
 			'internalcode' => 'mordba."content"',
 			'label' => 'Basket content',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.basket.ctime' => array(
 			'code' => 'order.basket.ctime',
 			'internalcode' => 'mordba."ctime"',
 			'label' => 'Basket create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.basket.mtime' => array(
@@ -71,7 +65,6 @@ class Standard
 			'internalcode' => 'mordba."mtime"',
 			'label' => 'Basket modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.basket.editor' => array(
@@ -79,7 +72,6 @@ class Standard
 			'internalcode' => 'mordba."editor"',
 			'label' => 'Basket editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

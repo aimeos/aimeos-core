@@ -27,8 +27,7 @@ class Standard
 			'code' => 'stock.type.id',
 			'internalcode' => 'mstoty."id"',
 			'label' => 'Type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'stock.type.siteid' => array(
@@ -36,7 +35,6 @@ class Standard
 			'internalcode' => 'mstoty."siteid"',
 			'label' => 'Type site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.type.label' => array(
@@ -44,42 +42,36 @@ class Standard
 			'internalcode' => 'mstoty."label"',
 			'label' => 'Type label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.type.code' => array(
 			'code' => 'stock.type.code',
 			'internalcode' => 'mstoty."code"',
 			'label' => 'Type code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.type.domain' => array(
 			'code' => 'stock.type.domain',
 			'internalcode' => 'mstoty."domain"',
 			'label' => 'Type domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.type.position' => array(
 			'code' => 'stock.type.position',
 			'internalcode' => 'mstoty."pos"',
 			'label' => 'Type position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'stock.type.status' => array(
 			'code' => 'stock.type.status',
 			'internalcode' => 'mstoty."status"',
 			'label' => 'Type status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'stock.type.ctime' => array(
 			'code' => 'stock.type.ctime',
 			'internalcode' => 'mstoty."ctime"',
 			'label' => 'Type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.type.mtime' => array(
@@ -87,7 +79,6 @@ class Standard
 			'internalcode' => 'mstoty."mtime"',
 			'label' => 'Type modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.type.editor' => array(
@@ -95,7 +86,6 @@ class Standard
 			'internalcode' => 'mstoty."editor"',
 			'label' => 'Type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

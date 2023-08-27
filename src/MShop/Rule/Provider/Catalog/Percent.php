@@ -27,7 +27,6 @@ class Percent
 			'internalcode' => 'percent',
 			'label' => 'Percentage to add or subtract',
 			'type' => 'number',
-			'internaltype' => 'string',
 			'default' => '0.00',
 			'required' => true,
 		],

@@ -143,15 +143,13 @@ class Standard
 			'code' => 'log.id',
 			'internalcode' => 'malog."id"',
 			'label' => 'Log ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
 			'internalcode' => 'malog."siteid"',
 			'label' => 'Log site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'log.message' => array(
@@ -159,35 +157,30 @@ class Standard
 			'internalcode' => 'malog."message"',
 			'label' => 'Log message',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.priority' => array(
 			'code' => 'log.priority',
 			'internalcode' => 'malog."priority"',
 			'label' => 'Log priority',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'log.timestamp' => array(
 			'code' => 'log.timestamp',
 			'internalcode' => 'malog."timestamp"',
 			'label' => 'Log create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.request' => array(
 			'code' => 'log.request',
 			'internalcode' => 'malog."request"',
 			'label' => 'Log request',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		)
 	);
 
@@ -552,7 +545,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 

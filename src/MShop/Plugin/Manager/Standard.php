@@ -138,8 +138,7 @@ class Standard
 			'label' => 'ID',
 			'code' => 'plugin.id',
 			'internalcode' => 'mplu."id"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'plugin.siteid' => array(
@@ -147,7 +146,6 @@ class Standard
 			'code' => 'plugin.siteid',
 			'internalcode' => 'mplu."siteid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.type' => array(
@@ -155,7 +153,6 @@ class Standard
 			'code' => 'plugin.type',
 			'internalcode' => 'mplu."type"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.label' => array(
@@ -163,35 +160,30 @@ class Standard
 			'code' => 'plugin.label',
 			'internalcode' => 'mplu."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.provider' => array(
 			'label' => 'Provider',
 			'code' => 'plugin.provider',
 			'internalcode' => 'mplu."provider"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.position' => array(
 			'label' => 'Position',
 			'code' => 'plugin.position',
 			'internalcode' => 'mplu."pos"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'plugin.status' => array(
 			'label' => 'Status',
 			'code' => 'plugin.status',
 			'internalcode' => 'mplu."status"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'plugin.config' => array(
 			'label' => 'Config',
 			'code' => 'plugin.config',
 			'internalcode' => 'mplu."config"',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.ctime' => array(
@@ -199,7 +191,6 @@ class Standard
 			'internalcode' => 'mplu."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.mtime' => array(
@@ -207,7 +198,6 @@ class Standard
 			'internalcode' => 'mplu."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.editor' => array(
@@ -215,7 +205,6 @@ class Standard
 			'internalcode' => 'mplu."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -506,7 +495,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getType() );

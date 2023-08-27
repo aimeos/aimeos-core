@@ -26,8 +26,7 @@ class Standard
 			'label' => 'Type ID',
 			'code' => 'media.type.id',
 			'internalcode' => 'mmedty."id"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'media.type.siteid' => array(
@@ -35,7 +34,6 @@ class Standard
 			'code' => 'media.type.siteid',
 			'internalcode' => 'mmedty."siteid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type.label' => array(
@@ -43,42 +41,36 @@ class Standard
 			'code' => 'media.type.label',
 			'internalcode' => 'mmedty."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.type.code' => array(
 			'label' => 'Type code',
 			'code' => 'media.type.code',
 			'internalcode' => 'mmedty."code"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.type.domain' => array(
 			'label' => 'Type domain',
 			'code' => 'media.type.domain',
 			'internalcode' => 'mmedty."domain"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.type.position' => array(
 			'label' => 'Type position',
 			'code' => 'media.type.position',
 			'internalcode' => 'mmedty."pos"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'media.type.status' => array(
 			'label' => 'Type status',
 			'code' => 'media.type.status',
 			'internalcode' => 'mmedty."status"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'media.type.ctime' => array(
 			'code' => 'media.type.ctime',
 			'internalcode' => 'mmedty."ctime"',
 			'label' => 'Type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type.mtime' => array(
@@ -86,7 +78,6 @@ class Standard
 			'internalcode' => 'mmedty."mtime"',
 			'label' => 'Type modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type.editor' => array(
@@ -94,7 +85,6 @@ class Standard
 			'internalcode' => 'mmedty."editor"',
 			'label' => 'Type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

@@ -26,8 +26,7 @@ class Standard
 			'code' => 'customer.group.id',
 			'internalcode' => 'mcusgr."id"',
 			'label' => 'Group ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'customer.group.siteid' => array(
@@ -35,7 +34,6 @@ class Standard
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Group site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.code' => array(
@@ -43,21 +41,18 @@ class Standard
 			'internalcode' => 'mcusgr."code"',
 			'label' => 'Group code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."label"',
 			'label' => 'Group label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.ctime' => array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."ctime"',
 			'label' => 'Group create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.mtime' => array(
@@ -65,7 +60,6 @@ class Standard
 			'internalcode' => 'mcusgr."mtime"',
 			'label' => 'Group modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.editor' => array(
@@ -73,7 +67,6 @@ class Standard
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Group editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -355,7 +348,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+				$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 			}
 
 			$stmt->bind( $idx++, $item->getCode() );

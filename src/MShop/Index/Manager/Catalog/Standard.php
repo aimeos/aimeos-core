@@ -28,22 +28,19 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca ON mindca."prodid" = mpro."id"' ),
 			'label' => 'Product index category ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
 			'internalcode' => ':site :catid :listtype mindca."pos"',
 			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'sort:index.catalog:position' => array(
 			'code' => 'sort:index.catalog:position()',
 			'internalcode' => 'mindca."pos"',
 			'label' => 'Sort product position in category, parameter([<list type code>,[<category IDs>]])',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		)
 	);

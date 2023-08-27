@@ -140,8 +140,7 @@ class Standard
 			'code' => 'attribute.id',
 			'internalcode' => 'matt."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'attribute.siteid' => array(
@@ -149,7 +148,6 @@ class Standard
 			'internalcode' => 'matt."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.key' => array(
@@ -157,7 +155,6 @@ class Standard
 			'internalcode' => 'matt."key"',
 			'label' => 'Unique key',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.type' => array(
@@ -165,7 +162,6 @@ class Standard
 			'internalcode' => 'matt."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.label' => array(
@@ -173,43 +169,37 @@ class Standard
 			'internalcode' => 'matt."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.code' => array(
 			'code' => 'attribute.code',
 			'internalcode' => 'matt."code"',
 			'label' => 'Code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.domain' => array(
 			'code' => 'attribute.domain',
 			'internalcode' => 'matt."domain"',
 			'label' => 'Domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.position' => array(
 			'code' => 'attribute.position',
 			'internalcode' => 'matt."pos"',
 			'label' => 'Position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'attribute.status' => array(
 			'code' => 'attribute.status',
 			'internalcode' => 'matt."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'attribute.ctime' => array(
 			'code' => 'attribute.ctime',
 			'internalcode' => 'matt."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.mtime' => array(
@@ -217,7 +207,6 @@ class Standard
 			'internalcode' => 'matt."mtime"',
 			'label' => 'Modification date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.editor' => array(
@@ -225,7 +214,6 @@ class Standard
 			'internalcode' => 'matt."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute:has' => array(
@@ -234,7 +222,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_attribute_list" AS mattli ON ( mattli."parentid" = matt."id" )'],
 			'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 		'attribute:prop' => array(
@@ -243,7 +230,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_attribute_property" AS mattpr ON ( mattpr."parentid" = matt."id" )'],
 			'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -533,7 +519,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getKey() );

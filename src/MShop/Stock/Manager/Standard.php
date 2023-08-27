@@ -138,8 +138,7 @@ class Standard
 			'code' => 'stock.id',
 			'internalcode' => 'msto."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'stock.siteid' => array(
@@ -147,7 +146,6 @@ class Standard
 			'internalcode' => 'msto."siteid"',
 			'label' => 'site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.type' => array(
@@ -155,42 +153,36 @@ class Standard
 			'internalcode' => 'msto."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.productid' => array(
 			'code' => 'stock.productid',
 			'internalcode' => 'msto."prodid"',
 			'label' => 'Product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.stocklevel' => array(
 			'code' => 'stock.stocklevel',
 			'internalcode' => 'msto."stocklevel"',
 			'label' => 'Stock level',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'stock.dateback' => array(
 			'code' => 'stock.dateback',
 			'internalcode' => 'msto."backdate"',
 			'label' => 'Back in stock date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.timeframe' => array(
 			'code' => 'stock.timeframe',
 			'internalcode' => 'msto."timeframe"',
 			'label' => 'Delivery time frame',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.ctime' => array(
 			'code' => 'stock.ctime',
 			'internalcode' => 'msto."ctime"',
 			'label' => 'Creation date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.mtime' => array(
@@ -198,7 +190,6 @@ class Standard
 			'internalcode' => 'msto."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.editor' => array(
@@ -206,7 +197,6 @@ class Standard
 			'internalcode' => 'msto."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -370,7 +360,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getProductId() );
@@ -852,7 +842,7 @@ class Standard
 	{
 		$context = $this->context();
 		$translations = ['stock.siteid' => '"siteid"'];
-		$types = ['stock.siteid' => $this->searchConfig['stock.siteid']['internaltype']];
+		$types = ['stock.siteid' => \Aimeos\Base\Criteria\SQL::type( $this->searchConfig['stock.siteid']['type'] )];
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/stock/manager/sitemode', $level );

@@ -137,15 +137,13 @@ class Standard extends Base
 			'code' => 'order.id',
 			'internalcode' => 'mord."id"',
 			'label' => 'Invoice ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.siteid' => array(
 			'code' => 'order.siteid',
 			'internalcode' => 'mord."siteid"',
 			'label' => 'Invoice site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.invoiceno' => array(
@@ -153,56 +151,48 @@ class Standard extends Base
 			'internalcode' => 'mord."invoiceno"',
 			'label' => 'Invoice number',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.relatedid' => array(
 			'code' => 'order.relatedid',
 			'internalcode' => 'mord."relatedid"',
 			'label' => 'Related invoice ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.channel' => array(
 			'code' => 'order.channel',
 			'internalcode' => 'mord."channel"',
 			'label' => 'Order channel',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.datepayment' => array(
 			'code' => 'order.datepayment',
 			'internalcode' => 'mord."datepayment"',
 			'label' => 'Purchase date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.datedelivery' => array(
 			'code' => 'order.datedelivery',
 			'internalcode' => 'mord."datedelivery"',
 			'label' => 'Delivery date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.statusdelivery' => array(
 			'code' => 'order.statusdelivery',
 			'internalcode' => 'mord."statusdelivery"',
 			'label' => 'Delivery status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.statuspayment' => array(
 			'code' => 'order.statuspayment',
 			'internalcode' => 'mord."statuspayment"',
 			'label' => 'Payment status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.sitecode' => array(
 			'code' => 'order.sitecode',
 			'internalcode' => 'mord."sitecode"',
 			'label' => 'Order site code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.customerid' => array(
@@ -210,112 +200,96 @@ class Standard extends Base
 			'internalcode' => 'mord."customerid"',
 			'label' => 'Order customer ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.customerref' => array(
 			'code' => 'order.customerref',
 			'internalcode' => 'mord."customerref"',
 			'label' => 'Order customer reference',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.languageid' => array(
 			'code' => 'order.languageid',
 			'internalcode' => 'mord."langid"',
 			'label' => 'Order language code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.currencyid' => array(
 			'code' => 'order.currencyid',
 			'internalcode' => 'mord."currencyid"',
 			'label' => 'Order currencyid code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.price' => array(
 			'code' => 'order.price',
 			'internalcode' => 'mord."price"',
 			'label' => 'Order price amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.costs' => array(
 			'code' => 'order.costs',
 			'internalcode' => 'mord."costs"',
 			'label' => 'Order shipping amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.rebate' => array(
 			'code' => 'order.rebate',
 			'internalcode' => 'mord."rebate"',
 			'label' => 'Order rebate amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.taxvalue' => array(
 			'code' => 'order.taxvalue',
 			'internalcode' => 'mord."tax"',
 			'label' => 'Order tax amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.taxflag' => array(
 			'code' => 'order.taxflag',
 			'internalcode' => 'mord."taxflag"',
 			'label' => 'Order tax flag (0=net, 1=gross)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.comment' => array(
 			'code' => 'order.comment',
 			'internalcode' => 'mord."comment"',
 			'label' => 'Order comment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.cdate' => array(
 			'code' => 'order.cdate',
 			'internalcode' => 'mord."cdate"',
 			'label' => 'Create date',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.cmonth' => array(
 			'code' => 'order.cmonth',
 			'internalcode' => 'mord."cmonth"',
 			'label' => 'Create month',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.cweek' => array(
 			'code' => 'order.cweek',
 			'internalcode' => 'mord."cweek"',
 			'label' => 'Create week',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.cwday' => array(
 			'code' => 'order.cwday',
 			'internalcode' => 'mord."cwday"',
 			'label' => 'Create weekday',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.chour' => array(
 			'code' => 'order.chour',
 			'internalcode' => 'mord."chour"',
 			'label' => 'Create hour',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.ctime' => array(
 			'code' => 'order.ctime',
 			'internalcode' => 'mord."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.mtime' => array(
@@ -323,7 +297,6 @@ class Standard extends Base
 			'internalcode' => 'mord."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.editor' => array(
@@ -331,7 +304,6 @@ class Standard extends Base
 			'internalcode' => 'mord."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order:status' => array(
@@ -341,8 +313,7 @@ class Standard extends Base
 				WHERE mord."id" = mordst_cs."parentid" AND :site
 				AND mordst_cs."type" = $1 AND mordst_cs."value" IN ( $2 ) )',
 			'label' => 'Number of order status items, parameter(<type>,<value>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 	);
@@ -767,7 +738,7 @@ class Standard extends Base
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getInvoiceNumber() );

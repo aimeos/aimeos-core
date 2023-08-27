@@ -28,8 +28,7 @@ class Standard
 			'internalcode' => 'mordprat."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_product_attr" AS mordprat ON ( mordpr."id" = mordprat."parentid" )' ),
 			'label' => 'Product attribute ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.product.attribute.siteid' => array(
@@ -37,7 +36,6 @@ class Standard
 			'internalcode' => 'mordprat."siteid"',
 			'label' => 'Product attribute site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.product.attribute.attributeid' => array(
@@ -45,15 +43,13 @@ class Standard
 			'internalcode' => 'mordprat."attrid"',
 			'label' => 'Product attribute original ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.product.attribute.parentid' => array(
 			'code' => 'order.product.attribute.parentid',
 			'internalcode' => 'mordprat."parentid"',
 			'label' => 'Product ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.product.attribute.name' => array(
@@ -61,49 +57,42 @@ class Standard
 			'internalcode' => 'mordprat."name"',
 			'label' => 'Product attribute name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.product.attribute.value' => array(
 			'code' => 'order.product.attribute.value',
 			'internalcode' => 'mordprat."value"',
 			'label' => 'Product attribute value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.product.attribute.code' => array(
 			'code' => 'order.product.attribute.code',
 			'internalcode' => 'mordprat."code"',
 			'label' => 'Product attribute code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.product.attribute.type' => array(
 			'code' => 'order.product.attribute.type',
 			'internalcode' => 'mordprat."type"',
 			'label' => 'Product attribute type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.product.attribute.quantity' => array(
 			'code' => 'order.product.attribute.quantity',
 			'internalcode' => 'mordprat."quantity"',
 			'label' => 'Product attribute quantity',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.product.attribute.price' => array(
 			'code' => 'order.product.attribute.price',
 			'internalcode' => 'mordprat."price"',
 			'label' => 'Product attribute price',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.product.attribute.ctime' => array(
 			'code' => 'order.product.attribute.ctime',
 			'internalcode' => 'mordprat."ctime"',
 			'label' => 'Product attribute create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.product.attribute.mtime' => array(
@@ -111,7 +100,6 @@ class Standard
 			'internalcode' => 'mordprat."mtime"',
 			'label' => 'Product attribute modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.product.attribute.editor' => array(
@@ -119,7 +107,6 @@ class Standard
 			'internalcode' => 'mordprat."editor"',
 			'label' => 'Product attribute editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -590,7 +577,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getAttributeId() );

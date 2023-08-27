@@ -139,15 +139,13 @@ class Standard
 			'code' => 'review.id',
 			'internalcode' => 'mrev."id"',
 			'label' => 'Review ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'review.siteid' => array(
 			'code' => 'review.siteid',
 			'internalcode' => 'mrev."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.customerid' => array(
@@ -155,7 +153,6 @@ class Standard
 			'internalcode' => 'mrev."customerid"',
 			'label' => 'Customer ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.orderproductid' => array(
@@ -163,7 +160,6 @@ class Standard
 			'internalcode' => 'mrev."ordprodid"',
 			'label' => 'Order product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.domain' => array(
@@ -171,28 +167,24 @@ class Standard
 			'internalcode' => 'mrev."domain"',
 			'label' => 'Domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'review.refid' => array(
 			'code' => 'review.refid',
 			'internalcode' => 'mrev."refid"',
 			'label' => 'ID from the referenced domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'review.name' => array(
 			'code' => 'review.name',
 			'internalcode' => 'mrev."name"',
 			'label' => 'Name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'review.comment' => array(
 			'code' => 'review.comment',
 			'internalcode' => 'mrev."comment"',
 			'label' => 'Comment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.response' => array(
@@ -200,29 +192,25 @@ class Standard
 			'internalcode' => 'mrev."response"',
 			'label' => 'Response',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.rating' => array(
 			'code' => 'review.rating',
 			'internalcode' => 'mrev."rating"',
 			'label' => 'Rating',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'review.status' => array(
 			'code' => 'review.status',
 			'internalcode' => 'mrev."status"',
 			'label' => 'Review status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'review.ctime' => array(
 			'code' => 'review.ctime',
 			'internalcode' => 'mrev."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.mtime' => array(
@@ -230,7 +218,6 @@ class Standard
 			'internalcode' => 'mrev."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.editor' => array(
@@ -238,7 +225,6 @@ class Standard
 			'internalcode' => 'mrev."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -481,7 +467,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getDomain() );

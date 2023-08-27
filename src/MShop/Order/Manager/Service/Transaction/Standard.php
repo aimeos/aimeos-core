@@ -28,8 +28,7 @@ class Standard
 			'internalcode' => 'mordsetx."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_service_tx" AS mordsetx ON ( mordse."id" = mordsetx."parentid" )' ),
 			'label' => 'Service transaction ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.service.transaction.siteid' => array(
@@ -37,15 +36,13 @@ class Standard
 			'internalcode' => 'mordsetx."siteid"',
 			'label' => 'Service transaction site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.transaction.parentid' => array(
 			'code' => 'order.service.transaction.parentid',
 			'internalcode' => 'mordsetx."parentid"',
 			'label' => 'Service ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.service.transaction.type' => array(
@@ -53,70 +50,60 @@ class Standard
 			'internalcode' => 'mordsetx."type"',
 			'label' => 'Service transaction type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.currencyid' => array(
 			'code' => 'order.service.transaction.currencyid',
 			'internalcode' => 'mordsetx."currencyid"',
 			'label' => 'Service currencyid code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.price' => array(
 			'code' => 'order.service.transaction.price',
 			'internalcode' => 'mordsetx."price"',
 			'label' => 'Service price',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.costs' => array(
 			'code' => 'order.service.transaction.costs',
 			'internalcode' => 'mordsetx."costs"',
 			'label' => 'Service shipping',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.rebate' => array(
 			'code' => 'order.service.transaction.rebate',
 			'internalcode' => 'mordsetx."rebate"',
 			'label' => 'Service rebate',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.taxvalue' => array(
 			'code' => 'order.service.transaction.taxvalue',
 			'internalcode' => 'mordsetx."tax"',
 			'label' => 'Service tax value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.taxflag' => array(
 			'code' => 'order.service.transaction.taxflag',
 			'internalcode' => 'mordsetx."taxflag"',
 			'label' => 'Service tax flag (0=net, 1=gross)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.service.transaction.config' => array(
 			'code' => 'order.service.transaction.config',
 			'internalcode' => 'mordsetx."config"',
 			'label' => 'Transaction data',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.transaction.status' => array(
 			'code' => 'order.service.transaction.status',
 			'internalcode' => 'mordsetx."status"',
 			'label' => 'Transaction status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.service.transaction.ctime' => array(
 			'code' => 'order.service.transaction.ctime',
 			'internalcode' => 'mordsetx."ctime"',
 			'label' => 'Service transaction create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.transaction.mtime' => array(
@@ -124,7 +111,6 @@ class Standard
 			'internalcode' => 'mordsetx."mtime"',
 			'label' => 'Service transaction modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.transaction.editor' => array(
@@ -132,7 +118,6 @@ class Standard
 			'internalcode' => 'mordsetx."editor"',
 			'label' => 'Service transaction editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -583,7 +568,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );

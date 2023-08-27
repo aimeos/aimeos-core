@@ -142,15 +142,13 @@ class Standard
 			'label' => 'ID',
 			'code' => 'media.id',
 			'internalcode' => 'mmed."id"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'media.siteid' => array(
 			'label' => 'Site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type' => array(
@@ -158,77 +156,66 @@ class Standard
 			'code' => 'media.type',
 			'internalcode' => 'mmed."type"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.label' => array(
 			'label' => 'Label',
 			'code' => 'media.label',
 			'internalcode' => 'mmed."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.domain' => array(
 			'label' => 'Domain',
 			'code' => 'media.domain',
 			'internalcode' => 'mmed."domain"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.languageid' => array(
 			'label' => 'Language code',
 			'code' => 'media.languageid',
 			'internalcode' => 'mmed."langid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.mimetype' => array(
 			'label' => 'Mime type',
 			'code' => 'media.mimetype',
 			'internalcode' => 'mmed."mimetype"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.url' => array(
 			'label' => 'URL',
 			'code' => 'media.url',
 			'internalcode' => 'mmed."link"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.preview' => array(
 			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.previews' => array(
 			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.previews',
 			'internalcode' => 'mmed."previews"',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.filesystem' => array(
 			'label' => 'File sytem name',
 			'code' => 'media.filesystem',
 			'internalcode' => 'mmed."fsname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.status' => array(
 			'label' => 'Status',
 			'code' => 'media.status',
 			'internalcode' => 'mmed."status"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'media.ctime' => array(
 			'code' => 'media.ctime',
 			'internalcode' => 'mmed."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.mtime' => array(
@@ -236,7 +223,6 @@ class Standard
 			'internalcode' => 'mmed."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.editor' => array(
@@ -244,7 +230,6 @@ class Standard
 			'internalcode' => 'mmed."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media:has' => array(
@@ -253,7 +238,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_media_list" AS mmedli ON ( mmedli."parentid" = mmed."id" )'],
 			'label' => 'Media has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 		'media:prop' => array(
@@ -262,7 +246,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_media_property" AS mmedpr ON ( mmedpr."parentid" = mmed."id" )'],
 			'label' => 'Media has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -679,7 +662,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLanguageId() );

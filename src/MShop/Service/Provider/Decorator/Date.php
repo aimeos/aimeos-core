@@ -26,8 +26,7 @@ class Date
 			'code' => 'date.minimumdays',
 			'internalcode' => 'date.minimumdays',
 			'label' => 'Miniumn number of days to wait when selecting dates',
-			'type' => 'integer',
-			'internaltype' => 'integer',
+			'type' => 'int',
 			'default' => '0',
 			'required' => false,
 		),
@@ -39,7 +38,6 @@ class Date
 			'internalcode' => 'value',
 			'label' => 'Delivery date',
 			'type' => 'date',
-			'internaltype' => 'date',
 			'default' => '',
 			'required' => true
 		),

@@ -26,8 +26,7 @@ class Standard
 			'code' => 'text.lists.type.id',
 			'internalcode' => 'mtexlity."id"',
 			'label' => 'List type Id',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'text.lists.type.siteid' => array(
@@ -35,7 +34,6 @@ class Standard
 			'internalcode' => 'mtexlity."siteid"',
 			'label' => 'List type site Id',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.lists.type.label' => array(
@@ -43,42 +41,36 @@ class Standard
 			'internalcode' => 'mtexlity."label"',
 			'label' => 'List type label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.lists.type.code' => array(
 			'code' => 'text.lists.type.code',
 			'internalcode' => 'mtexlity."code"',
 			'label' => 'List type code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.lists.type.domain' => array(
 			'code' => 'text.lists.type.domain',
 			'internalcode' => 'mtexlity."domain"',
 			'label' => 'List type domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.lists.type.position' => array(
 			'code' => 'text.lists.type.position',
 			'internalcode' => 'mtexlity."pos"',
 			'label' => 'List type position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'text.lists.type.status' => array(
 			'code' => 'text.lists.type.status',
 			'internalcode' => 'mtexlity."status"',
 			'label' => 'List type status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'text.lists.type.ctime' => array(
 			'code' => 'text.lists.type.ctime',
 			'internalcode' => 'mtexlity."ctime"',
 			'label' => 'List type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.lists.type.mtime' => array(
@@ -86,7 +78,6 @@ class Standard
 			'internalcode' => 'mtexlity."mtime"',
 			'label' => 'List type modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.lists.type.editor' => array(
@@ -94,7 +85,6 @@ class Standard
 			'internalcode' => 'mtexlity."editor"',
 			'label' => 'List type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

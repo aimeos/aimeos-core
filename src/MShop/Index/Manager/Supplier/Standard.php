@@ -27,7 +27,6 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_supplier" AS mindsu ON mindsu."prodid" = mpro."id"' ),
 			'label' => 'Product index supplier ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'index.supplier:radius' => array(
 			'code' => 'index.supplier:radius()',
@@ -43,24 +42,21 @@ class Standard
 				) * 6371
 			',
 			'label' => 'Within distance to given coordinates, parameter(<latitude>,<longitude>,<distance in km>)',
-			'type' => 'boolean',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_BOOL,
+			'type' => 'bool',
 			'public' => false,
 		),
 		'index.supplier:position' => array(
 			'code' => 'index.supplier:position()',
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
 			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'sort:index.supplier:position' => array(
 			'code' => 'sort:index.supplier:position()',
 			'internalcode' => 'mindsu."pos"',
 			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		)
 	);

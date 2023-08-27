@@ -142,8 +142,7 @@ class Standard
 			'code' => 'supplier.id',
 			'internalcode' => 'msup."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'supplier.siteid' => array(
@@ -151,7 +150,6 @@ class Standard
 			'internalcode' => 'msup."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.label' => array(
@@ -159,35 +157,30 @@ class Standard
 			'internalcode' => 'msup."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.code' => array(
 			'code' => 'supplier.code',
 			'internalcode' => 'msup."code"',
 			'label' => 'Code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.position' => array(
 			'code' => 'supplier.position',
 			'internalcode' => 'msup."pos"',
 			'label' => 'Position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'supplier.status' => array(
 			'code' => 'supplier.status',
 			'internalcode' => 'msup."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'supplier.ctime' => array(
 			'code' => 'supplier.ctime',
 			'internalcode' => 'msup."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.mtime' => array(
@@ -195,7 +188,6 @@ class Standard
 			'internalcode' => 'msup."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.editor' => array(
@@ -203,7 +195,6 @@ class Standard
 			'internalcode' => 'msup."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier:has' => array(
@@ -212,7 +203,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_supplier_list" AS msupli ON ( msupli."parentid" = msup."id" )'],
 			'label' => 'Supplier has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -559,7 +549,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getCode() );

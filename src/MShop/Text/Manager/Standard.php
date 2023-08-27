@@ -140,8 +140,7 @@ class Standard
 			'code' => 'text.id',
 			'internalcode' => 'mtex."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'text.siteid' => array(
@@ -149,7 +148,6 @@ class Standard
 			'internalcode' => 'mtex."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.type' => array(
@@ -157,49 +155,42 @@ class Standard
 			'internalcode' => 'mtex."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.label' => array(
 			'code' => 'text.label',
 			'internalcode' => 'mtex."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.content' => array(
 			'code' => 'text.content',
 			'internalcode' => 'mtex."content"',
 			'label' => 'Content',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.languageid' => array(
 			'code' => 'text.languageid',
 			'internalcode' => 'mtex."langid"',
 			'label' => 'Language code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.domain' => array(
 			'code' => 'text.domain',
 			'internalcode' => 'mtex."domain"',
 			'label' => 'Domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.status' => array(
 			'code' => 'text.status',
 			'internalcode' => 'mtex."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'text.ctime' => array(
 			'code' => 'text.ctime',
 			'internalcode' => 'mtex."ctime"',
 			'label' => 'create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.mtime' => array(
@@ -207,7 +198,6 @@ class Standard
 			'internalcode' => 'mtex."mtime"',
 			'label' => 'modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.editor' => array(
@@ -215,7 +205,6 @@ class Standard
 			'internalcode' => 'mtex."editor"',
 			'label' => 'editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text:has' => array(
@@ -224,7 +213,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_text_list" AS mtexli ON ( mtexli."parentid" = mtex."id" )'],
 			'label' => 'Text has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -411,7 +399,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLanguageId() );

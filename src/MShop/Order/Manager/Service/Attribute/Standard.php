@@ -28,8 +28,7 @@ class Standard
 			'internalcode' => 'mordseat."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_service_attr" AS mordseat ON ( mordse."id" = mordseat."parentid" )' ),
 			'label' => 'Service attribute ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.service.attribute.siteid' => array(
@@ -37,7 +36,6 @@ class Standard
 			'internalcode' => 'mordseat."siteid"',
 			'label' => 'Service attribute site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.attribute.attributeid' => array(
@@ -45,15 +43,13 @@ class Standard
 			'internalcode' => 'mordseat."attrid"',
 			'label' => 'Service attribute original ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.attribute.parentid' => array(
 			'code' => 'order.service.attribute.parentid',
 			'internalcode' => 'mordseat."parentid"',
 			'label' => 'Service ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.service.attribute.name' => array(
@@ -61,49 +57,42 @@ class Standard
 			'internalcode' => 'mordseat."name"',
 			'label' => 'Service attribute name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.attribute.value' => array(
 			'code' => 'order.service.attribute.value',
 			'internalcode' => 'mordseat."value"',
 			'label' => 'Service attribute value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.attribute.code' => array(
 			'code' => 'order.service.attribute.code',
 			'internalcode' => 'mordseat."code"',
 			'label' => 'Service attribute code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.attribute.type' => array(
 			'code' => 'order.service.attribute.type',
 			'internalcode' => 'mordseat."type"',
 			'label' => 'Service attribute type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.service.attribute.quantity' => array(
 			'code' => 'order.service.attribute.quantity',
 			'internalcode' => 'mordseat."quantity"',
 			'label' => 'Service attribute quantity',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'order.service.attribute.price' => array(
 			'code' => 'order.service.attribute.price',
 			'internalcode' => 'mordseat."price"',
 			'label' => 'Service attribute price',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'type' => 'int',
 		),
 		'order.service.attribute.ctime' => array(
 			'code' => 'order.service.attribute.ctime',
 			'internalcode' => 'mordseat."ctime"',
 			'label' => 'Service attribute create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.attribute.mtime' => array(
@@ -111,7 +100,6 @@ class Standard
 			'internalcode' => 'mordseat."mtime"',
 			'label' => 'Service attribute modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.service.attribute.editor' => array(
@@ -119,7 +107,6 @@ class Standard
 			'internalcode' => 'mordseat."editor"',
 			'label' => 'Service attribute editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -590,7 +577,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getAttributeId() );

@@ -26,8 +26,7 @@ class Standard
 			'internalcode' => 'mordst."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
 			'label' => 'Status ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.status.siteid' => array(
@@ -35,15 +34,13 @@ class Standard
 			'internalcode' => 'mordst."siteid"',
 			'label' => 'Status site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.parentid' => array(
 			'code' => 'order.status.parentid',
 			'internalcode' => 'mordst."parentid"',
 			'label' => 'Status parent id',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.status.type' => array(
@@ -51,21 +48,18 @@ class Standard
 			'internalcode' => 'mordst."type"',
 			'label' => 'Status type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.value' => array(
 			'code' => 'order.status.value',
 			'internalcode' => 'mordst."value"',
 			'label' => 'Status value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.ctime' => array(
 			'code' => 'order.status.ctime',
 			'internalcode' => 'mordst."ctime"',
 			'label' => 'Status create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.mtime' => array(
@@ -73,7 +67,6 @@ class Standard
 			'internalcode' => 'mordst."mtime"',
 			'label' => 'Status modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.editor' => array(
@@ -81,7 +74,6 @@ class Standard
 			'internalcode' => 'mordst."editor"',
 			'label' => 'Status editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -308,7 +300,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );

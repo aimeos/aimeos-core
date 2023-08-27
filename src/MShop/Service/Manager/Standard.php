@@ -138,8 +138,7 @@ class Standard
 			'code' => 'service.id',
 			'internalcode' => 'mser."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'service.siteid' => array(
@@ -147,7 +146,6 @@ class Standard
 			'internalcode' => 'mser."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.type' => array(
@@ -155,63 +153,54 @@ class Standard
 			'internalcode' => 'mser."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.label' => array(
 			'code' => 'service.label',
 			'internalcode' => 'mser."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.code' => array(
 			'code' => 'service.code',
 			'internalcode' => 'mser."code"',
 			'label' => 'Code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.provider' => array(
 			'code' => 'service.provider',
 			'internalcode' => 'mser."provider"',
 			'label' => 'Provider',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.datestart' => array(
 			'code' => 'service.datestart',
 			'internalcode' => 'mser."start"',
 			'label' => 'Start date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.dateend' => array(
 			'code' => 'service.dateend',
 			'internalcode' => 'mser."end"',
 			'label' => 'End date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'service.position' => array(
 			'code' => 'service.position',
 			'internalcode' => 'mser."pos"',
 			'label' => 'Position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'service.status' => array(
 			'code' => 'service.status',
 			'internalcode' => 'mser."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'service.config' => array(
 			'code' => 'service.config',
 			'internalcode' => 'mser."config"',
 			'label' => 'Configuration',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.ctime' => array(
@@ -219,7 +208,6 @@ class Standard
 			'internalcode' => 'mser."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.mtime' => array(
@@ -227,7 +215,6 @@ class Standard
 			'internalcode' => 'mser."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service.editor' => array(
@@ -235,7 +222,6 @@ class Standard
 			'internalcode' => 'mser."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'service:has' => array(
@@ -244,7 +230,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_service_list" AS mserli ON ( mserli."parentid" = mser."id" )'],
 			'label' => 'Service has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -550,7 +535,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );

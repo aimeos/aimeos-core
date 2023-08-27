@@ -138,8 +138,7 @@ class Standard
 			'code' => 'locale.id',
 			'internalcode' => 'mloc."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'locale.siteid' => array(
@@ -147,7 +146,6 @@ class Standard
 			'internalcode' => 'mloc."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.languageid' => array(
@@ -155,35 +153,30 @@ class Standard
 			'internalcode' => 'mloc."langid"',
 			'label' => 'Language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currencyid' => array(
 			'code' => 'locale.currencyid',
 			'internalcode' => 'mloc."currencyid"',
 			'label' => 'Currency ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.status' => array(
 			'code' => 'locale.status',
 			'internalcode' => 'mloc."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'locale.position' => array(
 			'code' => 'locale.position',
 			'internalcode' => 'mloc."pos"',
 			'label' => 'Position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'locale.ctime' => array(
 			'code' => 'locale.ctime',
 			'internalcode' => 'mloc."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.mtime' => array(
@@ -191,7 +184,6 @@ class Standard
 			'internalcode' => 'mloc."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.editor' => array(
@@ -199,7 +191,6 @@ class Standard
 			'internalcode' => 'mloc."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -487,7 +478,7 @@ class Standard
 		$siteIds = explode( '.', trim( $item->getSiteId(), '.' ) );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLanguageId() );

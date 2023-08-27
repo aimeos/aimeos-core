@@ -138,15 +138,13 @@ class Standard
 			'code' => 'price.id',
 			'internalcode' => 'mpri."id"',
 			'label' => 'Price ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'price.siteid' => array(
 			'code' => 'price.siteid',
 			'internalcode' => 'mpri."siteid"',
 			'label' => 'Price site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.type' => array(
@@ -154,105 +152,90 @@ class Standard
 			'code' => 'price.type',
 			'internalcode' => 'mpri."type"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.currencyid' => array(
 			'code' => 'price.currencyid',
 			'internalcode' => 'mpri."currencyid"',
 			'label' => 'Price currency code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.domain' => array(
 			'code' => 'price.domain',
 			'internalcode' => 'mpri."domain"',
 			'label' => 'Price domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.label' => array(
 			'code' => 'price.label',
 			'internalcode' => 'mpri."label"',
 			'label' => 'Price label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.quantity' => array(
 			'code' => 'price.quantity',
 			'internalcode' => 'mpri."quantity"',
 			'label' => 'Price quantity',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'price.value' => array(
 			'code' => 'price.value',
 			'internalcode' => 'mpri."value"',
 			'label' => 'Price regular value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.costs' => array(
 			'code' => 'price.costs',
 			'internalcode' => 'mpri."costs"',
 			'label' => 'Price shipping costs',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.rebate' => array(
 			'code' => 'price.rebate',
 			'internalcode' => 'mpri."rebate"',
 			'label' => 'Price rebate amount',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.taxrate' => array(
 			'code' => 'price.taxrate',
 			'internalcode' => 'mpri."taxrate"',
 			'label' => 'Price tax rates as JSON encoded string',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.taxrates' => array(
 			'code' => 'price.taxrates',
 			'internalcode' => 'mpri."taxrate"',
 			'label' => 'Price tax rates as JSON encoded string',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.taxflag' => array(
 			'code' => 'price.taxflag',
 			'internalcode' => 'mpri."taxflag"',
 			'label' => 'If net (=0) or gross (=1) price',
-			'type' => 'boolean',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'bool',
 		),
 		'price.status' => array(
 			'code' => 'price.status',
 			'internalcode' => 'mpri."status"',
 			'label' => 'Price status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'price.mtime' => array(
 			'code' => 'price.mtime',
 			'internalcode' => 'mpri."mtime"',
 			'label' => 'Price modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.ctime' => array(
 			'code' => 'price.ctime',
 			'internalcode' => 'mpri."ctime"',
 			'label' => 'Price create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.editor' => array(
 			'code' => 'price.editor',
 			'internalcode' => 'mpri."editor"',
 			'label' => 'Price editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price:has' => array(
 			'code' => 'price:has()',
@@ -260,7 +243,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_price_list" AS mprili ON ( mprili."parentid" = mpri."id" )'],
 			'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 		'price:prop' => array(
@@ -269,7 +251,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_price_property" AS mpripr ON ( mpripr."parentid" = mpri."id" )'],
 			'label' => 'Price has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -616,7 +597,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getType() );

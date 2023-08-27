@@ -143,15 +143,13 @@ class Standard
 			'code' => 'product.id',
 			'internalcode' => 'mpro."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'product.siteid' => array(
 			'code' => 'product.siteid',
 			'internalcode' => 'mpro."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.type' => array(
@@ -159,84 +157,72 @@ class Standard
 			'internalcode' => 'mpro."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.label' => array(
 			'code' => 'product.label',
 			'internalcode' => 'mpro."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.code' => array(
 			'code' => 'product.code',
 			'internalcode' => 'mpro."code"',
 			'label' => 'SKU',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.url' => array(
 			'code' => 'product.url',
 			'internalcode' => 'mpro."url"',
 			'label' => 'URL segment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.dataset' => array(
 			'code' => 'product.dataset',
 			'internalcode' => 'mpro."dataset"',
 			'label' => 'Data set',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.datestart' => array(
 			'code' => 'product.datestart',
 			'internalcode' => 'mpro."start"',
 			'label' => 'Start date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.dateend' => array(
 			'code' => 'product.dateend',
 			'internalcode' => 'mpro."end"',
 			'label' => 'End date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.instock' => array(
 			'code' => 'product.instock',
 			'internalcode' => 'mpro."instock"',
 			'label' => 'Product in stock',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'product.status' => array(
 			'code' => 'product.status',
 			'internalcode' => 'mpro."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'product.scale' => array(
 			'code' => 'product.scale',
 			'internalcode' => 'mpro."scale"',
 			'label' => 'Quantity scale',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'product.boost' => array(
 			'code' => 'product.boost',
 			'internalcode' => 'mpro."boost"',
 			'label' => 'Boost factor',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
 			'label' => 'Configuration',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.target' => array(
@@ -244,7 +230,6 @@ class Standard
 			'internalcode' => 'mpro."target"',
 			'label' => 'URL target',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.ctime' => array(
@@ -252,7 +237,6 @@ class Standard
 			'internalcode' => 'mpro."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.mtime' => array(
@@ -260,7 +244,6 @@ class Standard
 			'internalcode' => 'mpro."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.editor' => array(
@@ -268,7 +251,6 @@ class Standard
 			'internalcode' => 'mpro."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.rating' => array(
@@ -276,15 +258,13 @@ class Standard
 			'internalcode' => 'mpro."rating"',
 			'label' => 'Rating value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.ratings' => array(
 			'code' => 'product.ratings',
 			'internalcode' => 'mpro."ratings"',
 			'label' => 'Number of ratings',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'product:has' => array(
@@ -293,7 +273,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_product_list" AS mproli ON ( mproli."parentid" = mpro."id" )'],
 			'label' => 'Product has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 		'product:prop' => array(
@@ -302,7 +281,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_product_property" AS mpropr ON ( mpropr."parentid" = mpro."id" )'],
 			'label' => 'Product has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -863,7 +841,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getType() );

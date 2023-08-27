@@ -28,16 +28,14 @@ class Standard
 			'internalcode' => 'mordad."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_address" AS mordad ON ( mord."id" = mordad."parentid" )' ),
 			'label' => 'Address ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.address.parentid' => array(
 			'code' => 'order.address.parentid',
 			'internalcode' => 'mordad."parentid"',
 			'label' => 'Order ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.address.siteid' => array(
@@ -45,7 +43,6 @@ class Standard
 			'internalcode' => 'mordad."siteid"',
 			'label' => 'Address site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.addressid' => array(
@@ -53,7 +50,6 @@ class Standard
 			'internalcode' => 'mordad."addrid"',
 			'label' => 'Customer address ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.type' => array(
@@ -61,147 +57,126 @@ class Standard
 			'internalcode' => 'mordad."type"',
 			'label' => 'Address type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.company' => array(
 			'code' => 'order.address.company',
 			'internalcode' => 'mordad."company"',
 			'label' => 'Address company',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.vatid' => array(
 			'code' => 'order.address.vatid',
 			'internalcode' => 'mordad."vatid"',
 			'label' => 'Address Vat ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.salutation' => array(
 			'code' => 'order.address.salutation',
 			'internalcode' => 'mordad."salutation"',
 			'label' => 'Address salutation',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.title' => array(
 			'code' => 'order.address.title',
 			'internalcode' => 'mordad."title"',
 			'label' => 'Address title',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.firstname' => array(
 			'code' => 'order.address.firstname',
 			'internalcode' => 'mordad."firstname"',
 			'label' => 'Address firstname',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.lastname' => array(
 			'code' => 'order.address.lastname',
 			'internalcode' => 'mordad."lastname"',
 			'label' => 'Address lastname',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.address1' => array(
 			'code' => 'order.address.address1',
 			'internalcode' => 'mordad."address1"',
 			'label' => 'Address part one',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.address2' => array(
 			'code' => 'order.address.address2',
 			'internalcode' => 'mordad."address2"',
 			'label' => 'Address part two',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.address3' => array(
 			'code' => 'order.address.address3',
 			'internalcode' => 'mordad."address3"',
 			'label' => 'Address part three',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.postal' => array(
 			'code' => 'order.address.postal',
 			'internalcode' => 'mordad."postal"',
 			'label' => 'Address postal',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.city' => array(
 			'code' => 'order.address.city',
 			'internalcode' => 'mordad."city"',
 			'label' => 'Address city',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.state' => array(
 			'code' => 'order.address.state',
 			'internalcode' => 'mordad."state"',
 			'label' => 'Address state',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.countryid' => array(
 			'code' => 'order.address.countryid',
 			'internalcode' => 'mordad."countryid"',
 			'label' => 'Address country ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.languageid' => array(
 			'code' => 'order.address.languageid',
 			'internalcode' => 'mordad."langid"',
 			'label' => 'Address language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.telephone' => array(
 			'code' => 'order.address.telephone',
 			'internalcode' => 'mordad."telephone"',
 			'label' => 'Address telephone',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.telefax' => array(
 			'code' => 'order.address.telefax',
 			'internalcode' => 'mordad."telefax"',
 			'label' => 'Address telefax',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.mobile' => array(
 			'code' => 'order.address.mobile',
 			'internalcode' => 'mordad."mobile"',
 			'label' => 'Address mobile number',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.email' => array(
 			'code' => 'order.address.email',
 			'internalcode' => 'mordad."email"',
 			'label' => 'Address email',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.website' => array(
 			'code' => 'order.address.website',
 			'internalcode' => 'mordad."website"',
 			'label' => 'Address website',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.address.longitude' => array(
 			'code' => 'order.address.longitude',
 			'internalcode' => 'mordad."longitude"',
 			'label' => 'Address longitude',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.latitude' => array(
@@ -209,15 +184,13 @@ class Standard
 			'internalcode' => 'mordad."latitude"',
 			'label' => 'Address latitude',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.position' => array(
 			'code' => 'order.address.position',
 			'internalcode' => 'mordad."pos"',
 			'label' => 'Address position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.address.birthday' => array(
@@ -225,7 +198,6 @@ class Standard
 			'internalcode' => 'mordad."birthday"',
 			'label' => 'Address birthday',
 			'type' => 'date',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.ctime' => array(
@@ -233,7 +205,6 @@ class Standard
 			'internalcode' => 'mordad."ctime"',
 			'label' => 'Address create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.mtime' => array(
@@ -241,7 +212,6 @@ class Standard
 			'internalcode' => 'mordad."mtime"',
 			'label' => 'Address modify date/time',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.address.editor' => array(
@@ -249,7 +219,6 @@ class Standard
 			'internalcode' => 'mordad."editor"',
 			'label' => 'Address editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -722,7 +691,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );

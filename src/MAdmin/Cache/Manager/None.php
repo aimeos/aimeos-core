@@ -28,7 +28,6 @@ class None
 			'internalcode' => '"id"',
 			'label' => 'ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 

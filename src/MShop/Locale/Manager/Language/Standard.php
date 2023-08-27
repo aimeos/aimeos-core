@@ -29,7 +29,6 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ),
 			'label' => 'Language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.label' => array(
@@ -37,28 +36,24 @@ class Standard
 			'internalcode' => 'mlocla."label"',
 			'label' => 'Language label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.code' => array(
 			'code' => 'locale.language.code',
 			'internalcode' => 'mlocla."id"',
 			'label' => 'Language code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.status' => array(
 			'code' => 'locale.language.status',
 			'internalcode' => 'mlocla."status"',
 			'label' => 'Language status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'locale.language.ctime' => array(
 			'code' => 'locale.language.ctime',
 			'internalcode' => 'mlocla."ctime"',
 			'label' => 'Language create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.mtime' => array(
@@ -66,7 +61,6 @@ class Standard
 			'internalcode' => 'mlocla."mtime"',
 			'label' => 'Language modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.editor' => array(
@@ -74,7 +68,6 @@ class Standard
 			'internalcode' => 'mlocla."editor"',
 			'label' => 'Language editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -225,7 +218,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLabel() );

@@ -31,7 +31,6 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")'],
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.siteid' => array(
@@ -39,7 +38,6 @@ class Standard
 			'internalcode' => 'mlocsi."siteid"',
 			'label' => 'Unique site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.label' => array(
@@ -47,35 +45,30 @@ class Standard
 			'internalcode' => 'mlocsi."label"',
 			'label' => 'Site label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.code' => array(
 			'code' => 'locale.site.code',
 			'internalcode' => 'mlocsi."code"',
 			'label' => 'Site code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
 			'internalcode' => 'mlocsi."status"',
 			'label' => 'Site status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'locale.site.position' => array(
 			'code' => 'locale.site.position',
 			'internalcode' => 'mlocsi."id"',
 			'label' => 'Site position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'locale.site.level' => array(
 			'code' => 'locale.site.level',
 			'internalcode' => 'mlocsi."level"',
 			'label' => 'Site tree level',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'locale.site.config' => array(
@@ -83,7 +76,6 @@ class Standard
 			'internalcode' => 'mlocsi."config"',
 			'label' => 'Site config',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.icon' => array(
@@ -91,7 +83,6 @@ class Standard
 			'internalcode' => 'mlocsi."icon"',
 			'label' => 'Site icon',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.logo' => array(
@@ -99,7 +90,6 @@ class Standard
 			'internalcode' => 'mlocsi."logo"',
 			'label' => 'Site logo',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.rating' => array(
@@ -107,15 +97,13 @@ class Standard
 			'internalcode' => 'mlocsi."rating"',
 			'label' => 'Rating value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.ratings' => array(
 			'code' => 'locale.site.ratings',
 			'internalcode' => 'mlocsi."ratings"',
 			'label' => 'Number of ratings',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'locale.site.refid' => array(
@@ -123,7 +111,6 @@ class Standard
 			'internalcode' => 'mlocsi."refid"',
 			'label' => 'Site-related supplier ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.theme' => array(
@@ -131,7 +118,6 @@ class Standard
 			'internalcode' => 'mlocsi."theme"',
 			'label' => 'Site theme',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.ctime' => array(
@@ -139,7 +125,6 @@ class Standard
 			'internalcode' => 'mlocsi."ctime"',
 			'label' => 'Site create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.mtime' => array(
@@ -147,7 +132,6 @@ class Standard
 			'internalcode' => 'mlocsi."mtime"',
 			'label' => 'Site modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.editor' => array(
@@ -155,7 +139,6 @@ class Standard
 			'internalcode' => 'mlocsi."editor"',
 			'label' => 'Site editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'parentid' => array(
@@ -163,7 +146,6 @@ class Standard
 			'internalcode' => 'mlocsi."parentid"',
 			'label' => 'Parent site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -335,7 +317,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getSiteId() );
@@ -886,7 +868,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+				$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 			}
 
 			$stmt->bind( $idx++, '' ); // site ID

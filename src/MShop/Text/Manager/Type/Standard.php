@@ -26,8 +26,7 @@ class Standard
 			'code' => 'text.type.id',
 			'internalcode' => 'mtexty."id"',
 			'label' => 'Type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'text.type.siteid' => array(
@@ -35,7 +34,6 @@ class Standard
 			'internalcode' => 'mtexty."siteid"',
 			'label' => 'Type site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.type.label' => array(
@@ -43,42 +41,36 @@ class Standard
 			'internalcode' => 'mtexty."label"',
 			'label' => 'Type label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.type.code' => array(
 			'code' => 'text.type.code',
 			'internalcode' => 'mtexty."code"',
 			'label' => 'Type code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.type.domain' => array(
 			'code' => 'text.type.domain',
 			'internalcode' => 'mtexty."domain"',
 			'label' => 'Type domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'text.type.position' => array(
 			'code' => 'text.type.position',
 			'internalcode' => 'mtexty."pos"',
 			'label' => 'Type position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'text.type.status' => array(
 			'code' => 'text.type.status',
 			'internalcode' => 'mtexty."status"',
 			'label' => 'Type status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'text.type.ctime' => array(
 			'code' => 'text.type.ctime',
 			'internalcode' => 'mtexty."ctime"',
 			'label' => 'Type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.type.mtime' => array(
@@ -86,7 +78,6 @@ class Standard
 			'internalcode' => 'mtexty."mtime"',
 			'label' => 'Type modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'text.type.editor' => array(
@@ -94,7 +85,6 @@ class Standard
 			'internalcode' => 'mtexty."editor"',
 			'label' => 'Type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

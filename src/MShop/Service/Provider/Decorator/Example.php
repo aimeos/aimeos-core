@@ -28,7 +28,6 @@ class Example
 			'internalcode' => 'country',
 			'label' => 'Country',
 			'type' => 'string',
-			'internaltype' => 'string',
 			'default' => '',
 			'required' => true,
 		),

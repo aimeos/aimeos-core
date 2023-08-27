@@ -28,7 +28,6 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label' => 'Product index attribute ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'index.attribute:allof' => array(
 			'code' => 'index.attribute:allof()',
@@ -43,7 +42,6 @@ class Standard
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_NULL,
 			'public' => false,
 		),
 		'index.attribute:oneof' => array(
@@ -57,7 +55,6 @@ class Standard
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_NULL,
 			'public' => false,
 		),
 	);

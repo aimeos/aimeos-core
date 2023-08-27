@@ -137,15 +137,13 @@ class Standard
 			'code' => 'job.id',
 			'internalcode' => 'majob."id"',
 			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'job.siteid' => array(
 			'code' => 'job.siteid',
 			'internalcode' => 'majob."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'job.label' => array(
@@ -153,42 +151,36 @@ class Standard
 			'internalcode' => 'majob."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'job.status' => array(
 			'code' => 'job.status',
 			'internalcode' => 'majob."status"',
 			'label' => 'Status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'job.path' => array(
 			'code' => 'job.path',
 			'internalcode' => 'majob."path"',
 			'label' => 'Generated file path',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'job.ctime' => array(
 			'code' => 'job.ctime',
 			'internalcode' => 'majob."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'job.mtime' => array(
 			'code' => 'job.mtime',
 			'internalcode' => 'majob."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'job.editor' => array(
 			'code' => 'job.editor',
 			'internalcode' => 'majob."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -362,7 +354,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLabel() );

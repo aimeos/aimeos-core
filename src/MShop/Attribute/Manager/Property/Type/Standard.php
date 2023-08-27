@@ -25,8 +25,7 @@ class Standard
 			'code' => 'attribute.property.type.id',
 			'internalcode' => 'mattprty."id"',
 			'label' => 'Property type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'attribute.property.type.siteid' => array(
@@ -34,7 +33,6 @@ class Standard
 			'internalcode' => 'mattprty."siteid"',
 			'label' => 'Property type site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.property.type.label' => array(
@@ -42,42 +40,36 @@ class Standard
 			'internalcode' => 'mattprty."label"',
 			'label' => 'Property type label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.property.type.code' => array(
 			'code' => 'attribute.property.type.code',
 			'internalcode' => 'mattprty."code"',
 			'label' => 'Property type code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.property.type.domain' => array(
 			'code' => 'attribute.property.type.domain',
 			'internalcode' => 'mattprty."domain"',
 			'label' => 'Property type domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.property.type.position' => array(
 			'code' => 'attribute.property.type.position',
 			'internalcode' => 'mattprty."pos"',
 			'label' => 'Property type position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'attribute.property.type.status' => array(
 			'code' => 'attribute.property.type.status',
 			'internalcode' => 'mattprty."status"',
 			'label' => 'Property type status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'attribute.property.type.ctime' => array(
 			'code' => 'attribute.property.type.ctime',
 			'internalcode' => 'mattprty."ctime"',
 			'label' => 'Property type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.property.type.mtime' => array(
@@ -85,7 +77,6 @@ class Standard
 			'internalcode' => 'mattprty."mtime"',
 			'label' => 'Property type modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.property.type.editor' => array(
@@ -93,7 +84,6 @@ class Standard
 			'internalcode' => 'mattprty."editor"',
 			'label' => 'Property type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

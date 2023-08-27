@@ -137,8 +137,7 @@ class Standard
 			'label' => 'ID',
 			'code' => 'rule.id',
 			'internalcode' => 'mrul."id"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'rule.siteid' => array(
@@ -146,7 +145,6 @@ class Standard
 			'code' => 'rule.siteid',
 			'internalcode' => 'mrul."siteid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'rule.type' => array(
@@ -154,7 +152,6 @@ class Standard
 			'code' => 'rule.type',
 			'internalcode' => 'mrul."type"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'rule.label' => array(
@@ -162,35 +159,30 @@ class Standard
 			'code' => 'rule.label',
 			'internalcode' => 'mrul."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'rule.provider' => array(
 			'label' => 'Provider',
 			'code' => 'rule.provider',
 			'internalcode' => 'mrul."provider"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'rule.position' => array(
 			'label' => 'Position',
 			'code' => 'rule.position',
 			'internalcode' => 'mrul."pos"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'rule.status' => array(
 			'label' => 'Status',
 			'code' => 'rule.status',
 			'internalcode' => 'mrul."status"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'rule.config' => array(
 			'label' => 'Config',
 			'code' => 'rule.config',
 			'internalcode' => 'mrul."config"',
 			'type' => 'json',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'rule.datestart' => array(
@@ -198,21 +190,18 @@ class Standard
 			'internalcode' => 'mrul."start"',
 			'label' => 'Start date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'rule.dateend' => array(
 			'code' => 'rule.dateend',
 			'internalcode' => 'mrul."end"',
 			'label' => 'End date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'rule.ctime' => array(
 			'code' => 'rule.ctime',
 			'internalcode' => 'mrul."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'rule.mtime' => array(
@@ -220,7 +209,6 @@ class Standard
 			'internalcode' => 'mrul."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'rule.editor' => array(
@@ -228,7 +216,6 @@ class Standard
 			'internalcode' => 'mrul."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -538,7 +525,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getType() );

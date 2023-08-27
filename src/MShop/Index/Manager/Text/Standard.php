@@ -28,14 +28,12 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label' => 'Product index text ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
 			'internalcode' => ':site AND mindte."url"',
 			'label' => 'Product URL',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text:name' => array(
@@ -43,7 +41,6 @@ class Standard
 			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:index.text:name' => array(
@@ -51,7 +48,6 @@ class Standard
 			'internalcode' => 'mindte."name"',
 			'label' => 'Sort by product name, parameter(<language ID>)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text:relevance' => array(
@@ -59,7 +55,6 @@ class Standard
 			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
@@ -67,7 +62,6 @@ class Standard
 			'internalcode' => '-POSITION( $2 IN mindte."content" ) * mpro."boost"',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 	);

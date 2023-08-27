@@ -26,16 +26,14 @@ class Standard
 			'code' => 'media.property.id',
 			'internalcode' => 'mmedpr."id"',
 			'label' => 'Property ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'media.property.parentid' => array(
 			'code' => 'media.property.parentid',
 			'internalcode' => 'mmedpr."parentid"',
 			'label' => 'Property parent ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'media.property.siteid' => array(
@@ -43,7 +41,6 @@ class Standard
 			'internalcode' => 'mmedpr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.property.key' => array(
@@ -51,7 +48,6 @@ class Standard
 			'internalcode' => 'mmedpr."key"',
 			'label' => 'Property key',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.property.type' => array(
@@ -59,28 +55,24 @@ class Standard
 			'internalcode' => 'mmedpr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.property.value' => array(
 			'code' => 'media.property.value',
 			'internalcode' => 'mmedpr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.property.languageid' => array(
 			'code' => 'media.property.languageid',
 			'internalcode' => 'mmedpr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.property.ctime' => array(
 			'code' => 'media.property.ctime',
 			'internalcode' => 'mmedpr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.property.mtime' => array(
@@ -88,7 +80,6 @@ class Standard
 			'internalcode' => 'mmedpr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.property.editor' => array(
@@ -96,7 +87,6 @@ class Standard
 			'internalcode' => 'mmedpr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

@@ -28,8 +28,7 @@ class Standard
 			'internalcode' => 'mordco."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_coupon" AS mordco ON ( mord."id" = mordco."parentid" )' ),
 			'label' => 'Coupon ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.coupon.siteid' => array(
@@ -37,23 +36,20 @@ class Standard
 			'internalcode' => 'mordco."siteid"',
 			'label' => 'Coupon site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.coupon.parentid' => array(
 			'code' => 'order.coupon.parentid',
 			'internalcode' => 'mordco."parentid"',
 			'label' => 'Order ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.coupon.ordprodid' => array(
 			'code' => 'order.coupon.productid',
 			'internalcode' => 'mordco."ordprodid"',
 			'label' => 'Coupon product ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'order.coupon.code' => array(
@@ -61,14 +57,12 @@ class Standard
 			'internalcode' => 'mordco."code"',
 			'label' => 'Coupon code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.coupon.ctime' => array(
 			'code' => 'order.coupon.ctime',
 			'internalcode' => 'mordco."ctime"',
 			'label' => 'Coupon create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.coupon.mtime' => array(
@@ -76,7 +70,6 @@ class Standard
 			'internalcode' => 'mordco."mtime"',
 			'label' => 'Coupon modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.coupon.editor' => array(
@@ -84,7 +77,6 @@ class Standard
 			'internalcode' => 'mordco."editor"',
 			'label' => 'Coupon editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -555,7 +547,7 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );

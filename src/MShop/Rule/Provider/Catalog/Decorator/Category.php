@@ -28,7 +28,6 @@ class Category
 			'internalcode' => 'category.code',
 			'label' => 'Category codes',
 			'type' => 'string',
-			'internaltype' => 'string',
 			'default' => '',
 			'required' => true,
 		],

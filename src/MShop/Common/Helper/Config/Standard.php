@@ -56,6 +56,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 			{
 				switch( $attr->getType() )
 				{
+					case 'bool':
 					case 'boolean':
 						if( $config[$key] != null && !is_scalar( $config[$key] ) || $config[$key] != '0' && $config[$key] != '1' ) {
 							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
@@ -67,6 +68,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 							$errors[$key] = sprintf( 'Not a string' ); continue 2;
 						}
 						break;
+					case 'int':
 					case 'integer':
 						if( !is_integer( $config[$key] ) && !( is_string( $config[$key] ) && ctype_digit( $config[$key] ) ) ) {
 							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;

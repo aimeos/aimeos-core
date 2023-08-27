@@ -28,14 +28,12 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'index.price:value' => array(
 			'code' => 'index.price:value()',
 			'internalcode' => ':site AND mindpr."currencyid" = $1 AND mindpr."value"',
 			'label' => 'Product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'agg:index.price:value' => array(
@@ -43,7 +41,6 @@ class Standard
 			'internalcode' => 'mindpr."value"',
 			'label' => 'Aggregate product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:index.price:value' => array(
@@ -51,7 +48,6 @@ class Standard
 			'internalcode' => 'mindpr."value"',
 			'label' => 'Sort product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

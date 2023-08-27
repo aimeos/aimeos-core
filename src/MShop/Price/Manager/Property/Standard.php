@@ -26,16 +26,14 @@ class Standard
 			'code' => 'price.property.id',
 			'internalcode' => 'mpripr."id"',
 			'label' => 'Property ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'price.property.parentid' => array(
 			'code' => 'price.property.parentid',
 			'internalcode' => 'mpripr."parentid"',
 			'label' => 'Property parent ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'price.property.siteid' => array(
@@ -43,7 +41,6 @@ class Standard
 			'internalcode' => 'mpripr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.property.key' => array(
@@ -51,7 +48,6 @@ class Standard
 			'internalcode' => 'mpripr."key"',
 			'label' => 'Property key',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.property.type' => array(
@@ -59,28 +55,24 @@ class Standard
 			'internalcode' => 'mpripr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.property.value' => array(
 			'code' => 'price.property.value',
 			'internalcode' => 'mpripr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.property.languageid' => array(
 			'code' => 'price.property.languageid',
 			'internalcode' => 'mpripr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'price.property.ctime' => array(
 			'code' => 'price.property.ctime',
 			'internalcode' => 'mpripr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.property.mtime' => array(
@@ -88,7 +80,6 @@ class Standard
 			'internalcode' => 'mpripr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'price.property.editor' => array(
@@ -96,7 +87,6 @@ class Standard
 			'internalcode' => 'mpripr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
