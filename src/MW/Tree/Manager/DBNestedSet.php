@@ -139,23 +139,23 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$stmt = $this->conn->create( $this->config['delete'] );
-		$stmt->bind( 1, $node->left, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 2, $node->right, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 1, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $node->right, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		$diff = $node->right - $node->left + 1;
 
 		$stmt = $this->conn->create( $this->config['move-left'] );
-		$stmt->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-		$stmt->bind( 3, $node->right + 1, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 3, $node->right + 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		$stmt = $this->conn->create( $this->config['move-right'] );
-		$stmt->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
-		$stmt->bind( 2, $node->right + 1, $this->searchConfig['right']['internaltype'] );
-		$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $node->right + 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		return $this;
@@ -204,8 +204,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 
 		$stmt = $this->conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
-		$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-		$stmt->bind( 2, $numlevel, $this->searchConfig['level']['internaltype'] );
+		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $numlevel, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt->execute();
 
 		if( ( $row = $result->fetch() ) === null ) {
@@ -261,26 +261,26 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 
 		$stmt = $this->conn->create( $this->config['move-left'] );
-		$stmt->bind( 1, 2, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-		$stmt->bind( 3, $node->left, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmt->bind( 1, 2, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 3, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		$stmt = $this->conn->create( $this->config['move-right'] );
-		$stmt->bind( 1, 2, $this->searchConfig['right']['internaltype'] );
-		$stmt->bind( 2, $node->left, $this->searchConfig['right']['internaltype'] );
-		$stmt->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 1, 2, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		$stmt = $this->conn->create( $this->config['insert'] );
-		$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
-		$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
-		$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
-		$stmt->bind( 4, (int) $node->parentid, $this->searchConfig['parentid']['internaltype'] );
-		$stmt->bind( 5, $node->level, $this->searchConfig['level']['internaltype'] );
-		$stmt->bind( 6, $node->left, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 7, $node->right, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 1, $node->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$stmt->bind( 2, $node->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$stmt->bind( 3, $node->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 4, (int) $node->parentid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 5, $node->level, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 6, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 7, $node->right, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 
@@ -386,46 +386,46 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$updateParentId = $this->conn->create( $this->config['update-parentid'] );
 		// open gap for inserting node or subtree
 
-		$stmtLeft->bind( 1, $diff, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-		$stmtLeft->bind( 3, $openNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 1, $diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 3, $openNodeLeftBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtLeft->execute()->finish();
 
-		$stmtRight->bind( 1, $diff, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 2, $openNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 1, $diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 2, $openNodeRightBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtRight->execute()->finish();
 
 		// move node or subtree to the new gap
 
-		$stmtLeft->bind( 1, $movesize, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 2, $leveldiff, $this->searchConfig['level']['internaltype'] );
-		$stmtLeft->bind( 3, $moveNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 4, $moveNodeLeftEnd, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 1, $movesize, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 2, $leveldiff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 3, $moveNodeLeftBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 4, $moveNodeLeftEnd, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtLeft->execute()->finish();
 
-		$stmtRight->bind( 1, $movesize, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 2, $moveNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 3, $moveNodeRightEnd, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 1, $movesize, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 2, $moveNodeRightBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 3, $moveNodeRightEnd, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtRight->execute()->finish();
 
 		// close gap opened by moving the node or subtree to the new location
 
-		$stmtLeft->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
-		$stmtLeft->bind( 3, $closeNodeLeftBegin, $this->searchConfig['left']['internaltype'] );
-		$stmtLeft->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
+		$stmtLeft->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 3, $closeNodeLeftBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtLeft->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtLeft->execute()->finish();
 
-		$stmtRight->bind( 1, -$diff, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 2, $closeNodeRightBegin, $this->searchConfig['right']['internaltype'] );
-		$stmtRight->bind( 3, 0x7FFFFFFF, $this->searchConfig['right']['internaltype'] );
+		$stmtRight->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 2, $closeNodeRightBegin, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmtRight->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmtRight->execute()->finish();
 
 
-		$updateParentId->bind( 1, $newParentId, $this->searchConfig['parentid']['internaltype'] );
-		$updateParentId->bind( 2, $id, $this->searchConfig['id']['internaltype'] );
+		$updateParentId->bind( 1, $newParentId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$updateParentId->bind( 2, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$updateParentId->execute()->finish();
 
 		return $this;
@@ -452,10 +452,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 		$stmt = $this->conn->create( $this->config['update'] );
-		$stmt->bind( 1, $node->getLabel(), $this->searchConfig['label']['internaltype'] );
-		$stmt->bind( 2, $node->getCode(), $this->searchConfig['code']['internaltype'] );
-		$stmt->bind( 3, $node->getStatus(), $this->searchConfig['status']['internaltype'] );
-		$stmt->bind( 4, $node->getId(), $this->searchConfig['id']['internaltype'] );
+		$stmt->bind( 1, $node->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$stmt->bind( 2, $node->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$stmt->bind( 3, $node->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 4, $node->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		return $node;
@@ -499,8 +499,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		);
 
 		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $left, $this->searchConfig['left']['internaltype'] );
-		$stmt->bind( 2, $right, $this->searchConfig['right']['internaltype'] );
+		$stmt->bind( 1, $left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $right, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt->execute();
 
 		try
@@ -696,8 +696,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	protected function getNodeById( string $id ) : \Aimeos\MW\Tree\Node\Iface
 	{
 		$stmt = $this->conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
-		$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-		$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
+		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt->execute();
 
 		if( ( $row = $result->fetch() ) === null ) {
