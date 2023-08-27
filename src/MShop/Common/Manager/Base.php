@@ -231,7 +231,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	{
 		$attr = [];
 
-		foreach( $list as $key => $fields ) {
+		foreach( $list as $key => $fields )
+		{
+			$fields['code'] = $fields['code'] ?? $key;
 			$attr[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
 		}
 
