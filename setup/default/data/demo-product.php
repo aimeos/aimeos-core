@@ -1813,6 +1813,14 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			],
 			[
+				'product.code' => 'demo-selection-article-3',
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'product.code' => 'demo-selection-article-4',
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
 				'product.code' => 'demo-article',
 				'product.lists.type' => 'suggestion', 'product.lists.position' => 0
 			],
