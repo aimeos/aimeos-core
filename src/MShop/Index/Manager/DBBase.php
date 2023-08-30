@@ -470,12 +470,4 @@ abstract class DBBase
 
 		return map( $list );
 	}
-
-
-	/**
-	 * Returns the sub-manager instances available for the manager
-	 *
-	 * @return array Associative list of the sub-domain as key and the manager object as value
-	 */
-	abstract protected function getSubManagers() : array;
 }
