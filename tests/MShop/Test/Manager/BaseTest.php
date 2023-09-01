@@ -13,7 +13,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $stub;
 
 
 	protected function setUp() : void
@@ -92,7 +91,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->set( 'key', 'somekey' )
 			->set( 'value', 'someval' );
 
-		$item = $this->object->save( $item );
+		$this->object->save( $item );
 		$result = $this->object->search( $this->object->filter() );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $result );
@@ -109,7 +108,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->set( 'key', 'somekey' )
 			->set( 'value', 'someval' );
 
-		$item = $this->object->save( $item );
+		$this->object->save( $item );
 
 		$cursor = $this->object->cursor( $this->object->filter() );
 		$result = $this->object->iterate( $cursor );
