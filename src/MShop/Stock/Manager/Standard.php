@@ -837,7 +837,7 @@ class Standard
 	{
 		$context = $this->context();
 		$translations = ['stock.siteid' => '"siteid"'];
-		$types = ['stock.siteid' => \Aimeos\Base\Criteria\SQL::type( $this->searchConfig['stock.siteid']['type'] )];
+		$types = ['stock.siteid' => \Aimeos\Base\Criteria\SQL::type( 'string' )];
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/stock/manager/sitemode', $level );

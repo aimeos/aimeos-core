@@ -144,6 +144,7 @@ class Standard extends Base
 			'code' => 'catalog.siteid',
 			'internalcode' => 'mcat."siteid"',
 			'label' => 'Site ID',
+			'type' => 'string',
 			'public' => false,
 		),
 		'parentid' => array(
@@ -178,11 +179,13 @@ class Standard extends Base
 			'code' => 'catalog.label',
 			'internalcode' => 'mcat."label"',
 			'label' => 'Label',
+			'type' => 'string',
 		),
 		'code' => array(
 			'code' => 'catalog.code',
 			'internalcode' => 'mcat."code"',
 			'label' => 'Code',
+			'type' => 'string',
 		),
 		'status' => array(
 			'code' => 'catalog.status',
@@ -194,11 +197,13 @@ class Standard extends Base
 			'code' => 'catalog.url',
 			'internalcode' => 'mcat."url"',
 			'label' => 'URL segment',
+			'type' => 'string',
 		),
 		'catalog.target' => array(
 			'code' => 'catalog.target',
 			'internalcode' => 'mcat."target"',
 			'label' => 'URL target',
+			'type' => 'string',
 		),
 		'catalog.config' => array(
 			'code' => 'catalog.config',
@@ -225,6 +230,7 @@ class Standard extends Base
 			'code' => 'catalog.editor',
 			'internalcode' => 'mcat."editor"',
 			'label' => 'Editor',
+			'type' => 'string',
 			'public' => false,
 		),
 		'catalog:has' => array(

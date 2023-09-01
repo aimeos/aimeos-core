@@ -27,7 +27,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 
 	private \Aimeos\MShop\ContextIface $context;
-	private ?\Aimeos\Base\Criteria\Iface $search;
 
 
 	/**
@@ -105,24 +104,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		$context = $this->context();
-		$db = $this->getResourceName();
-		$conn = $context->db( $db );
-		$config = $context->config();
-
-		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
-			$adapter = $config->get( 'resource/db/adapter' );
-		}
-
-		switch( $adapter )
-		{
-			case 'pgsql':
-				$search = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
-			default:
-				$search = new \Aimeos\Base\Criteria\SQL( $conn ); break;
-		}
-
-		return $search;
+		return $this->filterBase( $this->getDomain() );
 	}
 
 
@@ -456,20 +438,5 @@ abstract class Base implements \Aimeos\Macro\Iface
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		return $this->context()->config()->get( $this->getConfigKey( 'sitemode' ), $level );
-	}
-
-
-	/**
-	 * Returns a search object singleton
-	 *
-	 * @return \Aimeos\Base\Criteria\Iface Search object
-	 */
-	protected function getSearch() : \Aimeos\Base\Criteria\Iface
-	{
-		if( !isset( $this->search ) ) {
-			$this->search = $this->filter();
-		}
-
-		return $this->search;
 	}
 }

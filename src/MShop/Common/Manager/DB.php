@@ -19,6 +19,7 @@ namespace Aimeos\MShop\Common\Manager;
  */
 trait DB
 {
+	private ?\Aimeos\Base\Criteria\Iface $search;
 	private ?string $resourceName = null;
 	private array $cachedStmts = [];
 
@@ -29,6 +30,32 @@ trait DB
 	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
 	abstract protected function context() : \Aimeos\MShop\ContextIface;
+
+
+	/**
+	 * Creates the criteria attribute items from the list of entries
+	 *
+	 * @param array $list Associative array of code as key and array with properties as values
+	 * @return \Aimeos\Base\Criteria\Attribute\Standard[] List of criteria attribute items
+	 */
+	abstract protected function createAttributes( array $list ) : array;
+
+
+	/**
+	 * Returns the full configuration key for the passed last part
+	 *
+	 * @param string $name Configuration last part
+	 * @return string Full configuration key
+	 */
+	abstract protected function getConfigKey( string $name ) : string;
+
+
+	/**
+	 * Returns the manager domain
+	 *
+	 * @return string Manager domain e.g. "product"
+	 */
+	abstract protected function getDomain() : string;
 
 
 	/**
@@ -82,6 +109,17 @@ trait DB
 	 * @return \Aimeos\Base\Criteria\Expression\Iface Site search condition
 	 */
 	abstract protected function siteCondition( string $name, int $sitelevel ) : \Aimeos\Base\Criteria\Expression\Iface;
+
+
+	/**
+	 * Returns the site ID that should be used based on the site level
+	 *
+	 * @param string $siteId Site ID to check
+	 * @param int $sitelevel Site level to check against
+	 * @return string Site ID that should be use based on the site level
+	 * @since 2022.04
+	 */
+	abstract protected function siteId( string $siteId, int $sitelevel ) : string;
 
 
 	/**
@@ -483,7 +521,22 @@ trait DB
 	 */
 	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		$filter = self::filter();
+		$context = $this->context();
+		$db = $this->getResourceName();
+		$conn = $context->db( $db );
+		$config = $context->config();
+
+		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
+			$adapter = $config->get( 'resource/db/adapter' );
+		}
+
+		switch( $adapter )
+		{
+			case 'pgsql':
+				$filter = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
+			default:
+				$filter = new \Aimeos\Base\Criteria\SQL( $conn ); break;
+		}
 
 		if( $default !== false ) {
 			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
@@ -626,6 +679,21 @@ trait DB
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Returns a search object singleton
+	 *
+	 * @return \Aimeos\Base\Criteria\Iface Search object
+	 */
+	protected function getSearch() : \Aimeos\Base\Criteria\Iface
+	{
+		if( !isset( $this->search ) ) {
+			$this->search = $this->filter();
+		}
+
+		return $this->search;
 	}
 
 

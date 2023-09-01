@@ -753,7 +753,7 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->locale()->getSites( $level ) ) );
 
 		$translations = ['coupon.code.siteid' => 'siteid'];
-		$types = ['coupon.code.siteid' => \Aimeos\Base\Criteria\SQL::type( $this->searchConfig['coupon.code.siteid']['type'] )];
+		$types = ['coupon.code.siteid' => \Aimeos\Base\Criteria\SQL::type( 'string' )];
 		$conditions = $search->getConditionSource( $types, $translations );
 
 		$conn = $context->db( $this->getResourceName() );
