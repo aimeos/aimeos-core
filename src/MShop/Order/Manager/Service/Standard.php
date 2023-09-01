@@ -35,7 +35,6 @@ class Standard
 			'code' => 'order.service.siteid',
 			'internalcode' => 'mordse."siteid"',
 			'label' => 'Service site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.parentid' => array(
@@ -49,32 +48,27 @@ class Standard
 			'code' => 'order.service.serviceid',
 			'internalcode' => 'mordse."servid"',
 			'label' => 'Service original service ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.name' => array(
 			'code' => 'order.service.name',
 			'internalcode' => 'mordse."name"',
 			'label' => 'Service name',
-			'type' => 'string',
 		),
 		'order.service.code' => array(
 			'code' => 'order.service.code',
 			'internalcode' => 'mordse."code"',
 			'label' => 'Service code',
-			'type' => 'string',
 		),
 		'order.service.type' => array(
 			'code' => 'order.service.type',
 			'internalcode' => 'mordse."type"',
 			'label' => 'Service type',
-			'type' => 'string',
 		),
 		'order.service.currencyid' => array(
 			'code' => 'order.service.currencyid',
 			'internalcode' => 'mordse."currencyid"',
 			'label' => 'Service currencyid code',
-			'type' => 'string',
 		),
 		'order.service.price' => array(
 			'code' => 'order.service.price',
@@ -116,7 +110,6 @@ class Standard
 			'code' => 'order.service.mediaurl',
 			'internalcode' => 'mordse."mediaurl"',
 			'label' => 'Service media url',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.position' => array(
@@ -144,7 +137,6 @@ class Standard
 			'code' => 'order.service.editor',
 			'internalcode' => 'mordse."editor"',
 			'label' => 'Service editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

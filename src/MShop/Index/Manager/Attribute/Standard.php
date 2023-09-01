@@ -27,7 +27,6 @@ class Standard
 			'internalcode' => 'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label' => 'Product index attribute ID',
-			'type' => 'string',
 		),
 		'index.attribute:allof' => array(
 			'code' => 'index.attribute:allof()',

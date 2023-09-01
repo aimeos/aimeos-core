@@ -27,7 +27,6 @@ class Example
 			'code' => 'country',
 			'internalcode' => 'country',
 			'label' => 'Country',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

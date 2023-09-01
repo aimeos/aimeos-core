@@ -145,20 +145,17 @@ class Standard
 			'code' => 'coupon.siteid',
 			'internalcode' => 'mcou."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'coupon.label' => array(
 			'code' => 'coupon.label',
 			'internalcode' => 'mcou."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'coupon.provider' => array(
 			'code' => 'coupon.provider',
 			'internalcode' => 'mcou."provider"',
 			'label' => 'Provider',
-			'type' => 'string',
 		),
 		'coupon.datestart' => array(
 			'code' => 'coupon.datestart',
@@ -203,7 +200,6 @@ class Standard
 			'code' => 'coupon.editor',
 			'internalcode' => 'mcou."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

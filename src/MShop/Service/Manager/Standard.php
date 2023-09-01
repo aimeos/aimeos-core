@@ -145,32 +145,27 @@ class Standard
 			'code' => 'service.siteid',
 			'internalcode' => 'mser."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'service.type' => array(
 			'code' => 'service.type',
 			'internalcode' => 'mser."type"',
 			'label' => 'Type',
-			'type' => 'string',
 		),
 		'service.label' => array(
 			'code' => 'service.label',
 			'internalcode' => 'mser."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'service.code' => array(
 			'code' => 'service.code',
 			'internalcode' => 'mser."code"',
 			'label' => 'Code',
-			'type' => 'string',
 		),
 		'service.provider' => array(
 			'code' => 'service.provider',
 			'internalcode' => 'mser."provider"',
 			'label' => 'Provider',
-			'type' => 'string',
 		),
 		'service.datestart' => array(
 			'code' => 'service.datestart',
@@ -221,7 +216,6 @@ class Standard
 			'code' => 'service.editor',
 			'internalcode' => 'mser."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'service:has' => array(

@@ -40,33 +40,28 @@ class Standard
 			'code' => 'price.property.siteid',
 			'internalcode' => 'mpripr."siteid"',
 			'label' => 'Property site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'price.property.key' => array(
 			'code' => 'price.property.key',
 			'internalcode' => 'mpripr."key"',
 			'label' => 'Property key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'price.property.type' => array(
 			'code' => 'price.property.type',
 			'internalcode' => 'mpripr."type"',
 			'label' => 'Property type',
-			'type' => 'string',
 		),
 		'price.property.value' => array(
 			'code' => 'price.property.value',
 			'internalcode' => 'mpripr."value"',
 			'label' => 'Property value',
-			'type' => 'string',
 		),
 		'price.property.languageid' => array(
 			'code' => 'price.property.languageid',
 			'internalcode' => 'mpripr."langid"',
 			'label' => 'Property language ID',
-			'type' => 'string',
 		),
 		'price.property.ctime' => array(
 			'code' => 'price.property.ctime',
@@ -86,7 +81,6 @@ class Standard
 			'code' => 'price.property.editor',
 			'internalcode' => 'mpripr."editor"',
 			'label' => 'Property editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

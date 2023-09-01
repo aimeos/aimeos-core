@@ -149,20 +149,17 @@ class Standard
 			'code' => 'log.siteid',
 			'internalcode' => 'malog."siteid"',
 			'label' => 'Log site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'log.message' => array(
 			'code' => 'log.message',
 			'internalcode' => 'malog."message"',
 			'label' => 'Log message',
-			'type' => 'string',
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
-			'type' => 'string',
 		),
 		'log.priority' => array(
 			'code' => 'log.priority',
@@ -180,7 +177,6 @@ class Standard
 			'code' => 'log.request',
 			'internalcode' => 'malog."request"',
 			'label' => 'Log request',
-			'type' => 'string',
 		)
 	);
 

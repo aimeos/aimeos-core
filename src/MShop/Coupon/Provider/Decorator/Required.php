@@ -27,7 +27,6 @@ class Required
 			'code' => 'required.productcode',
 			'internalcode' => 'required.productcode',
 			'label' => 'Code of the product that must be in the basket',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

@@ -27,7 +27,6 @@ class FixedRebate
 			'code' => 'fixedrebate.productcode',
 			'internalcode' => 'fixedrebate.productcode',
 			'label' => 'Product code of the rebate product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

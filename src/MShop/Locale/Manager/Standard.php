@@ -145,20 +145,17 @@ class Standard
 			'code' => 'locale.siteid',
 			'internalcode' => 'mloc."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.languageid' => array(
 			'code' => 'locale.languageid',
 			'internalcode' => 'mloc."langid"',
 			'label' => 'Language ID',
-			'type' => 'string',
 		),
 		'locale.currencyid' => array(
 			'code' => 'locale.currencyid',
 			'internalcode' => 'mloc."currencyid"',
 			'label' => 'Currency ID',
-			'type' => 'string',
 		),
 		'locale.status' => array(
 			'code' => 'locale.status',
@@ -190,7 +187,6 @@ class Standard
 			'code' => 'locale.editor',
 			'internalcode' => 'mloc."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

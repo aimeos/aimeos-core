@@ -140,13 +140,11 @@ class Standard
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
 			'label' => 'ID',
-			'type' => 'string',
 		),
 		'cache.value' => array(
 			'code' => 'cache.value',
 			'internalcode' => '"value"',
 			'label' => 'Cached value',
-			'type' => 'string',
 		),
 		'cache.expire' => array(
 			'code' => 'cache.expire',
@@ -158,7 +156,6 @@ class Standard
 			'code' => 'cache.tag.name',
 			'internalcode' => '"tname"',
 			'label' => 'Tag name',
-			'type' => 'string',
 		),
 	);
 

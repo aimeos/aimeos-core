@@ -144,27 +144,23 @@ class Standard
 			'label' => 'Site ID',
 			'code' => 'rule.siteid',
 			'internalcode' => 'mrul."siteid"',
-			'type' => 'string',
 			'public' => false,
 		),
 		'rule.type' => array(
 			'label' => 'Type ID',
 			'code' => 'rule.type',
 			'internalcode' => 'mrul."type"',
-			'type' => 'string',
 			'public' => false,
 		),
 		'rule.label' => array(
 			'label' => 'Label',
 			'code' => 'rule.label',
 			'internalcode' => 'mrul."label"',
-			'type' => 'string',
 		),
 		'rule.provider' => array(
 			'label' => 'Provider',
 			'code' => 'rule.provider',
 			'internalcode' => 'mrul."provider"',
-			'type' => 'string',
 		),
 		'rule.position' => array(
 			'label' => 'Position',
@@ -215,7 +211,6 @@ class Standard
 			'code' => 'rule.editor',
 			'internalcode' => 'mrul."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

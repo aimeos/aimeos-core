@@ -35,14 +35,12 @@ class Standard
 			'code' => 'order.product.attribute.siteid',
 			'internalcode' => 'mordprat."siteid"',
 			'label' => 'Product attribute site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.product.attribute.attributeid' => array(
 			'code' => 'order.product.attribute.attributeid',
 			'internalcode' => 'mordprat."attrid"',
 			'label' => 'Product attribute original ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.product.attribute.parentid' => array(
@@ -56,25 +54,21 @@ class Standard
 			'code' => 'order.product.attribute.name',
 			'internalcode' => 'mordprat."name"',
 			'label' => 'Product attribute name',
-			'type' => 'string',
 		),
 		'order.product.attribute.value' => array(
 			'code' => 'order.product.attribute.value',
 			'internalcode' => 'mordprat."value"',
 			'label' => 'Product attribute value',
-			'type' => 'string',
 		),
 		'order.product.attribute.code' => array(
 			'code' => 'order.product.attribute.code',
 			'internalcode' => 'mordprat."code"',
 			'label' => 'Product attribute code',
-			'type' => 'string',
 		),
 		'order.product.attribute.type' => array(
 			'code' => 'order.product.attribute.type',
 			'internalcode' => 'mordprat."type"',
 			'label' => 'Product attribute type',
-			'type' => 'string',
 		),
 		'order.product.attribute.quantity' => array(
 			'code' => 'order.product.attribute.quantity',
@@ -86,7 +80,6 @@ class Standard
 			'code' => 'order.product.attribute.price',
 			'internalcode' => 'mordprat."price"',
 			'label' => 'Product attribute price',
-			'type' => 'string',
 		),
 		'order.product.attribute.ctime' => array(
 			'code' => 'order.product.attribute.ctime',
@@ -106,7 +99,6 @@ class Standard
 			'code' => 'order.product.attribute.editor',
 			'internalcode' => 'mordprat."editor"',
 			'label' => 'Product attribute editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

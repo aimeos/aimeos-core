@@ -28,20 +28,17 @@ class Standard
 			'internalcode' => 'mlocla."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ),
 			'label' => 'Language ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.language.label' => array(
 			'code' => 'locale.language.label',
 			'internalcode' => 'mlocla."label"',
 			'label' => 'Language label',
-			'type' => 'string',
 		),
 		'locale.language.code' => array(
 			'code' => 'locale.language.code',
 			'internalcode' => 'mlocla."id"',
 			'label' => 'Language code',
-			'type' => 'string',
 		),
 		'locale.language.status' => array(
 			'code' => 'locale.language.status',
@@ -67,7 +64,6 @@ class Standard
 			'code' => 'locale.language.editor',
 			'internalcode' => 'mlocla."editor"',
 			'label' => 'Language editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

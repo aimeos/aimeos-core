@@ -33,26 +33,22 @@ class Standard
 			'code' => 'service.type.siteid',
 			'internalcode' => 'mserty."siteid"',
 			'label' => 'Type site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'service.type.label' => array(
 			'code' => 'service.type.label',
 			'internalcode' => 'mserty."label"',
 			'label' => 'Type label',
-			'type' => 'string',
 		),
 		'service.type.code' => array(
 			'code' => 'service.type.code',
 			'internalcode' => 'mserty."code"',
 			'label' => 'Type code',
-			'type' => 'string',
 		),
 		'service.type.domain' => array(
 			'code' => 'service.type.domain',
 			'internalcode' => 'mserty."domain"',
 			'label' => 'Type domain',
-			'type' => 'string',
 		),
 		'service.type.position' => array(
 			'code' => 'service.type.position',
@@ -84,7 +80,6 @@ class Standard
 			'code' => 'service.type.editor',
 			'internalcode' => 'mserty."editor"',
 			'label' => 'Type editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

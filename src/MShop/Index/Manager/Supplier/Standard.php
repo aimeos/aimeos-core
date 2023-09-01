@@ -26,7 +26,6 @@ class Standard
 			'internalcode' => 'mindsu."supid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_supplier" AS mindsu ON mindsu."prodid" = mpro."id"' ),
 			'label' => 'Product index supplier ID',
-			'type' => 'string',
 		),
 		'index.supplier:radius' => array(
 			'code' => 'index.supplier:radius()',

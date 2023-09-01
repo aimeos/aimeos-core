@@ -147,38 +147,32 @@ class Standard
 			'code' => 'text.siteid',
 			'internalcode' => 'mtex."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'text.type' => array(
 			'code' => 'text.type',
 			'internalcode' => 'mtex."type"',
 			'label' => 'Type',
-			'type' => 'string',
 		),
 		'text.label' => array(
 			'code' => 'text.label',
 			'internalcode' => 'mtex."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'text.content' => array(
 			'code' => 'text.content',
 			'internalcode' => 'mtex."content"',
 			'label' => 'Content',
-			'type' => 'string',
 		),
 		'text.languageid' => array(
 			'code' => 'text.languageid',
 			'internalcode' => 'mtex."langid"',
 			'label' => 'Language code',
-			'type' => 'string',
 		),
 		'text.domain' => array(
 			'code' => 'text.domain',
 			'internalcode' => 'mtex."domain"',
 			'label' => 'Domain',
-			'type' => 'string',
 		),
 		'text.status' => array(
 			'code' => 'text.status',
@@ -204,7 +198,6 @@ class Standard
 			'code' => 'text.editor',
 			'internalcode' => 'mtex."editor"',
 			'label' => 'editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'text:has' => array(

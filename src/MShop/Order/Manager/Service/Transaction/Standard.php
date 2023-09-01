@@ -35,7 +35,6 @@ class Standard
 			'code' => 'order.service.transaction.siteid',
 			'internalcode' => 'mordsetx."siteid"',
 			'label' => 'Service transaction site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.transaction.parentid' => array(
@@ -49,13 +48,11 @@ class Standard
 			'code' => 'order.service.transaction.type',
 			'internalcode' => 'mordsetx."type"',
 			'label' => 'Service transaction type',
-			'type' => 'string',
 		),
 		'order.service.transaction.currencyid' => array(
 			'code' => 'order.service.transaction.currencyid',
 			'internalcode' => 'mordsetx."currencyid"',
 			'label' => 'Service currencyid code',
-			'type' => 'string',
 		),
 		'order.service.transaction.price' => array(
 			'code' => 'order.service.transaction.price',
@@ -117,7 +114,6 @@ class Standard
 			'code' => 'order.service.transaction.editor',
 			'internalcode' => 'mordsetx."editor"',
 			'label' => 'Service transaction editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

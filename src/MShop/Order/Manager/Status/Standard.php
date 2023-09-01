@@ -33,7 +33,6 @@ class Standard
 			'code' => 'order.status.siteid',
 			'internalcode' => 'mordst."siteid"',
 			'label' => 'Status site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.status.parentid' => array(
@@ -47,13 +46,11 @@ class Standard
 			'code' => 'order.status.type',
 			'internalcode' => 'mordst."type"',
 			'label' => 'Status type',
-			'type' => 'string',
 		),
 		'order.status.value' => array(
 			'code' => 'order.status.value',
 			'internalcode' => 'mordst."value"',
 			'label' => 'Status value',
-			'type' => 'string',
 		),
 		'order.status.ctime' => array(
 			'code' => 'order.status.ctime',
@@ -73,7 +70,6 @@ class Standard
 			'code' => 'order.status.editor',
 			'internalcode' => 'mordst."editor"',
 			'label' => 'Status editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

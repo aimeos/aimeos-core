@@ -145,20 +145,17 @@ class Standard
 			'code' => 'stock.siteid',
 			'internalcode' => 'msto."siteid"',
 			'label' => 'site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'stock.type' => array(
 			'code' => 'stock.type',
 			'internalcode' => 'msto."type"',
 			'label' => 'Type',
-			'type' => 'string',
 		),
 		'stock.productid' => array(
 			'code' => 'stock.productid',
 			'internalcode' => 'msto."prodid"',
 			'label' => 'Product ID',
-			'type' => 'string',
 		),
 		'stock.stocklevel' => array(
 			'code' => 'stock.stocklevel',
@@ -176,7 +173,6 @@ class Standard
 			'code' => 'stock.timeframe',
 			'internalcode' => 'msto."timeframe"',
 			'label' => 'Delivery time frame',
-			'type' => 'string',
 		),
 		'stock.ctime' => array(
 			'code' => 'stock.ctime',
@@ -196,7 +192,6 @@ class Standard
 			'code' => 'stock.editor',
 			'internalcode' => 'msto."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

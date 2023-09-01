@@ -40,33 +40,28 @@ class Standard
 			'code' => 'media.property.siteid',
 			'internalcode' => 'mmedpr."siteid"',
 			'label' => 'Property site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.property.key' => array(
 			'code' => 'media.property.key',
 			'internalcode' => 'mmedpr."key"',
 			'label' => 'Property key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.property.type' => array(
 			'code' => 'media.property.type',
 			'internalcode' => 'mmedpr."type"',
 			'label' => 'Property type',
-			'type' => 'string',
 		),
 		'media.property.value' => array(
 			'code' => 'media.property.value',
 			'internalcode' => 'mmedpr."value"',
 			'label' => 'Property value',
-			'type' => 'string',
 		),
 		'media.property.languageid' => array(
 			'code' => 'media.property.languageid',
 			'internalcode' => 'mmedpr."langid"',
 			'label' => 'Property language ID',
-			'type' => 'string',
 		),
 		'media.property.ctime' => array(
 			'code' => 'media.property.ctime',
@@ -86,7 +81,6 @@ class Standard
 			'code' => 'media.property.editor',
 			'internalcode' => 'mmedpr."editor"',
 			'label' => 'Property editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

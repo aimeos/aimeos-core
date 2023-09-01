@@ -148,50 +148,42 @@ class Standard
 			'label' => 'Site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.type' => array(
 			'label' => 'Type',
 			'code' => 'media.type',
 			'internalcode' => 'mmed."type"',
-			'type' => 'string',
 		),
 		'media.label' => array(
 			'label' => 'Label',
 			'code' => 'media.label',
 			'internalcode' => 'mmed."label"',
-			'type' => 'string',
 		),
 		'media.domain' => array(
 			'label' => 'Domain',
 			'code' => 'media.domain',
 			'internalcode' => 'mmed."domain"',
-			'type' => 'string',
 		),
 		'media.languageid' => array(
 			'label' => 'Language code',
 			'code' => 'media.languageid',
 			'internalcode' => 'mmed."langid"',
-			'type' => 'string',
 		),
 		'media.mimetype' => array(
 			'label' => 'Mime type',
 			'code' => 'media.mimetype',
 			'internalcode' => 'mmed."mimetype"',
-			'type' => 'string',
 		),
 		'media.url' => array(
 			'label' => 'URL',
 			'code' => 'media.url',
 			'internalcode' => 'mmed."link"',
-			'type' => 'string',
 		),
 		'media.preview' => array(
 			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
-			'type' => 'string',
 		),
 		'media.previews' => array(
 			'label' => 'Preview URLs as JSON encoded string',
@@ -203,7 +195,6 @@ class Standard
 			'label' => 'File sytem name',
 			'code' => 'media.filesystem',
 			'internalcode' => 'mmed."fsname"',
-			'type' => 'string',
 		),
 		'media.status' => array(
 			'label' => 'Status',
@@ -229,7 +220,6 @@ class Standard
 			'code' => 'media.editor',
 			'internalcode' => 'mmed."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media:has' => array(

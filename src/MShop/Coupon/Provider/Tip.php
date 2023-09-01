@@ -27,7 +27,6 @@ class Tip
 			'code' => 'tip.productcode',
 			'internalcode' => 'tip.productcode',
 			'label' => 'Product code of the tip product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

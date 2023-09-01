@@ -144,32 +144,27 @@ class Standard
 			'code' => 'price.siteid',
 			'internalcode' => 'mpri."siteid"',
 			'label' => 'Price site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'price.type' => array(
 			'label' => 'Price type ID',
 			'code' => 'price.type',
 			'internalcode' => 'mpri."type"',
-			'type' => 'string',
 		),
 		'price.currencyid' => array(
 			'code' => 'price.currencyid',
 			'internalcode' => 'mpri."currencyid"',
 			'label' => 'Price currency code',
-			'type' => 'string',
 		),
 		'price.domain' => array(
 			'code' => 'price.domain',
 			'internalcode' => 'mpri."domain"',
 			'label' => 'Price domain',
-			'type' => 'string',
 		),
 		'price.label' => array(
 			'code' => 'price.label',
 			'internalcode' => 'mpri."label"',
 			'label' => 'Price label',
-			'type' => 'string',
 		),
 		'price.quantity' => array(
 			'code' => 'price.quantity',
@@ -235,7 +230,6 @@ class Standard
 			'code' => 'price.editor',
 			'internalcode' => 'mpri."editor"',
 			'label' => 'Price editor',
-			'type' => 'string',
 		),
 		'price:has' => array(
 			'code' => 'price:has()',

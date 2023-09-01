@@ -147,40 +147,34 @@ class Standard
 			'code' => 'attribute.siteid',
 			'internalcode' => 'matt."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute.key' => array(
 			'code' => 'attribute.key',
 			'internalcode' => 'matt."key"',
 			'label' => 'Unique key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute.type' => array(
 			'code' => 'attribute.type',
 			'internalcode' => 'matt."type"',
 			'label' => 'Type',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute.label' => array(
 			'code' => 'attribute.label',
 			'internalcode' => 'matt."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'attribute.code' => array(
 			'code' => 'attribute.code',
 			'internalcode' => 'matt."code"',
 			'label' => 'Code',
-			'type' => 'string',
 		),
 		'attribute.domain' => array(
 			'code' => 'attribute.domain',
 			'internalcode' => 'matt."domain"',
 			'label' => 'Domain',
-			'type' => 'string',
 		),
 		'attribute.position' => array(
 			'code' => 'attribute.position',
@@ -213,7 +207,6 @@ class Standard
 			'code' => 'attribute.editor',
 			'internalcode' => 'matt."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute:has' => array(

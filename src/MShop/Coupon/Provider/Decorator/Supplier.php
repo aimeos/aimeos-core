@@ -26,7 +26,6 @@ class Supplier
 			'code' => 'supplier.code',
 			'internalcode' => 'supplier.code',
 			'label' => 'Comma separated supplier codes',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

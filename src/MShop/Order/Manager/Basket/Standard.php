@@ -24,34 +24,29 @@ class Standard
 			'code' => 'order.basket.id',
 			'internalcode' => 'mordba."id"',
 			'label' => 'Basket ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.basket.siteid' => array(
 			'code' => 'order.basket.siteid',
 			'internalcode' => 'mordba."siteid"',
 			'label' => 'Basket site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.basket.customerid' => array(
 			'code' => 'order.basket.customerid',
 			'internalcode' => 'mordba."customerid"',
 			'label' => 'Basket customer ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.basket.name' => array(
 			'code' => 'order.basket.name',
 			'internalcode' => 'mordba."name"',
 			'label' => 'Basket name',
-			'type' => 'string',
 		),
 		'order.basket.content' => array(
 			'code' => 'order.basket.content',
 			'internalcode' => 'mordba."content"',
 			'label' => 'Basket content',
-			'type' => 'string',
 		),
 		'order.basket.ctime' => array(
 			'code' => 'order.basket.ctime',
@@ -71,7 +66,6 @@ class Standard
 			'code' => 'order.basket.editor',
 			'internalcode' => 'mordba."editor"',
 			'label' => 'Basket editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

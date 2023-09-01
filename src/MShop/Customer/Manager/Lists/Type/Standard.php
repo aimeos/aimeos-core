@@ -33,26 +33,22 @@ class Standard
 			'code' => 'customer.lists.type.siteid',
 			'internalcode' => 'mcuslity."siteid"',
 			'label' => 'List type site Id',
-			'type' => 'string',
 			'public' => false,
 		),
 		'customer.lists.type.label' => array(
 			'code' => 'customer.lists.type.label',
 			'internalcode' => 'mcuslity."label"',
 			'label' => 'List type label',
-			'type' => 'string',
 		),
 		'customer.lists.type.code' => array(
 			'code' => 'customer.lists.type.code',
 			'internalcode' => 'mcuslity."code"',
 			'label' => 'List type code',
-			'type' => 'string',
 		),
 		'customer.lists.type.domain' => array(
 			'code' => 'customer.lists.type.domain',
 			'internalcode' => 'mcuslity."domain"',
 			'label' => 'List type domain',
-			'type' => 'string',
 		),
 		'customer.lists.type.position' => array(
 			'code' => 'customer.lists.type.position',
@@ -84,7 +80,6 @@ class Standard
 			'code' => 'customer.lists.type.editor',
 			'internalcode' => 'mcuslity."editor"',
 			'label' => 'List type editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

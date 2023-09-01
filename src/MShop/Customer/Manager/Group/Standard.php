@@ -33,20 +33,17 @@ class Standard
 			'code' => 'customer.group.siteid',
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Group site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'customer.group.code' => array(
 			'code' => 'customer.group.code',
 			'internalcode' => 'mcusgr."code"',
 			'label' => 'Group code',
-			'type' => 'string',
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."label"',
 			'label' => 'Group label',
-			'type' => 'string',
 		),
 		'customer.group.ctime' => array(
 			'code' => 'customer.group.ctime',
@@ -66,7 +63,6 @@ class Standard
 			'code' => 'customer.group.editor',
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Group editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

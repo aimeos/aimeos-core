@@ -35,7 +35,6 @@ class Standard
 			'code' => 'coupon.code.siteid',
 			'internalcode' => 'mcouco."siteid"',
 			'label' => 'Code site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'coupon.code.parentid' => array(
@@ -49,13 +48,11 @@ class Standard
 			'code' => 'coupon.code.code',
 			'internalcode' => 'mcouco."code"',
 			'label' => 'Code value',
-			'type' => 'string',
 		),
 		'coupon.code.count' => array(
 			'code' => 'coupon.code.count',
 			'internalcode' => 'mcouco."count"',
 			'label' => 'Code quantity',
-			'type' => 'string',
 		),
 		'coupon.code.datestart' => array(
 			'code' => 'coupon.code.datestart',
@@ -73,7 +70,6 @@ class Standard
 			'code' => 'coupon.code.ref',
 			'internalcode' => 'mcouco."ref"',
 			'label' => 'Code reference',
-			'type' => 'string',
 		),
 		'coupon.code.ctime' => array(
 			'code' => 'coupon.code.ctime',
@@ -93,7 +89,6 @@ class Standard
 			'code' => 'coupon.code.editor',
 			'internalcode' => 'mcouco."editor"',
 			'label' => 'Code editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

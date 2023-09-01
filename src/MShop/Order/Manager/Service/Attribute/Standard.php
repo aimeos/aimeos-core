@@ -35,14 +35,12 @@ class Standard
 			'code' => 'order.service.attribute.siteid',
 			'internalcode' => 'mordseat."siteid"',
 			'label' => 'Service attribute site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.attribute.attributeid' => array(
 			'code' => 'order.service.attribute.attributeid',
 			'internalcode' => 'mordseat."attrid"',
 			'label' => 'Service attribute original ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.service.attribute.parentid' => array(
@@ -56,25 +54,21 @@ class Standard
 			'code' => 'order.service.attribute.name',
 			'internalcode' => 'mordseat."name"',
 			'label' => 'Service attribute name',
-			'type' => 'string',
 		),
 		'order.service.attribute.value' => array(
 			'code' => 'order.service.attribute.value',
 			'internalcode' => 'mordseat."value"',
 			'label' => 'Service attribute value',
-			'type' => 'string',
 		),
 		'order.service.attribute.code' => array(
 			'code' => 'order.service.attribute.code',
 			'internalcode' => 'mordseat."code"',
 			'label' => 'Service attribute code',
-			'type' => 'string',
 		),
 		'order.service.attribute.type' => array(
 			'code' => 'order.service.attribute.type',
 			'internalcode' => 'mordseat."type"',
 			'label' => 'Service attribute type',
-			'type' => 'string',
 		),
 		'order.service.attribute.quantity' => array(
 			'code' => 'order.service.attribute.quantity',
@@ -106,7 +100,6 @@ class Standard
 			'code' => 'order.service.attribute.editor',
 			'internalcode' => 'mordseat."editor"',
 			'label' => 'Service attribute editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

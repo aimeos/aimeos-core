@@ -32,26 +32,22 @@ class Standard
 			'code' => 'rule.type.siteid',
 			'internalcode' => 'mrulty."siteid"',
 			'label' => 'Type site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'rule.type.label' => array(
 			'code' => 'rule.type.label',
 			'internalcode' => 'mrulty."label"',
 			'label' => 'Type label',
-			'type' => 'string',
 		),
 		'rule.type.code' => array(
 			'code' => 'rule.type.code',
 			'internalcode' => 'mrulty."code"',
 			'label' => 'Type code',
-			'type' => 'string',
 		),
 		'rule.type.domain' => array(
 			'code' => 'rule.type.domain',
 			'internalcode' => 'mrulty."domain"',
 			'label' => 'Type domain',
-			'type' => 'string',
 		),
 		'rule.type.position' => array(
 			'code' => 'rule.type.position',
@@ -83,7 +79,6 @@ class Standard
 			'code' => 'rule.type.editor',
 			'internalcode' => 'mrulty."editor"',
 			'label' => 'Type editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

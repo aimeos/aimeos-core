@@ -27,7 +27,6 @@ class None
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
 			'label' => 'ID',
-			'type' => 'string',
 		),
 	);
 

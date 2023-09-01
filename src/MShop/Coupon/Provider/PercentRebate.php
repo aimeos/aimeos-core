@@ -27,7 +27,6 @@ class PercentRebate
 			'code' => 'percentrebate.productcode',
 			'internalcode' => 'percentrebate.productcode',
 			'label' => 'Product code of the rebate product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

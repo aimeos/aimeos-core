@@ -32,7 +32,6 @@ class FreeProduct
 			'code' => 'productcode',
 			'internalcode' => 'productcode',
 			'label' => 'SKU of the free product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

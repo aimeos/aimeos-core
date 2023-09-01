@@ -143,14 +143,12 @@ class Standard
 			'code' => 'job.siteid',
 			'internalcode' => 'majob."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'job.label' => array(
 			'code' => 'job.label',
 			'internalcode' => 'majob."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'job.status' => array(
 			'code' => 'job.status',
@@ -162,7 +160,6 @@ class Standard
 			'code' => 'job.path',
 			'internalcode' => 'majob."path"',
 			'label' => 'Generated file path',
-			'type' => 'string',
 		),
 		'job.ctime' => array(
 			'code' => 'job.ctime',
@@ -180,7 +177,6 @@ class Standard
 			'code' => 'job.editor',
 			'internalcode' => 'majob."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 		),
 	);
 

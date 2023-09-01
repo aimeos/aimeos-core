@@ -27,7 +27,6 @@ class Standard
 			'internalcode' => 'mindca."catid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca ON mindca."prodid" = mpro."id"' ),
 			'label' => 'Product index category ID',
-			'type' => 'string',
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',

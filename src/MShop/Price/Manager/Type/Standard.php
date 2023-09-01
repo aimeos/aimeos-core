@@ -33,26 +33,22 @@ class Standard
 			'code' => 'price.type.siteid',
 			'internalcode' => 'mprity."siteid"',
 			'label' => 'Type site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'price.type.label' => array(
 			'code' => 'price.type.label',
 			'internalcode' => 'mprity."label"',
 			'label' => 'Type label',
-			'type' => 'string',
 		),
 		'price.type.code' => array(
 			'code' => 'price.type.code',
 			'internalcode' => 'mprity."code"',
 			'label' => 'Type code',
-			'type' => 'string',
 		),
 		'price.type.domain' => array(
 			'code' => 'price.type.domain',
 			'internalcode' => 'mprity."domain"',
 			'label' => 'Type domain',
-			'type' => 'string',
 		),
 		'price.type.position' => array(
 			'code' => 'price.type.position',
@@ -84,7 +80,6 @@ class Standard
 			'code' => 'price.type.editor',
 			'internalcode' => 'mprity."editor"',
 			'label' => 'Type editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

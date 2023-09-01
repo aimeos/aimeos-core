@@ -33,7 +33,6 @@ class Standard
 			'code' => 'media.lists.siteid',
 			'internalcode' => 'mmedli."siteid"',
 			'label' => 'List site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.lists.parentid' => array(
@@ -47,20 +46,17 @@ class Standard
 			'code' => 'media.lists.key',
 			'internalcode' => 'mmedli."key"',
 			'label' => 'List key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.lists.type' => array(
 			'code' => 'media.lists.type',
 			'internalcode' => 'mmedli."type"',
 			'label' => 'List type',
-			'type' => 'string',
 		),
 		'media.lists.refid' => array(
 			'code' => 'media.lists.refid',
 			'internalcode' => 'mmedli."refid"',
 			'label' => 'List reference ID',
-			'type' => 'string',
 		),
 		'media.lists.datestart' => array(
 			'code' => 'media.lists.datestart',
@@ -78,7 +74,6 @@ class Standard
 			'code' => 'media.lists.domain',
 			'internalcode' => 'mmedli."domain"',
 			'label' => 'List domain',
-			'type' => 'string',
 		),
 		'media.lists.position' => array(
 			'code' => 'media.lists.position',
@@ -117,7 +112,6 @@ class Standard
 			'code' => 'media.lists.editor',
 			'internalcode' => 'mmedli."editor"',
 			'label' => 'List editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

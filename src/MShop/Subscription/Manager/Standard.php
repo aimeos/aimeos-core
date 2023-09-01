@@ -145,7 +145,6 @@ class Standard
 			'code' => 'subscription.siteid',
 			'internalcode' => 'msub."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'subscription.orderid' => array(
@@ -178,7 +177,6 @@ class Standard
 			'code' => 'subscription.interval',
 			'internalcode' => 'msub."interval"',
 			'label' => 'Renewal interval',
-			'type' => 'string',
 		),
 		'subscription.reason' => array(
 			'code' => 'subscription.reason',
@@ -196,7 +194,6 @@ class Standard
 			'code' => 'subscription.productid',
 			'internalcode' => 'msub."productid"',
 			'label' => 'Subscription product ID',
-			'type' => 'string',
 		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
@@ -222,7 +219,6 @@ class Standard
 			'code' => 'subscription.editor',
 			'internalcode' => 'msub."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

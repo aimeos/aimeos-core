@@ -33,7 +33,6 @@ class Standard
 			'code' => 'product.lists.siteid',
 			'internalcode' => 'mproli."siteid"',
 			'label' => 'List site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'product.lists.parentid' => array(
@@ -47,20 +46,17 @@ class Standard
 			'code' => 'product.lists.key',
 			'internalcode' => 'mproli."key"',
 			'label' => 'List key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'product.lists.type' => array(
 			'code' => 'product.lists.type',
 			'internalcode' => 'mproli."type"',
 			'label' => 'List type',
-			'type' => 'string',
 		),
 		'product.lists.refid' => array(
 			'code' => 'product.lists.refid',
 			'internalcode' => 'mproli."refid"',
 			'label' => 'List reference ID',
-			'type' => 'string',
 		),
 		'product.lists.datestart' => array(
 			'code' => 'product.lists.datestart',
@@ -78,7 +74,6 @@ class Standard
 			'code' => 'product.lists.domain',
 			'internalcode' => 'mproli."domain"',
 			'label' => 'List domain',
-			'type' => 'string',
 		),
 		'product.lists.position' => array(
 			'code' => 'product.lists.position',
@@ -117,7 +112,6 @@ class Standard
 			'code' => 'product.lists.editor',
 			'internalcode' => 'mproli."editor"',
 			'label' => 'List editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

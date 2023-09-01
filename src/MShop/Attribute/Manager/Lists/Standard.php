@@ -40,27 +40,23 @@ class Standard
 			'code' => 'attribute.lists.siteid',
 			'internalcode' => 'mattli."siteid"',
 			'label' => 'List site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute.lists.key' => array(
 			'code' => 'attribute.lists.key',
 			'internalcode' => 'mattli."key"',
 			'label' => 'List key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'attribute.lists.type' => array(
 			'code' => 'attribute.lists.type',
 			'internalcode' => 'mattli."type"',
 			'label' => 'List type',
-			'type' => 'string',
 		),
 		'attribute.lists.refid' => array(
 			'code' => 'attribute.lists.refid',
 			'internalcode' => 'mattli."refid"',
 			'label' => 'List reference ID',
-			'type' => 'string',
 		),
 		'attribute.lists.datestart' => array(
 			'code' => 'attribute.lists.datestart',
@@ -78,7 +74,6 @@ class Standard
 			'code' => 'attribute.lists.domain',
 			'internalcode' => 'mattli."domain"',
 			'label' => 'List domain',
-			'type' => 'string',
 		),
 		'attribute.lists.position' => array(
 			'code' => 'attribute.lists.position',
@@ -117,7 +112,6 @@ class Standard
 			'code' => 'attribute.lists.editor',
 			'internalcode' => 'mattli."editor"',
 			'label' => 'List editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

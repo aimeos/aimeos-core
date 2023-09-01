@@ -149,38 +149,32 @@ class Standard
 			'code' => 'product.siteid',
 			'internalcode' => 'mpro."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'product.type' => array(
 			'code' => 'product.type',
 			'internalcode' => 'mpro."type"',
 			'label' => 'Type',
-			'type' => 'string',
 		),
 		'product.label' => array(
 			'code' => 'product.label',
 			'internalcode' => 'mpro."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'product.code' => array(
 			'code' => 'product.code',
 			'internalcode' => 'mpro."code"',
 			'label' => 'SKU',
-			'type' => 'string',
 		),
 		'product.url' => array(
 			'code' => 'product.url',
 			'internalcode' => 'mpro."url"',
 			'label' => 'URL segment',
-			'type' => 'string',
 		),
 		'product.dataset' => array(
 			'code' => 'product.dataset',
 			'internalcode' => 'mpro."dataset"',
 			'label' => 'Data set',
-			'type' => 'string',
 		),
 		'product.datestart' => array(
 			'code' => 'product.datestart',
@@ -229,7 +223,6 @@ class Standard
 			'code' => 'product.target',
 			'internalcode' => 'mpro."target"',
 			'label' => 'URL target',
-			'type' => 'string',
 			'public' => false,
 		),
 		'product.ctime' => array(
@@ -250,7 +243,6 @@ class Standard
 			'code' => 'product.editor',
 			'internalcode' => 'mpro."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'product.rating' => array(

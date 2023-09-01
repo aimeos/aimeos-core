@@ -42,7 +42,6 @@ class Time
 			'code' => 'time.weekdays',
 			'internalcode' => 'time.weekdays',
 			'label' => 'Comma separated week days the start and end time is valid for, i.e. number from 1 (Monday) to 7 (Sunday)',
-			'type' => 'string',
 			'default' => '1,2,3,4,5,6,7',
 			'required' => false,
 		),

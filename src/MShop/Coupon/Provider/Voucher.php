@@ -26,7 +26,6 @@ class Voucher
 			'code' => 'voucher.productcode',
 			'internalcode' => 'voucher.productcode',
 			'label' => 'Product code of the rebate product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

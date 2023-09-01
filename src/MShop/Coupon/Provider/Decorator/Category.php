@@ -26,7 +26,6 @@ class Category
 			'code' => 'category.code',
 			'internalcode' => 'category.code',
 			'label' => 'Comma separated category codes',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

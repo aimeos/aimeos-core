@@ -27,7 +27,6 @@ class DirectDebit
 			'code' => 'directdebit.accountowner',
 			'internalcode' => 'accountowner',
 			'label' => 'Account owner',
-			'type' => 'string',
 			'default' => '',
 			'required' => true
 		),
@@ -35,7 +34,6 @@ class DirectDebit
 			'code' => 'directdebit.accountno',
 			'internalcode' => 'accountno',
 			'label' => 'Account number',
-			'type' => 'string',
 			'default' => '',
 			'required' => true
 		),
@@ -43,7 +41,6 @@ class DirectDebit
 			'code' => 'directdebit.bankcode',
 			'internalcode' => 'bankcode',
 			'label' => 'Bank code',
-			'type' => 'string',
 			'default' => '',
 			'required' => true
 		),
@@ -51,7 +48,6 @@ class DirectDebit
 			'code' => 'directdebit.bankname',
 			'internalcode' => 'bankname',
 			'label' => 'Bank name',
-			'type' => 'string',
 			'default' => '',
 			'required' => true
 		),

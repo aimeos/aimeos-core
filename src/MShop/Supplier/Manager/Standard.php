@@ -149,20 +149,17 @@ class Standard
 			'code' => 'supplier.siteid',
 			'internalcode' => 'msup."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'supplier.label' => array(
 			'code' => 'supplier.label',
 			'internalcode' => 'msup."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'supplier.code' => array(
 			'code' => 'supplier.code',
 			'internalcode' => 'msup."code"',
 			'label' => 'Code',
-			'type' => 'string',
 		),
 		'supplier.position' => array(
 			'code' => 'supplier.position',
@@ -194,7 +191,6 @@ class Standard
 			'code' => 'supplier.editor',
 			'internalcode' => 'msup."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'supplier:has' => array(

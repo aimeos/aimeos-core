@@ -42,7 +42,6 @@ class Standard
 			'code' => 'order.product.siteid',
 			'internalcode' => 'mordpr."siteid"',
 			'label' => 'Product site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.product.orderaddressid' => array(
@@ -63,55 +62,46 @@ class Standard
 			'code' => 'order.product.parentproductid',
 			'internalcode' => 'mordpr."parentprodid"',
 			'label' => 'Parent product ID',
-			'type' => 'string',
 		),
 		'order.product.productid' => array(
 			'code' => 'order.product.productid',
 			'internalcode' => 'mordpr."prodid"',
 			'label' => 'Product original ID',
-			'type' => 'string',
 		),
 		'order.product.name' => array(
 			'code' => 'order.product.name',
 			'internalcode' => 'mordpr."name"',
 			'label' => 'Product name',
-			'type' => 'string',
 		),
 		'order.product.description' => array(
 			'code' => 'order.product.description',
 			'internalcode' => 'mordpr."description"',
 			'label' => 'Product description',
-			'type' => 'string',
 		),
 		'order.product.prodcode' => array(
 			'code' => 'order.product.prodcode',
 			'internalcode' => 'mordpr."prodcode"',
 			'label' => 'Product code',
-			'type' => 'string',
 		),
 		'order.product.type' => array(
 			'code' => 'order.product.type',
 			'internalcode' => 'mordpr."type"',
 			'label' => 'Product type',
-			'type' => 'string',
 		),
 		'order.product.vendor' => array(
 			'code' => 'order.product.vendor',
 			'internalcode' => 'mordpr."vendor"',
 			'label' => 'Product vendor',
-			'type' => 'string',
 		),
 		'order.product.stocktype' => array(
 			'code' => 'order.product.stocktype',
 			'internalcode' => 'mordpr."stocktype"',
 			'label' => 'Product stock type',
-			'type' => 'string',
 		),
 		'order.product.timeframe' => array(
 			'code' => 'order.product.timeframe',
 			'internalcode' => 'mordpr."timeframe"',
 			'label' => 'Delivery time frame',
-			'type' => 'string',
 		),
 		'order.product.quantity' => array(
 			'code' => 'order.product.quantity',
@@ -135,7 +125,6 @@ class Standard
 			'code' => 'order.product.currencyid',
 			'internalcode' => 'mordpr."currencyid"',
 			'label' => 'Product currencyid code',
-			'type' => 'string',
 		),
 		'order.product.price' => array(
 			'code' => 'order.product.price',
@@ -195,19 +184,16 @@ class Standard
 			'code' => 'order.product.mediaurl',
 			'internalcode' => 'mordpr."mediaurl"',
 			'label' => 'Product media url',
-			'type' => 'string',
 		),
 		'order.product.target' => array(
 			'code' => 'order.product.target',
 			'internalcode' => 'mordpr."target"',
 			'label' => 'Product url target',
-			'type' => 'string',
 		),
 		'order.product.notes' => array(
 			'code' => 'order.product.notes',
 			'internalcode' => 'mordpr."notes"',
 			'label' => 'Product notes',
-			'type' => 'string',
 		),
 		'order.product.flags' => array(
 			'code' => 'order.product.flags',
@@ -233,7 +219,6 @@ class Standard
 			'code' => 'order.product.editor',
 			'internalcode' => 'mordpr."editor"',
 			'label' => 'Product editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'agg:order.product:count' => array(

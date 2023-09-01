@@ -33,7 +33,6 @@ class Standard
 			'code' => 'catalog.lists.siteid',
 			'internalcode' => 'mcatli."siteid"',
 			'label' => 'List site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'catalog.lists.parentid' => array(
@@ -47,20 +46,17 @@ class Standard
 			'code' => 'catalog.lists.key',
 			'internalcode' => 'mcatli."key"',
 			'label' => 'List key',
-			'type' => 'string',
 			'public' => false,
 		),
 		'catalog.lists.type' => array(
 			'code' => 'catalog.lists.type',
 			'internalcode' => 'mcatli."type"',
 			'label' => 'List type',
-			'type' => 'string',
 		),
 		'catalog.lists.refid' => array(
 			'code' => 'catalog.lists.refid',
 			'internalcode' => 'mcatli."refid"',
 			'label' => 'List reference ID',
-			'type' => 'string',
 		),
 		'catalog.lists.datestart' => array(
 			'code' => 'catalog.lists.datestart',
@@ -78,7 +74,6 @@ class Standard
 			'code' => 'catalog.lists.domain',
 			'internalcode' => 'mcatli."domain"',
 			'label' => 'List Domain',
-			'type' => 'string',
 		),
 		'catalog.lists.position' => array(
 			'code' => 'catalog.lists.position',
@@ -117,7 +112,6 @@ class Standard
 			'code' => 'catalog.lists.editor',
 			'internalcode' => 'mcatli."editor"',
 			'label' => 'List editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

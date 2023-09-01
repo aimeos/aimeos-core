@@ -27,27 +27,23 @@ class Standard
 			'internalcode' => 'mindte."prodid"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label' => 'Product index text ID',
-			'type' => 'string',
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
 			'internalcode' => ':site AND mindte."url"',
 			'label' => 'Product URL',
-			'type' => 'string',
 			'public' => false,
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
 			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
-			'type' => 'string',
 			'public' => false,
 		),
 		'sort:index.text:name' => array(
 			'code' => 'sort:index.text:name()',
 			'internalcode' => 'mindte."name"',
 			'label' => 'Sort by product name, parameter(<language ID>)',
-			'type' => 'string',
 			'public' => false,
 		),
 		'index.text:relevance' => array(

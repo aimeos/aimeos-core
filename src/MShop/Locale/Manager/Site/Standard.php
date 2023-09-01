@@ -30,27 +30,23 @@ class Standard
 			'internalcode' => 'mlocsi."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")'],
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.siteid' => array(
 			'code' => 'locale.site.siteid',
 			'internalcode' => 'mlocsi."siteid"',
 			'label' => 'Unique site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.label' => array(
 			'code' => 'locale.site.label',
 			'internalcode' => 'mlocsi."label"',
 			'label' => 'Site label',
-			'type' => 'string',
 		),
 		'locale.site.code' => array(
 			'code' => 'locale.site.code',
 			'internalcode' => 'mlocsi."code"',
 			'label' => 'Site code',
-			'type' => 'string',
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
@@ -82,14 +78,12 @@ class Standard
 			'code' => 'locale.site.icon',
 			'internalcode' => 'mlocsi."icon"',
 			'label' => 'Site icon',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.logo' => array(
 			'code' => 'locale.site.logo',
 			'internalcode' => 'mlocsi."logo"',
 			'label' => 'Site logo',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.rating' => array(
@@ -110,14 +104,12 @@ class Standard
 			'code' => 'locale.site.refid',
 			'internalcode' => 'mlocsi."refid"',
 			'label' => 'Site-related supplier ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.theme' => array(
 			'code' => 'locale.site.theme',
 			'internalcode' => 'mlocsi."theme"',
 			'label' => 'Site theme',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.site.ctime' => array(
@@ -138,14 +130,12 @@ class Standard
 			'code' => 'locale.site.editor',
 			'internalcode' => 'mlocsi."editor"',
 			'label' => 'Site editor',
-			'type' => 'string',
 			'public' => false,
 		),
 		'parentid' => array(
 			'code' => 'locale.site.parentid',
 			'internalcode' => 'mlocsi."parentid"',
 			'label' => 'Parent site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

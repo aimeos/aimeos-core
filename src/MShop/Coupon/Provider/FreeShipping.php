@@ -27,7 +27,6 @@ class FreeShipping
 			'code' => 'freeshipping.productcode',
 			'internalcode' => 'freeshipping.productcode',
 			'label' => 'Product code of the free shipping product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

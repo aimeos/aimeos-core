@@ -145,27 +145,23 @@ class Standard
 			'label' => 'Site ID',
 			'code' => 'plugin.siteid',
 			'internalcode' => 'mplu."siteid"',
-			'type' => 'string',
 			'public' => false,
 		),
 		'plugin.type' => array(
 			'label' => 'Type ID',
 			'code' => 'plugin.type',
 			'internalcode' => 'mplu."type"',
-			'type' => 'string',
 			'public' => false,
 		),
 		'plugin.label' => array(
 			'label' => 'Label',
 			'code' => 'plugin.label',
 			'internalcode' => 'mplu."label"',
-			'type' => 'string',
 		),
 		'plugin.provider' => array(
 			'label' => 'Provider',
 			'code' => 'plugin.provider',
 			'internalcode' => 'mplu."provider"',
-			'type' => 'string',
 		),
 		'plugin.position' => array(
 			'label' => 'Position',
@@ -204,7 +200,6 @@ class Standard
 			'code' => 'plugin.editor',
 			'internalcode' => 'mplu."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

@@ -27,7 +27,6 @@ class Standard
 			'internalcode' => 'mindpr."prodid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
-			'type' => 'string',
 		),
 		'index.price:value' => array(
 			'code' => 'index.price:value()',

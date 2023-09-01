@@ -144,32 +144,27 @@ class Standard
 			'code' => 'tag.siteid',
 			'internalcode' => 'mtag."siteid"',
 			'label' => 'Site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'tag.type' => array(
 			'code' => 'tag.type',
 			'internalcode' => 'mtag."type"',
 			'label' => 'Type',
-			'type' => 'string',
 		),
 		'tag.label' => array(
 			'code' => 'tag.label',
 			'internalcode' => 'mtag."label"',
 			'label' => 'Label',
-			'type' => 'string',
 		),
 		'tag.domain' => array(
 			'code' => 'tag.domain',
 			'internalcode' => 'mtag."domain"',
 			'label' => 'Domain',
-			'type' => 'string',
 		),
 		'tag.languageid' => array(
 			'code' => 'tag.languageid',
 			'internalcode' => 'mtag."langid"',
 			'label' => 'Language id',
-			'type' => 'string',
 		),
 		'tag.ctime' => array(
 			'code' => 'tag.ctime',
@@ -189,7 +184,6 @@ class Standard
 			'code' => 'tag.editor',
 			'internalcode' => 'mtag."editor"',
 			'label' => 'Editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

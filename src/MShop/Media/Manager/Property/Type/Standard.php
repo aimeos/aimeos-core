@@ -32,26 +32,22 @@ class Standard
 			'code' => 'media.property.type.siteid',
 			'internalcode' => 'mmedprty."siteid"',
 			'label' => 'Property type site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'media.property.type.label' => array(
 			'code' => 'media.property.type.label',
 			'internalcode' => 'mmedprty."label"',
 			'label' => 'Property type label',
-			'type' => 'string',
 		),
 		'media.property.type.code' => array(
 			'code' => 'media.property.type.code',
 			'internalcode' => 'mmedprty."code"',
 			'label' => 'Property type code',
-			'type' => 'string',
 		),
 		'media.property.type.domain' => array(
 			'code' => 'media.property.type.domain',
 			'internalcode' => 'mmedprty."domain"',
 			'label' => 'Property type domain',
-			'type' => 'string',
 		),
 		'media.property.type.position' => array(
 			'code' => 'media.property.type.position',
@@ -83,7 +79,6 @@ class Standard
 			'code' => 'media.property.type.editor',
 			'internalcode' => 'mmedprty."editor"',
 			'label' => 'Property type editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

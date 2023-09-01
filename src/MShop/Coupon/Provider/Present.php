@@ -27,7 +27,6 @@ class Present
 			'code' => 'present.productcode',
 			'internalcode' => 'present.productcode',
 			'label' => 'Product code of the rebate product',
-			'type' => 'string',
 			'default' => '',
 			'required' => true,
 		),

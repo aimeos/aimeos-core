@@ -35,7 +35,6 @@ class Standard
 			'code' => 'order.coupon.siteid',
 			'internalcode' => 'mordco."siteid"',
 			'label' => 'Coupon site ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'order.coupon.parentid' => array(
@@ -56,7 +55,6 @@ class Standard
 			'code' => 'order.coupon.code',
 			'internalcode' => 'mordco."code"',
 			'label' => 'Coupon code',
-			'type' => 'string',
 		),
 		'order.coupon.ctime' => array(
 			'code' => 'order.coupon.ctime',
@@ -76,7 +74,6 @@ class Standard
 			'code' => 'order.coupon.editor',
 			'internalcode' => 'mordco."editor"',
 			'label' => 'Coupon editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);

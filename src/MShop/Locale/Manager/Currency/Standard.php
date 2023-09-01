@@ -28,20 +28,17 @@ class Standard
 			'internalcode' => 'mloccu."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")' ),
 			'label' => 'Currency ID',
-			'type' => 'string',
 			'public' => false,
 		),
 		'locale.currency.label' => array(
 			'code' => 'locale.currency.label',
 			'internalcode' => 'mloccu."label"',
 			'label' => 'Currency label',
-			'type' => 'string',
 		),
 		'locale.currency.code' => array(
 			'code' => 'locale.currency.code',
 			'internalcode' => 'mloccu."id"',
 			'label' => 'Currency code',
-			'type' => 'string',
 		),
 		'locale.currency.status' => array(
 			'code' => 'locale.currency.status',
@@ -67,7 +64,6 @@ class Standard
 			'code' => 'locale.currency.editor',
 			'internalcode' => 'mloccu."editor"',
 			'label' => 'Currency editor',
-			'type' => 'string',
 			'public' => false,
 		),
 	);
