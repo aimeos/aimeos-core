@@ -648,7 +648,7 @@ trait DB
 
 		$colstring = '';
 		foreach( $columns as $name => $entry ) {
-			$colstring .= '"' . $entry->getInternalCode() . '", ';
+			$colstring .= $entry->getInternalCode() . ', ';
 		}
 
 		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );

@@ -152,7 +152,9 @@ class Standard extends \Aimeos\MShop\Common\Manager\Base implements \Aimeos\MSho
 	public function getSaveAttributes() : array
 	{
 		return $this->createAttributes( [
-			'key' => [],
+			'key' => [
+				'internalcode' => '"key"'
+			],
 			'value' => [],
 		] );
 	}

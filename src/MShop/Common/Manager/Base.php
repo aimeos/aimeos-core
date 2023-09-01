@@ -226,9 +226,11 @@ abstract class Base implements \Aimeos\Macro\Iface
 			return null;
 		}
 
-		$key = key( $this->getSearchAttributes() );
-		$filter = $cursor->filter()->add( $key, '>', (int) $cursor->value() )->order( $key );
+		if( ( $first = current( $this->getSearchAttributes() ) ) === false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No search configuration available for "%1$s"', get_class( $this ) ) );
+		}
 
+		$filter = $cursor->filter()->add( $first->getCode(), '>', (int) $cursor->value() )->order( $first->getCode() );
 		$items = $this->search( $filter, $ref );
 		$cursor->setValue( $items->lastKey() ?: '' );
 
@@ -450,7 +452,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 *
 	 * @return int Site mode constant (default: SITE_ALL for inheritance and aggregation)
 	 */
-	protected function getSiteMode() : string
+	protected function getSiteMode() : int
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		return $this->context()->config()->get( $this->getConfigKey( 'sitemode' ), $level );
