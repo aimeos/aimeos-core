@@ -47,7 +47,7 @@ return [
 				FROM ":table"
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group "id"
+				GROUP BY :columns :group "id", "siteid", "ctime", "mtime", "editor"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',

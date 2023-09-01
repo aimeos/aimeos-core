@@ -488,7 +488,7 @@ trait DB
 		$config = $this->context()->config();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
-		if( $sql = $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi' ) ) ) {
+		if( ( $sql = $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi' ) ) ) !== null ) {
 			return str_replace( ':table', $this->getTable(), $sql );
 		}
 
