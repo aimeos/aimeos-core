@@ -264,7 +264,7 @@ class MShop
 	{
 		$classname = self::classname( $context, [], $domain, $name );
 		$iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';
-		$manager = self::createManager( $context, $classname, $iface, $domain );
+		$manager = self::createManager( $context, $classname, interface_exists( $iface ) ? $iface : null, $domain );
 
 		self::$objects[$classname] = $manager;
 		$paths = [$domain => $manager];

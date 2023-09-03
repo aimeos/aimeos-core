@@ -154,10 +154,10 @@ trait Traits
 			$domainname = ucfirst( $domain );
 			$subnames = $this->createSubNames( $manager );
 
-			$classname = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
-			$interface = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
+			$class = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
+			$iface = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
-			$subManager = \Aimeos\Utils::create( $classname, [$context], $interface );
+			$subManager = \Aimeos\Utils::create( $class, [$context], interface_exists( $iface ) ? $iface : null );
 
 			$subManager = $this->addManagerDecorators( $subManager, $manager, $domain );
 			$this->subManagers[$key] = $subManager->setObject( $subManager );

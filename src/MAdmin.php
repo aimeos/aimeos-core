@@ -84,7 +84,7 @@ class MAdmin
 		{
 			$iface = '\\Aimeos\\MAdmin\\' . ucfirst( $domain ) . '\\Manager\\Iface';
 
-			$manager = self::createManager( $context, $classname, $iface );
+			$manager = self::createManager( $context, $classname, interface_exists( $iface ) ? $iface : null );
 			$manager = self::addManagerDecorators( $context, $manager, $domain );
 
 			self::$objects[$classname] = $manager;
