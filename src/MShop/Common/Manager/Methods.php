@@ -252,7 +252,7 @@ trait Methods
 	 */
 	protected function getTable() : string
 	{
-		return 'mshop_' . $this->domain . ( $this->subpath ?: '' );
+		return 'mshop_' . $this->domain . ( $this->subpath ? '_' . str_replace( '/', '_', $this->subpath ): '' );
 	}
 
 
