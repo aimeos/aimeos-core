@@ -210,7 +210,7 @@ class MAdmin
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected static function createManager( \Aimeos\MShop\ContextIface $context,
-		string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
+		string $classname, ?string $interface ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
