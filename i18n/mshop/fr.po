@@ -7,6 +7,7 @@
 # a270031086f2a0d3514bc0cb507b48f6, 2019
 # Laurent Georget <laurent@lgeorget.eu>, 2020-2021
 # Medzo Zeng <medzozeng@hotmail.fr>, 2019
+# Nicolas Capsias, 2023
 # nsendetzky, 2014
 # Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-07 11:38+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Six byNine <wwinx@hotmail.com>, 2018\n"
+"Last-Translator: Nicolas Capsias, 2023\n"
 "Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -159,11 +160,11 @@ msgstr "Le code \"%1$s\" ne doit pas dépasser 32 caractères"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Le code contient des caractères non valides: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Le code est trop long"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -271,7 +272,7 @@ msgstr "Objet d'internationalisation indisponible pour \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Code ISO de pays invalide"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
@@ -279,7 +280,7 @@ msgstr "Code \"1%1$s\" de devise ISO invalide"
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Code ISO de devise invalide"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -287,7 +288,7 @@ msgstr "Caractères invalides dans le code de devise ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Code langue ISO non valide"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
