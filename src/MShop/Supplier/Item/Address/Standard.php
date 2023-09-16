@@ -20,13 +20,4 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Address\Standard
 	implements \Aimeos\MShop\Supplier\Item\Address\Iface
 {
-	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'supplier/address';
-	}
 }

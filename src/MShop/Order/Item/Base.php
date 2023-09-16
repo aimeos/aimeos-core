@@ -269,17 +269,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'order';
-	}
-
-
-	/**
 	 * Adds the address of the given type to the basket
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Address\Iface $address Order address item for the given type

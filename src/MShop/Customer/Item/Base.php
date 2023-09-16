@@ -109,17 +109,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'customer';
-	}
-
-
-	/**
 	 * Tests if this item object was modified
 	 *
 	 * @return bool True if modified, false if not

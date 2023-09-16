@@ -99,17 +99,6 @@ class Standard
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'catalog';
-	}
-
-
-	/**
 	 * Returns the unique ID of the node.
 	 *
 	 * @return string|null Unique ID of the node

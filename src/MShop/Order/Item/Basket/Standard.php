@@ -118,17 +118,6 @@ class Standard
 	}
 
 
-	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'order/basket';
-	}
-
-
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *

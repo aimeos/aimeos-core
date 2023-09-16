@@ -112,17 +112,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'price';
-	}
-
-
-	/**
 	 * Tests if the price is within the requirements.
 	 *
 	 * @param string|int|float|null $value Monetary value

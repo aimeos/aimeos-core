@@ -33,7 +33,7 @@ class Standard
 	 */
 	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( $prefix, $values );
+		parent::__construct( $prefix, $values, str_replace( '.', '/', rtrim( $prefix, '.' ) ) );
 
 		$this->prefix = $prefix;
 	}
@@ -162,17 +162,6 @@ class Standard
 	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'status', $status );
-	}
-
-
-	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
 	}
 
 

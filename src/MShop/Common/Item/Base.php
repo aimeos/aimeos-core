@@ -26,7 +26,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	protected bool $available = true;
 	protected bool $modified = false;
 	protected string $bprefix;
-	protected string $type;
+	protected ?string $type;
 	protected array $bdata;
 
 
@@ -35,9 +35,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 *
 	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative list of key/value pairs of the item properties
-	 * @param string $type Item resource type
+	 * @param string|null $type Item resource type
 	 */
-	public function __construct( string $prefix, array $values, string $type = 'custom' )
+	public function __construct( string $prefix, array $values, string $type = null )
 	{
 		$this->bprefix = $prefix;
 		$this->bdata = $values;
@@ -366,6 +366,19 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function getResourceType() : string
 	{
+		if( !$this->type )
+		{
+			$parts = explode( '\\', strtolower( get_class( $this ) ) );
+			array_shift( $parts ); array_shift( $parts ); // remove "Aimeos\MShop"
+			array_pop( $parts );
+
+			$domain = array_shift( $parts ) ?: 'custom';
+			array_shift( $parts ); // remove "item"
+			array_unshift( $parts, $domain );
+
+			$this->type = join( '/', $parts );
+		}
+
 		return $this->type;
 	}
 

@@ -227,17 +227,6 @@ class Standard
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'rule';
-	}
-
-
-	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
 	 * @return bool True if available, false if not

@@ -38,7 +38,7 @@ class Standard
 	 */
 	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( $prefix, $values );
+		parent::__construct( $prefix, $values, str_replace( '.', '/', rtrim( $prefix, '.' ) ) );
 
 		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
 		$this->prefix = (string) $prefix;
@@ -292,17 +292,6 @@ class Standard
 		$this->refItem = $refItem;
 
 		return $this;
-	}
-
-
-	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
 	}
 
 

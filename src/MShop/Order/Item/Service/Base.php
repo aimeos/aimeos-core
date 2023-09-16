@@ -93,17 +93,6 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType() : string
-	{
-		return 'order/service';
-	}
-
-
-	/**
 	 * Returns the value or list of values of the attribute item for the ordered service with the given code.
 	 *
 	 * @param string $code Code of the service attribute item
