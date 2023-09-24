@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-07 11:38+0100\n"
+"POT-Creation-Date: 2023-09-26 15:47+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2023\n"
 "Language-Team: Turkish (http://app.transifex.com/aimeos/aimeos-core/language/tr/)\n"
@@ -293,6 +293,10 @@ msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr "\"%1$s\" içinde \"%2$s\" kimlik numarası için arama sonucu olarak geçersiz JSON: %3$s"
 
 #, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr "\"%1$d\" konumunda geçersiz nitelik"
+
+#, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
 msgstr "\"%1$s\" ISO para birimi kodunda geçersiz karakterler"
 
@@ -538,6 +542,10 @@ msgstr "\"%1$s\" kodlu hiçbir ürün bulunamadı"
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
 msgstr "\"%1$s\" para birimi için hiçbir indirim mevcut değil"
+
+#, php-format
+msgid "No search configuration available for \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "No search keys available"

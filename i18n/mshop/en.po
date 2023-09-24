@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-05 07:26+0200\n"
+"POT-Creation-Date: 2023-09-26 15:47+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -327,6 +327,10 @@ msgstr ""
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr ""
 
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr ""
+
 # error domain: misc.
 # error type: invalid characters in name or value
 #, php-format
@@ -628,6 +632,10 @@ msgstr ""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
+msgstr ""
+
+#, php-format
+msgid "No search configuration available for \"%1$s\""
 msgstr ""
 
 #, php-format
