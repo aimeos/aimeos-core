@@ -219,10 +219,10 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_list_type" ( :names
-							"code", "domain", "label", "pos", "status",
-							"mtime", "editor", "siteid", "ctime"
+							"code", "domain", "label", "i18n", "pos", "status",
+							"mtime","editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -230,8 +230,8 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_customer_list_type"
 						SET :names
-							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
-							"status" = ?, "mtime" = ?, "editor" = ?
+							"code" = ?, "domain" = ?, "label" = ?, "i18n" = ?,
+							"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
@@ -427,10 +427,10 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_property_type" ( :names
-							"code", "domain", "label", "pos", "status",
-							"mtime", "editor", "siteid", "ctime"
+							"code", "domain", "label", "i18n", "pos", "status",
+							"mtime","editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -438,8 +438,8 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_customer_property_type"
 						SET :names
-							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
-							"status" = ?, "mtime" = ?, "editor" = ?
+							"code" = ?, "domain" = ?, "label" = ?, "i18n" = ?,
+							"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),

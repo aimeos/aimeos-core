@@ -24,12 +24,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.type.code' => 'code',
 			'common.type.domain' => 'domain',
 			'common.type.label' => 'label',
-			'common.type.name' => 'name',
+			'common.type.i18n' => ['de' => 'name'],
 			'common.type.position' => 5,
 			'common.type.status' => 1,
 			'common.type.mtime' => '2011-01-01 00:00:02',
 			'common.type.ctime' => '2011-01-01 00:00:01',
 			'common.type.editor' => 'unitTestUser',
+			'.language' => 'de'
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.', $this->values );
@@ -80,6 +81,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $return );
 		$this->assertEquals( 'domain2', $this->object->getDomain() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testGetI18n()
+	{
+		$this->assertEquals( ['de' => 'name'], $this->object->getI18n() );
+	}
+
+	public function testSetI18n()
+	{
+		$return = $this->object->setI18n( ['de' => 'label2'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $return );
+		$this->assertEquals( ['de' => 'label2'], $this->object->getI18n() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -159,12 +174,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.' );
+		$item = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.', ['.language' => 'de'] );
 
 		$list = $entries = array(
 			'common.type.id' => 8,
 			'common.type.code' => 'test',
 			'common.type.domain' => 'testDomain',
+			'common.type.i18n' => ['de' => 'test eintrag'],
 			'common.type.label' => 'test item',
 			'common.type.position' => 2,
 			'common.type.status' => 1,
@@ -177,10 +193,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['common.type.id'], $item->getId() );
 		$this->assertEquals( $list['common.type.code'], $item->getCode() );
 		$this->assertEquals( $list['common.type.domain'], $item->getDomain() );
-		$this->assertEquals( $list['common.type.label'], $item->getName() ); // fallback to label
+		$this->assertEquals( $list['common.type.i18n'], $item->getI18n() );
 		$this->assertEquals( $list['common.type.label'], $item->getLabel() );
 		$this->assertEquals( $list['common.type.position'], $item->getPosition() );
 		$this->assertEquals( $list['common.type.status'], $item->getStatus() );
+		$this->assertEquals( 'test eintrag', $item->getName() );
 		$this->assertEquals( '', $item->getSiteId() );
 	}
 
@@ -188,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) ); // no ".language"
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.type.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['common.type.code'] );

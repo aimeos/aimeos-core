@@ -67,6 +67,7 @@ abstract class Base
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values[$this->prefix . 'siteid'] = $values[$this->prefix . 'siteid'] ?? $this->context()->locale()->getSiteId();
+
 		return $this->createItemBase( $values );
 	}
 
@@ -118,9 +119,10 @@ abstract class Base
 			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
-		$stmt->bind( $idx++, $item->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
-		$stmt->bind( $idx++, $item->getDomain(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
-		$stmt->bind( $idx++, $item->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $item->getDomain() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, json_encode( $item->getI18n() ) );
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $time ); //mtime
@@ -216,6 +218,13 @@ abstract class Base
 
 		while( ( $row = $results->fetch() ) !== null )
 		{
+			if( ( $row[$this->prefix . 'i18n'] = json_decode( $i18n = $row[$this->prefix . 'i18n'], true ) ) === null )
+			{
+				$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.i18n', $row[$this->prefix . 'id'], $i18n );
+				$this->context()->logger()->warning( $msg, 'core/type' );
+				$row[$this->prefix . 'i18n'] = [];
+			}
+
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 				$items[$row[$this->prefix . 'id']] = $item;
 			}
@@ -262,6 +271,8 @@ abstract class Base
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Type\Iface
 	{
+		$values['.language'] = $this->context()->locale()->getLanguageId();
+
 		return new \Aimeos\MShop\Common\Item\Type\Standard( $this->prefix, $values );
 	}
 

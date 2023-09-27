@@ -40,9 +40,9 @@ class Standard
 
 
 	/**
-	 * Returns the code of the common list type item
+	 * Returns the code of the type item
 	 *
-	 * @return string Code of the common list type item
+	 * @return string Code of the type item
 	 */
 	public function getCode() : string
 	{
@@ -51,9 +51,9 @@ class Standard
 
 
 	/**
-	 * Sets the code of the common list type item
+	 * Sets the code of the type item
 	 *
-	 * @param string $code New code of the common list type item
+	 * @param string $code New code of the type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
@@ -63,9 +63,9 @@ class Standard
 
 
 	/**
-	 * Returns the domain of the common list type item
+	 * Returns the domain of the type item
 	 *
-	 * @return string Domain of the common list type item
+	 * @return string Domain of the type item
 	 */
 	public function getDomain() : string
 	{
@@ -74,14 +74,37 @@ class Standard
 
 
 	/**
-	 * Sets the domain of the common list type item
+	 * Sets the domain of the type item
 	 *
-	 * @param string $domain New domain of the common list type item
+	 * @param string $domain New domain of the type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'domain', $domain );
+	}
+
+
+	/**
+	 * Returns the translations of the type item label
+	 *
+	 * @return array Translations of the type item label
+	 */
+	public function getI18n() : array
+	{
+		return $this->get( $this->prefix . 'i18n', [] );
+	}
+
+
+	/**
+	 * Sets the translations of the type item label
+	 *
+	 * @param array $value New translations of the type item label
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
+	 */
+	public function setI18n( array $value ) : \Aimeos\MShop\Common\Item\Type\Iface
+	{
+		return $this->set( $this->prefix . 'i18n', $value );
 	}
 
 
@@ -92,14 +115,15 @@ class Standard
 	 */
 	public function getName() : string
 	{
-		return $this->get( $this->prefix . 'name', $this->getLabel() );
+		$i18n = $this->getI18n();
+		return $i18n[$this->get( '.language' )] ?? $this->getLabel();
 	}
 
 
 	/**
-	 * Returns the label of the common list type item
+	 * Returns the label of the type item
 	 *
-	 * @return string Label of the common list type item
+	 * @return string Label of the type item
 	 */
 	public function getLabel() : string
 	{
@@ -108,9 +132,9 @@ class Standard
 
 
 	/**
-	 * Sets the label of the common list type item
+	 * Sets the label of the type item
 	 *
-	 * @param string $label New label of the common list type item
+	 * @param string $label New label of the type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setLabel( string $label ) : \Aimeos\MShop\Common\Item\Type\Iface
@@ -143,9 +167,9 @@ class Standard
 
 
 	/**
-	 * Returns the status of the common list type item
+	 * Returns the status of the type item
 	 *
-	 * @return int Status of the common list type item
+	 * @return int Status of the type item
 	 */
 	public function getStatus() : int
 	{
@@ -154,9 +178,9 @@ class Standard
 
 
 	/**
-	 * Sets the status of the common list type item
+	 * Sets the status of the type item
 	 *
-	 * @param int $status New status of the common list type item
+	 * @param int $status New status of the type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
@@ -193,6 +217,7 @@ class Standard
 			{
 				case $this->prefix . 'code': $item = $item->setCode( $value ); break;
 				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
+				case $this->prefix . 'i18n': $item = $item->setI18n( (array) $value ); break;
 				case $this->prefix . 'label': $item = $item->setLabel( $value ); break;
 				case $this->prefix . 'position': $item = $item->setPosition( (int) $value ); break;
 				case $this->prefix . 'status': $item = $item->setStatus( (int) $value ); break;
