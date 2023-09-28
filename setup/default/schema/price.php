@@ -17,7 +17,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' )->default( '' );
-			$table->json( 'i18n' )->null( true );
+			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
@@ -58,7 +58,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' )->default( '' );
-			$table->json( 'i18n' )->null( true );
+			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
@@ -101,7 +101,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' )->default( '' );
-			$table->json( 'i18n' )->null( true );
+			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();

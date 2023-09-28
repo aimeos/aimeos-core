@@ -228,6 +228,13 @@ class Setup
 				->default( '' );
 		} );
 
+		\Aimeos\Upscheme\Schema\Table::macro( 'i18n', function( string $name = 'i18n' ) {
+			return $this->text( $name )
+				->opt( 'charset', 'utf8mb4', 'mysql' )
+				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
+				->default( '{}' );
+		} );
+
 		\Aimeos\Upscheme\Schema\Table::macro( 'meta', function() {
 			$this->datetime( 'mtime' );
 			$this->datetime( 'ctime' );
