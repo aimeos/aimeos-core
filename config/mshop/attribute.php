@@ -42,7 +42,8 @@ return array(
 							mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 							mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 							mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
-							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
+							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position",
+							mattlity."i18n" AS "attribute.lists.type.i18n"
 						FROM "mshop_attribute_list_type" mattlity
 						:joins
 						WHERE :cond
@@ -55,7 +56,8 @@ return array(
 							mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 							mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 							mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
-							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
+							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position",
+							mattlity."i18n" AS "attribute.lists.type.i18n"
 						FROM "mshop_attribute_list_type" mattlity
 						:joins
 						WHERE :cond
@@ -250,7 +252,8 @@ return array(
 							mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 							mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
 							mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
-							mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position"
+							mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position",
+							mattprty."i18n" AS "attribute.property.type.i18n"
 						FROM "mshop_attribute_property_type" mattprty
 						:joins
 						WHERE :cond
@@ -263,7 +266,8 @@ return array(
 							mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 							mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
 							mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
-							mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position"
+							mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position",
+							mattprty."i18n" AS "attribute.property.type.i18n"
 						FROM "mshop_attribute_property_type" mattprty
 						:joins
 						WHERE :cond
@@ -425,7 +429,8 @@ return array(
 						mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 						mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 						mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
-						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
+						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position",
+						mattty."i18n" AS "attribute.type.i18n"
 					FROM "mshop_attribute_type" mattty
 					:joins
 					WHERE :cond
@@ -438,7 +443,8 @@ return array(
 						mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 						mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 						mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
-						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
+						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position",
+						mattty."i18n" AS "attribute.type.i18n"
 					FROM "mshop_attribute_type" mattty
 					:joins
 					WHERE :cond

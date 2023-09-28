@@ -41,8 +41,9 @@ return array(
 						mrulty."code" AS "rule.type.code", mrulty."domain" AS "rule.type.domain",
 						mrulty."label" AS "rule.type.label", mrulty."status" AS "rule.type.status",
 						mrulty."mtime" AS "rule.type.mtime", mrulty."editor" AS "rule.type.editor",
-						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position"
-					FROM "mshop_rule_type" mrulty
+						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position",
+						mrulty."i18n" AS "rule.type.i18n"
+						FROM "mshop_rule_type" mrulty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -54,7 +55,8 @@ return array(
 						mrulty."code" AS "rule.type.code", mrulty."domain" AS "rule.type.domain",
 						mrulty."label" AS "rule.type.label", mrulty."status" AS "rule.type.status",
 						mrulty."mtime" AS "rule.type.mtime", mrulty."editor" AS "rule.type.editor",
-						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position"
+						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position",
+						mrulty."i18n" AS "rule.type.i18n"
 					FROM "mshop_rule_type" mrulty
 					:joins
 					WHERE :cond

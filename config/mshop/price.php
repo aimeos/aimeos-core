@@ -42,8 +42,9 @@ return array(
 							mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 							mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 							mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
-							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
-						FROM "mshop_price_list_type" mprility
+							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position",
+							mprility."i18n" AS "price.lists.type.i18n"
+							FROM "mshop_price_list_type" mprility
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -55,7 +56,8 @@ return array(
 							mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 							mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 							mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
-							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
+							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position",
+							mprility."i18n" AS "price.lists.type.i18n"
 						FROM "mshop_price_list_type" mprility
 						:joins
 						WHERE :cond
@@ -250,7 +252,8 @@ return array(
 							mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 							mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
 							mpriprty."mtime" AS "price.property.type.mtime", mpriprty."editor" AS "price.property.type.editor",
-							mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position"
+							mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position",
+							mpriprty."i18n" AS "price.property.type.i18n"
 						FROM "mshop_price_property_type" mpriprty
 						:joins
 						WHERE :cond
@@ -263,7 +266,8 @@ return array(
 							mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 							mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
 							mpriprty."mtime" AS "price.property.type.mtime", mpriprty."editor" AS "price.property.type.editor",
-							mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position"
+							mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position",
+							mpriprty."i18n" AS "price.property.type.i18n"
 						FROM "mshop_price_property_type" mpriprty
 						:joins
 						WHERE :cond
@@ -425,7 +429,8 @@ return array(
 						mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 						mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 						mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
-						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
+						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position",
+						mprity."i18n" AS "price.type.i18n"
 					FROM "mshop_price_type" mprity
 					:joins
 					WHERE :cond
@@ -438,7 +443,8 @@ return array(
 						mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 						mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 						mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
-						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
+						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position",
+						mprity."i18n" AS "price.type.i18n"
 					FROM "mshop_price_type" mprity
 					:joins
 					WHERE :cond

@@ -157,7 +157,8 @@ return array(
 							msuplity."code" AS "supplier.lists.type.code", msuplity."domain" AS "supplier.lists.type.domain",
 							msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 							msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
-							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
+							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position",
+							msuplity."i18n" AS "supplier.lists.type.i18n"
 						FROM "mshop_supplier_list_type" msuplity
 						:joins
 						WHERE :cond
@@ -170,7 +171,8 @@ return array(
 							msuplity."code" AS "supplier.lists.type.code", msuplity."domain" AS "supplier.lists.type.domain",
 							msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 							msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
-							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
+							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position",
+							msuplity."i18n" AS "supplier.lists.type.i18n"
 						FROM "mshop_supplier_list_type" msuplity
 						:joins
 						WHERE :cond

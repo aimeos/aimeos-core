@@ -42,7 +42,8 @@ return array(
 							mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 							mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 							mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
-							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
+							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position",
+							mtexlity."i18n" AS "text.lists.type.i18n"
 						FROM "mshop_text_list_type" mtexlity
 						:joins
 						WHERE :cond
@@ -55,7 +56,8 @@ return array(
 							mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 							mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 							mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
-							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
+							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position",
+							mtexlity."i18n" AS "text.lists.type.i18n"
 						FROM "mshop_text_list_type" mtexlity
 						:joins
 						WHERE :cond
@@ -249,7 +251,8 @@ return array(
 						mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 						mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
 						mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
-						mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position"
+						mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position",
+						mtexty."i18n" AS "text.type.i18n"
 					FROM "mshop_text_type" mtexty
 					:joins
 					WHERE :cond
@@ -262,7 +265,8 @@ return array(
 						mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 						mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
 						mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
-						mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position"
+						mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position",
+						mtexty."i18n" AS "text.type.i18n"
 					FROM "mshop_text_type" mtexty
 					:joins
 					WHERE :cond

@@ -48,7 +48,8 @@ return array(
 						mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 						mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
 						mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position"
+						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position",
+						mpluty."i18n" AS "plugin.type.i18n"
 					FROM "mshop_plugin_type" mpluty
 					:joins
 					WHERE :cond
@@ -61,7 +62,8 @@ return array(
 						mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 						mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
 						mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position"
+						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position",
+						mpluty."i18n" AS "plugin.type.i18n"
 					FROM "mshop_plugin_type" mpluty
 					:joins
 					WHERE :cond

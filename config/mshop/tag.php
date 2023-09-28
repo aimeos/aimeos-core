@@ -41,7 +41,8 @@ return array(
 						mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 						mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
 						mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position"
+						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
+						mtagty."i18n" AS "tag.type.i18n"
 					FROM "mshop_tag_type" mtagty
 					:joins
 					WHERE :cond
@@ -54,7 +55,8 @@ return array(
 						mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 						mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
 						mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position"
+						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
+						mtagty."i18n" AS "tag.type.i18n"
 					FROM "mshop_tag_type" mtagty
 					:joins
 					WHERE :cond

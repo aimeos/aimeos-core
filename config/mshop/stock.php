@@ -41,7 +41,8 @@ return array(
 						mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 						mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
 						mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position"
+						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position",
+						mstoty."i18n" AS "stock.type.i18n"
 					FROM "mshop_stock_type" mstoty
 					:joins
 					WHERE :cond
@@ -54,7 +55,8 @@ return array(
 						mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 						mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
 						mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position"
+						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position",
+						mstoty."i18n" AS "stock.type.i18n"
 					FROM "mshop_stock_type" mstoty
 					:joins
 					WHERE :cond

@@ -42,7 +42,8 @@ return array(
 							mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 							mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 							mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
-							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
+							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position",
+							mprolity."i18n" AS "product.lists.type.i18n"
 						FROM "mshop_product_list_type" mprolity
 						:joins
 						WHERE :cond
@@ -55,7 +56,8 @@ return array(
 							mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 							mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 							mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
-							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
+							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position",
+							mprolity."i18n" AS "product.lists.type.i18n"
 						FROM "mshop_product_list_type" mprolity
 						:joins
 						WHERE :cond
@@ -250,7 +252,8 @@ return array(
 							mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 							mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
 							mproprty."mtime" AS "product.property.type.mtime", mproprty."editor" AS "product.property.type.editor",
-							mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position"
+							mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position",
+							mproprty."i18n" AS "product.property.type.i18n"
 						FROM "mshop_product_property_type" mproprty
 						:joins
 						WHERE :cond
@@ -263,7 +266,8 @@ return array(
 							mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 							mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
 							mproprty."mtime" AS "product.property.type.mtime", mproprty."editor" AS "product.property.type.editor",
-							mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position"
+							mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position",
+							mproprty."i18n" AS "product.property.type.i18n"
 						FROM "mshop_product_property_type" mproprty
 						:joins
 						WHERE :cond
@@ -425,7 +429,8 @@ return array(
 						mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 						mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 						mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
-						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
+						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position",
+						mproty."i18n" AS "product.type.i18n"
 					FROM "mshop_product_type" mproty
 					:joins
 					WHERE :cond
@@ -438,7 +443,8 @@ return array(
 						mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 						mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 						mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
-						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
+						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position",
+						mproty."i18n" AS "product.type.i18n"
 					FROM "mshop_product_type" mproty
 					:joins
 					WHERE :cond

@@ -42,7 +42,8 @@ return array(
 							mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
 							mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 							mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
-							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
+							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position",
+							mserlity."i18n" AS "service.lists.type.i18n"
 						FROM "mshop_service_list_type" mserlity
 						:joins
 						WHERE :cond
@@ -55,7 +56,8 @@ return array(
 							mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
 							mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 							mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
-							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
+							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position",
+							mserlity."i18n" AS "service.lists.type.i18n"
 						FROM "mshop_service_list_type" mserlity
 						:joins
 						WHERE :cond
@@ -249,7 +251,8 @@ return array(
 						mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
 						mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 						mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
-						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
+						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position",
+						mserty."i18n" AS "service.type.i18n"
 					FROM "mshop_service_type" mserty
 					:joins
 					WHERE :cond
@@ -262,7 +265,8 @@ return array(
 						mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
 						mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 						mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
-						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
+						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position",
+						mserty."i18n" AS "service.type.i18n"
 					FROM "mshop_service_type" mserty
 					:joins
 					WHERE :cond

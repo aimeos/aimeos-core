@@ -42,7 +42,8 @@ return array(
 							mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
+							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position",
+							mcatlity."i18n" AS "catalog.lists.type.i18n"
 						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
@@ -55,7 +56,8 @@ return array(
 							mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
+							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position",
+							mcatlity."i18n" AS "catalog.lists.type.i18n"
 						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
