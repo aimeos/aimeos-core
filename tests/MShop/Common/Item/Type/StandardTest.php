@@ -205,11 +205,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) ); // no ".language"
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.type.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['common.type.code'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['common.type.domain'] );
+		$this->assertEquals( $this->object->getI18n(), $arrayObject['common.type.i18n'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['common.type.name'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['common.type.label'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['common.type.position'] );
