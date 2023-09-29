@@ -243,10 +243,11 @@ class Standard
 
 		$list[$this->prefix . 'code'] = $this->getCode();
 		$list[$this->prefix . 'domain'] = $this->getDomain();
-		$list[$this->prefix . 'name'] = $this->getName();
 		$list[$this->prefix . 'label'] = $this->getLabel();
 		$list[$this->prefix . 'position'] = $this->getPosition();
 		$list[$this->prefix . 'status'] = $this->getStatus();
+		$list[$this->prefix . 'i18n'] = $this->getI18n();
+		$list[$this->prefix . 'name'] = $this->getName();
 
 		return $list;
 	}
