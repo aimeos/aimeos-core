@@ -46,10 +46,8 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 
 		foreach( $this->criteria as $key => $attr )
 		{
-			if( $attr->isRequired() === true && ( !isset( $config[$key] ) || $config[$key] === '' ) )
-			{
-				$errors[$key] = sprintf( 'Configuration for "%1$s" is missing', $key );
-				continue;
+			if( $attr->isRequired() === true && ( !isset( $config[$key] ) || $config[$key] === '' ) ) {
+				$errors[$key] = sprintf( 'Configuration for "%1$s" is missing', $key ); continue;
 			}
 
 			if( isset( $config[$key] ) )
@@ -58,7 +56,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 				{
 					case 'bool':
 					case 'boolean':
-						if( $config[$key] != null && !is_scalar( $config[$key] ) || $config[$key] != '0' && $config[$key] != '1' ) {
+						if( !in_array( $config[$key], ['', '0', '1'] ) ) {
 							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
 						}
 						break;
