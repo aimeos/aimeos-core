@@ -545,7 +545,7 @@ msgstr "\"%1$s\" para birimi için hiçbir indirim mevcut değil"
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" için arama yapılandırması bulunamadı "
 
 #, php-format
 msgid "No search keys available"
