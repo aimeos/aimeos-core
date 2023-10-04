@@ -341,12 +341,16 @@ abstract class Base
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
-			$search = $manager->filter()->slice( 0, count( $list ) )->add( [
-				str_replace( '/', '.', $domain ) . '.id' => $list
-			] );
+			if( ( $attr = current( $manager->getSearchAttributes() ) ) === false )
+			{
+				$msg = sprintf( 'No search configuration available for domain "%1$s"', $domain );
+				throw new \Aimeos\MShop\Exception( $msg );
+			}
+
+			$search = $manager->filter()->slice( 0, count( $list ) )->add( [$attr->getCode() => $list] );
 
 			foreach( $manager->search( $search, $domains ) as $id => $item ) {
-					$items[$domain][$id] = $item;
+				$items[$domain][$id] = $item;
 			}
 		}
 

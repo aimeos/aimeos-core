@@ -220,8 +220,14 @@ trait Traits
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
+			if( ( $attr = current( $manager->getSearchAttributes() ) ) === false )
+			{
+				$msg = sprintf( 'No search configuration available for domain "%1$s"', $domain );
+				throw new \Aimeos\MShop\Exception( $msg );
+			}
+
 			$search = $manager->filter()->slice( 0, count( $list ) )
-				->add( [str_replace( '/', '.', $domain ) . '.id' => array_keys( $list )] );
+				->add( [$attr->getCode() => array_keys( $list )] );
 
 			foreach( $manager->search( $search, $domains ) as $id => $item )
 			{
