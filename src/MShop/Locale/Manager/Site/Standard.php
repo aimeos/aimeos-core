@@ -924,7 +924,7 @@ class Standard
 			 * @see mshop/locale/manager/site/rate/ansi
 			 */
 			$path = 'mshop/locale/manager/newid';
-			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );
+			$item->setId( $this->newId( $conn, $path ) );
 
 			// Add unique site identifier
 			$item = $this->object()->save( $item->setSiteId( $item->getId() . '.' ) );
