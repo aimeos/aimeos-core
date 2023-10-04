@@ -118,6 +118,9 @@
 				<include name="config/**/*.php" />
 				<include name="src/**/*.php" />
 			</fileset>
+			<fileset dir="${extdir}/ai-cms-grapesjs" expandsymboliclinks="true" >
+				<include name="config/**/*.php" />
+			</fileset>
 		</confdoc>
 		<confdoc prefix="admin/jsonadm" keyparts="1"
 			optfile="${extdir}/ai-admin-jsonadm/tests/confdoc.ser"
