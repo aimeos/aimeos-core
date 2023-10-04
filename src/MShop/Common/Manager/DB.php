@@ -485,6 +485,10 @@ trait DB
 	 */
 	protected function getSqlConfig( string $path )
 	{
+		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $path ) !== 1 ) {
+			return $path;
+		}
+
 		$config = $this->context()->config();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
