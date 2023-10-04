@@ -271,6 +271,7 @@ class MShopConfigDocTask extends Task
 	protected function extractFile( $filename, array $options )
 	{
 		$matches = array();
+		$prefixlen = strlen( $this->prefix );
 
 		if( ( $text = file_get_contents( $filename ) ) === false ) {
 			throw new BuildException( sprintf( 'Unable to get file content from "%1$s"', $filename ) );
@@ -282,6 +283,10 @@ class MShopConfigDocTask extends Task
 
 		foreach( (array) $matches[1] as $pos => $key )
 		{
+			if( strncmp( $key, $this->prefix, $prefixlen ) !== 0 ) {
+				continue;
+			}
+
 			if( ( $list = preg_split( '/$/smu', $matches[0][$pos], -1, PREG_SPLIT_NO_EMPTY ) ) === false ) {
 				throw new BuildException( 'Invalid split pattern' );
 			}
