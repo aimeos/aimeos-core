@@ -1060,8 +1060,6 @@ class Standard
 
 		if( isset( $ref['product'] ) || in_array( 'product', $ref ) )
 		{
-			$domains = isset( $ref['product'] ) && is_array( $ref['product'] ) ? $ref['product'] : [];
-
 			$ids = [];
 			foreach( $map as $list ) {
 				$ids[] = $list['item']['order.product.productid'] ?? null;
@@ -1070,7 +1068,7 @@ class Standard
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
 			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['product.id' => array_unique( array_filter( $ids ) )] );
-			$prodItems = $manager->search( $search, $domains );
+			$prodItems = $manager->search( $search, $ref );
 		}
 
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
