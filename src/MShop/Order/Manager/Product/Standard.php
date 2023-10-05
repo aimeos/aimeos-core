@@ -1065,6 +1065,7 @@ class Standard
 			$ids = [];
 			foreach( $map as $list ) {
 				$ids[] = $list['item']['order.product.productid'] ?? null;
+				$ids[] = $list['item']['order.product.parentproductid'] ?? null;
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
@@ -1076,6 +1077,7 @@ class Standard
 
 		foreach( $map as $id => $list )
 		{
+			$list['item']['.parentproduct'] = $prodItems[$list['item']['order.product.parentproductid'] ?? null] ?? null;
 			$list['item']['.product'] = $prodItems[$list['item']['order.product.productid'] ?? null] ?? null;
 			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [] );
 
