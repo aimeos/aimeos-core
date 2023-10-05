@@ -187,10 +187,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.product.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->and( $expr ) );
-		$result = $this->object->search( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, ['product'], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+		$this->assertNotNull( $result->first()->getProductItem() );
 	}
 
 

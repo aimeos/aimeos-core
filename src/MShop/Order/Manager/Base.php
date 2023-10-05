@@ -198,9 +198,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Returns the address item map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
+	 * @param array $ref List of referenced domains that should be fetched too
 	 * @return array Multi-dimensional associative list of order IDs as keys and order address type/item pairs as values
 	 */
-	protected function getAddresses( array $ids ) : array
+	protected function getAddresses( array $ids, array $ref ) : array
 	{
 		$items = [];
 		$manager = $this->object()->getSubManager( 'address' );
@@ -208,7 +209,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.address.parentid', $ids ) );
 
-		foreach( $manager->search( $criteria ) as $item ) {
+		foreach( $manager->search( $criteria, $ref ) as $item ) {
 			$items[$item->getParentId()][] = $item;
 		}
 
@@ -261,10 +262,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Retrieves the ordered products from the storage.
 	 *
 	 * @param string[] $ids List of order IDs
+	 * @param array $ref List of referenced domains that should be fetched too
 	 * @return array Multi-dimensional associative list of order IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
 	 */
-	protected function getProducts( array $ids ) : array
+	protected function getProducts( array $ids, array $ref ) : array
 	{
 		$map = $attributes = $subProducts = [];
 		$manager = $this->object()->getSubManager( 'product' );
@@ -272,12 +274,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.product.parentid', $ids ) );
-		$items = $manager->search( $criteria )->reverse();
+		$items = $manager->search( $criteria, $ref )->reverse();
 
 		$search = $attrManager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.product.attribute.parentid', $items->keys()->toArray() ) );
 
-		foreach( $attrManager->search( $search ) as $id => $attribute ) {
+		foreach( $attrManager->search( $search, $ref ) as $id => $attribute ) {
 			$attributes[$attribute->getParentId()][$id] = $attribute;
 		}
 
@@ -313,9 +315,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Retrieves the order services from the storage.
 	 *
 	 * @param string[] $ids List of order IDs
+	 * @param array $ref List of referenced domains that should be fetched too
 	 * @return array Multi-dimensional associative list of order IDs as keys and service type/items pairs as values
 	 */
-	protected function getServices( array $ids ) : array
+	protected function getServices( array $ids, array $ref ) : array
 	{
 		$map = [];
 		$manager = $this->object()->getSubManager( 'service' );
@@ -323,7 +326,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.service.parentid', $ids ) );
 
-		foreach( $manager->search( $criteria ) as $item ) {
+		foreach( $manager->search( $criteria, $ref ) as $item ) {
 			$map[$item->getParentId()][] = $item;
 		}
 

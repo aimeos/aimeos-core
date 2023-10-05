@@ -1077,11 +1077,11 @@ class Standard extends Base
 		$addressMap = $couponMap = $productMap = $serviceMap = [];
 
 		if( in_array( 'order/address', $ref ) ) {
-			$addressMap = $this->getAddresses( $baseIds );
+			$addressMap = $this->getAddresses( $baseIds, $ref  );
 		}
 
 		if( in_array( 'order/product', $ref ) || in_array( 'order/coupon', $ref ) ) {
-			$productMap = $this->getProducts( $baseIds );
+			$productMap = $this->getProducts( $baseIds, $ref  );
 		}
 
 		if( in_array( 'order/coupon', $ref ) ) {
@@ -1089,7 +1089,7 @@ class Standard extends Base
 		}
 
 		if( in_array( 'order/service', $ref ) ) {
-			$serviceMap = $this->getServices( $baseIds );
+			$serviceMap = $this->getServices( $baseIds, $ref  );
 		}
 
 		foreach( $map as $id => $list )
