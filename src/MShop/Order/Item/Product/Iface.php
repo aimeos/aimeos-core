@@ -22,6 +22,13 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the associated parent product item
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Iface|null Product item
+	 */
+	public function getParentProductItem() : ?\Aimeos\MShop\Product\Item\Iface;
+
+	/**
 	 * Returns the associated product item
 	 *
 	 * @return \Aimeos\MShop\Product\Item\Iface|null Product item

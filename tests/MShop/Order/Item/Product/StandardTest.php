@@ -65,8 +65,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.product.mtime' => '2000-12-31 23:59:59',
 			'order.product.ctime' => '2011-01-01 00:00:01',
 			'order.product.editor' => 'unitTestUser',
-			'.product' => \Aimeos\MShop::create( \TestHelper::context(), 'product' )->create(),
 			'.supplier' => \Aimeos\MShop::create( \TestHelper::context(), 'supplier' )->create(),
+			'.parentproduct' => \Aimeos\MShop::create( \TestHelper::context(), 'product' )->create(),
+			'.product' => \Aimeos\MShop::create( \TestHelper::context(), 'product' )->create(),
 		);
 
 		$this->subProducts = array(
@@ -83,6 +84,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testGetParentProductItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getParentProductItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( $this->price ) )->getParentProductItem() );
 	}
 
 

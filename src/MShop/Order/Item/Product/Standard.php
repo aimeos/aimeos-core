@@ -34,6 +34,17 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the associated parent product item
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Iface|null Product item
+	 */
+	public function getParentProductItem() : ?\Aimeos\MShop\Product\Item\Iface
+	{
+		return $this->get( '.parentproduct' );
+	}
+
+
+	/**
 	 * Returns the associated product item
 	 *
 	 * @return \Aimeos\MShop\Product\Item\Iface|null Product item
