@@ -89,7 +89,6 @@ trait Traits
 	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, string $domain,
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\AddressRef\Iface
 	{
-		$pos = 0;
 		$manager = $this->object()->getSubManager( 'address' );
 		$manager->delete( $item->getAddressItemsDeleted()->keys()->toArray() );
 
@@ -99,8 +98,7 @@ trait Traits
 				$addrItem = $addrItem->setId( null ); //create new address item if copied
 			}
 
-			$addrItem = $addrItem->setParentId( $item->getId() )->setPosition( $pos++ );
-			$addrItem = $manager->save( $addrItem, $fetch );
+			$addrItem = $manager->save( $addrItem->setParentId( $item->getId() ), $fetch );
 			$item = $item->addAddressItem( $addrItem, $idx );
 		}
 
