@@ -539,7 +539,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getProvider() );
 		$stmt->bind( $idx++, $item->getDateStart() );
 		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );

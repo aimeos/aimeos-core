@@ -846,7 +846,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getScale(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 		$stmt->bind( $idx++, $item->getDateStart() );
 		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $item->getTarget() );
 		$stmt->bind( $idx++, $item->boost() );
 		$stmt->bind( $idx++, $context->editor() );
