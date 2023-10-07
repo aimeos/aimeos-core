@@ -1177,7 +1177,7 @@ class Standard extends Base
 		}
 
 		$stmt->bind( $idx++, $item->getUrl() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $date ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, $item->getTarget() );

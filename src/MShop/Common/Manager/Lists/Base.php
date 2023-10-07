@@ -202,7 +202,7 @@ abstract class Base
 		$stmt->bind( $idx++, $item->getRefId() );
 		$stmt->bind( $idx++, $item->getDateStart() );
 		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); //mtime

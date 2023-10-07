@@ -496,7 +496,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getType() );
 		$stmt->bind( $idx++, $item->getLabel() );
 		$stmt->bind( $idx++, $item->getProvider() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $date ); //mtime
