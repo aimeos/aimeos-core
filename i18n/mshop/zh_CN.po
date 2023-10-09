@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"POT-Creation-Date: 2023-10-09 17:16+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Henry LIU <dadaycm@hotmail.com>, 2016\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
@@ -535,6 +535,10 @@ msgstr ""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
 msgstr ""
 
 #, php-format
