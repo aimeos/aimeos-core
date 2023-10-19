@@ -220,7 +220,9 @@ abstract class Base
 		{
 			if( ( $row[$this->prefix . 'i18n'] = json_decode( $i18n = $row[$this->prefix . 'i18n'], true ) ) === null )
 			{
-				$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.i18n', $row[$this->prefix . 'id'], $i18n );
+				$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
+				$msg = sprintf( $str, $this->getTable() . '.i18n', $row[$this->prefix . 'id'], $i18n );
+
 				$this->context()->logger()->warning( $msg, 'core/type' );
 				$row[$this->prefix . 'i18n'] = [];
 			}
