@@ -68,7 +68,7 @@ class Standard
 		}
 
 		return $item->setUrl( $filepath )->setMimeType( $media->getMimeType() )
-			->setLabel( $item->getLabel() ?: $file->getClientFilename() );
+			->setLabel( $file->getClientFilename() );
 	}
 
 

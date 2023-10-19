@@ -170,7 +170,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return (string) $this->get( 'media.label', '' );
+		return (string) ( $this->get( 'media.label' ) ?: basename( $this->getUrl() ) );
 	}
 
 
