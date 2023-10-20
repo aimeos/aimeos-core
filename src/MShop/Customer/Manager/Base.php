@@ -194,17 +194,17 @@ abstract class Base
 		$groupIds = [];
 
 		$manager = $this->object()->getSubManager( 'lists' );
-		$listItems = $item->getListItems( 'customer/group', 'default', null, false );
+		$listItems = $item->getListItems( 'group', 'default', null, false );
 
 		foreach( $item->getGroups() as $refId )
 		{
-			if( ( $litem = $item->getListItem( 'customer/group', 'default', $refId, false ) ) !== null ) {
-				unset( $listItems[$litem->getId()], $listItems['__customer/group_default_' . $refId] );
+			if( ( $litem = $item->getListItem( 'group', 'default', $refId, false ) ) !== null ) {
+				unset( $listItems[$litem->getId()], $listItems['__group_default_' . $refId] );
 			} else {
 				$litem = $manager->create()->setType( 'default' );
 			}
 
-			$item->addListItem( 'customer/group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
+			$item->addListItem( 'group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
 		}
 
 		return $item->deleteListItems( $listItems->toArray() );

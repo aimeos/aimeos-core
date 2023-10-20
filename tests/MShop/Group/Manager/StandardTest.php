@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MShop\Customer\Manager\Group;
+namespace Aimeos\MShop\Group\Manager;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::context();
 		$this->editor = $context->editor();
 
-		$this->object = new \Aimeos\MShop\Customer\Manager\Group\Standard( $context );
+		$this->object = new \Aimeos\MShop\Group\Manager\Standard( $context );
 	}
 
 
@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->assertContains( 'customer/group', $this->object->getResourceType() );
+		$this->assertContains( 'group', $this->object->getResourceType() );
 	}
 
 
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->create();
-		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Group\Iface::class, $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Group\Item\Iface::class, $item );
 	}
 
 
@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'customer.group.label', 'Unitgroup' ) );
+		$search->setConditions( $search->compare( '==', 'group.label', 'Unitgroup' ) );
 
 		$items = $this->object->search( $search )->toArray();
 
@@ -138,7 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItem()
 	{
 		$total = 0;
-		$search = $this->object->filter()->add( 'customer.group.code', '~=', 'unitgroup' )->slice( 0, 1 );
+		$search = $this->object->filter()->add( 'group.code', '~=', 'unitgroup' )->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );

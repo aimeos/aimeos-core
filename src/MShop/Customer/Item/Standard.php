@@ -199,7 +199,7 @@ class Standard extends Base implements Iface
 		{
 			if( ( $list = (array) $this->get( 'customer.groups', [] ) ) === [] )
 			{
-				foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
+				foreach( $this->getListItems( 'group', 'default' ) as $listItem ) {
 					$list[] = $listItem->getRefId();
 				}
 			}

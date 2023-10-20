@@ -170,6 +170,7 @@ return array(
 						'catalog' => 'catalog',
 						'coupon' => 'coupon',
 						'customer' => 'customer',
+						'group' => 'group',
 						'index' => 'index',
 						'media' => 'media',
 						'order' => 'order',

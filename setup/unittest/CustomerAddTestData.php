@@ -22,7 +22,7 @@ class CustomerAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['Customer', 'Text', 'ProductAddTestData'];
+		return ['Customer', 'Group', 'Text', 'GroupAddTestData', 'ProductAddTestData'];
 	}
 
 
@@ -52,12 +52,11 @@ class CustomerAddTestData extends BaseAddTestData
 		}
 
 		$manager = $this->getManager( 'customer' );
-		$groupManager = $manager->getSubManager( 'group' );
+		$groupManager = $this->getManager( 'group' );
 
 		$manager->begin();
 
 		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
-		$this->addGroupItems( $groupManager, $testdata );
 
 		$items = [];
 		foreach( $testdata['customer'] as $entry )
@@ -104,27 +103,5 @@ class CustomerAddTestData extends BaseAddTestData
 		}
 
 		return $item;
-	}
-
-
-	/**
-	 * Adds the customer group items
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
-	 * @param array $data Associative list of key/list pairs
-	 */
-	protected function addGroupItems( \Aimeos\MShop\Common\Manager\Iface $groupManager, array $data )
-	{
-		if( isset( $data['customer/group'] ) )
-		{
-			foreach( $data['customer/group'] as $entry )
-			{
-				try {
-					$groupManager->save( $groupManager->find( $entry['customer.group.code'] )->fromArray( $entry ) );
-				} catch( \Exception $e ) {
-					$groupManager->save( $groupManager->create()->fromArray( $entry ), false );
-				}
-			}
-		}
 	}
 }

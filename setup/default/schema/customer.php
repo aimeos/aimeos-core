@@ -94,20 +94,6 @@ return array(
 			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mscusad_pid' );
 		},
 
-		'mshop_customer_group' => function( \Aimeos\Upscheme\Schema\Table $table ) {
-
-			$table->engine = 'InnoDB';
-
-			$table->id()->primary( 'pk_mscusgr_id' );
-			$table->string( 'siteid' );
-			$table->code();
-			$table->string( 'label' )->default( '' );
-			$table->meta();
-
-			$table->unique( ['code', 'siteid'], 'unq_mscusgr_code_sid' );
-			$table->index( ['label', 'siteid'], 'idx_mscusgr_label_sid' );
-		},
-
 		'mshop_customer_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';

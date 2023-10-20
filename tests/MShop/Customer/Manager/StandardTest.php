@@ -70,7 +70,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertContains( 'customer', $result );
 		$this->assertContains( 'customer/address', $result );
-		$this->assertContains( 'customer/group', $result );
 		$this->assertContains( 'customer/lists', $result );
 	}
 
@@ -174,14 +173,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setLabel( 'unitTest' );
 		$item->setGroups( array( 1, 2, 3 ) );
 		$item = $this->object->save( $item );
-		$itemSaved = $this->object->get( $item->getId(), array( 'customer/group' ) );
+		$itemSaved = $this->object->get( $item->getId(), array( 'group' ) );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
 		$itemExp->setGroups( array( 2, 4 ) );
 		$itemExp = $this->object->save( $itemExp );
-		$itemUpd = $this->object->get( $itemExp->getId(), array( 'customer/group' ) );
+		$itemUpd = $this->object->get( $itemExp->getId(), array( 'group' ) );
 
 		$this->object->delete( $item->getId() );
 

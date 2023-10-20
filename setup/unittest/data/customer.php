@@ -19,11 +19,6 @@ return [
 		['customer.property.type.domain' => 'customer', 'customer.property.type.code' => 'newsletter', 'customer.property.type.label' => 'Newsletter', 'customer.property.type.status' => 1],
 	],
 
-	'customer/group' => [
-		['customer.group.code' => 'unitgroup', 'customer.group.label' => 'Unitgroup'],
-		['customer.group.code' => 'unitgroup2', 'customer.group.label' => 'Unitgroup 2'],
-	],
-
 	'customer' => [
 		'customer/test@example.com' => [
 			'customer.label' => 'unitCustomer001', 'customer.code' => 'test@example.com', 'customer.status' => 1,

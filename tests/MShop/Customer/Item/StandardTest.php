@@ -203,8 +203,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetGroups()
 	{
-		$listValues = array( 'domain' => 'customer/group', 'type' => 'default', 'refid' => 123 );
-		$listItems = array( 'customer/group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
+		$listValues = array( 'domain' => 'group', 'type' => 'default', 'refid' => 123 );
+		$listItems = array( 'group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
 		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, [], $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );

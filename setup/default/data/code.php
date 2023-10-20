@@ -5,7 +5,7 @@
  */
 
 return array(
-	'customer/group' => array(
+	'group' => array(
 		'admin' => array( 'code' => 'admin', 'label' => 'Administrator' ),
 		'editor' => array( 'code' => 'editor', 'label' => 'Editor' ),
 	),
