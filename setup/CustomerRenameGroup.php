@@ -39,6 +39,10 @@ class CustomerRenameGroup extends Base
 	{
 		$db = $this->db( 'db-customer' );
 
+		if( !$db->hasTable( $table ) ) {
+			return;
+		}
+
 		$result = $db->query( 'SELECT
 			' . $db->qi( 'id' ) . ',
 			' . $db->qi( 'type' ) . ',
