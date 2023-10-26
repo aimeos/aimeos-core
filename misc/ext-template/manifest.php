@@ -24,6 +24,9 @@ return [
 		'controller/jobs' => 'i18n',
 		'mshop' => 'i18n',
 	],
+	'include' => [
+		'src',
+	],
 	'setup' => [
 		'setup',
 	],
