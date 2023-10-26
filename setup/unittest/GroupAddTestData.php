@@ -53,7 +53,6 @@ class GroupAddTestData extends BaseAddTestData
 		$manager = $this->getManager( 'group' );
 		$manager->begin();
 
-		$items = [];
 		foreach( $testdata['group'] as $entry )
 		{
 			try {
