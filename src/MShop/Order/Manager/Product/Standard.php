@@ -231,7 +231,7 @@ class Standard
 		),
 		'agg:order.product:total' => array(
 			'code' => 'agg:order.product:total()',
-			'internalcode' => 'mordpr."quantity" * mordpr."price"',
+			'internalcode' => 'mordpr."quantity" * ( mordpr."price" + mordpr."costs" )',
 			'label' => 'Product price total',
 			'type' => 'float',
 			'public' => false,
