@@ -268,7 +268,7 @@ class Autofill
 	{
 		if( $order->getServices()->isEmpty() && $this->getConfigValue( 'orderservice', true ) == true )
 		{
-			$map = $item->getServices();
+			$map = $item->getServices()->all();
 			$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
 
 			foreach( $map as $type => $list )
