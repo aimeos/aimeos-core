@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );
-		$this->assertEquals( 3139, $result['default'] );
+		$this->assertEquals( 3292.5, $result['default'] );
 	}
 
 
