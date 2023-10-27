@@ -393,7 +393,7 @@ class Standard
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/clear' );
 	}
 
 
@@ -643,6 +643,7 @@ class Standard
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( $idx++, $this->getUser()?->getSiteId() );
 			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$billingAddress->setId( $id ); // enforce ID to be present
 		} else {

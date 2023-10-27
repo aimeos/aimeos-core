@@ -9,10 +9,16 @@
 return array(
 	'manager' => array(
 		'address' => array(
-			'delete' => array(
+			'clear' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer_address"
 					WHERE :cond AND "siteid" LIKE ?
+				',
+			),
+			'delete' => array(
+				'ansi' => '
+					DELETE FROM "mshop_customer_address"
+					WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 				'
 			),
 			'insert' => array(
@@ -39,7 +45,7 @@ return array(
 						"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 						"longitude" = ?, "latitude" = ?, "pos" = ?, "birthday" = ?,
 						"mtime" = ?, "editor" = ?
-					WHERE "siteid" LIKE ? AND "id" = ?
+					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				'
 			),
 			'search' => array(
@@ -624,10 +630,16 @@ return array(
 				GROUP BY :keys
 			'
 		),
-		'delete' => array(
+		'clear' => array(
 			'ansi' => '
 				DELETE FROM "mshop_customer"
 				WHERE :cond AND "siteid" LIKE ?
+			',
+		),
+		'delete' => array(
+			'ansi' => '
+				DELETE FROM "mshop_customer"
+				WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 			'
 		),
 		'insert' => array(
@@ -654,7 +666,7 @@ return array(
 					"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 					"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
 					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" LIKE ? AND "id" = ?
+				WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 			'
 		),
 		'search' => array(
