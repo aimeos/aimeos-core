@@ -153,7 +153,7 @@ return [
 				'media' => [[
 					'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'media', 'catalog.lists.position' => 3,
 					'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2098-01-01 00:00:00',
-					'media.languageid' => 'de', 'media.type' => 'icon', 'media.domain' => 'catalog',
+					'media.languageid' => 'de', 'media.type' => 'stage', 'media.domain' => 'catalog',
 					'media.label' => 'path/to/folder/example4.jpg', 'media.url' => 'path/to/folder/example4.jpg',
 					'media.previews' => [1 => 'path/to/folder/example4.jpg'], 'media.mimetype' => 'image/jpeg',
 				]],
