@@ -189,6 +189,8 @@ class Standard
 		),
 	);
 
+	private ?\Aimeos\MShop\Customer\Item\Iface $user = null;
+
 
 	/**
 	 * Initializes the object.
@@ -227,7 +229,7 @@ class Standard
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/address/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/address/clear' );
 	}
 
 
@@ -401,6 +403,86 @@ class Standard
 
 
 	/**
+	 * Saves a common address item object.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item common address item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface $item Updated item including the generated ID
+	 */
+	protected function saveItem( \Aimeos\MShop\Common\Item\Address\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Address\Iface
+	{
+		if( !$item->isModified() ) {
+			return $item;
+		}
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$id = $item->getId();
+		$date = date( 'Y-m-d H:i:s' );
+		$path = $this->getConfigPath();
+		$columns = $this->object()->getSaveAttributes();
+
+		if( $id === null ) {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
+		} else {
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
+		}
+
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
+
+		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getCompany() );
+		$stmt->bind( $idx++, $item->getVatId() );
+		$stmt->bind( $idx++, $item->getSalutation() );
+		$stmt->bind( $idx++, $item->getTitle() );
+		$stmt->bind( $idx++, $item->getFirstname() );
+		$stmt->bind( $idx++, $item->getLastname() );
+		$stmt->bind( $idx++, $item->getAddress1() );
+		$stmt->bind( $idx++, $item->getAddress2() );
+		$stmt->bind( $idx++, $item->getAddress3() );
+		$stmt->bind( $idx++, $item->getPostal() );
+		$stmt->bind( $idx++, $item->getCity() );
+		$stmt->bind( $idx++, $item->getState() );
+		$stmt->bind( $idx++, $item->getCountryId() );
+		$stmt->bind( $idx++, $item->getLanguageId() );
+		$stmt->bind( $idx++, $item->getTelephone() );
+		$stmt->bind( $idx++, $item->getMobile() );
+		$stmt->bind( $idx++, $item->getEmail() );
+		$stmt->bind( $idx++, $item->getTelefax() );
+		$stmt->bind( $idx++, $item->getWebsite() );
+		$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+		$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getBirthday() );
+		$stmt->bind( $idx++, $date ); //mtime
+		$stmt->bind( $idx++, $context->editor() );
+
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( $idx++, $this->getUser()?->getSiteId() );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
+			$stmt->bind( $idx++, $date ); // ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
+		}
+
+		return $item->setId( $id );
+	}
+
+
+	/**
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
@@ -409,6 +491,48 @@ class Standard
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return new \Aimeos\MShop\Customer\Item\Address\Standard( $this->getPrefix(), $values );
+	}
+
+
+	/**
+	 * Deletes items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
+	 * @param string $cfgpath Configuration path to the SQL statement
+	 * @param bool $siteid If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
+		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		if( map( $items )->isEmpty() ) {
+			return $this;
+		}
+
+		$search = $this->object()->filter();
+		$search->setConditions( $search->compare( '==', $name, $items ) );
+
+		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$translations = array( $name => '"' . $name . '"' );
+
+		$cond = $search->getConditionSource( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$stmt = $conn->create( $sql );
+
+		if( $siteid )
+		{
+			$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( 2, $this->getUser()?->getSiteId() );
+		}
+
+		$stmt->execute()->finish();
+
+		return $this;
 	}
 
 
@@ -678,5 +802,22 @@ class Standard
 	protected function getSearchConfig() : array
 	{
 		return $this->searchConfig;
+	}
+
+
+	/**
+	 * Returns the currently authenticated user
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item or NULL if not available
+	 */
+	protected function getUser() : ?\Aimeos\MShop\Customer\Item\Iface
+	{
+		if( !isset( $this->user ) && ( $userid = $this->context()->user() ) !== null )
+		{
+			$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
+			$this->user = $manager->search( $manager->filter( true )->add( 'customer.id', '==', $userid ) )->first();
+		}
+
+		return $this->user;
 	}
 }

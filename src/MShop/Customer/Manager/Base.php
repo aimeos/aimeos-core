@@ -26,6 +26,7 @@ abstract class Base
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
+	private ?\Aimeos\MShop\Customer\Item\Iface $user = null;
 	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
 	private ?string $salt;
 
@@ -234,6 +235,48 @@ abstract class Base
 
 
 	/**
+	 * Deletes items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
+	 * @param string $cfgpath Configuration path to the SQL statement
+	 * @param bool $siteid If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
+		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		if( map( $items )->isEmpty() ) {
+			return $this;
+		}
+
+		$search = $this->object()->filter();
+		$search->setConditions( $search->compare( '==', $name, $items ) );
+
+		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$translations = array( $name => '"' . $name . '"' );
+
+		$cond = $search->getConditionSource( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$stmt = $conn->create( $sql );
+
+		if( $siteid )
+		{
+			$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( 2, $this->getUser()?->getSiteId() );
+		}
+
+		$stmt->execute()->finish();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns a password helper object based on the configuration.
 	 *
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
@@ -286,5 +329,20 @@ abstract class Base
 		$interface = \Aimeos\MShop\Common\Helper\Password\Iface::class;
 
 		return $this->helper = \Aimeos\Utils::create( $classname, [$options], $interface );
+	}
+
+
+	/**
+	 * Returns the currently authenticated user
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item or NULL if not available
+	 */
+	protected function getUser() : ?\Aimeos\MShop\Customer\Item\Iface
+	{
+		if( !isset( $this->user ) && ( $userid = $this->context()->user() ) !== null ) {
+			$this->user = $this->search( $this->filter( true )->add( 'customer.id', '==', $userid ) )->first();
+		}
+
+		return $this->user;
 	}
 }
