@@ -460,7 +460,7 @@ class Standard
 
 		$required = array( 'order.basket' );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 		$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
 
 		/** mshop/order/manager/basket/search/mysql
