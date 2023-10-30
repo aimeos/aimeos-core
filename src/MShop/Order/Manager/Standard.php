@@ -618,7 +618,7 @@ class Standard extends Base
 			return $this->saveBasket( $item );
 		}
 
-		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
+		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING )
 		{
 			try {
 				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
