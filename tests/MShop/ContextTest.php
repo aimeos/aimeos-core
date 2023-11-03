@@ -311,7 +311,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetGroups()
 	{
-		$fcn = function() use ( $context ) {
+		$fcn = function() {
 			return [123 => 'admin'];
 		};
 
