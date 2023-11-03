@@ -99,8 +99,6 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateOrderNoItem()
 	{
-		$this->context->setUserId( '' );
-
 		$this->plugin->setConfig( array( 'useorder' => '1' ) );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
@@ -112,7 +110,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderNone()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
+		$this->context->setUser( $manager->find( 'test@example.com' ) );
 
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
@@ -129,7 +127,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderAddress()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
+		$this->context->setUser( $manager->find( 'test@example.com' ) );
 
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
@@ -148,7 +146,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderService()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
+		$this->context->setUser( $manager->find( 'test@example.com' ) );
 
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
@@ -171,7 +169,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateAddress()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
+		$this->context->setUser( $manager->find( 'test@example.com' ) );
 
 		$this->plugin->setConfig( ['address' => '1'] );
 		$type = \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT;

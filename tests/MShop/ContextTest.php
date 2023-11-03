@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\Base;
+namespace Aimeos\MShop;
 
 
 class ContextTest extends \PHPUnit\Framework\TestCase
@@ -290,30 +290,39 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSetUserId()
+	public function testGetSetUser()
 	{
+		$mock = $this->getMockBuilder( \Aimeos\MShop\Customer\Item\Iface::class )->getMock();
+		$fcn = function() use ( $mock ) {
+			return $mock;
+		};
+
 		$this->assertEquals( null, $this->object->user() );
 
-		$return = $this->object->setUserId( 123 );
-		$this->assertEquals( '123', $this->object->user() );
+		$return = $this->object->setUser( $fcn );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $this->object->user() );
 
-		$return = $this->object->setUserId( function() { return 456; } );
-		$this->assertEquals( '456', $this->object->user() );
+		$return = $this->object->setUser( $fcn() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $this->object->user() );
 	}
 
 
-	public function testGetSetGroupIds()
+	public function testGetSetGroups()
 	{
+		$fcn = function() use ( $context ) {
+			return [123 => 'admin'];
+		};
+
 		$this->assertEquals( [], $this->object->groups() );
 
-		$return = $this->object->setGroupIds( array( 123 ) );
-		$this->assertEquals( array( '123' ), $this->object->groups() );
+		$return = $this->object->setGroups( $fcn );
+		$this->assertEquals( [123 => 'admin'], $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 
-		$return = $this->object->setGroupIds( function() { return array( 456 ); } );
-		$this->assertEquals( array( '456' ), $this->object->groups() );
+		$return = $this->object->setGroups( $fcn() );
+		$this->assertEquals( [123 => 'admin'], $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 	}
 }

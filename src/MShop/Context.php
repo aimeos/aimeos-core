@@ -648,25 +648,11 @@ class Context implements \Aimeos\MShop\ContextIface
 
 
 	/**
-	 * Sets the user ID of the logged in user.
+	 * Returns the user/customer item of the logged in user.
 	 *
-	 * @param \Closure|string|null $user User ID of the logged in user or closure to retrieve them
-	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null User/customer item of the logged in user
 	 */
-	public function setUserId( $user ) : \Aimeos\MShop\ContextIface
-	{
-		$this->user = $user;
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the user ID of the logged in user.
-	 *
-	 * @return string|null User ID of the logged in user
-	 */
-	public function user() : ?string
+	public function user() : ?\Aimeos\MShop\Customer\Item\Iface
 	{
 		if( $this->user instanceof \Closure )
 		{
@@ -679,23 +665,23 @@ class Context implements \Aimeos\MShop\ContextIface
 
 
 	/**
-	 * Sets the group IDs of the logged in user.
+	 * Sets the user/customer item of the logged in user.
 	 *
-	 * @param \Closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 * @param \Closure|string|null $user User/customer item of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
-	public function setGroupIds( $groupIds ) : \Aimeos\MShop\ContextIface
+	public function setUser( $user ) : \Aimeos\MShop\ContextIface
 	{
-		$this->groups = $groupIds;
+		$this->user = $user;
 
 		return $this;
 	}
 
 
 	/**
-	 * Returns the group IDs of the logged in user.
+	 * Returns the group ID/code pairs of the logged in user.
 	 *
-	 * @return array Group IDs of the logged in user
+	 * @return array Group ID/code pairs of the logged in user
 	 */
 	public function groups() : array
 	{
@@ -706,6 +692,20 @@ class Context implements \Aimeos\MShop\ContextIface
 		}
 
 		return (array) $this->groups;
+	}
+
+
+	/**
+	 * Sets the group IDs of the logged in user.
+	 *
+	 * @param \Closure|array $groups Group ID/code pairs of the logged in user or closure to retrieve them
+	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 */
+	public function setGroups( $groups ) : \Aimeos\MShop\ContextIface
+	{
+		$this->groups = $groups;
+
+		return $this;
 	}
 
 

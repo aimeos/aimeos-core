@@ -24,7 +24,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::cache( true );
 
 		$this->context = \TestHelper::context();
-		$this->context->setUserId( null );
+		$this->context->setUser( null );
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->create();
@@ -120,7 +120,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoConfig()
 	{
-		$this->context->setUserId( 1 );
+		$this->context->setUser( \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -132,7 +132,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableTotal()
 	{
-		$this->context->setUserId( 1 );
+		$this->context->setUser( \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' ) );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -156,7 +156,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableTotalNotEnough()
 	{
-		$this->context->setUserId( 1 );
+		$this->context->setUser( \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' ) );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -176,7 +176,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableLimit()
 	{
-		$this->context->setUserId( 1 );
+		$this->context->setUser( \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' ) );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -200,7 +200,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableLimitTooMuch()
 	{
-		$this->context->setUserId( 1 );
+		$this->context->setUser( \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' ) );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
