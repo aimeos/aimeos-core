@@ -706,11 +706,11 @@ msgstr "Fiyat eklenemiyor.  Fiyat öğesinin para birimi kimlik numarası \"%1$s
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr "Belirtilen miktar \"%1$d\" minimum sipariş miktarının altında. Lütfen bu ürün için minimum sipariş miktarına bakın."
+msgstr "Bu ürün için %1$d adet sipariş veremezsiniz. Lütfen bu ürünün detay sayfasından bu ürün için belirlediğimiz minimum sipariş miktarına bakın."
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr "Belirtilen miktar \"%1$s\" minimum sipariş miktarının altında. Lütfen bu ürün için minimum sipariş miktarına bakın."
+msgstr "Bu ürün için %1$s adet sipariş veremezsiniz. Lütfen bu ürünün detay sayfasından bu ürün için belirlediğimiz minimum sipariş miktarına bakın."
 
 #, php-format
 msgid "Price item not available"

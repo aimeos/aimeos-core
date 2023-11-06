@@ -5,9 +5,10 @@
 # Translators:
 # a270031086f2a0d3514bc0cb507b48f6, 2019
 # a270031086f2a0d3514bc0cb507b48f6, 2019
+# Jean-Marc Kutyla, 2023
 # Laurent Georget <laurent@lgeorget.eu>, 2020-2021
 # Medzo Zeng <medzozeng@hotmail.fr>, 2019
-# Nicolas Capsias, 2023
+# Amiskatonic, 2023
 # nsendetzky, 2014
 # Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-26 15:47+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Nicolas Capsias, 2023\n"
+"Last-Translator: Jean-Marc Kutyla, 2023\n"
 "Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +105,7 @@ msgstr "Type d'adresse \"%1$s\" pas dans la plage autorisée"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Au moins une clé est nécessaire pour l'agrégation"
 
 #, php-format
 msgid "Basket empty"
@@ -300,7 +301,7 @@ msgstr "JSON invalide en résultat de recherche pour \"%2$s\" dans \"%1$s\" : %3
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Attribut invalide en position \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
@@ -326,11 +327,11 @@ msgstr "Caractères invalides dans la date \"%1$s\". Format ISO \"AAAA-MM-JJ\" a
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Caractères non valides dans la date, format ISO \"DD-MM-YYYY hh:mm:ss\" attendu"
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Caractères non valides dans la date, format ISO \"DD-MM-YYYY\" attendu"
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -385,7 +386,7 @@ msgstr "Nom du fournisseur non valide \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Panier sérialisé non valide. '%1$s' à retourné \"%2$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
@@ -409,7 +410,7 @@ msgstr "L'entrée ne peut être supprimée. La valeur de site de l'entrée diff�
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "L'article n'a pas pu être sauvegardé avec la méthode save(). L'ID de l'article n'est pas disponible."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -507,7 +508,7 @@ msgstr "La nouvelle valeur \"%1$s\" de l'entrée diffère de l'ancienne valeur \
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "La nouvelle création de site ne peut être enregistré avec la méthode \"save()\". Essayez avec la méthode 'insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -551,7 +552,7 @@ msgstr "Pas de remise pour la devise \"%1$s\" disponible"
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Aucune configuration de recherche disponible pour \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
@@ -667,7 +668,7 @@ msgstr "La paramètre \"%1$s\" pour la configuration n'est pas disponible"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Objet mot de passe non disponible"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
@@ -774,11 +775,11 @@ msgstr "Fournisseur dans \"%1$s\" indisponible"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "La quantité doit être égale ou supérieure à 0 et ne doit pas dépasser %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "La quantité doit être égale ou supérieure à 0 et ne doit pas dépasser la quantité commandée"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
@@ -786,11 +787,11 @@ msgstr "La quantité doit être supérieure à 0 et ne doit pas dépasser %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "La quantité doit être supérieure à 0 et ne doit pas dépasser 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "L'échelle de quantité doit être supérieure à 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
