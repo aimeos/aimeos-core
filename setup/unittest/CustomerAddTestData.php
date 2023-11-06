@@ -85,7 +85,7 @@ class CustomerAddTestData extends BaseAddTestData
 			$manager = $this->getManager( 'group' );
 			$list = $manager->search( $manager->filter()->slice( 0, 10000 ) )->getCode();
 
-			$item->setGroups( $list->intersect( $data['group'] )->dump()->all() );
+			$item->setGroups( $list->intersect( $data['group'] )->all() );
 		}
 
 		return $item;
