@@ -52,8 +52,6 @@ class CustomerAddTestData extends BaseAddTestData
 		}
 
 		$manager = $this->getManager( 'customer' );
-		$groupManager = $this->getManager( 'group' );
-
 		$manager->begin();
 
 		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
@@ -62,7 +60,7 @@ class CustomerAddTestData extends BaseAddTestData
 		foreach( $testdata['customer'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry, true );
-			$item = $this->addGroupData( $groupManager, $item, $entry );
+			$item = $this->addGroupData( $item, $entry );
 			$item = $this->addPropertyData( $manager, $item, $entry );
 			$item = $this->addAddressData( $manager, $item, $entry );
 			$items[] = $this->addListData( $manager, $item, $entry );
@@ -76,30 +74,18 @@ class CustomerAddTestData extends BaseAddTestData
 	/**
 	 * Adds the group test data
 	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Customer\Item\Iface Modified item object
 	 */
-	protected function addGroupData( \Aimeos\MShop\Common\Manager\Iface $groupManager, \Aimeos\MShop\Customer\Item\Iface $item, array $data )
+	protected function addGroupData( \Aimeos\MShop\Customer\Item\Iface $item, array $data )
 	{
 		if( isset( $data['group'] ) )
 		{
-			$grpIds = $list = [];
-			$search = $groupManager->filter()->slice( 0, 10000 );
+			$manager = $this->getManager( 'group' );
+			$list = $manager->search( $manager->filter()->slice( 0, 10000 ) )->getCode();
 
-			foreach( $groupManager->search( $search ) as $id => $groupItem ) {
-				$list[$groupItem->getCode()] = $id;
-			}
-
-			foreach( $data['group'] as $code )
-			{
-				if( isset( $list[$code] ) ) {
-					$grpIds[] = $list[$code];
-				}
-			}
-
-			$item->setGroups( $grpIds );
+			$item->setGroups( $list->intersect( $data['group'] )->dump()->all() );
 		}
 
 		return $item;

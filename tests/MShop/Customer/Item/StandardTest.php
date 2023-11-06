@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.label' => 'unitObject',
 			'customer.code' => '12345ABCDEF',
 			'customer.status' => 1,
-			'customer.groups' => [1, 2],
+			'customer.groups' => [1 => 'unitgroup', 2 => 'unitgroup2'],
 			'customer.password' => '',
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
@@ -203,11 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetGroups()
 	{
-		$listValues = array( 'domain' => 'group', 'type' => 'default', 'refid' => 123 );
-		$listItems = array( 'group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
-		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, [], $listItems );
-
-		$this->assertEquals( array( 123 ), $object->getGroups() );
+		$this->assertEquals( [1 => 'unitgroup', 2 => 'unitgroup2'], $this->object->getGroups() );
 	}
 
 

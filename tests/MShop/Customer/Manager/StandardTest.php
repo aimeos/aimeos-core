@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Customer\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
+	private $context;
 	private $fixture;
 	private $address;
 	private $editor = '';
@@ -19,8 +20,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( $this->context );
 
 		$this->fixture = array(
 			'customer.label' => 'unitTest',
@@ -33,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->fixture, $this->address );
+		unset( $this->object, $this->fixture, $this->address, $this->context );
 	}
 
 
@@ -167,20 +169,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
+		$group = \Aimeos\MShop::create( $this->context, 'group' )->find( 'unitgroup' );
 		$item = $this->object->create();
 
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
-		$item->setGroups( array( 1, 2, 3 ) );
+		$item->setGroups( [$group->getId() => $group->getCode()] );
 		$item = $this->object->save( $item );
-		$itemSaved = $this->object->get( $item->getId(), array( 'group' ) );
+		$itemSaved = $this->object->get( $item->getId(), ['group'] );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
-		$itemExp->setGroups( array( 2, 4 ) );
+		$itemExp->setGroups( [] );
 		$itemExp = $this->object->save( $itemExp );
-		$itemUpd = $this->object->get( $itemExp->getId(), array( 'group' ) );
+		$itemUpd = $this->object->get( $itemExp->getId(), ['group'] );
 
 		$this->object->delete( $item->getId() );
 

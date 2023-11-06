@@ -197,7 +197,7 @@ abstract class Base
 		$manager = $this->object()->getSubManager( 'lists' );
 		$listItems = $item->getListItems( 'group', 'default', null, false );
 
-		foreach( $item->getGroups() as $refId )
+		foreach( $item->getGroups() as $refId => $code )
 		{
 			if( ( $litem = $item->getListItem( 'group', 'default', $refId, false ) ) !== null ) {
 				unset( $listItems[$litem->getId()], $listItems['__group_default_' . $refId] );
@@ -208,7 +208,7 @@ abstract class Base
 			$item->addListItem( 'group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
 		}
 
-		return $item->deleteListItems( $listItems->toArray() );
+		return $item->deleteListItems( $listItems );
 	}
 
 
