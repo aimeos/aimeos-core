@@ -275,7 +275,7 @@ class Standard
 	public function getPreview( $width = false ) : string
 	{
 		if( ( $list = (array) $this->get( 'media.previews', [] ) ) === [] ) {
-			return '';
+			return $this->getUrl();
 		}
 
 		ksort( $list );
