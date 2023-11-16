@@ -111,7 +111,7 @@ class ServicesAvailable
 			return $value;
 		}
 
-		map( $order ) ->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		$problems = [];
 		$services = $order->getServices();
