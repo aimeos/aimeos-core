@@ -92,7 +92,7 @@ class Standard
 	public function getOrderNumber() : string
 	{
 		if( self::macro( 'ordernumber' ) ) {
-			return (string) $this->call( 'ordernumber', $this );
+			return (string) $this->call( 'ordernumber' );
 		}
 
 		return (string) $this->getId();
@@ -107,7 +107,7 @@ class Standard
 	public function getInvoiceNumber() : string
 	{
 		if( self::macro( 'invoicenumber' ) ) {
-			return (string) $this->call( 'invoicenumber', $this );
+			return (string) $this->call( 'invoicenumber' );
 		}
 
 		return (string) $this->get( 'order.invoiceno', '' );
