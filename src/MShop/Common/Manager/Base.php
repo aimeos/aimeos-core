@@ -37,7 +37,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$this->context = $context;
-		$this->init(); // init support trait
 	}
 
 
@@ -66,20 +65,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['siteid'] = $values['siteid'] ?? $this->context()->locale()->getSiteId();
-
 		return new \Aimeos\MShop\Common\Item\Base( '', $values );
-	}
-
-
-	/**
-	 * Creates a new cursor based on the filter criteria
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
-	 */
-	public function cursor( \Aimeos\Base\Criteria\Iface $filter ) : \Aimeos\MShop\Common\Cursor\Iface
-	{
-		return new \Aimeos\MShop\Common\Cursor\Standard( $filter );
 	}
 
 
@@ -132,17 +118,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 	public function getResourceType( bool $withsub = true ) : array
 	{
 		return $this->getResourceTypeBase( $this->getDomain(), $this->getConfigKey( 'submanagers' ), [], $withsub );
-	}
-
-
-	/**
-	 * Returns the additional column/search definitions
-	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
-	 */
-	public function getSaveAttributes() : array
-	{
-		return [];
 	}
 
 
