@@ -87,8 +87,8 @@ class Standard
 	 */
 	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		if( $fcn = self::macro( 'copyFrom' ) ) {
-			return $fcn( $product );
+		if( self::macro( 'copyFrom' ) ) {
+			return $this->call( 'copyFrom', $item );
 		}
 
 		parent::copyFrom( $item );

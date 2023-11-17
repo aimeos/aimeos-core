@@ -91,8 +91,8 @@ class Standard
 	 */
 	public function getOrderNumber() : string
 	{
-		if( $fcn = self::macro( 'ordernumber' ) ) {
-			return (string) $fcn( $this );
+		if( self::macro( 'ordernumber' ) ) {
+			return (string) $this->call( 'ordernumber', $this );
 		}
 
 		return (string) $this->getId();
@@ -106,8 +106,8 @@ class Standard
 	 */
 	public function getInvoiceNumber() : string
 	{
-		if( $fcn = self::macro( 'invoicenumber' ) ) {
-			return (string) $fcn( $this );
+		if( self::macro( 'invoicenumber' ) ) {
+			return (string) $this->call( 'invoicenumber', $this );
 		}
 
 		return (string) $this->get( 'order.invoiceno', '' );
