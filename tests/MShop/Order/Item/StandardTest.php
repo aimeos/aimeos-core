@@ -104,15 +104,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetOrderNumberCustom()
 	{
-		\Aimeos\MShop\Order\Item\Base::macro( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
-			return 'order-' . $item->getId() . 'Z';
+		\Aimeos\MShop\Order\Item\Base::macro( 'ordernumber', function() {
+			return 'order-' . $this->getId() . 'Z';
 		} );
 
-		$this->assertEquals( 'order-' . $this->values['order.id'] . 'Z', $this->object->getOrderNumber() );
+		$result = $this->object->getOrderNumber();
 
-		\Aimeos\MShop\Order\Item\Base::macro( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
-			return $item->getId();
-		} );
+		\Aimeos\MShop\Order\Item\Base::unmacro( 'ordernumber' );
+
+		$this->assertEquals( 'order-' . $this->values['order.id'] . 'Z', $result );
 	}
 
 
