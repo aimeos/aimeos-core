@@ -305,6 +305,22 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailableIncludeBillingPrefix()
+	{
+		$address = \Aimeos\MShop::create( $this->context, 'order/address' )->create();
+		$address->setPostal( '025698' );
+
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
+		$this->servItem->setConfig( array( 'postal.billing-include' => '025' ) );
+
+		$this->mockProvider->expects( $this->once() )
+			->method( 'isAvailable' )
+			->will( $this->returnValue( true ) );
+
+		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
+	}
+
+
 	public function testIsAvailableIncludeDelivery()
 	{
 		$address = \Aimeos\MShop::create( $this->context, 'order/address' )->create();
