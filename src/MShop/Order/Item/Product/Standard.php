@@ -762,10 +762,6 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		if( self::macro( 'copyFrom' ) ) {
-			return $this->call( 'copyFrom', $product );
-		}
-
 		$values = $product->toArray();
 		$this->fromArray( $values );
 
@@ -787,6 +783,10 @@ class Standard extends Base implements Iface
 
 		if( $item = $product->getSiteItem() ) {
 			$this->setVendor( $item->getLabel() );
+		}
+
+		if( self::macro( 'copyFrom' ) ) {
+			$this->call( 'copyFrom', $product );
 		}
 
 		return $this->setModified();
