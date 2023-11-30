@@ -8,7 +8,7 @@ jobs:
   "php80-mssql2019":
     docker:
       - image: aimeos/ci-php:8.0
-      - image: mcr.microsoft.com/mssql/server:2019-latest
+      - image: mcr.microsoft.com/mssql/server:2022-latest
         environment:
           SA_PASSWORD: S3c0r3P4ss
           ACCEPT_EULA: Y
@@ -25,10 +25,10 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php81-pgsql14":
+  "php81-pgsql16":
     docker:
       - image: aimeos/ci-php:8.1
-      - image: cimg/postgres:14.0
+      - image: postgres:16
         environment:
           POSTGRES_PASSWORD: aimeos
           POSTGRES_USER: aimeos
@@ -49,7 +49,7 @@ jobs:
   "php82-mysql80":
     docker:
       - image: aimeos/ci-php:8.2
-      - image: cimg/mysql:8.0
+      - image: mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -72,7 +72,7 @@ jobs:
   "php83-mysql82":
     docker:
       - image: aimeos/ci-php:8.3
-      - image: cimg/mysql:8.2
+      - image: mysql:8
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -97,6 +97,6 @@ workflows:
   unittest:
     jobs:
       - "php80-mssql2019"
-      - "php81-pgsql14"
+      - "php81-pgsql16"
       - "php82-mysql80"
       - "php83-mysql82"
