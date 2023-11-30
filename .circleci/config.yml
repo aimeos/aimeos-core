@@ -5,10 +5,10 @@
 version: 2.1
 
 jobs:
-  "php80-mssql2019":
+  "php80-mssql":
     docker:
       - image: aimeos/ci-php:8.0
-      - image: mcr.microsoft.com/mssql/server:2022-latest
+      - image: mcr.microsoft.com/mssql/server:latest
         environment:
           SA_PASSWORD: S3c0r3P4ss
           ACCEPT_EULA: Y
@@ -25,10 +25,10 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php81-pgsql16":
+  "php81-pgsql":
     docker:
       - image: aimeos/ci-php:8.1
-      - image: postgres:16
+      - image: postgres:latest
         environment:
           POSTGRES_PASSWORD: aimeos
           POSTGRES_USER: aimeos
@@ -69,10 +69,10 @@ jobs:
       - run: ./vendor/bin/phing setup coverage
       - run: ./vendor/bin/php-coveralls -o coveralls.json -vvv -x tests/coverage.xml
 
-  "php83-mysql82":
+  "php83-mysql":
     docker:
       - image: aimeos/ci-php:8.3
-      - image: mysql:8
+      - image: mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -89,14 +89,13 @@ jobs:
           paths: [./vendor]
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup coverage
-      - run: ./vendor/bin/php-coveralls -o coveralls.json -vvv -x tests/coverage.xml
+      - run: ./vendor/bin/phing setup test
 
 workflows:
   version: 2
   unittest:
     jobs:
-      - "php80-mssql2019"
-      - "php81-pgsql16"
+      - "php80-mssql"
+      - "php81-pgsql"
       - "php82-mysql80"
-      - "php83-mysql82"
+      - "php83-mysql"
