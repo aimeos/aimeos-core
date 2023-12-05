@@ -371,7 +371,9 @@ abstract class Base
 	{
 		$list = [];
 
-		foreach( $configList as $key => $config ) {
+		foreach( $configList as $key => $config )
+		{
+			$config['code'] = $config['code'] ?? $key;
 			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
 		}
 
