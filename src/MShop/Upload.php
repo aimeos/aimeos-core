@@ -95,7 +95,7 @@ trait Upload
 	 */
 	protected function storeFile( UploadedFileInterface $file, string $filepath, string $fsname = 'fs-media' ) : self
 	{
-		if( $file->getError() !== UPLOAD_ERR_OK )
+		if( ( $code = $file->getError() ) !== UPLOAD_ERR_OK )
 		{
 			$errors = [
 				0 => 'There is no error, the file uploaded with success',

@@ -425,8 +425,6 @@ class Standard
 		 */
 		$cfgpath = 'mshop/media/manager/delete';
 
-		$fs = $this->context()->fs( 'fs-media' );
-
 		foreach( map( $items ) as $item )
 		{
 			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
