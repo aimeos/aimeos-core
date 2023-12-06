@@ -221,6 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setMimeType( 'image/jpeg' );
 		$item->setUrl( 'test.jpg' );
 		$item->setPreview( 'xxxtest-preview.jpg' );
+		$item->setFileSystem( 'fs-media' );
 
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
@@ -230,7 +231,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->delete( $item->getId() );
+		$this->object->delete( $item );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -335,6 +336,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
 		$this->assertEquals( 'test.gif', $result->getUrl() );
 		$this->assertNotEquals( '', $result->getPreview() );
+	}
+
+
+	public function testUpload()
+	{
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $this->object->create(), $file );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertEquals( 'image/gif', $result->getMimetype() );
+		$this->assertEquals( 'test.gif', $result->getLabel() );
 	}
 
 

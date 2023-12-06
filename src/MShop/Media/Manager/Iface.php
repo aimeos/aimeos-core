@@ -11,6 +11,8 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
+use Psr\Http\Message\UploadedFileInterface;
+
 
 /**
  * Generic interface for media managers.
@@ -44,4 +46,14 @@ interface Iface
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface;
+
+
+	/**
+	 * Stores the uploaded file and returns the updated item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item for storing the file meta data, "domain" must be set
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file object
+	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item including file and preview paths
+	 */
+	public function upload( \Aimeos\MShop\Media\Item\Iface $item, UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface;
 }

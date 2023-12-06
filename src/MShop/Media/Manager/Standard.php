@@ -11,6 +11,8 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
+use \Psr\Http\Message\UploadedFileInterface;
+
 
 /**
  * Default media manager implementation.
@@ -22,6 +24,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Media\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Upload;
+
+
 	/** mshop/media/manager/name
 	 * Class name of the used media manager implementation
 	 *
@@ -426,11 +431,8 @@ class Standard
 		{
 			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
 			{
-				if( ( $path = $item->getUrl() ) && $fs->has( $path ) ) {
-					$fs->rm( $path );
-				}
-
 				$this->deletePreviews( $item, $item->getPreviews() );
+				$this->deleteFile( $item->getUrl(), 'fs-media' );
 			}
 		}
 
@@ -774,8 +776,7 @@ class Standard
 				unset( $old[$width] );
 			}
 
-			$item = $this->deletePreviews( $item, $old );
-			$item->setPreviews( $previews );
+			$item = $this->deletePreviews( $item, $old )->setPreviews( $previews );
 
 			$this->call( 'scaled', $item, $media );
 		}
@@ -965,6 +966,28 @@ class Standard
 		}
 
 		return $this->buildItems( $map, $ref, 'media', $propItems );
+	}
+
+
+	/**
+	 * Stores the uploaded file and returns the updated item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item for storing the file meta data, "domain" must be set
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file object
+	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item including file and preview paths
+	 */
+	public function upload( \Aimeos\MShop\Media\Item\Iface $item, UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		$mimetype = $this->getFilemime( $file );
+		$filepath = $this->getPath( $file->getClientFilename(), $mimetype, $item->getDomain() );
+
+		$this->storeFile( $file, $filepath );
+
+		$item->setLabel( $file->getClientFilename() )
+			->setMimetype( $mimetype )
+			->setUrl( $filepath );
+
+		return $this->scale( $item );
 	}
 
 
