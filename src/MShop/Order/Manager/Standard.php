@@ -21,6 +21,9 @@ namespace Aimeos\MShop\Order\Manager;
 class Standard extends Base
 	implements \Aimeos\MShop\Order\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use Session;
+
+
 	/** mshop/order/manager/name
 	 * Class name of the used order manager implementation
 	 *

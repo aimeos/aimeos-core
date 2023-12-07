@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Order\Manager;
 
 
-class BaseTest extends \PHPUnit\Framework\TestCase
+class SessionTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
@@ -37,17 +37,5 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $session );
 		$this->assertEquals( 'test comment', $order->getComment() );
 		$this->assertEquals( $order, $session );
-	}
-
-
-	public function testGetSetSessionLock()
-	{
-		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( \Aimeos\MShop\Order\Manager\Base::LOCK_DISABLE, $lock );
-
-		$this->object->setSessionLock( \Aimeos\MShop\Order\Manager\Base::LOCK_ENABLE, 'test' );
-
-		$lock = $this->object->getSessionLock( 'test' );
-		$this->assertEquals( \Aimeos\MShop\Order\Manager\Base::LOCK_ENABLE, $lock );
 	}
 }
