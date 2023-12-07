@@ -20,9 +20,6 @@
       <file>MAdminTest.php</file>
       <directory>MAdmin/</directory>
     </testsuite>
-    <testsuite name="Controller suite">
-      <directory>Controller/</directory>
-    </testsuite>
   </testsuites>
   <logging/>
 </phpunit>

@@ -2,37 +2,29 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2014
  * @copyright Aimeos (aimeos.org), 2015-2023
- * @package Controller
- * @subpackage Common
+ * @package MShop
+ * @subpackage Order
  */
 
 
-namespace Aimeos\Controller\Common\Order;
+namespace Aimeos\MShop\Order\Manager;
 
 
 /**
- * Common order controller methods.
+ * Update trait for order managers
  *
- * @package Controller
- * @subpackage Common
+ * @package MShop
+ * @subpackage Order
  */
-class Standard
-	implements \Aimeos\Controller\Common\Order\Iface
+trait Update
 {
-	private \Aimeos\MShop\ContextIface $context;
-
-
 	/**
-	 * Initializes the object.
+	 * Returns the context item object.
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context
+	 * @return \Aimeos\MShop\ContextIface Context item object
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		$this->context = $context;
-	}
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
 
 
 	/**
@@ -160,7 +152,7 @@ class Standard
 	protected function getBundleMap( string $prodId ) : array
 	{
 		$bundleMap = [];
-		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
 		$search = $productManager->filter();
 		$func = $search->make( 'product:has', ['product', 'default', $prodId] );
@@ -181,17 +173,6 @@ class Standard
 		}
 
 		return $bundleMap;
-	}
-
-
-	/**
-	 * Returns the context item object.
-	 *
-	 * @return \Aimeos\MShop\ContextIface Context item object
-	 */
-	protected function context() : \Aimeos\MShop\ContextIface
-	{
-		return $this->context;
 	}
 
 
@@ -230,7 +211,7 @@ class Standard
 	 */
 	protected function getStockItems( iterable $prodIds, string $stockType ) : \Aimeos\Map
 	{
-		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
+		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		$search = $stockManager->filter()->slice( 0, count( $prodIds ) )
 			->add( ['stock.productid' => $prodIds, 'stock.type' => $stockType] );
@@ -407,7 +388,7 @@ class Standard
 			return;
 		}
 
-		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
+		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		foreach( $this->getStockItems( array_keys( $bundleIds ), $stockType ) as $item )
 		{
@@ -431,8 +412,8 @@ class Standard
 	 */
 	protected function updateStockSelection( string $prodId, string $stocktype )
 	{
-		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
-		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
+		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
 		$productItem = $productManager->get( $prodId, ['product'] );
 		$prodIds = $productItem->getRefItems( 'product', 'default', 'default' )->getId()->push( $productItem->getId() );

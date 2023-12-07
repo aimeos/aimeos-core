@@ -22,6 +22,7 @@ class Standard extends Base
 	implements \Aimeos\MShop\Order\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	use Session;
+	use Update;
 
 
 	/** mshop/order/manager/name
