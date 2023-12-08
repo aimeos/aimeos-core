@@ -20,6 +20,22 @@ namespace Aimeos\MShop\Order\Manager;
 trait Session
 {
 	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
+
+
+	/**
+	 * Returns the context item object.
+	 *
+	 * @return \Aimeos\MShop\ContextIface Context item object
+	 */
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
+
+
+	/**
 	 * Returns the current basket of the customer.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket

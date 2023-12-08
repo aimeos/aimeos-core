@@ -126,7 +126,7 @@ trait Update
 	 * @param string $parentid Order ID
 	 * @param string $type Status type
 	 * @param string $value Status value
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return \Aimeos\MShop\Common\Manager\Iface Same manager for fluent interface
 	 */
 	protected function addStatusItem( string $parentid, string $type, string $value ) : Iface
 	{
