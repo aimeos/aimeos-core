@@ -754,12 +754,9 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				if( ( $row['rule.config'] = json_decode( $config = $row['rule.config'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'rule.config', $row['rule.id'], $config );
-					$this->context()->logger()->warning( $msg, 'core/rule' );
+				if( ( $row['rule.config'] = json_decode( $config = $row['rule.config'], true ) ) === null ) {
 					$row['rule.config'] = [];
 				}
 

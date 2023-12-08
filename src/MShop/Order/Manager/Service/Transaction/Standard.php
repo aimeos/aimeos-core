@@ -771,16 +771,10 @@ class Standard
 
 		try
 		{
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				$id = $row['order.service.transaction.id'];
-				$data = $row['order.service.transaction.config'];
-
-				if( ( $row['order.service.transaction.config'] = json_decode( $data, true ) ) === null && $data !== 'null' )
-				{
-					$msg = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
-					$msg = sprintf( $msg, 'mshop_order_service_transaction.config', $id, $data );
-					$this->context()->logger()->warning( $msg, 'core/order' );
+				if( ( $row['order.service.transaction.config'] = json_decode( $row['order.service.transaction.config'], true ) ) === null ) {
+					$row['order.service.transaction.config'] = [];
 				}
 
 				// don't use fromArray() or set*() methods to avoid recalculation of tax value
@@ -794,7 +788,7 @@ class Standard
 				] );
 
 				if( $item = $this->applyFilter( $this->createItemBase( $price, $row ) ) ) {
-					$items[$id] = $item;
+					$items[$row['order.service.transaction.id']] = $item;
 				}
 			}
 		}

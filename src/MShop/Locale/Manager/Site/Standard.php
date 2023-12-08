@@ -699,22 +699,13 @@ class Standard
 
 		try
 		{
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				$id = $row['locale.site.id'];
-				$logos = $row['locale.site.logo'] ?? '{}';
-				$config = $row['locale.site.config'] ?? '{}';
-
-				if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
-					$this->context()->logger()->warning( $msg, 'core/locale/site' );
+				if( ( $row['locale.site.logo'] = json_decode( $row['locale.site.logo'], true ) ) === null ) {
+					$row['locale.site.logo'] = [];
 				}
 
-				if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
-					$this->context()->logger()->warning( $msg, 'core/locale/site' );
+				if( ( $row['locale.site.config'] = json_decode( $row['locale.site.config'], true ) ) === null ) {
 					$row['locale.site.config'] = [];
 				}
 

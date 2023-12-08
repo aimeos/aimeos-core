@@ -40,7 +40,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->string( 'label' )->default( '' );
 			$table->string( 'link' );
-			$table->text( 'preview' )->default( '{}' );
+			$table->text( 'preview' )->null( true );
 			$table->string( 'mimetype', 64 )->default( '' );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();

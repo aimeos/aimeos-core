@@ -211,7 +211,7 @@ class Setup
 			return $this->text( $name )
 				->opt( 'charset', 'utf8mb4', 'mysql' )
 				->opt( 'collation', 'utf8mb4_general_ci', 'mysql' )
-				->default( '{}' );
+				->null( true );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) use ( $codelen ) {
@@ -232,7 +232,7 @@ class Setup
 			return $this->text( $name )
 				->opt( 'charset', 'utf8mb4', 'mysql' )
 				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
-				->default( '{}' );
+				->null( true );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'meta', function() {

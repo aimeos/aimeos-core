@@ -764,12 +764,9 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				if( ( $row['service.config'] = json_decode( $config = $row['service.config'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['service.id'], $config );
-					$this->context()->logger()->warning( $msg, 'core/service' );
+				if( ( $row['service.config'] = json_decode( $row['service.config'], true ) ) === null ) {
 					$row['service.config'] = [];
 				}
 
