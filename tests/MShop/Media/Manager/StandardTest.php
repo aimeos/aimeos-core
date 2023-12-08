@@ -353,6 +353,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUploadPreview()
+	{
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+		$preview = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $this->object->create(), $file, $preview );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
+		$this->assertStringEndsWith( '_test.gif', $result->getPreview() );
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertEquals( 'image/gif', $result->getMimetype() );
+		$this->assertEquals( 'test.gif', $result->getLabel() );
+	}
+
+
 	public function testUploadException()
 	{
 		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );

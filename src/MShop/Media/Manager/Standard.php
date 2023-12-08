@@ -971,19 +971,30 @@ class Standard
 	 * Stores the uploaded file and returns the updated item
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item for storing the file meta data, "domain" must be set
-	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file object
+	 * @param \Psr\Http\Message\UploadedFileInterface|null $file Uploaded file object
+	 * @param \Psr\Http\Message\UploadedFileInterface|null $preview Uploaded preview image
 	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item including file and preview paths
 	 */
-	public function upload( \Aimeos\MShop\Media\Item\Iface $item, UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface
+	public function upload( \Aimeos\MShop\Media\Item\Iface $item, ?UploadedFileInterface $file, UploadedFileInterface $preview = null ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		$mimetype = $this->getFilemime( $file );
-		$filepath = $this->getPath( $file->getClientFilename(), $mimetype, $item->getDomain() );
+		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE )
+		{
+			$path = $this->getPath( $preview->getClientFilename(), $this->getFilemime( $preview ), $item->getDomain() );
+			$this->storeFile( $preview, $path );
+			$item->setPreview( $path );
+		}
 
-		$this->storeFile( $file, $filepath );
+		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE )
+		{
+			$mimetype = $this->getFilemime( $file );
+			$path = $this->getPath( $file->getClientFilename(), $mimetype, $item->getDomain() );
 
-		$item->setLabel( $file->getClientFilename() )
-			->setMimetype( $mimetype )
-			->setUrl( $filepath );
+			$this->storeFile( $file, $path );
+
+			$item->setLabel( $file->getClientFilename() )
+				->setMimetype( $mimetype )
+				->setUrl( $path );
+		}
 
 		return $this->scale( $item );
 	}
@@ -1359,7 +1370,7 @@ class Standard
 	 * @param string $content File content
 	 * @param string $filepath Path of the new file
 	 * @param \Aimeos\Base\Filesystem\Iface $fs File system object
-	 * @return \Aimeos\Controller\Common\Media\Iface Self object for fluent interface
+	 * @return \Aimeos\MShop\Media\Manager\Iface Self object for fluent interface
 	 */
 	protected function store( string $content, string $filepath, \Aimeos\Base\Filesystem\Iface $fs ) : Iface
 	{
