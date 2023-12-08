@@ -251,13 +251,10 @@ abstract class Base
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null )
+		while( $row = $results->fetch() )
 		{
-			if( ( $row[$this->prefix . 'config'] = json_decode( $config = $row[$this->prefix . 'config'], true ) ) === null )
-			{
-				$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
-				$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
-				$this->context()->logger()->warning( $msg, 'core' );
+			if( ( $row[$this->prefix . 'config'] = json_decode( $row[$this->prefix . 'config'], true ) ) === null ) {
+				$row[$this->prefix . 'config'] = [];
 			}
 
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

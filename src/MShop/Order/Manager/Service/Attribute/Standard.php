@@ -778,19 +778,14 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null )
+				while( $row = $results->fetch() )
 				{
-					$id = $row['order.service.attribute.id'];
-					$config = $row['order.service.attribute.value'];
-
-					if( ( $row['order.service.attribute.value'] = json_decode( $config, true ) ) === null && $config !== 'null' )
-					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_service_attribute.value', $id, $config );
-						$this->context()->logger()->warning( $msg, 'core/order' );
+					if( ( $row['order.service.attribute.value'] = json_decode( $row['order.service.attribute.value'], true ) ) === null ) {
+						$row['order.service.attribute.value'] = [];
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-						$items[$id] = $item;
+						$items[$row['order.service.attribute.id']] = $item;
 					}
 				}
 			}

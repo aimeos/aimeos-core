@@ -703,12 +703,9 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null )
+				while( $row = $results->fetch() )
 				{
-					if( ( $row['coupon.config'] = json_decode( $config = $row['coupon.config'], true ) ) === null )
-					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_coupon.config', $row['id'], $config );
-						$context->logger()->warning( $msg, 'core/coupon' );
+					if( ( $row['coupon.config'] = json_decode( $config = $row['coupon.config'], true ) ) === null ) {
 						$row['coupon.config'] = [];
 					}
 

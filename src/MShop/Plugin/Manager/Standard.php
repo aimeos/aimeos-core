@@ -722,12 +722,9 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				if( ( $row['plugin.config'] = json_decode( $config = $row['plugin.config'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['plugin.id'], $config );
-					$this->context()->logger()->warning( $msg, 'core/plugin' );
+				if( ( $row['plugin.config'] = json_decode( $config = $row['plugin.config'], true ) ) === null ) {
 					$row['plugin.config'] = [];
 				}
 

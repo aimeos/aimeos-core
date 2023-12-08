@@ -1028,12 +1028,9 @@ class Standard
 
 		try
 		{
-			while( ( $row = $results->fetch() ) !== null )
+			while( $row = $results->fetch() )
 			{
-				if( ( $row['order.product.taxrates'] = json_decode( $config = $row['order.product.taxrates'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_product.taxrates', $row['order.product.id'], $config );
-					$this->context()->logger()->warning( $msg, 'core/order' );
+				if( ( $row['order.product.taxrates'] = json_decode( $row['order.product.taxrates'], true ) ) === null ) {
 					$row['order.product.taxrates'] = [];
 				}
 

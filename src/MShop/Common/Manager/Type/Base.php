@@ -216,14 +216,9 @@ abstract class Base
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null )
+		while( $row = $results->fetch() )
 		{
-			if( ( $row[$this->prefix . 'i18n'] = json_decode( $i18n = $row[$this->prefix . 'i18n'], true ) ) === null )
-			{
-				$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
-				$msg = sprintf( $str, $this->getTable() . '.i18n', $row[$this->prefix . 'id'], $i18n );
-
-				$this->context()->logger()->warning( $msg, 'core/type' );
+			if( ( $row[$this->prefix . 'i18n'] = json_decode( $i18n = $row[$this->prefix . 'i18n'], true ) ) === null ) {
 				$row[$this->prefix . 'i18n'] = [];
 			}
 
