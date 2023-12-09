@@ -20,11 +20,10 @@ namespace Aimeos\MShop\Order\Item;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
-	implements \Aimeos\MShop\Order\Item\Iface, \Aimeos\MW\Observer\Publisher\Iface,
-		\Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
+	implements \Aimeos\MShop\Order\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
-	use \Aimeos\MW\Observer\Publisher\Traits;
 	use \Aimeos\Macro\Macroable;
+	use Publisher;
 
 
 	/**

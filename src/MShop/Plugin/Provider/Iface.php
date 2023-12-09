@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Plugin\Provider;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MW\Observer\Listener\Iface
+interface Iface
 {
 	/**
 	 * Checks the backend configuration attributes for validity.
@@ -44,4 +44,23 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
 	 */
 	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface;
+
+
+	/**
+	 * Subscribes itself to a publisher.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 */
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface;
+
+	/**
+	 * Receives a notification from a publisher object.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
+	 * @param string $action Name of the action to listen for
+	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
+	 */
+	public function update( \Aimeos\MShop\Order\Item\Iface $p, string $action, $value = null );
 }

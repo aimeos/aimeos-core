@@ -43,17 +43,4 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 		$this->order->addCoupon( 'OPQR' );
 		$this->assertEquals( null, $this->object->update( $this->order, 'test' ) );
 	}
-
-
-	public function testUpdateInvalidObject()
-	{
-		$this->expectException( \UnexpectedValueException::class );
-		$this->object->update( new TestPublisher(), 'test' );
-	}
-}
-
-
-class TestPublisher implements \Aimeos\MW\Observer\Publisher\Iface
-{
-	use \Aimeos\MW\Observer\Publisher\Traits;
 }

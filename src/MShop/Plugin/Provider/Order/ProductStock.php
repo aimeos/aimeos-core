@@ -37,10 +37,10 @@ class ProductStock
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$p->attach( $this->object(), 'addProduct.after' );
 		$p->attach( $this->object(), 'check.after' );
@@ -51,19 +51,17 @@ class ProductStock
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
+	public function update( \Aimeos\MShop\Order\Item\Iface $order, string $action, $value = null )
 	{
 		if( !in_array( 'order/product', (array) $value ) ) {
 			return $value;
 		}
-
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
 		if( !$order->getProducts()->isEmpty() && ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{
@@ -78,7 +76,7 @@ class ProductStock
 	/**
 	 * Checks if all products in the basket have enough stock
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Shop basket object
 	 * @return array Associative list of basket product positions as keys and the error codes as values
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Iface $order ) : array
@@ -116,7 +114,7 @@ class ProductStock
 	 * Removes products from the basket which are out of stock and decreases the
 	 * quantities of orders products if there's not enough stock.
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Shop basket object
 	 * @param array $stockMap Multi-dimensional associative list of product ID / stock type as keys and stock level as values
 	 * @return array Associative list of basket positions as keys and error codes as values
 	 */

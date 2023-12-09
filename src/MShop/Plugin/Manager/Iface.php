@@ -31,9 +31,9 @@ interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 	/**
 	 * Registers plugins to the given publisher.
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
+	 * @param \Aimeos\MShop\Order\Item\Iface $publisher Publisher object
 	 * @param string $type Plugin type code
 	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface;
+	public function register( \Aimeos\MShop\Order\Item\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface;
 }

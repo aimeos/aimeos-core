@@ -21,6 +21,22 @@ namespace Aimeos\MShop\Order\Item;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
+	 * Adds a listener to a publisher object.
+	 *
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $l Object implementing listener interface
+	 * @param string $action Name of the action to listen for
+	 * @return \Aimeos\MShop\Order\Item\Iface Publisher object for method chaining
+	 */
+	 public function attach( \Aimeos\MShop\Plugin\Provider\Iface $l, string $action ) : Iface;
+
+	 /**
+	  * Removes all attached listeners from the publisher
+	  *
+	  * @return \Aimeos\MShop\Order\Item\Iface Publisher object for method chaining
+	  */
+	 public function off() : Iface;
+
+	 /**
 	 * Returns the order number
 	 *
 	 * @return string Order number

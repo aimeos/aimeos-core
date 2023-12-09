@@ -75,8 +75,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$publisher = new TestPublisher();
-		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Manager\Iface::class, $this->object->register( $publisher, 'order' ) );
+		$item = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create();
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Manager\Iface::class, $this->object->register( $item, 'order' ) );
 	}
 
 
@@ -240,10 +240,4 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'type', 'unknown' );
 	}
-}
-
-
-class TestPublisher implements \Aimeos\MW\Observer\Publisher\Iface
-{
-	use \Aimeos\MW\Observer\Publisher\Traits;
 }

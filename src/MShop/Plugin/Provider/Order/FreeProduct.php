@@ -76,10 +76,10 @@ class FreeProduct
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$p->attach( $this->object(), 'addProduct.after' );
 		return $this;
@@ -89,14 +89,13 @@ class FreeProduct
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
+	public function update( \Aimeos\MShop\Order\Item\Iface $order, string $action, $value = null )
 	{
-		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 		map( [$value] )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		$code = $this->getConfigValue( 'productcode' );

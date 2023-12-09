@@ -88,11 +88,11 @@ abstract class Base
 	/**
 	 * Registers plugins to the given publisher.
 	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
+	 * @param \Aimeos\MShop\Order\Item\Iface $publisher Publisher object
 	 * @param string $type Unique plugin type code
 	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
