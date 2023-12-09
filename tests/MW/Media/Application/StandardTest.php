@@ -11,6 +11,16 @@ namespace Aimeos\MW\Media\Application;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	public static function setUpBeforeClass() : void
+	{
+		$dir = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp';
+
+		if( !is_dir( $dir ) ) {
+			mkdir( $dir, 0755, true );
+		}
+	}
+
+
 	public function testConstruct()
 	{
 		$ds = DIRECTORY_SEPARATOR;

@@ -14,6 +14,16 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	private $content;
 
 
+	public static function setUpBeforeClass() : void
+	{
+		$dir = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp';
+
+		if( !is_dir( $dir ) ) {
+			mkdir( $dir, 0755, true );
+		}
+	}
+
+
 	protected function setUp() : void
 	{
 		$ds = DIRECTORY_SEPARATOR;
