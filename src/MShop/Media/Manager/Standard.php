@@ -773,7 +773,9 @@ class Standard
 		{
 			$path = $old[$width] ?? $this->path( $url, 'image/webp', $domain );
 			$fs->write( $path, (string) $image->toWebp( $quality ) );
+
 			$previews[$width] = $path;
+			unset( $old[$width] );
 		}
 
 		$item = $this->deletePreviews( $item, $old )->setPreviews( $previews );
@@ -987,6 +989,10 @@ class Standard
 			$item->setLabel( $file->getClientFilename() )
 				->setMimetype( $mime )
 				->setUrl( $path );
+
+			if( !preview ) {
+				$this->scale( $item, true );
+			}
 		}
 
 		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $preview ) ) )
@@ -997,7 +1003,7 @@ class Standard
 			$item->setPreview( $path );
 		}
 
-		return $this->scale( $item );
+		return $item;
 	}
 
 

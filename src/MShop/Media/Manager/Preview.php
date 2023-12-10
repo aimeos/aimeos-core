@@ -32,7 +32,7 @@ trait Preview
 	abstract protected function context() : \Aimeos\MShop\ContextIface;
 
 
-    /**
+	/**
 	 * Creates scaled images according to the configuration settings
 	 *
 	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
@@ -129,7 +129,7 @@ trait Preview
 			$force = $entry['force-size'] ?? 0;
 			$maxwidth = $entry['maxwidth'] ?? null;
 			$maxheight = $entry['maxheight'] ?? null;
-			$bg = ltrim( $entry['background'] ?? 'ffffffff', '#' );
+			$bg = ltrim( $entry['background'] ?? 'ffffff00', '#' );
 
 			if( $this->call( 'filterPreviews', $image, $domain, $type, $maxwidth, $maxheight, $force ) )
 			{
