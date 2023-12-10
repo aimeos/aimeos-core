@@ -1035,7 +1035,7 @@ class Standard
 		$list = [];
 		$config = $this->context()->config();
 
-		/** controller/common/media/previews
+		/** mshop/media/manager/previews/common
 		 * Scaling options for preview images
 		 *
 		 * For responsive images, several preview images of different sizes are
@@ -1074,18 +1074,18 @@ class Standard
 		 * for catalog images) and for different types (e.g. catalog stage images).
 		 * Use configuration settings like
 		 *
-		 *  controller/common/media/<domain>/previews
-		 *  controller/common/media/<domain>/<type>/previews
+		 *  mshop/media/manager/previews/previews/<domain>/
+		 *  mshop/media/manager/previews/previews/<domain>/<type>/
 		 *
 		 * for example:
 		 *
-		 *  controller/common/media/catalog/previews => [
+		 *  mshop/media/manager/previews/catalog/previews => [
 		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
 		 *  ]
-		 *  controller/common/media/catalog/previews => [
+		 *  mshop/media/manager/previews/catalog/previews => [
 		 *    ['maxwidth' => 400, 'maxheight' => 300, 'force-size' => false]
 		 *  ]
-		 *  controller/common/media/catalog/stage/previews => [
+		 *  mshop/media/manager/previews/catalog/stage/previews => [
 		 *    ['maxwidth' => 360, 'maxheight' => 320, 'force-size' => true],
 		 *    ['maxwidth' => 720, 'maxheight' => 480, 'force-size' => true]
 		 *  ]
@@ -1110,9 +1110,9 @@ class Standard
 		 * @category User
 		 * @since 2019.07
 		 */
-		$previews = $config->get( 'controller/common/media/previews', [] );
-		$previews = $config->get( 'controller/common/media/' . $domain . '/previews', $previews );
-		$previews = $config->get( 'controller/common/media/' . $domain . '/' . $type . '/previews', $previews );
+		$previews = $config->get( 'mshop/media/manager/previews/common', [] );
+		$previews = $config->get( 'mshop/media/manager/previews/' . $domain, $previews );
+		$previews = $config->get( 'mshop/media/manager/previews/' . $domain . '/' . $type, $previews );
 
 		foreach( $previews as $entry )
 		{
