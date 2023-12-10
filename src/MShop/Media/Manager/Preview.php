@@ -21,7 +21,18 @@ use \Intervention\Image\Interfaces\ImageInterface;
  */
 trait Preview
 {
+	use \Aimeos\Macro\Macroable;
+
+
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\ContextIface Context object
+	 */
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
+
+
+    /**
 	 * Creates scaled images according to the configuration settings
 	 *
 	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object

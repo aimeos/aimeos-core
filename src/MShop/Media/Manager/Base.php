@@ -10,7 +10,7 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
-use enshrined\svgSanitize\Sanitizer;
+use \Enshrined\Svgsanitize\Sanitizer;
 use \Intervention\Image\Interfaces\ImageInterface;
 
 
@@ -38,10 +38,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		{
 			if( class_exists( '\Intervention\Image\Vips\Driver' ) ) {
 				$driver = new \Intervention\Image\Vips\Driver();
-			} elseif( class_exists( 'Imagick' ) ) {
+			} elseif( class_exists( '\Imagick' ) ) {
 				$driver = new \Intervention\Image\Drivers\Imagick\Driver();
 			} else {
-				$driver = new Intervention\Image\Drivers\Gd\Driver();
+				$driver = new \Intervention\Image\Drivers\Gd\Driver();
 			}
 
 			$this->driver = new \Intervention\Image\ImageManager( $driver );

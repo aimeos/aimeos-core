@@ -11,9 +11,7 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
-use enshrined\svgSanitize\Sanitizer;
 use \Psr\Http\Message\UploadedFileInterface;
-use \Intervention\Image\Interfaces\ImageInterface;
 
 
 /**
