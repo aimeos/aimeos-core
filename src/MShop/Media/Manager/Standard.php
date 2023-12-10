@@ -990,7 +990,7 @@ class Standard
 				->setMimetype( $mime )
 				->setUrl( $path );
 
-			if( !preview ) {
+			if( !$preview ) {
 				$this->scale( $item, true );
 			}
 		}
