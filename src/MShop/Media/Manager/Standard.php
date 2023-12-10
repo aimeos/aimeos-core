@@ -11,7 +11,9 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
+use enshrined\svgSanitize\Sanitizer;
 use \Psr\Http\Message\UploadedFileInterface;
+use \Intervention\Image\Interfaces\ImageInterface;
 
 
 /**
@@ -343,18 +345,20 @@ class Standard
 		$item = ( clone $item )->setId( null );
 
 		$path = $item->getUrl();
+		$mime = $item->getMimeType();
+		$domain = $item->getDomain();
 		$previews = $item->getPreviews();
 		$fsname = $item->getFileSystem();
 		$fs = $this->context()->fs( $fsname );
 
 		if( $fs->has( $path ) )
 		{
-			$newPath = $this->getPath( substr( basename( $path ), 9 ), 'files', $item->getMimeType() );
+			$newPath = $this->path( substr( basename( $path ), 9 ), $mime, $domain );
 			$fs->copy( $path, $newPath );
 			$item->setUrl( $newPath );
 		}
 
-		if( $fsname !== 'fs-mimeicon' && empty( $previews ) ) {
+		if( empty( $previews ) ) {
 			return $this->scale( $item, true );
 		}
 
@@ -362,7 +366,7 @@ class Standard
 		{
 			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
 			{
-				$newPath = $this->getPath( substr( basename( $preview ), 9 ), 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+				$newPath = $this->path( substr( basename( $preview ), 9 ), $mime, $domain );
 				$fs->copy( $preview, $newPath );
 				$previews[$size] = $newPath;
 			}
@@ -740,44 +744,44 @@ class Standard
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		$url = $item->getUrl();
+		$mime = $item->getMimeType();
 
-		if( empty( $url ) || \Aimeos\Base\Str::starts( $url, 'data:' ) ) {
-			return $item->setPreview( $url );
+		if( empty( $url = $item->getUrl() )
+			|| $item->getFileSystem() === 'fs-mimeicon'
+			|| strncmp( 'data:', $url, 5 ) === 0
+			|| strncmp( 'image/svg', $mime, 9 ) === 0
+			|| strncmp( 'image/', $mime, 6 ) !== 0
+		) {
+			return $item;
 		}
 
-		$context = $this->context();
-		$fs = $context->fs( $item->getFileSystem() );
+		$fs = $this->context()->fs( $item->getFileSystem() );
 		$is = ( $fs instanceof \Aimeos\Base\Filesystem\MetaIface ? true : false );
 
-		if( !$force && !empty( $item->getPreviews() ) && preg_match( '#^[a-zA-Z]{2,6}://#', $url ) !== 1
+		if( !$force
+			&& !empty( $item->getPreviews() )
+			&& preg_match( '#^[a-zA-Z]{2,6}://#', $url ) !== 1
 			&& ( $is && date( 'Y-m-d H:i:s', $fs->time( $url ) ) < $item->getTimeModified() || $fs->has( $url ) )
 		) {
 			return $item;
 		}
 
-		$media = $this->getFile( $url );
+		$previews = [];
+		$old = $item->getPreviews();
+		$domain = $item->getDomain() ?: '-';
+		$image = $this->image( $fs, $url );
+		$quality = $this->quality();
 
-		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
+		foreach( $this->createPreviews( $image, $domain, $item->getType() ) as $width => $image )
 		{
-			$previews = [];
-			$old = $item->getPreviews();
-			$domain = $item->getDomain();
-
-			foreach( $this->createPreviews( $media, $domain, $item->getType() ) as $width => $mediaFile )
-			{
-				$mime = $this->getMime( $mediaFile );
-				$path = $old[$width] ?? $this->getPath( $url, $mime, $domain ?: '-' );
-
-				$this->store( $mediaFile->save( null, $mime ), $path, $fs );
-				$previews[$width] = $path;
-				unset( $old[$width] );
-			}
-
-			$item = $this->deletePreviews( $item, $old )->setPreviews( $previews );
-
-			$this->call( 'scaled', $item, $media );
+			$path = $old[$width] ?? $this->path( $url, 'image/webp', $domain );
+			$fs->write( $path, (string) $image->toWebp( $quality ) );
+			$previews[$width] = $path;
 		}
+
+		$item = $this->deletePreviews( $item, $old )->setPreviews( $previews );
+
+		$this->call( 'scaled', $item, $image );
 
 		return $item;
 	}
@@ -975,23 +979,25 @@ class Standard
 	 */
 	public function upload( \Aimeos\MShop\Media\Item\Iface $item, ?UploadedFileInterface $file, UploadedFileInterface $preview = null ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE )
-		{
-			$path = $this->getPath( $preview->getClientFilename(), $this->getFilemime( $preview ), $item->getDomain() );
-			$this->storeFile( $preview, $path );
-			$item->setPreview( $path );
-		}
+		$domain = $item->getDomain() ?: '-';
+		$fsname = $item->getFileSystem() ?: 'fs-media';
 
-		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE )
+		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $file ) ) )
 		{
-			$mimetype = $this->getFilemime( $file );
-			$path = $this->getPath( $file->getClientFilename(), $mimetype, $item->getDomain() );
-
-			$this->storeFile( $file, $path );
+			$path = $this->path( $file->getClientFilename(), $mime, $domain );
+			$this->context()->fs( $fsname )->write( $path, $this->sanitize( (string) $file->getStream(), $mime ) );
 
 			$item->setLabel( $file->getClientFilename() )
-				->setMimetype( $mimetype )
+				->setMimetype( $mime )
 				->setUrl( $path );
+		}
+
+		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $preview ) ) )
+		{
+			$path = $this->path( $preview->getClientFilename(), $mime, $domain );
+			$this->context()->fs( $fsname )->write( $path, $this->sanitize( (string) $preview->getStream(), $mime ) );
+
+			$item->setPreview( $path );
 		}
 
 		return $this->scale( $item );
@@ -1019,12 +1025,12 @@ class Standard
 	/**
 	 * Creates scaled images according to the configuration settings
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
 	 * @param string $domain Domain the item is from, e.g. product, catalog, etc.
 	 * @param string $type Type of the item within the given domain, e.g. default, stage, etc.
-	 * @return \Aimeos\MW\Media\Image\Iface[] Associative list of image width as keys and scaled media object as values
+	 * @return \Intervention\Image\Interfaces\ImageInterface[] Associative list of image width as keys and scaled media object as values
 	 */
-	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type ) : array
+	protected function createPreviews( ImageInterface $image, string $domain, string $type ) : array
 	{
 		$list = [];
 		$config = $this->context()->config();
@@ -1113,12 +1119,17 @@ class Standard
 			$force = $entry['force-size'] ?? 0;
 			$maxwidth = $entry['maxwidth'] ?? null;
 			$maxheight = $entry['maxheight'] ?? null;
+			$bg = ltrim( $entry['background'] ?? 'ffffffff', '#' );
 
-			if( $this->call( 'filterPreviews', $media, $domain, $type, $maxwidth, $maxheight, $force ) )
+			if( $this->call( 'filterPreviews', $image, $domain, $type, $maxwidth, $maxheight, $force ) )
 			{
-				$file = $media->scale( $maxwidth, $maxheight, $force );
-				$width = $file->getWidth();
-				$list[$width] = $file;
+				$file = match( $force ) {
+					0 => $image->scaleDown( $maxwidth, $maxheight ),
+					1 => $image->pad( $maxwidth, $maxheight, $bg, 'center' ),
+					2 => $image->cover( $maxwidth, $maxheight )
+				};
+
+				$list[$file->width()] = $file;
 			}
 		}
 
@@ -1154,14 +1165,14 @@ class Standard
 	/**
 	 * Tests if the preview image should be created
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
 	 * @param string $domain Domain the item is from, e.g. product, catalog, etc.
 	 * @param string $type Type of the item within the given domain, e.g. default, stage, etc.
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
 	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
 	 */
-	protected function filterPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type,
+	protected function filterPreviews( ImageInterface $image, string $domain, string $type,
 		?int $maxwidth, ?int $maxheight, int $force ) : bool
 	{
 		return true;
@@ -1169,68 +1180,83 @@ class Standard
 
 
 	/**
-	 * Returns the file content of the file or URL
+	 * Checks if the mime type is allowed
 	 *
-	 * @param string $path Path to the file or URL
-	 * @return string File content
-	 * @throws \Aimeos\MShop\Media\Exception If no file is found
+	 * @param string Mime type
+	 * @return bool TRUE if mime type is allowed
+	 * @throws \Aimeos\MShop\Media\Exception If mime type is not allowed
 	 */
-	protected function getContent( string $path ) : string
+	protected function isAllowed( string $mimetype ) : bool
 	{
-		if( $path )
+		$context = $this->context();
+
+		/** mshop/media/manager/allowedtypes
+		 * A list of mime types that are allowed for uploaded files
+		 *
+		 * The list of allowed mime types must be explicitly configured for the
+		 * uploaded files. Trying to upload and store a file not available in
+		 * the list of allowed mime types will result in an exception.
+		 *
+		 * @param array List of image mime types
+		 * @since 2024.01
+		 */
+		$default = [
+			'image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
+			'application/epub+zip', 'application/pdf', 'application/zip',
+			'video/mp4', 'video/webm',
+			'audio/mpeg', 'audio/ogg', 'audio/weba'
+		];
+		$allowed = $context->config()->get( 'mshop/media/manager/allowedtypes', $default );
+
+		if( !in_array( $mimetype, $allowed ) )
 		{
-			if( preg_match( '#^[a-zA-Z]{1,10}://#', $path ) === 1 )
-			{
-				if( ( $content = @file_get_contents( $path ) ) === false ) {
-					throw new \Aimeos\MShop\Media\Exception( sprintf( 'Downloading file "%1$s" failed', $path ) );
-				}
-
-				return $content;
-			}
-
-			$fs = $this->context()->fs( 'fs-media' );
-
-			if( $fs->has( $path ) ) {
-				return $fs->read( $path );
-			}
+			$msg = sprintf( $context->translate( 'mshop', 'Uploading mimetype "%1$s" is not allowed' ), $mimetype );
+			throw new \Aimeos\MShop\Media\Exception( $msg, 406 );
 		}
 
-		throw new \Aimeos\MShop\Media\Exception( sprintf( 'File "%1$s" not found', $path ) );
+		return true;
 	}
 
 
 	/**
 	 * Returns the media object for the given file name
 	 *
-	 * @param string $file Path to the file
-	 * @return \Aimeos\MW\Media\Iface Media object
+	 * @param \Aimeos\Base\Filesystem\Iface $fs File system where the file is stored
+	 * @param string $file URL or relative path to the file
+	 * @return \Intervention\Image\Interfaces\ImageInterface Image object
 	 */
-	protected function getFile( string $filepath ) : \Aimeos\MW\Media\Iface
+	protected function image( \Aimeos\Base\Filesystem\Iface $fs, string $file ) : ImageInterface
 	{
-		/** controller/common/media/options
-		 * Options used for processing the uploaded media files
-		 *
-		 * When uploading a file, a preview image for that file is generated if
-		 * possible (especially for images). You can configure certain options
-		 * for the generated images, namely the implementation of the scaling
-		 * algorithm and the quality of the resulting images with
-		 *
-		 *  array(
-		 *  	'image' => array(
-		 *  		'name' => 'Imagick',
-		 *  		'quality' => 75,
-		 * 			'background' => '#f8f8f8' // only if "force-size" is true
-		 *  	)
-		 *  )
-		 *
-		 * @param array Multi-dimendional list of configuration options
-		 * @since 2016.01
-		 * @category Developer
-		 * @category User
-		 */
-		$options = $this->context()->config()->get( 'controller/common/media/options', [] );
+		if( !isset( $this->driver ) )
+		{
+			if( class_exists( '\Intervention\Image\Vips\Driver' ) ) {
+				$driver = new \Intervention\Image\Vips\Driver();
+			} elseif( class_exists( 'Imagick' ) ) {
+				$driver = new \Intervention\Image\Drivers\Imagick\Driver();
+			} else {
+				$driver = new Intervention\Image\Drivers\Gd\Driver();
+			}
 
-		return \Aimeos\MW\Media\Factory::get( $this->getContent( $filepath ), $options );
+			$this->driver = new \Intervention\Image\ImageManager( $driver );
+		}
+
+		if( preg_match( '#^[a-zA-Z]{1,10}://#', $file ) === 1 )
+		{
+			if( ( $fh = fopen( $file, 'r' ) ) === false )
+			{
+				$msg = $this->context()->translate( 'mshop', 'Unable to open file "%1$s"' );
+				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, $file ) );
+			}
+		}
+		else
+		{
+			$fh = $this->context()->fs( 'fs-media' )->reads( $file );
+		}
+
+		$image = $this->driver->read( $fh );
+		fclose( $fh );
+
+		return $image;
 	}
 
 
@@ -1242,11 +1268,11 @@ class Standard
 	 * @param string $domain data domain
 	 * @return string New file name including the file path
 	 */
-	protected function getPath( string $filepath, string $mimetype, string $domain ) : string
+	protected function path( string $filepath, string $mimetype, string $domain ) : string
 	{
 		$context = $this->context();
 
-		/** controller/common/media/extensions
+		/** mshop/media/manager/extensions
 		 * Available files extensions for mime types of uploaded files
 		 *
 		 * Uploaded files should have the right file extension (e.g. ".jpg" for
@@ -1260,7 +1286,8 @@ class Standard
 		 * @since 2018.04
 		 * @category Developer
 		 */
-		$list = $context->config()->get( 'controller/common/media/extensions', [] );
+		$default = ['image/gif' => 'gif', 'image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+		$list = $context->config()->get( 'mshop/media/manager/extensions', $default );
 
 		$filename = basename( $filepath );
 		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
@@ -1275,58 +1302,22 @@ class Standard
 
 
 	/**
-	 * Returns the mime type for the new image
+	 * Returns the quality level of the resized images
 	 *
-	 * @param \Aimeos\MW\Media\Iface $media Media object
-	 * @return string New mime type
-	 * @throws \Aimeos\Controller\Common\Exception If no mime types are configured
+	 * @return int Quality level from 0 to 100
 	 */
-	protected function getMime( \Aimeos\MW\Media\Iface $media ) : string
+	protected function quality() : int
 	{
-		$mimetype = $media->getMimetype();
-		$config = $this->context()->config();
-
-		/** controller/common/media/files/allowedtypes
-		 * A list of image mime types that are allowed for uploaded image files
+		/** mshop/media/manager/quality
+		 * Quality level of saved images
 		 *
-		 * The list of allowed image types must be explicitly configured for the
-		 * uploaded image files. Trying to upload and store an image file not
-		 * available in the list of allowed mime types will result in an exception.
+		 * Qualitity level must be an integer from 0 (worst) to 100 (best).
+		 * The higher the quality, the bigger the file size.
 		 *
-		 * @param array List of image mime types
-		 * @since 2016.01
-		 * @category Developer
-		 * @category User
+		 * @param int Quality level from 0 to 100
+		 * @since 2024.01
 		 */
-
-		/** controller/common/media/preview/allowedtypes
-		 * A list of image mime types that are allowed for preview image files
-		 *
-		 * The list of allowed image types must be explicitly configured for the
-		 * preview image files. Trying to create a preview image whose mime type
-		 * is not available in the list of allowed mime types will result in an
-		 * exception.
-		 *
-		 * @param array List of image mime types
-		 * @since 2016.01
-		 * @category Developer
-		 * @category User
-		 */
-		$default = [
-			'image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
-			'application/epub+zip', 'application/pdf', 'application/zip',
-			'video/mp4', 'video/webm',
-			'audio/mpeg', 'audio/ogg', 'audio/weba'
-		];
-		$allowed = $config->get( 'controller/common/media/preview/allowedtypes', $default );
-
-		if( in_array( $mimetype, ['image/jpeg', 'image/png'] )
-			&& !empty( $supported = $media::supports( $allowed ) ) && ( $imgtype = reset( $supported ) ) !== false
-		) {
-			return $imgtype;
-		}
-
-		return $mimetype;
+		return $this->context()->config()->get( 'mshop/media/manager/quality', 75 );
 	}
 
 
@@ -1351,28 +1342,42 @@ class Standard
 
 
 	/**
-	 * Called after the image has been scaled
-	 * Can be used to update the media item with image information.
+	 * Sanitizes the uploaded file
 	 *
-	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
-	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param string $content File content
+	 * @param string $mimetype File mime type
+	 * @return string Sanitized content
 	 */
-	protected function scaled( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media )
+	protected function sanitize( string $content, string $mimetype ) : string
 	{
+		if( strncmp( 'image/svg', $mimetype, 9 ) === 0 )
+		{
+			$sanitizer = new Sanitizer();
+			$sanitizer->removeRemoteReferences( true );
+
+			if( ( $content = $sanitizer->sanitize( $content ) ) === false )
+			{
+				$msg = $this->context()->translate( 'mshop', 'Invalid SVG file: %1$s' );
+				throw new \Aimeos\MShop\Media\Exception\Exception( sprintf( $msg, print_r( $sanitizer->getXmlIssues(), true ) ) );
+			}
+		}
+
+		if( $fcn = self::macro( 'sanitize' ) ) {
+			$content = $fcn( $content, $mimetype );
+		}
+
+		return $content;
 	}
 
 
 	/**
-	 * Stores the file content
+	 * Called after the image has been scaled
+	 * Can be used to update the media item with image information.
 	 *
-	 * @param string $content File content
-	 * @param string $filepath Path of the new file
-	 * @param \Aimeos\Base\Filesystem\Iface $fs File system object
-	 * @return \Aimeos\MShop\Media\Manager\Iface Self object for fluent interface
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
+	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
 	 */
-	protected function store( string $content, string $filepath, \Aimeos\Base\Filesystem\Iface $fs ) : Iface
+	protected function scaled( \Aimeos\MShop\Media\Item\Iface $item, ImageInterface $image )
 	{
-		$fs->write( $filepath, $content );
-		return $this;
 	}
 }

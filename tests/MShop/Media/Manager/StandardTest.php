@@ -318,23 +318,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
 
-		$object = $this->getMockBuilder( \Aimeos\MShop\Media\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )
-			->onlyMethods( ['getContent', 'store'] )
-			->getMock();
-
-		$object->expects( $this->once() )->method( 'getContent' )
-			->will( $this->returnValue( file_get_contents( __DIR__ . '/_testfiles/test.gif' ) ) );
-
-		$object->expects( $this->any() )->method( 'store' );
-
 		$item = $this->object->create()->setUrl( 'test.gif' )
 			->setMimeType( 'image/gif' )->setDomain( 'product' );
 
-		$result = $object->scale( $item, true );
+		$result = $this->object->scale( $item, true );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
 		$this->assertEquals( 'test.gif', $result->getUrl() );
+		$this->assertNotEquals( '', $result->getPreview() );
+	}
+
+
+	public function testScaleHttp()
+	{
+
+		$item = $this->object->create()->setUrl( 'https://aimeos.org/fileadmin/logos/favicon.png' )
+			->setMimeType( 'image/png' )->setDomain( 'product' );
+
+		$result = $this->object->scale( $item, true );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
+		$this->assertEquals( 'https://aimeos.org/fileadmin/logos/favicon.png', $result->getUrl() );
 		$this->assertNotEquals( '', $result->getPreview() );
 	}
 
@@ -375,55 +379,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), 1, 'test.gif' );
 
 		$this->expectException( \RuntimeException::class );
-		$result = $this->object->upload( $this->object->create(), $file );
+		$this->object->upload( $this->object->create(), $file );
 	}
 
 
-	public function testGetContent()
+	public function testIsAllowed()
 	{
-		$dest = dirname( __DIR__, 3 ) . '/tmp/';
-		is_dir( $dest ) ?: mkdir( $dest, 0755, true );
-		copy( __DIR__ . '/_testfiles/test.gif', $dest . 'test.gif' );
-
-		$result = $this->access( 'getContent' )->invokeArgs( $this->object, ['test.gif'] );
-
-		$this->assertNotEquals( '', $result );
+		$this->assertTrue( $this->access( 'isAllowed' )->invokeArgs( $this->object, ['image/jpeg'] ) );
 	}
 
 
-	public function testGetContentHttp()
-	{
-		$url = 'https://aimeos.org/fileadmin/logos/favicon.png';
-		$result = $this->access( 'getContent' )->invokeArgs( $this->object, [$url] );
-
-		$this->assertNotEquals( '', $result );
-	}
-
-
-	public function testGetContentException()
+	public function testIsAllowedException()
 	{
 		$this->expectException( \Aimeos\MShop\Media\Exception::class );
-		$this->access( 'getContent' )->invokeArgs( $this->object, [''] );
+		$this->access( 'isAllowed' )->invokeArgs( $this->object, array( 'application/xxx' ) );
 	}
 
 
-	public function testGetFile()
+	public function testImage()
 	{
-		$dest = dirname( __DIR__, 3 ) . '/tmp/';
-		is_dir( $dest ) ?: mkdir( $dest, 0755, true );
-		copy( __DIR__ . '/_testfiles/test.gif', $dest . 'test.gif' );
+		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
 
-		$result = $this->access( 'getFile' )->invokeArgs( $this->object, ['test.gif'] );
-		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $result );
-	}
-
-
-	public function testGetMime()
-	{
-		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/_testfiles/test.png' );
-
-		$result = $this->access( 'getMime' )->invokeArgs( $this->object, array( $file, 'files' ) );
-		$this->assertEquals( true, in_array( $result, ['image/webp', 'image/png'] ) );
+		$img = $this->access( 'image' )->invokeArgs( $this->object, [$this->context->fs( 'fs-media' ), 'test.gif'] );
+		$this->assertInstanceOf( \Intervention\Image\Interfaces\ImageInterface::class, $img );
 	}
 
 

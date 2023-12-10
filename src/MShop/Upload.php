@@ -47,19 +47,6 @@ trait Upload
 
 
 	/**
-	 * Returns a save file name for the uploaded file
-	 *
-	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file object
-	 * @return string Sanitized file name
-	 */
-	protected function getFilename( UploadedFileInterface $file ) : string
-	{
-		$filename = \Aimeos\Base\Str::slug( $file->getClientFilename() );
-		return substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
-	}
-
-
-	/**
 	 * Returns the file mime type for the uploaded file
 	 *
 	 * Caution: This method must be called before storeFile() to be able to
@@ -68,7 +55,7 @@ trait Upload
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file object
 	 * @return string File mime type
 	 */
-	protected function getFilemime( UploadedFileInterface $file ) : string
+	protected function mimetype( UploadedFileInterface $file ) : string
 	{
 		$stream = $file->getStream();
 
