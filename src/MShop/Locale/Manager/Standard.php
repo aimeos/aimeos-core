@@ -933,7 +933,7 @@ class Standard
 			$map[$row['locale.id']] = $row;
 		}
 
-		return $map ;
+		return $map;
 	}
 
 

@@ -765,7 +765,7 @@ trait DB
 				$icode = '"' . $icode . '"';
 			}
 
-			$cols[] = $icode . ' AS "' . $entry->getCode()  . '"';
+			$cols[] = $icode . ' AS "' . $entry->getCode() . '"';
 			$group[] = $icode;
 		}
 

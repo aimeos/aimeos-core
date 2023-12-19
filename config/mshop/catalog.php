@@ -302,11 +302,7 @@ return array(
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group,
-					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
-					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-					mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
-					mcat."ctime", mcat."target"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -319,7 +315,7 @@ return array(
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
-				GROUP BY :group, mcat."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

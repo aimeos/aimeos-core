@@ -555,7 +555,7 @@ class Standard
 		 */
 		$cfgPathSearch = 'mshop/locale/manager/language/search';
 
-				/** mshop/locale/manager/language/count/mysql
+		/** mshop/locale/manager/language/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * @see mshop/locale/manager/language/count/ansi
