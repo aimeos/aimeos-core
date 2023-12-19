@@ -44,7 +44,7 @@ class Standard
 			'type' => 'int',
 			'public' => false,
 		),
-		'order.coupon.ordprodid' => array(
+		'order.coupon.productid' => array(
 			'code' => 'order.coupon.productid',
 			'internalcode' => 'mordco."ordprodid"',
 			'label' => 'Coupon product ID',

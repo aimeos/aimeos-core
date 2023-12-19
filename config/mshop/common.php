@@ -43,20 +43,20 @@ return [
 		],
 		'search' => [
 			'ansi' => '
-				SELECT :columns "id", "siteid", "ctime", "mtime", "editor"
+				SELECT :columns
 				FROM ":table"
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group "id", "siteid", "ctime", "mtime", "editor"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
-				SELECT :columns "id", "siteid", "ctime", "mtime", "editor"
+				SELECT :columns
 				FROM ":table"
 				:joins
 				WHERE :cond
-				GROUP BY :group "id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

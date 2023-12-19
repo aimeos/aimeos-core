@@ -82,6 +82,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'tag.type.i18n' => array(
+			'internalcode' => 'mtagty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

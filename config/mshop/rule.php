@@ -37,13 +37,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mrulty."id" AS "rule.type.id", mrulty."siteid" AS "rule.type.siteid",
-						mrulty."code" AS "rule.type.code", mrulty."domain" AS "rule.type.domain",
-						mrulty."label" AS "rule.type.label", mrulty."status" AS "rule.type.status",
-						mrulty."mtime" AS "rule.type.mtime", mrulty."editor" AS "rule.type.editor",
-						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position",
-						mrulty."i18n" AS "rule.type.i18n"
-						FROM "mshop_rule_type" mrulty
+					FROM "mshop_rule_type" mrulty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -51,12 +45,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mrulty."id" AS "rule.type.id", mrulty."siteid" AS "rule.type.siteid",
-						mrulty."code" AS "rule.type.code", mrulty."domain" AS "rule.type.domain",
-						mrulty."label" AS "rule.type.label", mrulty."status" AS "rule.type.status",
-						mrulty."mtime" AS "rule.type.mtime", mrulty."editor" AS "rule.type.editor",
-						mrulty."ctime" AS "rule.type.ctime", mrulty."pos" AS "rule.type.position",
-						mrulty."i18n" AS "rule.type.i18n"
 					FROM "mshop_rule_type" mrulty
 					:joins
 					WHERE :cond
@@ -126,13 +114,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mrul."id" AS "rule.id", mrul."siteid" AS "rule.siteid",
-					mrul."type" AS "rule.type", mrul."label" AS "rule.label",
-					mrul."provider" AS "rule.provider", mrul."config" AS "rule.config",
-					mrul."start" AS "rule.datestart", mrul."end" AS "rule.dateend",
-					mrul."pos" AS "rule.position", mrul."status" AS "rule.status",
-					mrul."mtime" AS "rule.mtime", mrul."editor" AS "rule.editor",
-					mrul."ctime" AS "rule.ctime"
 				FROM "mshop_rule" mrul
 				:joins
 				WHERE :cond
@@ -141,13 +122,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					mrul."id" AS "rule.id", mrul."siteid" AS "rule.siteid",
-					mrul."type" AS "rule.type", mrul."label" AS "rule.label",
-					mrul."provider" AS "rule.provider", mrul."config" AS "rule.config",
-					mrul."start" AS "rule.datestart", mrul."end" AS "rule.dateend",
-					mrul."pos" AS "rule.position", mrul."status" AS "rule.status",
-					mrul."mtime" AS "rule.mtime", mrul."editor" AS "rule.editor",
-					mrul."ctime" AS "rule.ctime"
 				FROM "mshop_rule" mrul
 				:joins
 				WHERE :cond

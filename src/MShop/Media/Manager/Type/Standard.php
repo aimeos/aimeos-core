@@ -82,6 +82,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'media.type.i18n' => array(
+			'internalcode' => 'mmedty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

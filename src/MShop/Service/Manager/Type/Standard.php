@@ -82,6 +82,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'service.type.i18n' => array(
+			'internalcode' => 'mserty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

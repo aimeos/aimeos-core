@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Order\Item\Coupon;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Item\Coupon\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp() : void
 	{
 		$this->values = array(
@@ -32,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.coupon.siteid' => 99,
 			'order.coupon.parentid' => 42,
 			'order.coupon.code' => 'SomeCode',
-			'order.coupon.ordprodid' => 566778,
+			'order.coupon.productid' => 566778,
 			'order.coupon.mtime' => '2001-12-30 23:59:59',
 			'order.coupon.ctime' => '2011-01-01 00:00:01',
 			'order.coupon.editor' => 'unitTestUser'
@@ -41,21 +32,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Order\Item\Coupon\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 1, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -72,15 +60,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetParentId()
 	{
 		$this->assertEquals( 42, $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -91,10 +82,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( 'SomeCode', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -105,10 +98,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetProductId()
 	{
 		$this->assertEquals( 566778, $this->object->getProductId() );
 	}
+
 
 	public function testSetProductId()
 	{
@@ -119,15 +114,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2001-12-30 23:59:59', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{

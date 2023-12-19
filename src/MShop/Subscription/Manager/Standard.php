@@ -646,7 +646,10 @@ class Standard
 		$path = 'mshop/subscription/manager/submanagers';
 
 		$list = $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
-		$list += \Aimeos\MShop::create( $this->context(), 'order' )->getSearchAttributes();
+
+		if( $withsub ) {
+			$list += \Aimeos\MShop::create( $this->context(), 'order' )->getSearchAttributes( $withsub );
+		}
 
 		return $list;
 	}

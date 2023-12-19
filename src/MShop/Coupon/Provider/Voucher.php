@@ -192,7 +192,6 @@ class Voucher
 		$orderIds = $this->filterOrderIds( $orderIds );
 
 
-
 		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 
 		$search = $manager->filter();

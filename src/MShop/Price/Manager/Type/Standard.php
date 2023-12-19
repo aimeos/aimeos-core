@@ -82,6 +82,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'price.type.i18n' => array(
+			'internalcode' => 'mprity."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

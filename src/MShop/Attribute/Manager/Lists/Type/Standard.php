@@ -87,6 +87,11 @@ class Standard
 			'type' => 'string',
 			'public' => false,
 		),
+		'attribute.lists.type.i18n' => array(
+			'internalcode' => 'mattlity."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

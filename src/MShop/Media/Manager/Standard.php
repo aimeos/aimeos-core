@@ -189,12 +189,6 @@ class Standard
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 		),
-		'media.previews' => array(
-			'label' => 'Preview URLs as JSON encoded string',
-			'code' => 'media.previews',
-			'internalcode' => 'mmed."previews"',
-			'type' => 'json',
-		),
 		'media.filesystem' => array(
 			'label' => 'File sytem name',
 			'code' => 'media.filesystem',
@@ -950,8 +944,8 @@ class Standard
 
 			while( $row = $results->fetch() )
 			{
-				if( ( $row['media.previews'] = json_decode( $config = $row['media.previews'], true ) ) === null ) {
-					$row['media.previews'] = [];
+				if( ( $row['media.preview'] = json_decode( $row['media.preview'], true ) ) === null ) {
+					$row['media.preview'] = [];
 				}
 
 				$map[$row['media.id']] = $row;

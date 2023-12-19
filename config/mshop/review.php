@@ -88,36 +88,19 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mrev."id" AS "review.id", mrev."siteid" AS "review.siteid",
-					mrev."domain" AS "review.domain", mrev."refid" AS "review.refid",
-					mrev."customerid" AS "review.customerid", mrev."ordprodid" AS "review.orderproductid",
-					mrev."name" AS "review.name", mrev."comment" AS "review.comment",
-					mrev."response" AS "review.response", mrev."rating" AS "review.rating",
-					mrev."status" AS "review.status", mrev."ctime" AS "review.ctime",
-					mrev."mtime" AS "review.mtime", mrev."editor" AS "review.editor"
 				FROM "mshop_review" mrev
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
-					mrev."id", mrev."siteid", mrev."domain", mrev."refid", mrev."customerid", mrev."ordprodid",
-					mrev."name", mrev."comment", mrev."response", mrev."rating", mrev."status", mrev."ctime",
-					mrev."mtime", mrev."editor"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mrev."id" AS "review.id", mrev."siteid" AS "review.siteid",
-					mrev."domain" AS "review.domain", mrev."refid" AS "review.refid",
-					mrev."customerid" AS "review.customerid", mrev."ordprodid" AS "review.orderproductid",
-					mrev."name" AS "review.name", mrev."comment" AS "review.comment",
-					mrev."response" AS "review.response", mrev."rating" AS "review.rating",
-					mrev."status" AS "review.status", mrev."ctime" AS "review.ctime",
-					mrev."mtime" AS "review.mtime", mrev."editor" AS "review.editor"
 				FROM "mshop_review" mrev
 				:joins
 				WHERE :cond
-				GROUP BY :group mrev."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

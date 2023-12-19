@@ -37,12 +37,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
-						mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
-						mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
-						mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position",
-						mstoty."i18n" AS "stock.type.i18n"
 					FROM "mshop_stock_type" mstoty
 					:joins
 					WHERE :cond
@@ -51,12 +45,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
-						mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
-						mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
-						mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-						mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position",
-						mstoty."i18n" AS "stock.type.i18n"
 					FROM "mshop_stock_type" mstoty
 					:joins
 					WHERE :cond
@@ -126,11 +114,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
-					msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
-					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.dateback",
-					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
-					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 				FROM "mshop_stock" msto
 				:joins
 				WHERE :cond
@@ -139,11 +122,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
-					msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
-					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.dateback",
-					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
-					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 				FROM "mshop_stock" msto
 				:joins
 				WHERE :cond

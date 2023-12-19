@@ -495,25 +495,7 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$attributes = $this->object()->getSearchAttributes();
-		$translations = $this->getSearchTranslations( $attributes );
-		$types = $this->getSearchTypes( $attributes );
-		$columns = $this->object()->getSaveAttributes();
-		$sortcols = $search->translate( $search->getSortations(), $translations );
-
-		$colstring = '';
-		foreach( $columns as $name => $entry ) {
-			$colstring .= $entry->getInternalCode() . ', ';
-		}
-
-		$find = array( ':columns', ':cond', ':order', ':start', ':size' );
-		$replace = array(
-			$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
-			$search->getConditionSource( $types, $translations ),
-			$search->getSortationSource( $types, $translations ),
-			$search->getOffset(),
-			$search->getLimit(),
-		);
+		$required = ['locale.language'];
 
 		/** mshop/locale/manager/language/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -571,95 +553,9 @@ class Standard
 		 * @see mshop/locale/manager/language/delete/ansi
 		 * @see mshop/locale/manager/language/count/ansi
 		 */
-		$path = 'mshop/locale/manager/language/search';
+		$cfgPathSearch = 'mshop/locale/manager/language/search';
 
-		$sql = $this->getSqlConfig( $path );
-		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
-
-		try
-		{
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row['locale.language.id']] = $item;
-				}
-			}
-		}
-		catch( \Exception $e )
-		{
-			$results->finish();
-			throw $e;
-		}
-
-		if( $total !== null ) {
-			$total = $this->getTotal( $conn, $find, $replace );
-		}
-
-		return map( $items );
-	}
-
-
-	/**
-	 * Creates a filter object.
-	 *
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
-	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
-	{
-		return $this->filterBase( 'locale.language', $default );
-	}
-
-
-	/**
-	 * Returns the search results for the given SQL statement.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string $sql SQL statement
-	 * @return \Aimeos\Base\DB\Result\Iface Search result object
-	 */
-	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
-	{
-		$time = microtime( true );
-
-		$stmt = $conn->create( $sql );
-		$result = $stmt->execute();
-
-		$msg = 'Time: ' . ( microtime( true ) - $time ) * 1000 . "ms\n"
-			. 'Class: ' . get_class( $this ) . "\n"
-			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
-
-		$this->context()->logger()->debug( $msg, 'core/sql' );
-
-		return $result;
-	}
-
-
-	/**
-	 * Create new item object initialized with given parameters.
-	 *
-	 * @param array $data Associative list of item key/value pairs
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item
-	 */
-	protected function createItemBase( array $data = [] ) : \Aimeos\MShop\Locale\Item\Language\Iface
-	{
-		return new \Aimeos\MShop\Locale\Item\Language\Standard( $data );
-	}
-
-
-	/**
-	 * Returns the total number of items found for the conditions
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string[] $find List of markers that should be replaced in the SQL statement
-	 * @param string[] $replace List of replacements for the markers in the SQL statement
-	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
-	 * @return integer Total number of found items
-	 */
-	protected function getTotal( \Aimeos\Base\DB\Connection\Iface $conn, array $find, array $replace ) : int
-	{
-		/** mshop/locale/manager/language/count/mysql
+				/** mshop/locale/manager/language/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * @see mshop/locale/manager/language/count/ansi
@@ -709,18 +605,56 @@ class Standard
 		 * @see mshop/locale/manager/language/delete/ansi
 		 * @see mshop/locale/manager/language/search/ansi
 		 */
-		$path = 'mshop/locale/manager/language/count';
+		$cfgPathCount = 'mshop/locale/manager/language/count';
 
-		$sql = $this->getSqlConfig( $path );
-		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
 
-		$row = $results->fetch();
-		$results->finish();
-
-		if( $row === null ) {
-			throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
+		while( ( $row = $results->fetch() ) !== null )
+		{
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row['locale.language.id']] = $item;
+			}
 		}
 
-		return $row['count'];
+		return map( $items );
+	}
+
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
+	 */
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		return $this->filterBase( 'locale.language', $default );
+	}
+
+
+	/**
+	 * Create new item object initialized with given parameters.
+	 *
+	 * @param array $data Associative list of item key/value pairs
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item
+	 */
+	protected function createItemBase( array $data = [] ) : \Aimeos\MShop\Locale\Item\Language\Iface
+	{
+		return new \Aimeos\MShop\Locale\Item\Language\Standard( $data );
+	}
+
+
+	/**
+	 * Returns the site coditions for the search request
+	 *
+	 * @param string[] $keys Sorted list of criteria keys
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
+	 */
+	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
+	{
+		return [];
 	}
 }

@@ -320,39 +320,20 @@ abstract class DBBase
 	 * Returns the string replacements for the SQL statements
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items
-	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of item keys and criteria plugin objects
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values for the base table
+	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $plugins,
-		array $joins, array $columns = [] ) : array
+	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
 	{
-		$list = [];
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
-		$colstring = '';
-		foreach( $columns as $name => $entry ) {
-			$colstring .= $entry->getInternalCode() . ', ';
-		}
-
-		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
-		$replace = array(
-			$colstring,
-			implode( "\n", array_unique( $joins ) ),
-			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
-			$search->getOffset(),
-			$search->getLimit(),
-		);
-
-		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false )
-		{
-			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
-		}
-		elseif( !empty( $search->getSortations() ) )
+		if( !empty( $search->getSortations() ) )
 		{
 			$names = $search->translate( $search->getSortations(), [], $funcs );
 			$cols = $search->translate( $search->getSortations(), $translations, $funcs );
@@ -365,13 +346,12 @@ abstract class DBBase
 			}
 		}
 
-		$find[] = ':mincols';
-		$replace[] = !empty( $list ) ? ', ' . implode( ', ', $list ) : '';
+		$map = parent::getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
 
-		$find[] = ':order';
-		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
+		$map[':mincols'] = !empty( $list ) ? ', ' . implode( ', ', $list ) : '';
+		$map[':order'] = $search->getSortationSource( $types, $translations, $funcs );
 
-		return [$find, $replace];
+		return $map;
 	}
 
 

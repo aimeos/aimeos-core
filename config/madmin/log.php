@@ -34,10 +34,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					malog."id" AS "log.id", malog."siteid" AS "log.siteid",
-					malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
-					malog."priority" AS "log.priority", malog."message" AS "log.message",
-					malog."request" AS "log.request"
 				FROM "madmin_log" malog
 				:joins
 				WHERE :cond
@@ -46,10 +42,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					malog."id" AS "log.id", malog."siteid" AS "log.siteid",
-					malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
-					malog."priority" AS "log.priority", malog."message" AS "log.message",
-					malog."request" AS "log.request"
 				FROM "madmin_log" malog
 				:joins
 				WHERE :cond

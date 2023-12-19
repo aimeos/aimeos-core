@@ -82,6 +82,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'plugin.type.i18n' => array(
+			'internalcode' => 'mpluty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

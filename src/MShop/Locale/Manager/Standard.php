@@ -816,30 +816,6 @@ class Standard
 
 
 	/**
-	 * Returns the search results for the given SQL statement.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string $sql SQL statement
-	 * @return \Aimeos\Base\DB\Result\Iface Search result object
-	 */
-	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
-	{
-		$time = microtime( true );
-
-		$stmt = $conn->create( $sql );
-		$result = $stmt->execute();
-
-		$msg = 'Time: ' . ( microtime( true ) - $time ) * 1000 . "ms\n"
-			. 'Class: ' . get_class( $this ) . "\n"
-			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
-
-		$this->context()->logger()->debug( $msg, 'core/sql' );
-
-		return $result;
-	}
-
-
-	/**
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Criteria object with conditions, sortations, etc.
@@ -853,159 +829,124 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$attributes = $this->object()->getSearchAttributes();
-			$translations = $this->getSearchTranslations( $attributes );
-			$types = $this->getSearchTypes( $attributes );
-			$columns = $this->object()->getSaveAttributes();
-			$sortcols = $search->translate( $search->getSortations(), $translations );
+		$required = ['locale'];
 
-			if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
-				$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
-			}
+		/** mshop/locale/manager/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/locale/manager/search/ansi
+		 */
 
-			$colstring = '';
-			foreach( $columns as $name => $entry ) {
-				$colstring .= $entry->getInternalCode() . ', ';
-			}
+		/** mshop/locale/manager/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the locale
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/insert/ansi
+		 * @see mshop/locale/manager/update/ansi
+		 * @see mshop/locale/manager/newid/ansi
+		 * @see mshop/locale/manager/delete/ansi
+		 * @see mshop/locale/manager/count/ansi
+		 */
+		$cfgPathSearch = 'mshop/locale/manager/search';
 
-			$find = array( ':columns', ':cond', ':order', ':group', ':start', ':size' );
-			$replace = array(
-				$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
-				$search->getConditionSource( $types, $translations ),
-				$search->getSortationSource( $types, $translations ),
-				implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ',
-				$search->getOffset(),
-				$search->getLimit(),
-			);
+		/** mshop/locale/manager/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/locale/manager/count/ansi
+		 */
 
-			/** mshop/locale/manager/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/locale/manager/search/ansi
-			 */
+		/** mshop/locale/manager/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the locale
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/insert/ansi
+		 * @see mshop/locale/manager/update/ansi
+		 * @see mshop/locale/manager/newid/ansi
+		 * @see mshop/locale/manager/delete/ansi
+		 * @see mshop/locale/manager/search/ansi
+		 */
+		$cfgPathCount = 'mshop/locale/manager/count';
 
-			/** mshop/locale/manager/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the locale
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/locale/manager/insert/ansi
-			 * @see mshop/locale/manager/update/ansi
-			 * @see mshop/locale/manager/newid/ansi
-			 * @see mshop/locale/manager/delete/ansi
-			 * @see mshop/locale/manager/count/ansi
-			 */
-			$path = 'mshop/locale/manager/search';
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
 
-			$sql = $this->getSqlConfig( $path );
-			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+		while( $row = $results->fetch() ) {
+			$map[$row['locale.id']] = $row;
+		}
 
-			try
-			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$map[$row['locale.id']] = $row;
-				}
-			}
-			catch( \Exception $e )
-			{
-				$results->finish();
-				throw $e;
-			}
+		return $map ;
+	}
 
-			if( $total !== null )
-			{
-				/** mshop/locale/manager/count/mysql
-				 * Counts the number of records matched by the given criteria in the database
-				 *
-				 * @see mshop/locale/manager/count/ansi
-				 */
 
-				/** mshop/locale/manager/count/ansi
-				 * Counts the number of records matched by the given criteria in the database
-				 *
-				 * Counts all records matched by the given criteria from the locale
-				 * database. The records must be from one of the sites that are
-				 * configured via the context item. If the current site is part of
-				 * a tree of sites, the statement can count all records from the
-				 * current site and the complete sub-tree of sites.
-				 *
-				 * To limit the records matched, conditions can be added to the given
-				 * criteria object. It can contain comparisons like column names that
-				 * must match specific values which can be combined by AND, OR or NOT
-				 * operators. The resulting string of SQL conditions replaces the
-				 * ":cond" placeholder before the statement is sent to the database
-				 * server.
-				 *
-				 * Both, the strings for ":joins" and for ":cond" are the same as for
-				 * the "search" SQL statement.
-				 *
-				 * Contrary to the "search" statement, it doesn't return any records
-				 * but instead the number of records that have been found. As counting
-				 * thousands of records can be a long running task, the maximum number
-				 * of counted records is limited for performance reasons.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for counting items
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/locale/manager/insert/ansi
-				 * @see mshop/locale/manager/update/ansi
-				 * @see mshop/locale/manager/newid/ansi
-				 * @see mshop/locale/manager/delete/ansi
-				 * @see mshop/locale/manager/search/ansi
-				 */
-				$path = 'mshop/locale/manager/count';
-
-				$sql = $this->getSqlConfig( $path );
-				$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
-
-				$row = $results->fetch();
-				$results->finish();
-
-				if( $row === null )
-				{
-					$msg = $this->context()->translate( 'mshop', 'Total results value not found' );
-					throw new \Aimeos\MShop\Locale\Exception( $msg );
-				}
-
-				$total = $row['count'];
-			}
-
-		return $map;
+	/**
+	 * Returns the site coditions for the search request
+	 *
+	 * @param string[] $keys Sorted list of criteria keys
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
+	 */
+	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
+	{
+		return [];
 	}
 }

@@ -481,24 +481,33 @@ trait DB
 	 * adapter.
 	 *
 	 * @param string $path Configuration path to the SQL statement
+	 * @param array $replace Associative list of keys with strings to replace by their values
 	 * @return array|string ANSI or database specific SQL statement
 	 */
-	protected function getSqlConfig( string $path )
+	protected function getSqlConfig( string $path, array $replace = [] )
 	{
-		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $path ) !== 1 ) {
+		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $path ) !== 1 )
+		{
+			foreach( $replace as $key => $value ) {
+				$path = str_replace( $key, $value, $path );
+			}
+
 			return $path;
 		}
 
 		$config = $this->context()->config();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
-		if( ( $sql = $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi' ) ) ) !== null ) {
-			return str_replace( ':table', $this->getTable(), $sql );
+		if( ( $sql = $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi' ) ) ) === null )
+		{
+			$parts = explode( '/', $path );
+			$cpath = 'mshop/common/manager/' . end( $parts );
+			$sql = $config->get( $cpath . '/' . $adapter, $config->get( $cpath . '/ansi', $path ) );
 		}
 
-		$parts = explode( '/', $path );
-		$cpath = 'mshop/common/manager/' . end( $parts );
-		$sql = $config->get( $cpath . '/' . $adapter, $config->get( $cpath . '/ansi', $path ) );
+		foreach( $replace as $key => $value ) {
+			$sql = str_replace( $key, $value, $sql );
+		}
 
 		return str_replace( ':table', $this->getTable(), $sql );
 	}
@@ -650,15 +659,35 @@ trait DB
 
 		if( isset( $attributes[$prefix] ) && $attributes[$prefix] instanceof $iface ) {
 			return $attributes[$prefix]->getInternalDeps();
-		}
-		elseif( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
+		} elseif( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
 			return $attributes[$name]->getInternalDeps();
-		}
-		else if( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
+		} elseif( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
 			return $attributes['id']->getInternalDeps();
 		}
 
 		return [];
+	}
+
+
+	/**
+	 * Returns the required SQL joins for the critera.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
+	 * @param string $prefix Search key prefix
+	 * @return array|null List of JOIN SQL strings
+	 */
+	private function getRequiredJoins( array $attributes, array $keys, string $basekey = null ) : array
+	{
+		$joins = [];
+
+		foreach( $keys as $key )
+		{
+			if( $key !== $basekey ) {
+				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
+			}
+		}
+
+		return array_unique( $joins );
 	}
 
 
@@ -706,43 +735,49 @@ trait DB
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values for the base table
 	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $plugins,
-		array $joins, array $columns = [] ) : array
+	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
 	{
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
-		$colstring = '';
-		foreach( $columns as $name => $entry ) {
-			$colstring .= $entry->getInternalCode() . ', ';
-		}
-
-		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
-		$replace = array(
-			$colstring,
-			implode( "\n", array_unique( $joins ) ),
-			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
-			$search->getOffset(),
-			$search->getLimit(),
-		);
-
-		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
+		if( empty( $search->getSortations() ) && ( $attribute = reset( $attronly ) ) !== false ) {
 			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
+		$sorts = $search->translate( $search->getSortations(), $translations, $funcs );
 
-		$find[] = ':order';
-		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
+		$cols = $group = [];
+		foreach( $attronly as $name => $entry )
+		{
+			if( str_contains( $name, ':' ) || empty( $entry->getInternalCode() ) ) {
+				continue;
+			}
 
-		$find[] = ':group';
-		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations, $funcs ) ) . ', ';
+			$icode = $entry->getInternalCode();
 
-		return [$find, $replace];
+			if( !( str_contains( $icode, '"' ) || str_contains( $icode, '.' ) ) ) {
+				$icode = '"' . $icode . '"';
+			}
+
+			$cols[] = $icode . ' AS "' . $entry->getCode()  . '"';
+			$group[] = $icode;
+		}
+
+		return [
+			':columns' => join( ', ', $cols ),
+			':joins' => join( "\n", array_unique( $joins ) ),
+			':group' => join( ', ', array_unique( array_merge( $group, $sorts ) ) ),
+			':cond' => $search->getConditionSource( $types, $translations, $plugins, $funcs ),
+			':order' => $search->getSortationSource( $types, $translations, $funcs ),
+			':start' => $search->getOffset(),
+			':size' => $search->getLimit(),
+		];
 	}
 
 
@@ -789,22 +824,13 @@ trait DB
 		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
 		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
 	{
-		$joins = [];
 		$conditions = $search->getConditions();
-		$columns = $this->object()->getSaveAttributes();
 		$attributes = $this->object()->getSearchAttributes();
+
 		$keys = $this->getCriteriaKeyList( $search, $required );
+		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
 
-		$basekey = array_shift( $required );
-
-		foreach( $keys as $key )
-		{
-			if( $key !== $basekey ) {
-				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
-			}
-		}
-
-		$joins = array_unique( $joins );
+		$attronly = $this->object()->getSearchAttributes( false );
 		$cond = $this->getSiteConditions( $keys, $attributes, $sitelevel );
 
 		if( $conditions !== null ) {
@@ -814,11 +840,11 @@ trait DB
 		$search = clone $search;
 		$search->setConditions( $search->and( $cond ) );
 
-		list( $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins, $columns );
+		$replace = $this->getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
 
 		if( $total !== null )
 		{
-			$sql = str_replace( $find, $replace, $this->getSqlConfig( $cfgPathCount ) );
+			$sql = $this->getSqlConfig( $cfgPathCount, $replace );
 			$result = $this->getSearchResults( $conn, $sql );
 			$row = $result->fetch();
 			$result->finish();
@@ -832,7 +858,7 @@ trait DB
 			$total = (int) $row['count'];
 		}
 
-		return $this->getSearchResults( $conn, str_replace( $find, $replace, $this->getSqlConfig( $cfgPathSearch ) ) );
+		return $this->getSearchResults( $conn, $this->getSqlConfig( $cfgPathSearch, $replace ) );
 	}
 
 

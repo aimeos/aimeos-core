@@ -63,7 +63,7 @@ class Standard
 	 */
 	public function getProductId() : ?string
 	{
-		return $this->get( 'order.coupon.ordprodid' );
+		return $this->get( 'order.coupon.productid' );
 	}
 
 
@@ -75,7 +75,7 @@ class Standard
 	 */
 	public function setProductId( string $productid ) : \Aimeos\MShop\Order\Item\Coupon\Iface
 	{
-		return $this->set( 'order.coupon.ordprodid', (string) $productid );
+		return $this->set( 'order.coupon.productid', (string) $productid );
 	}
 
 

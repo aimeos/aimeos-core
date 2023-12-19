@@ -47,10 +47,6 @@ class Standard
 	public function __construct( array $values = [], array $listItems = [],
 		array $refItems = [], array $propItems = [] )
 	{
-		if( isset( $values['media.preview'] ) && !isset( $values['media.previews'] ) ) {
-			$values['media.previews'] = [1 => $values['media.preview']];
-		}
-
 		parent::__construct( 'media.', $values );
 
 		$this->langid = $values['.languageid'] ?? null;
@@ -274,7 +270,7 @@ class Standard
 	 */
 	public function getPreview( $width = false ) : string
 	{
-		if( ( $list = (array) $this->get( 'media.previews', [] ) ) === [] ) {
+		if( ( $list = (array) $this->get( 'media.preview', [] ) ) === [] ) {
 			return $this->getUrl();
 		}
 
@@ -320,7 +316,7 @@ class Standard
 	 */
 	public function getPreviews( bool $version = false ) : array
 	{
-		$previews = (array) $this->get( 'media.previews', [] );
+		$previews = (array) $this->get( 'media.preview', [] );
 
 		if( $version && $this->getTimeModified() )
 		{
@@ -344,7 +340,7 @@ class Standard
 	 */
 	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		return $this->set( 'media.previews', [1 => $url] );
+		return $this->set( 'media.preview', [1 => $url] );
 	}
 
 
@@ -356,7 +352,7 @@ class Standard
 	 */
 	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		return $this->set( 'media.previews', $urls );
+		return $this->set( 'media.preview', $urls );
 	}
 
 

@@ -37,12 +37,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
-						mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
-						mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
-						mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
-						mtagty."i18n" AS "tag.type.i18n"
 					FROM "mshop_tag_type" mtagty
 					:joins
 					WHERE :cond
@@ -51,12 +45,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
-						mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
-						mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
-						mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-						mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
-						mtagty."i18n" AS "tag.type.i18n"
 					FROM "mshop_tag_type" mtagty
 					:joins
 					WHERE :cond
@@ -125,11 +113,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
-					mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
-					mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
-					mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
-					mtag."ctime" AS "tag.ctime"
 				FROM "mshop_tag" mtag
 				:joins
 				WHERE :cond
@@ -138,11 +121,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
-					mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
-					mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
-					mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
-					mtag."ctime" AS "tag.ctime"
 				FROM "mshop_tag" mtag
 				:joins
 				WHERE :cond

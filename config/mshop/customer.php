@@ -51,21 +51,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
-						mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
-						mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
-						mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
-						mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
-						mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
-						mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
-						mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
-						mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
-						mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
-						mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
-						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
-						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday",
-						mcusad."mobile" AS "customer.address.mobile"
 					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
@@ -74,21 +59,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
-						mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
-						mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
-						mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
-						mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
-						mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
-						mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
-						mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
-						mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
-						mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
-						mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
-						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
-						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday",
-						mcusad."mobile" AS "customer.address.mobile"
 					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
@@ -160,12 +130,6 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
-							mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
-							mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
-							mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-							mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position",
-							mcuslity."i18n" AS "customer.lists.type.i18n"
 						FROM "mshop_customer_list_type" mcuslity
 						:joins
 						WHERE :cond
@@ -174,12 +138,6 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
-							mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
-							mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
-							mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-							mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position",
-							mcuslity."i18n" AS "customer.lists.type.i18n"
 						FROM "mshop_customer_list_type" mcuslity
 						:joins
 						WHERE :cond
@@ -277,13 +235,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
-						mcusli."siteid" AS "customer.lists.siteid", mcusli."type" AS "customer.lists.type",
-						mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
-						mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
-						mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
-						mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
-						mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
 					FROM "mshop_customer_list" mcusli
 					:joins
 					WHERE :cond
@@ -292,13 +243,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
-						mcusli."siteid" AS "customer.lists.siteid", mcusli."type" AS "customer.lists.type",
-						mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
-						mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
-						mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
-						mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
-						mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
 					FROM "mshop_customer_list" mcusli
 					:joins
 					WHERE :cond
@@ -370,12 +314,6 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
-							mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
-							mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
-							mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-							mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position",
-							mcusprty."i18n" AS "customer.property.type.i18n"
 						FROM "mshop_customer_property_type" mcusprty
 						:joins
 						WHERE :cond
@@ -384,12 +322,6 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
-							mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
-							mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
-							mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-							mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position",
-							mcusprty."i18n" AS "customer.property.type.i18n"
 						FROM "mshop_customer_property_type" mcusprty
 						:joins
 						WHERE :cond
@@ -459,11 +391,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
-						mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
-						mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
-						mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
-						mcuspr."ctime" AS "customer.property.ctime"
 					FROM "mshop_customer_property" mcuspr
 					:joins
 					WHERE :cond
@@ -472,11 +399,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
-						mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
-						mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
-						mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
-						mcuspr."ctime" AS "customer.property.ctime"
 					FROM "mshop_customer_property" mcuspr
 					:joins
 					WHERE :cond
@@ -588,57 +510,19 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
-					mcus."label" AS "customer.label", mcus."code" AS "customer.code",
-					mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
-					mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
-					mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
-					mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
-					mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
-					mcus."city" AS "customer.city", mcus."state" AS "customer.state",
-					mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
-					mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
-					mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
-					mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
-					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
-					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-					mcus."editor" AS "customer.editor", mcus."mobile" AS "customer.mobile"
-					FROM "mshop_customer" mcus
+				FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
-					mcus."id", mcus."siteid", mcus."label", mcus."code", mcus."company", mcus."vatid",
-					mcus."salutation", mcus."title", mcus."firstname", mcus."lastname", mcus."address1",
-					mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state",
-					mcus."countryid", mcus."langid", mcus."telephone", mcus."email", mcus."telefax",
-					mcus."website", mcus."longitude", mcus."latitude", mcus."birthday", mcus."status",
-					mcus."vdate", mcus."password", mcus."ctime", mcus."mtime", mcus."editor", mcus."mobile"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
-					mcus."label" AS "customer.label", mcus."code" AS "customer.code",
-					mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
-					mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
-					mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
-					mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
-					mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
-					mcus."city" AS "customer.city", mcus."state" AS "customer.state",
-					mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
-					mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
-					mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
-					mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
-					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
-					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-					mcus."editor" AS "customer.editor", mcus."mobile" AS "customer.mobile"
 				FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond
-				GROUP BY :group mcus."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

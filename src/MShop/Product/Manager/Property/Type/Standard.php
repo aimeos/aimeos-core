@@ -81,6 +81,11 @@ class Standard
 			'label' => 'Property type editor',
 			'public' => false,
 		),
+		'product.property.type.i18n' => array(
+			'internalcode' => 'mproprty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

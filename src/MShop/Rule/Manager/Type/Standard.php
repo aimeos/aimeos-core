@@ -81,6 +81,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'rule.type.i18n' => array(
+			'internalcode' => 'mrulty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

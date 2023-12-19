@@ -82,6 +82,11 @@ class Standard
 			'label' => 'List type editor',
 			'public' => false,
 		),
+		'text.lists.type.i18n' => array(
+			'internalcode' => 'mtexlity."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

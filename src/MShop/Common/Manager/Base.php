@@ -129,7 +129,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		return $this->createAttributes( [
+		return array_replace( $this->createAttributes( [
 			'id' => [
 				'label' => 'ID',
 				'type' => 'int',
@@ -153,7 +153,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 				'label' => 'Editor',
 				'public' => false,
 			],
-		] ) + $this->getSaveAttributes();
+		] ), $this->getSaveAttributes() );
 	}
 
 

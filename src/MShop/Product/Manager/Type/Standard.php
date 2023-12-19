@@ -83,6 +83,11 @@ class Standard
 			'label' => 'Type editor',
 			'public' => false,
 		),
+		'product.type.i18n' => array(
+			'internalcode' => 'mproty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

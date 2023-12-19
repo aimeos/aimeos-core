@@ -37,12 +37,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
-						mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
-						mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
-						mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
-						mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
-						mcouco."editor" AS "coupon.code.editor"
 					FROM "mshop_coupon_code" mcouco
 					:joins
 					WHERE :cond
@@ -51,12 +45,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
-						mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
-						mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
-						mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
-						mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
-						mcouco."editor" AS "coupon.code.editor"
 					FROM "mshop_coupon_code" mcouco
 					:joins
 					WHERE :cond
@@ -133,33 +121,19 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
-					mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
-					mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
-					mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
-					mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
-					mcou."ctime" AS "coupon.ctime"
 				FROM "mshop_coupon" mcou
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
-					mcou."id", mcou."siteid", mcou."label", mcou."provider", mcou."start", mcou."end",
-					mcou."config", mcou."status", mcou."mtime", mcou."editor", mcou."ctime"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
-					mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
-					mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
-					mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
-					mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
-					mcou."ctime" AS "coupon.ctime"
 				FROM "mshop_coupon" mcou
 				:joins
 				WHERE :cond
-				GROUP BY :group mcou."id"
+				GROUP BY mcou."id"
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

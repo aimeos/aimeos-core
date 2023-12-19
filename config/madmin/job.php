@@ -35,10 +35,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					majob."id" AS "job.id", majob."siteid" AS "job.siteid",
-					majob."label" AS "job.label", majob."path" AS "job.path",
-					majob."status" AS "job.status", majob."editor" AS "job.editor",
-					majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 				FROM "madmin_job" majob
 				:joins
 				WHERE :cond
@@ -47,10 +43,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					majob."id" AS "job.id", majob."siteid" AS "job.siteid",
-					majob."label" AS "job.label", majob."path" AS "job.path",
-					majob."status" AS "job.status", majob."editor" AS "job.editor",
-					majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 				FROM "madmin_job" majob
 				:joins
 				WHERE :cond

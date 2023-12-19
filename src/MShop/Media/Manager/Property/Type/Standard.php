@@ -81,6 +81,11 @@ class Standard
 			'label' => 'Property type editor',
 			'public' => false,
 		),
+		'media.property.type.i18n' => array(
+			'internalcode' => 'mmedprty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

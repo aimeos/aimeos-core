@@ -34,10 +34,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mgro."id" AS "group.id", mgro."siteid" AS "group.siteid",
-					mgro."code" AS "group.code", mgro."label" AS "group.label",
-					mgro."mtime" AS "group.mtime", mgro."editor" AS "group.editor",
-					mgro."ctime" AS "group.ctime"
 				FROM "mshop_group" mgro
 				:joins
 				WHERE :cond
@@ -46,10 +42,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					mgro."id" AS "group.id", mgro."siteid" AS "group.siteid",
-					mgro."code" AS "group.code", mgro."label" AS "group.label",
-					mgro."mtime" AS "group.mtime", mgro."editor" AS "group.editor",
-					mgro."ctime" AS "group.ctime"
 				FROM "mshop_group" mgro
 				:joins
 				WHERE :cond

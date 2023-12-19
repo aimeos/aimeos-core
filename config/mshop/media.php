@@ -92,12 +92,6 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
-							mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
-							mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
-							mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
-							mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position",
-							mmedlity."i18n" AS "media.lists.type.i18n"
 						FROM "mshop_media_list_type" mmedlity
 						:joins
 						WHERE :cond
@@ -106,12 +100,6 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
-							mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
-							mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
-							mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
-							mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position",
-							mmedlity."i18n" AS "media.lists.type.i18n"
 						FROM "mshop_media_list_type" mmedlity
 						:joins
 						WHERE :cond
@@ -209,13 +197,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
-						mmedli."siteid" AS "media.lists.siteid", mmedli."type" AS "media.lists.type",
-						mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
-						mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
-						mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
-						mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
-						mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
 					FROM "mshop_media_list" mmedli
 					:joins
 					WHERE :cond
@@ -224,13 +205,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
-						mmedli."siteid" AS "media.lists.siteid", mmedli."type" AS "media.lists.type",
-						mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
-						mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
-						mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
-						mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
-						mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
 					FROM "mshop_media_list" mmedli
 					:joins
 					WHERE :cond
@@ -302,12 +276,6 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
-							mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
-							mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
-							mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
-							mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position",
-							mmedprty."i18n" AS "media.property.type.i18n"
 						FROM "mshop_media_property_type" mmedprty
 						:joins
 						WHERE :cond
@@ -316,12 +284,6 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
-							mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
-							mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
-							mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
-							mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position",
-							mmedprty."i18n" AS "media.property.type.i18n"
 						FROM "mshop_media_property_type" mmedprty
 						:joins
 						WHERE :cond
@@ -391,11 +353,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
-						mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
-						mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
-						mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
-						mmedpr."ctime" AS "media.property.ctime"
 					FROM "mshop_media_property" mmedpr
 					:joins
 					WHERE :cond
@@ -404,11 +361,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
-						mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
-						mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
-						mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
-						mmedpr."ctime" AS "media.property.ctime"
 					FROM "mshop_media_property" mmedpr
 					:joins
 					WHERE :cond
@@ -479,12 +431,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
-						mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
-						mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
-						mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
-						mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position",
-						mmedty."i18n" AS "media.type.i18n"
 					FROM "mshop_media_type" mmedty
 					:joins
 					WHERE :cond
@@ -493,13 +439,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
-						mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
-						mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
-						mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
-						mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position",
-						mmedty."i18n" AS "media.type.i18n"
-						FROM "mshop_media_type" mmedty
+					FROM "mshop_media_type" mmedty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -568,36 +508,19 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
-					mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
-					mmed."link" AS "media.url", mmed."label" AS "media.label",
-					mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
-					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
-					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
-					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
 				FROM "mshop_media" mmed
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
-					mmed."id", mmed."siteid", mmed."langid", mmed."type", mmed."link",
-					mmed."label", mmed."status", mmed."mimetype", mmed."domain", mmed."preview",
-					mmed."fsname", mmed."mtime", mmed."editor", mmed."ctime"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
-					mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
-					mmed."link" AS "media.url", mmed."label" AS "media.label",
-					mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
-					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
-					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
-					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
 				FROM "mshop_media" mmed
 				:joins
 				WHERE :cond
-				GROUP BY :group mmed."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

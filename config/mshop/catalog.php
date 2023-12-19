@@ -38,12 +38,6 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
-							mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
-							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
-							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position",
-							mcatlity."i18n" AS "catalog.lists.type.i18n"
 						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
@@ -52,12 +46,6 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
-							mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
-							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
-							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position",
-							mcatlity."i18n" AS "catalog.lists.type.i18n"
 						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
@@ -155,13 +143,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mcatli."id" AS "catalog.lists.id", mcatli."parentid" AS "catalog.lists.parentid",
-						mcatli."siteid" AS "catalog.lists.siteid", mcatli."type" AS "catalog.lists.type",
-						mcatli."domain" AS "catalog.lists.domain", mcatli."refid" AS "catalog.lists.refid",
-						mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
-						mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
-						mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
-						mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
 					FROM "mshop_catalog_list" mcatli
 					:joins
 					WHERE :cond
@@ -170,13 +151,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mcatli."id" AS "catalog.lists.id", mcatli."parentid" AS "catalog.lists.parentid",
-						mcatli."siteid" AS "catalog.lists.siteid", mcatli."type" AS "catalog.lists.type",
-						mcatli."domain" AS "catalog.lists.domain", mcatli."refid" AS "catalog.lists.refid",
-						mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
-						mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
-						mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
-						mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
 					FROM "mshop_catalog_list" mcatli
 					:joins
 					WHERE :cond
@@ -320,7 +294,7 @@ return array(
 		),
 		'search-item' => array(
 			'ansi' => '
-				SELECT :columns
+				SELECT :columns,
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
@@ -328,7 +302,7 @@ return array(
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
+				GROUP BY :columns :group,
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
@@ -337,7 +311,7 @@ return array(
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
-				SELECT :columns
+				SELECT :columns,
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
@@ -345,7 +319,7 @@ return array(
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
-				GROUP BY :group mcat."id"
+				GROUP BY :group, mcat."id"
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

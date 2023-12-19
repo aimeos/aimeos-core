@@ -64,38 +64,21 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					msub."id" AS "subscription.id", msub."orderid" AS "subscription.orderid",
-					msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
-					msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
-					msub."interval" AS "subscription.interval", msub."reason" AS "subscription.reason",
-					msub."productid" AS "subscription.productid", msub."period" AS "subscription.period",
-					msub."status" AS "subscription.status", msub."ctime" AS "subscription.ctime",
-					msub."mtime" AS "subscription.mtime", msub."editor" AS "subscription.editor"
 				FROM "mshop_subscription" msub
 				JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 				:joins
 				WHERE :cond
-				GROUP BY :columns :group
-					msub."id", msub."orderid", msub."ordprodid", msub."siteid", msub."next", msub."end",
-					msub."interval", msub."reason", msub."productid", msub."period", msub."status", msub."ctime",
-					msub."mtime", msub."editor"
+				GROUP BY :group
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
 				SELECT :columns
-					msub."id" AS "subscription.id", msub."orderid" AS "subscription.orderid",
-					msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
-					msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
-					msub."interval" AS "subscription.interval", msub."reason" AS "subscription.reason",
-					msub."productid" AS "subscription.productid", msub."period" AS "subscription.period",
-					msub."status" AS "subscription.status", msub."ctime" AS "subscription.ctime",
-					msub."mtime" AS "subscription.mtime", msub."editor" AS "subscription.editor"
 				FROM "mshop_subscription" msub
 				JOIN "mshop_order" mord ON msub."orderid" = mord."id"
 				:joins
 				WHERE :cond
-				GROUP BY :group msub."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'

@@ -44,12 +44,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
-						mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
-						mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
-						mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position",
-						mpluty."i18n" AS "plugin.type.i18n"
 					FROM "mshop_plugin_type" mpluty
 					:joins
 					WHERE :cond
@@ -58,12 +52,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
-						mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
-						mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
-						mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-						mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position",
-						mpluty."i18n" AS "plugin.type.i18n"
 					FROM "mshop_plugin_type" mpluty
 					:joins
 					WHERE :cond
@@ -133,12 +121,6 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
-					mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
-					mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
-					mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
-					mplu."mtime" AS "plugin.mtime", mplu."editor" AS "plugin.editor",
-					mplu."ctime" AS "plugin.ctime"
 				FROM "mshop_plugin" mplu
 				:joins
 				WHERE :cond
@@ -147,12 +129,6 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
-					mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
-					mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
-					mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
-					mplu."mtime" AS "plugin.mtime", mplu."editor" AS "plugin.editor",
-					mplu."ctime" AS "plugin.ctime"
 				FROM "mshop_plugin" mplu
 				:joins
 				WHERE :cond

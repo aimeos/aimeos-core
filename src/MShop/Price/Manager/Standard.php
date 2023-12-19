@@ -196,18 +196,6 @@ class Standard
 			'label' => 'Price tax rates as JSON encoded string',
 			'type' => 'json',
 		),
-		'price.taxrates' => array(
-			'code' => 'price.taxrates',
-			'internalcode' => 'mpri."taxrate"',
-			'label' => 'Price tax rates as JSON encoded string',
-			'type' => 'json',
-		),
-		'price.taxflag' => array(
-			'code' => 'price.taxflag',
-			'internalcode' => 'mpri."taxflag"',
-			'label' => 'If net (=0) or gross (=1) price',
-			'type' => 'bool',
-		),
 		'price.status' => array(
 			'code' => 'price.status',
 			'internalcode' => 'mpri."status"',
@@ -830,7 +818,7 @@ class Standard
 
 			while( $row = $results->fetch() )
 			{
-				if( ( $row['price.taxrates'] = json_decode( $row['price.taxrates'], true ) ) === null ) {
+				if( ( $row['price.taxrates'] = json_decode( $row['price.taxrate'], true ) ) === null ) {
 					$row['price.taxrates'] = [];
 				}
 

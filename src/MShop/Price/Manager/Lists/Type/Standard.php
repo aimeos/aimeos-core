@@ -82,6 +82,11 @@ class Standard
 			'label' => 'List type editor',
 			'public' => false,
 		),
+		'price.lists.type.i18n' => array(
+			'internalcode' => 'mprility."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

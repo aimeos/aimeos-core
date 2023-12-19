@@ -614,25 +614,7 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$attributes = $this->object()->getSearchAttributes();
-		$translations = $this->getSearchTranslations( $attributes );
-		$types = $this->getSearchTypes( $attributes );
-		$columns = $this->object()->getSaveAttributes();
-		$sortcols = $search->translate( $search->getSortations(), $translations );
-
-		$colstring = '';
-		foreach( $columns as $name => $entry ) {
-			$colstring .= $entry->getInternalCode() . ', ';
-		}
-
-		$find = array( ':columns', ':cond', ':order', ':start', ':size' );
-		$replace = array(
-			$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
-			$search->getConditionSource( $types, $translations ),
-			$search->getSortationSource( $types, $translations ),
-			$search->getOffset(),
-			$search->getLimit(),
-		);
+		$required = ['locale.site'];
 
 		/** mshop/locale/manager/site/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -692,36 +674,76 @@ class Standard
 		 * @see mshop/locale/manager/site/newid/ansi
 		 * @see mshop/locale/manager/site/rate/ansi
 		 */
-		$path = 'mshop/locale/manager/site/search';
+		$cfgPathSearch = 'mshop/locale/manager/site/search';
 
-		$sql = $this->getSqlConfig( $path );
-		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+		/** mshop/locale/manager/site/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/locale/manager/site/count/ansi
+		 */
 
-		try
+		/** mshop/locale/manager/site/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the attribute
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/insert/ansi
+		 * @see mshop/locale/manager/site/update/ansi
+		 * @see mshop/locale/manager/site/delete/ansi
+		 * @see mshop/locale/manager/site/search/ansi
+		 * @see mshop/locale/manager/site/newid/ansi
+		 */
+		$cfgPathCount = 'mshop/locale/manager/site/count';
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+
+		while( $row = $results->fetch() )
 		{
-			while( $row = $results->fetch() )
-			{
-				if( ( $row['locale.site.logo'] = json_decode( $row['locale.site.logo'], true ) ) === null ) {
-					$row['locale.site.logo'] = [];
-				}
-
-				if( ( $row['locale.site.config'] = json_decode( $row['locale.site.config'], true ) ) === null ) {
-					$row['locale.site.config'] = [];
-				}
-
-				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-					$items[$row['locale.site.id']] = $item;
-				}
+			if( ( $row['locale.site.logo'] = json_decode( $row['locale.site.logo'], true ) ) === null ) {
+				$row['locale.site.logo'] = [];
 			}
-		}
-		catch( \Exception $e )
-		{
-			$results->finish();
-			throw $e;
-		}
 
-		if( $total !== null ) {
-			$total = $this->getTotal( $conn, $find, $replace );
+			if( ( $row['locale.site.config'] = json_decode( $row['locale.site.config'], true ) ) === null ) {
+				$row['locale.site.config'] = [];
+			}
+
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+				$items[$row['locale.site.id']] = $item;
+			}
 		}
 
 		return map( $items );
@@ -1012,30 +1034,6 @@ class Standard
 
 
 	/**
-	 * Returns the search results for the given SQL statement.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string $sql SQL statement
-	 * @return \Aimeos\Base\DB\Result\Iface Search result object
-	 */
-	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
-	{
-		$time = microtime( true );
-
-		$stmt = $conn->create( $sql );
-		$result = $stmt->execute();
-
-		$msg = 'Time: ' . ( microtime( true ) - $time ) * 1000 . "ms\n"
-			. 'Class: ' . get_class( $this ) . "\n"
-			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
-
-		$this->context()->logger()->debug( $msg, 'core/sql' );
-
-		return $result;
-	}
-
-
-	/**
 	 * Create new item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of item key/value pairs
@@ -1059,79 +1057,15 @@ class Standard
 
 
 	/**
-	 * Returns the total number of items found for the conditions
+	 * Returns the site coditions for the search request
 	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string[] $find List of markers that should be replaced in the SQL statement
-	 * @param string[] $replace List of replacements for the markers in the SQL statement
-	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
-	 * @return int Total number of found items
+	 * @param string[] $keys Sorted list of criteria keys
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
 	 */
-	protected function getTotal( \Aimeos\Base\DB\Connection\Iface $conn, array $find, array $replace ) : int
+	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
 	{
-		/** mshop/locale/manager/site/count/mysql
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * @see mshop/locale/manager/site/count/ansi
-		 */
-
-		/** mshop/locale/manager/site/count/ansi
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * Counts all records matched by the given criteria from the attribute
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the statement can count all records from the
-		 * current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * Both, the strings for ":joins" and for ":cond" are the same as for
-		 * the "search" SQL statement.
-		 *
-		 * Contrary to the "search" statement, it doesn't return any records
-		 * but instead the number of records that have been found. As counting
-		 * thousands of records can be a long running task, the maximum number
-		 * of counted records is limited for performance reasons.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for counting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/locale/manager/site/insert/ansi
-		 * @see mshop/locale/manager/site/update/ansi
-		 * @see mshop/locale/manager/site/delete/ansi
-		 * @see mshop/locale/manager/site/search/ansi
-		 * @see mshop/locale/manager/site/newid/ansi
-		 */
-		$path = 'mshop/locale/manager/site/count';
-
-		$sql = $this->getSqlConfig( $path );
-		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
-
-		$row = $results->fetch();
-		$results->finish();
-
-		if( $row === null ) {
-			throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
-		}
-
-		return $row['count'];
+		return [];
 	}
 }

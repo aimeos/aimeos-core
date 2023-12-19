@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.mimetype' => 'image/jpeg',
 			'media.filesystem' => 'fs-mimeicon',
 			'media.url' => 'http://www.url.com/test.jpg',
-			'media.previews' => [100 => 'directory/test.jpg', 200 => 'directory/test2.jpg'],
+			'media.preview' => [100 => 'directory/test.jpg', 200 => 'directory/test2.jpg'],
 			'media.status' => 6,
 			'media.languageid' => 'de',
 			'media.mtime' => '2011-01-01 00:00:02',

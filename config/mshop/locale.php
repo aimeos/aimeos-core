@@ -34,9 +34,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
-						mloccu."status" AS "locale.currency.status", mloccu."mtime" AS "locale.currency.mtime",
-						mloccu."editor" AS "locale.currency.editor", mloccu."ctime" AS "locale.currency.ctime"
 					FROM "mshop_locale_currency" mloccu
 					WHERE :cond
 					ORDER BY :order
@@ -44,9 +41,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
-						mloccu."status" AS "locale.currency.status", mloccu."mtime" AS "locale.currency.mtime",
-						mloccu."editor" AS "locale.currency.editor", mloccu."ctime" AS "locale.currency.ctime"
 					FROM "mshop_locale_currency" mloccu
 					WHERE :cond
 					ORDER BY :order
@@ -111,9 +105,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
-						mlocla."status" AS "locale.language.status", mlocla."mtime" AS "locale.language.mtime",
-						mlocla."editor" AS "locale.language.editor", mlocla."ctime" AS "locale.language.ctime"
 					FROM "mshop_locale_language" mlocla
 					WHERE :cond
 					ORDER BY :order
@@ -121,9 +112,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
-						mlocla."status" AS "locale.language.status", mlocla."mtime" AS "locale.language.mtime",
-						mlocla."editor" AS "locale.language.editor", mlocla."ctime" AS "locale.language.ctime"
 					FROM "mshop_locale_language" mlocla
 					WHERE :cond
 					ORDER BY :order
@@ -235,14 +223,6 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						mlocsi."id" AS "locale.site.id", mlocsi."siteid" AS "locale.site.siteid",
-						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
-						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
-						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
-						mlocsi."rating" AS "locale.site.rating", mlocsi."ratings" AS "locale.site.ratings",
-						mlocsi."refid" AS "locale.site.refid", mlocsi."theme" AS "locale.site.theme",
-						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
-						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" mlocsi
 					WHERE :cond
 					ORDER BY :order
@@ -250,14 +230,6 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						mlocsi."id" AS "locale.site.id", mlocsi."siteid" AS "locale.site.siteid",
-						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
-						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
-						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
-						mlocsi."rating" AS "locale.site.rating", mlocsi."ratings" AS "locale.site.ratings",
-						mlocsi."refid" AS "locale.site.refid", mlocsi."theme" AS "locale.site.theme",
-						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
-						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" mlocsi
 					WHERE :cond
 					ORDER BY :order
@@ -323,36 +295,24 @@ return array(
 		),
 		'search' => array(
 			'ansi' => '
-				SELECT :columns
-					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid", mloc."site_id",
-					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
-					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
-					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
-					mloc."ctime" AS "locale.ctime", mlocsi."code" AS "locale.sitecode"
+				SELECT :columns, mlocsi."code" AS "locale.sitecode"
 				FROM "mshop_locale" mloc
 				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
-				GROUP BY :columns :group
-					mloc."id", mloc."siteid", mloc."site_id", mloc."langid", mloc."currencyid", mloc."pos",
-					mloc."status", mloc."mtime", mloc."editor", mloc."ctime", mlocsi."code"
+				GROUP BY :group, mlocsi."code"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
 			'mysql' => '
-				SELECT :columns
-					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid", mloc."site_id",
-					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
-					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
-					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
-					mloc."ctime" AS "locale.ctime", mlocsi."code" AS "locale.sitecode"
+				SELECT :columns, mlocsi."code" AS "locale.sitecode"
 				FROM "mshop_locale" mloc
 				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
-				GROUP BY :group mloc."id"
+				GROUP BY :group
 				ORDER BY :order
 				LIMIT :size OFFSET :start
 			'
