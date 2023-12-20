@@ -815,17 +815,17 @@ return array(
 			),
 			'insert' => array(
 				'mysql' => '
-					INSERT INTO "mshop_order_basket" (
+					INSERT INTO "mshop_order_basket" ( :names
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?
 					) ON DUPLICATE KEY UPDATE
 						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 				',
 				'pgsql' => '
-					INSERT INTO "mshop_order_basket" (
+					INSERT INTO "mshop_order_basket" ( :names
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?
 					) ON CONFLICT ("id") DO UPDATE SET
 						"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
@@ -838,9 +838,9 @@ return array(
 					WHEN MATCHED THEN
 						UPDATE SET "customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 					WHEN NOT MATCHED THEN
-						INSERT (
+						INSERT ( :names
 							"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
-						) VALUES (
+						) VALUES ( :values
 							src."customerid", src."content", src."name", src."mtime", src."editor", src."siteid", src."ctime", src."id"
 						);
 				'
