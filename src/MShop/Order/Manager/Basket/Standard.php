@@ -159,6 +159,7 @@ class Standard
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
+		$columns = $this->object()->getSaveAttributes();
 		$date = date( 'Y-m-d H:i:s' );
 
 		/** mshop/order/manager/basket/insert/mysql
@@ -187,11 +188,15 @@ class Standard
 		 */
 		$path = 'mshop/order/manager/basket/insert';
 
-		$sql = $this->getSqlConfig( 'mshop/order/manager/basket/insert' );
+		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		$serialized = base64_encode( serialize( clone $item->getItem() ) );
 		$idx = 1;
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
 
 		// insert
 		$stmt->bind( $idx++, $item->getCustomerId() );
