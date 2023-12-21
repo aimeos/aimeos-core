@@ -213,7 +213,7 @@ trait Update
 	{
 		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
-		$search = $stockManager->filter()->slice( 0, count( $prodIds ) )
+		$search = $stockManager->filter()->slice( 0, 0x7fffffff )
 			->add( ['stock.productid' => $prodIds, 'stock.type' => $stockType] );
 
 		return $stockManager->search( $search );
@@ -418,8 +418,8 @@ trait Update
 		$productItem = $productManager->get( $prodId, ['product'] );
 		$prodIds = $productItem->getRefItems( 'product', 'default', 'default' )->getId()->push( $productItem->getId() );
 
-		$stockItems = $this->getStockItems( $prodIds, $stocktype )->col( null, 'stock.productid' );
-		$selStockItem = $stockItems->pull( $prodId ) ?: $stockManager->create();
+		$stockItems = $this->getStockItems( $prodIds, $stocktype );
+		$selStockItem = $stockItems->col( null, 'stock.productid' )->pull( $prodId ) ?: $stockManager->create();
 
 		$sum = $stockItems->getStockLevel()->reduce( function( $result, $value ) {
 			return $result !== null && $value !== null ? $result + $value : null;
