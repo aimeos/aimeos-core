@@ -400,7 +400,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
 
-		$img = $this->access( 'image' )->invokeArgs( $this->object, [$this->context->fs( 'fs-media' ), 'test.gif'] );
+		$img = $this->access( 'image' )->invokeArgs( $this->object, ['test.gif'] );
 		$this->assertInstanceOf( \Intervention\Image\Interfaces\ImageInterface::class, $img );
 	}
 

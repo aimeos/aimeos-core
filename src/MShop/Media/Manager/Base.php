@@ -22,51 +22,6 @@ use \Intervention\Image\Interfaces\ImageInterface;
  */
 abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 {
-	private ?\Intervention\Image\ImageManager $driver = null;
-
-
-	/**
-	 * Returns the media object for the given file name
-	 *
-	 * @param \Aimeos\Base\Filesystem\Iface $fs File system where the file is stored
-	 * @param string $file URL or relative path to the file
-	 * @return \Intervention\Image\Interfaces\ImageInterface Image object
-	 */
-	protected function image( \Aimeos\Base\Filesystem\Iface $fs, string $file ) : ImageInterface
-	{
-		if( !isset( $this->driver ) )
-		{
-			if( class_exists( '\Intervention\Image\Vips\Driver' ) ) {
-				$driver = new \Intervention\Image\Vips\Driver();
-			} elseif( class_exists( '\Imagick' ) ) {
-				$driver = new \Intervention\Image\Drivers\Imagick\Driver();
-			} else {
-				$driver = new \Intervention\Image\Drivers\Gd\Driver();
-			}
-
-			$this->driver = new \Intervention\Image\ImageManager( $driver );
-		}
-
-		if( preg_match( '#^[a-zA-Z]{1,10}://#', $file ) === 1 )
-		{
-			if( ( $fh = fopen( $file, 'r' ) ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Unable to open file "%1$s"' );
-				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, $file ) );
-			}
-		}
-		else
-		{
-			$fh = $this->context()->fs( 'fs-media' )->reads( $file );
-		}
-
-		$image = $this->driver->read( $fh );
-		fclose( $fh );
-
-		return $image;
-	}
-
-
 	/**
 	 * Checks if the mime type is allowed
 	 *
