@@ -440,20 +440,6 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 
 
 	/**
-	 * Checks if the new ID is valid for the item.
-	 *
-	 * @param string|null $old Current ID of the item
-	 * @param string|null $new New ID which should be set in the item
-	 * @return string|null Value of the new ID
-	 * @deprecated 2023.01
-	 */
-	public static function checkId( ?string $old, ?string $new ) : ?string
-	{
-		return ( $new !== null ? (string) $new : $new );
-	}
-
-
-	/**
 	 * Tests if the date parameter represents an ISO format.
 	 *
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
