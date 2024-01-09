@@ -22,7 +22,7 @@ class MShopAddTypeData extends Base
 	public function after() : array
 	{
 		return [
-			'Attribute', 'Catalog', 'Customer', 'Media', 'Plugin', 'Price', 'Product',
+			'Attribute', 'Catalog', 'Customer', 'Group', 'Media', 'Plugin', 'Price', 'Product',
 			'Rule', 'Stock', 'Service', 'Supplier', 'Tag', 'Text', 'MShopSetLocale'
 		];
 	}

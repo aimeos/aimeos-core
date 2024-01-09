@@ -21,7 +21,7 @@ class MShopAddCodeData extends Base
 	 */
 	public function after() : array
 	{
-		return ['Customer', 'MShopAddLocaleData'];
+		return ['Group', 'MShopAddLocaleData'];
 	}
 
 
