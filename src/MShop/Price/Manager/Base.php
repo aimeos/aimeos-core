@@ -116,7 +116,10 @@ abstract class Base
 
 			$qty = (string) $priceItem->getQuantity();
 
-			if( !isset( $list[$qty] ) || $list[$qty]->getValue() > $priceItem->getValue() ) {
+			if( !isset( $list[$qty] )
+				|| $list[$qty]->getValue() === null
+				|| $priceItem->getValue() !== null && $list[$qty]->getValue() > $priceItem->getValue()
+			) {
 				$list[$qty] = $priceItem;
 			}
 		}
