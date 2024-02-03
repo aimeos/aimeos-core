@@ -38,7 +38,7 @@ trait Upload
 	{
 		$fs = $this->context()->fs( $fsname );
 
-		if( $fs->has( $filepath ) ) {
+		if( $filepath && $fs->has( $filepath ) ) {
 			$fs->rm( $filepath );
 		}
 
