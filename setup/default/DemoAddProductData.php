@@ -57,7 +57,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 		$this->info( 'Processing product demo data', 'vv' );
 
 		$domains = ['media', 'price', 'text'];
-		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, 'index' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
@@ -100,7 +100,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 		}
 
 		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, 'index' );
 
 		foreach( $data as $entry )
 		{
