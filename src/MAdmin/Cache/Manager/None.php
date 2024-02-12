@@ -43,6 +43,18 @@ class None
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
+	 */
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return $this;
+	}
+
+
+	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
