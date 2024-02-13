@@ -77,6 +77,10 @@ class Standard
 	 */
 	public function __isset( string $name ) : bool
 	{
+		if( $name === 'children' ) {
+			return true;
+		}
+
 		return parent::__isset( $name ) ?: isset( $this->node->$name );
 	}
 
@@ -90,6 +94,10 @@ class Standard
 	 */
 	public function get( string $name, $default = null )
 	{
+		if( $name === 'children' ) {
+			return $this->children;
+		}
+
 		if( ( $value = parent::get( $name ) ) !== null ) {
 			return $value;
 		}
