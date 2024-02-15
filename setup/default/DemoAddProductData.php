@@ -23,7 +23,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	public function after() : array
 	{
 		return [
-			'Product', 'Attribute', 'Media', 'Price', 'Stock', 'Text',
+			'Product', 'Index', 'Attribute', 'Media', 'Price', 'Stock', 'Text',
 			'MShopSetLocale', 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault',
 			'DemoAddTypeData', 'DemoAddCatalogData', 'DemoAddSupplierData'
 		];
