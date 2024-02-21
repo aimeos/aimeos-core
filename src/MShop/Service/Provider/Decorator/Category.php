@@ -179,7 +179,7 @@ class Category
 			}
 		}
 
-		return $productIds;
+		return array_unique( $productIds );
 	}
 
 
