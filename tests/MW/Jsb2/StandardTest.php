@@ -61,36 +61,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetFiles()
 	{
-		$files = $this->object->getFiles( 'js' );
+		$files = $this->object->getFiles( 'jsb2-test.js' );
 
 		$this->assertEquals( 1, count( $files ) );
 		$this->assertStringContainsString( 'test.js', $files[0] );
-	}
-
-
-	public function testGetHTML()
-	{
-		$html = '<script type="text/javascript" src="/./../%1$s"></script>';
-		$mtime = filemtime( __DIR__ . DIRECTORY_SEPARATOR . 'test.js' );
-
-		$this->assertEquals( sprintf( $html, 'test.js?v=' . $mtime ), trim( $this->object->getHTML( 'js' ) ) );
-	}
-
-
-	public function testGetUrls()
-	{
-		$urls = $this->object->getUrls( 'js' );
-
-		$this->assertEquals( 1, count( $urls ) );
-		$this->assertStringContainsString( '/test.js', $urls[0] );
-	}
-
-
-	public function testGetUrlsFilemtimeException()
-	{
-		$object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
-
-		$this->expectException( '\Aimeos\MW\Jsb2\Exception' );
-		$object->getHTML( 'js' );
 	}
 }

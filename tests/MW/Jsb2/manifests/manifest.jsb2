@@ -4,7 +4,7 @@
 	"licenseText": "LGPLv3, https://www.gnu.org/licenses/lgpl-3.0.html",
 	"pkgs": [{
 		"name": "Jsb2 Test",
-		"file": "js/jsb2-test.js",
+		"file": "jsb2-test.js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "test.js",

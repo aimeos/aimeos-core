@@ -47,112 +47,21 @@ class Standard
 	/**
 	 * Returns the list of URLs for packages files with given filter.
 	 *
-	 * @param string $type Specific filetypes to create output
+	 * @param string $name File name, e.g. "index.js", "index.css", "ltr.index.css" or "rtl.index.css"
 	 * @return string[] List of URLs for the package files
 	 */
-	public function getFiles( string $type ) : array
+	public function getFiles( string $name ) : array
 	{
 		$files = [];
 
-		foreach( $this->registeredPackages as $filetype => $packageList )
+		foreach( $this->registeredPackages[$name] ?? [] as $package )
 		{
-			if( $filetype === $type )
-			{
-				foreach( $packageList as $package )
-				{
-					foreach( $package->fileIncludes as $singleFile ) {
-						$files[] = $this->basePath . $singleFile->path . $singleFile->text;
-					}
-				}
+			foreach( $package->fileIncludes as $singleFile ) {
+				$files[] = $this->basePath . $singleFile->path . $singleFile->text;
 			}
 		}
 
 		return $files;
-	}
-
-
-	/**
-	 * Returns the list of URLs for packages files with given filter.
-	 *
-	 * @param string $type Specific filetypes to create output
-	 * @param string $version URL version string with %s placeholder for the file time
-	 * @return string[] List of URLs for the package files
-	 */
-	public function getUrls( string $type, string $version = '?v=%s' ) : array
-	{
-		$files = [];
-
-		foreach( $this->registeredPackages as $filetype => $packageList )
-		{
-			if( $filetype === $type )
-			{
-				foreach( $packageList as $package ) {
-					$files = array_merge( $files, $this->getFileUrls( $package, $version ) );
-				}
-			}
-		}
-
-		return $files;
-	}
-
-
-	/**
-	 * Returns HTML for packages files with given filter.
-	 *
-	 * @param string $type Specific filetypes to create output
-	 * @return string HTML output with script and stylesheet link tags
-	 */
-	public function getHTML( string $type ) : string
-	{
-		$html = '';
-		$version = '?v=%s';
-
-		if( strpos( $this->baseURL, '?' ) !== false ) {
-			$version = '&v=%s';
-		}
-
-		foreach( $this->getUrls( $type, $version ) as $file )
-		{
-			switch( $type )
-			{
-				case 'js':
-					$html .= '<script type="text/javascript" src="' . $file . '"></script>' . PHP_EOL;
-					break;
-				case 'css':
-					$html .= '<link rel="stylesheet" type="text/css" href="' . $file . '"/>' . PHP_EOL;
-					break;
-			}
-		}
-
-		return $html;
-	}
-
-
-	/**
-	 * Returns the file URLs of the given package object.
-	 *
-	 * @param \stdClass $package Object with "fileIncludes" property containing a
-	 * 	list of file objects with "path" and "text" properties
-	 * @param string $version Version string that should be added to the URLs suitable for sprintf()
-	 * @return string[] List of URLs to the files from the package
-	 * @throws \Aimeos\MW\Jsb2\Exception If the file modification timestamp couldn't be determined
-	 */
-	protected function getFileUrls( \stdClass $package, string $version = '?v=%s' ) : array
-	{
-		$list = [];
-
-		foreach( $package->fileIncludes as $singleFile )
-		{
-			$filename = $this->basePath . $singleFile->path . $singleFile->text;
-
-			if( !is_file( $filename ) || ( $fileTime = filemtime( $filename ) ) === false ) {
-				throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
-			}
-
-			$list[] = $this->baseURL . $singleFile->path . $singleFile->text . sprintf( $version, $fileTime );
-		}
-
-		return $list;
 	}
 
 
@@ -181,7 +90,7 @@ class Standard
 			}
 
 			if( !in_array( $package->name, $filter ) ) {
-				$packageContainer[pathinfo( $package->file, PATHINFO_EXTENSION )][] = $package;
+				$packageContainer[$package->file][] = $package;
 			}
 		}
 
