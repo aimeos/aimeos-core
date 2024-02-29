@@ -3,7 +3,7 @@
 	"licenseText": "proprietary",
 	"pkgs": [{
 		"name": "<extname> CSS",
-		"file": "index.css",
+		"file": "index-css",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "custom.css",
@@ -11,7 +11,7 @@
 		}]
 	}, {
 		"name": "<extname> JS",
-		"file": "index.js",
+		"file": "index-js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "custom.js",
