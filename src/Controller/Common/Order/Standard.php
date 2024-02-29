@@ -165,7 +165,7 @@ class Standard
 		$search = $productManager->filter();
 		$func = $search->make( 'product:has', ['product', 'default', $prodId] );
 		$expr = array(
-			$search->compare( '==', 'product.type', 'bundle' ),
+			$search->compare( '==', 'product.type', ['bundle', 'group'] ),
 			$search->compare( '!=', $func, null ),
 		);
 		$search->setConditions( $search->and( $expr ) );
