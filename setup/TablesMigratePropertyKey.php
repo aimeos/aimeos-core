@@ -25,7 +25,7 @@ class TablesMigratePropertyKey extends Base
 
 	public function after() : array
 	{
-		return ['TypesMigrateColumns', 'TablesClearPropertyKey', 'Attribute', 'Customer', 'Media', 'Price', 'Product'];
+		return ['TablesClearPropertyKey', 'Attribute', 'Customer', 'Media', 'Price', 'Product'];
 	}
 
 

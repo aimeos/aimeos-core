@@ -19,7 +19,7 @@ class AttributeMigrateKey extends Base
 
 	public function after() : array
 	{
-		return ['TypesMigrateColumns'];
+		return [];
 	}
 
 

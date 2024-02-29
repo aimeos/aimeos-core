@@ -26,7 +26,7 @@ class TablesMigrateListsKey extends Base
 
 	public function after() : array
 	{
-		return ['TypesMigrateColumns', 'Attribute', 'Catalog', 'Customer', 'Media', 'Price', 'Product', 'Service', 'Supplier', 'Text'];
+		return ['Attribute', 'Catalog', 'Customer', 'Media', 'Price', 'Product', 'Service', 'Supplier', 'Text'];
 	}
 
 

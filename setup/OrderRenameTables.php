@@ -14,9 +14,8 @@ class OrderRenameTables extends Base
 	public function after() : array
 	{
 		return [
-			'OrderAddProductParentid', 'OrderAddBaseServiceCurrencyid', 'OrderAddBaseProductCurrencyid',
+			'OrderAddProductParentid', 'OrderConnectTables',
 			'OrderRenameAttributeParentid', 'OrderRenameProductStatus', 'OrderRenameProductSupplier',
-			'OrderConnectTables'
 		];
 	}
 
