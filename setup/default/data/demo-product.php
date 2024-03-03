@@ -126,18 +126,6 @@ return [
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
-					[
-						'text.label' => 'Demo url/de',
-						'text.content' => 'dunkel',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en',
-						'text.content' => 'dark',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
 				],
 				'media' => [
 					[
@@ -164,18 +152,6 @@ return [
 						'text.label' => 'Demo name/en: Small print',
 						'text.content' => 'Small print',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/de: Kleiner Aufdruck',
-						'text.content' => 'kleiner-aufdruck',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Small print',
-						'text.content' => 'small-print',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 				],
@@ -209,18 +185,6 @@ return [
 						'text.label' => 'Demo name/en: Large print',
 						'text.content' => 'Large print',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/de: Grosser Aufdruck',
-						'text.content' => 'grosser-aufdruck',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Large print',
-						'text.content' => 'large-print',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 				],
@@ -1195,18 +1159,6 @@ return [
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
-					[
-						'text.label' => 'Demo url/de: Kleines Etikett',
-						'text.content' => 'Kleines-Etikett',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Small sticker',
-						'text.content' => 'small-sticker',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
 				],
 				'price' => [
 					[
@@ -1238,18 +1190,6 @@ return [
 						'text.label' => 'Demo name/en: Large sticker',
 						'text.content' => 'Large sticker',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/de: Grosses Etikett',
-						'text.content' => 'Grosses-Etikett',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Large sticker',
-						'text.content' => 'large-sticker',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
 				],
@@ -1459,18 +1399,6 @@ return [
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					],
-					[
-						'text.label' => 'Demo url/de: Blau',
-						'text.content' => 'Blau',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Blue',
-						'text.content' => 'blue',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
-					],
 				],
 				'media' => [
 					[
@@ -1492,16 +1420,6 @@ return [
 						'text.type' => 'name', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
-					[
-						'text.label' => 'Demo url: Width 32', 'text.content' => 'Weite-32',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url: Width 32', 'text.content' => 'width-32',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
 				],
 			],
 			[
@@ -1512,16 +1430,6 @@ return [
 					[
 						'text.label' => 'Demo name: Length 34', 'text.content' => '34',
 						'text.type' => 'name', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
-					],
-					[
-						'text.label' => 'Demo url: Length 34', 'text.content' => 'Länge-34',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
-					],
-					[
-						'text.label' => 'Demo url: Length 34', 'text.content' => 'length-34',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					],
 				],
@@ -1564,16 +1472,6 @@ return [
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					],
-					[
-						'text.label' => 'Demo url/de: Light', 'text.content' => 'Hell',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url/en: Light', 'text.content' => 'beige',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
-					],
 				],
 				'media' => [
 					[
@@ -1595,16 +1493,6 @@ return [
 						'text.type' => 'name', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					],
-					[
-						'text.label' => 'Demo url: Width 33', 'text.content' => 'Weite-33',
-						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
-					[
-						'text.label' => 'Demo url: Width 33', 'text.content' => 'width-33',
-						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
-					],
 				],
 			],
 			[
@@ -1615,16 +1503,6 @@ return [
 					[
 						'text.label' => 'Demo name: Length 36', 'text.content' => '36',
 						'text.type' => 'name', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
-					],
-					[
-						'text.label' => 'Demo url: Length 36', 'text.content' => 'Länge-36',
-						'text.type' => 'url', 'text.status' => 1,
-						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
-					],
-					[
-						'text.label' => 'Demo url: Length 36', 'text.content' => 'length-36',
-						'text.type' => 'url', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					],
 				],
