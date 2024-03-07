@@ -1098,11 +1098,8 @@ class Standard
 
 		if( isset( $ref['stock'] ) || in_array( 'stock', $ref, true ) )
 		{
-			foreach( $this->getStockItems( array_keys( $map ), $ref ) as $stockId => $stockItem )
-			{
-				if( isset( $map[$stockItem->getProductId()] ) ) {
-					$map[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
-				}
+			foreach( $this->getStockItems( array_keys( $map ), $ref ) as $stockId => $stockItem ) {
+				$map[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
 			}
 		}
 
@@ -1166,18 +1163,12 @@ class Standard
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
-		$search = $manager->filter( true )->slice( 0, 0x7fffffff );
-		$expr = [
-			$search->compare( '==', 'stock.productid', $ids ),
-			$search->getConditions(),
-		];
+		$filter = $manager->filter( true )->add( 'stock.productid', '==', $ids )->slice( 0, 0x7fffffff );
 
 		if( isset( $ref['stock'] ) && is_array( $ref['stock'] ) ) {
-			$expr[] = $search->compare( '==', 'stock.type', $ref['stock'] );
+			$filter->add( 'stock.type', '==', $ref['stock'] );
 		}
 
-		$search->setConditions( $search->and( $expr ) );
-
-		return $manager->search( $search );
+		return $manager->search( $filter );
 	}
 }
