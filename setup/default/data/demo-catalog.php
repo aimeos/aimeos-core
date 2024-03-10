@@ -10,102 +10,102 @@ return [
 	'catalog.code' => 'home', 'catalog.label' => 'Home', 'catalog.config' => ['css-class' => 'megamenu'],
 	'text' => [
 		[
-			'label' => 'Demo name/de', 'content' => 'Start',
-			'type' => 'name', 'languageid' => 'de', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo name/de', 'text.content' => 'Start',
+			'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo url/de', 'content' => 'Start',
-			'type' => 'url', 'languageid' => 'de', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo url/de', 'text.content' => 'Start',
+			'text.type' => 'media.url', 'text.languageid' => 'de', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo short/de',
-			'content' => 'Hohe Qualität, niedrige Preise!',
-			'type' => 'short', 'languageid' => 'de', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo short/de',
+			'text.content' => 'Hohe Qualität, niedrige Preise!',
+			'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 1, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo short/en',
-			'content' => 'High quality, low prices!',
-			'type' => 'short', 'languageid' => 'en', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo short/en',
+			'text.content' => 'High quality, low prices!',
+			'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 2, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo long/de',
-			'content' => 'Hier finden Sie eine fantastische Auswahl zu günstigesten Preisen!',
-			'type' => 'long', 'languageid' => 'de', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo long/de',
+			'text.content' => 'Hier finden Sie eine fantastische Auswahl zu günstigesten Preisen!',
+			'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 3, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo long/en',
-			'content' => 'Find a fantastic selection of products for the cheapest price!',
-			'type' => 'long', 'languageid' => 'en', 'status' => 1,
-			'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo long/en',
+			'text.content' => 'Find a fantastic selection of products for the cheapest price!',
+			'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 4, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 		[
-			'label' => 'Demo meta-description',
-			'content' => 'Meta descriptions are important because they are shown in the search engine result page',
-			'type' => 'meta-description', 'languageid' => null, 'status' => 1,
-			'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
+			'text.label' => 'Demo meta-description',
+			'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+			'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+			'catalog.list.type' => 'default', 'catalog.list.position' => 5, 'catalog.list.config' => [],
+			'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 		],
 	],
 	'catalog' => [[
 		'catalog.code' => 'demo-best', 'catalog.label' => 'Best sellers',
 		'text' => [
 			[
-				'label' => 'Best seller kurz',
-				'content' => '<p>Große Auswahl an TOP Sellern<br /><strong>BESTE Preise garantiert</strong></p>',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Best seller kurz',
+				'text.content' => '<p>Große Auswahl an TOP Sellern<br /><strong>BESTE Preise garantiert</strong></p>',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 1, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Best seller short',
-				'content' => '<p>LARGE selection of TOP sellers<br /><strong>BEST prices guaranteed</strong></p>',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Best seller short',
+				'text.content' => '<p>LARGE selection of TOP sellers<br /><strong>BEST prices guaranteed</strong></p>',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 2, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Demo meta-description',
-				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Best seller stage', 'mimetype' => 'image/webp',
-				'url' => 'https://aimeos.org/media/default/main-banner-1-big.webp',
-				'preview' => [
+				'media.label' => 'Demo: Best seller stage', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/main-banner-1-big.webp',
+				'media.previews' => [
 					480 => 'https://aimeos.org/media/default/main-banner-1-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-1-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-1-big.webp',
 				],
-				'type' => 'stage', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.type' => 'stage', 'media.languageid' => null, 'media.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Demo: Best seller menu', 'mimetype' => 'image/webp',
-				'url' => 'https://aimeos.org/media/default/product_01_A-low.webp',
-				'preview' => [
+				'media.label' => 'Demo: Best seller menu', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/product_01_A-low.webp',
+				'media.previews' => [
 					240 => 'https://aimeos.org/media/default/product_01_A-low.webp',
 					720 => 'https://aimeos.org/media/default/product_01_A-med.webp',
 					1350 => 'https://aimeos.org/media/default/product_01_A-big.webp',
 				],
-				'type' => 'menu', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.type' => 'menu', 'media.languageid' => null, 'media.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 		'catalog' => [[
@@ -136,78 +136,78 @@ return [
 		'catalog.code' => 'demo-new', 'catalog.label' => 'New arrivals',
 		'text' => [
 			[
-				'label' => 'New arrivals kurz',
-				'content' => '<p><strong>Sommer 2024</strong></p><p>Neue Collection eingetroffen</p>',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'New arrivals kurz',
+				'text.content' => '<p><strong>Sommer 2024</strong></p><p>Neue Collection eingetroffen</p>',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 1, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'New arrivals short',
-				'content' => '<p><strong>Summer 2024</strong></p><p>New collection available</p>',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'New arrivals short',
+				'text.content' => '<p><strong>Summer 2024</strong></p><p>New collection available</p>',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 2, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Demo meta-description',
-				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 		'media' => [
 			[
-				'label' => 'Demo: New arrivals stage', 'mimetype' => 'image/webp',
-				'url' => 'https://aimeos.org/media/default/main-banner-2-big.webp',
-				'preview' => [
+				'media.label' => 'Demo: New arrivals stage', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/main-banner-2-big.webp',
+				'media.previews' => [
 					480 => 'https://aimeos.org/media/default/main-banner-2-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-2-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-2-big.webp',
 				],
-				'type' => 'stage', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.type' => 'stage', 'media.languageid' => null, 'media.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 	], [
 		'catalog.code' => 'demo-deals', 'catalog.label' => 'Hot deals',
 		'text' => [
 			[
-				'label' => 'Hot deals kurz',
-				'content' => '<p>Bis zu <strong>30%</strong> Rabatt<br />auf ausgewählte Stücke</p>',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Hot deals kurz',
+				'text.content' => '<p>Bis zu <strong>30%</strong> Rabatt<br />auf ausgewählte Stücke</p>',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 1, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Hot deals short',
-				'content' => '<p>Up to <strong>30%</strong> discount<br />on selected items</p>',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Hot deals short',
+				'text.content' => '<p>Up to <strong>30%</strong> discount<br />on selected items</p>',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 2, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
-				'label' => 'Demo meta-description',
-				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Hot deals stage', 'mimetype' => 'image/webp',
-				'url' => 'https://aimeos.org/media/default/main-banner-3-big.webp',
-				'preview' => [
+				'media.label' => 'Demo: Hot deals stage', 'media.mimetype' => 'image/webp',
+				'media.url' => 'https://aimeos.org/media/default/main-banner-3-big.webp',
+				'media.previews' => [
 					480 => 'https://aimeos.org/media/default/main-banner-3-low.webp',
 					960 => 'https://aimeos.org/media/default/main-banner-3-med.webp',
 					1920 => 'https://aimeos.org/media/default/main-banner-3-big.webp',
 				],
-				'type' => 'stage', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.type' => 'stage', 'media.languageid' => null, 'media.status' => 1,
+				'catalog.list.type' => 'default', 'catalog.list.position' => 0, 'catalog.list.config' => [],
+				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 		],
 	]],

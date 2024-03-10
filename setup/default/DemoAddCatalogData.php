@@ -42,8 +42,6 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing catalog demo data', 'vv' );
-
 		$context = $this->context();
 
 		if( ( $value = $context->config()->get( 'setup/default/demo', '' ) ) === '' ) {
@@ -51,91 +49,88 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 		}
 
 
-		$item = null;
-		$manager = \Aimeos\MShop::create( $context, 'catalog' );
+		$this->info( 'Processing catalog demo data', 'vv' );
 
-		try
-		{
-			// Don't delete the catalog node because users are likely use it for production
-			$item = $manager->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
-
-			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'media' );
-			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'text' );
-			$this->removeListItems( $item->getId(), 'catalog/lists', 'product' );
-		}
-		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
-
-		$search = $manager->filter();
-		$search->add( $search->and( [
-			$search->compare( '=~', 'catalog.code', 'demo-' ),
-			$search->compare( '==', 'catalog.level', 1 )
-		] ) );
-		$manager->delete( $manager->search( $search )->getId()->toArray() );
+		$item = $this->removeItems();
 
 
-		if( $value === '1' )
-		{
-			$ds = DIRECTORY_SEPARATOR;
-			$path = __DIR__ . $ds . 'data' . $ds . 'demo-catalog.php';
-
-			if( ( $data = include( $path ) ) == false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
-			}
-
-			if( $item === null ) {
-				$item = $manager->insert( $manager->create()->fromArray( $data ) );
-			}
-
-			if( isset( $data['media'] ) ) {
-				$this->addMedia( $item->getId(), $data['media'], 'catalog' );
-			}
-
-			if( isset( $data['product'] ) ) {
-				$this->addProducts( $item->getId(), $data['product'], 'catalog' );
-			}
-
-			if( isset( $data['text'] ) ) {
-				$this->addTexts( $item->getId(), $data['text'], 'catalog' );
-			}
-
-			if( isset( $data['catalog'] ) ) {
-				$this->addCatalog( $item->getId(), $data['catalog'], 'catalog' );
-			}
+		if( $value === '1' ) {
+			$this->addDemoData();
 		}
 	}
 
 
 	/**
-	 * Adds the catalog items including referenced items
+	 * Adds the demo data to the database.
 	 *
-	 * @param string $id Unique ID of the parent category
-	 * @param array $data List of category data
-	 * @param string $domain Parent domain name (catalog)
+	 * @throws \RuntimeException If the file isn't found
 	 */
-	protected function addCatalog( string $id, array $data, string $domain )
+	protected function addDemoData()
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), $domain );
+		$ds = DIRECTORY_SEPARATOR;
+		$path = __DIR__ . $ds . 'data' . $ds . 'demo-catalog.php';
+
+		if( ( $data = include( $path ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
+		}
+
+		$context = $this->context();
+		$manager = \Aimeos\MShop::create( $context, 'catalog' );
+
+		try {
+			$item = $manager->getTree( null, ['media', 'text'], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		} catch( \Exception $e ) {
+			$item = $manager->insert( $manager->create()->fromArray( $data ) );
+		}
+var_dump($item->getId(), $item->getLabel());
+
+		$this->addRefItems( $item, $data );
+
+		$manager->save( $item );
+	}
+
+
+	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	{
+		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->create()->fromArray( $entry );
-			$item = $manager->insert( $item, $id );
+			$catItem = $manager->create()->fromArray( $entry );
+			$catItem = $manager->insert( $catItem, $item->getId() );
 
-			if( isset( $entry['media'] ) ) {
-				$this->addMedia( $item->getId(), $entry['media'], $domain );
-			}
-
-			if( isset( $entry['product'] ) ) {
-				$this->addProducts( $item->getId(), $entry['product'], $domain );
-			}
-
-			if( isset( $entry['text'] ) ) {
-				$this->addTexts( $item->getId(), $entry['text'], $domain );
-			}
-
-			if( isset( $entry['catalog'] ) ) {
-				$this->addCatalog( $item->getId(), $entry['catalog'], $domain );
-			}
+			$this->addRefItems( $catItem, $entry );
 		}
+
+		return $item;
+	}
+
+
+	/**
+	 * Deletes the demo catalog items
+	 */
+	protected function removeItems() : ?\Aimeos\MShop\Catalog\Item\Iface
+	{
+		$context = $this->context();
+		$domains = ['media', 'text'];
+		$manager = \Aimeos\MShop::create( $context, 'catalog' );
+
+		try
+		{
+			// Don't delete the catalog node because users are likely use it for production
+			$item = $manager->getTree( null, $domains, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+			$this->removeRefItems( map( $item ), $domains );
+			$manager->save( $item );
+		}
+		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
+
+		$filter = $manager->filter()->add( 'catalog.code', '=~', 'demo-')->add( 'catalog.level', '==', 1 )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter, $domains );
+
+		$this->removeRefItems( $items, $domains );
+
+		$manager->delete( $items );
+
+		return $item ?? null;
 	}
 }

@@ -56,26 +56,8 @@ class DemoAddProductData extends MShopAddDataAbstract
 
 		$this->info( 'Processing product demo data', 'vv' );
 
-		$domains = ['media', 'price', 'text'];
-		$manager = \Aimeos\MShop::create( $context, 'product' );
-
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
-		$products = $manager->search( $search, $domains );
-
-		foreach( $domains as $domain )
-		{
-			$rmIds = map();
-
-			foreach( $products as $item ) {
-				$rmIds = $rmIds->merge( $item->getRefItems( $domain, null, null, false )->keys() );
-			}
-
-			\Aimeos\MShop::create( $context, $domain )->delete( $rmIds->toArray() );
-		}
-
-		$manager->delete( $products->toArray() );
-		$this->removeStockItems( $products->keys() );
+		$items = $this->removeItems();
+		$this->removeStockItems( $items );
 		$this->removeAttributeItems();
 
 
@@ -144,108 +126,6 @@ class DemoAddProductData extends MShopAddDataAbstract
 
 
 	/**
-	 * Adds the referenced items from the given entry data.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
-	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
-	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
-	 */
-	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
-	{
-		$context = $this->context();
-		$domain = $item->getResourceType();
-		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
-
-		if( isset( $entry['attribute'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $context, 'attribute' );
-
-			foreach( $entry['attribute'] as $data )
-			{
-				$listItem = $listManager->create()->fromArray( $data );
-				$refItem = $manager->create()->fromArray( $data );
-
-				try
-				{
-					$manager = \Aimeos\MShop::create( $context, 'attribute' );
-					$refItem = $manager->find( $refItem->getCode(), [], $domain, $refItem->getType() );
-				}
-				catch( \Exception $e ) { ; } // attribute doesn't exist yet
-
-				$refItem = $this->addRefItems( $refItem, $data );
-				$item->addListItem( 'attribute', $listItem, $refItem );
-			}
-		}
-
-		foreach( ['media', 'price', 'text'] as $refDomain )
-		{
-			if( isset( $entry[$refDomain] ) )
-			{
-				$manager = \Aimeos\MShop::create( $context, $refDomain );
-
-				foreach( $entry[$refDomain] as $data )
-				{
-					$listItem = $listManager->create()->fromArray( $data );
-					$refItem = $manager->create()->fromArray( $data );
-
-					if( isset( $data['property'] ) )
-					{
-						foreach( (array) $data['property'] as $property )
-						{
-							$propItem = $manager->createPropertyItem()->fromArray( $property );
-							$refItem->addPropertyItem( $propItem );
-						}
-					}
-
-					$item->addListItem( $refDomain, $listItem, $refItem );
-				}
-			}
-		}
-
-		if( isset( $entry['product'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $context, 'product' );
-
-			foreach( $entry['product'] as $data )
-			{
-				$listItem = $listManager->create()->fromArray( $data );
-				$listItem->setRefId( $manager->find( $data['product.code'] )->getId() );
-
-				$item->addListItem( 'product', $listItem );
-			}
-		}
-
-		if( isset( $entry['catalog'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $context, 'catalog' );
-
-			foreach( $entry['catalog'] as $data )
-			{
-				$listItem = $listManager->create()->fromArray( $data );
-				$listItem->setRefId( $manager->find( $data['catalog.code'] )->getId() );
-
-				$item->addListItem( 'catalog', $listItem );
-			}
-		}
-
-		if( isset( $entry['supplier'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $context, 'supplier' );
-
-			foreach( $entry['supplier'] as $data )
-			{
-				$listItem = $listManager->create()->fromArray( $data );
-				$listItem->setRefId( $manager->find( $data['supplier.code'] )->getId() );
-
-				$item->addListItem( 'supplier', $listItem );
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
 	 * Adds stock levels to the given product in the database.
 	 *
 	 * @param string $productId ID of the product item where the stock levels should be associated to
@@ -260,6 +140,25 @@ class DemoAddProductData extends MShopAddDataAbstract
 			$item = $manager->create()->fromArray( $entry )->setProductId( $productId );
 			$manager->save( $item, false );
 		}
+	}
+
+
+	/**
+	 * Deletes the demo product items
+	 */
+	protected function removeItems() : \Aimeos\Map
+	{
+		$context = $this->context();
+		$domains = ['media', 'price', 'text'];
+		$manager = \Aimeos\MShop::create( $context, 'product' );
+
+		$filter = $manager->filter()->add( 'product.code', '=~', 'demo-' )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter, $domains );
+
+		$this->removeRefItems( $items, $domains );
+		$manager->delete( $items );
+
+		return $items;
 	}
 
 
@@ -280,11 +179,11 @@ class DemoAddProductData extends MShopAddDataAbstract
 	/**
 	 * Deletes the demo stock items
 	 */
-	protected function removeStockItems( \Aimeos\Map $prodIds )
+	protected function removeStockItems( \Aimeos\Map $products )
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
-		$filter = $manager->filter()->add( ['stock.productid' => $prodIds] )->slice( 0, $prodIds->count() );
+		$filter = $manager->filter()->add( ['stock.productid' => $products] )->slice( 0, 0x7fffffff );
 
 		$manager->delete( $manager->search( $filter ) );
 	}

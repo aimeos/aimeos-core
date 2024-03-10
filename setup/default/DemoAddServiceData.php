@@ -41,56 +41,57 @@ class DemoAddServiceData extends MShopAddDataAbstract
 
 		$this->info( 'Processing service demo data', 'vv' );
 
+		$items = $this->removeItems();
+
+
+		if( $value === '1' ) {
+			$this->addDemoData();
+		}
+	}
+
+
+	/**
+	 * Adds the demo data to the database.
+	 *
+	 * @throws \RuntimeException If the file isn't found
+	 */
+	protected function addDemoData()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$path = __DIR__ . $ds . 'data' . $ds . 'demo-service.php';
+
+		if( ( $data = include( $path ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for service domain', $path ) );
+		}
+
+		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
+
+		foreach( $data as $entry )
+		{
+			$item = $manager->create()->fromArray( $entry );
+
+			$this->addRefItems( $item, $entry );
+
+			$manager->save( $item );
+		}
+	}
+
+
+	/**
+	 * Deletes the demo service items
+	 */
+	protected function removeItems() : \Aimeos\Map
+	{
+		$context = $this->context();
+		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'service' );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '=~', 'service.code', 'demo-' ) );
-		$services = $manager->search( $search );
+		$filter = $manager->filter()->add( 'service.code', '=~', 'demo-' )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter, $domains );
 
-		foreach( $services as $item )
-		{
-			$this->removeItems( $item->getId(), 'service/lists', 'service', 'media' );
-			$this->removeItems( $item->getId(), 'service/lists', 'service', 'price' );
-			$this->removeItems( $item->getId(), 'service/lists', 'service', 'text' );
-		}
+		$this->removeRefItems( $items, $domains );
+		$manager->delete( $items );
 
-		$manager->delete( $services->toArray() );
-
-
-		if( $value === '1' )
-		{
-			$ds = DIRECTORY_SEPARATOR;
-			$path = __DIR__ . $ds . 'data' . $ds . 'demo-service.php';
-
-			if( ( $data = include( $path ) ) == false ) {
-				throw new \RuntimeException( sprintf( 'No file "%1$s" found for service domain', $path ) );
-			}
-
-			foreach( $data as $entry )
-			{
-				$item = $manager->create();
-				$item->setType( $entry['type'] );
-				$item->setCode( $entry['code'] );
-				$item->setLabel( $entry['label'] );
-				$item->setProvider( $entry['provider'] );
-				$item->setPosition( $entry['position'] );
-				$item->setConfig( $entry['config'] );
-				$item->setStatus( $entry['status'] );
-
-				$manager->save( $item );
-
-				if( isset( $entry['media'] ) ) {
-					$this->addMedia( $item->getId(), $entry['media'], 'service' );
-				}
-
-				if( isset( $entry['price'] ) ) {
-					$this->addPrices( $item->getId(), $entry['price'], 'service' );
-				}
-
-				if( isset( $entry['text'] ) ) {
-					$this->addTexts( $item->getId(), $entry['text'], 'service' );
-				}
-			}
-		}
+		return $items;
 	}
 }
