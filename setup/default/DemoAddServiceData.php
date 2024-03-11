@@ -41,7 +41,7 @@ class DemoAddServiceData extends MShopAddDataAbstract
 
 		$this->info( 'Processing service demo data', 'vv' );
 
-		$items = $this->removeItems();
+		$this->removeItems();
 
 
 		if( $value === '1' ) {
@@ -79,6 +79,8 @@ class DemoAddServiceData extends MShopAddDataAbstract
 
 	/**
 	 * Deletes the demo service items
+	 *
+	 * @return \Aimeos\Map List of items that were removed from the database
 	 */
 	protected function removeItems() : \Aimeos\Map
 	{

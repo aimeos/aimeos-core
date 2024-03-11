@@ -581,7 +581,7 @@ return [
 		'service.code' => 'demo-prepay', 'service.type' => 'payment', 'service.label' => 'Prepayment',
 		'service.provider' => 'PrePay,Reduction', 'service.position' => 4, 'service.status' => 1,
 		'service.config' => [
-			'reduction.basket-value-min' => [ 'EUR' => '200.00' ],
+			'reduction.basket-value-min' => ['EUR' => '200.00'],
 			'reduction.percent' => 3,
 		],
 		'text' => [

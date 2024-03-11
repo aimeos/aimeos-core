@@ -15,9 +15,6 @@ namespace Aimeos\Upscheme\Task;
  */
 class MShopAddDataAbstract extends Base
 {
-	private $attributes;
-
-
 	public function up()
 	{
 	}
@@ -30,7 +27,7 @@ class MShopAddDataAbstract extends Base
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
+	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$context = $this->context();
 
@@ -68,6 +65,13 @@ class MShopAddDataAbstract extends Base
 	}
 
 
+	/**
+	 * Adds the attributes from the given entry data to the passed item.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
+	 */
 	protected function addAttributes( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
@@ -79,7 +83,7 @@ class MShopAddDataAbstract extends Base
 
 			try {
 				$refItem = $manager->find( $refItem->getCode(), [], $item->getResourceType(), $refItem->getType() );
-			} catch( \Exception $e ) { ; }
+			} catch( \Exception $e ) { ; } // if not found, use the new item
 
 			$refItem = $this->addRefItems( $refItem, $data );
 			$item->addListItem( 'attribute', $listItem, $refItem );
@@ -89,6 +93,13 @@ class MShopAddDataAbstract extends Base
 	}
 
 
+	/**
+	 * Adds the categories from the given entry data to the passed item.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
+	 */
 	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
@@ -105,6 +116,13 @@ class MShopAddDataAbstract extends Base
 	}
 
 
+	/**
+	 * Adds the products from the given entry data to the passed item.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
+	 */
 	protected function addProducts( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
@@ -121,6 +139,13 @@ class MShopAddDataAbstract extends Base
 	}
 
 
+	/**
+	 * Adds the suppliers from the given entry data to the passed item.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
+	 */
 	protected function addSuppliers( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );

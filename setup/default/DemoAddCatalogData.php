@@ -82,14 +82,18 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 		} catch( \Exception $e ) {
 			$item = $manager->insert( $manager->create()->fromArray( $data ) );
 		}
-var_dump($item->getId(), $item->getLabel());
 
-		$this->addRefItems( $item, $data );
-
-		$manager->save( $item );
+		$manager->save( $this->addRefItems( $catItem, $entry ) );
 	}
 
 
+	/**
+	 * Adds the categories from the given entry data to the passed item.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
+	 */
 	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
@@ -99,7 +103,7 @@ var_dump($item->getId(), $item->getLabel());
 			$catItem = $manager->create()->fromArray( $entry );
 			$catItem = $manager->insert( $catItem, $item->getId() );
 
-			$this->addRefItems( $catItem, $entry );
+			$manager->save( $this->addRefItems( $catItem, $entry ) );
 		}
 
 		return $item;
@@ -124,7 +128,7 @@ var_dump($item->getId(), $item->getLabel());
 		}
 		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
 
-		$filter = $manager->filter()->add( 'catalog.code', '=~', 'demo-')->add( 'catalog.level', '==', 1 )->slice( 0, 0x7fffffff );
+		$filter = $manager->filter()->add( 'catalog.code', '=~', 'demo-' )->add( 'catalog.level', '==', 1 )->slice( 0, 0x7fffffff );
 		$items = $manager->search( $filter, $domains );
 
 		$this->removeRefItems( $items, $domains );
