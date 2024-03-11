@@ -136,46 +136,4 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 
 		return $item;
 	}
-
-
-	/**
-	 * Adds the referenced items from the given entry data.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
-	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item
-	 */
-	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
-	{
-		$context = $this->context();
-		$domain = $item->getResourceType();
-		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
-
-		foreach( ['media', 'price', 'text'] as $refDomain )
-		{
-			if( isset( $entry[$refDomain] ) )
-			{
-				$manager = \Aimeos\MShop::create( $context, $refDomain );
-
-				foreach( $entry[$refDomain] as $data )
-				{
-					$listItem = $listManager->create()->fromArray( $data );
-					$refItem = $manager->create()->fromArray( $data );
-
-					if( isset( $data['property'] ) )
-					{
-						foreach( (array) $data['property'] as $property )
-						{
-							$propItem = $manager->createPropertyItem()->fromArray( $property );
-							$refItem->addPropertyItem( $propItem );
-						}
-					}
-
-					$item->addListItem( $refDomain, $listItem, $refItem );
-				}
-			}
-		}
-
-		return $item;
-	}
 }
