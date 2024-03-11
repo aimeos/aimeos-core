@@ -132,7 +132,7 @@ class MShopAddDataAbstract extends Base
 			$listItem = $manager->createListItem()->fromArray( $data );
 			$refItem = $manager->find( $data['product.code'] );
 
-			$item->addListItem( 'product', $listItem, $refItem );
+			$item->addListItem( 'product', $listItem->setRefId( $refItem->getId() ) );
 		}
 
 		return $item;

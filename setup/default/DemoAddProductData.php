@@ -82,7 +82,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 		}
 
 		$context = $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, 'index' );
 
 		foreach( $data as $entry )
 		{
@@ -129,12 +129,15 @@ class DemoAddProductData extends MShopAddDataAbstract
 	protected function addStockItems( $productId, array $data )
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
+		$manager->begin();
 
 		foreach( $data as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry )->setProductId( $productId );
 			$manager->save( $item, false );
 		}
+
+		$manager->commit();
 	}
 
 
@@ -145,13 +148,16 @@ class DemoAddProductData extends MShopAddDataAbstract
 	{
 		$context = $this->context();
 		$domains = ['media', 'price', 'text'];
+
 		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$manager->begin();
 
 		$filter = $manager->filter()->add( 'product.code', '=~', 'demo-' )->slice( 0, 0x7fffffff );
 		$items = $manager->search( $filter, $domains );
 
 		$this->removeRefItems( $items, $domains );
 		$manager->delete( $items );
+		$manager->commit();
 
 		return $items;
 	}
