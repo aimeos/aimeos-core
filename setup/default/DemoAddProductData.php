@@ -89,14 +89,12 @@ class DemoAddProductData extends MShopAddDataAbstract
 			$item = $manager->create()->fromArray( $entry );
 
 			$this->addRefItems( $item, $entry );
-			$this->addPropertyItems( $item, $entry );
+			$this->addPropertyItems( $item, $entry['property'] ?? [] );
 
 			$manager->save( $item );
 			$manager->rate( $item->getId(), $entry['rating'] ?? 0, $entry['ratings'] ?? 0 );
 
-			if( isset( $entry['stock'] ) ) {
-				$this->addStockItems( $item->getId(), $entry['stock'] );
-			}
+			$this->addStockItems( $item->getId(), $entry['stock'] ?? [] );
 		}
 	}
 
@@ -105,20 +103,17 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 * Adds the properties from the given entry data.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @param array $entries List of stock entries
 	 * @return \Aimeos\MShop\Product\Item\Iface $item Updated product item
 	 */
-	protected function addPropertyItems( \Aimeos\MShop\Product\Item\Iface $item, array $entry )
+	protected function addPropertyItems( \Aimeos\MShop\Product\Item\Iface $item, array $entries ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		if( isset( $entry['property'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'product/property' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'product/property' );
 
-			foreach( (array) $entry['property'] as $values )
-			{
-				$propItem = $manager->create()->fromArray( $values );
-				$item->addPropertyItem( $propItem );
-			}
+		foreach( $entries as $values )
+		{
+			$propItem = $manager->create()->fromArray( $values );
+			$item->addPropertyItem( $propItem );
 		}
 
 		return $item;

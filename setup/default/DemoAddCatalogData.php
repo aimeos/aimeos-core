@@ -112,6 +112,8 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 
 	/**
 	 * Deletes the demo catalog items
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface|null Root catalog item whose reference data was removed
 	 */
 	protected function removeItems() : ?\Aimeos\MShop\Catalog\Item\Iface
 	{
@@ -128,7 +130,10 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 		}
 		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
 
-		$filter = $manager->filter()->add( 'catalog.code', '=~', 'demo-' )->add( 'catalog.level', '==', 1 )->slice( 0, 0x7fffffff );
+		$filter = $manager->filter()
+			->add( 'catalog.code', '=~', 'demo-' )
+			->add( 'catalog.level', '==', 1 )
+			->slice( 0, 0x7fffffff );
 		$items = $manager->search( $filter, $domains );
 
 		$this->removeRefItems( $items, $domains );
