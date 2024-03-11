@@ -50,7 +50,7 @@ return array(
 			$table->decimal( 'rebate', 12 )->default( '0.00' );
 			$table->decimal( 'tax', 14, 4 )->default( '0.0000' );
 			$table->smallint( 'taxflag' )->default( 1 );
-			$table->string( 'customerref' )->default( '' );
+			$table->string( 'customerref' )->null( true );
 			$table->text( 'comment' )->default( '' );
 			$table->meta();
 
