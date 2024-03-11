@@ -83,7 +83,7 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 			$item = $manager->insert( $manager->create()->fromArray( $data ) );
 		}
 
-		$manager->save( $this->addRefItems( $catItem, $entry ) );
+		$manager->save( $this->addRefItems( $item, $data ) );
 	}
 
 
