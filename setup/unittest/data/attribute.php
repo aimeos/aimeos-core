@@ -7,10 +7,10 @@
 
 return [
 	'attribute/type' => [
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'color', 'attribute.type.label' => 'Color'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'size', 'attribute.type.label' => 'Size'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'width', 'attribute.type.label' => 'Width'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'length', 'attribute.type.label' => 'Length'],
+		['attribute.type.domain' => 'product', 'attribute.type.code' => 'color', 'attribute.type.label' => 'Color', 'attribute.type.position' => 0],
+		['attribute.type.domain' => 'product', 'attribute.type.code' => 'size', 'attribute.type.label' => 'Size', 'attribute.type.position' => 1],
+		['attribute.type.domain' => 'product', 'attribute.type.code' => 'width', 'attribute.type.label' => 'Width', 'attribute.type.position' => 2],
+		['attribute.type.domain' => 'product', 'attribute.type.code' => 'length', 'attribute.type.label' => 'Length', 'attribute.type.position' => 3],
 		['attribute.type.domain' => 'product', 'attribute.type.code' => 'download', 'attribute.type.label' => 'Download'],
 		['attribute.type.domain' => 'product', 'attribute.type.code' => 'date', 'attribute.type.label' => 'Date'],
 		['attribute.type.domain' => 'product', 'attribute.type.code' => 'price', 'attribute.type.label' => 'Price'],
