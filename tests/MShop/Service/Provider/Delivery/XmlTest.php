@@ -102,10 +102,10 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$price, $locale, []] )
 			->getMock();
 
-		$itemMock->expects( $this->once() )->method( 'setStatusDelivery' )->will( $this->returnSelf() );
-		$itemMock->expects( $this->once() )->method( 'setStatusPayment' )->will( $this->returnSelf() );
-		$itemMock->expects( $this->once() )->method( 'setDateDelivery' )->will( $this->returnSelf() );
-		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setStatusDelivery' )->willReturnSelf();
+		$itemMock->expects( $this->once() )->method( 'setStatusPayment' )->willReturnSelf();
+		$itemMock->expects( $this->once() )->method( 'setDateDelivery' )->willReturnSelf();
+		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->willReturnSelf();
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->onlyMethods( ['save', 'search'] )
@@ -113,7 +113,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$mock->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( ['123' => $itemMock] ) ) );
+			->willReturn( map( ['123' => $itemMock] ) );
 
 		$mock->expects( $this->once() )->method( 'save' );
 

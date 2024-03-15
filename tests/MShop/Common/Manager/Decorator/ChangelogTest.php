@@ -60,7 +60,7 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
 
 		$item = $this->mock->find( 'U:TESTP' )->setId( null );
 
-		$this->mock->expects( $this->once() )->method( 'save' )->will( $this->returnArgument( 0 ) );
+		$this->mock->expects( $this->once() )->method( 'save' )->willReturnArgument( 0 );
 		$this->logger->expects( $this->once() )->method( 'notice' );
 
 		$this->assertEquals( $item, $this->object->save( $item ) );

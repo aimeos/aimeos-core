@@ -80,16 +80,16 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->any() )->method( 'getProducts' )
-			->will( $this->returnValue( map( [$orderProduct] ) ) );
+			->willReturn( map( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
+			->willReturn( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
-			->will( $this->returnValue( $providerStub ) );
+			->willReturn( $providerStub );
 
 		$providerStub->expects( $this->exactly( 2 ) )->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addProduct.after' ) );
@@ -135,16 +135,16 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( map( [$orderProduct] ) ) );
+			->willReturn( map( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
+			->willReturn( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
-			->will( $this->returnValue( $providerStub ) );
+			->willReturn( $providerStub );
 
 		$providerStub->expects( $this->exactly( 2 ) )->method( 'isAvailable' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addProduct.after' ) );
@@ -177,7 +177,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( map( [$orderProduct] ) ) );
+			->willReturn( map( [$orderProduct] ) );
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addAddress.after' ) );

@@ -44,7 +44,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -58,7 +58,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'delivery.partial' => '0',
@@ -76,7 +76,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -90,7 +90,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'delivery.partial' => [],
@@ -120,7 +120,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->willReturn( [] );
 
 		$basket = $orderManager->get( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
@@ -133,7 +133,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigFE( ['delivery.type' => '0'] );
 
@@ -145,7 +145,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigFE( ['delivery.type' => null] );
 
@@ -158,7 +158,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigFE( ['delivery.type' => 2] );
 

@@ -40,14 +40,14 @@ class NotTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableFalse()
 	{
-		$this->provider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->provider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertFalse( $this->object->isAvailable( $this->order ) );
 	}
 
 
 	public function testIsAvailableTrue()
 	{
-		$this->provider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( false ) );
+		$this->provider->expects( $this->once() )->method( 'isAvailable' )->willReturn( false );
 		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 }

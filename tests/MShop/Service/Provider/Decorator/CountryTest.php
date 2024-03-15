@@ -48,7 +48,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -63,7 +63,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'country.billing-include' => ' DE, AT, CH ',
@@ -85,7 +85,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -101,7 +101,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'country.billing-include' => [],
@@ -129,7 +129,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -146,7 +146,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -162,7 +162,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -178,7 +178,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -194,7 +194,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -210,7 +210,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -226,7 +226,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -242,7 +242,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -300,7 +300,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -316,7 +316,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -332,7 +332,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}

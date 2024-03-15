@@ -44,7 +44,7 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -54,7 +54,7 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$list = $this->object->getConfigBE();
 
@@ -65,7 +65,7 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 	public function testUpdate()
 	{
 		$value = 'value';
-		$this->mock->expects( $this->once() )->method( 'update' )->will( $this->returnValue( $value ) );
+		$this->mock->expects( $this->once() )->method( 'update' )->willReturn( $value );
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
 	}

@@ -51,7 +51,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->onlyMethods( array( 'save' ) )
 			->getMock();
 
-		$this->orderMock->expects( $this->any() )->method( 'save' )->will( $this->returnArgument( 0 ) );
+		$this->orderMock->expects( $this->any() )->method( 'save' )->willReturnArgument( 0 );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $this->orderMock );
 	}
@@ -110,9 +110,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( '&ACK=Success&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&TOKEN=UT-99999999' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( '&ACK=Success&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&TOKEN=UT-99999999' );
 
 		$helperForm = $this->object->process( $this->order );
 
@@ -142,13 +140,11 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
-		$request->expects( $this->once() )->method( 'getAttributes' )->will( $this->returnValue( [] ) );
-		$request->expects( $this->once() )->method( 'getParsedBody' )->will( $this->returnValue( [] ) );
-		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+		$request->expects( $this->once() )->method( 'getAttributes' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( $params );
 
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId() )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId() );
 
 		$result = $this->object->updateSync( $request, $this->order );
 
@@ -177,9 +173,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
-		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( $params );
 		$response->expects( $this->once() )->method( 'withStatus' )
-			->will( $this->returnValue( $response ) )
+			->willReturn( $response )
 			->with( $this->equalTo( 200 ) );
 
 		$cmpFcn = function( $subject ) {
@@ -191,7 +187,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		};
 
 		$this->orderMock->expects( $this->once() )->method( 'save' )->with( $this->callback( $cmpFcn ) );
-		$this->object->expects( $this->once() )->method( 'send' )->will( $this->returnValue( 'VERIFIED' ) );
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'VERIFIED' );
 
 		$result = $this->object->updatePush( $request, $response );
 		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
@@ -200,9 +196,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'REFUNDTRANSACTIONID=88888888&FEEREFUNDAMT=2.00&TOTALREFUNDAMT=24.00&CURRENCYCODE=EUR&REFUNDSTATUS=delayed&PENDINGREASON=echeck&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'REFUNDTRANSACTIONID=88888888&FEEREFUNDAMT=2.00&TOTALREFUNDAMT=24.00&CURRENCYCODE=EUR&REFUNDSTATUS=delayed&PENDINGREASON=echeck&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->refund( $this->order );
 
@@ -228,9 +222,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->capture( $this->order );
 
@@ -240,9 +232,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testQueryPaymentReceived()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Completed&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Completed&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->query( $this->order );
 
@@ -252,9 +242,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testQueryPaymentRefused()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Expired&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Expired&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->query( $this->order );
 
@@ -264,9 +252,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->cancel( $this->order );
 
@@ -276,9 +262,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testQueryPaymentAuthorized()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' );
 
 		$this->object->query( $this->order );
 
@@ -288,9 +272,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongAuthorization()
 	{
-		$this->object->expects( $this->once() )->method( 'send' )->will(
-			$this->returnValue( '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error' )
-		);
+		$this->object->expects( $this->once() )->method( 'send' )->willReturn( '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error' );
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->process( $this->order );

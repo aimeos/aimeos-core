@@ -44,7 +44,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -57,7 +57,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'currency.include' => ' EUR , USD ',
@@ -75,7 +75,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -89,7 +89,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'currency.include' => [],
@@ -109,7 +109,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -131,7 +131,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -153,7 +153,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}

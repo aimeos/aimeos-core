@@ -52,10 +52,10 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getOrderProductItem' )
-			->will( $this->returnValue( $orderProduct ) );
+			->willReturn( $orderProduct );
 
 		$object->expects( $this->once() )->method( 'getUsedRebate' )
-			->will( $this->returnValue( 20.0 ) );
+			->willReturn( 20.0 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
 

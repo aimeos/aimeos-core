@@ -39,7 +39,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -52,7 +52,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'quantity.packagecosts' => '10.0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -66,7 +66,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'quantity.packagecosts' => [] );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -83,7 +83,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $price ) );
+			->willReturn( $price );
 
 		$this->servItem->setConfig( array( 'quantity.packagecosts' => '1' ) );
 
@@ -98,7 +98,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $price ) );
+			->willReturn( $price );
 
 		$this->servItem->setConfig( array( 'quantity.packagecosts' => '1.0' ) );
 
@@ -113,7 +113,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $price ) );
+			->willReturn( $price );
 
 		$this->servItem->setConfig( array( 'quantity.packagesize' => '5', 'quantity.packagecosts' => '2.50' ) );
 
@@ -128,7 +128,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $price ) );
+			->willReturn( $price );
 
 		$this->servItem->setConfig( array( 'quantity.packagesize' => '7', 'quantity.packagecosts' => '5.00' ) );
 

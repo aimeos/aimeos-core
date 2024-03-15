@@ -46,7 +46,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$stub, $this->context] )
 			->getMockForAbstractClass();
 
-		$stub->expects( $this->once() )->method( '__call' )->will( $this->returnValue( true ) );
+		$stub->expects( $this->once() )->method( '__call' )->willReturn( true );
 
 		$this->assertTrue( $object->invalid() );
 	}
@@ -57,7 +57,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->createListItem();
 
 		$this->stub->expects( $this->once() )->method( 'createListItem' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $this->object->createListItem( [] ) );
 	}
@@ -68,7 +68,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'find' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->find( -1 ) );
 	}
@@ -79,7 +79,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'getPath' )
-			->will( $this->returnValue( map( $item ) ) );
+			->willReturn( map( $item ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->getPath( -1 )->first() );
 	}
@@ -90,7 +90,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'getTree' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->getTree( -1 ) );
 	}
@@ -101,7 +101,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'insert' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->insert( $item ) );
 	}
@@ -110,7 +110,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testMove()
 	{
 		$this->stub->expects( $this->once() )->method( 'move' )
-			->will( $this->returnSelf() );
+			->willReturnSelf();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Manager\Iface::class, $this->object->move( -1 ) );
 	}

@@ -47,7 +47,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -62,7 +62,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'postal.billing-include' => ' 025698, 573789, 452168 ',
@@ -84,7 +84,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -100,7 +100,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'postal.billing-include' => [],
@@ -128,7 +128,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -145,7 +145,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -161,7 +161,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -177,7 +177,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -193,7 +193,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -209,7 +209,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -225,7 +225,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -241,7 +241,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -299,7 +299,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -315,7 +315,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -331,7 +331,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -347,7 +347,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}

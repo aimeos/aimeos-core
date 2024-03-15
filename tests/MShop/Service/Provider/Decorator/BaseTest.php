@@ -50,7 +50,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
-		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
+		$this->mock->expects( $this->once() )->method( 'calcPrice' )->willReturn( $item->getPrice() );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $this->object->calcPrice( $item ) );
 	}
@@ -58,7 +58,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->checkConfigBE( [] ) );
 	}
@@ -66,7 +66,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigFE()
 	{
-		$this->mock->expects( $this->once() )->method( 'checkConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'checkConfigFE' )->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->checkConfigFE( [] ) );
 	}
@@ -74,7 +74,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getConfigBE() );
 	}
@@ -84,7 +84,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
-		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getConfigFE( $item ) );
 	}
@@ -92,7 +92,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testInjectGlobalConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'injectGlobalConfigBE' )->will( $this->returnSelf() );
+		$this->mock->expects( $this->once() )->method( 'injectGlobalConfigBE' )->willReturnSelf();
 
 		$this->object->injectGlobalConfigBE( [] );
 	}
@@ -102,14 +102,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
 
-		$this->mock->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 
 		$this->assertEquals( true, $this->object->isAvailable( $item ) );
 	}
 
 	public function testIsImplemented()
 	{
-		$this->mock->expects( $this->once() )->method( 'isImplemented' )->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'isImplemented' )->willReturn( true );
 
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
 	}
@@ -198,7 +198,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
-		$this->mock->expects( $this->once() )->method( 'updatePush' )->will( $this->returnValue( $response ) );
+		$this->mock->expects( $this->once() )->method( 'updatePush' )->willReturn( $response );
 
 		$result = $this->object->updatePush( $request, $response );
 
@@ -211,7 +211,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop::create( $this->context, 'order' )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
-		$this->mock->expects( $this->once() )->method( 'updateSync' )->will( $this->returnValue( $orderItem ) );
+		$this->mock->expects( $this->once() )->method( 'updateSync' )->willReturn( $orderItem );
 
 		$result = $this->object->updateSync( $request, $orderItem );
 

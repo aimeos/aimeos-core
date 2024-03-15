@@ -47,7 +47,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -60,7 +60,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'ordercheck.total-number-min' => '0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -74,7 +74,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'ordercheck.total-number-min' => 'nope' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -88,7 +88,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'ordercheck.limit-days-pending' => '0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -102,7 +102,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'ordercheck.limit-days-pending' => 'nope' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -124,7 +124,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -142,13 +142,13 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map( [$mock->create()] ) ) );
+			->willReturn( map( [$mock->create()] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -166,7 +166,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map() ) );
+			->willReturn( map() );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
@@ -186,13 +186,13 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map() ) );
+			->willReturn( map() );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -210,7 +210,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map( [$mock->create()] ) ) );
+			->willReturn( map( [$mock->create()] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $mock );
 

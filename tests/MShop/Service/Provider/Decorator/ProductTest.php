@@ -44,7 +44,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -57,7 +57,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'product.include' => 'test',
@@ -75,7 +75,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -89,7 +89,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'product.include' => [],
@@ -109,7 +109,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -119,7 +119,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->servItem->setConfig( array( 'product.include' => '' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
@@ -130,7 +130,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -161,7 +161,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
 		$this->servItem->setConfig( array( 'product.include' => 'CNC' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
@@ -171,7 +171,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
 		$this->servItem->setConfig( array( 'product.include' => 'CNC,CNE' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 

@@ -213,7 +213,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
+			->willReturn( map( [$orderCouponStub->create()->setCode( 'test' )] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Coupon\Standard::class, $orderCouponStub );
 
@@ -249,7 +249,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
+			->willReturn( map( [$orderCouponStub->create()->setCode( 'test' )] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Coupon\Standard::class, $orderCouponStub );
 
@@ -291,7 +291,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->never() )->method( 'addStatusItem' );
 
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
-			->will( $this->returnValue( $statusItem ) );
+			->willReturn( $statusItem );
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
@@ -312,7 +312,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
-			->will( $this->returnValue( $statusItem ) );
+			->willReturn( $statusItem );
 
 		$object->expects( $this->once() )->method( 'updateStock' );
 		$object->expects( $this->once() )->method( 'addStatusItem' );
@@ -336,7 +336,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
-			->will( $this->returnValue( $statusItem ) );
+			->willReturn( $statusItem );
 
 		$object->expects( $this->once() )->method( 'updateCoupons' );
 		$object->expects( $this->once() )->method( 'addStatusItem' );
@@ -360,7 +360,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderProductStub->create()] ) ) );
+			->willReturn( map( [$orderProductStub->create()] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Product\Standard::class, $orderProductStub );
 
@@ -406,7 +406,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'default' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderProductItem] ) ) );
+			->willReturn( map( [$orderProductItem] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Product\Standard::class, $orderProductStub );
 
@@ -452,7 +452,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'select' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderProductItem] ) ) );
+			->willReturn( map( [$orderProductItem] ) );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Product\Standard::class, $orderProductStub );
 
@@ -549,7 +549,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getBundleMap' )
-			->will( $this->returnValue( ['123' => ['789'], '456' => ['789']] ) );
+			->willReturn( ['123' => ['789'], '456' => ['789']] );
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
 			->will( $this->onConsecutiveCalls(

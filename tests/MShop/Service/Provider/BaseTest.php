@@ -87,7 +87,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
-		$response->expects( $this->once() )->method( 'withStatus' )->will( $this->returnValue( $response ) );
+		$response->expects( $this->once() )->method( 'withStatus' )->willReturn( $response );
 
 		$result = $this->object->updatePush( $request, $response );
 

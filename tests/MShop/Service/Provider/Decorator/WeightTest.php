@@ -42,7 +42,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -55,7 +55,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'weight.min' => '10.0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -69,7 +69,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'weight.min' => [] );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -83,7 +83,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->getOrderBaseItem() ) );
 	}
@@ -95,7 +95,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->getOrderBaseItem() ) );
 	}

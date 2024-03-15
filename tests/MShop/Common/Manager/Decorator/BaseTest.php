@@ -46,7 +46,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$stub, $this->context] )
 			->getMockForAbstractClass();
 
-		$stub->expects( $this->once() )->method( '__call' )->will( $this->returnValue( true ) );
+		$stub->expects( $this->once() )->method( '__call' )->willReturn( true );
 
 		$this->assertTrue( $object->invalid() );
 	}
@@ -69,7 +69,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'create' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->create( [] ) );
 	}
@@ -80,7 +80,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$filter = \Aimeos\MShop::create( $this->context, 'product' )->filter();
 
 		$this->stub->expects( $this->once() )->method( 'filter' )
-			->will( $this->returnValue( $filter ) );
+			->willReturn( $filter );
 
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}
@@ -97,7 +97,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->get( -1 ) );
 	}
@@ -106,7 +106,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetResourceType()
 	{
 		$this->stub->expects( $this->once() )->method( 'getResourceType' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getResourceType() );
 	}
@@ -115,7 +115,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetSaveAttributes()
 	{
 		$this->stub->expects( $this->once() )->method( 'getSaveAttributes' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getSaveAttributes() );
 	}
@@ -124,7 +124,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		$this->stub->expects( $this->once() )->method( 'getSearchAttributes' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getSearchAttributes() );
 	}
@@ -133,7 +133,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManager()
 	{
 		$this->stub->expects( $this->once() )->method( 'getSubManager' )
-			->will( $this->returnValue( $this->stub ) );
+			->willReturn( $this->stub );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( '' ) );
 	}
@@ -144,7 +144,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
 		$this->stub->expects( $this->once() )->method( 'save' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->save( $item ) );
 	}
@@ -157,7 +157,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 
 		$this->stub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$item] ) ) );
+			->willReturn( map( [$item] ) );
 
 		$this->assertEquals( [$item], $this->object->search( $manager->filter(), [], $total )->toArray() );
 	}
@@ -172,7 +172,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testBegin()
 	{
 		$this->stub->expects( $this->once() )->method( 'begin' )
-			->will( $this->returnValue( $this->stub ) );
+			->willReturn( $this->stub );
 
 		$this->assertSame( $this->object, $this->object->begin() );
 	}
@@ -181,7 +181,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testCommit()
 	{
 		$this->stub->expects( $this->once() )->method( 'commit' )
-			->will( $this->returnValue( $this->stub ) );
+			->willReturn( $this->stub );
 
 		$this->assertSame( $this->object, $this->object->commit() );
 	}
@@ -190,7 +190,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testRollback()
 	{
 		$this->stub->expects( $this->once() )->method( 'rollback' )
-			->will( $this->returnValue( $this->stub ) );
+			->willReturn( $this->stub );
 
 		$this->assertSame( $this->object, $this->object->rollback() );
 	}

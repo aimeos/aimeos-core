@@ -47,7 +47,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -59,7 +59,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'costs.percent' => '1.5' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -73,7 +73,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -90,7 +90,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem->setValue( 0 ) ) );
+			->willReturn( $priceItem->setValue( 0 ) );
 
 		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '0.00', $price->getValue() );

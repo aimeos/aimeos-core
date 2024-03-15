@@ -42,7 +42,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -56,7 +56,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'reduction.percent' => '1.5',
@@ -74,7 +74,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -91,7 +91,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '20.00' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
+			->willReturn( $priceItem );
 
 		$price = $this->object->calcPrice( $this->basket );
 
@@ -109,7 +109,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '40.00' )->setCosts( '20.00' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
+			->willReturn( $priceItem );
 
 		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '36.00', $price->getValue() );

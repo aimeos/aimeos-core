@@ -44,7 +44,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -57,7 +57,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'category.include' => 'test',
@@ -75,7 +75,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -89,7 +89,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'category.include' => [],
@@ -109,7 +109,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -119,7 +119,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->servItem->setConfig( array( 'category.include' => '' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
@@ -130,7 +130,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
@@ -171,7 +171,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
 		$this->servItem->setConfig( array( 'category.include' => 'new' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
@@ -181,7 +181,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
 		$this->servItem->setConfig( array( 'category.include' => 'cafe,new' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
@@ -191,7 +191,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
 		$this->servItem->setConfig( array( 'category.include' => 'group' ) );
 
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 

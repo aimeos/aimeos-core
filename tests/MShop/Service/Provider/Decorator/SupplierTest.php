@@ -56,7 +56,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->willReturn( [] );
 
 		$basket = $orderManager->get( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
@@ -74,7 +74,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array( 'supplier.code' => 'unitSupplier001' );
 		$expected = array( 'supplier.code' => null );
@@ -89,7 +89,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'supplier.code' => -1 );
 		$result = $this->object->checkConfigFE( $config );

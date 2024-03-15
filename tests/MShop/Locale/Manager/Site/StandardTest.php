@@ -259,7 +259,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$object->create()] ) ) );
+			->willReturn( map( [$object->create()] ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getTree() );
 	}
@@ -273,7 +273,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map() ) );
+			->willReturn( map() );
 
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$object->getTree();

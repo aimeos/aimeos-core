@@ -44,7 +44,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -58,7 +58,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'time.start' => '00:00',
@@ -78,7 +78,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -93,7 +93,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'time.start' => [],
@@ -125,7 +125,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->willReturn( [] );
 
 		$basket = $orderManager->get( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
@@ -138,7 +138,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'time.hourminute' => '12:00' );
 		$expected = array( 'time.hourminute' => null );
@@ -153,7 +153,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'time.hourminute' => '9:00' );
 		$expected = array( 'time.hourminute' => null );
@@ -168,7 +168,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'time.hourminute' => 0 );
 		$result = $this->object->checkConfigFE( $config );
@@ -182,7 +182,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->servItem->setConfig( ['time.start' => '10:00'] );
 
@@ -198,7 +198,7 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->servItem->setConfig( ['time.end' => '18:00'] );
 

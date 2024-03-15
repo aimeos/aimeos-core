@@ -44,7 +44,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->getConfigBE();
 
@@ -56,7 +56,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'date.minimumdays' => '0',
@@ -72,7 +72,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$result = $this->object->checkConfigBE( [] );
 
@@ -85,7 +85,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$attributes = array(
 			'date.minimumdays' => [],
@@ -113,7 +113,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->willReturn( [] );
 
 		$basket = $orderManager->get( $order->getId(), ['order/service'] );
 		$config = $this->object->getConfigFE( $basket );
@@ -126,7 +126,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'date.value' => date( 'Y-m-d' ) );
 		$expected = array( 'date.value' => null );
@@ -141,7 +141,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$config = array( 'date.value' => 0 );
 		$result = $this->object->checkConfigFE( $config );
@@ -155,7 +155,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigFE' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->servItem->setConfig( ['date.minimumdays' => '1'] );
 

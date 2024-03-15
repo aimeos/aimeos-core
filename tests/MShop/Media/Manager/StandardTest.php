@@ -97,10 +97,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$fsm->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $fs ) );
+			->willReturn( $fs );
 
 		$fs->expects( $this->exactly( 2 ) )->method( 'has' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$fs->expects( $this->exactly( 2 ) )->method( 'copy' );
 

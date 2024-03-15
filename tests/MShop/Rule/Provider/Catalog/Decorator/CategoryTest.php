@@ -65,7 +65,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE', ['catalog'] );
 
 		$this->stub->expects( $this->once() )->method( 'apply' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->assertFalse( $object->apply( $product ) );
 	}
@@ -87,7 +87,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE', ['catalog'] );
 
 		$this->stub->expects( $this->once() )->method( 'apply' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $object->apply( $product ) );
 	}
