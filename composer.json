@@ -39,7 +39,7 @@
 	"require-dev": {
 		"php-coveralls/php-coveralls": "~2.0",
 		"squizlabs/php_codesniffer": "~3.0",
-		"phpunit/phpunit": "~9.0",
+		"phpunit/phpunit": "~10.0||~11.0",
 		"phing/phing": "~2.4"
 	},
 	"autoload": {
