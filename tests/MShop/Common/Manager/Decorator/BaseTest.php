@@ -9,46 +9,38 @@
 namespace Aimeos\MShop\Common\Manager\Decorator;
 
 
+class Example extends \Aimeos\MShop\Common\Manager\Decorator\Base
+{
+}
+
+
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $stub;
+	private $mock;
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
 
-		$this->stub = $this->getMockBuilder( \Aimeos\MShop\Product\Manager\Standard::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$this->object = $this->getMockBuilder( \Aimeos\MShop\Common\Manager\Decorator\Base::class )
-			->setConstructorArgs( [$this->stub, $this->context] )
-			->getMockForAbstractClass();
+		$this->mock = $this->createMock( \Aimeos\MShop\Product\Manager\Standard::class );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Example( $this->mock, $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->context, $this->object, $this->stub );
+		unset( $this->object, $this->mock, $this->context );
 	}
 
 
 	public function testCall()
 	{
-		$stub = $this->getMockBuilder( \Aimeos\MShop\Product\Manager\Standard::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->mock->expects( $this->once() )->method( '__call' )->willReturn( true );
 
-		$object = $this->getMockBuilder( \Aimeos\MShop\Common\Manager\Decorator\Base::class )
-			->setConstructorArgs( [$stub, $this->context] )
-			->getMockForAbstractClass();
-
-		$stub->expects( $this->once() )->method( '__call' )->willReturn( true );
-
-		$this->assertTrue( $object->invalid() );
+		$this->assertTrue( $this->object->invalid() );
 	}
 
 
@@ -68,7 +60,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
-		$this->stub->expects( $this->once() )->method( 'create' )
+		$this->mock->expects( $this->once() )->method( 'create' )
 			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->create( [] ) );
@@ -79,7 +71,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$filter = \Aimeos\MShop::create( $this->context, 'product' )->filter();
 
-		$this->stub->expects( $this->once() )->method( 'filter' )
+		$this->mock->expects( $this->once() )->method( 'filter' )
 			->willReturn( $filter );
 
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
@@ -96,7 +88,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
-		$this->stub->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->once() )->method( 'get' )
 			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->get( -1 ) );
@@ -105,7 +97,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->stub->expects( $this->once() )->method( 'getResourceType' )
+		$this->mock->expects( $this->once() )->method( 'getResourceType' )
 			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getResourceType() );
@@ -114,7 +106,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaveAttributes()
 	{
-		$this->stub->expects( $this->once() )->method( 'getSaveAttributes' )
+		$this->mock->expects( $this->once() )->method( 'getSaveAttributes' )
 			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getSaveAttributes() );
@@ -123,7 +115,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSearchAttributes()
 	{
-		$this->stub->expects( $this->once() )->method( 'getSearchAttributes' )
+		$this->mock->expects( $this->once() )->method( 'getSearchAttributes' )
 			->willReturn( [] );
 
 		$this->assertEquals( [], $this->object->getSearchAttributes() );
@@ -132,8 +124,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->stub->expects( $this->once() )->method( 'getSubManager' )
-			->willReturn( $this->stub );
+		$this->mock->expects( $this->once() )->method( 'getSubManager' )
+			->willReturn( $this->mock );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( '' ) );
 	}
@@ -143,7 +135,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
-		$this->stub->expects( $this->once() )->method( 'save' )
+		$this->mock->expects( $this->once() )->method( 'save' )
 			->willReturn( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->save( $item ) );
@@ -156,7 +148,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = $manager->create();
 		$total = 0;
 
-		$this->stub->expects( $this->once() )->method( 'search' )
+		$this->mock->expects( $this->once() )->method( 'search' )
 			->willReturn( map( [$item] ) );
 
 		$this->assertEquals( [$item], $this->object->search( $manager->filter(), [], $total )->toArray() );
@@ -165,14 +157,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetObject()
 	{
-		$this->assertSame( $this->object, $this->object->setObject( $this->stub ) );
+		$this->assertSame( $this->object, $this->object->setObject( $this->mock ) );
 	}
 
 
 	public function testBegin()
 	{
-		$this->stub->expects( $this->once() )->method( 'begin' )
-			->willReturn( $this->stub );
+		$this->mock->expects( $this->once() )->method( 'begin' )
+			->willReturn( $this->mock );
 
 		$this->assertSame( $this->object, $this->object->begin() );
 	}
@@ -180,8 +172,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCommit()
 	{
-		$this->stub->expects( $this->once() )->method( 'commit' )
-			->willReturn( $this->stub );
+		$this->mock->expects( $this->once() )->method( 'commit' )
+			->willReturn( $this->mock );
 
 		$this->assertSame( $this->object, $this->object->commit() );
 	}
@@ -189,8 +181,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRollback()
 	{
-		$this->stub->expects( $this->once() )->method( 'rollback' )
-			->willReturn( $this->stub );
+		$this->mock->expects( $this->once() )->method( 'rollback' )
+			->willReturn( $this->mock );
 
 		$this->assertSame( $this->object, $this->object->rollback() );
 	}
@@ -200,13 +192,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->access( 'getManager' )->invokeArgs( $this->object, [] );
 
-		$this->assertSame( $this->stub, $result );
+		$this->assertSame( $this->mock, $result );
 	}
 
 
 	protected function access( $name )
 	{
-		$class = new \ReflectionClass( \Aimeos\MShop\Common\Manager\Decorator\Base::class );
+		$class = new \ReflectionClass( \Aimeos\MShop\Common\Manager\Decorator\Example::class );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 

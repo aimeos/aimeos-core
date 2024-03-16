@@ -307,7 +307,6 @@ abstract class Base
 	}
 
 
-
 	/**
 	 * Returns the manager object
 	 *

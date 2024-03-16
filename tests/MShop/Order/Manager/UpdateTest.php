@@ -552,10 +552,10 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 			->willReturn( ['123' => ['789'], '456' => ['789']] );
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
-			->will( $this->onConsecutiveCalls(
+			->willReturn(
 				map( [$stockItem2, $stockItem1] ),
 				map( [$stockItem3] )
-			) );
+			);
 
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
