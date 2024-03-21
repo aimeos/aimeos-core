@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# shmuel adler, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: shmuel adler, 2024\n"
+"Language-Team: Hebrew (http://app.transifex.com/aimeos/aimeos-core/language/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "ארכוב"
+
+#. Item status
+msgid "status:-1"
+msgstr "סקירה"
+
+#. Item status
+msgid "status:0"
+msgstr "לא זמין"
+
+#. Item status
+msgid "status:1"
+msgstr "זמין"
+
+#. Item status
+msgid "status:2"
+msgstr "נסתר"
+
+#. Address salutation
+msgid "company"
+msgstr "חברה"
+
+#. Address salutation
+msgid "mr"
+msgstr "מר"
+
+#. Address salutation
+msgid "ms"
+msgstr "גברת"
+
+#. Address salutation
+msgid "mrs"
+msgstr "גברת"
+
+#. Address salutation
+msgid "miss"
+msgstr "מיס"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "חוזר"
+
+#. Order type value
+msgid "order:web"
+msgstr "אינטרנט"
+
+#. Order type value
+msgid "order:phone"
+msgstr "טלפון"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "תשלום"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "פג תוקף"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "בוטל"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr ""
+
+#. Payment status value
+msgid "pay:0"
+msgstr "נמחק"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "בוטל"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "נדחה"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "זוכה"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "ממתין"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "מורשה"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "התקבל"
+
+#. Payment status value
+msgid "pay:7"
+msgstr "הועבר"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr ""
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "נמחק"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "ממתין"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "בתהליך"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "נשלח"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "נמסר"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "אבד"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "נדחה"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "הוחזר"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "הכתובת לחיוב חסרה"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "הכתובת למשלוח חסרה"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "כתובת לחיוב אינה מותרת"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "כתובת משלוח אינה מותרת"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "האפשרות לתשלום חסרה"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "האפשרות למשלוח חסרה"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "אפשרות תשלום אינה מותרת"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "אפשרות משלוח אינה מותרת"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "סליחה, לפחות מוצר אחד כבר לא קיים. אנא הסר אותו מהסל שלך כדי להמשיך"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "סליחה, לפחות מוצר אחד חסר. נא להסיר אותו מהסל כדי להמשיך"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "סליחה, לפחות מוצר אחד אינו זמין עוד. אנא הסר אותו מהסל שלך כדי להמשיך"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "המחיר של לפחות מוצר אחד השתנה בינתיים ועודכן באופן אוטומטי"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "מצטערים, לפחות מוצר אחד אזל מהמלאי. אנא הסר אותו מהסל שלך כדי להמשיך"

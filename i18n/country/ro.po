@@ -7,6 +7,7 @@
 # Translators:
 # Translators:
 # Translators:
+# George Cojocaru, 2024
 # iulian iulian <iulian.abc@gmail.com>, 2020
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:34+0000\n"
-"Last-Translator: iulian iulian <iulian.abc@gmail.com>, 2020\n"
+"Last-Translator: George Cojocaru, 2024\n"
 "Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,7 +120,7 @@ msgid "BS"
 msgstr "Bahamas"
 
 msgid "BT"
-msgstr ""
+msgstr "Bhutan"
 
 msgid "BV"
 msgstr ""
@@ -143,7 +144,7 @@ msgid "CD"
 msgstr "Republica Democrata Congo"
 
 msgid "CF"
-msgstr ""
+msgstr "Republica Centrafricană"
 
 msgid "CG"
 msgstr "Congo"
@@ -155,7 +156,7 @@ msgid "CI"
 msgstr "Coasta de Fildes"
 
 msgid "CK"
-msgstr ""
+msgstr "Insulele Cook"
 
 msgid "CL"
 msgstr "Chile"
@@ -254,7 +255,7 @@ msgid "GB"
 msgstr "Marea Britanie"
 
 msgid "GD"
-msgstr ""
+msgstr "Grenada"
 
 msgid "GE"
 msgstr "Georgia"
@@ -266,16 +267,16 @@ msgid "GG"
 msgstr ""
 
 msgid "GH"
-msgstr ""
+msgstr "Ghana"
 
 msgid "GI"
 msgstr "Gibraltar"
 
 msgid "GL"
-msgstr ""
+msgstr "Groenlanda"
 
 msgid "GM"
-msgstr ""
+msgstr "Gambia"
 
 msgid "GN"
 msgstr "Guinea"
@@ -296,7 +297,7 @@ msgid "GT"
 msgstr "Guatemala"
 
 msgid "GU"
-msgstr ""
+msgstr "Guam"
 
 msgid "GW"
 msgstr "Guineea-Bissau"
@@ -347,7 +348,7 @@ msgid "IR"
 msgstr "Republica Islamica Iran"
 
 msgid "IS"
-msgstr ""
+msgstr "Islanda"
 
 msgid "IT"
 msgstr "Italia"
@@ -365,7 +366,7 @@ msgid "JP"
 msgstr "Japonia"
 
 msgid "KE"
-msgstr ""
+msgstr "Kenya"
 
 msgid "KG"
 msgstr ""
@@ -389,10 +390,10 @@ msgid "KR"
 msgstr ""
 
 msgid "KW"
-msgstr ""
+msgstr "Kuweit"
 
 msgid "KY"
-msgstr ""
+msgstr "Insulele Cayman"
 
 msgid "KZ"
 msgstr ""
@@ -410,7 +411,7 @@ msgid "LI"
 msgstr "Liechtenstein"
 
 msgid "LK"
-msgstr ""
+msgstr "Sri Lanka"
 
 msgid "LR"
 msgstr ""
@@ -458,7 +459,7 @@ msgid "ML"
 msgstr "Mali"
 
 msgid "MM"
-msgstr ""
+msgstr "Myanmar"
 
 msgid "MN"
 msgstr "Mongolia"
@@ -470,7 +471,7 @@ msgid "MP"
 msgstr ""
 
 msgid "MQ"
-msgstr ""
+msgstr "Martinica"
 
 msgid "MR"
 msgstr ""
@@ -755,10 +756,10 @@ msgid "WS"
 msgstr ""
 
 msgid "XK"
-msgstr ""
+msgstr "Kosovo"
 
 msgid "YE"
-msgstr ""
+msgstr "Yemen"
 
 msgid "YT"
 msgstr ""
@@ -770,4 +771,4 @@ msgid "ZM"
 msgstr "Zambia"
 
 msgid "ZW"
-msgstr ""
+msgstr "Zimbabwe"

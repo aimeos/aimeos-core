@@ -1,0 +1,941 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Aimeos, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Aimeos, 2024\n"
+"Language-Team: Hebrew (http://app.transifex.com/aimeos/aimeos-core/language/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+
+#, php-format
+msgid "Address for domain \"%1$s\" not available"
+msgstr "כתובת עבור הדומיין \"%1$s\" אינה זמינה"
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr "כתובת לסוג \"%1$s\" אינה זמינה"
+
+#, php-format
+msgid "Address item for removal not found"
+msgstr "פריט הכתובת להסרה לא נמצא"
+
+#, php-format
+msgid "Address not available"
+msgstr "כתובת לא זמינה"
+
+#, php-format
+msgid "Address salutation \"%1$s\" not within allowed range"
+msgstr "כתובת הצדעה \"%1$s\" אינה בטווח המותר"
+
+#, php-format
+msgid "Address search configuration not available"
+msgstr "תצורת חיפוש כתובת אינה זמינה"
+
+#, php-format
+msgid "Address type \"%1$s\" not within allowed range"
+msgstr "סוג הכתובת \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr "לפחות מפתח אחד נדרש לצבירה"
+
+#, php-format
+msgid "Basket empty"
+msgstr "הסל ריק"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr "השובר שנקנה במטבע \"%1$s\", הסל משתמש ב\"%2$s\""
+
+#, php-format
+msgid "Cache object not available"
+msgstr "אובייקט המטמון אינו זמין"
+
+#, php-format
+msgid "Called unknown method \"%1$s\" on class \"%2$s\""
+msgstr "שיטה לא ידועה נקראה \"%1$s\" במחלקה \"%2$s\""
+
+#, php-format
+msgid "Catalog node for ID \"%1$s\" not available"
+msgstr "צומת קטלוג עבור המזהה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "Catalog path for ID \"%1$s\" not found"
+msgstr "נתיב קטלוג עבור המזהה \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "Checks for available addresses in basket failed"
+msgstr "בדיקת כתובות זמינות בסל נכשלה"
+
+#, php-format
+msgid "Checks for available service items in basket failed"
+msgstr "הבדיקות של פריטי שירות זמינים בסל נכשלו"
+
+#, php-format
+msgid "Child node with index \"%1$d\" not available"
+msgstr "צומת ילד עם האינדקס \"%1$d\" אינו זמין"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "מחלקה \"%1$s\" לא מיישמת ממשק \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "מחלקה \"%1$s\" לא זמינה"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than %2$d characters"
+msgstr "הקוד \"%1$s\" לא יכול להיות ארוך מ-%2$d תווים"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr "הקוד \"%1$s\" לא יכול להיות ארוך מ-32 תווים"
+
+#, php-format
+msgid "Code contains invalid characters: \"%1$s\""
+msgstr "קוד מכיל תווים לא חוקיים: \"%1$s\""
+
+#, php-format
+msgid "Code is too long"
+msgstr "הקוד ארוך מדי"
+
+#, php-format
+msgid "Code must not be longer than 255 characters"
+msgstr "הקוד לא יכול להיות ארוך מ-255 תווים"
+
+#, php-format
+msgid "Code must not be longer than 32 characters"
+msgstr "הקוד לא יכול להיות ארוך מ-32 תווים"
+
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr "תצורה עבור \"%1$s\" חסרה"
+
+#, php-format
+msgid "Configuration invalid"
+msgstr "תצורה לא חוקית"
+
+#, php-format
+msgid "Configuration not available"
+msgstr "תצורה לא זמינה"
+
+#, php-format
+msgid "Configuration object not available"
+msgstr "אובייקט תצורה אינו זמין"
+
+#, php-format
+msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr "תצורה של משפט SQL הכרחי עבור \"%1$s\" אינה זמינה"
+
+#, php-format
+msgid "Coupon in basket is not available any more"
+msgstr "קופון בסל אינו זמין יותר"
+
+msgid "Coupon is not available any more"
+msgstr "הקופון אינו זמין יותר"
+
+#, php-format
+msgid "Curl could not be initialized"
+msgstr "לא ניתן לאתחל את Curl"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr "שגיאת תלתל: \"%1$s\" - \"%2$s\""
+
+#, php-format
+msgid "Database manager object not available"
+msgstr "אובייקט מנהל מסדי נתונים אינו זמין"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr "ערך התאריך לפני \"%1$s\""
+
+#, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "הורדת הקובץ \"%1$s\" נכשלה"
+
+#, php-format
+msgid "Duplicate coupon code"
+msgstr "שכפל קוד קופון"
+
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr "שכפל קוד קופון \"%1$s\""
+
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr "הרחבת צומת \"%1$s\" נכשלה"
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "הקובץ \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr "הקובץ או הספרייה \"%1$s\" אינם קיימים"
+
+#, php-format
+msgid "File system manager object not available"
+msgstr "אובייקט מנהל מערכת הקבצים אינו זמין"
+
+#, php-format
+msgid "Finished order status import from \"%1$s\""
+msgstr "ייבוא ​​סטטוס הזמנה הסתיים מ- \"%1$s\""
+
+#, php-format
+msgid "Finished order status import from file \"%1$s\""
+msgstr "ייבוא ​​סטטוס הזמנה הסתיים מקובץ \"%1$s\""
+
+#, php-format
+msgid "Flags \"%1$s\" not within allowed range"
+msgstr "דגלים \"%1$s\" אינם בטווח המותר"
+
+#, php-format
+msgid "Flags not within allowed range"
+msgstr "דגלים אינם בטווח המותר"
+
+#, php-format
+msgid "ID of last inserted database record not available"
+msgstr "מזהה של רשומת מסד הנתונים האחרונה שהוכנסה אינו זמין"
+
+#. / Locale ID %1$s
+#, php-format
+msgid "Internationalization object not available for \"%1$s\""
+msgstr "אובייקט בינלאומי לא זמין עבור \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO country code"
+msgstr "קוד מדינה ISO לא חוקי"
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr "קוד מדינה ISO לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO currency code"
+msgstr "קוד מטבע ISO לא חוקי"
+
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr "קוד מטבע ISO לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr "קוד שפת ISO לא חוקי"
+
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr "קוד שפת ISO לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr "JSON לא חוקי כתוצאה מחיפוש המזהה \"%2$s\" ב\"%1$s\": %3$s"
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr "תכונה לא חוקית במיקום \"%1$d\""
+
+#, php-format
+msgid "Invalid characters in ISO currency code \"%1$s\""
+msgstr "תווים לא חוקיים בקוד המטבע ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in ISO language code \"%1$s\""
+msgstr "תווים לא חוקיים בקוד שפת ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "תווים לא חוקיים בשם המחלקה \"%1$s\""
+
+#, php-format
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr "תווים לא חוקיים בתאריך \"%1$s\". "
+
+#, php-format
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr "תווים לא חוקיים בתאריך \"%1$s\". "
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr "תווים לא חוקיים בתאריך, פורמט ISO \"YYYY-MM-DD hh:mm:ss\" צפוי"
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr "תווים לא חוקיים בתאריך, פורמט ISO \"YYYY-MM-DD\" צפוי"
+
+#, php-format
+msgid "Invalid characters in domain name \"%1$s\""
+msgstr "תווים לא חוקיים בשם הדומיין \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in email address: \"%1$s\""
+msgstr "תווים לא חוקיים בכתובת האימייל: \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\""
+msgstr "תווים לא חוקיים בשם המנהל \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
+msgstr "תווים לא חוקיים בשם המנהל \"%1$s\" ב\"%2$s\""
+
+#, php-format
+msgid "Invalid characters in price \"%1$s\""
+msgstr "תווים לא חוקיים במחיר \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in provider name \"%1$s\""
+msgstr "תווים לא חוקיים בשם הספק \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in purchase date \"%1$s\""
+msgstr "תווים לא חוקיים בתאריך הרכישה \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in type name \"%1$s\""
+msgstr "תווים לא חוקיים בשם הסוג \"%1$s\""
+
+#, php-format
+msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
+msgstr "תצורה לא חוקית עבור ספק הקופונים \"%1$s\", צריך \"%2$s\""
+
+msgid "Invalid delivery type"
+msgstr "סוג מסירה לא חוקי"
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "מפעל לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid mime type \"%1$s\""
+msgstr "סוג פנטומימאי לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr "שם ספק לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
+msgstr "סל מסודר לא חוקי. \"%1$s\" החזרות \"%2$s\"."
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr "סל מסודר לא חוקי. \"%1$s\" החזרות \"%2$s\"."
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
+msgstr "פורמט מרווח זמן לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr "סוג לא חוקי \"%1$s\""
+
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
+msgstr "כתובת אתר לא חוקית \"%1$s\""
+
+#, php-format
+msgid "Item can not be deleted. Site ID of item differs from present site ID."
+msgstr "לא ניתן למחוק פריט. "
+
+#, php-format
+msgid "Item could not be saved using method save(). Item ID not available."
+msgstr "לא ניתן לשמור את הפריט באמצעות השיטה save(). "
+
+#, php-format
+msgid "Item referenced in domain \"%1$s\" not found: %2$s"
+msgstr "פריט שהופנה בדומיין \"%1$s\" לא נמצא: %2$s"
+
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr "פריט עם מזהה \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "פריט עם מזהה \"%2$s\" ב- \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "Job with ID \"%1$s\" not found"
+msgstr "העבודה עם המזהה \"%1$s\" לא נמצאה"
+
+#, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr "פריט רשימה להסרה מהדומיין \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "פריט רשימה עם המזהה \"%2$s\" ב- \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "List type for attribute item with ID \"%1$s\" not available"
+msgstr "סוג רשימה עבור פריט תכונה עם המזהה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "List type for price item with ID \"%1$s\" not available"
+msgstr "סוג רשימה עבור פריט מחיר עם המזהה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "List type for text item with ID \"%1$s\" not available"
+msgstr "סוג רשימה עבור פריט טקסט עם המזהה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "Loading of XML response \"%1$s\" from delivery provider failed"
+msgstr "טעינת תגובת ה-XML \"%1$s\" מספק המסירה נכשלה"
+
+#, php-format
+msgid "Locale item for site \"%1$s\" not found"
+msgstr "פריט מקומי עבור האתר \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "Locale object not available"
+msgstr "אובייקט מקומי אינו זמין"
+
+#, php-format
+msgid "Lock flag \"%1$d\" not within allowed range"
+msgstr "דגל נעילה \"%1$d\" אינו בטווח המותר"
+
+#, php-format
+msgid "Log entry with ID \"%1$s\" not found"
+msgstr "כניסת יומן עם המזהה \"%1$s\" לא נמצאה"
+
+#, php-format
+msgid "Log manager object not available"
+msgstr "אובייקט מנהל היומנים אינו זמין"
+
+#, php-format
+msgid "Mail object not available"
+msgstr "אובייקט דואר אינו זמין"
+
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr "נתיב מנהל \"%1$s\" אינו חוקי"
+
+#, php-format
+msgid "Manager path is empty"
+msgstr "נתיב מנהל ריק"
+
+#, php-format
+msgid "Message queue object not available"
+msgstr "אובייקט תור הודעות אינו זמין"
+
+#, php-format
+msgid "Method \"%1$s\" for locale site manager not available"
+msgstr "שיטה \"%1$s\" עבור מנהל האתר לא זמינה"
+
+#, php-format
+msgid "Method \"%1$s\" for provider not available"
+msgstr "שיטה \"%1$s\" עבור ספק אינה זמינה"
+
+#, php-format
+msgid "Missing configuration \"%1$s\""
+msgstr "חסרה תצורה \"%1$s\""
+
+#, php-format
+msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr "המזהה החדש \"%1$s\" לפריט שונה מהמזהה הישן \"%2$s\""
+
+#, php-format
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
+msgstr "לא ניתן לשמור אתר חדש שנוצר באמצעות השיטה \"save()\". נסה להשתמש בשיטה \"insert()\" במקום זאת."
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr "לא נמצא קובץ XML \"%1$s\"."
+
+#, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr "אין שובר שנקנה עבור הקוד \"%1$s\" זמין"
+
+#, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr "אין צומת קטלוג עבור המזהה \"%1$s\""
+
+#, php-format
+msgid "No item found for conditions: %1$s"
+msgstr "לא נמצא פריט לתנאים: %1$s"
+
+#, php-format
+msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr "לא נמצא פריט עם \"%2$s\" ב\"%1$s\"."
+
+#, php-format
+msgid "No more credit available for voucher \"%1$s\""
+msgstr "אין יותר זיכוי זמין עבור השובר \"%1$s\""
+
+#, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr "לא נמצאה הזמנה עבור מזהה \"%1$s\"."
+
+#, php-format
+msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
+msgstr "אין מחיר עבור מזהה המוצר \"%1$s\" או קוד המוצר \"%2$s\" זמין"
+
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "לא נמצא מוצר עם הקוד \"%1$s\"."
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr "אין הנחה למטבע \"%1$s\" זמינה"
+
+#, php-format
+msgid "No search configuration available for \"%1$s\""
+msgstr "אין תצורת חיפוש זמינה עבור \"%1$s\""
+
+#, php-format
+msgid "No search keys available"
+msgstr "אין מפתחות חיפוש זמינים"
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr "לא נמצא סוג מלאי עבור הקוד \"%1$s\"."
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "לא נמצא סוג לקוד \"%1$s\"."
+
+#, php-format
+msgid "No warehouse for code \"%1$s\" found"
+msgstr "לא נמצא מחסן עבור הקוד \"%1$s\"."
+
+#, php-format
+msgid "Not a date"
+msgstr "לא דייט"
+
+#, php-format
+msgid "Not a date and time"
+msgstr "לא תאריך ושעה"
+
+#, php-format
+msgid "Not a key/value map"
+msgstr "לא מפת מפתח/ערך"
+
+#, php-format
+msgid "Not a list item"
+msgstr "לא פריט רשימה"
+
+#, php-format
+msgid "Not a listed value"
+msgstr "לא ערך רשום"
+
+#, php-format
+msgid "Not a number"
+msgstr "לא מספר"
+
+#, php-format
+msgid "Not a string"
+msgstr "לא מחרוזת"
+
+#, php-format
+msgid "Not a time"
+msgstr "לא פעם"
+
+#, php-format
+msgid "Not a true/false value"
+msgstr "לא ערך נכון/לא נכון"
+
+#, php-format
+msgid "Not an integer number"
+msgstr "לא מספר שלם"
+
+#, php-format
+msgid "Object is not of required type \"%1$s\""
+msgstr "האובייקט אינו מהסוג הנדרש \"%1$s\""
+
+#, php-format
+msgid "Operation not supported"
+msgstr "פעולה לא נתמכת"
+
+#, php-format
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr "מזהה ההזמנה \"%1$s\" בתגובת ה-XML של ספק המשלוח שונה מזהה החשבונית המאוחסנת \"%2$s\" של ההזמנה"
+
+#, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr "מיקום כתובת ההזמנה \"%1$s\" חייב להיות גדול מ-0"
+
+#, php-format
+msgid "Order base item with order ID \"%1$s\" not found"
+msgstr "פריט בסיס הזמנה עם מזהה הזמנה \"%1$s\" לא נמצא"
+
+#, php-format
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr "נתוני ההזמנה שנשלחו לספק המשלוח נדחו עם הקוד \"%1$s\" לפי תגובת XML"
+
+#, php-format
+msgid "Order delivery status \"%1$s\" not within allowed range"
+msgstr "סטטוס מסירת ההזמנה \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr "סטטוס תשלום ההזמנה \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
+msgstr "מיקום מוצר ההזמנה \"%1$s\" חייב להיות גדול מ-0"
+
+#, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr "עמדת שירות ההזמנה \"%1$s\" חייבת להיות גדולה מ-0"
+
+#, php-format
+msgid "Order type \"%1$s\" not within allowed range"
+msgstr "סוג ההזמנה \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr "הזמנה עם מזהה \"%1$s\" נדחתה עם הקוד \"%2$s\": %3$s"
+
+#, php-format
+msgid "Parameter \"%1$s\" for configuration not available"
+msgstr "פרמטר \"%1$s\" עבור תצורה אינו זמין"
+
+#, php-format
+msgid "Password object not available"
+msgstr "אובייקט סיסמה אינו זמין"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr "PayPal Express: עסקה משוכפלת עם המזהה \"%1$s\" והסטטוס \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr "PayPal Express: עסקה כפולה עם המזהה \"%1$s\" והסטטוס \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr "PayPal Express: בקשה לא חוקית \"%1$s\""
+
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr "PayPal Express: מזהה עסקת תשלום עבור מזהה הזמנה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr "PayPal Express: בקשה למזהה הזמנה \"%1$s\" נכשלה עם \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr "PayPal Express: סכום תשלום שגוי \"%1$s\" עבור מזהה הזמנה \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr "PayPal Express: דוא\"ל מקלט שגוי \"%1$s\""
+
+msgid "Payment costs"
+msgstr "עלויות תשלום"
+
+#, php-format
+msgid "Please have a look at the prices of the products in your basket"
+msgstr "אנא עיין במחירי המוצרים בסל שלך"
+
+#, php-format
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr "לא ניתן להוסיף מחיר. מזהה המטבע \"%1$s\" של פריט המחיר ומזהה המטבע הנוכחי \"%2$s\" אינו תואם."
+
+#, php-format
+msgid "Price for the given quantity \"%1$d\" not available"
+msgstr "המחיר עבור הכמות הנתונה \"%1$d\" אינו זמין"
+
+#, php-format
+msgid "Price for the given quantity \"%1$s\" not available"
+msgstr "המחיר עבור הכמות הנתונה \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "Price item not available"
+msgstr "פריט המחיר אינו זמין"
+
+#, php-format
+msgid "Process object not available"
+msgstr "אובייקט תהליך אינו זמין"
+
+#, php-format
+msgid "Product  not available"
+msgstr "המוצר אינו זמין"
+
+#, php-format
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr "מוצר אינו מכיל את כל הערכים הנדרשים. "
+
+#, php-format
+msgid "Product does not contain the SKU code"
+msgstr "מוצר אינו מכיל את קוד מק\"ט"
+
+#, php-format
+msgid "Product matching given properties not found"
+msgstr "לא נמצאו מאפיינים התואמים למוצר"
+
+#, php-format
+msgid "Product not available"
+msgstr "המוצר אינו זמין"
+
+#, php-format
+msgid "Product with array key \"%1$d\" not available"
+msgstr "מוצר עם מפתח מערך \"%1$d\" אינו זמין"
+
+#, php-format
+msgid "Products in basket not available"
+msgstr "המוצרים בסל אינם זמינים"
+
+#, php-format
+msgid "Products out of stock"
+msgstr "המוצרים אזלו מהמלאי"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr "פריט נכס להסרה לא נמצא"
+
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
+msgstr "שם הנכס \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "Provider in \"%1$s\" not available"
+msgstr "ספק ב- \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr "הכמות חייבת להיות 0 או יותר ולא תעלה על %1$d"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr "הכמות חייבת להיות 0 או יותר ואסור לעלות על הכמות שהוזמנה"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr "הכמות חייבת להיות גדולה מ-0 ולא תעלה על %1$d"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr "הכמות חייבת להיות גדולה מ-0 ולא תעלה על 2147483647"
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr "סולם הכמות חייב להיות גדול מ-0"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "פרמטר נדרש \"%1$s\" חסר"
+
+#, php-format
+msgid "Required value for \"%1$s\" is missing"
+msgstr "חסר ערך נדרש עבור \"%1$s\"."
+
+#, php-format
+msgid "Search configuration for \"%1$s\" not available"
+msgstr "תצורת חיפוש עבור \"%1$s\" אינה זמינה"
+
+#, php-format
+msgid "Search configuration not available"
+msgstr "תצורת החיפוש אינה זמינה"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr "הזמנת השליחה נכשלה: \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
+msgstr "שליחת ההזמנה לספק משלוח נכשלה עם סטטוס HTTP \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr "שליחת ההזמנה לספק משלוח נכשלה: \"%1$s\""
+
+#, php-format
+msgid "Service not available"
+msgstr "השירות אינו זמין"
+
+#, php-format
+msgid "Service of type \"%1$s\" not available"
+msgstr "שירות מסוג \"%1$s\" אינו זמין"
+
+#, php-format
+msgid "Session object not available"
+msgstr "אובייקט הפעלה אינו זמין"
+
+#, php-format
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr "לא ניתן להכניס אתר. "
+
+#, php-format
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr "לא ניתן להזיז את האתר. "
+
+#, php-format
+msgid "Site for code \"%1$s\" not found"
+msgstr "אתר לקוד \"%1$s\" לא נמצא"
+
+#, php-format
+msgid "Started order status import from \"%1$s\""
+msgstr "החל ייבוא ​​סטטוס הזמנה מ- \"%1$s\""
+
+#, php-format
+msgid "Started order status import from file \"%1$s\""
+msgstr "החל ייבוא ​​סטטוס הזמנה מקובץ \"%1$s\""
+
+#, php-format
+msgid "The algorithm \"%1$s\" is not supported"
+msgstr "אלגוריתם \"%1$s\" אינו נתמך"
+
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr "חריגה מערך הסל המרבי של %1$s"
+
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr "כמות המוצר המקסימלית היא %1$d"
+
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr "חריגה מכמות המוצר המקסימלית של %1$d"
+
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr "ערך המוצר המקסימלי הוא %1$s"
+
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr "הכמות המקסימלית של כל המוצרים היא %1$d"
+
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr "הערך המקסימלי של כל המוצרים הוא %1$s"
+
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr "ערך הסל המינימלי של %1$s לא הגיע"
+
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr "לא הושגה כמות המוצר המינימלית של %1$d"
+
+#, php-format
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr "סוג אפשרות התצורה עם מפתח \"%1$s\" חייב להיות \"%2$s\""
+
+#, php-format
+msgid "Time value after \"%1$s\""
+msgstr "ערך זמן אחרי \"%1$s\""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr "ערך זמן לפני \"%1$s\""
+
+#, php-format
+msgid "Total results value not found"
+msgstr "ערך התוצאות הכולל לא נמצא"
+
+#, php-format
+msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
+msgstr "שורש עץ עם הקוד \"%1$s\" ב- \"%2$s\" לא נמצא"
+
+#, php-format
+msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr "הקלד פריט עם המזהה \"%1$s\" ב-\"%2$s\" לא נמצא"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "לא ניתן לקרוא לשיטה \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr "לא ניתן ליצור קובץ XML להזמנה \"%1$s\""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr "לא ניתן להעביר את הקובץ המיובא \"%1$s\" אל \"%2$s\""
+
+#, php-format
+msgid "Unable to sort public holidays: \"%1$s\""
+msgstr "אין אפשרות למיין חגים ציבוריים: \"%1$s\""
+
+#, php-format
+msgid "Unknown search key \"%1$s\""
+msgstr "מפתח חיפוש לא ידוע \"%1$s\""
+
+#, php-format
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr "אימות תגובת ה-XML מספק המסירה מול הסכימה \"%1$s\" נכשל"
+
+#, php-format
+msgid "View object not available"
+msgstr "אובייקט התצוגה אינו זמין"
