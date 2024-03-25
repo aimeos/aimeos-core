@@ -209,18 +209,18 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Sets the group IDs the customer belongs to
+	 * Sets the group IDs/codes the customer belongs to
 	 *
-	 * @param string[] $ids List of group IDs
+	 * @param array $map Associative list of group IDs as keys and group codes as values
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setGroups( array $ids ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setGroups( array $map ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		$list = $this->getGroups();
 
-		if( array_diff( $ids, $list ) !== [] || array_diff( $list, $ids ) !== [] )
+		if( array_diff_assoc( $map, $list ) !== [] || array_diff_assoc( $list, $map ) !== [] )
 		{
-			$this->groups = $ids;
+			$this->groups = $map;
 			$this->setModified();
 		}
 
