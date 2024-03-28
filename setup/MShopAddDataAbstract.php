@@ -37,9 +37,9 @@ class MShopAddDataAbstract extends Base
 			{
 				$manager = \Aimeos\MShop::create( $context, $refDomain );
 
-				foreach( $entry[$refDomain] as $data )
+				foreach( $entry[$refDomain] as $idx => $data )
 				{
-					$listItem = $manager->createListItem()->fromArray( $data );
+					$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
 					$refItem = $manager->create()->fromArray( $data );
 
 					if( isset( $data['property'] ) )
@@ -76,9 +76,9 @@ class MShopAddDataAbstract extends Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
-		foreach( $entries as $data )
+		foreach( $entries as $idx => $data )
 		{
-			$listItem = $manager->createListItem()->fromArray( $data );
+			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
 			$refItem = $manager->create()->fromArray( $data );
 
 			try {
@@ -104,9 +104,9 @@ class MShopAddDataAbstract extends Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
-		foreach( $entries as $data )
+		foreach( $entries as $idx => $data )
 		{
-			$listItem = $manager->createListItem()->fromArray( $data );
+			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
 			$refItem = $manager->find( $data['catalog.code'] );
 
 			$item->addListItem( 'catalog', $listItem, $refItem );
@@ -127,9 +127,9 @@ class MShopAddDataAbstract extends Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		foreach( $entries as $data )
+		foreach( $entries as $idx => $data )
 		{
-			$listItem = $manager->createListItem()->fromArray( $data );
+			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
 			$refItem = $manager->find( $data['product.code'] );
 
 			$item->addListItem( 'product', $listItem->setRefId( $refItem->getId() ) );
@@ -150,9 +150,9 @@ class MShopAddDataAbstract extends Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
 
-		foreach( $entries as $data )
+		foreach( $entries as $idx => $data )
 		{
-			$listItem = $manager->createListItem()->fromArray( $data );
+			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
 			$refItem = $manager->find( $data['supplier.code'] );
 
 			$item->addListItem( 'supplier', $listItem, $refItem );
