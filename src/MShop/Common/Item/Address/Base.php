@@ -22,28 +22,6 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Address\Iface
 {
-	/**
-	 * Saluation is not known.
-	 * The customer didn't choose a valid salutation.
-	 */
-	const SALUTATION_UNKNOWN = '';
-
-	/**
-	 * Saluation for a company.
-	 */
-	const SALUTATION_COMPANY = 'company';
-
-	/**
-	 * Saluation for a female customer.
-	 */
-	const SALUTATION_MS = 'ms';
-
-	/**
-	 * Saluation for a male customer.
-	 */
-	const SALUTATION_MR = 'mr';
-
-
 	private string $prefix;
 
 
@@ -110,11 +88,11 @@ abstract class Base
 	/**
 	 * Returns the salutation constant for the person described by the address.
 	 *
-	 * @return string Saluatation constant defined in \Aimeos\MShop\Common\Item\Address\Base
+	 * @return string Saluatation code
 	 */
 	public function getSalutation() : string
 	{
-		return $this->get( $this->prefix . 'salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN );
+		return $this->get( $this->prefix . 'salutation', '' );
 	}
 
 

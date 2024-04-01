@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.parentid' => 'referenceid',
 			'customer.address.company' => 'unitCompany',
 			'customer.address.vatid' => 'DE999999999',
-			'customer.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.address.salutation' => 'mr',
 			'customer.address.title' => 'Herr',
 			'customer.address.firstname' => 'firstunit',
 			'customer.address.lastname' => 'lastunit',
@@ -125,16 +125,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
+		$this->assertEquals( 'mr', $this->object->getSalutation() );
 	}
 
 
 	public function testSetSalutation()
 	{
-		$return = $this->object->setSalutation( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY );
+		$return = $this->object->setSalutation( 'company' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY, $this->object->getSalutation() );
+		$this->assertEquals( 'company', $this->object->getSalutation() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

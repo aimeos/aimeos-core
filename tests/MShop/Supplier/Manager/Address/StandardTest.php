@@ -190,7 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions[] = $search->compare( '!=', 'supplier.address.parentid', null );
 		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
-		$conditions[] = $search->compare( '==', 'supplier.address.salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS );
+		$conditions[] = $search->compare( '==', 'supplier.address.salutation', 'ms' );
 		$conditions[] = $search->compare( '==', 'supplier.address.title', '' );
 		$conditions[] = $search->compare( '==', 'supplier.address.firstname', 'Good' );
 		$conditions[] = $search->compare( '==', 'supplier.address.lastname', 'Unittest' );

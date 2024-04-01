@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
-			'customer.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.salutation' => 'mr',
 			'customer.title' => 'Dr.',
 			'customer.firstname' => 'firstunit',
 			'customer.lastname' => 'lastunit',
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$address = $this->object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
-		$this->assertEquals( $address->getSalutation(), \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR );
+		$this->assertEquals( $address->getSalutation(), 'mr' );
 		$this->assertEquals( $address->getTitle(), 'Dr.' );
 		$this->assertEquals( $address->getFirstname(), 'firstunit' );
 		$this->assertEquals( $address->getLastname(), 'lastunit' );
@@ -316,7 +316,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
-			'customer.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.salutation' => 'mr',
 			'customer.title' => 'Dr.',
 			'customer.firstname' => 'firstunit',
 			'customer.lastname' => 'lastunit',
