@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Aimeos, 2024\n"
 "Language-Team: Hebrew (http://app.transifex.com/aimeos/aimeos-core/language/he/)\n"
@@ -95,6 +95,10 @@ msgstr "תצורת חיפוש כתובת אינה זמינה"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "סוג הכתובת \"%1$s\" אינו בטווח המותר"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr ""
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -546,6 +550,10 @@ msgstr "אין הנחה למטבע \"%1$s\" זמינה"
 #, php-format
 msgid "No search configuration available for \"%1$s\""
 msgstr "אין תצורת חיפוש זמינה עבור \"%1$s\""
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "No search keys available"

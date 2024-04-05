@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-09 17:16+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -95,6 +95,10 @@ msgstr ""
 # error type: value not within allowed range
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
 msgstr ""
 
 #, php-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-09 17:16+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,10 @@ msgstr "Address search configuration not available"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Address type \"%1$s\" not within allowed range"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr ""
 
 #, php-format
 msgid "At least one key is required for aggregation"
