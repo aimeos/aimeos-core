@@ -8,11 +8,11 @@
 
 return array(
 	'attribute/type' => array(
-		array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1, 'i18n' => ['de' => 'Download', 'en' => 'Download'] ),
+		array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1, 'i18n' => ['de' => 'Preis', 'en' => 'Price'] ),
+		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1, 'i18n' => ['de' => 'Text', 'en' => 'Text'] ),
+		array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1, 'i18n' => ['de' => 'Datum', 'en' => 'Date'] ),
+		array( 'domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1, 'i18n' => ['de' => 'Interval', 'en' => 'Interval'] ),
 		array( 'domain' => 'product', 'code' => 'customer/group', 'label' => 'Customer group ID', 'status' => 1 ),
 	),
 
@@ -93,10 +93,10 @@ return array(
 	),
 
 	'product/property/type' => array(
-		array( 'domain' => 'product', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1, 'i18n' => ['de' => 'Pakethöhe', 'en' => 'Package height'] ),
+		array( 'domain' => 'product', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1, 'i18n' => ['de' => 'Paketlänge', 'en' => 'Package length'] ),
+		array( 'domain' => 'product', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1, 'i18n' => ['de' => 'Paketbreite', 'en' => 'Package width'] ),
+		array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1, 'i18n' => ['de' => 'Paketgewicht', 'en' => 'Package weight'] ),
 	),
 
 	'rule/type' => array(
