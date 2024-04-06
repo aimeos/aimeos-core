@@ -83,12 +83,11 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
 
-		foreach( $data as $entry )
+		foreach( $data as $idx => $entry )
 		{
 			$item = $manager->create()->fromArray( $entry, true );
 
-			$item = $this->addRefItems( $item, $entry );
-			$item = $this->addProductRefs( $item, $entry );
+			$item = $this->addRefItems( $item, $entry, $idx );
 			$item = $this->addAddressItems( $item, $entry );
 
 			$manager->save( $item );
@@ -109,29 +108,6 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 
 		foreach( $entry['address'] ?? [] as $addr ) {
 			$item->addAddressItem( $manager->create()->fromArray( $addr, true ) );
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Adds the referenced product items from the given entry data.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
-	 * @param array $entry Associative list of data with product section
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item
-	 */
-	protected function addProductRefs( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
-	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
-
-		foreach( $entry['product'] ?? [] as $data )
-		{
-			$listItem = $manager->createListItem()->fromArray( $data );
-			$listItem->setRefId( $manager->find( $data['product.code'] )->getId() );
-
-			$item->addListItem( 'product', $listItem );
 		}
 
 		return $item;

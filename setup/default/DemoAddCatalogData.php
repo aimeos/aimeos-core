@@ -94,16 +94,16 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data, int $idx ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
-		foreach( $data as $entry )
+		foreach( $data as $idx => $entry )
 		{
 			$catItem = $manager->create()->fromArray( $entry );
 			$catItem = $manager->insert( $catItem, $item->getId() );
 
-			$manager->save( $this->addRefItems( $catItem, $entry ) );
+			$manager->save( $this->addRefItems( $catItem, $entry, $idx ) );
 		}
 
 		return $item;

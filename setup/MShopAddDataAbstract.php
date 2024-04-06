@@ -25,22 +25,24 @@ class MShopAddDataAbstract extends Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @param int $idx Position of product
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry, int $idx = 0 ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$context = $this->context();
+		$manager = \Aimeos\MShop::create( $context, $item->getResourceType() );
 
 		foreach( ['media', 'price', 'text'] as $refDomain )
 		{
 			if( isset( $entry[$refDomain] ) )
 			{
-				$manager = \Aimeos\MShop::create( $context, $refDomain );
+				$refManager = \Aimeos\MShop::create( $context, $refDomain );
 
-				foreach( $entry[$refDomain] as $idx => $data )
+				foreach( $entry[$refDomain] as $index => $data )
 				{
-					$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
-					$refItem = $manager->create()->fromArray( $data );
+					$listItem = $manager->createListItem()->setPosition( $index )->fromArray( $data );
+					$refItem = $refManager->create()->fromArray( $data );
 
 					if( isset( $data['property'] ) )
 					{
@@ -57,8 +59,8 @@ class MShopAddDataAbstract extends Base
 		}
 
 		$this->addAttributes( $item, $entry['attribute'] ?? [] );
-		$this->addCategories( $item, $entry['catalog'] ?? [] );
-		$this->addSuppliers( $item, $entry['supplier'] ?? [] );
+		$this->addCategories( $item, $entry['catalog'] ?? [], $idx );
+		$this->addSuppliers( $item, $entry['supplier'] ?? [], $idx );
 		$this->addProducts( $item, $entry['product'] ?? [] );
 
 		return $item;
@@ -74,15 +76,17 @@ class MShopAddDataAbstract extends Base
 	 */
 	protected function addAttributes( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
+		$context = $this->context();
+		$refManager = \Aimeos\MShop::create( $context, 'attribute' );
+		$manager = \Aimeos\MShop::create( $context, $item->getResourceType() );
 
 		foreach( $entries as $idx => $data )
 		{
 			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
-			$refItem = $manager->create()->fromArray( $data );
+			$refItem = $refManager->create()->fromArray( $data );
 
 			try {
-				$refItem = $manager->find( $refItem->getCode(), [], $item->getResourceType(), $refItem->getType() );
+				$refItem = $refManager->find( $refItem->getCode(), [], $item->getResourceType(), $refItem->getType() );
 			} catch( \Exception $e ) { ; } // if not found, use the new item
 
 			$refItem = $this->addRefItems( $refItem, $data );
@@ -98,16 +102,19 @@ class MShopAddDataAbstract extends Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @param int $idx Position of product
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	protected function addCategories( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries, int $idx ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
+		$context = $this->context();
+		$refManager = \Aimeos\MShop::create( $context, 'catalog' );
+		$manager = \Aimeos\MShop::create( $context, $item->getResourceType() );
 
-		foreach( $entries as $idx => $data )
+		foreach( $entries as $data )
 		{
 			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
-			$refItem = $manager->find( $data['catalog.code'] );
+			$refItem = $refManager->find( $data['catalog.code'] );
 
 			$item->addListItem( 'catalog', $listItem, $refItem );
 		}
@@ -125,12 +132,14 @@ class MShopAddDataAbstract extends Base
 	 */
 	protected function addProducts( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
+		$context = $this->context();
+		$refManager = \Aimeos\MShop::create( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, $item->getResourceType() );
 
 		foreach( $entries as $idx => $data )
 		{
 			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
-			$refItem = $manager->find( $data['product.code'] );
+			$refItem = $refManager->find( $data['product.code'] );
 
 			$item->addListItem( 'product', $listItem->setRefId( $refItem->getId() ) );
 		}
@@ -144,16 +153,19 @@ class MShopAddDataAbstract extends Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with attribute, catalog, media, price, text or product sections
+	 * @param int $idx Position of product
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addSuppliers( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	protected function addSuppliers( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entries, int $idx ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
+		$context = $this->context();
+		$refManager = \Aimeos\MShop::create( $context, 'supplier' );
+		$manager = \Aimeos\MShop::create( $context, $item->getResourceType() );
 
-		foreach( $entries as $idx => $data )
+		foreach( $entries as $data )
 		{
 			$listItem = $manager->createListItem()->setPosition( $idx )->fromArray( $data );
-			$refItem = $manager->find( $data['supplier.code'] );
+			$refItem = $refManager->find( $data['supplier.code'] );
 
 			$item->addListItem( 'supplier', $listItem, $refItem );
 		}

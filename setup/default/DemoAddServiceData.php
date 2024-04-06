@@ -66,11 +66,11 @@ class DemoAddServiceData extends MShopAddDataAbstract
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
 
-		foreach( $data as $entry )
+		foreach( $data as $idx => $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
 
-			$this->addRefItems( $item, $entry );
+			$this->addRefItems( $item, $entry, $idx );
 
 			$manager->save( $item );
 		}

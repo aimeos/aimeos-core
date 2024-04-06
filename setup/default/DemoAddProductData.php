@@ -84,11 +84,11 @@ class DemoAddProductData extends MShopAddDataAbstract
 		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'index' );
 
-		foreach( $data as $entry )
+		foreach( $data as $idx => $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
 
-			$this->addRefItems( $item, $entry );
+			$this->addRefItems( $item, $entry, $idx );
 			$this->addPropertyItems( $item, $entry['property'] ?? [] );
 
 			$manager->save( $item );
