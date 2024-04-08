@@ -104,7 +104,7 @@ class MShopAddTypeData extends Base
 					->setCode( $entry['code'] )
 					->setDomain( $entry['domain'] )
 					->setLabel( $entry['label'] )
-					->setI18n( $entry['i18n'] )
+					->setI18n( $entry['i18n'] ?? [] )
 					->setStatus( $entry['status'] );
 
 				$manager->save( $item );
