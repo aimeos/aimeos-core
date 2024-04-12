@@ -88,7 +88,7 @@ trait Site
 	protected function siteInactive( string $current ) : \Aimeos\Map
 	{
 		// Required for fetching customer item below
-		if( !strncmp( current( $this->getResourceType( false ) ), 'customer', 8 ) ) {
+		if( in_array( current( $this->getResourceType( false ) ), ['customer', 'customer/lists', 'group'] ) ) {
 			return map();
 		}
 
@@ -98,17 +98,11 @@ trait Site
 			$search = $manager->filter()->add( 'locale.site.siteid', '=~', $current )->add( 'locale.site.status', '<', 1 );
 			$sites = $manager->search( $search )->getSiteId();
 
-			if( ( $userId = $this->context()->user() ) )
+			if( ( $siteId = $this->context()->user()?->getSiteId() ) )
 			{
-				$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
-				$custItems = $manager->search( $manager->filter()->add( ['customer.id' => $userId] ) );
-
-				if( $siteId = $custItems->getSiteId()->first() )
-				{
-					$sites = $sites->filter( function( $item ) use ( $siteId ) {
-						return strncmp( $item, $siteId, strlen( $siteId ) );
-					} );
-				}
+				$sites = $sites->filter( function( $item ) use ( $siteId ) {
+					return strncmp( $item, $siteId, strlen( $siteId ) );
+				} );
 			}
 
 			self::$siteInactive[$current] = $sites;
