@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2023
+# Metal <meteoramic@yahoo.com>, 2015-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2023\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2024\n"
 "Language-Team: Turkish (http://app.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +98,7 @@ msgstr "Adres türü \"%1$s\" izin verilen aralıkta değil"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "%1$d koduyla bilinmeyen bir hata oluştu"
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -553,7 +553,7 @@ msgstr "\"%1$s\" için arama yapılandırması bulunamadı "
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" etki alanı için arama yapılandırması mevcut değil"
 
 #, php-format
 msgid "No search keys available"
