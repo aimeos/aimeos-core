@@ -57,6 +57,10 @@ class Standard
 	/**
 	 * Returns the site code of the item.
 	 *
+	 * Caution: This will return the site code of the locale item, not the code
+	 * of the associated site item! If you need the site code of the site item,
+	 * you have to call getSiteItem() and getCode() on the returned object.
+	 *
 	 * @return string|null Site code or NULL if not available
 	 */
 	public function getSiteCode() : ?string
