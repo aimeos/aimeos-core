@@ -17,12 +17,17 @@ return [
 	],
 	'i18n' => [
 		'admin' => 'i18n',
+		'admin/ext' => 'i18n',
 		'client' => 'i18n',
 		'client/code' => 'i18n',
 		'controller/common' => 'i18n',
 		'controller/frontend' => 'i18n',
 		'controller/jobs' => 'i18n',
+		'country' => 'i18n',
+		'currency' => 'i18n',
+		'language' => 'i18n',
 		'mshop' => 'i18n',
+		'mshop/code' => 'i18n',
 	],
 	'include' => [
 		'src',
