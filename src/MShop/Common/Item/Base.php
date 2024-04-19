@@ -519,7 +519,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 			throw new \Aimeos\MShop\Exception( sprintf( 'Code contains invalid characters: "%1$s"', $code ) );
 		}
 
-		return (string) $code;
+		return $code;
 	}
 
 

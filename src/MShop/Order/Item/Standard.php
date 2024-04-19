@@ -117,12 +117,12 @@ class Standard
 	/**
 	 * Sets the number of the invoice.
 	 *
-	 * @param string $value Invoice number
+	 * @param string|null $value Invoice number
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setInvoiceNumber( string $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setInvoiceNumber( ?string $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.invoiceno', $value );
+		return $this->set( 'order.invoiceno', (string) $value );
 	}
 
 
@@ -140,12 +140,12 @@ class Standard
 	/**
 	 * Sets the channel of the invoice.
 	 *
-	 * @param string $channel Invoice channel
+	 * @param string|null $channel Invoice channel
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setChannel( string $channel ) : \Aimeos\MShop\Common\Item\Iface
+	public function setChannel( ?string $channel ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.channel', $this->checkCode( $channel ) );
+		return $this->set( 'order.channel', $this->checkCode( (string) $channel ) );
 	}
 
 
@@ -309,7 +309,7 @@ class Standard
 	/**
 	 * Sets the comment field of the order item
 	 *
-	 * @param string $comment Comment for the order
+	 * @param string|null $comment Comment for the order
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
 	 */
 	public function setComment( ?string $comment ) : \Aimeos\MShop\Order\Item\Iface
@@ -332,7 +332,7 @@ class Standard
 	/**
 	 * Sets the customer ID of the customer who has ordered.
 	 *
-	 * @param string $customerid Unique ID of the customer
+	 * @param string|null $customerid Unique ID of the customer
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
 	 */
 	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Iface
@@ -362,7 +362,7 @@ class Standard
 	/**
 	 * Sets the customer reference field of the order item
 	 *
-	 * @param string $value Customer reference for the order
+	 * @param string|null $value Customer reference for the order
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
 	 */
 	public function setCustomerReference( ?string $value ) : \Aimeos\MShop\Order\Item\Iface
