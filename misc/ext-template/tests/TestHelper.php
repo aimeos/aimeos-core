@@ -43,7 +43,7 @@ class TestHelper
 
 	public static function getHtmlTemplatePaths()
 	{
-		return self::getAimeos()->getTemplatePaths( 'client/html/templates' );
+		return self::getAimeos()->getTemplatePaths( 'templates/client/html' );
 	}
 
 
