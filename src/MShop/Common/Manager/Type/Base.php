@@ -218,7 +218,7 @@ abstract class Base
 
 		while( $row = $results->fetch() )
 		{
-			if( ( $row[$this->prefix . 'i18n'] = json_decode( ($i18n = $row[$this->prefix . 'i18n'] ?? ''), true ) ) === null ) {
+			if( ( $row[$this->prefix . 'i18n'] = json_decode( ( $row[$this->prefix . 'i18n'] ?? '{}' ), true ) ) === null ) {
 				$row[$this->prefix . 'i18n'] = [];
 			}
 
