@@ -721,9 +721,7 @@ class Standard extends Base
 		 *
 		 * If the records that are retrieved should be ordered by one or more
 		 * columns, the generated string of column / sort direction pairs
-		 * replaces the ":order" placeholder. In case no ordering is required,
-		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-		 * markers is removed to speed up retrieving the records. Columns of
+		 * replaces the ":order" placeholder. Columns of
 		 * sub-managers can also be used for ordering the result set but then
 		 * no index can be used.
 		 *

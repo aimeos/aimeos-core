@@ -616,162 +616,160 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$required = array( 'service' );
+		$required = array( 'service' );
 
-			/** mshop/service/manager/sitemode
-			 * Mode how items from levels below or above in the site tree are handled
-			 *
-			 * By default, only items from the current site are fetched from the
-			 * storage. If the ai-sites extension is installed, you can create a
-			 * tree of sites. Then, this setting allows you to define for the
-			 * whole service domain if items from parent sites are inherited,
-			 * sites from child sites are aggregated or both.
-			 *
-			 * Available constants for the site mode are:
-			 * * 0 = only items from the current site
-			 * * 1 = inherit items from parent sites
-			 * * 2 = aggregate items from child sites
-			 * * 3 = inherit and aggregate items at the same time
-			 *
-			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/sitelevel) to one of the constants.
-			 * If you set it to the same value, it will work as described but you
-			 * can also use different modes. For example, if inheritance and
-			 * aggregation is configured the locale manager but only inheritance
-			 * in the domain manager because aggregating items makes no sense in
-			 * this domain, then items wil be only inherited. Thus, you have full
-			 * control over inheritance and aggregation in each domain.
-			 *
-			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-			 * @category Developer
-			 * @since 2018.01
-			 * @see mshop/locale/manager/sitelevel
-			 */
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-			$level = $context->config()->get( 'mshop/service/manager/sitemode', $level );
+		/** mshop/service/manager/sitemode
+		 * Mode how items from levels below or above in the site tree are handled
+		 *
+		 * By default, only items from the current site are fetched from the
+		 * storage. If the ai-sites extension is installed, you can create a
+		 * tree of sites. Then, this setting allows you to define for the
+		 * whole service domain if items from parent sites are inherited,
+		 * sites from child sites are aggregated or both.
+		 *
+		 * Available constants for the site mode are:
+		 * * 0 = only items from the current site
+		 * * 1 = inherit items from parent sites
+		 * * 2 = aggregate items from child sites
+		 * * 3 = inherit and aggregate items at the same time
+		 *
+		 * You also need to set the mode in the locale manager
+		 * (mshop/locale/manager/sitelevel) to one of the constants.
+		 * If you set it to the same value, it will work as described but you
+		 * can also use different modes. For example, if inheritance and
+		 * aggregation is configured the locale manager but only inheritance
+		 * in the domain manager because aggregating items makes no sense in
+		 * this domain, then items wil be only inherited. Thus, you have full
+		 * control over inheritance and aggregation in each domain.
+		 *
+		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @category Developer
+		 * @since 2018.01
+		 * @see mshop/locale/manager/sitelevel
+		 */
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
+		$level = $context->config()->get( 'mshop/service/manager/sitemode', $level );
 
-			/** mshop/service/manager/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/service/manager/search/ansi
-			 */
+		/** mshop/service/manager/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/service/manager/search/ansi
+		 */
 
-			/** mshop/service/manager/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the service
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/service/manager/insert/ansi
-			 * @see mshop/service/manager/update/ansi
-			 * @see mshop/service/manager/newid/ansi
-			 * @see mshop/service/manager/delete/ansi
-			 * @see mshop/service/manager/count/ansi
-			 */
-			$cfgPathSearch = 'mshop/service/manager/search';
+		/** mshop/service/manager/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the service
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/service/manager/insert/ansi
+		 * @see mshop/service/manager/update/ansi
+		 * @see mshop/service/manager/newid/ansi
+		 * @see mshop/service/manager/delete/ansi
+		 * @see mshop/service/manager/count/ansi
+		 */
+		$cfgPathSearch = 'mshop/service/manager/search';
 
-			/** mshop/service/manager/count/mysql
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * @see mshop/service/manager/count/ansi
-			 */
+		/** mshop/service/manager/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/service/manager/count/ansi
+		 */
 
-			/** mshop/service/manager/count/ansi
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * Counts all records matched by the given criteria from the service
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the statement can count all records from the
-			 * current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Both, the strings for ":joins" and for ":cond" are the same as for
-			 * the "search" SQL statement.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for counting items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/service/manager/insert/ansi
-			 * @see mshop/service/manager/update/ansi
-			 * @see mshop/service/manager/newid/ansi
-			 * @see mshop/service/manager/delete/ansi
-			 * @see mshop/service/manager/search/ansi
-			 */
-			$cfgPathCount = 'mshop/service/manager/count';
+		/** mshop/service/manager/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the service
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/service/manager/insert/ansi
+		 * @see mshop/service/manager/update/ansi
+		 * @see mshop/service/manager/newid/ansi
+		 * @see mshop/service/manager/delete/ansi
+		 * @see mshop/service/manager/search/ansi
+		 */
+		$cfgPathCount = 'mshop/service/manager/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( $row = $results->fetch() )
-			{
-				if( ( $row['service.config'] = json_decode( $row['service.config'], true ) ) === null ) {
-					$row['service.config'] = [];
-				}
-
-				$map[$row['service.id']] = $row;
+		while( $row = $results->fetch() )
+		{
+			if( ( $row['service.config'] = json_decode( $row['service.config'], true ) ) === null ) {
+				$row['service.config'] = [];
 			}
+
+			$map[$row['service.id']] = $row;
+		}
 
 		return $this->buildItems( $map, $ref, 'service' );
 	}

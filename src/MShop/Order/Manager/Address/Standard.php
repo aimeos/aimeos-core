@@ -769,140 +769,138 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 		$items = [];
 
-			$required = array( 'order.address' );
+		$required = array( 'order.address' );
 
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
 
-			/** mshop/order/manager/address/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/order/manager/address/search/ansi
-			 */
+		/** mshop/order/manager/address/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/order/manager/address/search/ansi
+		 */
 
-			/** mshop/order/manager/address/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the order
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/order/manager/address/insert/ansi
-			 * @see mshop/order/manager/address/update/ansi
-			 * @see mshop/order/manager/address/newid/ansi
-			 * @see mshop/order/manager/address/delete/ansi
-			 * @see mshop/order/manager/address/count/ansi
-			 */
-			$cfgPathSearch = 'mshop/order/manager/address/search';
+		/** mshop/order/manager/address/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the order
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/order/manager/address/insert/ansi
+		 * @see mshop/order/manager/address/update/ansi
+		 * @see mshop/order/manager/address/newid/ansi
+		 * @see mshop/order/manager/address/delete/ansi
+		 * @see mshop/order/manager/address/count/ansi
+		 */
+		$cfgPathSearch = 'mshop/order/manager/address/search';
 
-			/** mshop/order/manager/address/count/mysql
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * @see mshop/order/manager/address/count/ansi
-			 */
+		/** mshop/order/manager/address/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/order/manager/address/count/ansi
+		 */
 
-			/** mshop/order/manager/address/count/ansi
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * Counts all records matched by the given criteria from the order
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the statement can count all records from the
-			 * current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Both, the strings for ":joins" and for ":cond" are the same as for
-			 * the "search" SQL statement.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for counting items
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/order/manager/address/insert/ansi
-			 * @see mshop/order/manager/address/update/ansi
-			 * @see mshop/order/manager/address/newid/ansi
-			 * @see mshop/order/manager/address/delete/ansi
-			 * @see mshop/order/manager/address/search/ansi
-			 */
-			$cfgPathCount = 'mshop/order/manager/address/count';
+		/** mshop/order/manager/address/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the order
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/order/manager/address/insert/ansi
+		 * @see mshop/order/manager/address/update/ansi
+		 * @see mshop/order/manager/address/newid/ansi
+		 * @see mshop/order/manager/address/delete/ansi
+		 * @see mshop/order/manager/address/search/ansi
+		 */
+		$cfgPathCount = 'mshop/order/manager/address/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
+			$required, $total, $level );
 
-			try
+		try
+		{
+			while( ( $row = $results->fetch() ) !== null )
 			{
-				while( ( $row = $results->fetch() ) !== null )
-				{
-					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-						$items[$row['order.address.id']] = $item;
-					}
+				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+					$items[$row['order.address.id']] = $item;
 				}
 			}
-			catch( \Exception $e )
-			{
-				$results->finish();
-				throw $e;
-			}
+		}
+		catch( \Exception $e )
+		{
+			$results->finish();
+			throw $e;
+		}
 
 		return map( $items );
 	}
