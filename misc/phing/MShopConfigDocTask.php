@@ -193,7 +193,9 @@ class MShopConfigDocTask extends Task
 				$defvalue = str_replace( $matches[1], '', $defvalue );
 			}
 
-			$default = $defvalue !== '' ? "* Default: `" . str_replace( ["\n\t"], ["\n "], print_r( $defvalue, true ) ) . "`\n" : '';
+			$defaultStr = str_replace( ["\n\t"], ["\n "], print_r( $defvalue, true ) );
+			$defaultStr = strpos( $defaultStr, "\n" ) !== false ? "\n```\n" . $defaultStr . '```' : '`' . $defaultStr . '`';
+			$default = $defvalue !== '' ? "* Default: " . $defaultStr . "\n" : '';
 
 			$data .= "\n$short";
 			$data .= "\n```";
