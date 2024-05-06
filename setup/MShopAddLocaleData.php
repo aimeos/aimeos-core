@@ -57,18 +57,6 @@ class MShopAddLocaleData extends Base
 		} catch( \Aimeos\Base\DB\Exception $e ) {
 			$siteItem = $siteManager->find( $code );
 		}
-
-		try
-		{
-			$localeItem = $localeManager->create();
-			$localeItem->setSiteId( $siteItem->getSiteId() );
-			$localeItem->setLanguageId( 'en' );
-			$localeItem->setCurrencyId( 'EUR' );
-			$localeItem->setStatus( 1 );
-
-			$localeManager->save( $localeItem, false );
-		}
-		catch( \Aimeos\Base\DB\Exception $e ) {} // already in the database
 	}
 
 
