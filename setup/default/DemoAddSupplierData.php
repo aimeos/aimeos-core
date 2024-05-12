@@ -37,7 +37,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 
 
 	/**
-	 * Insert service data.
+	 * Insert supplier data.
 	 */
 	public function up()
 	{
@@ -55,9 +55,9 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'supplier.code', 'demo-' ) );
-		$services = $manager->search( $search );
+		$items = $manager->search( $search );
 
-		$manager->delete( $services->toArray() );
+		$manager->delete( $items );
 
 
 		if( $value === '1' )
