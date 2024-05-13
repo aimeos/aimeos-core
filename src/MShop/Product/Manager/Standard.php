@@ -493,7 +493,7 @@ class Standard
 		$path = 'mshop/product/manager/delete';
 
 		$this->deleteItemsBase( $items, $path )->deleteRefItems( $items );
-		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->cast()->prefix( 'product-' )->all() );
+		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->copy()->cast()->prefix( 'product-' )->all() );
 
 		return $this;
 	}
