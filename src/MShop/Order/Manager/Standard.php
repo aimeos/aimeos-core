@@ -635,7 +635,6 @@ class Standard extends Base
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -742,20 +741,21 @@ class Standard extends Base
 		$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getCustomerReference() );
 		$stmt->bind( $idx++, $item->getComment() );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
+			$date = date_create_from_format( 'Y-m-d H:i:s', $context->datetime() );
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $date ); // ctime
-			$stmt->bind( $idx++, date( 'Y-m-d' ) ); // cdate
-			$stmt->bind( $idx++, date( 'Y-m' ) ); // cmonth
-			$stmt->bind( $idx++, date( 'Y-W' ) ); // cweek
-			$stmt->bind( $idx++, date( 'w' ) ); // cwday
-			$stmt->bind( $idx++, date( 'H' ) ); // chour
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
+			$stmt->bind( $idx++, $date->format( 'Y-m-d' ) ); // cdate
+			$stmt->bind( $idx++, $date->format( 'Y-m' ) ); // cmonth
+			$stmt->bind( $idx++, $date->format( 'Y-W' ) ); // cweek
+			$stmt->bind( $idx++, $date->format( 'w' ) ); // cwday
+			$stmt->bind( $idx++, $date->format( 'G' ) ); // chour
 		}
 
 		$stmt->execute()->finish();
