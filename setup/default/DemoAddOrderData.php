@@ -21,7 +21,7 @@ class DemoAddOrderData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['Customer', 'Coupon', 'Order', 'Product', 'Serivce'];
+		return ['Order', 'DemoAddCustomerData', 'DemoAddCouponData', 'DemoAddProductData', 'DemoAddServiceData'];
 	}
 
 
@@ -41,33 +41,30 @@ class DemoAddOrderData extends MShopAddDataAbstract
 		$this->info( 'Processing order demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'order' );
-		$customer = \Aimeos\MShop::create( $context, 'customer' )->find( 'demo@example.com' );
-
-		$filter = $manager->filter();
-		$filter->add( 'order.customerid', '==', $customer->getId() );
-		$items = $manager->search( $filter );
-
-		$manager->delete( $items );
+		$filter = $manager->filter()->add( 'order.channel', '==', 'demo' );
+		$manager->delete( $manager->search( $filter ) );
 
 
 		if( $value === '1' ) {
-			$this->add( $customer );
+			$this->addDemoData();
 		}
 	}
 
 
 	/**
 	 * Adds the demo orders.
-	 *
-	 * @param \Aimeos\MShop\Customer\Item\Iface $customer Customer item object
 	 */
-	protected function add( \Aimeos\MShop\Customer\Item\Iface $customer )
+	protected function addDemoData()
 	{
+		$num = 0;
 		$paystatus = [
+			\Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
+			\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
 			\Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 			\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
 			\Aimeos\MShop\Order\Item\Base::PAY_PENDING
 		];
+		$customer = \Aimeos\MShop::create( $this->context(), 'customer' )->find( 'demo@example.com' );
 
 		foreach( $this->locales() as $locale )
 		{
@@ -84,49 +81,71 @@ class DemoAddOrderData extends MShopAddDataAbstract
 			{
 				for( $j = 0; $j < floor( $i / 4 ) + 1; $j++ )
 				{
-					$item = $manager->create();
-					$item->setCustomerId( $customer->getId() );
-					$item->setStatusPayment( $paystatus[( $i + $j ) % 3] );
-					$item->setDatePayment( date( 'Y-m-d H:i:s', time() + ( -10 + $i ) * ( 66400 + $j * 10000 ) ) );
-					$item->setLocale( $locale );
+					$lcontext->setDateTime( date( 'Y-m-d H:i:s', time() + ( -9 + $i ) * 86400 - 15000 + ( $num % 10 ) * 1357 ) );
 
-					$item->addAddress( $this->address( $customer->getPaymentAddress() ), 'payment' );
-
-					foreach( $products->random( rand( 1, 2 ) ) as $product ) {
-						$item->addProduct( $product );
-					}
+					$item = $manager->create()
+						->setChannel( 'demo' )
+						->setCustomerId( $customer->getId() )
+						->setStatusPayment( $paystatus[$num % 5] )
+						->setDatePayment( $lcontext->datetime() )
+						->setLocale( $locale );
 
 					foreach( map( $services->get( 'delivery', [] ) )->random( 1 ) as $service ) {
-						$item->addService( $service, 'delivery' );
+						$item->addService( clone $service, 'delivery' );
 					}
 
 					foreach( map( $services->get( 'payment', [] ) )->random( 1 ) as $service ) {
-						$item->addService( $service, 'payment' );
+						$item->addService( clone $service, 'payment' );
 					}
 
+					foreach( $products->random( rand( 1, 2 ) ) as $product ) {
+						$item->addProduct( clone $product );
+					}
+
+					$item->addAddress( $this->address( $customer->getPaymentAddress(), $num ), 'payment' );
+
 					$manager->save( $item );
+					++$num;
 				}
 			}
 
 			$manager->commit();
+			$num += 7;
 		}
 	}
 
 
-	protected function address( \Aimeos\MShop\Common\Item\Address\Standard $address ) : \Aimeos\MShop\Order\Item\Address\Iface
+	/**
+	 * Returns the order address item based on the passed number
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Standard $address Address item
+	 * @param int $num Sequential number
+	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order address item
+	 */
+	protected function address( \Aimeos\MShop\Common\Item\Address\Standard $address, int $num ) : \Aimeos\MShop\Order\Item\Address\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'order/address' );
-		$firstname = ['John', 'Jane', 'Max', 'Anna', 'Tom', 'Emma', 'Peter', 'Lucy', 'Paul', 'Lily'];
-		$lastname = ['Doe', 'Smith', 'Miller', 'Brown', 'Taylor', 'Wilson', 'Evans', 'Singh', 'Li', 'Müller'];
+		$firstname = ['John', 'Jose', 'Sandrine', 'Anna', 'Angel', 'Emma', 'Peter', 'Lucy', 'Paul', 'Lilly'];
+		$lastname = ['Doe', 'Alva', 'Hugo', 'Lodz', 'Hidalgo', 'Wilson', 'Evans', 'Singh', 'Li', 'Müller'];
+		$country = ['AU', 'BR', 'FR', 'PL', 'ES', 'US', 'ZA', 'IN', 'CN', 'DE'];
 
-		return $manager->create()->copyFrom( $address )->setFirstname( $firstname[rand( 0, 9 )] )->setLastname( $lastname[rand( 0, 9 )] );
+		return $manager->create()->copyFrom( $address )
+			->setFirstname( $firstname[$num % 10] )
+			->setLastname( $lastname[$num % 10] )
+			->setCountryId( $country[$num % 10] )
+			->setCompany( '' );
 	}
 
 
+	/**
+	 * Returns the available locale objects
+	 *
+	 * @return \Aimeos\Map List of locale objects
+	 */
 	protected function locales() : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'locale' );
-		$items = $manager->search( $manager->filter() );
+		$items = $manager->search( $manager->filter()->add( 'locale.site.code', '==', 'default' ) );
 		$list = [];
 
 		foreach( $items as $item ) {
@@ -137,36 +156,50 @@ class DemoAddOrderData extends MShopAddDataAbstract
 	}
 
 
+	/**
+	 * Returns the available products
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @return \Aimeos\Map List of product items
+	 */
 	protected function products( \Aimeos\MShop\ContextIface $context ) : \Aimeos\Map
 	{
-		$domains = ['media', 'price', 'product' => 'default', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$items = $manager->search( $manager->filter()->add( 'product.type', '=~', 'demo-article' ), $domains );
+		$items = $manager->search( $manager->filter()->add( 'product.code', '=~', 'demo-article' ), ['media', 'price', 'text'] );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/product' );
 		$list = [];
 
-		foreach( $items as $item ) {
-			$list[$item->getId()] = $manager->create()->copyFrom( $item )->setQuantity( rand( 1, 3 ) );
+		foreach( $items as $item )
+		{
+			$price = $item->getRefItems( 'price', 'default', 'default' )->first();
+			$list[$item->getId()] = $manager->create()->copyFrom( $item )->setQuantity( rand( 1, 3 ) )->setPrice( $price );
 		}
 
 		return map( $list );
 	}
 
 
+	/**
+	 * Returns the available services
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @return \Aimeos\Map List of service items
+	 */
 	protected function services( \Aimeos\MShop\ContextIface $context ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $context, 'service' );
 		$items = $manager->search( $manager->filter(), ['media', 'price', 'text'] );
 
-
 		$manager = \Aimeos\MShop::create( $context, 'order/service' );
 		$list = [];
 
-		foreach( $items as $item ) {
-			$list[$item->getId()] = $manager->create()->copyFrom( $item );
+		foreach( $items as $item )
+		{
+			$price = $item->getRefItems( 'price', 'default', 'default' )->first();
+			$list[$item->getId()] = $manager->create()->copyFrom( $item )->setPrice( $price );
 		}
 
-		return map( $list )->groupBy( 'service.type' );
+		return map( $list )->groupBy( 'order.service.type' );
 	}
 }
