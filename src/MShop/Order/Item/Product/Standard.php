@@ -282,7 +282,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStockType() : string
 	{
-		return $this->get( 'order.product.stocktype', '' );
+		return $this->get( 'order.product.stocktype', 'default' );
 	}
 
 
