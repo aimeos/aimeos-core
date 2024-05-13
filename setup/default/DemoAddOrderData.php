@@ -159,7 +159,7 @@ class DemoAddOrderData extends MShopAddDataAbstract
 	/**
 	 * Returns the available products
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @return \Aimeos\Map List of product items
 	 */
 	protected function products( \Aimeos\MShop\ContextIface $context ) : \Aimeos\Map
@@ -183,7 +183,7 @@ class DemoAddOrderData extends MShopAddDataAbstract
 	/**
 	 * Returns the available services
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\ContextIface $context Context object
 	 * @return \Aimeos\Map List of service items
 	 */
 	protected function services( \Aimeos\MShop\ContextIface $context ) : \Aimeos\Map
