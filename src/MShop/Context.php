@@ -238,7 +238,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	public function datetime() : string
 	{
 		if( $this->datetime === null ) {
-			$this->datetime = date( 'Y-m-d H:i:00' );
+			$this->datetime = date( 'Y-m-d H:i:s' );
 		}
 
 		return $this->datetime;
