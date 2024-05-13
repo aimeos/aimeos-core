@@ -169,11 +169,8 @@ class DemoAddProductData extends MShopAddDataAbstract
 	protected function removeAttributeItems()
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
-
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
-
-		$manager->delete( $manager->search( $search ) );
+		$filter = $manager->filter()->add( 'attribute.label', '=~', 'Demo:' );
+		$manager->delete( $manager->search( $filter ) );
 	}
 
 
@@ -183,9 +180,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	protected function removeStockItems( \Aimeos\Map $products )
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
-
 		$filter = $manager->filter()->add( ['stock.productid' => $products] )->slice( 0, 0x7fffffff );
-
 		$manager->delete( $manager->search( $filter ) );
 	}
 }
