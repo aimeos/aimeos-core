@@ -57,7 +57,7 @@ return array(
 			$table->id()->primary( 'pk_msmedlity_id' );
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
-			$table->code( 'code' );
+			$table->code();
 			$table->string( 'label' )->default( '' );
 			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
@@ -78,7 +78,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
 			$table->string( 'key', 134 )->default( '' );
-			$table->type( 'type' );
+			$table->type();
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
@@ -100,7 +100,7 @@ return array(
 			$table->id()->primary( 'pk_msmedprty_id' );
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
-			$table->code( 'code' );
+			$table->code();
 			$table->string( 'label' )->default( '' );
 			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
@@ -121,7 +121,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
 			$table->string( 'key' )->default( '' );
-			$table->type( 'type' );
+			$table->type();
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'value' );
 			$table->meta();

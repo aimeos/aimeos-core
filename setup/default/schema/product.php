@@ -35,8 +35,8 @@ return array(
 			$table->id()->primary( 'pk_mspro_id' );
 			$table->string( 'siteid' );
 			$table->string( 'dataset', 64 )->default( '' );
-			$table->type( 'type' );
-			$table->code( 'code' );
+			$table->type();
+			$table->code();
 			$table->string( 'label' )->default( '' );
 			$table->string( 'url' )->default( '' );
 			$table->config();

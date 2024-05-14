@@ -122,7 +122,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
 			$table->string( 'key', 134 )->default( '' );
-			$table->type( 'type' );
+			$table->type();
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();

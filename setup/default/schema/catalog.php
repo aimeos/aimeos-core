@@ -17,7 +17,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->int( 'parentid' )->null( true );
 			$table->smallint( 'level' )->default( 0 );
-			$table->code( 'code' );
+			$table->code();
 			$table->string( 'label' )->default( '' );
 			$table->string( 'url' )->default( '' );
 			$table->config();

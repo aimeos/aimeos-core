@@ -17,8 +17,8 @@ return array(
 			$table->int( 'artid' )->null( true );
 			$table->refid( 'attrid' );
 			$table->type( 'listtype' );
-			$table->type( 'type' );
-			$table->code( 'code' );
+			$table->type();
+			$table->code();
 			$table->datetime( 'mtime' );
 
 			$table->unique( ['prodid', 'siteid', 'attrid', 'listtype'], 'unq_msindat_p_s_aid_lt' );
