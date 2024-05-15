@@ -102,7 +102,6 @@ abstract class Base
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$time = date( 'Y-m-d H:i:s' );
 		$path = $this->getConfigPath();
 		$columns = $this->object()->getSaveAttributes();
 
@@ -125,7 +124,7 @@ abstract class Base
 		$stmt->bind( $idx++, json_encode( $item->getI18n(), JSON_FORCE_OBJECT ) );
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $time ); //mtime
+		$stmt->bind( $idx++, $context->datetime() ); //mtime
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
@@ -133,7 +132,7 @@ abstract class Base
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $time ); //ctime
+			$stmt->bind( $idx++, $context->datetime() ); //ctime
 		}
 
 		$stmt->execute()->finish();

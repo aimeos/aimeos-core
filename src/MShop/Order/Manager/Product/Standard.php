@@ -713,7 +713,6 @@ class Standard
 
 		$id = $item->getId();
 		$price = $item->getPrice();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -826,7 +825,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getStatusPayment(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, $item->getTarget() );
 		$stmt->bind( $idx++, $item->getQuantityOpen(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
@@ -837,7 +836,7 @@ class Standard
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
-			$stmt->bind( $idx++, $date ); // ctime
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();

@@ -388,7 +388,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -481,7 +480,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getCurrencyId() );
 		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, end( $siteIds ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getSiteId() );
@@ -489,7 +488,7 @@ class Standard
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
-			$stmt->bind( $idx++, $date ); // ctime
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();

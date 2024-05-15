@@ -340,7 +340,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -434,7 +433,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getDateStart() );
 		$stmt->bind( $idx++, $item->getDateEnd() );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
@@ -442,7 +441,7 @@ class Standard
 			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx, $date ); // ctime
+			$stmt->bind( $idx, $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();

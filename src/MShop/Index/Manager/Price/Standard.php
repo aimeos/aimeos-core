@@ -644,7 +644,6 @@ class Standard
 	protected function savePrices( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListsRef\Iface $item )
 	{
 		$prices = [];
-		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
 
@@ -680,7 +679,7 @@ class Standard
 			$stmt->bind( 1, $item->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $currencyId );
 			$stmt->bind( 3, reset( $list ) );
-			$stmt->bind( 4, $date ); // mtime
+			$stmt->bind( 4, $context->datetime() ); // mtime
 			$stmt->bind( 5, $siteid );
 
 			try {

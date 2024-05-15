@@ -522,7 +522,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$billingAddress = $item->getPaymentAddress();
 		$columns = $this->object()->getSaveAttributes();
 
@@ -638,7 +637,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getDateVerified() );
 		$stmt->bind( $idx++, $item->getPassword() );
-		$stmt->bind( $idx++, $date ); // Modification time
+		$stmt->bind( $idx++, $context->datetime() ); // Modification time
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
@@ -648,7 +647,7 @@ class Standard
 			$billingAddress->setId( $id ); // enforce ID to be present
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx, $date ); // Creation time
+			$stmt->bind( $idx, $context->datetime() ); // Creation time
 		}
 
 		$stmt->execute()->finish();

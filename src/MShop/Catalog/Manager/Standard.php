@@ -1068,7 +1068,6 @@ class Standard extends Base
 	private function updateUsage( string $id, \Aimeos\MShop\Catalog\Item\Iface $item,
 		bool $case = false ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
-		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
@@ -1176,7 +1175,7 @@ class Standard extends Base
 
 		$stmt->bind( $idx++, $item->getUrl() );
 		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, $item->getTarget() );
 
@@ -1187,7 +1186,7 @@ class Standard extends Base
 		}
 		else
 		{
-			$stmt->bind( $idx++, $date ); // ctime
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
 			$stmt->bind( $idx++, $siteid );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		}

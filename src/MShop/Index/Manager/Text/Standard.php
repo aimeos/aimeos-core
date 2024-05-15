@@ -749,8 +749,9 @@ class Standard
 	 */
 	protected function saveTextMap( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
 	{
-		$date = date( 'Y-m-d H:i:s' );
-		$siteid = $this->context()->locale()->getSiteId();
+		$context = $this->context();
+		$date = $context->datetime();
+		$siteid = $context->locale()->getSiteId();
 
 		foreach( $texts as $langId => $map )
 		{

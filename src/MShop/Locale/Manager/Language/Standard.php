@@ -138,7 +138,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -219,13 +218,13 @@ class Standard
 
 		$stmt->bind( $idx++, $item->getLabel() );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		// code and ID are identical after saving and ID is the flag to detect updates or inserts
 		$stmt->bind( $idx++, $item->getCode() );
 
 		if( $id === null ) {
-			$stmt->bind( $idx++, $date ); // ctime
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();

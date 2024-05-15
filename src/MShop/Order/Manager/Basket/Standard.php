@@ -158,9 +158,9 @@ class Standard
 		}
 
 		$context = $this->context();
+		$date = $context->datetime();
 		$conn = $context->db( $this->getResourceName() );
 		$columns = $this->object()->getSaveAttributes();
-		$date = date( 'Y-m-d H:i:s' );
 
 		/** mshop/order/manager/basket/insert/mysql
 		 * Inserts a new basket record into the database table or updates an existing one

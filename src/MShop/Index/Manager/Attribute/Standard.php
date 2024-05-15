@@ -661,7 +661,6 @@ class Standard
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
 		$products = $item->getRefItems( 'product', null, 'default' )->push( $item );
-		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $products as $product )
 		{
@@ -677,7 +676,7 @@ class Standard
 				$stmt->bind( 4, $listItem->getType() );
 				$stmt->bind( 5, $refItem->getType() );
 				$stmt->bind( 6, $refItem->getCode() );
-				$stmt->bind( 7, $date ); // mtime
+				$stmt->bind( 7, $context->datetime() ); // mtime
 				$stmt->bind( 8, $siteid );
 
 				try {

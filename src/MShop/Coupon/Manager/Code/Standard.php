@@ -369,7 +369,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -465,7 +464,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getDateEnd() );
 		$stmt->bind( $idx++, $item->getCount(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getRef() );
-		$stmt->bind( $idx++, $date ); // mtime
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
@@ -473,7 +472,7 @@ class Standard
 			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx, $date ); // ctime
+			$stmt->bind( $idx, $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();
@@ -756,50 +755,50 @@ class Standard
 
 		$conn = $context->db( $this->getResourceName() );
 
-			/** mshop/coupon/manager/code/counter/mysql
-			 * Increases or decreases the counter of the coupon code record matched by the given code
-			 *
-			 * @see mshop/coupon/manager/code/counter/ansi
-			 */
+		/** mshop/coupon/manager/code/counter/mysql
+		 * Increases or decreases the counter of the coupon code record matched by the given code
+		 *
+		 * @see mshop/coupon/manager/code/counter/ansi
+		 */
 
-			/** mshop/coupon/manager/code/counter/ansi
-			 * Increases or decreases the counter of the coupon code record matched by the given code
-			 *
-			 * A counter is associated to each coupon code and it's decreased
-			 * each time by one if a code used in an paid order was redeemed
-			 * successfully. Shop owners can also use the coupon code counter to
-			 * use the same code more often by setting it to an arbitrary value.
-			 * In this case, the code can be redeemed until the counter reaches
-			 * zero.
-			 *
-			 * The coupon codes must be from one of the sites that are configured
-			 * via the context item. If the current site is part of a tree of
-			 * sites, the statement can increase or decrease codes from the
-			 * current site and all parent sites if the code is inherited by one
-			 * of the parent sites.
-			 *
-			 * Each time the code is updated, the modify date/time is set to
-			 * the current timestamp and the editor field is updated.
-			 *
-			 * @param string SQL statement for increasing/decreasing the coupon code count
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/coupon/manager/code/insert/ansi
-			 * @see mshop/coupon/manager/code/update/ansi
-			 * @see mshop/coupon/manager/code/newid/ansi
-			 * @see mshop/coupon/manager/code/delete/ansi
-			 * @see mshop/coupon/manager/code/search/ansi
-			 * @see mshop/coupon/manager/code/count/ansi
-			 */
-			$path = 'mshop/coupon/manager/code/counter';
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
+		/** mshop/coupon/manager/code/counter/ansi
+		 * Increases or decreases the counter of the coupon code record matched by the given code
+		 *
+		 * A counter is associated to each coupon code and it's decreased
+		 * each time by one if a code used in an paid order was redeemed
+		 * successfully. Shop owners can also use the coupon code counter to
+		 * use the same code more often by setting it to an arbitrary value.
+		 * In this case, the code can be redeemed until the counter reaches
+		 * zero.
+		 *
+		 * The coupon codes must be from one of the sites that are configured
+		 * via the context item. If the current site is part of a tree of
+		 * sites, the statement can increase or decrease codes from the
+		 * current site and all parent sites if the code is inherited by one
+		 * of the parent sites.
+		 *
+		 * Each time the code is updated, the modify date/time is set to
+		 * the current timestamp and the editor field is updated.
+		 *
+		 * @param string SQL statement for increasing/decreasing the coupon code count
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/coupon/manager/code/insert/ansi
+		 * @see mshop/coupon/manager/code/update/ansi
+		 * @see mshop/coupon/manager/code/newid/ansi
+		 * @see mshop/coupon/manager/code/delete/ansi
+		 * @see mshop/coupon/manager/code/search/ansi
+		 * @see mshop/coupon/manager/code/count/ansi
+		 */
+		$path = 'mshop/coupon/manager/code/counter';
+		$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-			$stmt->bind( 1, $amount, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 3, $context->editor() );
-			$stmt->bind( 4, $code );
+		$stmt->bind( 1, $amount, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $context->datetime() ); // mtime
+		$stmt->bind( 3, $context->editor() );
+		$stmt->bind( 4, $code );
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
 		return $this;
 	}

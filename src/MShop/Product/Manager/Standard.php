@@ -744,7 +744,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -850,8 +849,8 @@ class Standard
 		$stmt->bind( $idx++, $item->getTarget() );
 		$stmt->bind( $idx++, $item->boost() );
 		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $date ); // mtime
-		$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
+		$stmt->bind( $idx++, $item->getTimeCreated() ?: $context->datetime() );
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );

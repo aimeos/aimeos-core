@@ -268,7 +268,6 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$columns = $this->object()->getSaveAttributes();
 
 		if( $id === null )
@@ -363,7 +362,7 @@ class Standard
 		$stmt->bind( $idx++, $item->getStockLevel(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getDateBack() );
 		$stmt->bind( $idx++, $item->getTimeFrame() );
-		$stmt->bind( $idx++, $date ); //mtime
+		$stmt->bind( $idx++, $context->datetime() ); //mtime
 		$stmt->bind( $idx++, $context->editor() );
 
 		if( $id !== null ) {
@@ -371,7 +370,7 @@ class Standard
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $date ); //ctime
+			$stmt->bind( $idx++, $context->datetime() ); //ctime
 		}
 
 		$stmt->execute()->finish();
@@ -846,54 +845,54 @@ class Standard
 
 		$conn = $context->db( $this->getResourceName() );
 
-			/** mshop/stock/manager/stocklevel/mysql
-			 * Increases or decreases the stock level for the given product and type code
-			 *
-			 * @see mshop/stock/manager/stocklevel/ansi
-			 */
+		/** mshop/stock/manager/stocklevel/mysql
+		 * Increases or decreases the stock level for the given product and type code
+		 *
+		 * @see mshop/stock/manager/stocklevel/ansi
+		 */
 
-			/** mshop/stock/manager/stocklevel/ansi
-			 * Increases or decreases the stock level for the given product and type code
-			 *
-			 * The stock level is decreased for the ordered products each time
-			 * an order is placed by a customer successfully. Also, updates
-			 * from external sources like ERP systems can increase the stock
-			 * level of a product if no absolute values are set via save()
-			 * instead.
-			 *
-			 * The stock level must be from one of the sites that are configured
-			 * via the context item. If the current site is part of a tree of
-			 * sites, the statement can increase or decrease stock levels from
-			 * the current site and all parent sites if the stock level is
-			 * inherited by one of the parent sites.
-			 *
-			 * Each time the stock level is updated, the modify date/time is
-			 * set to the current timestamp and the editor field is updated.
-			 *
-			 * @param string SQL statement for increasing/decreasing the stock level
-			 * @since 2017.01
-			 * @category Developer
-			 * @see mshop/stock/manager/insert/ansi
-			 * @see mshop/stock/manager/update/ansi
-			 * @see mshop/stock/manager/newid/ansi
-			 * @see mshop/stock/manager/delete/ansi
-			 * @see mshop/stock/manager/search/ansi
-			 * @see mshop/stock/manager/count/ansi
-			 */
-			$path = 'mshop/stock/manager/stocklevel';
+		/** mshop/stock/manager/stocklevel/ansi
+		 * Increases or decreases the stock level for the given product and type code
+		 *
+		 * The stock level is decreased for the ordered products each time
+		 * an order is placed by a customer successfully. Also, updates
+		 * from external sources like ERP systems can increase the stock
+		 * level of a product if no absolute values are set via save()
+		 * instead.
+		 *
+		 * The stock level must be from one of the sites that are configured
+		 * via the context item. If the current site is part of a tree of
+		 * sites, the statement can increase or decrease stock levels from
+		 * the current site and all parent sites if the stock level is
+		 * inherited by one of the parent sites.
+		 *
+		 * Each time the stock level is updated, the modify date/time is
+		 * set to the current timestamp and the editor field is updated.
+		 *
+		 * @param string SQL statement for increasing/decreasing the stock level
+		 * @since 2017.01
+		 * @category Developer
+		 * @see mshop/stock/manager/insert/ansi
+		 * @see mshop/stock/manager/update/ansi
+		 * @see mshop/stock/manager/newid/ansi
+		 * @see mshop/stock/manager/delete/ansi
+		 * @see mshop/stock/manager/search/ansi
+		 * @see mshop/stock/manager/count/ansi
+		 */
+		$path = 'mshop/stock/manager/stocklevel';
 
-			foreach( $pairs as $prodid => $qty )
-			{
-				$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
+		foreach( $pairs as $prodid => $qty )
+		{
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-				$stmt->bind( 1, $qty, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
-				$stmt->bind( 3, $context->editor() );
-				$stmt->bind( 4, $prodid );
-				$stmt->bind( 5, $type );
+			$stmt->bind( 1, $qty, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->datetime() ); //mtime
+			$stmt->bind( 3, $context->editor() );
+			$stmt->bind( 4, $prodid );
+			$stmt->bind( 5, $type );
 
-				$stmt->execute()->finish();
-			}
+			$stmt->execute()->finish();
+		}
 
 		return $this;
 	}

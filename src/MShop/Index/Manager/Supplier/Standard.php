@@ -421,7 +421,6 @@ class Standard
 
 		$items->implements( \Aimeos\MShop\Product\Item\Iface::class, true );
 
-		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
 		$conn = $context->db( $this->getResourceName() );
@@ -488,7 +487,7 @@ class Standard
 						$stmt->bind( 4, $listItem->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 5, $pair['lat'] ?? null, \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 						$stmt->bind( 6, $pair['lon'] ?? null, \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-						$stmt->bind( 7, $date ); //mtime
+						$stmt->bind( 7, $context->datetime() ); //mtime
 						$stmt->bind( 8, $siteid );
 
 						try {
