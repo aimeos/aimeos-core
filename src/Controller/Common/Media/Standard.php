@@ -47,7 +47,7 @@ class Standard
 	{
 		$this->checkFileUpload( $file );
 
-		$media = $this->getMediaFile( $file->getStream() );
+		$media = $this->getMediaFile( $file->getStream()->getContents() );
 		$mimetype = $this->getMimeType( $media, 'files' );
 		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
 

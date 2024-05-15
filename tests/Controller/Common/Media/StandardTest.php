@@ -42,12 +42,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->any() )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
+
+		$stream->expects( $this->once() )->method( 'getContents' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
 		$file->expects( $this->exactly( 3 ) )->method( 'getClientFilename' )
 			->will( $this->returnValue( 'test.gif' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
-			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
+			->will( $this->returnValue( $stream ) );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create()->setDomain( 'product' );
@@ -66,12 +70,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
+
+		$stream->expects( $this->once() )->method( 'getContents' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
 		$file->expects( $this->exactly( 3 ) )->method( 'getClientFilename' )
 			->will( $this->returnValue( 'test.gif' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
-			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
+			->will( $this->returnValue( $stream ) );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create()->setDomain( 'product' );
@@ -93,12 +101,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->any() )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
 
-		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
+		$stream->expects( $this->once() )->method( 'getContents' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
+
+		$file->expects( $this->exactly( 3 ) )->method( 'getClientFilename' )
 			->will( $this->returnValue( 'test.pdf' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
-			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
+			->will( $this->returnValue( $stream ) );
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 
@@ -296,6 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCheckFileUploadException()
 	{
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( -1 ) );
 
 		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
