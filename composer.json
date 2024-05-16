@@ -30,7 +30,7 @@
 		"doctrine/dbal": "~2.0",
 		"psr/http-message": "~1.0",
 		"voku/portable-ascii": "^1.4",
-		"enshrined/svg-sanitize": "^0.14||^0.15"
+		"enshrined/svg-sanitize": "~0.18"
 	},
 	"require-dev": {
 		"php-coveralls/php-coveralls": "~2.0",
