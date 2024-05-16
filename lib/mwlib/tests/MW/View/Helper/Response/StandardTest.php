@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->response->expects( $this->once() )->method( 'withStatus' )
 			->will( $this->returnValue( $this->response ) );
 
-		$this->assertEquals( $this->object, $this->object->withStatus( 'test', 'phrase' ) );
+		$this->assertEquals( $this->object, $this->object->withStatus( 500, 'phrase' ) );
 	}
 
 
