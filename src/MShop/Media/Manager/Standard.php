@@ -1059,25 +1059,43 @@ class Standard
 	{
 		$domain = $item->getDomain() ?: '-';
 		$fsname = $item->getFileSystem() ?: 'fs-media';
+		$fs = $this->context()->fs( $fsname );
 
 		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $file ) ) )
 		{
-			$path = $this->path( $file->getClientFilename(), $mime, $domain );
-			$this->context()->fs( $fsname )->write( $path, $this->sanitize( $file->getStream()->getContents(), $mime ) );
+			try
+			{
+				$oldpath = $item->getUrl();
 
-			$item->setLabel( $file->getClientFilename() )
-				->setMimetype( $mime )
-				->setUrl( $path );
+				$path = $this->path( $file->getClientFilename(), $mime, $domain );
+				$fs->write( $path, $this->sanitize( $file->getStream()->getContents(), $mime ) );
 
-			if( !$preview ) {
-				$this->scale( $item, true );
+				$item->setLabel( $file->getClientFilename() )
+					->setMimetype( $mime )
+					->setUrl( $path );
+
+				if( !$preview ) {
+					$this->scale( $item, true );
+				}
+
+				if( !empty( $oldpath ) && $fs->has( $oldpath ) ) {
+					$fs->rm( $oldpath );
+				}
+			}
+			catch( \Exception $e )
+			{
+				if( !empty( $path ) && $fs->has( $path ) ) {
+					$fs->rm( $path );
+				}
+
+				throw $e;
 			}
 		}
 
 		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $preview ) ) )
 		{
 			$path = $this->path( $preview->getClientFilename(), $mime, $domain );
-			$this->context()->fs( $fsname )->write( $path, $this->sanitize( $preview->getStream()->getContents(), $mime ) );
+			$fs->write( $path, $this->sanitize( $preview->getStream()->getContents(), $mime ) );
 
 			$item->setPreview( $path );
 		}
