@@ -1065,8 +1065,8 @@ class Standard
 
 		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $file ) ) )
 		{
-			$path = $item->getUrl() ?: $this->path( $file->getClientFilename(), $mime, $domain );
-			$this->context()->fs( $fsname )->write( $path, $this->sanitize( (string) $file->getStream(), $mime ) );
+			$path = $this->path( $file->getClientFilename(), $mime, $domain );
+			$this->context()->fs( $fsname )->write( $path, $this->sanitize( $file->getStream()->getContents(), $mime ) );
 
 			$item->setLabel( $file->getClientFilename() )
 				->setMimetype( $mime )
@@ -1080,7 +1080,7 @@ class Standard
 		if( $preview && $preview->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $preview ) ) )
 		{
 			$path = $this->path( $preview->getClientFilename(), $mime, $domain );
-			$this->context()->fs( $fsname )->write( $path, $this->sanitize( (string) $preview->getStream(), $mime ) );
+			$this->context()->fs( $fsname )->write( $path, $this->sanitize( $preview->getStream()->getContents(), $mime ) );
 
 			$item->setPreview( $path );
 		}
