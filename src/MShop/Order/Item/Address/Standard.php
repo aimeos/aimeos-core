@@ -75,7 +75,7 @@ class Standard
 	 */
 	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.address.type', $this->checkType( $type ) );
+		return $this->set( 'order.address.type', $type );
 	}
 
 

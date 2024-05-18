@@ -37,6 +37,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Address\Base
 	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Address\Base
 	 * @return string Sanitized address type
 	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
+	 * @deprecated 2025.01
 	 */
 	protected function checkType( string $value ) : string
 	{
