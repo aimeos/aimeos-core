@@ -757,4 +757,15 @@ abstract class Base
 
 		return $value;
 	}
+
+
+	/**
+	 * Returns the prefix for toArray() and fromArray() methods.
+	 *
+	 * @return string Prefix for toArray() and fromArray() methods
+	 */
+	protected function getPrefix() : string
+	{
+		return $this->prefix;
+	}
 }

@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
-		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
+		$item->addAddressItem( new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );

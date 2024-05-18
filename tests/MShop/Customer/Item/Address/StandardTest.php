@@ -21,6 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.id' => 23,
 			'customer.address.siteid' => 12,
 			'customer.address.parentid' => 'referenceid',
+			'customer.address.type' => 'test',
 			'customer.address.company' => 'unitCompany',
 			'customer.address.vatid' => 'DE999999999',
 			'customer.address.salutation' => 'mr',
@@ -87,6 +88,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $return );
 		$this->assertEquals( 'unitreference', $this->object->getParentId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetType()
+	{
+		$this->assertEquals( 'test', $this->object->getType() );
+	}
+
+
+	public function testSetType()
+	{
+		$return = $this->object->setType( 'delivery' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $return );
+		$this->assertEquals( 'delivery', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -514,6 +531,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'customer.address.id' => 1,
 			'customer.address.parentid' => 2,
+			'customer.address.type' => 'delivery',
 			'customer.address.salutation' => 'mr',
 			'customer.address.company' => 'mw',
 			'customer.address.vatid' => 'vatnumber',
@@ -539,13 +557,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.position' => 4,
 		);
 
-		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' );
+		$object = new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.' );
 		$object = $object->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['customer.address.id'], $object->getId() );
 		$this->assertEquals( $list['customer.address.parentid'], $object->getParentId() );
+		$this->assertEquals( $list['customer.address.type'], $object->getType() );
 		$this->assertEquals( $list['customer.address.salutation'], $object->getSalutation() );
 		$this->assertEquals( $list['customer.address.company'], $object->getCompany() );
 		$this->assertEquals( $list['customer.address.vatid'], $object->getVatID() );
@@ -581,6 +600,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['customer.address.siteid'] );
 		$this->assertEquals( $this->object->getParentId(), $arrayObject['customer.address.parentid'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['customer.address.position'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['customer.address.type'] );
 		$this->assertEquals( $this->object->getCompany(), $arrayObject['customer.address.company'] );
 		$this->assertEquals( $this->object->getVatID(), $arrayObject['customer.address.vatid'] );
 		$this->assertEquals( $this->object->getSalutation(), $arrayObject['customer.address.salutation'] );

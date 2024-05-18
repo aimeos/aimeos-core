@@ -59,6 +59,7 @@ return array(
 			$table->id()->primary( 'pk_mscusad_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
+			$table->type()->default( 'delivery' );
 			$table->string( 'company', 100 )->default( '' );
 			$table->string( 'vatid', 32 )->default( '' );
 			$table->string( 'salutation', 8 )->default( '' );
@@ -84,6 +85,7 @@ return array(
 			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
+			$table->index( ['parentid', 'type'], 'idx_mscusad_pid_type' );
 			$table->index( ['langid', 'siteid'], 'idx_mscusad_langid_sid' );
 			$table->index( ['lastname', 'firstname'], 'idx_mscusad_last_first' );
 			$table->index( ['postal', 'address1'], 'idx_mscusad_post_addr1' );

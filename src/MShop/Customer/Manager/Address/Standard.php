@@ -44,6 +44,11 @@ class Standard
 			'type' => 'int',
 			'public' => false,
 		),
+		'customer.address.type' => array(
+			'label' => 'Address type',
+			'code' => 'customer.address.type',
+			'internalcode' => 'mcusad."type"',
+		),
 		'customer.address.company' => array(
 			'label' => 'Address company',
 			'code' => 'customer.address.company',
@@ -436,6 +441,7 @@ class Standard
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getType() );
 		$stmt->bind( $idx++, $item->getCompany() );
 		$stmt->bind( $idx++, $item->getVatId() );
 		$stmt->bind( $idx++, $item->getSalutation() );
