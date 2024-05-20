@@ -757,94 +757,7 @@ class Standard
 		}
 
 		$domain = $item->getDomain() ?: '-';
-		$config = $this->context()->config();
-
-		/** mshop/media/manager/previews/common
-		 * Scaling options for preview images
-		 *
-		 * For responsive images, several preview images of different sizes are
-		 * generated. This setting controls how many preview images are generated,
-		 * what's their maximum width and height and if the given width/height is
-		 * enforced by cropping images that doesn't fit.
-		 *
-		 * The setting must consist of a list image size definitions like:
-		 *
-		 *  [
-		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => 2],
-		 *    ['maxwidth' => 720, 'maxheight' => 960, 'force-size' => 1],
-		 *    ['maxwidth' => 2160, 'maxheight' => 2880, 'force-size' => 0],
-		 *  ]
-		 *
-		 * "maxwidth" sets the maximum allowed width of the image whereas
-		 * "maxheight" does the same for the maximum allowed height. If both
-		 * values are given, the image is scaled proportionally so it fits into
-		 * the box defined by both values.
-		 *
-		 * In case the image has different proportions than the specified ones
-		 * and "force-size" is "0", the image is resized to fit entirely into
-		 * the specified box. One side of the image will be shorter than it
-		 * would be possible by the specified box.
-		 *
-		 * If "force-size" is "1", scaled images that doesn't fit into the
-		 * given maximum width/height are centered and then filled with the
-		 * background color.
-		 *
-		 * The value of "2" will center the image while the given maxwidth and
-		 * maxheight are fully covered and crop the parts of the image which
-		 * are outside the box created by maxwidth and maxheight.
-		 *
-		 * By default, images aren't padded or cropped, only scaled.
-		 *
-		 * The values for "maxwidth" and "maxheight" can also be null or not
-		 * used. In that case, the width or height or both is unbound. If none
-		 * of the values are given, the image won't be scaled at all. If only
-		 * one value is set, the image will be scaled exactly to the given width
-		 * or height and the other side is scaled proportionally.
-		 *
-		 * You can also define different preview sizes for different domains (e.g.
-		 * for catalog images) and for different types (e.g. catalog stage images).
-		 * Use configuration settings like
-		 *
-		 *  mshop/media/manager/previews/previews/<domain>/
-		 *  mshop/media/manager/previews/previews/<domain>/<type>/
-		 *
-		 * for example:
-		 *
-		 *  mshop/media/manager/previews/catalog/previews => [
-		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
-		 *  ]
-		 *  mshop/media/manager/previews/catalog/previews => [
-		 *    ['maxwidth' => 400, 'maxheight' => 300, 'force-size' => false]
-		 *  ]
-		 *  mshop/media/manager/previews/catalog/stage/previews => [
-		 *    ['maxwidth' => 360, 'maxheight' => 320, 'force-size' => true],
-		 *    ['maxwidth' => 720, 'maxheight' => 480, 'force-size' => true]
-		 *  ]
-		 *
-		 * These settings will create two preview images for catalog stage images,
-		 * one with a different size for all other catalog images and all images
-		 * from other domains will be sized to 240x320px. The available domains
-		 * which can have images are:
-		 *
-		 * * attribute
-		 * * catalog
-		 * * product
-		 * * service
-		 * * supplier
-		 *
-		 * There are a few image types included per domain ("default" is always
-		 * available). You can also add your own types in the admin backend and
-		 * extend the frontend to display them where you need them.
-		 *
-		 * @param array List of image size definitions
-		 * @category Developer
-		 * @category User
-		 * @since 2019.07
-		 */
-		$sizes = $config->get( 'mshop/media/manager/previews/common', [] );
-		$sizes = $config->get( 'mshop/media/manager/previews/' . $domain, $sizes );
-		$sizes = $config->get( 'mshop/media/manager/previews/' . $domain . '/' . $item->getType(), $sizes );
-
+		$sizes = $this->sizes( $domain, $item->getType() );
 		$image = $this->image( $url );
 		$quality = $this->quality();
 		$old = $item->getPreviews();
@@ -1119,5 +1032,106 @@ class Standard
 		$values['.languageid'] = $this->languageId;
 
 		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems, $propItems );
+	}
+
+
+	/**
+	 * Returns the preview image sizes for scaling the images.
+	 *
+	 * @param string $domain Domain of the image
+	 * @param string $type Type of the image
+	 * @return array List of image sizes with "maxwidth", "maxheight" and "force-size" properties
+	 */
+	protected function sizes( string $domain, string $type ) : array
+	{
+		$config = $this->context()->config();
+
+		/** mshop/media/manager/previews/common
+		 * Scaling options for preview images
+		 *
+		 * For responsive images, several preview images of different sizes are
+		 * generated. This setting controls how many preview images are generated,
+		 * what's their maximum width and height and if the given width/height is
+		 * enforced by cropping images that doesn't fit.
+		 *
+		 * The setting must consist of a list image size definitions like:
+		 *
+		 *  [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => 2],
+		 *    ['maxwidth' => 720, 'maxheight' => 960, 'force-size' => 1],
+		 *    ['maxwidth' => 2160, 'maxheight' => 2880, 'force-size' => 0],
+		 *  ]
+		 *
+		 * "maxwidth" sets the maximum allowed width of the image whereas
+		 * "maxheight" does the same for the maximum allowed height. If both
+		 * values are given, the image is scaled proportionally so it fits into
+		 * the box defined by both values.
+		 *
+		 * In case the image has different proportions than the specified ones
+		 * and "force-size" is "0", the image is resized to fit entirely into
+		 * the specified box. One side of the image will be shorter than it
+		 * would be possible by the specified box.
+		 *
+		 * If "force-size" is "1", scaled images that doesn't fit into the
+		 * given maximum width/height are centered and then filled with the
+		 * background color.
+		 *
+		 * The value of "2" will center the image while the given maxwidth and
+		 * maxheight are fully covered and crop the parts of the image which
+		 * are outside the box created by maxwidth and maxheight.
+		 *
+		 * By default, images aren't padded or cropped, only scaled.
+		 *
+		 * The values for "maxwidth" and "maxheight" can also be null or not
+		 * used. In that case, the width or height or both is unbound. If none
+		 * of the values are given, the image won't be scaled at all. If only
+		 * one value is set, the image will be scaled exactly to the given width
+		 * or height and the other side is scaled proportionally.
+		 *
+		 * You can also define different preview sizes for different domains (e.g.
+		 * for catalog images) and for different types (e.g. catalog stage images).
+		 * Use configuration settings like
+		 *
+		 *  mshop/media/manager/previews/previews/<domain>/
+		 *  mshop/media/manager/previews/previews/<domain>/<type>/
+		 *
+		 * for example:
+		 *
+		 *  mshop/media/manager/previews/catalog/previews => [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
+		 *  ]
+		 *  mshop/media/manager/previews/catalog/previews => [
+		 *    ['maxwidth' => 400, 'maxheight' => 300, 'force-size' => false]
+		 *  ]
+		 *  mshop/media/manager/previews/catalog/stage/previews => [
+		 *    ['maxwidth' => 360, 'maxheight' => 320, 'force-size' => true],
+		 *    ['maxwidth' => 720, 'maxheight' => 480, 'force-size' => true]
+		 *  ]
+		 *
+		 * These settings will create two preview images for catalog stage images,
+		 * one with a different size for all other catalog images and all images
+		 * from other domains will be sized to 240x320px. The available domains
+		 * which can have images are:
+		 *
+		 * * attribute
+		 * * catalog
+		 * * product
+		 * * service
+		 * * supplier
+		 *
+		 * There are a few image types included per domain ("default" is always
+		 * available). You can also add your own types in the admin backend and
+		 * extend the frontend to display them where you need them.
+		 *
+		 * @param array List of image size definitions
+		 * @category Developer
+		 * @category User
+		 * @since 2019.07
+		 */
+		$sizes = $config->get( 'mshop/media/manager/previews/common', [] );
+		$sizes = $config->get( 'mshop/media/manager/previews/' . $domain, $sizes );
+		$sizes = $config->get( 'mshop/media/manager/previews/' . $domain . '/' . $type, $sizes );
+
+		return $sizes;
 	}
 }
