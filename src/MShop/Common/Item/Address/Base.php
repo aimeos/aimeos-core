@@ -612,6 +612,29 @@ abstract class Base
 
 
 	/**
+	 * Returns the type of the address item.
+	 *
+	 * @return string Address type
+	 */
+	public function getType() : string
+	{
+		return $this->get( $this->prefix . 'type', 'delivery' );
+	}
+
+
+	/**
+	 * Sets the type of the address item.
+	 *
+	 * @param string $type Address type
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address item for chaining method calls
+	 */
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Address\Iface
+	{
+		return $this->set( $this->prefix . 'type', $type );
+	}
+
+
+	/**
 	 * Copies the values of the address item into another one.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item
@@ -622,6 +645,7 @@ abstract class Base
 		$values = $item->toArray();
 		$this->fromArray( $values );
 
+		$this->setType( $item->getType() );
 		$this->setCompany( $item->getCompany() );
 		$this->setVatID( $item->getVatID() );
 		$this->setSalutation( $item->getSalutation() );
@@ -668,6 +692,7 @@ abstract class Base
 			switch( $key )
 			{
 				case 'parentid': !$private ?: $item = $item->setParentId( $value ); break;
+				case 'type': $item = $item->setType( $value ); break;
 				case 'salutation': $item = $item->setSalutation( $value ); break;
 				case 'company': $item = $item->setCompany( $value ); break;
 				case 'vatid': $item = $item->setVatID( $value ); break;
@@ -711,6 +736,7 @@ abstract class Base
 	{
 		$list = parent::toArray( $private );
 
+		$list[$this->prefix . 'type'] = $this->getType();
 		$list[$this->prefix . 'salutation'] = $this->getSalutation();
 		$list[$this->prefix . 'company'] = $this->getCompany();
 		$list[$this->prefix . 'vatid'] = $this->getVatID();

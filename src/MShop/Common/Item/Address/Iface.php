@@ -18,7 +18,9 @@ namespace Aimeos\MShop\Common\Item\Address;
  * @package MShop
  * @subpackage Common
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface, \Aimeos\MShop\Common\Item\Position\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface,
+		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Copies the values of the address item into another one.

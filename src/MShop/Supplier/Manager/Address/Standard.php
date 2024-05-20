@@ -44,6 +44,11 @@ class Standard
 			'type' => 'int',
 			'public' => false,
 		),
+		'supplier.address.type' => array(
+			'code' => 'supplier.address.type',
+			'internalcode' => 'msupad."type"',
+			'label' => 'Address type',
+		),
 		'supplier.address.company' => array(
 			'code' => 'supplier.address.company',
 			'internalcode' => 'msupad."company"',

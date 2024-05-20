@@ -22,6 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.address.id' => 23,
 			'common.address.siteid' => 12,
 			'common.address.parentid' => 'referenceid',
+			'common.address.type' => 'test',
 			'common.address.company' => 'unitCompany',
 			'common.address.vatid' => 'DE999999999',
 			'common.address.salutation' => 'mr',
@@ -89,6 +90,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'unitreference', $this->object->getParentId() );
+	}
+
+
+	public function testGetType()
+	{
+		$this->assertEquals( 'test', $this->object->getType() );
+	}
+
+
+	public function testSetType()
+	{
+		$return = $this->object->setType( 'delivery' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $return );
+		$this->assertEquals( 'delivery', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -500,6 +517,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'common.address.id' => 1,
 			'common.address.parentid' => 2,
+			'common.address.type' => 'delivery',
 			'common.address.salutation' => 'mr',
 			'common.address.company' => 'mw',
 			'common.address.vatid' => 'vatnumber',
@@ -530,6 +548,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['common.address.id'], $object->getId() );
 		$this->assertEquals( $list['common.address.parentid'], $object->getParentId() );
+		$this->assertEquals( $list['common.address.type'], $object->getType() );
 		$this->assertEquals( $list['common.address.salutation'], $object->getSalutation() );
 		$this->assertEquals( $list['common.address.company'], $object->getCompany() );
 		$this->assertEquals( $list['common.address.vatid'], $object->getVatID() );
@@ -564,6 +583,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.address.siteid'] );
 		$this->assertEquals( $this->object->getParentId(), $arrayObject['common.address.parentid'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['common.address.position'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['common.address.type'] );
 		$this->assertEquals( $this->object->getCompany(), $arrayObject['common.address.company'] );
 		$this->assertEquals( $this->object->getVatID(), $arrayObject['common.address.vatid'] );
 		$this->assertEquals( $this->object->getSalutation(), $arrayObject['common.address.salutation'] );

@@ -57,29 +57,6 @@ class Standard
 
 
 	/**
-	 * Returns the address type which can be billing or delivery.
-	 *
-	 * @return string Address type
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.address.type', \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
-	}
-
-
-	/**
-	 * Sets the new type of the address which can be billing or delivery.
-	 *
-	 * @param string $type New type of the address
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.address.type', $type );
-	}
-
-
-	/**
 	 * Copys all data from a given address item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New address
@@ -116,7 +93,6 @@ class Standard
 			switch( $key )
 			{
 				case 'order.address.addressid': $item = $item->setAddressId( $value ); break;
-				case 'order.address.type': $item = $item->setType( $value ); break;
 				default: continue 2;
 			}
 
@@ -137,7 +113,6 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.address.type'] = $this->getType();
 		$list['order.address.addressid'] = $this->getAddressId();
 
 		return $list;

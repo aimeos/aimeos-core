@@ -138,6 +138,7 @@ abstract class Base
 		}
 
 		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getType() );
 		$stmt->bind( $idx++, $item->getCompany() );
 		$stmt->bind( $idx++, $item->getVatId() );
 		$stmt->bind( $idx++, $item->getSalutation() );

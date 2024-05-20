@@ -105,6 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
@@ -138,6 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
 		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID() );
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
@@ -188,6 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions[] = $search->compare( '!=', 'supplier.address.id', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.parentid', null );
+		$conditions[] = $search->compare( '==', 'supplier.address.type', 'delivery' );
 		$conditions[] = $search->compare( '==', 'supplier.address.company', 'Example company LLC' );
 		$conditions[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$conditions[] = $search->compare( '==', 'supplier.address.salutation', 'ms' );

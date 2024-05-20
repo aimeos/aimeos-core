@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Order\Item\Address;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
+	extends \Aimeos\MShop\Common\Item\Address\Iface
 {
 	/**
 	 * Returns the original customer address ID.

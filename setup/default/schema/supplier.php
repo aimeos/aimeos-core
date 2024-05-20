@@ -33,6 +33,7 @@ return array(
 			$table->id()->primary( 'pk_mssupad_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
+			$table->type();
 			$table->string( 'company', 100 )->default( '' );
 			$table->string( 'vatid', 32 )->default( '' );
 			$table->string( 'salutation', 8 )->default( '' );
