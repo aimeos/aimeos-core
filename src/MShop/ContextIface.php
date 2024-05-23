@@ -18,6 +18,14 @@ namespace Aimeos\MShop;
 interface ContextIface
 {
 	/**
+	 * Checks the permissions of the currently logged in user.
+	 *
+	 * @param string|array $groups Group codes to check
+	 * @return bool TRUE if access is allowed, FALSE if not
+	 */
+	public function access( $groups ) : bool;
+
+	/**
 	 * Returns the cache object.
 	 *
 	 * @return \Aimeos\Base\Cache\Iface Cache object

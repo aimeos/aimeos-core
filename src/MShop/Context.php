@@ -121,6 +121,18 @@ class Context implements \Aimeos\MShop\ContextIface
 
 
 	/**
+	 * Checks the permissions of the currently logged in user.
+	 *
+	 * @param string|array $groups Group codes to check
+	 * @return bool TRUE if access is allowed, FALSE if not
+	 */
+	public function access( $groups ) : bool
+	{
+		return $this->view ? $this->view->access( $groups ) : true;
+	}
+
+
+	/**
 	 * Sets the cache object.
 	 *
 	 * @param \Aimeos\Base\Cache\Iface $cache Cache object

@@ -94,11 +94,12 @@ trait Site
 
 		if( !isset( self::$siteInactive[$current] ) )
 		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
+			$context = $this->context();
+			$manager = \Aimeos\MShop::create( $context, 'locale/site' );
 			$search = $manager->filter()->add( 'locale.site.siteid', '=~', $current )->add( 'locale.site.status', '<', 1 );
 			$sites = $manager->search( $search )->getSiteId();
 
-			if( ( $siteId = $this->context()->user()?->getSiteId() ) )
+			if( ( $siteId = (string) $context->user()?->getSiteId() ) || $context->access( 'super' ) )
 			{
 				$sites = $sites->filter( function( $item ) use ( $siteId ) {
 					return strncmp( $item, $siteId, strlen( $siteId ) );
