@@ -46,7 +46,7 @@ class MShopSetLocale extends Base
 		catch( \Exception $e )
 		{
 			$siteItem = \Aimeos\MShop::create( $context, 'locale/site', 'Standard' )->find( $site );
-			$locale = $localeManager->create( [
+			$locale = new \Aimeos\MShop\Locale\Item\Standard( [
 				'locale.sitecode' => $siteItem->getCode(),
 				'locale.siteid' => $siteItem->getSiteId(),
 			], $siteItem, [$siteItem->getSiteId()] );
