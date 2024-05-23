@@ -38,7 +38,20 @@ class MShopSetLocale extends Base
 
 		// Set locale for further tasks
 		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
-		$locale = $localeManager->bootstrap( $site, '', '', false )->setLanguageId( null )->setCurrencyId( null );
+
+		try
+		{
+			$locale = $localeManager->bootstrap( $site, '', '', false )->setLanguageId( null )->setCurrencyId( null );
+		}
+		catch( \Exception $e )
+		{
+			$siteItem = \Aimeos\MShop::create( $context, 'locale/site', 'Standard' )->find( $site );
+			$locale = $localeManager->create( [
+				'locale.sitecode' => $siteItem->getCode(),
+				'locale.siteid' => $siteItem->getSiteId(),
+			], $siteItem, [$siteItem->getSiteId()] );
+		}
+
 		$context->setLocale( $locale );
 	}
 }
