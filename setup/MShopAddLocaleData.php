@@ -165,9 +165,9 @@ class MShopAddLocaleData extends Base
 				throw new \RuntimeException( sprintf( 'No ID for site for key "%1$s" found', $dataset['site'] ) );
 			}
 
+			$this->context()->setLocale( $localeManager->create()->setSiteId( $siteIds[$dataset['site']]['site'] ) );
 			$item = $localeManager->create()->fromArray( $dataset, true )
-				->set( 'site_id', $siteIds[$dataset['site']]['id'] )
-				->setSiteId( $siteIds[$dataset['site']]['site'] );
+				->set( 'site_id', $siteIds[$dataset['site']]['id'] );
 
 			try {
 				$localeManager->save( $item );
