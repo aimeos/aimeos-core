@@ -313,8 +313,8 @@ class Standard
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-//		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-//		$search = (clone $search)->add( $this->siteCondition( 'locale.siteid', $level ) );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
+		$search = (clone $search)->add( $this->siteCondition( 'locale.siteid', $level ) );
 
 		foreach( $this->searchEntries( $search, $ref, $total ) as $row )
 		{
@@ -483,7 +483,7 @@ class Standard
 		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, end( $siteIds ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getSiteId() );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
