@@ -552,7 +552,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 
 		if( $currencyid != null )
 		{
-			if( preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
+			if( preg_match( '/^[A-Za-z]{3}$/', $currencyid ) !== 1 ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code' ) );
 			}
 
