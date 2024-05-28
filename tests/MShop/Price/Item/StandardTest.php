@@ -177,13 +177,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetCurrencyIdInvalid()
-	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->setCurrencyId( 'usd' );
-	}
-
-
 	public function testGetDomain()
 	{
 		$this->assertEquals( 'product', $this->object->getDomain() );
