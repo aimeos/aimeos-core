@@ -197,6 +197,39 @@ class Standard
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		foreach( $this->getSubManagers() as $submanager ) {
+			$submanager->clear( $siteids );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Removes all entries not touched after the given timestamp in the index.
+	 * This can be a long lasting operation.
+	 *
+	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	{
+		foreach( $this->getSubManagers() as $submanager ) {
+			$submanager->cleanup( $timestamp );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Creates a new lists item object
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -205,6 +238,22 @@ class Standard
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		return $this->getManager()->createListItem( $values );
+	}
+
+
+	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->getManager()->delete( $itemIds );
+		parent::delete( $itemIds );
+
+		$this->context()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
+		return $this;
 	}
 
 
@@ -289,55 +338,6 @@ class Standard
 		 * @see mshop/index/manager/aggregate/ansi
 		 */
 		return $this->optimizeBase( 'mshop/index/manager/optimize' );
-	}
-
-
-	/**
-	 * Removes old entries from the storage.
-	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->clear( $siteids );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Removes all entries not touched after the given timestamp in the index.
-	 * This can be a long lasting operation.
-	 *
-	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
-	{
-		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->cleanup( $timestamp );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$this->getManager()->delete( $itemIds );
-		parent::delete( $itemIds );
-
-		$this->context()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
-		return $this;
 	}
 
 
@@ -541,36 +541,6 @@ class Standard
 
 
 	/**
-	 * Indexes all given product items
-	 *
-	 * @param \Aimeos\Map $items Product items with associated attributes, categories, media, prices, products, texts, etc.
-	 * @return \Aimeos\Map Indexed product items
-	 */
-	protected function index( \Aimeos\Map $items ) : \Aimeos\Map
-	{
-		try
-		{
-			$this->begin();
-
-			$this->remove( $items );
-
-			foreach( $this->getSubManagers() as $submanager ) {
-				$submanager->rebuild( $items );
-			}
-
-			$this->commit();
-		}
-		catch( \Exception $e )
-		{
-			$this->rollback();
-			throw $e;
-		}
-
-		return $items;
-	}
-
-
-	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
 	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
@@ -616,5 +586,35 @@ class Standard
 		}
 
 		return $this->subManagers;
+	}
+
+
+	/**
+	 * Indexes all given product items
+	 *
+	 * @param \Aimeos\Map $items Product items with associated attributes, categories, media, prices, products, texts, etc.
+	 * @return \Aimeos\Map Indexed product items
+	 */
+	protected function index( \Aimeos\Map $items ) : \Aimeos\Map
+	{
+		try
+		{
+			$this->begin();
+
+			$this->remove( $items );
+
+			foreach( $this->getSubManagers() as $submanager ) {
+				$submanager->rebuild( $items );
+			}
+
+			$this->commit();
+		}
+		catch( \Exception $e )
+		{
+			$this->rollback();
+			throw $e;
+		}
+
+		return $items;
 	}
 }
