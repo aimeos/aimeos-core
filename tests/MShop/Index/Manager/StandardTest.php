@@ -59,6 +59,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateListItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $this->object->createListItem() );
+	}
+
+
 	public function testCreateSearch()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
