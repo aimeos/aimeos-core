@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -15,51 +14,6 @@ namespace Aimeos\Upscheme\Task;
  */
 class MShopAddLocaleData extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function after() : array
-	{
-		return ['MShopAddLocaleLangCurData', 'Log'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function before() : array
-	{
-		return ['MShopSetLocale'];
-	}
-
-
-	/**
-	 * Creates new locale data if necessary
-	 */
-	public function up()
-	{
-		$this->info( 'Adding locale data if not yet present', 'vv' );
-
-		// Set editor for further tasks
-		$this->context()->setEditor( 'core' );
-
-		$code = $this->context()->config()->get( 'setup/site', 'default' );
-
-		$localeManager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' );
-		$siteManager = $localeManager->getSubManager( 'site' );
-
-		try {
-			$siteItem = $siteManager->insert( $siteManager->create()->setLabel( $code )->setCode( $code ) );
-		} catch( \Aimeos\Base\DB\Exception $e ) {
-			$siteItem = $siteManager->find( $code );
-		}
-	}
-
-
 	/**
 	 * Adds locale site data.
 	 *
