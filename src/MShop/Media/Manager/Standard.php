@@ -188,6 +188,7 @@ class Standard
 			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
+			'type' => 'json',
 		),
 		'media.filesystem' => array(
 			'label' => 'File sytem name',
