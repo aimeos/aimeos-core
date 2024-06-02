@@ -36,7 +36,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->refid( 'prodid' );
 			$table->type();
-			$table->int( 'stocklevel' )->null( true );
+			$table->float( 'stocklevel' )->null( true );
 			$table->datetime( 'backdate' )->null( true );
 			$table->string( 'timeframe', 16 )->default( '' );
 			$table->meta();

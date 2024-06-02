@@ -161,7 +161,7 @@ class Standard
 			'code' => 'stock.stocklevel',
 			'internalcode' => 'msto."stocklevel"',
 			'label' => 'Stock level',
-			'type' => 'int',
+			'type' => 'float',
 		),
 		'stock.dateback' => array(
 			'code' => 'stock.dateback',
