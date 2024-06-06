@@ -18,6 +18,7 @@ namespace Aimeos\MW\Jsb2;
  *
  * @package MW
  * @subpackage Jsb2
+ * @deprecated 2025.01
  */
 class Standard
 {
@@ -89,8 +90,15 @@ class Standard
 				throw new \Aimeos\MW\Jsb2\Exception( 'No files in package found' );
 			}
 
-			if( !in_array( $package->name, $filter ) ) {
-				$packageContainer[$package->file][] = $package;
+			if( $package->overwrite ?? false )
+			{
+				if( !in_array( $package->name, $filter ) ) {
+					$packageContainer[$package->file][] = $package;
+				}
+			}
+			else
+			{
+				$packageContainer[$package->file] = [$package];
 			}
 		}
 
