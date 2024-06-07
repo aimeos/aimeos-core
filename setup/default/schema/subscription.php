@@ -18,8 +18,8 @@ return array(
 			$table->string( 'siteid' );
 			$table->bigint( 'orderid' );
 			$table->bigint( 'ordprodid' );
-			$table->date( 'next' )->null( true );
-			$table->date( 'end' )->null( true );
+			$table->datetime( 'next' )->null( true );
+			$table->datetime( 'end' )->null( true );
 			$table->refid( 'productid' )->default( '' );
 			$table->string( 'interval', 32 );
 			$table->smallint( 'reason' )->null( true );
