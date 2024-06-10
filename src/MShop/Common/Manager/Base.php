@@ -37,6 +37,8 @@ abstract class Base implements \Aimeos\Macro\Iface
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$this->context = $context;
+
+		$this->setResourceName( $context->config()->get( 'mshop/' . $this->getDomain() . '/manager/resource', 'db-' . $this->getDomain() ) );
 	}
 
 
