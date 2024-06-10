@@ -723,7 +723,7 @@ class Standard
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 			$required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null )
+		while( $row = $results->fetch() )
 		{
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 				$items[$row['order.status.id']] = $item;

@@ -798,7 +798,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
+				while( $row = $results->fetch() ) {
 					$items[$row['review.id']] = $this->applyFilter( $this->createItemBase( $row ) );
 				}
 			}

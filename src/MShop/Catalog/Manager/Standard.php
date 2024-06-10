@@ -815,7 +815,7 @@ class Standard extends Base
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null ) {
+		while( $row = $results->fetch() ) {
 			$map[$row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
 		}
 

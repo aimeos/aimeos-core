@@ -976,7 +976,7 @@ class Standard extends Base
 
 		try
 		{
-			while( ( $row = $results->fetch() ) !== null ) {
+			while( $row = $results->fetch() ) {
 				$map[$row['order.id']] = $row;
 			}
 		}

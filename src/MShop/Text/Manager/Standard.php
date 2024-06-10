@@ -724,7 +724,7 @@ class Standard
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null ) {
+		while( $row = $results->fetch() ) {
 			$map[$row['text.id']] = $row;
 		}
 

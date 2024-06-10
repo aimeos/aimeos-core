@@ -243,7 +243,7 @@ trait DB
 
 		$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
-		while( ( $row = $results->fetch() ) !== null )
+		while( $row = $results->fetch() )
 		{
 			$row = $this->transform( $row );
 

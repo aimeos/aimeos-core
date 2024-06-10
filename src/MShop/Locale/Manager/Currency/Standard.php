@@ -466,7 +466,7 @@ class Standard
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
 
-		while( ( $row = $results->fetch() ) !== null )
+		while( $row = $results->fetch() )
 		{
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 				$items[$row['locale.currency.id']] = $item;

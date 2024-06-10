@@ -506,7 +506,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		try
 		{
 			$nodes = [];
-			while( ( $row = $result->fetch() ) !== null ) {
+			while( $row = $result->fetch() ) {
 				$nodes[$row['id']] = $this->createNodeBase( $row );
 			}
 		}
@@ -625,7 +625,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	protected function createTree( \Aimeos\Base\DB\Result\Iface $result, \Aimeos\MW\Tree\Node\Iface $node ) : ?\Aimeos\MW\Tree\Node\Iface
 	{
-		while( ( $record = $result->fetch() ) !== null )
+		while( $record = $result->fetch() )
 		{
 			$newNode = $this->createNodeBase( $record );
 
