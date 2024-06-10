@@ -158,7 +158,7 @@ class Standard extends \Aimeos\MShop\Common\Manager\Base implements \Aimeos\MSho
 				'internalcode' => '"key"'
 			],
 			'value' => [],
-			'json' => [
+			'jsoncol' => [
 				'type' => 'json'
 			],
 		] );
