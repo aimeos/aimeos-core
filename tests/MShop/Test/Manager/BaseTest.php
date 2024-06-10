@@ -42,6 +42,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'siteid' => '1.',
 			'key' => 'somekey',
 			'value' => 'someval',
+			'json' => ['key' => 'value'],
 			'mtime' => '2000-01-01 00:00:00',
 			'ctime' => '2000-01-01 00:00:00',
 			'editor' => 'testeditor'
@@ -51,6 +52,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '1.', $item->getSiteId() );
 		$this->assertEquals( 'somekey', $item->get( 'key' ) );
 		$this->assertEquals( 'someval', $item->get( 'value' ) );
+		$this->assertEquals( ['key' => 'value'], $item->get( 'json' ) );
 		$this->assertEquals( '2000-01-01 00:00:00', $item->getTimeModified() );
 		$this->assertEquals( '2000-01-01 00:00:00', $item->getTimeCreated() );
 		$this->assertEquals( 'testeditor', $item->editor() );
@@ -75,7 +77,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->create()
 			->set( 'key', 'somekey' )
-			->set( 'value', 'someval' );
+			->set( 'value', 'someval' )
+			->set( 'json', ['somekey' => 'someval'] );
 
 		$result = $this->object->save( $item );
 
@@ -155,6 +158,9 @@ class Standard extends \Aimeos\MShop\Common\Manager\Base implements \Aimeos\MSho
 				'internalcode' => '"key"'
 			],
 			'value' => [],
+			'json' => [
+				'type' => 'json'
+			],
 		] );
 	}
 }

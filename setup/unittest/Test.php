@@ -23,6 +23,7 @@ class Test extends Base
 			$table->string( 'siteid' );
 			$table->string( 'key', 32 );
 			$table->string( 'value' );
+			$table->json( 'json' );
 			$table->meta();
 
 			$table->index( ['key', 'siteid'], 'idx_mstes_key_sid' );

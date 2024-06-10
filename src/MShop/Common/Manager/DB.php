@@ -962,8 +962,11 @@ trait DB
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		foreach( $columns as $entry ) {
-			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry )
+		{
+			$value = $item->get( $entry->getCode() );
+			$value = $entry->getType() === 'json' ? json_encode( $value, JSON_FORCE_OBJECT ) : $value;
+			$stmt->bind( $idx++, $value, \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $context->datetime() ); // mtime
