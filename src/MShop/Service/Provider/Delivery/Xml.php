@@ -287,7 +287,7 @@ class Xml
 			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null
 				&& ( $item = $items->get( $attr->nodeValue ) ) !== null
 			) {
-				$item->fromArray( $list );
+				$item->fromArray( $list, true );
 			}
 		}
 

@@ -286,13 +286,13 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.channel': $item = $item->setChannel( $value ); break;
+				case 'order.channel': !$private ?: $item = $item->setChannel( $value ); break;
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.invoiceno': !$private ?: $item = $item->setInvoiceNumber( $value ); break;
-				case 'order.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
-				case 'order.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
-				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
-				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
+				case 'order.statusdelivery': !$private ?: $item = $item->setStatusDelivery( (int) $value ); break;
+				case 'order.statuspayment': !$private ?: $item = $item->setStatusPayment( (int) $value ); break;
+				case 'order.datedelivery': !$private ?: $item = $item->setDateDelivery( $value ); break;
+				case 'order.datepayment': !$private ?: $item = $item->setDatePayment( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
 				default: continue 2;
 			}
