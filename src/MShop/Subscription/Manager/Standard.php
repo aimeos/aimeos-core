@@ -816,7 +816,6 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );
 
-<<<<<<< HEAD
 			try
 			{
 				while( ( $row = $results->fetch() ) !== null ) {
@@ -827,12 +826,6 @@ class Standard
 			{
 				$results->finish();
 				throw $e;
-=======
-		try
-		{
-			while( $row = $results->fetch() ) {
-				$map[$row['subscription.id']] = $row;
->>>>>>> 637713b47 (Treat order item properties in fromArray() that should only be set directly as private)
 			}
 
 
