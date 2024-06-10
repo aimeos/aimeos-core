@@ -153,9 +153,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetStatusCode()
 	{
 		$this->response->expects( $this->once() )->method( 'getStatusCode' )
-			->will( $this->returnValue( 'test' ) );
+			->will( $this->returnValue( 500 ) );
 
-		$this->assertEquals( 'test', $this->object->getStatusCode() );
+		$this->assertEquals( 500, $this->object->getStatusCode() );
 	}
 
 
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->response->expects( $this->once() )->method( 'withStatus' )
 			->will( $this->returnValue( $this->response ) );
 
-		$this->assertEquals( $this->object, $this->object->withStatus( 'test', 'phrase' ) );
+		$this->assertEquals( $this->object, $this->object->withStatus( 500, 'phrase' ) );
 	}
 
 
