@@ -461,16 +461,16 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.channel': $item = $item->setChannel( $value ); break;
+				case 'order.channel': !$private ?: $item = $item->setChannel( $value ); break;
 				case 'order.invoiceno': !$private ?: $item = $item->setInvoiceNumber( $value ); break;
-				case 'order.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
-				case 'order.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
-				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
-				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
-				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
-				case 'order.customerid': $item = $item->setCustomerId( $value ); break;
-				case 'order.languageid': $locale = $locale->setLanguageId( $value ); break;
+				case 'order.statusdelivery': !$private ?: $item = $item->setStatusDelivery( (int) $value ); break;
+				case 'order.statuspayment': !$private ?: $item = $item->setStatusPayment( (int) $value ); break;
+				case 'order.datedelivery': !$private ?: $item = $item->setDateDelivery( $value ); break;
+				case 'order.datepayment': !$private ?: $item = $item->setDatePayment( $value ); break;
+				case 'order.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
 				case 'order.customerref': $item = $item->setCustomerReference( $value ); break;
+				case 'order.languageid': $locale = $locale->setLanguageId( $value ); break;
+				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
 				case 'order.comment': $item = $item->setComment( $value ); break;
 				default: continue 2;
 			}
