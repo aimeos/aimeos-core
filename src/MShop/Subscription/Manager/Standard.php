@@ -817,7 +817,7 @@ class Standard
 
 		try
 		{
-			while( ( $row = $results->fetch() ) !== null ) {
+			while( $row = $results->fetch() ) {
 				$map[$row['subscription.id']] = $row;
 			}
 		}
