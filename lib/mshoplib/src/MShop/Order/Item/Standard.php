@@ -250,11 +250,11 @@ class Standard
 			switch( $key )
 			{
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
-				case 'order.type': $item = $item->setType( $value ); break;
-				case 'order.statusdelivery': $item = $item->setDeliveryStatus( $value ); break;
-				case 'order.statuspayment': $item = $item->setPaymentStatus( $value ); break;
-				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
-				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
+				case 'order.type': !$private ?: $item = $item->setType( $value ); break;
+				case 'order.statusdelivery': !$private ?: $item = $item->setDeliveryStatus( $value ); break;
+				case 'order.statuspayment': !$private ?: $item = $item->setPaymentStatus( $value ); break;
+				case 'order.datepayment': !$private ?: $item = $item->setDatePayment( $value ); break;
+				case 'order.datedelivery': !$private ?: $item = $item->setDateDelivery( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
 				default: continue 2;
 			}
