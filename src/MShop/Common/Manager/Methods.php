@@ -307,6 +307,24 @@ trait Methods
 
 
 	/**
+	 * Returns the table alias name.
+	 *
+	 * @return string Table alias name
+	 */
+	protected function getAlias() : string
+	{
+		$parts = explode( '/', $this->getSubPath() );
+		$str = 'm' . substr( $this->getDomain(), 0, 3 );
+
+		foreach( $parts as $part ) {
+			$str .= substr( $part, 0, 2 );
+		}
+
+		return $str;
+	}
+
+
+	/**
 	 * Returns the full configuration key for the passed last part
 	 *
 	 * @param string $name Configuration last part

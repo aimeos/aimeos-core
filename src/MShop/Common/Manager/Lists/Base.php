@@ -21,9 +21,13 @@ namespace Aimeos\MShop\Common\Manager\Lists;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\Methods;
+	use \Aimeos\MShop\Common\Manager\Site;
+	use \Aimeos\MShop\Common\Manager\DB;
+	use \Aimeos\Macro\Macroable;
+
+
 	private string $date;
-	private string $prefix;
-	private array $searchConfig;
 
 
 	/**
@@ -35,28 +39,27 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
-		$this->date = $context->datetime();
-		$this->searchConfig = $this->getSearchConfig();
-
-		if( ( $entry = reset( $this->searchConfig ) ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
-			throw new \Aimeos\MShop\Exception( $msg );
-		}
-
-		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
-		}
-
-		if( empty( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
-		}
-
 		parent::__construct( $context );
+
+		$this->date = $context->datetime();
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
+	 */
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$path = 'mshop/' . $this->getDomain() . 'manager/lists/submanagers';
+
+		foreach( $this->context()->config()->get( $path, ['type'] ) as $domain ) {
+			$this->object()->getSubManager( $domain )->clear( $siteids );
+		}
+
+		return $this->clearBase( $siteids, 'mshop/common/manager/lists/delete' );
 	}
 
 
@@ -68,7 +71,7 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->prefix . 'siteid'] = $values[$this->prefix . 'siteid'] ?? $this->context()->locale()->getSiteId();
+		$values[$this->getPrefix() . 'siteid'] = $values[$this->getPrefix() . 'siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -81,7 +84,7 @@ abstract class Base
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
+		return $this->deleteItemsBase( $itemIds, 'mshop/common/manager/lists/delete' );
 	}
 
 
@@ -131,20 +134,133 @@ abstract class Base
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
-			throw new \Aimeos\MShop\Exception( $msg );
-		}
-
-		$criteria = $this->object()->filter( $default )->add( [$conf['code'] => $id] );
+		$code = $this->getPrefix() . 'id';
+		$criteria = $this->object()->filter( $default )->add( [$code => $id] );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
-		$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $conf['code'], $id );
+		$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $code, $id );
 		throw new \Aimeos\MShop\Exception( $msg );
+	}
+
+
+	/**
+	 * Returns the available manager types
+	 *
+	 * @param bool $withsub Return also the resource type of sub-managers if true
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( bool $withsub = true ) : array
+	{
+		$path = 'mshop/' . $this->getDomain() . 'manager/lists/submanagers';
+		return $this->getResourceTypeBase( $this->getDomain() . '/lists', $path, [], $withsub );
+	}
+
+
+	/**
+	 * Returns the list attributes that can be used for searching.
+	 *
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
+	 */
+	public function getSearchAttributes( bool $withsub = true ) : array
+	{
+		return $this->createAttributes( [
+			'id' => [
+				'code' => $this->getDomain() . '.lists.id',
+				'internalcode' => $this->getAlias() . '."id"',
+				'label' => 'List ID',
+				'type' => 'int',
+				'public' => false,
+			],
+			'siteid' => [
+				'code' => $this->getDomain() . '.lists.siteid',
+				'internalcode' => $this->getAlias() . '."siteid"',
+				'label' => 'List site ID',
+				'public' => false,
+			],
+			'ctime' => [
+				'code' => $this->getDomain() . '.lists.ctime',
+				'internalcode' => $this->getAlias() . '."ctime"',
+				'label' => 'List create date/time',
+				'type' => 'datetime',
+				'public' => false,
+			],
+			'mtime' => [
+				'code' => $this->getDomain() . '.lists.mtime',
+				'internalcode' => $this->getAlias() . '."mtime"',
+				'label' => 'List modify date/time',
+				'type' => 'datetime',
+				'public' => false,
+			],
+			'editor' => [
+				'code' => $this->getDomain() . '.lists.editor',
+				'internalcode' => $this->getAlias() . '."editor"',
+				'label' => 'List editor',
+				'public' => false,
+			],
+			'parentid' => [
+				'code' => $this->getDomain() . '.lists.parentid',
+				'internalcode' => $this->getAlias() . '."parentid"',
+				'label' => 'List parent ID',
+				'type' => 'int',
+				'public' => false,
+			],
+			'key' => [
+				'code' => $this->getDomain() . '.lists.key',
+				'internalcode' => $this->getAlias() . '."key"',
+				'label' => 'List key',
+				'public' => false,
+			],
+			'type' => [
+				'code' => $this->getDomain() . '.lists.type',
+				'internalcode' => $this->getAlias() . '."type"',
+				'label' => 'List type',
+			],
+			'refid' => [
+				'code' => $this->getDomain() . '.lists.refid',
+				'internalcode' => $this->getAlias() . '."refid"',
+				'label' => 'List reference ID',
+			],
+			'datestart' => [
+				'code' => $this->getDomain() . '.lists.datestart',
+				'internalcode' => $this->getAlias() . '."start"',
+				'label' => 'List start date',
+				'type' => 'datetime',
+			],
+			'dateend' => [
+				'code' => $this->getDomain() . '.lists.dateend',
+				'internalcode' => $this->getAlias() . '."end"',
+				'label' => 'List end date',
+				'type' => 'datetime',
+			],
+			'domain' => [
+				'code' => $this->getDomain() . '.lists.domain',
+				'internalcode' => $this->getAlias() . '."domain"',
+				'label' => 'List domain',
+			],
+			'position' => [
+				'code' => $this->getDomain() . '.lists.position',
+				'internalcode' => $this->getAlias() . '."pos"',
+				'label' => 'List position',
+				'type' => 'int',
+			],
+			'status' => [
+				'code' => $this->getDomain() . '.lists.status',
+				'internalcode' => $this->getAlias() . '."status"',
+				'label' => 'List status',
+				'type' => 'int',
+			],
+			'config' => [
+				'code' => $this->getDomain() . '.lists.config',
+				'internalcode' => $this->getAlias() . '."config"',
+				'label' => 'List config',
+				'type' => 'json',
+				'public' => false,
+			],
+		] );
 	}
 
 
@@ -157,74 +273,24 @@ abstract class Base
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'common', 'lists/' . $manager, $name );
+		return $this->getSubManagerBase( $this->getDomain(), 'lists/' . $manager, $name );
 	}
 
 
 	/**
-	 * Updates or adds a common list item object.
+	 * Adds or updates an item object or a list of them.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
 	 */
-	protected function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Lists\Iface
+	public function save( $items, bool $fetch = true )
 	{
-		if( !$item->isModified() ) {
-			return $item;
+		foreach( map( $items ) as $item ) {
+			$this->saveItem( $item, $fetch );
 		}
 
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$path = $this->getConfigPath();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null ) {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-		} else {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getKey() );
-		$stmt->bind( $idx++, $item->getType() );
-		$stmt->bind( $idx++, $item->getDomain() );
-		$stmt->bind( $idx++, $item->getRefId() );
-		$stmt->bind( $idx++, $item->getDateStart() );
-		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $context->datetime() ); //mtime
-		$stmt->bind( $idx++, $this->context()->editor() );
-
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); //ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null && $fetch === true ) {
-			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-		}
-
-		$item->setId( $id );
-
-		return $item;
+		return is_array( $items ) ? map( $items ) : $items;
 	}
 
 
@@ -239,25 +305,23 @@ abstract class Base
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
+		$required = [$this->getDomain()];
 		$conn = $this->context()->db( $this->getResourceName() );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$cfgPathSearch = $this->getConfigPath() . 'search';
-		$cfgPathCount = $this->getConfigPath() . 'count';
-
-		$name = trim( $this->prefix, '.' );
-		$required = array( $name );
+		$cfgPathSearch = 'mshop/common/manager/lists/search';
+		$cfgPathCount = 'mshop/common/manager/lists/count';
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() )
 		{
-			if( ( $row[$this->prefix . 'config'] = json_decode( $row[$this->prefix . 'config'], true ) ) === null ) {
-				$row[$this->prefix . 'config'] = [];
+			if( ( $row[$this->getPrefix() . 'config'] = json_decode( $row[$this->getPrefix() . 'config'], true ) ) === null ) {
+				$row[$this->getPrefix() . 'config'] = [];
 			}
 
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-				$items[$row[$this->prefix . 'id']] = $item;
+				$items[$row[$this->getPrefix() . 'id']] = $item;
 			}
 		}
 
@@ -307,7 +371,7 @@ abstract class Base
 	{
 		$values['.date'] = $this->date;
 
-		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix, $values );
+		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->getPrefix(), $values );
 	}
 
 
@@ -318,7 +382,7 @@ abstract class Base
 	 */
 	protected function getPrefix() : string
 	{
-		return $this->prefix;
+		return $this->getDomain() . '.lists.';
 	}
 
 
@@ -355,17 +419,80 @@ abstract class Base
 
 
 	/**
-	 * Returns the config path for retrieving the configuration values.
+	 * Updates or adds a common list item object.
 	 *
-	 * @return string Configuration path
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface $item Updated item including the generated ID
 	 */
-	abstract protected function getConfigPath() : string;
+	protected function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Lists\Iface
+	{
+		if( !$item->isModified() ) {
+			return $item;
+		}
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$id = $item->getId();
+		$path = 'mshop/common/manager/lists/';
+		$columns = $this->object()->getSaveAttributes();
+
+		if( $id === null ) {
+			$type = 'insert'; $mode = true;
+		} else {
+			$type = 'update'; $mode = false;
+		}
+
+		$idx = 1;
+		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path . $type ), $mode );
+		$stmt = $this->getCachedStatement( $conn, 'mshop/' . $this->getDomain() . '/manager/lists/' . $type, $sql );
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
+
+		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getKey() );
+		$stmt->bind( $idx++, $item->getType() );
+		$stmt->bind( $idx++, $item->getDomain() );
+		$stmt->bind( $idx++, $item->getRefId() );
+		$stmt->bind( $idx++, $item->getDateStart() );
+		$stmt->bind( $idx++, $item->getDateEnd() );
+		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $context->datetime() ); //mtime
+		$stmt->bind( $idx++, $this->context()->editor() );
+
+
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
+			$stmt->bind( $idx++, $context->datetime() ); //ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, 'mshop/common/manager/lists/newid' );
+		}
+
+		$item->setId( $id );
+
+		return $item;
+	}
 
 
 	/**
-	 * Returns the search configuration for searching items.
+	 * Returns the name of the used table
 	 *
-	 * @return array Associative list of search keys and search definitions
+	 * @return string Table name
 	 */
-	abstract protected function getSearchConfig() : array;
+	protected function getTable() : string
+	{
+		return substr( parent::getTable(), 0, -1 ); // cuts of the "s" from "lists"
+	}
 }

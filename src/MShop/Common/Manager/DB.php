@@ -51,6 +51,14 @@ trait DB
 
 
 	/**
+	 * Returns the alias of the used table
+	 *
+	 * @return string Table alias e.g. "mprolity"
+	 */
+	abstract protected function getAlias() : string;
+
+
+	/**
 	 * Returns the manager domain
 	 *
 	 * @return string Manager domain e.g. "product"
@@ -509,7 +517,7 @@ trait DB
 			$sql = str_replace( $key, $value, $sql );
 		}
 
-		return str_replace( ':table', $this->getTable(), $sql );
+		return str_replace( [':alias', ':table'], [$this->getAlias(), $this->getTable()], $sql );
 	}
 
 
