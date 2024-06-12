@@ -32,7 +32,7 @@ class Standard
 	 * @since 2023.04
 	 */
 
-		/** mshop/text/manager/lists/submanagers
+	/** mshop/text/manager/lists/submanagers
 	 * List of manager names that can be instantiated by the text list manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
