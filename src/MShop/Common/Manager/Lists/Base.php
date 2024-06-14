@@ -20,6 +20,7 @@ namespace Aimeos\MShop\Common\Manager\Lists;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	use \Aimeos\MShop\Common\Manager\Methods;
 	use \Aimeos\MShop\Common\Manager\Site;
