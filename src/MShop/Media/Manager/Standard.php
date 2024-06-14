@@ -424,8 +424,15 @@ class Standard
 		{
 			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
 			{
-				$this->deletePreviews( $item, $item->getPreviews() );
-				$this->deleteFile( $item->getUrl(), 'fs-media' );
+				try
+				{
+					$this->deletePreviews( $item, $item->getPreviews() );
+					$this->deleteFile( $item->getUrl(), 'fs-media' );
+				}
+				catch( \Exception $e )
+				{
+					$this->context()->logger()->warning( $e->getMessage() );
+				}
 			}
 		}
 
