@@ -296,7 +296,7 @@ trait Traits
 					$listItem->setRefId( $refItem->getId() );
 				}
 
-				if( $listItem->getParentId() != $item->getId() ) {
+				if( $listItem->getParentId() && $listItem->getParentId() != $item->getId() ) {
 					$listItem->setId( null ); // create new list item if copied
 				}
 
