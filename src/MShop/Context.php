@@ -679,7 +679,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Sets the user/customer item of the logged in user.
 	 *
-	 * @param \Closure|string|null $user User/customer item of the logged in user or closure to retrieve them
+	 * @param \Closure|null $user User/customer item of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
 	public function setUser( $user ) : \Aimeos\MShop\ContextIface
