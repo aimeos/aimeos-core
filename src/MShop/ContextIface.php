@@ -165,17 +165,18 @@ interface ContextIface
 	/**
 	 * Returns the mail object.
 	 *
+	 * @param string|null $name Name of the mail configuration, NULL for default mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function mail() : \Aimeos\Base\Mail\Iface;
+	public function mail( string $name = null ) : \Aimeos\Base\Mail\Iface;
 
 	/**
-	 * Sets the mail object.
+	 * Sets the mail manager object.
 	 *
-	 * @param \Aimeos\Base\Mail\Iface $mail Mail object
+	 * @param \Aimeos\Base\Mail\Manager\Iface $mail Mail manager object
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
-	public function setMail( \Aimeos\Base\Mail\Iface $mail ) : \Aimeos\MShop\ContextIface;
+	public function setMail( \Aimeos\Base\Mail\Manager\Iface $mail ) : \Aimeos\MShop\ContextIface;
 
 	/**
 	 * Returns the password adapter object.

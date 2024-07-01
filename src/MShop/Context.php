@@ -23,7 +23,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	private ?\Aimeos\Base\Filesystem\Manager\Iface $fs = null;
 	private ?\Aimeos\MShop\Locale\Item\Iface $locale = null;
 	private ?\Aimeos\Base\Logger\Iface $logger = null;
-	private ?\Aimeos\Base\Mail\Iface $mail = null;
+	private ?\Aimeos\Base\Mail\Manager\Iface $mail = null;
 	private ?\Aimeos\Base\MQueue\Manager\Iface $queue = null;
 	private ?\Aimeos\Base\Password\Iface $password = null;
 	private ?\Aimeos\Base\Process\Iface $process = null;
@@ -413,12 +413,12 @@ class Context implements \Aimeos\MShop\ContextIface
 
 
 	/**
-	 * Sets the mail object.
+	 * Sets the mail manager object.
 	 *
-	 * @param \Aimeos\Base\Mail\Iface $mail Mail object
+	 * @param \Aimeos\Base\Mail\Manager\Iface $mail Mail manager object
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
-	public function setMail( \Aimeos\Base\Mail\Iface $mail ) : \Aimeos\MShop\ContextIface
+	public function setMail( \Aimeos\Base\Mail\Manager\Iface $mail ) : \Aimeos\MShop\ContextIface
 	{
 		$this->mail = $mail;
 
@@ -429,15 +429,16 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Returns the mail object.
 	 *
+	 * @param string|null $name Name of the mail configuration, NULL for default mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function mail() : \Aimeos\Base\Mail\Iface
+	public function mail( string $name = null ) : \Aimeos\Base\Mail\Iface
 	{
 		if( !isset( $this->mail ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Mail object not available' ) );
 		}
 
-		return $this->mail;
+		return $this->mail->get( $name );
 	}
 
 

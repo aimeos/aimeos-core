@@ -200,11 +200,11 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMail()
 	{
-		$mail = new \Aimeos\Base\Mail\None();
+		$mail = new \Aimeos\Base\Mail\Manager\None();
 		$return = $this->object->setMail( $mail );
 
-		$this->assertSame( $mail, $this->object->mail() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
+		$this->assertInstanceOf( \Aimeos\Base\Mail\Iface::class, $this->object->mail() );
 	}
 
 
