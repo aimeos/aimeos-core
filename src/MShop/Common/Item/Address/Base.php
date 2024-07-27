@@ -81,7 +81,7 @@ abstract class Base
 	 */
 	public function setVatID( ?string $vatid ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->set( $this->prefix . 'vatid', (string) $vatid );
+		return $this->set( $this->prefix . 'vatid', str_replace( ' ', '', (string) $vatid ) );
 	}
 
 
