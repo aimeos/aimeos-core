@@ -111,13 +111,10 @@ class FreeProduct
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
-		$search = $manager->filter();
-		$expr = [
-			$search->compare( '==', 'order.address.email', $email ),
-			$search->compare( '==', 'order.product.prodcode', $code ),
-			$search->compare( '>=', 'order.statuspayment', $status ),
-		];
-		$search->setConditions( $search->and( $expr ) );
+		$search = $manager->filter()->add( [
+			'order.address.email' => $email,
+			'order.product.prodcode' => $code
+		] )->add( 'order.statuspayment', '>=', $status );
 
 		$result = $manager->aggregate( $search, 'order.address.email', 'order.product.quantity', 'sum' );
 

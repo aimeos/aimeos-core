@@ -75,13 +75,10 @@ class Coupon
 
 		foreach( $order->getCoupons() as $code => $products )
 		{
-			$search = $manager->filter( true )->slice( 0, 1 );
-			$expr = array(
-				$search->compare( '==', 'coupon.code.code', $code ),
-				$codeManager->filter( true )->getConditions(),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->and( $expr ) );
+			$search = $manager->filter( true )
+				->add( 'coupon.code.code', '==', $code )
+				->add( $codeManager->filter( true )->getConditions() )
+				->slice( 0, 1 );
 
 			if( ( $item = $manager->search( $search )->first() ) !== null ) {
 				$manager->getProvider( $item, $code )->update( $order );

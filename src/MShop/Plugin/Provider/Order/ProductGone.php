@@ -64,12 +64,8 @@ class ProductGone
 		$productIds = $order->getProducts()->getProductId()->toArray();
 		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$search = $productManager->filter( true );
-		$search->setConditions( $search->and( [
-			$search->compare( '==', 'product.id', $productIds ),
-			$search->getConditions()
-		] ) );
-		$checkItems = $productManager->search( $search );
+		$filter = $productManager->filter( true )->add( 'product.id', '==', $productIds );
+		$checkItems = $productManager->search( $filter );
 
 		foreach( $order->getProducts() as $position => $orderProduct )
 		{
