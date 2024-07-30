@@ -56,9 +56,9 @@ trait Preview
 			if( $this->call( 'filterPreviews', $image, $maxwidth, $maxheight, $force ) )
 			{
 				$file = match( $force ) {
-					0 => $image->scaleDown( $maxwidth, $maxheight ),
-					1 => $image->pad( $maxwidth, $maxheight, $bg, 'center' ),
-					2 => $image->cover( $maxwidth, $maxheight )
+					0 => (clone $image)->scaleDown( $maxwidth, $maxheight ),
+					1 => (clone $image)->pad( $maxwidth, $maxheight, $bg, 'center' ),
+					2 => (clone $image)->cover( $maxwidth, $maxheight )
 				};
 
 				$list[$file->width()] = $file;
