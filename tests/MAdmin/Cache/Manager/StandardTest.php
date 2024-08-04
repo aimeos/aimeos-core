@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteItems()
+	public function testDelete()
 	{
 		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Manager\Iface::class, $this->object->delete( [-1] ) );
 	}
