@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
+	public function testFilter()
 	{
 		$search = $this->object->filter();
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $search );

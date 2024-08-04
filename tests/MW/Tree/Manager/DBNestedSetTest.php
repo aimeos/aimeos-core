@@ -203,7 +203,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
+	public function testFilter()
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm->get() );
 

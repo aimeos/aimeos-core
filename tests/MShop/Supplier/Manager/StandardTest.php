@@ -130,7 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->get( $itemSaved->getId() );
 	}
 
-	public function testCreateSearch()
+	public function testFilter()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}

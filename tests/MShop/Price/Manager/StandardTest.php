@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
+	public function testFilter()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $this->object->filter() );
 	}

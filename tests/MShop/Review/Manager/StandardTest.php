@@ -168,13 +168,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
+	public function testFilter()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
-	public function testCreateSearchDefault()
+	public function testFilterDefault()
 	{
 		$result = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
