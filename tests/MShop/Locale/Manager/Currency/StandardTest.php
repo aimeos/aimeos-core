@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		// insert case
 		$item = $this->object->create();

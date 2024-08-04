@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
 			->add( ['order.channel' => 'phone', 'order.editor' => $this->editor] );

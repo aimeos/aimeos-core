@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$group = \Aimeos\MShop::create( $this->context, 'group' )->find( 'unitgroup' );
 		$item = $this->object->create();

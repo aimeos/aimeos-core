@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$type = \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY;
 

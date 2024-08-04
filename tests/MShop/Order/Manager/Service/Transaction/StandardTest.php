@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->add( ['order.service.transaction.price' => '2465.00'] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'empty search result' ) );

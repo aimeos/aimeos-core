@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$siteid = \TestHelper::context()->locale()->getSiteId();
 

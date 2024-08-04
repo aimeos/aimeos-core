@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
 			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->editor] );

@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->add( ['order.product.attribute.value' => 33] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'empty search result' ) );

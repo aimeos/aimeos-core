@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.property.type.editor', $this->editor ) );

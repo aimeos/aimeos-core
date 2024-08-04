@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$item = $this->object->create();
 		$item->setLabel( 'unit test' );

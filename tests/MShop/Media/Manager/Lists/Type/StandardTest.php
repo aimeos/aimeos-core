@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
 		$conditions = $search->compare( '==', 'media.lists.type.editor', $this->editor );

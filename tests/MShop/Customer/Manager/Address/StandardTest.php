@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$item = new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', $this->fixture );
 		$item->setId( null );

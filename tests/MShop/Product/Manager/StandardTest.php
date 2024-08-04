@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$item = $this->object->find( 'CNC' );
 		$listItem = $this->object->createListItem();
@@ -290,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItemRefItems()
+	public function testSaveRefItems()
 	{
 		$context = \TestHelper::context();
 
@@ -330,7 +330,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItemSitecheck()
+	public function testSaveSitecheck()
 	{
 		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'product' );
 

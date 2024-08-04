@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );

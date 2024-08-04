@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveUpdateDeleteItem()
+	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->add( ['order.basket.customerid' => -1] )->slice( 0, 1 );
 		$item = $this->object->search( $search )->first( new \Exception( 'No order basket item found' ) );
