@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
 

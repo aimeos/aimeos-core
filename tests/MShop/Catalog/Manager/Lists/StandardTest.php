@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$results = $this->object->search( $search )->toArray();

@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$domains = ['text', 'customer/property' => ['newsletter']];
 		$search = $this->object->filter()->slice( 0, 1 );

@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$item = $this->object->find( 'unitSupplier001' );
 

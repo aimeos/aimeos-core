@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$type = \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY;
 

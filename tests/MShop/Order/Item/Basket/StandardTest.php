@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $this->object->getItem() );
 	}

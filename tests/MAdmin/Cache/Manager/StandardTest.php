@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$this->object->save( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 

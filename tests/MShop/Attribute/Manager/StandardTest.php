@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$itemA = $this->object->find( 'black', [], 'product', 'color' );
 		$itemB = $this->object->get( $itemA->getId(), ['attribute/property', 'text'] );
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItemLists()
+	public function testGetLists()
 	{
 		$itemA = $this->object->find( 'xxl', [], 'product', 'size' );
 		$itemB = $this->object->get( $itemA->getId(), ['text'] );

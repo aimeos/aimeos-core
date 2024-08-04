@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )->add( [
 			'order.service.transaction.price' => '2465.00',

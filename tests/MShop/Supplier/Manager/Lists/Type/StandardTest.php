@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item );
 	}
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor ) );

@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$expected = $this->object->search( $search )->first( new \Exception( 'No order basket item found' ) );

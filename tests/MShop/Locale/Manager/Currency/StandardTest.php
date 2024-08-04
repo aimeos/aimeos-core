@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$actual = $this->object->get( 'EUR' );
 

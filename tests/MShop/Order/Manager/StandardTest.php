@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetItem()
+	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
 			->add( ['order.price' => '672.00', 'order.editor' => $this->editor] );
