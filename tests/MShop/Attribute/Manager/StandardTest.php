@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItem()
+	public function testFind()
 	{
 		$item = $this->object->find( 'm', array( 'text' ), 'product', 'size' );
 
@@ -103,14 +103,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItemInvalid()
+	public function testFindInvalid()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->find( 'invalid' );
 	}
 
 
-	public function testFindItemMissing()
+	public function testFindMissing()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->find( 'm', [], 'product' );

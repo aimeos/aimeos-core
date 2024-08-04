@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItem()
+	public function testFind()
 	{
 		$item = $this->object->find( 'CNC' );
 
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItemDeep()
+	public function testFindDeep()
 	{
 		$item = $this->object->find( 'U:BUNDLE', ['attribute', 'product'] );
 		$products = $item->getRefItems( 'product' );
@@ -119,14 +119,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItemDomainFilter()
+	public function testFindDomainFilter()
 	{
 		$item = $this->object->find( 'U:BUNDLE', ['product' => ['default']] );
 		$this->assertEquals( 2, count( $item->getListItems( 'product' ) ) );
 	}
 
 
-	public function testFindItemForeignDomains()
+	public function testFindForeignDomains()
 	{
 		$item = $this->object->find( 'CNE', ['catalog', 'supplier', 'stock'] );
 

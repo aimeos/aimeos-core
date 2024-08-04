@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItem()
+	public function testFind()
 	{
 		$item = $this->object->find( 'size', [], 'product' );
 
