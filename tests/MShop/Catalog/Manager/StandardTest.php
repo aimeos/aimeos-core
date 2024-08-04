@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateItem()
+	public function testCreate()
 	{
 		$item = $this->object->create();
 

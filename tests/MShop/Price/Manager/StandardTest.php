@@ -57,13 +57,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateItem()
+	public function testCreate()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $this->object->create() );
 	}
 
 
-	public function testCreateItemType()
+	public function testCreateType()
 	{
 		$item = $this->object->create( ['price.type' => 'default'] );
 		$this->assertEquals( 'default', $item->getType() );

@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateItem()
+	public function testCreate()
 	{
 		$actual = $this->object->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, $actual );

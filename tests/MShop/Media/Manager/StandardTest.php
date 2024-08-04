@@ -64,14 +64,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateItem()
+	public function testCreate()
 	{
 		$item = $this->object->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $item );
 	}
 
 
-	public function testCreateItemType()
+	public function testCreateType()
 	{
 		$item = $this->object->create( ['media.type' => 'default'] );
 		$this->assertEquals( 'default', $item->getType() );
