@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRelevance()
+	public function testSearchRelevance()
 	{
 		$config = $this->context->config();
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRelevanceCase()
+	public function testSearchRelevanceCase()
 	{
 		$config = $this->context->config();
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsNoLanguage()
+	public function testSearchNoLanguage()
 	{
 		$config = $this->context->config();
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsName()
+	public function testSearchName()
 	{
 		$search = $this->object->filter();
 
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsUrl()
+	public function testSearchUrl()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.text:url("de")', 'cafe-noire-cappuccino' ) );

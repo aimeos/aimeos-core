@@ -353,7 +353,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$total = 0;
 		$suggestItem = $this->object->find( 'CNC' );
@@ -413,7 +413,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAll()
+	public function testSearchAll()
 	{
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 10 );
@@ -423,7 +423,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBase()
+	public function testSearchBase()
 	{
 		$search = $this->object->filter( true );
 		$expr = array(
@@ -437,7 +437,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRef()
+	public function testSearchRef()
 	{
 		$item = $this->object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
 
@@ -448,7 +448,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsDomains()
+	public function testSearchDomains()
 	{
 		$item = $this->object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );
 
@@ -483,7 +483,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsLimit()
+	public function testSearchLimit()
 	{
 		$start = 0;
 		$numproducts = 0;

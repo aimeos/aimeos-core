@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		//search without base criteria
 		$search = $this->object->filter();

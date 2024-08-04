@@ -226,7 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRef()
+	public function testSearchRef()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitSupplier001' ) );

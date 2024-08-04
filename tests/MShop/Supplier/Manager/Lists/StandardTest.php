@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$total = 0;
 		$search = $this->object->filter();
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBase()
+	public function testSearchBase()
 	{
 		$total = 0;
 		$search = $this->object->filter( true );

@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$item = $this->object->find( 'test@example.com', ['text'] );
 
@@ -361,7 +361,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsTotal()
+	public function testSearchTotal()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
@@ -379,7 +379,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsCriteria()
+	public function testSearchCriteria()
 	{
 		$search = $this->object->filter( true );
 		$conditions = array(
@@ -391,7 +391,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRef()
+	public function testSearchRef()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );

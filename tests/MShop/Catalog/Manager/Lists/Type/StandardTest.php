@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$search = $this->object->filter();
 
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBase()
+	public function testSearchBase()
 	{
 		$search = $this->object->filter( true );
 		$expr = array(
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsTotal()
+	public function testSearchTotal()
 	{
 		$total = 0;
 		$search = $this->object->filter();

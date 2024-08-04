@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$attributeManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$id = $attributeManager->find( '30', [], 'product', 'length' )->getId();
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsNoId()
+	public function testSearchNoId()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAllof()
+	public function testSearchAllof()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAllofArticle()
+	public function testSearchAllofArticle()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsOneof()
+	public function testSearchOneof()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
@@ -215,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsOneofArticle()
+	public function testSearchOneofArticle()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 

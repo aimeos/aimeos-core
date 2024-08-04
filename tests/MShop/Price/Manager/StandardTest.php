@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$search = $this->object->filter()->add( ['price.value' => '2.95', 'price.costs' => '1.00'] );
 
@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsProperty()
+	public function testSearchProperty()
 	{
 		$total = 0;
 		$search = $this->object->filter();
@@ -267,7 +267,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsTotal()
+	public function testSearchTotal()
 	{
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 10 );
@@ -277,7 +277,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBase()
+	public function testSearchBase()
 	{
 		$search = $this->object->filter( true );
 		$results = $this->object->search( $search )->toArray();

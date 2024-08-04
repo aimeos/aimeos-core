@@ -398,7 +398,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$siteid = $this->context->locale()->getSiteId();
 
@@ -540,7 +540,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsTotal()
+	public function testSearchTotal()
 	{
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 1 );
@@ -560,7 +560,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRef()
+	public function testSearchRef()
 	{
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 1 );

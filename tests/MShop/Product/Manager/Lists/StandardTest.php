@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$search = $this->object->filter();
 		$expr = array(
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBase()
+	public function testSearchBase()
 	{
 		$total = 0;
 		//search with base criteria
@@ -215,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRef()
+	public function testSearchRef()
 	{
 		$search = $this->object->filter( true )->slice( 0, 1 )->add( [
 			'product.lists.domain' => 'text',

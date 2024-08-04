@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$item = $this->object->find( 'black', ['text'], 'product', 'color' );
 

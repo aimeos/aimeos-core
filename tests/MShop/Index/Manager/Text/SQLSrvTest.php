@@ -46,7 +46,7 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRelevance()
+	public function testSearchRelevance()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
@@ -58,7 +58,7 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRelevanceCase()
+	public function testSearchRelevanceCase()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
@@ -70,7 +70,7 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRelevanceTerms()
+	public function testSearchRelevanceTerms()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'cafe noire expresso'] ), 0 ) );

@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsId()
+	public function testSearchId()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsIdNull()
+	public function testSearchIdNull()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) );
@@ -155,7 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPosition()
+	public function testSearchPosition()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPositionList()
+	public function testSearchPositionList()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitSupplier001' )->getId();
 
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRadiusInside()
+	public function testSearchRadiusInside()
 	{
 		$search = $this->object->filter()->order( 'index.supplier.id' );
 		$search->add( $search->make( 'index.supplier:radius', [52.5, 10, 115] ), '!=', null );
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsRadiusOutside()
+	public function testSearchRadiusOutside()
 	{
 		$search = $this->object->filter()->order( 'index.supplier.id' );
 		$search->add( $search->make( 'index.supplier:radius', [52.5, 10, 110] ), '!=', null );

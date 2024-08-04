@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$this->object->save( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 

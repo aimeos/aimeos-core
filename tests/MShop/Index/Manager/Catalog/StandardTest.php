@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsId()
+	public function testSearchId()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'catalog' )->find( 'cafe' )->getId();
 
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsNoId()
+	public function testSearchNoId()
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPosition()
+	public function testSearchPosition()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'catalog' )->find( 'cafe' )->getId();
 
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPositionList()
+	public function testSearchPositionList()
 	{
 		$id = \Aimeos\MShop::create( $this->context, 'catalog' )->find( 'cafe' )->getId();
 
@@ -174,7 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPositionNoCatid()
+	public function testSearchPositionNoCatid()
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->context, 'catalog' );
 		$id = $catalogManager->find( 'cafe' )->getId();
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsPositionNoParams()
+	public function testSearchPositionNoParams()
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->context, 'catalog' );
 		$id = $catalogManager->find( 'cafe' )->getId();

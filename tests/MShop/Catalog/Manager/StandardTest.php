@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
 		$item = $this->object->find( 'cafe', ['media'] );
 
@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsTranslation()
+	public function testSearchTranslation()
 	{
 		$search = $this->object->filter();
 
