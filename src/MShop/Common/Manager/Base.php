@@ -62,12 +62,14 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
+	 * @return \Aimeos\MShop\Common\Item\Iface New attribute item object
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $values['siteid'] ?? $this->context()->locale()->getSiteId();
-		return new \Aimeos\MShop\Common\Item\Base( '', $values );
+		$prefix = $this->getPrefix();
+		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $this->context()->locale()->getSiteId();
+
+		return new \Aimeos\MShop\Common\Item\Base( $prefix, $values );
 	}
 
 
@@ -75,7 +77,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
@@ -102,12 +104,12 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * @param string $id Unique ID of the attribute item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Returns the attribute item of the given id
+	 * @return \Aimeos\MShop\Common\Item\Iface Returns the attribute item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( 'id', $id, $ref, $default );
+		return $this->getItemBase( $this->getPrefix() . 'id', $id, $ref, $default );
 	}
 
 
@@ -131,27 +133,34 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
+		$prefix = $this->getPrefix();
+
 		return array_replace( $this->createAttributes( [
 			'id' => [
+				'code' => $prefix . 'id',
 				'label' => 'ID',
 				'type' => 'int',
 				'public' => false,
 			],
 			'siteid' => [
+				'code' => $prefix . 'siteid',
 				'label' => 'Site ID',
 				'public' => false,
 			],
 			'ctime' => [
+				'code' => $prefix . 'ctime',
 				'label' => 'Create date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
 			'mtime' => [
+				'code' => $prefix . 'mtime',
 				'label' => 'Modification date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
 			'editor' => [
+				'code' => $prefix . 'editor',
 				'label' => 'Editor',
 				'public' => false,
 			],
@@ -340,6 +349,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$cfgPathCount = 'mshop/common/manager/count';
 
 		$items = [];
+		$prefix = $this->getPrefix();
 		$level = $this->getSiteMode();
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
@@ -349,7 +359,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		while( $row = $results->fetch() )
 		{
 			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$row['id']] = $item;
+				$items[$row[$prefix . 'id']] = $item;
 			}
 		}
 
@@ -401,6 +411,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
+	}
+
+
+	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function getPrefix() : string
+	{
+		return '';
 	}
 
 

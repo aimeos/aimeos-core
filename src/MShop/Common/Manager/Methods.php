@@ -299,6 +299,7 @@ trait Methods
 		foreach( $list as $key => $fields )
 		{
 			$fields['code'] = $fields['code'] ?? $key;
+			$fields['internalcode'] = $fields['internalcode'] ?? $key;
 			$attr[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
 		}
 

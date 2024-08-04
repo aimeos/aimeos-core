@@ -475,7 +475,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testBost()
+	public function testBoost()
 	{
 		$this->assertEquals( 1.5, $this->object->boost() );
 	}
