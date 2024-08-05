@@ -366,6 +366,17 @@ trait Methods
 
 
 	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function getPrefix() : string
+	{
+		return '';
+	}
+
+
+	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items

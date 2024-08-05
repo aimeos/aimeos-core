@@ -421,17 +421,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 
 	/**
-	 * Returns the prefix for the item properties and search keys.
-	 *
-	 * @return string Prefix for the item properties and search keys
-	 */
-	protected function getPrefix() : string
-	{
-		return '';
-	}
-
-
-	/**
 	 * Returns the site mode constant for inheritance/aggregation
 	 *
 	 * @return int Site mode constant (default: SITE_ALL for inheritance and aggregation)
