@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'group.editor' => 'unittest',
 		);
 
-		$this->object = new \Aimeos\MShop\Group\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Group\Item\Standard( 'group.', $this->values );
 	}
 
 
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Group\Item\Standard();
+		$item = new \Aimeos\MShop\Group\Item\Standard( 'group.', [] );
 
 		$list = $entries = array(
 			'group.id' => 12,

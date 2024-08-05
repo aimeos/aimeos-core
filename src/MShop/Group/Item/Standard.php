@@ -22,17 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Group\Item\Iface
 {
 	/**
-	 * Initializes the group item
-	 *
-	 * @param array $values List of key/value pairs of the group
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'group.', $values );
-	}
-
-
-	/**
 	 * Returns the code of the group
 	 *
 	 * @return string Code of the group
