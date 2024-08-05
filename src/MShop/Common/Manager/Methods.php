@@ -72,7 +72,7 @@ trait Methods
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return new \Aimeos\MShop\Common\Item\Base( '', $values );
+		return new \Aimeos\MShop\Common\Item\Base( $this->getPrefix(), $values );
 	}
 
 
