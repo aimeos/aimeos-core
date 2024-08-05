@@ -133,34 +133,40 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
+		$alias = $this->getAlias();
 		$prefix = $this->getPrefix();
 
 		return array_replace( $this->createAttributes( [
 			'id' => [
 				'code' => $prefix . 'id',
+				'internalcode' => $alias . '."id"',
 				'label' => 'ID',
 				'type' => 'int',
 				'public' => false,
 			],
 			'siteid' => [
 				'code' => $prefix . 'siteid',
+				'internalcode' => $alias . '."siteid"',
 				'label' => 'Site ID',
 				'public' => false,
 			],
 			'ctime' => [
 				'code' => $prefix . 'ctime',
+				'internalcode' => $alias . '."ctime"',
 				'label' => 'Create date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
 			'mtime' => [
 				'code' => $prefix . 'mtime',
+				'internalcode' => $alias . '."mtime"',
 				'label' => 'Modification date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
 			'editor' => [
 				'code' => $prefix . 'editor',
+				'internalcode' => $alias . '."editor"',
 				'label' => 'Editor',
 				'public' => false,
 			],

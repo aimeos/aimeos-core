@@ -65,7 +65,7 @@ return [
 			'ansi' => '
 				SELECT COUNT(*) AS "count"
 				FROM (
-					SELECT "id"
+					SELECT :alias."id"
 					FROM ":table" :alias
 					:joins
 					WHERE :cond
@@ -77,7 +77,7 @@ return [
 			'mysql' => '
 				SELECT COUNT(*) AS "count"
 				FROM (
-					SELECT "id"
+					SELECT :alias."id"
 					FROM ":table" :alias
 					:joins
 					WHERE :cond
