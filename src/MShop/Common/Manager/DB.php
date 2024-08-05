@@ -467,13 +467,16 @@ trait DB
 	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
 	{
 		$list = [];
+		$entries = array_column( $attributes, null, 'code' );
 
 		foreach( $keys as $key )
 		{
 			$name = $key . '.siteid';
 
-			if( isset( $attributes[$name] ) ) {
+			if( isset( $entries[$name] ) ) {
 				$list[] = $this->siteCondition( $name, $sitelevel );
+			} elseif( isset( $entries['siteid'] ) ) {
+				$list[] = $this->siteCondition( 'siteid', $sitelevel );
 			}
 		}
 
