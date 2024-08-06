@@ -190,66 +190,79 @@ trait DB
 		 * @since 2021.04
 		 */
 		$limit = $this->context()->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
-		$keys = (array) $keys;
 
-		if( !count( $keys ) )
+		if( empty( $keys ) )
 		{
 			$msg = $this->context()->translate( 'mshop', 'At least one key is required for aggregation' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
-		$conn = $this->context()->db( $this->getResourceName() );
-
-		$total = null;
-		$cols = $map = [];
-		$search = clone $search;
-		$search->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$attrList = array_filter( $this->object()->getSearchAttributes(), function( $item ) {
+		$attrMap = array_column( array_filter( $this->object()->getSearchAttributes(), function( $item ) {
 			return $item->isPublic() || strncmp( $item->getCode(), 'agg:', 4 ) === 0;
-		} );
+		} ), null, 'code' );
 
-		if( $value === null && ( $value = key( $attrList ) ) === null )
+		if( $value === null && ( $value = key( $attrMap ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'No search keys available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
-			$value = substr( $value, 0, $pos );
+			$value = substr( $value, 0, $pos ) . '()'; // remove parameters from search function
 		}
 
-		if( !isset( $attrList[$value] ) )
+		if( !isset( $attrMap[$value] ) )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $value ) );
 		}
 
+		$keys = (array) $keys;
+		$acols = $cols = $expr = [];
+		$search = (clone $search)->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
+
 		foreach( $keys as $string )
 		{
-			if( !isset( $attrList[$string] ) )
+			if( ( $attrItem = $attrMap[$string] ?? null ) === null )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
 			}
 
-			$cols[] = $attrList[$string]->getInternalCode();
-			$acols[] = $attrList[$string]->getInternalCode() . ' AS "' . $string . '"';
+			$cols[] = $attrItem->getInternalCode();
+			$acols[] = $attrItem->getInternalCode() . ' AS "' . $string . '"';
 
-			/** @todo Required to get the joins, but there should be a better way */
-			$search->add( [$string => null], '!=' );
+			$expr[] = $search->compare( '!=', $string, null ); // required for the joins
 		}
-		$search->add( [$valkey => null], '!=' );
+
+		$search->add( $search->and( $expr ) )->add( $valkey, '!=', null );
 
 		$sql = $this->getSqlConfig( $cfgPath );
 		$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
 		$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
 		$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
-		$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
+		$sql = str_replace( ':val', $attrMap[$value]->getInternalCode(), $sql );
 		$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
 
-		$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
+		return $this->aggregateResult( $search, $sql, $required );
+	}
+
+
+	/**
+	 * Returns the aggregated values for the given SQL string and filter.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $filter Filter object
+	 * @param string $sql SQL statement
+	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
+	 * @return \Aimeos\Map (Nested) list of aggregated values as key and the number of counted products as value
+	 */
+	protected function aggregateResult( \Aimeos\Base\Criteria\Iface $filter, string $sql, array $required ) : \Aimeos\Map
+	{
+		$map = [];
+		$total = null;
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$conn = $this->context()->db( $this->getResourceName() );
+		$results = $this->searchItemsBase( $conn, $filter, $sql, '', $required, $total, $level );
 
 		while( $row = $results->fetch() )
 		{
