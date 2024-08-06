@@ -498,7 +498,7 @@ trait Methods
 	 */
 	protected function initMethods()
 	{
-		$parts = explode( '\\', strtolower( get_class( $this ) ) );
+		$parts = explode( '\\', strtolower( current( $this->classes() ) ) );
 		array_shift( $parts ); array_shift( $parts ); // remove "Aimeos\MShop"
 		array_pop( $parts );
 

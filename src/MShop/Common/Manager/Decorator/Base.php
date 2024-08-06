@@ -33,8 +33,8 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\Common\Manager\Iface $manager, \Aimeos\MShop\ContextIface $context )
 	{
-		parent::__construct( $context );
 		$this->manager = $manager;
+		parent::__construct( $context );
 	}
 
 
