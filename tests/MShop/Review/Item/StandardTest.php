@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'review.editor' => 'unitTestUser',
 		);
 
-		$this->object = new \Aimeos\MShop\Review\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Review\Item\Standard( 'review.', $this->values );
 	}
 
 
@@ -288,7 +288,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Review\Item\Standard();
+		$item = new \Aimeos\MShop\Review\Item\Standard( 'review.', [] );
 
 		$list = $entries = array(
 			'review.id' => 1,

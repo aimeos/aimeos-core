@@ -22,17 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Review\Item\Iface
 {
 	/**
-	 * Initializes the item object.
-	 *
-	 * @param array $values Parameter for initializing the basic properties
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'review.', $values );
-	}
-
-
-	/**
 	 * Returns the comment for the reviewed item
 	 *
 	 * @return string Comment for the reviewed item
