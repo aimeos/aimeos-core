@@ -360,10 +360,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
 
+		$attrs = array_filter( $this->getSearchAttributes(), fn( $attr ) => $attr->getType() === 'json' );
+		$attrs = array_column( $attrs, null, 'code' );
+
 		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() )
 		{
+			foreach( $attrs as $code => $attr ) {
+				$row[$code] = json_decode( $row[$code], true );
+			}
+
 			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
 				$items[$row[$prefix . 'id']] = $item;
 			}
