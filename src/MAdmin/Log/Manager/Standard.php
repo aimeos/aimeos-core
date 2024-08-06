@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** madmin/log/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/global
 	 * @see madmin/log/manager/decorators/local
@@ -100,7 +98,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/excludes
 	 * @see madmin/log/manager/decorators/local
@@ -125,7 +122,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/excludes
 	 * @see madmin/log/manager/decorators/global
@@ -237,8 +233,6 @@ class Standard
 		 *
 		 * @param int Log level number
 		 * @since 2014.03
-		 * @category Developer
-		 * @category User
 		 */
 		$this->loglevel = $config->get( 'madmin/log/manager/loglevel', \Aimeos\Base\Logger\Iface::NOTICE );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
@@ -309,7 +303,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi
 		 * @see madmin/log/manager/newid/ansi
@@ -385,7 +378,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'madmin/log/manager/submanagers';
 
@@ -489,7 +481,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/log/manager/update/ansi
 			 * @see madmin/log/manager/newid/ansi
 			 * @see madmin/log/manager/delete/ansi
@@ -526,7 +517,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/log/manager/insert/ansi
 			 * @see madmin/log/manager/newid/ansi
 			 * @see madmin/log/manager/delete/ansi
@@ -589,7 +579,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/log/manager/insert/ansi
 			 * @see madmin/log/manager/update/ansi
 			 * @see madmin/log/manager/delete/ansi
@@ -670,7 +659,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi
 		 * @see madmin/log/manager/newid/ansi
@@ -723,7 +711,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi
 		 * @see madmin/log/manager/newid/ansi

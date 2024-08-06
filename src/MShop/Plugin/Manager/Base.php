@@ -73,7 +73,6 @@ abstract class Base
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/plugin/provider/order/decorators
 		 */
 		$decorators = $context->config()->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );

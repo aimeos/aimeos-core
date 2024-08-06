@@ -141,8 +141,6 @@ class BasketLimits
 		 * allow them to send free or replacements for lost or damaged products.
 		 *
 		 * @param bool True to disable the check, false to keep it enabled
-		 * @category Developer
-		 * @category User
 		 * @since 2014.03
 		 */
 		if( $context->config()->get( 'mshop/plugin/provider/order/complete/disable', false ) != true )

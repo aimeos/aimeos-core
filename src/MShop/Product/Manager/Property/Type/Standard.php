@@ -166,7 +166,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2015.01
-		 * @category Developer
 		 */
 		$path = 'mshop/product/manager/property/type/submanagers';
 
@@ -214,7 +213,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2015.01
-		 * @category Developer
 		 */
 
 		/** mshop/product/manager/property/type/decorators/excludes
@@ -237,7 +235,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/product/manager/property/type/decorators/global
 		 * @see mshop/product/manager/property/type/decorators/local
@@ -263,7 +260,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/product/manager/property/type/decorators/excludes
 		 * @see mshop/product/manager/property/type/decorators/local
@@ -289,7 +285,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/product/manager/property/type/decorators/excludes
 		 * @see mshop/product/manager/property/type/decorators/global
@@ -334,7 +329,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/update/ansi
 		 * @see mshop/product/manager/property/type/newid/ansi
 		 * @see mshop/product/manager/property/type/delete/ansi
@@ -367,7 +361,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/insert/ansi
 		 * @see mshop/product/manager/property/type/newid/ansi
 		 * @see mshop/product/manager/property/type/delete/ansi
@@ -404,7 +397,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/insert/ansi
 		 * @see mshop/product/manager/property/type/update/ansi
 		 * @see mshop/product/manager/property/type/delete/ansi
@@ -435,7 +427,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/insert/ansi
 		 * @see mshop/product/manager/property/type/update/ansi
 		 * @see mshop/product/manager/property/type/newid/ansi
@@ -491,7 +482,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/insert/ansi
 		 * @see mshop/product/manager/property/type/update/ansi
 		 * @see mshop/product/manager/property/type/newid/ansi
@@ -543,7 +533,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/product/manager/property/type/insert/ansi
 		 * @see mshop/product/manager/property/type/update/ansi
 		 * @see mshop/product/manager/property/type/newid/ansi

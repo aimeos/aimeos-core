@@ -180,7 +180,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting or updating records
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/order/manager/basket/newid/ansi
 		 * @see mshop/order/manager/basket/delete/ansi
 		 * @see mshop/order/manager/basket/search/ansi
@@ -266,7 +265,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/order/manager/basket/insert/ansi
 		 * @see mshop/order/manager/basket/update/ansi
 		 * @see mshop/order/manager/basket/newid/ansi
@@ -316,7 +314,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2022.10
-		 * @category Developer
 		 */
 		$path = 'mshop/order/manager/basket/submanagers';
 
@@ -364,7 +361,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2022.10
-		 * @category Developer
 		 */
 
 		/** mshop/order/manager/basket/decorators/excludes
@@ -387,7 +383,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/basket/decorators/global
 		 * @see mshop/order/manager/basket/decorators/local
@@ -413,7 +408,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/basket/decorators/excludes
 		 * @see mshop/order/manager/basket/decorators/local
@@ -439,7 +433,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/basket/decorators/excludes
 		 * @see mshop/order/manager/basket/decorators/global
@@ -516,7 +509,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/order/manager/basket/insert/ansi
 		 * @see mshop/order/manager/basket/update/ansi
 		 * @see mshop/order/manager/basket/newid/ansi
@@ -569,7 +561,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2022.10
-		 * @category Developer
 		 * @see mshop/order/manager/basket/insert/ansi
 		 * @see mshop/order/manager/basket/update/ansi
 		 * @see mshop/order/manager/basket/newid/ansi

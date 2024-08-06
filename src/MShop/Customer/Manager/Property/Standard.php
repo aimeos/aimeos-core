@@ -163,7 +163,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2018.07
-		 * @category Developer
 		 */
 		$path = 'mshop/customer/manager/property/submanagers';
 
@@ -211,7 +210,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2018.07
-		 * @category Developer
 		 */
 
 		/** mshop/customer/manager/property/decorators/excludes
@@ -234,7 +232,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/global
 		 * @see mshop/customer/manager/property/decorators/local
@@ -260,7 +257,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/excludes
 		 * @see mshop/customer/manager/property/decorators/local
@@ -286,7 +282,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/excludes
 		 * @see mshop/customer/manager/property/decorators/global
@@ -331,7 +326,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/update/ansi
 		 * @see mshop/customer/manager/property/newid/ansi
 		 * @see mshop/customer/manager/property/delete/ansi
@@ -364,7 +358,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/insert/ansi
 		 * @see mshop/customer/manager/property/newid/ansi
 		 * @see mshop/customer/manager/property/delete/ansi
@@ -401,7 +394,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/insert/ansi
 		 * @see mshop/customer/manager/property/update/ansi
 		 * @see mshop/customer/manager/property/delete/ansi
@@ -432,7 +424,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/insert/ansi
 		 * @see mshop/customer/manager/property/update/ansi
 		 * @see mshop/customer/manager/property/newid/ansi
@@ -488,7 +479,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/insert/ansi
 		 * @see mshop/customer/manager/property/update/ansi
 		 * @see mshop/customer/manager/property/newid/ansi
@@ -540,7 +530,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/customer/manager/property/insert/ansi
 		 * @see mshop/customer/manager/property/update/ansi
 		 * @see mshop/customer/manager/property/newid/ansi

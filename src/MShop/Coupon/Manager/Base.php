@@ -65,7 +65,6 @@ abstract class Base
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.05
-		 * @category Developer
 		 * @see client/html/common/decorators/default
 		 * @see client/html/account/favorite/decorators/excludes
 		 * @see client/html/account/favorite/decorators/local

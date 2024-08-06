@@ -168,7 +168,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2017.01
-		 * @category Developer
 		 */
 		$path = 'mshop/stock/manager/type/submanagers';
 
@@ -216,7 +215,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2017.01
-		 * @category Developer
 		 */
 
 		/** mshop/stock/manager/type/decorators/excludes
@@ -239,7 +237,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/stock/manager/type/decorators/global
 		 * @see mshop/stock/manager/type/decorators/local
@@ -265,7 +262,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/stock/manager/type/decorators/excludes
 		 * @see mshop/stock/manager/type/decorators/local
@@ -291,7 +287,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/stock/manager/type/decorators/excludes
 		 * @see mshop/stock/manager/type/decorators/global
@@ -336,7 +331,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/update/ansi
 		 * @see mshop/stock/manager/type/newid/ansi
 		 * @see mshop/stock/manager/type/delete/ansi
@@ -369,7 +363,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/insert/ansi
 		 * @see mshop/stock/manager/type/newid/ansi
 		 * @see mshop/stock/manager/type/delete/ansi
@@ -406,7 +399,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/insert/ansi
 		 * @see mshop/stock/manager/type/update/ansi
 		 * @see mshop/stock/manager/type/delete/ansi
@@ -437,7 +429,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/insert/ansi
 		 * @see mshop/stock/manager/type/update/ansi
 		 * @see mshop/stock/manager/type/newid/ansi
@@ -493,7 +484,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/insert/ansi
 		 * @see mshop/stock/manager/type/update/ansi
 		 * @see mshop/stock/manager/type/newid/ansi
@@ -545,7 +535,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2017.01
-		 * @category Developer
 		 * @see mshop/stock/manager/type/insert/ansi
 		 * @see mshop/stock/manager/type/update/ansi
 		 * @see mshop/stock/manager/type/newid/ansi

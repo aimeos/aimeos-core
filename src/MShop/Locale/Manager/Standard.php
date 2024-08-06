@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** mshop/locale/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/global
 	 * @see mshop/locale/manager/decorators/local
@@ -101,7 +99,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/excludes
 	 * @see mshop/locale/manager/decorators/local
@@ -126,7 +123,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/excludes
 	 * @see mshop/locale/manager/decorators/global
@@ -358,7 +354,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/insert/ansi
 		 * @see mshop/locale/manager/update/ansi
 		 * @see mshop/locale/manager/newid/ansi
@@ -420,7 +415,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/update/ansi
 			 * @see mshop/locale/manager/newid/ansi
 			 * @see mshop/locale/manager/delete/ansi
@@ -457,7 +451,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/insert/ansi
 			 * @see mshop/locale/manager/newid/ansi
 			 * @see mshop/locale/manager/delete/ansi
@@ -524,7 +517,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/insert/ansi
 			 * @see mshop/locale/manager/update/ansi
 			 * @see mshop/locale/manager/delete/ansi
@@ -590,7 +582,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/locale/manager/submanagers';
 		$default = array( 'language', 'currency', 'site' );
@@ -870,7 +861,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/insert/ansi
 		 * @see mshop/locale/manager/update/ansi
 		 * @see mshop/locale/manager/newid/ansi
@@ -915,7 +905,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/insert/ansi
 		 * @see mshop/locale/manager/update/ansi
 		 * @see mshop/locale/manager/newid/ansi

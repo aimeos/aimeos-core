@@ -192,7 +192,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/coupon/manager/code/decorators/excludes
@@ -215,7 +214,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/coupon/manager/code/decorators/global
 		 * @see mshop/coupon/manager/code/decorators/local
@@ -240,7 +238,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/coupon/manager/code/decorators/excludes
 		 * @see mshop/coupon/manager/code/decorators/local
@@ -266,7 +263,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/coupon/manager/code/decorators/excludes
 		 * @see mshop/coupon/manager/code/decorators/global
@@ -312,7 +308,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/coupon/manager/code/submanagers';
 
@@ -401,7 +396,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/code/update/ansi
 			 * @see mshop/coupon/manager/code/newid/ansi
 			 * @see mshop/coupon/manager/code/delete/ansi
@@ -439,7 +433,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/code/insert/ansi
 			 * @see mshop/coupon/manager/code/newid/ansi
 			 * @see mshop/coupon/manager/code/delete/ansi
@@ -508,7 +501,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/code/insert/ansi
 			 * @see mshop/coupon/manager/code/update/ansi
 			 * @see mshop/coupon/manager/code/delete/ansi
@@ -557,7 +549,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/code/insert/ansi
 		 * @see mshop/coupon/manager/code/update/ansi
 		 * @see mshop/coupon/manager/code/newid/ansi
@@ -635,7 +626,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/code/insert/ansi
 		 * @see mshop/coupon/manager/code/update/ansi
 		 * @see mshop/coupon/manager/code/newid/ansi
@@ -689,7 +679,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/code/insert/ansi
 		 * @see mshop/coupon/manager/code/update/ansi
 		 * @see mshop/coupon/manager/code/newid/ansi
@@ -782,7 +771,6 @@ class Standard
 		 *
 		 * @param string SQL statement for increasing/decreasing the coupon code count
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/code/insert/ansi
 		 * @see mshop/coupon/manager/code/update/ansi
 		 * @see mshop/coupon/manager/code/newid/ansi

@@ -422,7 +422,6 @@ abstract class DBBase
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */

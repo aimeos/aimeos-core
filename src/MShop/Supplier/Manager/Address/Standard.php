@@ -269,7 +269,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/supplier/manager/address/submanagers';
 
@@ -317,7 +316,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/supplier/manager/address/decorators/excludes
@@ -340,7 +338,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/supplier/manager/address/decorators/global
 		 * @see mshop/supplier/manager/address/decorators/local
@@ -366,7 +363,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/supplier/manager/address/decorators/excludes
 		 * @see mshop/supplier/manager/address/decorators/local
@@ -392,7 +388,6 @@ class Standard
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/supplier/manager/address/decorators/excludes
 		 * @see mshop/supplier/manager/address/decorators/global
@@ -449,7 +444,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/update/ansi
 		 * @see mshop/supplier/manager/address/newid/ansi
 		 * @see mshop/supplier/manager/address/delete/ansi
@@ -482,7 +476,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/insert/ansi
 		 * @see mshop/supplier/manager/address/newid/ansi
 		 * @see mshop/supplier/manager/address/delete/ansi
@@ -519,7 +512,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/insert/ansi
 		 * @see mshop/supplier/manager/address/update/ansi
 		 * @see mshop/supplier/manager/address/delete/ansi
@@ -550,7 +542,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/insert/ansi
 		 * @see mshop/supplier/manager/address/update/ansi
 		 * @see mshop/supplier/manager/address/newid/ansi
@@ -606,7 +597,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/insert/ansi
 		 * @see mshop/supplier/manager/address/update/ansi
 		 * @see mshop/supplier/manager/address/newid/ansi
@@ -658,7 +648,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/supplier/manager/address/insert/ansi
 		 * @see mshop/supplier/manager/address/update/ansi
 		 * @see mshop/supplier/manager/address/newid/ansi

@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** madmin/cache/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/global
 	 * @see madmin/cache/manager/decorators/local
@@ -100,7 +98,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/excludes
 	 * @see madmin/cache/manager/decorators/local
@@ -125,7 +122,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/excludes
 	 * @see madmin/cache/manager/decorators/global
@@ -288,7 +284,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting a new cache entry
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
 		 * @see madmin/cache/manager/get/ansi
@@ -325,7 +320,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting a new tag to an existing cache entry
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
 		 * @see madmin/cache/manager/get/ansi
@@ -427,7 +421,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/cache/manager/get/ansi
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
@@ -468,7 +461,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/cache/manager/get/ansi
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
@@ -527,7 +519,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'madmin/cache/manager/submanagers';
 

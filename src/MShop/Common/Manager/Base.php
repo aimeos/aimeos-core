@@ -292,7 +292,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2023.10
-		 * @category Developer
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi
 		 * @see mshop/common/manager/newid/ansi
@@ -345,7 +344,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2023.10
-		 * @category Developer
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi
 		 * @see mshop/common/manager/newid/ansi

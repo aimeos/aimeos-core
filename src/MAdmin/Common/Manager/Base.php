@@ -53,7 +53,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );
 		$excludes = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );

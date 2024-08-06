@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** mshop/coupon/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/coupon/manager/decorators/global
 	 * @see mshop/coupon/manager/decorators/local
@@ -101,7 +99,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/coupon/manager/decorators/excludes
 	 * @see mshop/coupon/manager/decorators/local
@@ -126,7 +123,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/coupon/manager/decorators/excludes
 	 * @see mshop/coupon/manager/decorators/global
@@ -300,7 +296,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/coupon/manager/submanagers';
 
@@ -372,7 +367,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/update/ansi
 			 * @see mshop/coupon/manager/newid/ansi
 			 * @see mshop/coupon/manager/delete/ansi
@@ -409,7 +403,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/insert/ansi
 			 * @see mshop/coupon/manager/newid/ansi
 			 * @see mshop/coupon/manager/delete/ansi
@@ -477,7 +470,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/coupon/manager/insert/ansi
 			 * @see mshop/coupon/manager/update/ansi
 			 * @see mshop/coupon/manager/delete/ansi
@@ -525,7 +517,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/insert/ansi
 		 * @see mshop/coupon/manager/update/ansi
 		 * @see mshop/coupon/manager/newid/ansi
@@ -579,7 +570,6 @@ class Standard
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -634,7 +624,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/insert/ansi
 		 * @see mshop/coupon/manager/update/ansi
 		 * @see mshop/coupon/manager/newid/ansi
@@ -687,7 +676,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/coupon/manager/insert/ansi
 		 * @see mshop/coupon/manager/update/ansi
 		 * @see mshop/coupon/manager/newid/ansi

@@ -134,7 +134,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting the outdated price index records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/delete/ansi
 		 * @see mshop/index/manager/price/insert/ansi
@@ -175,7 +174,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting index price records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/cleanup/ansi
 		 * @see mshop/index/manager/price/insert/ansi
@@ -224,7 +222,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/index/manager/price/submanagers';
 
@@ -272,7 +269,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/index/manager/price/decorators/excludes
@@ -295,7 +291,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/global
 		 * @see mshop/index/manager/price/decorators/local
@@ -321,7 +316,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/excludes
 		 * @see mshop/index/manager/price/decorators/local
@@ -347,7 +341,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/excludes
 		 * @see mshop/index/manager/price/decorators/global
@@ -386,7 +379,6 @@ class Standard
 		 *
 		 * @param string SQL statement for optimizing the stored price data
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/search/ansi
 		 * @see mshop/index/manager/price/aggregate/ansi
@@ -439,7 +431,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/index/manager/price/cleanup/ansi
 			 * @see mshop/index/manager/price/delete/ansi
 			 * @see mshop/index/manager/price/search/ansi
@@ -530,7 +521,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/optimize/ansi
 		 * @see mshop/index/manager/price/aggregate/ansi
@@ -581,7 +571,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/price/search/ansi
 		 * @see mshop/index/manager/price/optimize/ansi
 		 * @see mshop/index/manager/price/aggregate/ansi
@@ -618,8 +607,6 @@ class Standard
 			 *
 			 * @param string List of index sub-manager names
 			 * @since 2014.09
-			 * @category User
-			 * @category Developer
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/price/submanagers', [] ) as $domain )
@@ -658,7 +645,6 @@ class Standard
 		 *
 		 * @param array List of price types codes
 		 * @since 2019.04
-		 * @category Developer
 		 */
 		$types = $context->config()->get( 'mshop/index/manager/price/types', ['default'] );
 

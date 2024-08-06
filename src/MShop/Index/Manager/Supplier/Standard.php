@@ -147,7 +147,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting the outdated index records
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/delete/ansi
 		 * @see mshop/index/manager/supplier/insert/ansi
@@ -188,7 +187,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting index supplier records
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/cleanup/ansi
 		 * @see mshop/index/manager/supplier/insert/ansi
@@ -237,7 +235,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2018.07
-		 * @category Developer
 		 */
 		$path = 'mshop/index/manager/supplier/submanagers';
 
@@ -285,7 +282,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2018.07
-		 * @category Developer
 		 */
 
 		/** mshop/index/manager/supplier/decorators/excludes
@@ -308,7 +304,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/global
 		 * @see mshop/index/manager/supplier/decorators/local
@@ -334,7 +329,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/excludes
 		 * @see mshop/index/manager/supplier/decorators/local
@@ -360,7 +354,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/excludes
 		 * @see mshop/index/manager/supplier/decorators/global
@@ -399,7 +392,6 @@ class Standard
 		 *
 		 * @param string SQL statement for optimizing the stored supplier data
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/search/ansi
 		 * @see mshop/index/manager/supplier/aggregate/ansi
@@ -453,7 +445,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2018.07
-			 * @category Developer
 			 * @see mshop/index/manager/supplier/cleanup/ansi
 			 * @see mshop/index/manager/supplier/delete/ansi
 			 * @see mshop/index/manager/supplier/search/ansi
@@ -576,7 +567,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/optimize/ansi
 		 * @see mshop/index/manager/supplier/aggregate/ansi
@@ -627,7 +617,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2018.07
-		 * @category Developer
 		 * @see mshop/index/manager/supplier/search/ansi
 		 * @see mshop/index/manager/supplier/optimize/ansi
 		 * @see mshop/index/manager/supplier/aggregate/ansi
@@ -664,8 +653,6 @@ class Standard
 			 *
 			 * @param string List of index sub-manager names
 			 * @since 2018.07
-			 * @category User
-			 * @category Developer
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/supplier/submanagers', [] ) as $domain )

@@ -54,7 +54,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** mshop/product/manager/decorators/excludes
@@ -77,7 +76,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/global
 	 * @see mshop/product/manager/decorators/local
@@ -102,7 +100,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/excludes
 	 * @see mshop/product/manager/decorators/local
@@ -127,7 +124,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/excludes
 	 * @see mshop/product/manager/decorators/global
@@ -431,8 +427,6 @@ class Standard
 			 * that are already over and customers can still buy them.
 			 *
 			 * @param bool TRUE to hide events after they are over (default), FALSE to continue to show them
-			 * @category Developer
-			 * @category User
 			 * @since 2019.10
 			 */
 			if( !$this->context()->config()->get( 'mshop/product/manager/strict-events', true ) ) {
@@ -481,7 +475,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -567,7 +560,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/product/manager/submanagers';
 
@@ -623,7 +615,6 @@ class Standard
 		 *
 		 * @param string SQL statement for update ratings
 		 * @since 2020.10
-		 * @category Developer
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -681,7 +672,6 @@ class Standard
 		 *
 		 * @param string SQL statement for update ratings
 		 * @since 2021.10
-		 * @category Developer
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -776,7 +766,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/product/manager/update/ansi
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -815,7 +804,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/product/manager/insert/ansi
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -892,7 +880,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/product/manager/insert/ansi
 			 * @see mshop/product/manager/update/ansi
 			 * @see mshop/product/manager/delete/ansi
@@ -953,7 +940,6 @@ class Standard
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -1008,7 +994,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi
@@ -1063,7 +1048,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
 		 * @see mshop/product/manager/newid/ansi

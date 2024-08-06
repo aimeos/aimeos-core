@@ -85,7 +85,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 *
 		 * @param array Associative list of mime types as keys and file extensions as values
 		 * @since 2018.04
-		 * @category Developer
 		 */
 		$default = ['image/gif' => 'gif', 'image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 		$list = $context->config()->get( 'mshop/media/manager/extensions', $default );

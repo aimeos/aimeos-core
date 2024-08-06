@@ -56,7 +56,6 @@ class Standard extends Base
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** mshop/order/manager/decorators/excludes
@@ -79,7 +78,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/global
 	 * @see mshop/order/manager/decorators/local
@@ -104,7 +102,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/excludes
 	 * @see mshop/order/manager/decorators/local
@@ -129,7 +126,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/excludes
 	 * @see mshop/order/manager/decorators/global
@@ -385,7 +381,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/order/manager/insert/ansi
 		 * @see mshop/order/manager/update/ansi
 		 * @see mshop/order/manager/newid/ansi
@@ -399,7 +394,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for aggregating the order items and computing the average value
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/aggregateavg/ansi
 		 * @see mshop/order/manager/aggregate/mysql
 		 */
@@ -409,7 +403,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for aggregating the order items and computing the average value
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/aggregate/ansi
 		 */
 
@@ -418,7 +411,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for aggregating the order items and computing the sum
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/aggregatesum/ansi
 		 * @see mshop/order/manager/aggregate/mysql
 		 */
@@ -428,7 +420,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for aggregating the order items and computing the sum
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/aggregate/ansi
 		 */
 
@@ -508,7 +499,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/insert/ansi
 		 * @see mshop/order/manager/update/ansi
 		 * @see mshop/order/manager/newid/ansi
@@ -600,7 +590,6 @@ class Standard extends Base
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/order/manager/submanagers';
 		$default = ['address', 'coupon', 'product', 'service', 'status'];
@@ -667,7 +656,6 @@ class Standard extends Base
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/update/ansi
 			 * @see mshop/order/manager/newid/ansi
 			 * @see mshop/order/manager/delete/ansi
@@ -704,7 +692,6 @@ class Standard extends Base
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/insert/ansi
 			 * @see mshop/order/manager/newid/ansi
 			 * @see mshop/order/manager/delete/ansi
@@ -791,7 +778,6 @@ class Standard extends Base
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/insert/ansi
 			 * @see mshop/order/manager/update/ansi
 			 * @see mshop/order/manager/delete/ansi
@@ -854,7 +840,6 @@ class Standard extends Base
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -909,7 +894,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/insert/ansi
 		 * @see mshop/order/manager/update/ansi
 		 * @see mshop/order/manager/newid/ansi
@@ -962,7 +946,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/insert/ansi
 		 * @see mshop/order/manager/update/ansi
 		 * @see mshop/order/manager/newid/ansi

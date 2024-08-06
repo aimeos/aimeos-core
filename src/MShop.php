@@ -156,7 +156,6 @@ class MShop
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
 		$excludes = $config->get( 'mshop/' . $domain . '/manager/decorators/excludes', [] );

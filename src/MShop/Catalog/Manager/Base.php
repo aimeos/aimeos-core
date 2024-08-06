@@ -202,7 +202,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for deleting items
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
 					 * @see mshop/catalog/manager/update/ansi
@@ -248,7 +247,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for searching items
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/insert/ansi
 					 * @see mshop/catalog/manager/update/ansi
@@ -292,7 +290,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for inserting records
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/update/ansi
@@ -334,7 +331,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -376,7 +372,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -424,7 +419,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for searching items
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -465,7 +459,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -506,7 +499,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for updating records
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -551,7 +543,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 *
 					 * @param string SQL statement for retrieving the last inserted record ID
 					 * @since 2014.03
-					 * @category Developer
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi

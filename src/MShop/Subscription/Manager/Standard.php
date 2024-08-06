@@ -52,7 +52,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2018.04
-	 * @category Developer
 	 */
 
 	/** mshop/subscription/manager/decorators/excludes
@@ -75,7 +74,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2018.04
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/global
 	 * @see mshop/subscription/manager/decorators/local
@@ -101,7 +99,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2018.04
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/excludes
 	 * @see mshop/subscription/manager/decorators/local
@@ -127,7 +124,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2018.04
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/excludes
 	 * @see mshop/subscription/manager/decorators/global
@@ -300,7 +296,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating subscription items
 		 * @since 2018.04
-		 * @category Developer
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
 		 * @see mshop/subscription/manager/newid/ansi
@@ -422,7 +417,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2018.04
-			 * @category Developer
 			 * @see mshop/subscription/manager/update/ansi
 			 * @see mshop/subscription/manager/newid/ansi
 			 * @see mshop/subscription/manager/delete/ansi
@@ -459,7 +453,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2018.04
-			 * @category Developer
 			 * @see mshop/subscription/manager/insert/ansi
 			 * @see mshop/subscription/manager/newid/ansi
 			 * @see mshop/subscription/manager/delete/ansi
@@ -530,7 +523,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2018.04
-			 * @category Developer
 			 * @see mshop/subscription/manager/insert/ansi
 			 * @see mshop/subscription/manager/update/ansi
 			 * @see mshop/subscription/manager/delete/ansi
@@ -591,7 +583,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2018.04
-		 * @category Developer
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
 		 * @see mshop/subscription/manager/newid/ansi
@@ -640,7 +631,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2018.04
-		 * @category Developer
 		 */
 		$path = 'mshop/subscription/manager/submanagers';
 
@@ -695,7 +685,6 @@ class Standard
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.04
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -752,7 +741,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2018.04
-		 * @category Developer
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
 		 * @see mshop/subscription/manager/newid/ansi
@@ -805,7 +793,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2018.04
-		 * @category Developer
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
 		 * @see mshop/subscription/manager/newid/ansi

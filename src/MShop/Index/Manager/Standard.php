@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2015.11
-	 * @category Developer
 	 */
 
 	/** mshop/index/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2015.11
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/global
 	 * @see mshop/index/manager/decorators/local
@@ -100,7 +98,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2015.11
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/excludes
 	 * @see mshop/index/manager/decorators/local
@@ -125,7 +122,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2015.11
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/excludes
 	 * @see mshop/index/manager/decorators/global
@@ -187,7 +183,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/search/ansi
@@ -332,7 +327,6 @@ class Standard
 		 *
 		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/search/ansi
 		 * @see mshop/index/manager/aggregate/ansi
@@ -367,8 +361,6 @@ class Standard
 		 *
 		 * @param int Number of products
 		 * @since 2014.09
-		 * @category User
-		 * @category Developer
 		 * @see mshop/index/manager/domains
 		 * @see mshop/index/manager/index
 		 * @see mshop/index/manager/subdomains
@@ -391,7 +383,6 @@ class Standard
 		 *
 		 * @param string List of MShop domain names
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/chunksize
 		 * @see mshop/index/manager/index
 		 * @see mshop/index/manager/subdomains
@@ -478,7 +469,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/aggregate/ansi
@@ -529,7 +519,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/search/ansi
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/aggregate/ansi
@@ -569,8 +558,6 @@ class Standard
 			 *
 			 * @param string List of index sub-manager names
 			 * @since 2016.02
-			 * @category User
-			 * @category Developer
 			 * @see mshop/index/manager/chunksize
 			 * @see mshop/index/manager/domains
 			 * @see mshop/index/manager/index

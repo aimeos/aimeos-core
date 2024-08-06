@@ -53,7 +53,6 @@ class Standard
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** madmin/job/manager/decorators/excludes
@@ -76,7 +75,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/global
 	 * @see madmin/job/manager/decorators/local
@@ -100,7 +98,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/excludes
 	 * @see madmin/job/manager/decorators/local
@@ -125,7 +122,6 @@ class Standard
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/excludes
 	 * @see madmin/job/manager/decorators/global
@@ -297,7 +293,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/job/manager/update/ansi
 			 * @see madmin/job/manager/newid/ansi
 			 * @see madmin/job/manager/delete/ansi
@@ -334,7 +329,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/job/manager/insert/ansi
 			 * @see madmin/job/manager/newid/ansi
 			 * @see madmin/job/manager/delete/ansi
@@ -399,7 +393,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see madmin/job/manager/insert/ansi
 			 * @see madmin/job/manager/update/ansi
 			 * @see madmin/job/manager/delete/ansi
@@ -446,7 +439,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
 		 * @see madmin/job/manager/newid/ansi
@@ -552,7 +544,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
 		 * @see madmin/job/manager/newid/ansi
@@ -605,7 +596,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
 		 * @see madmin/job/manager/newid/ansi
@@ -663,7 +653,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'madmin/job/manager/submanagers';
 

@@ -206,7 +206,6 @@ class Standard
 		 *
 		 * @param array List of domain names in lower case
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/cleanup/admin/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
@@ -231,7 +230,6 @@ class Standard
 		 *
 		 * @param array List of domain names in lower case
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/cleanup/shop/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
@@ -303,7 +301,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
 		 * @see mshop/locale/manager/site/search/ansi
@@ -384,7 +381,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/search/ansi
@@ -467,7 +463,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/locale/manager/site/submanagers';
 
@@ -515,7 +510,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/locale/manager/site/decorators/excludes
@@ -538,7 +532,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/site/decorators/global
 		 * @see mshop/locale/manager/site/decorators/local
@@ -564,7 +557,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/site/decorators/excludes
 		 * @see mshop/locale/manager/site/decorators/local
@@ -590,7 +582,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/site/decorators/excludes
 		 * @see mshop/locale/manager/site/decorators/global
@@ -664,7 +655,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
@@ -718,7 +708,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
@@ -863,7 +852,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
 		 * @see mshop/locale/manager/site/search/ansi
@@ -925,7 +913,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
@@ -995,7 +982,6 @@ class Standard
 			 *
 			 * @param string SQL statement for update ratings
 			 * @since 2022.10
-			 * @category Developer
 			 * @see mshop/locale/manager/site/update/ansi
 			 * @see mshop/locale/manager/site/delete/ansi
 			 * @see mshop/locale/manager/site/search/ansi

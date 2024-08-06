@@ -168,7 +168,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/currency/update/ansi
 			 * @see mshop/locale/manager/currency/delete/ansi
 			 * @see mshop/locale/manager/currency/search/ansi
@@ -201,7 +200,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/currency/insert/ansi
 			 * @see mshop/locale/manager/currency/delete/ansi
 			 * @see mshop/locale/manager/currency/search/ansi
@@ -269,7 +267,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/currency/insert/ansi
 		 * @see mshop/locale/manager/currency/update/ansi
 		 * @see mshop/locale/manager/currency/search/ansi
@@ -332,7 +329,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/locale/manager/currency/submanagers';
 
@@ -404,7 +400,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/currency/insert/ansi
 		 * @see mshop/locale/manager/currency/update/ansi
 		 * @see mshop/locale/manager/currency/delete/ansi
@@ -456,7 +451,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/currency/insert/ansi
 		 * @see mshop/locale/manager/currency/update/ansi
 		 * @see mshop/locale/manager/currency/delete/ansi
@@ -517,7 +511,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/locale/manager/currency/decorators/excludes
@@ -540,7 +533,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/currency/decorators/global
 		 * @see mshop/locale/manager/currency/decorators/local
@@ -566,7 +558,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/currency/decorators/excludes
 		 * @see mshop/locale/manager/currency/decorators/local
@@ -592,7 +583,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/currency/decorators/excludes
 		 * @see mshop/locale/manager/currency/decorators/global

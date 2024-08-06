@@ -150,7 +150,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting the outdated text index records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/delete/ansi
 		 * @see mshop/index/manager/text/insert/ansi
@@ -192,7 +191,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting index text records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
 		 * @see mshop/index/manager/text/insert/ansi
@@ -241,7 +239,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/index/manager/text/submanagers';
 
@@ -289,7 +286,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/index/manager/text/decorators/excludes
@@ -312,7 +308,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/global
 		 * @see mshop/index/manager/text/decorators/local
@@ -338,7 +333,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
 		 * @see mshop/index/manager/text/decorators/local
@@ -364,7 +358,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
 		 * @see mshop/index/manager/text/decorators/global
@@ -403,7 +396,6 @@ class Standard
 		 *
 		 * @param string SQL statement for optimizing the stored text data
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
 		 * @see mshop/index/manager/text/count/ansi
@@ -459,7 +451,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/index/manager/text/cleanup/ansi
 			 * @see mshop/index/manager/text/count/ansi
 			 * @see mshop/index/manager/text/delete/ansi
@@ -552,7 +543,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
 		 * @see mshop/index/manager/text/count/ansi
@@ -606,7 +596,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
 		 * @see mshop/index/manager/text/insert/ansi
@@ -683,7 +672,6 @@ class Standard
 		 * for avoiding product matches due to texts that should be internal only.
 		 *
 		 * @param array|string|null Type name or list of type names, null for all
-		 * @category Developer
 		 * @since 2019.04
 		 */
 		$types = $config->get( 'mshop/index/manager/text/types' );
@@ -697,7 +685,6 @@ class Standard
 		 * for words that are part of those skipped attributes.
 		 *
 		 * @param array|string|null Type name or list of type names, null for all
-		 * @category Developer
 		 * @since 2020.10
 		 */
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
@@ -835,8 +822,6 @@ class Standard
 			 *
 			 * @param string List of index sub-manager names
 			 * @since 2014.09
-			 * @category User
-			 * @category Developer
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/text/submanagers', [] ) as $domain )

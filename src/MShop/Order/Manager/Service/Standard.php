@@ -218,7 +218,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
 		 * @see mshop/order/manager/service/newid/ansi
@@ -232,7 +231,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/service/aggregateavg/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
 		 */
@@ -242,7 +240,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */
 
@@ -251,7 +248,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/service/aggregatesum/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
 		 */
@@ -261,7 +257,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
-		 * @category Developer
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */
 
@@ -375,7 +370,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
 		 * @see mshop/order/manager/service/newid/ansi
@@ -439,7 +433,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/order/manager/service/submanagers';
 
@@ -487,7 +480,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/order/manager/service/decorators/excludes
@@ -510,7 +502,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/service/decorators/global
 		 * @see mshop/order/manager/service/decorators/local
@@ -536,7 +527,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/service/decorators/excludes
 		 * @see mshop/order/manager/service/decorators/local
@@ -562,7 +552,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/order/manager/service/decorators/excludes
 		 * @see mshop/order/manager/service/decorators/global
@@ -625,7 +614,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/service/update/ansi
 			 * @see mshop/order/manager/service/newid/ansi
 			 * @see mshop/order/manager/service/delete/ansi
@@ -662,7 +650,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/service/insert/ansi
 			 * @see mshop/order/manager/service/newid/ansi
 			 * @see mshop/order/manager/service/delete/ansi
@@ -737,7 +724,6 @@ class Standard
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/order/manager/service/insert/ansi
 			 * @see mshop/order/manager/service/update/ansi
 			 * @see mshop/order/manager/service/delete/ansi
@@ -826,7 +812,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
 		 * @see mshop/order/manager/service/newid/ansi
@@ -879,7 +864,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
 		 * @see mshop/order/manager/service/newid/ansi

@@ -167,7 +167,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/price/manager/lists/type/submanagers';
 
@@ -215,7 +214,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/price/manager/lists/type/decorators/excludes
@@ -238,7 +236,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/price/manager/lists/type/decorators/global
 		 * @see mshop/price/manager/lists/type/decorators/local
@@ -264,7 +261,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/price/manager/lists/type/decorators/excludes
 		 * @see mshop/price/manager/lists/type/decorators/local
@@ -290,7 +286,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/price/manager/lists/type/decorators/excludes
 		 * @see mshop/price/manager/lists/type/decorators/global
@@ -335,7 +330,6 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/update/ansi
 		 * @see mshop/price/manager/lists/type/newid/ansi
 		 * @see mshop/price/manager/lists/type/delete/ansi
@@ -368,7 +362,6 @@ class Standard
 		 *
 		 * @param string SQL statement for updating records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/insert/ansi
 		 * @see mshop/price/manager/lists/type/newid/ansi
 		 * @see mshop/price/manager/lists/type/delete/ansi
@@ -405,7 +398,6 @@ class Standard
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/insert/ansi
 		 * @see mshop/price/manager/lists/type/update/ansi
 		 * @see mshop/price/manager/lists/type/delete/ansi
@@ -436,7 +428,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/insert/ansi
 		 * @see mshop/price/manager/lists/type/update/ansi
 		 * @see mshop/price/manager/lists/type/newid/ansi
@@ -492,7 +483,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/insert/ansi
 		 * @see mshop/price/manager/lists/type/update/ansi
 		 * @see mshop/price/manager/lists/type/newid/ansi
@@ -544,7 +534,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/price/manager/lists/type/insert/ansi
 		 * @see mshop/price/manager/lists/type/update/ansi
 		 * @see mshop/price/manager/lists/type/newid/ansi

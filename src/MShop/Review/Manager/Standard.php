@@ -126,7 +126,6 @@ class Standard
 		 *
 		 * @param string SQL statement for aggregating review items
 		 * @since 2020.10
-		 * @category Developer
 		 * @see mshop/review/manager/insert/ansi
 		 * @see mshop/review/manager/update/ansi
 		 * @see mshop/review/manager/newid/ansi

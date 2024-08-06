@@ -52,7 +52,6 @@ class Standard extends Base
 	 *
 	 * @param string Last part of the class name
 	 * @since 2014.03
-	 * @category Developer
 	 */
 
 	/** mshop/catalog/manager/decorators/excludes
@@ -75,7 +74,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/global
 	 * @see mshop/catalog/manager/decorators/local
@@ -100,7 +98,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
 	 * @see mshop/catalog/manager/decorators/local
@@ -125,7 +122,6 @@ class Standard extends Base
 	 *
 	 * @param array List of decorator names
 	 * @since 2014.03
-	 * @category Developer
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
 	 * @see mshop/catalog/manager/decorators/global
@@ -338,7 +334,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for removing the records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/insert/ansi
 		 * @see mshop/catalog/manager/update/ansi
@@ -513,7 +508,6 @@ class Standard extends Base
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/catalog/manager/submanagers';
 
@@ -682,7 +676,6 @@ class Standard extends Base
 		 * control over inheritance and aggregation in each domain.
 		 *
 		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @category Developer
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -737,7 +730,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
 		 * @see mshop/catalog/manager/insert/ansi
@@ -795,7 +787,6 @@ class Standard extends Base
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
 		 * @see mshop/catalog/manager/insert/ansi
@@ -1006,7 +997,6 @@ class Standard extends Base
 		 *
 		 * @param string Lock SQL statement
 		 * @since 2019.04
-		 * @category Developer
 		 */
 		$path = 'mshop/catalog/manager/lock';
 
@@ -1043,7 +1033,6 @@ class Standard extends Base
 		 *
 		 * @param string Lock SQL statement
 		 * @since 2019.04
-		 * @category Developer
 		 */
 		 $path = 'mshop/catalog/manager/unlock';
 
@@ -1104,7 +1093,6 @@ class Standard extends Base
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi
 			 * @see mshop/catalog/manager/insert/ansi
@@ -1149,7 +1137,6 @@ class Standard extends Base
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi
 			 * @see mshop/catalog/manager/insert/ansi

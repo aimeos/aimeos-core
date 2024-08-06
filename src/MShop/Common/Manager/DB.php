@@ -935,7 +935,6 @@ trait DB
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2023.10
-			 * @category Developer
 			 * @see mshop/common/manager/update/ansi
 			 * @see mshop/common/manager/newid/ansi
 			 * @see mshop/common/manager/delete/ansi
@@ -972,7 +971,6 @@ trait DB
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2023.10
-			 * @category Developer
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/newid/ansi
 			 * @see mshop/common/manager/delete/ansi
@@ -1038,7 +1036,6 @@ trait DB
 			 *
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2023.10
-			 * @category Developer
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/update/ansi
 			 * @see mshop/common/manager/delete/ansi

@@ -149,7 +149,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting the outdated attribute index records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/delete/ansi
 		 * @see mshop/index/manager/attribute/insert/ansi
@@ -190,7 +189,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting index attribute records
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/cleanup/ansi
 		 * @see mshop/index/manager/attribute/insert/ansi
@@ -239,7 +237,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/index/manager/attribute/submanagers';
 
@@ -287,7 +284,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/index/manager/attribute/decorators/excludes
@@ -310,7 +306,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/global
 		 * @see mshop/index/manager/attribute/decorators/local
@@ -336,7 +331,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
 		 * @see mshop/index/manager/attribute/decorators/local
@@ -362,7 +356,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
 		 * @see mshop/index/manager/attribute/decorators/global
@@ -401,7 +394,6 @@ class Standard
 		 *
 		 * @param string SQL statement for optimizing the stored attribute data
 		 * @since 2014.09
-		 * @category Developer
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/search/ansi
 		 * @see mshop/index/manager/attribute/aggregate/ansi
@@ -454,7 +446,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/index/manager/attribute/cleanup/ansi
 			 * @see mshop/index/manager/attribute/delete/ansi
 			 * @see mshop/index/manager/attribute/search/ansi
@@ -545,7 +536,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
 		 * @see mshop/index/manager/attribute/aggregate/ansi
@@ -596,7 +586,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/index/manager/attribute/search/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
 		 * @see mshop/index/manager/attribute/aggregate/ansi
@@ -633,8 +622,6 @@ class Standard
 			 *
 			 * @param string List of index sub-manager names
 			 * @since 2014.09
-			 * @category User
-			 * @category Developer
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/attribute/submanagers', [] ) as $domain )

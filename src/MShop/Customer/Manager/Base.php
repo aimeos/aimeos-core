@@ -63,8 +63,6 @@ abstract class Base
 		 *
 		 * @param string Installation wide password salt
 		 * @since 2014.03
-		 * @category Developer
-		 * @category User
 		 * @see mshop/customer/manager/password/name
 		 * @sse mshop/customer/manager/password/options
 		 */
@@ -124,7 +122,6 @@ abstract class Base
 		 *
 		 * @param string SQL statement for aggregating customer items
 		 * @since 2021.04
-		 * @category Developer
 		 * @see mshop/customer/manager/insert/ansi
 		 * @see mshop/customer/manager/update/ansi
 		 * @see mshop/customer/manager/newid/ansi
@@ -300,7 +297,6 @@ abstract class Base
 		 *
 		 * @param string Name of the password helper implementation
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/customer/manager/salt
 		 * @see mshop/customer/manager/password/options
 		 */
@@ -315,7 +311,6 @@ abstract class Base
 		 *
 		 * @param string Associative list of key/value pairs
 		 * @since 2015.01
-		 * @category Developer
 		 * @see mshop/customer/manager/password/name
 		 * @sse mshop/customer/manager/salt
 		 */

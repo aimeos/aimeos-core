@@ -166,7 +166,6 @@ class Standard
 			 *
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/language/update/ansi
 			 * @see mshop/locale/manager/language/delete/ansi
 			 * @see mshop/locale/manager/language/search/ansi
@@ -199,7 +198,6 @@ class Standard
 			 *
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
-			 * @category Developer
 			 * @see mshop/locale/manager/language/insert/ansi
 			 * @see mshop/locale/manager/language/delete/ansi
 			 * @see mshop/locale/manager/language/search/ansi
@@ -266,7 +264,6 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/language/insert/ansi
 		 * @see mshop/locale/manager/language/update/ansi
 		 * @see mshop/locale/manager/language/search/ansi
@@ -330,7 +327,6 @@ class Standard
 		 *
 		 * @param array List of sub-manager names
 		 * @since 2014.03
-		 * @category Developer
 		 */
 		$path = 'mshop/locale/manager/language/submanagers';
 
@@ -378,7 +374,6 @@ class Standard
 		 *
 		 * @param string Last part of the class name
 		 * @since 2014.03
-		 * @category Developer
 		 */
 
 		/** mshop/locale/manager/language/decorators/excludes
@@ -401,7 +396,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/language/decorators/global
 		 * @see mshop/locale/manager/language/decorators/local
@@ -427,7 +421,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/language/decorators/excludes
 		 * @see mshop/locale/manager/language/decorators/local
@@ -453,7 +446,6 @@ class Standard
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/locale/manager/language/decorators/excludes
 		 * @see mshop/locale/manager/language/decorators/global
@@ -544,7 +536,6 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/language/insert/ansi
 		 * @see mshop/locale/manager/language/update/ansi
 		 * @see mshop/locale/manager/language/delete/ansi
@@ -596,7 +587,6 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
-		 * @category Developer
 		 * @see mshop/locale/manager/language/insert/ansi
 		 * @see mshop/locale/manager/language/update/ansi
 		 * @see mshop/locale/manager/language/delete/ansi
