@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -33,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'.date' => date( 'Y-m-d H:i:s' ),
 		);
 
-		$this->object = new \Aimeos\MShop\Coupon\Item\Code\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Coupon\Item\Code\Standard( 'coupon.code.', $this->values );
 	}
 
 
@@ -107,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertEquals( 100, $this->object->getCount() );
 
-		$object = new \Aimeos\MShop\Coupon\Item\Code\Standard();
+		$object = new \Aimeos\MShop\Coupon\Item\Code\Standard( 'coupon.code.', [] );
 		$this->assertSame( 0, $object->getCount() );
 	}
 
@@ -204,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Coupon\Item\Code\Standard();
+		$item = new \Aimeos\MShop\Coupon\Item\Code\Standard( 'coupon.code.', [] );
 
 		$list = $entries = array(
 			'coupon.code.id' => 1,

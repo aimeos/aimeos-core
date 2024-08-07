@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Coupon
@@ -22,22 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Coupon\Item\Code\Iface
 {
-	private string $date;
-
-
-	/**
-	 * Initializes the coupon code instance
-	 *
-	 * @param array $values Associative array with ID, coupon item ID, code and counter
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'coupon.code.', $values );
-
-		$this->date = $values['.date'] ?? date( 'Y-m-d H:i:s' );
-	}
-
-
 	/**
 	 * Returns the unique ID of the coupon item the code belongs to.
 	 *
@@ -191,9 +174,11 @@ class Standard
 	 */
 	public function isAvailable() : bool
 	{
+		$date = $this->get( '.date' );
+
 		return parent::isAvailable()
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $date );
 	}
 
 
