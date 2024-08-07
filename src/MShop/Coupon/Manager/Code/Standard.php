@@ -22,13 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Coupon\Manager\Code\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = [
-		'coupon.code.id' => [
-			'label' => 'Code ID',
-			'internaldeps' => ['LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."parentid")'],
-			'internalcode' => 'id',
-			'type' => 'int',
-			'public' => false,
-		],
 		'coupon.code.parentid' => [
 			'label' => 'Coupon ID',
 			'internalcode' => 'parentid',
@@ -149,6 +142,26 @@ class Standard
 	public function getSaveAttributes() : array
 	{
 		return $this->createAttributes( $this->searchConfig );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
+	 */
+	public function getSearchAttributes( bool $withsub = true ) : array
+	{
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'coupon.code.id' => [
+				'label' => 'Code ID',
+				'internaldeps' => ['LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."parentid")'],
+				'internalcode' => 'id',
+				'type' => 'int',
+				'public' => false,
+			]
+		] ) );
 	}
 
 
