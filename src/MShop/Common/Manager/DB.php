@@ -42,23 +42,6 @@ trait DB
 
 
 	/**
-	 * Returns the full configuration key for the passed last part
-	 *
-	 * @param string $name Configuration last part
-	 * @return string Full configuration key
-	 */
-	abstract protected function getConfigKey( string $name ) : string;
-
-
-	/**
-	 * Returns the manager domain
-	 *
-	 * @return string Manager domain e.g. "product"
-	 */
-	abstract protected function getDomain() : string;
-
-
-	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
@@ -83,14 +66,6 @@ trait DB
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
 	abstract protected function getSearchTypes( array $attributes ) : array;
-
-
-	/**
-	 * Returns the name of the used table
-	 *
-	 * @return string Table name e.g. "mshop_product_lists_type"
-	 */
-	abstract protected function getTable() : string;
 
 
 	/**
@@ -275,6 +250,49 @@ trait DB
 
 
 	/**
+	 * Returns the table alias name.
+	 *
+	 * @param string|null $attrcode Search attribute code
+	 * @return string Table alias name
+	 */
+	protected function alias( string $attrcode = null ) : string
+	{
+		if( $attrcode ) {
+			$parts = array_slice( explode( '.', $attrcode ), 1, -1 );
+		} else {
+			$parts = explode( '/', $this->getSubPath() );
+		}
+
+		$str = 'm' . substr( $this->getDomain(), 0, 3 );
+
+		foreach( $parts as $part ) {
+			$str .= substr( $part, 0, 2 );
+		}
+
+		return $str;
+	}
+
+
+	/**
+	 * Adds aliases for the columns
+	 *
+	 * @param array $map Associative list of search keys as keys and internal column names as values
+	 * @return array Associative list of search keys as keys and aliased column names as values
+	 */
+	protected function aliasTranslations( array $map ) : array
+	{
+		foreach( $map as $key => $value )
+		{
+			if( ( $pos = strpos( $value, '"' ) ) === false ) {
+				$map[$key] = $this->alias( $key ) . '."' . $value . '"';
+			}
+		}
+
+		return $map;
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
@@ -345,20 +363,15 @@ trait DB
 
 
 	/**
-	 * Returns the table alias name.
+	 * Returns the full configuration key for the passed last part
 	 *
-	 * @return string Table alias name
+	 * @param string $name Configuration last part
+	 * @return string Full configuration key
 	 */
-	protected function alias() : string
+	protected function getConfigKey( string $name ) : string
 	{
-		$parts = explode( '/', $this->getSubPath() );
-		$str = 'm' . substr( $this->getDomain(), 0, 3 );
-
-		foreach( $parts as $part ) {
-			$str .= substr( $part, 0, 2 );
-		}
-
-		return $str;
+		$subPath = $this->getSubPath();
+		return 'mshop/' . $this->getDomain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
 	}
 
 
@@ -381,6 +394,33 @@ trait DB
 		sort( $keys );
 
 		return $keys;
+	}
+
+
+	/**
+	 * Returns the manager domain
+	 *
+	 * @return string Manager domain e.g. "product"
+	 */
+	protected function getDomain() : string
+	{
+		if( !isset( $this->domain ) ) {
+			$this->initDb();
+		}
+
+		return $this->domain;
+	}
+
+
+	/**
+	 * Returns the manager path
+	 *
+	 * @return string Manager path e.g. "product/lists/type"
+	 */
+	protected function getManagerPath() : string
+	{
+		$subPath = $this->getSubPath();
+		return $this->getDomain() . ( $subPath ? '/' . $subPath : '' );
 	}
 
 
@@ -443,6 +483,18 @@ trait DB
 		}
 
 		return $attr;
+	}
+
+
+	/**
+	 * Returns the item search key for the passed name
+	 *
+	 * @return string Item prefix e.g. "product.lists.type.id"
+	 */
+	protected function getSearchKey( string $name = '' ) : string
+	{
+		$subPath = $this->getSubPath();
+		return $this->getDomain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
 	}
 
 
@@ -514,29 +566,25 @@ trait DB
 	 * the ANSI SQL statement. The database type is determined via the resource
 	 * adapter.
 	 *
-	 * @param string $path Configuration path to the SQL statement
+	 * @param string $sql Configuration path to the SQL statement
 	 * @param array $replace Associative list of keys with strings to replace by their values
 	 * @return array|string ANSI or database specific SQL statement
 	 */
-	protected function getSqlConfig( string $path, array $replace = [] )
+	protected function getSqlConfig( string $sql, array $replace = [] )
 	{
-		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $path ) !== 1 )
+		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $sql ) === 1 )
 		{
-			foreach( $replace as $key => $value ) {
-				$path = str_replace( $key, $value, $path );
+			$config = $this->context()->config();
+			$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
+
+			if( ( $str = $config->get( $sql . '/' . $adapter, $config->get( $sql . '/ansi' ) ) ) === null )
+			{
+				$parts = explode( '/', $sql );
+				$cpath = 'mshop/common/manager/' . end( $parts );
+				$str = $config->get( $cpath . '/' . $adapter, $config->get( $cpath . '/ansi', $sql ) );
 			}
 
-			return $path;
-		}
-
-		$config = $this->context()->config();
-		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
-
-		if( ( $sql = $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi' ) ) ) === null )
-		{
-			$parts = explode( '/', $path );
-			$cpath = 'mshop/common/manager/' . end( $parts );
-			$sql = $config->get( $cpath . '/' . $adapter, $config->get( $cpath . '/ansi', $path ) );
+			$sql = $str;
 		}
 
 		foreach( $replace as $key => $value ) {
@@ -555,6 +603,21 @@ trait DB
 	protected function getSubManagers() : array
 	{
 		return $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
+	}
+
+
+	/**
+	 * Returns the manager domain sub-path
+	 *
+	 * @return string Manager domain sub-path e.g. "lists/type"
+	 */
+	protected function getSubPath() : string
+	{
+		if( !isset( $this->subpath ) ) {
+			$this->initDb();
+		}
+
+		return $this->subpath;
 	}
 
 
@@ -777,15 +840,15 @@ trait DB
 	 */
 	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
 	{
-		$alias = $this->alias();
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
-		$translations = $this->getSearchTranslations( $attributes );
+		$trans = $this->getSearchTranslations( $attributes );
+		$trans = $this->aliasTranslations( $trans );
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attronly ) ) !== false ) {
 			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
-		$sorts = $search->translate( $search->getSortations(), $translations, $funcs );
+		$sorts = $search->translate( $search->getSortations(), $trans, $funcs );
 
 		$cols = $group = [];
 		foreach( $attronly as $name => $entry )
@@ -796,8 +859,10 @@ trait DB
 
 			$icode = $entry->getInternalCode();
 
-			if( !( str_contains( $icode, '"' ) ) ) {
-				$icode = $alias .'."' . $icode . '"';
+			if( !str_contains( $icode, '"' ) )
+			{
+				$alias = $this->alias( $entry->getCode() );
+				$icode = $alias . '."' . $icode . '"';
 			}
 
 			$cols[] = $icode . ' AS "' . $entry->getCode() . '"';
@@ -808,11 +873,36 @@ trait DB
 			':columns' => join( ', ', $cols ),
 			':joins' => join( "\n", array_unique( $joins ) ),
 			':group' => join( ', ', array_unique( array_merge( $group, $sorts ) ) ),
-			':cond' => $search->getConditionSource( $types, $translations, $plugins, $funcs ),
-			':order' => $search->getSortationSource( $types, $translations, $funcs ),
+			':cond' => $search->getConditionSource( $types, $trans, $plugins, $funcs ),
+			':order' => $search->getSortationSource( $types, $trans, $funcs ),
 			':start' => $search->getOffset(),
 			':size' => $search->getLimit(),
 		];
+	}
+
+
+	/**
+	 * Returns the name of the used table
+	 *
+	 * @return string Table name e.g. "mshop_product_lists_type"
+	 */
+	protected function getTable() : string
+	{
+		$subPath = $this->getSubPath();
+		return 'mshop_' . $this->getDomain() . ( $subPath ? '_' . str_replace( '/', '_', $subPath ) : '' );
+	}
+
+
+	/**
+	 * Initializes the trait
+	 */
+	protected function initDb()
+	{
+		$parts = array_slice( explode( '\\', strtolower( current( $this->classes() ) ) ), 2, -1 );
+
+		$this->domain = array_shift( $parts ) ?: '';
+		array_shift( $parts ); // remove "manager"
+		$this->subpath = join( '/', $parts );
 	}
 
 

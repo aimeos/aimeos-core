@@ -121,7 +121,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getResourceType( bool $withsub = true ) : array
 	{
-		return $this->getResourceTypeBase( $this->getDomain(), $this->getConfigKey( 'submanagers' ), [], $withsub );
+		return $this->getResourceTypeBase( $this->getManagerPath(), $this->getConfigKey( 'submanagers' ), [], $withsub );
 	}
 
 

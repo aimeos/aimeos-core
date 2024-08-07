@@ -26,14 +26,6 @@ trait Methods
 
 
 	/**
-	 * Returns the alias of the used table
-	 *
-	 * @return string Table alias e.g. "mprolity"
-	 */
-	abstract protected function alias() : string;
-
-
-	/**
 	 * Adds a filter callback for an item type
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
@@ -132,18 +124,6 @@ trait Methods
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		throw new \LogicException( 'Not implemented' );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		return [$this->getManagerPath()];
 	}
 
 
@@ -316,46 +296,6 @@ trait Methods
 
 
 	/**
-	 * Returns the full configuration key for the passed last part
-	 *
-	 * @param string $name Configuration last part
-	 * @return string Full configuration key
-	 */
-	protected function getConfigKey( string $name ) : string
-	{
-		$subPath = $this->getSubPath();
-		return 'mshop/' . $this->getDomain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
-	}
-
-
-	/**
-	 * Returns the manager domain
-	 *
-	 * @return string Manager domain e.g. "product"
-	 */
-	protected function getDomain() : string
-	{
-		if( !isset( $this->domain ) ) {
-			$this->initMethods();
-		}
-
-		return $this->domain;
-	}
-
-
-	/**
-	 * Returns the manager path
-	 *
-	 * @return string Manager path e.g. "product/lists/type"
-	 */
-	protected function getManagerPath() : string
-	{
-		$subPath = $this->getSubPath();
-		return $this->getDomain() . ( $subPath ? '/' . $subPath : '' );
-	}
-
-
-	/**
 	 * Returns the prefix for the item properties and search keys.
 	 *
 	 * @return string Prefix for the item properties and search keys
@@ -375,32 +315,12 @@ trait Methods
 	protected function getSearchFunctions( array $attributes ) : array
 	{
 		$list = [];
-		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
 
-		foreach( $attributes as $key => $item )
-		{
-			if( $item instanceof $iface ) {
-				$list[$item->getCode()] = $item->getFunction();
-			} else if( isset( $item['code'] ) ) {
-				$list[$item['code']] = $item['function'] ?? null;
-			} else {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
-			}
+		foreach( $attributes as $key => $item ) {
+			$list[$item->getCode()] = $item->getFunction();
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Returns the item search key for the passed name
-	 *
-	 * @return string Item prefix e.g. "product.lists.type.id"
-	 */
-	protected function getSearchKey( string $name = '' ) : string
-	{
-		$subPath = $this->getSubPath();
-		return $this->getDomain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
 	}
 
 
@@ -412,20 +332,13 @@ trait Methods
 	 */
 	protected function getSearchTranslations( array $attributes ) : array
 	{
-		$translations = [];
-		$alias = $this->alias();
-		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+		$list = [];
 
-		foreach( $attributes as $key => $item )
-		{
-			if( $alias && strpos( $item->getInternalCode(), '"' ) === false ) {
-				$translations[$item->getCode()] = $alias . '."' . $item->getInternalCode() . '"';
-			} else {
-				$translations[$item->getCode()] = $item->getInternalCode();
-			}
+		foreach( $attributes as $key => $item ) {
+			$list[$item->getCode()] = $item->getInternalCode();
 		}
 
-		return $translations;
+		return $list;
 	}
 
 
@@ -437,63 +350,13 @@ trait Methods
 	 */
 	protected function getSearchTypes( array $attributes ) : array
 	{
-		$types = [];
-		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+		$list = [];
 
-		foreach( $attributes as $key => $item )
-		{
-			if( $item instanceof $iface ) {
-				$types[$item->getCode()] = $item->getInternalType();
-			} else if( isset( $item['code'] ) ) {
-				$types[$item['code']] = $item['internaltype'];
-			} else {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
-			}
+		foreach( $attributes as $key => $item ) {
+			$list[$item->getCode()] = $item->getInternalType();
 		}
 
-		return $types;
-	}
-
-
-	/**
-	 * Returns the manager domain sub-path
-	 *
-	 * @return string Manager domain sub-path e.g. "lists/type"
-	 */
-	protected function getSubPath() : string
-	{
-		if( !isset( $this->subpath ) ) {
-			$this->initMethods();
-		}
-
-		return $this->subpath;
-	}
-
-
-	/**
-	 * Returns the name of the used table
-	 *
-	 * @return string Table name e.g. "mshop_product_lists_type"
-	 */
-	protected function getTable() : string
-	{
-		$subPath = $this->getSubPath();
-		return 'mshop_' . $this->getDomain() . ( $subPath ? '_' . str_replace( '/', '_', $subPath ) : '' );
-	}
-
-
-	/**
-	 * Initializes the trait
-	 */
-	protected function initMethods()
-	{
-		$parts = explode( '\\', strtolower( current( $this->classes() ) ) );
-		array_shift( $parts ); array_shift( $parts ); // remove "Aimeos\MShop"
-		array_pop( $parts );
-
-		$this->domain = array_shift( $parts ) ?: '';
-		array_shift( $parts ); // remove "manager"
-		$this->subpath = join( '/', $parts );
+		return $list;
 	}
 
 
