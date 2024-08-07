@@ -51,7 +51,7 @@ class Depth
 			 *
 			 * @param int Number of levels
 			 * @since 2019.04
-				 */
+			 */
 			$max = $this->context()->config()->get( 'mshop/common/manager/maxdepth', 2 );
 
 			if( $this->level++ < $max ) {

@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'plugin.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Plugin\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Plugin\Item\Standard( 'plugin.', $this->values );
 	}
 
 
@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Plugin\Item\Standard();
+		$item = new \Aimeos\MShop\Plugin\Item\Standard( 'plugin.', [] );
 
 		$list = $entries = array(
 			'plugin.id' => 1,

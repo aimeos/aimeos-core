@@ -26,17 +26,6 @@ class Standard
 
 
 	/**
-	 * Initializes the plugin object
-	 *
-	 * @param array $values Associative array of id, type, name, config and status
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'plugin.', $values );
-	}
-
-
-	/**
 	 * Returns the type of the plugin.
 	 *
 	 * @return string Plugin type
