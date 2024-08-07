@@ -95,7 +95,7 @@ class Standard
 	 *
 	 * @return string Prefix for the item properties and search keys
 	 */
-	protected function getPrefix() : string
+	protected function prefix() : string
 	{
 		return 'plugin.';
 	}

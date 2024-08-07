@@ -248,7 +248,7 @@ abstract class Base
 	 *
 	 * @return string Search key / item prefix
 	 */
-	protected function getPrefix() : string
+	protected function prefix() : string
 	{
 		return $this->prefix;
 	}

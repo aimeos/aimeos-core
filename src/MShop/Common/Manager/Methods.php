@@ -80,7 +80,7 @@ trait Methods
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return new \Aimeos\MShop\Common\Item\Base( $this->getPrefix(), $values );
+		return new \Aimeos\MShop\Common\Item\Base( $this->prefix(), $values );
 	}
 
 
@@ -360,7 +360,7 @@ trait Methods
 	 *
 	 * @return string Prefix for the item properties and search keys
 	 */
-	protected function getPrefix() : string
+	protected function prefix() : string
 	{
 		return '';
 	}

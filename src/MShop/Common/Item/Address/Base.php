@@ -792,7 +792,7 @@ abstract class Base
 	 *
 	 * @return string Prefix for toArray() and fromArray() methods
 	 */
-	protected function getPrefix() : string
+	protected function prefix() : string
 	{
 		return $this->prefix;
 	}

@@ -72,7 +72,7 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->getPrefix() . 'siteid'] = $values[$this->getPrefix() . 'siteid'] ?? $this->context()->locale()->getSiteId();
+		$values[$this->prefix() . 'siteid'] = $values[$this->prefix() . 'siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -100,7 +100,7 @@ abstract class Base
 	{
 		if( $default !== false )
 		{
-			$prefix = rtrim( $this->getPrefix(), '.' );
+			$prefix = rtrim( $this->prefix(), '.' );
 			$object = $this->filterBase( $prefix, $default );
 
 			$expr = [$object->getConditions()];
@@ -135,7 +135,7 @@ abstract class Base
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$code = $this->getPrefix() . 'id';
+		$code = $this->prefix() . 'id';
 		$criteria = $this->object()->filter( $default )->add( [$code => $id] );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
@@ -317,12 +317,12 @@ abstract class Base
 
 		while( $row = $results->fetch() )
 		{
-			if( ( $row[$this->getPrefix() . 'config'] = json_decode( $row[$this->getPrefix() . 'config'], true ) ) === null ) {
-				$row[$this->getPrefix() . 'config'] = [];
+			if( ( $row[$this->prefix() . 'config'] = json_decode( $row[$this->prefix() . 'config'], true ) ) === null ) {
+				$row[$this->prefix() . 'config'] = [];
 			}
 
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-				$items[$row[$this->getPrefix() . 'id']] = $item;
+				$items[$row[$this->prefix() . 'id']] = $item;
 			}
 		}
 
@@ -372,7 +372,7 @@ abstract class Base
 	{
 		$values['.date'] = $this->date;
 
-		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->getPrefix(), $values );
+		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix(), $values );
 	}
 
 
@@ -381,7 +381,7 @@ abstract class Base
 	 *
 	 * @return string Domain prefix with sub-domains separated by "."
 	 */
-	protected function getPrefix() : string
+	protected function prefix() : string
 	{
 		return $this->getDomain() . '.lists.';
 	}

@@ -490,7 +490,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return new \Aimeos\MShop\Customer\Item\Address\Standard( $this->getPrefix(), $values );
+		return new \Aimeos\MShop\Customer\Item\Address\Standard( $this->prefix(), $values );
 	}
 
 

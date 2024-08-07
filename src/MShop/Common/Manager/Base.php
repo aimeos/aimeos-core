@@ -66,7 +66,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$prefix = $this->getPrefix();
+		$prefix = $this->prefix();
 		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $this->context()->locale()->getSiteId();
 
 		return new \Aimeos\MShop\Common\Item\Base( $prefix, $values );
@@ -109,7 +109,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( $this->getPrefix() . 'id', $id, $ref, $default );
+		return $this->getItemBase( $this->prefix() . 'id', $id, $ref, $default );
 	}
 
 
@@ -133,7 +133,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$prefix = $this->getPrefix();
+		$prefix = $this->prefix();
 
 		$attr = array_replace( $this->createAttributes( [
 			$prefix . 'id' => [
@@ -358,7 +358,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$cfgPathCount = 'mshop/common/manager/count';
 
 		$items = [];
-		$prefix = $this->getPrefix();
+		$prefix = $this->prefix();
 		$level = $this->getSiteMode();
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
