@@ -22,6 +22,8 @@ trait DB
 	private ?\Aimeos\Base\Criteria\Iface $search;
 	private ?string $resourceName = null;
 	private array $cachedStmts = [];
+	private string $subpath;
+	private string $domain;
 
 
 	/**
@@ -283,7 +285,7 @@ trait DB
 	{
 		foreach( $map as $key => $value )
 		{
-			if( ( $pos = strpos( $value, '"' ) ) === false ) {
+			if( strpos( $value, '"' ) === false ) {
 				$map[$key] = $this->alias( $key ) . '."' . $value . '"';
 			}
 		}
@@ -898,7 +900,7 @@ trait DB
 	 */
 	protected function initDb()
 	{
-		$parts = array_slice( explode( '\\', strtolower( current( $this->classes() ) ) ), 2, -1 );
+		$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
 
 		$this->domain = array_shift( $parts ) ?: '';
 		array_shift( $parts ); // remove "manager"
