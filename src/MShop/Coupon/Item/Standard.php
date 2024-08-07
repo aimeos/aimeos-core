@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Coupon
@@ -23,23 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Coupon\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
-
-
-	private string $date;
-
-
-	/**
-	 * Initializes the coupon item.
-	 *
-	 * @param array $values Optional; Associative array with id, label, provider,
-	 * config and status to initialize the item properties
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'coupon.', $values );
-
-		$this->date = $values['.date'] ?? date( 'Y-m-d H:i:s' );
-	}
 
 
 	/**
