@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'rule.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Rule\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Rule\Item\Standard( 'rule.', $this->values );
 	}
 
 
@@ -232,7 +232,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Rule\Item\Standard();
+		$item = new \Aimeos\MShop\Rule\Item\Standard( 'rule.', [] );
 
 		$list = $entries = array(
 			'rule.id' => 1,

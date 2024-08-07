@@ -25,17 +25,6 @@ class Standard
 
 
 	/**
-	 * Initializes the rule object
-	 *
-	 * @param array $values Associative array of id, type, name, config and status
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'rule.', $values );
-	}
-
-
-	/**
 	 * Returns the type of the rule.
 	 *
 	 * @return string Rule type
