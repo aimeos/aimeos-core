@@ -30,7 +30,7 @@ trait Methods
 	 *
 	 * @return string Table alias e.g. "mprolity"
 	 */
-	abstract protected function getAlias() : string;
+	abstract protected function alias() : string;
 
 
 	/**
@@ -413,7 +413,7 @@ trait Methods
 	protected function getSearchTranslations( array $attributes ) : array
 	{
 		$translations = [];
-		$alias = $this->getAlias();
+		$alias = $this->alias();
 		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
 
 		foreach( $attributes as $key => $item )

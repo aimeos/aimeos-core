@@ -349,7 +349,7 @@ trait DB
 	 *
 	 * @return string Table alias name
 	 */
-	protected function getAlias() : string
+	protected function alias() : string
 	{
 		$parts = explode( '/', $this->getSubPath() );
 		$str = 'm' . substr( $this->getDomain(), 0, 3 );
@@ -543,7 +543,7 @@ trait DB
 			$sql = str_replace( $key, $value, $sql );
 		}
 
-		return str_replace( [':alias', ':table'], [$this->getAlias(), $this->getTable()], $sql );
+		return str_replace( [':alias', ':table'], [$this->alias(), $this->getTable()], $sql );
 	}
 
 
@@ -777,7 +777,7 @@ trait DB
 	 */
 	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
 	{
-		$alias = $this->getAlias();
+		$alias = $this->alias();
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
