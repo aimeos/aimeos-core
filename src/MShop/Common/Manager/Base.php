@@ -133,44 +133,49 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$alias = $this->getAlias();
 		$prefix = $this->getPrefix();
 
-		return array_replace( $this->createAttributes( [
-			'id' => [
-				'code' => $prefix . 'id',
-				'internalcode' => $alias . '."id"',
+		$attr = array_replace( $this->createAttributes( [
+			$prefix . 'id' => [
+				'internalcode' => 'id',
 				'label' => 'ID',
 				'type' => 'int',
 				'public' => false,
 			],
-			'siteid' => [
-				'code' => $prefix . 'siteid',
-				'internalcode' => $alias . '."siteid"',
+			$prefix . 'siteid' => [
+				'internalcode' => 'siteid',
 				'label' => 'Site ID',
 				'public' => false,
 			],
-			'ctime' => [
-				'code' => $prefix . 'ctime',
-				'internalcode' => $alias . '."ctime"',
+			$prefix . 'ctime' => [
+				'internalcode' => 'ctime',
 				'label' => 'Create date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
-			'mtime' => [
-				'code' => $prefix . 'mtime',
-				'internalcode' => $alias . '."mtime"',
+			$prefix . 'mtime' => [
+				'internalcode' => 'mtime',
 				'label' => 'Modification date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
-			'editor' => [
-				'code' => $prefix . 'editor',
-				'internalcode' => $alias . '."editor"',
+			$prefix . 'editor' => [
+				'internalcode' => 'editor',
 				'label' => 'Editor',
 				'public' => false,
 			],
 		] ), $this->getSaveAttributes() );
+
+		if( $withsub )
+		{
+			$domains = $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
+
+			foreach( $domains as $domain ) {
+				$attr += $this->object()->getSubManager( $domain )->getSearchAttributes( true );
+			}
+		}
+
+		return $attr;
 	}
 
 

@@ -22,53 +22,44 @@ class Standard
 	implements \Aimeos\MShop\Review\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = array(
-		'customerid' => array(
-			'code' => 'review.customerid',
-			'internalcode' => 'mrev."customerid"',
+		'review.customerid' => array(
 			'label' => 'Customer ID',
+			'internalcode' => 'customerid',
 			'public' => false,
 		),
-		'ordprodid' => array(
-			'code' => 'review.orderproductid',
-			'internalcode' => 'mrev."ordprodid"',
+		'review.orderproductid' => array(
 			'label' => 'Order product ID',
+			'internalcode' => 'ordprodid',
 			'public' => false,
 		),
-		'domain' => array(
-			'code' => 'review.domain',
-			'internalcode' => 'mrev."domain"',
+		'review.domain' => array(
 			'label' => 'Domain',
+			'internalcode' => 'domain',
 		),
-		'refid' => array(
-			'code' => 'review.refid',
-			'internalcode' => 'mrev."refid"',
+		'review.refid' => array(
 			'label' => 'ID from the referenced domain',
+			'internalcode' => 'refid',
 		),
-		'name' => array(
-			'code' => 'review.name',
-			'internalcode' => 'mrev."name"',
+		'review.name' => array(
 			'label' => 'Name',
+			'internalcode' => 'name',
 		),
-		'comment' => array(
-			'code' => 'review.comment',
-			'internalcode' => 'mrev."comment"',
+		'review.comment' => array(
 			'label' => 'Comment',
+			'internalcode' => 'comment',
 		),
-		'response' => array(
-			'code' => 'review.response',
-			'internalcode' => 'mrev."response"',
+		'review.response' => array(
 			'label' => 'Response',
+			'internalcode' => 'response',
 		),
-		'rating' => array(
-			'code' => 'review.rating',
-			'internalcode' => 'mrev."rating"',
+		'review.rating' => array(
 			'label' => 'Rating',
+			'internalcode' => 'rating',
 			'type' => 'int',
 		),
-		'status' => array(
-			'code' => 'review.status',
-			'internalcode' => 'mrev."status"',
+		'review.status' => array(
 			'label' => 'Review status',
+			'internalcode' => 'status',
 			'type' => 'int',
 		),
 	);

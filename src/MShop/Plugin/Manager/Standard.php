@@ -22,37 +22,31 @@ class Standard
 	implements \Aimeos\MShop\Plugin\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = array(
-		'type' => array(
+		'plugin.type' => array(
 			'label' => 'Type ID',
-			'code' => 'plugin.type',
-			'internalcode' => 'mplu."type"',
+			'internalcode' => 'type',
 		),
-		'label' => array(
+		'plugin.label' => array(
 			'label' => 'Label',
-			'code' => 'plugin.label',
-			'internalcode' => 'mplu."label"',
+			'internalcode' => 'label',
 		),
-		'provider' => array(
+		'plugin.provider' => array(
 			'label' => 'Provider',
-			'code' => 'plugin.provider',
-			'internalcode' => 'mplu."provider"',
+			'internalcode' => 'provider',
 		),
-		'pos' => array(
+		'plugin.position' => array(
 			'label' => 'Position',
-			'code' => 'plugin.position',
-			'internalcode' => 'mplu."pos"',
+			'internalcode' => 'pos',
 			'type' => 'int',
 		),
-		'status' => array(
+		'plugin.status' => array(
 			'label' => 'Status',
-			'code' => 'plugin.status',
-			'internalcode' => 'mplu."status"',
+			'internalcode' => 'status',
 			'type' => 'int',
 		),
-		'config' => array(
+		'plugin.config' => array(
 			'label' => 'Configuration',
-			'code' => 'plugin.config',
-			'internalcode' => 'mplu."config"',
+			'internalcode' => 'config',
 			'type' => 'json',
 			'public' => false,
 		),
@@ -256,7 +250,7 @@ class Standard
 	 * @see mshop/plugin/manager/count/ansi
 	 */
 
-	 /** mshop/plugin/manager/submanagers
+	/** mshop/plugin/manager/submanagers
 	 * List of manager names that can be instantiated by the plugin manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -273,7 +267,7 @@ class Standard
 	 * @since 2015.10
 	 */
 
-	 /** mshop/plugin/manager/insert/mysql
+	/** mshop/plugin/manager/insert/mysql
 	 * Inserts a new plugin record into the database table
 	 *
 	 * @see mshop/plugin/manager/insert/ansi
@@ -308,7 +302,7 @@ class Standard
 	 * @see mshop/plugin/manager/count/ansi
 	 */
 
-	 /** mshop/plugin/manager/update/mysql
+	/** mshop/plugin/manager/update/mysql
 	 * Updates an existing plugin record in the database
 	 *
 	 * @see mshop/plugin/manager/update/ansi

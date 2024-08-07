@@ -26,6 +26,14 @@ trait Methods
 
 
 	/**
+	 * Returns the alias of the used table
+	 *
+	 * @return string Table alias e.g. "mprolity"
+	 */
+	abstract protected function getAlias() : string;
+
+
+	/**
 	 * Adds a filter callback for an item type
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
@@ -308,24 +316,6 @@ trait Methods
 
 
 	/**
-	 * Returns the table alias name.
-	 *
-	 * @return string Table alias name
-	 */
-	protected function getAlias() : string
-	{
-		$parts = explode( '/', $this->getSubPath() );
-		$str = 'm' . substr( $this->getDomain(), 0, 3 );
-
-		foreach( $parts as $part ) {
-			$str .= substr( $part, 0, 2 );
-		}
-
-		return $str;
-	}
-
-
-	/**
 	 * Returns the full configuration key for the passed last part
 	 *
 	 * @param string $name Configuration last part
@@ -423,16 +413,15 @@ trait Methods
 	protected function getSearchTranslations( array $attributes ) : array
 	{
 		$translations = [];
+		$alias = $this->getAlias();
 		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
 
 		foreach( $attributes as $key => $item )
 		{
-			if( $item instanceof $iface ) {
-				$translations[$item->getCode()] = $item->getInternalCode();
-			} else if( isset( $item['code'] ) ) {
-				$translations[$item['code']] = $item['internalcode'];
+			if( $alias && strpos( $item->getInternalCode(), '"' ) === false ) {
+				$translations[$item->getCode()] = $alias . '."' . $item->getInternalCode() . '"';
 			} else {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+				$translations[$item->getCode()] = $item->getInternalCode();
 			}
 		}
 

@@ -22,50 +22,42 @@ class Standard
 	implements \Aimeos\MShop\Rule\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = [
-		'type' => [
+		'rule.type' => [
 			'label' => 'Type ID',
-			'code' => 'rule.type',
-			'internalcode' => 'mrul."type"',
+			'internalcode' => 'type',
 		],
-		'label' => [
+		'rule.label' => [
 			'label' => 'Label',
-			'code' => 'rule.label',
-			'internalcode' => 'mrul."label"',
+			'internalcode' => 'label',
 		],
-		'provider' => [
+		'rule.provider' => [
 			'label' => 'Provider',
-			'code' => 'rule.provider',
-			'internalcode' => 'mrul."provider"',
+			'internalcode' => 'provider',
 		],
-		'pos' => [
+		'rule.position' => [
 			'label' => 'Position',
-			'code' => 'rule.position',
-			'internalcode' => 'mrul."pos"',
+			'internalcode' => 'pos',
 			'type' => 'int',
 		],
-		'status' => [
+		'rule.status' => [
 			'label' => 'Status',
-			'code' => 'rule.status',
-			'internalcode' => 'mrul."status"',
+			'internalcode' => 'status',
 			'type' => 'int',
 		],
-		'config' => [
+		'rule.config' => [
 			'label' => 'Configuration',
-			'code' => 'rule.config',
-			'internalcode' => 'mrul."config"',
+			'internalcode' => 'config',
 			'type' => 'json',
 			'public' => false,
 		],
-		'start' => [
+		'rule.datestart' => [
 			'label' => 'Start date/time',
-			'code' => 'rule.datestart',
-			'internalcode' => 'mrul."start"',
+			'internalcode' => 'start',
 			'type' => 'datetime',
 		],
-		'end' => [
+		'rule.dateend' => [
 			'label' => 'End date/time',
-			'code' => 'rule.dateend',
-			'internalcode' => 'mrul."end"',
+			'internalcode' => 'end',
 			'type' => 'datetime',
 		],
 	];
@@ -285,7 +277,7 @@ class Standard
 	 * @see mshop/rule/manager/count/ansi
 	 */
 
-	 /** mshop/rule/manager/submanagers
+	/** mshop/rule/manager/submanagers
 	 * List of manager names that can be instantiated by the rule manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -302,7 +294,7 @@ class Standard
 	 * @since 2021.04
 	 */
 
-	 /** mshop/rule/manager/insert/mysql
+	/** mshop/rule/manager/insert/mysql
 	 * Inserts a new rule record into the database table
 	 *
 	 * @see mshop/rule/manager/insert/ansi
@@ -337,7 +329,7 @@ class Standard
 	 * @see mshop/rule/manager/count/ansi
 	 */
 
-	 /** mshop/rule/manager/update/mysql
+	/** mshop/rule/manager/update/mysql
 	 * Updates an existing rule record in the database
 	 *
 	 * @see mshop/rule/manager/update/ansi

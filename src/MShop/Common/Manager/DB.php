@@ -51,14 +51,6 @@ trait DB
 
 
 	/**
-	 * Returns the alias of the used table
-	 *
-	 * @return string Table alias e.g. "mprolity"
-	 */
-	abstract protected function getAlias() : string;
-
-
-	/**
 	 * Returns the manager domain
 	 *
 	 * @return string Manager domain e.g. "product"
@@ -349,6 +341,24 @@ trait DB
 		$stmt->execute()->finish();
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the table alias name.
+	 *
+	 * @return string Table alias name
+	 */
+	protected function getAlias() : string
+	{
+		$parts = explode( '/', $this->getSubPath() );
+		$str = 'm' . substr( $this->getDomain(), 0, 3 );
+
+		foreach( $parts as $part ) {
+			$str .= substr( $part, 0, 2 );
+		}
+
+		return $str;
 	}
 
 
@@ -767,6 +777,7 @@ trait DB
 	 */
 	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
 	{
+		$alias = $this->getAlias();
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
@@ -785,8 +796,8 @@ trait DB
 
 			$icode = $entry->getInternalCode();
 
-			if( !( str_contains( $icode, '"' ) || str_contains( $icode, '.' ) ) ) {
-				$icode = '"' . $icode . '"';
+			if( !( str_contains( $icode, '"' ) ) ) {
+				$icode = $alias .'."' . $icode . '"';
 			}
 
 			$cols[] = $icode . ' AS "' . $entry->getCode() . '"';
@@ -903,7 +914,7 @@ trait DB
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
+		$columns = array_column( $this->object()->getSaveAttributes(), null, 'internalcode' );
 
 		if( $id === null )
 		{

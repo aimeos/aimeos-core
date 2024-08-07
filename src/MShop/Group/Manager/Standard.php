@@ -22,15 +22,13 @@ class Standard
 	implements \Aimeos\MShop\Group\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	 private array $searchConfig = [
-		'code' => [
-			'code' => 'group.code',
-			'internalcode' => 'mgro."code"',
+		'group.code' => [
 			'label' => 'Group code',
+			'internalcode' => 'code',
 		],
-		'label' => [
-			'code' => 'group.label',
-			'internalcode' => 'mgro."label"',
+		'group.label' => [
 			'label' => 'Group label',
+			'internalcode' => 'label',
 		],
 	];
 
