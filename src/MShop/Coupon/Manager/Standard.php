@@ -276,7 +276,7 @@ class Standard
 	 * @see mshop/coupon/manager/count/ansi
 	 */
 
-	 /** mshop/coupon/manager/submanagers
+	/** mshop/coupon/manager/submanagers
 	 * List of manager names that can be instantiated by the coupon manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -293,7 +293,7 @@ class Standard
 	 * @since 2015.10
 	 */
 
-	 /** mshop/coupon/manager/insert/mysql
+	/** mshop/coupon/manager/insert/mysql
 	 * Inserts a new coupon record into the database table
 	 *
 	 * @see mshop/coupon/manager/insert/ansi
@@ -328,7 +328,7 @@ class Standard
 	 * @see mshop/coupon/manager/count/ansi
 	 */
 
-	 /** mshop/coupon/manager/update/mysql
+	/** mshop/coupon/manager/update/mysql
 	 * Updates an existing coupon record in the database
 	 *
 	 * @see mshop/coupon/manager/update/ansi

@@ -124,8 +124,7 @@ class Standard
 		 * @see mshop/review/manager/search/ansi
 		 * @see mshop/review/manager/count/ansi
 		 */
-		$cfgkey = 'mshop/review/manager/aggregate';
-		$cfgkey .= ( $type === 'rate' ? 'rate' : '' );
+		$cfgkey = 'mshop/review/manager/aggregate' . ( $type === 'rate' ? 'rate' : '' );
 
 		return $this->aggregateBase( $search, $key, $cfgkey, [], $value, $type );
 	}

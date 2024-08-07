@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -18,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = \Aimeos\MShop::create( \TestHelper::context(), 'coupon' );
+		$this->object = new \Aimeos\MShop\Coupon\Manager\Standard( \TestHelper::context() );
 
 		$this->item = $this->object->create();
 		$this->item->setProvider( 'None' );
