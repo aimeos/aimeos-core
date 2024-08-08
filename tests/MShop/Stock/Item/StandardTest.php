@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'stock.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Stock\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Stock\Item\Standard( 'stock.', $this->values );
 	}
 
 
@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Stock\Item\Standard();
+		$item = new \Aimeos\MShop\Stock\Item\Standard( 'stock.', [] );
 
 		$list = $entries = array(
 			'stock.id' => 1,

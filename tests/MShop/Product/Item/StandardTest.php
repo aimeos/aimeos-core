@@ -581,7 +581,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStockItemsType()
 	{
-		$stock = new \Aimeos\MShop\Stock\Item\Standard();
+		$stock = new \Aimeos\MShop\Stock\Item\Standard( 'stock.', [] );
 		$stocks = [123 => ( clone $stock )->setType( 'something' ), 456 => ( clone $stock )->setType( 'default' )];
 		$object = new \Aimeos\MShop\Product\Item\Standard( ['.stock' => $stocks] );
 

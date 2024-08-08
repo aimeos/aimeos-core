@@ -23,17 +23,6 @@ class Standard
 	implements \Aimeos\MShop\Stock\Item\Iface
 {
 	/**
-	 * Initializes the stock item object with the given values
-	 *
-	 * @param array $values Associative list of product stock key/value pairs
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'stock.', $values );
-	}
-
-
-	/**
 	 * Returns the back in stock date of the
 	 *
 	 * @return string|null Back in stock date of the product
