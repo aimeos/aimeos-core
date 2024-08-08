@@ -580,7 +580,7 @@ class Standard
 	 * @see mshop/subscription/manager/count/ansi
 	 */
 
-	 /** mshop/subscription/manager/submanagers
+	/** mshop/subscription/manager/submanagers
 	 * List of manager names that can be instantiated by the subscription manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -597,7 +597,7 @@ class Standard
 	 * @since 2018.04
 	 */
 
-	 /** mshop/subscription/manager/insert/mysql
+	/** mshop/subscription/manager/insert/mysql
 	 * Inserts a new subscription record into the database table
 	 *
 	 * @see mshop/subscription/manager/insert/ansi
@@ -632,7 +632,7 @@ class Standard
 	 * @see mshop/subscription/manager/count/ansi
 	 */
 
-	 /** mshop/subscription/manager/update/mysql
+	/** mshop/subscription/manager/update/mysql
 	 * Updates an existing subscription record in the database
 	 *
 	 * @see mshop/subscription/manager/update/ansi

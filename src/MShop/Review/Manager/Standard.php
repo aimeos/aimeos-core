@@ -327,7 +327,7 @@ class Standard
 	 * @see mshop/review/manager/count/ansi
 	 */
 
-	 /** mshop/review/manager/submanagers
+	/** mshop/review/manager/submanagers
 	 * List of manager names that can be instantiated by the review manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -344,7 +344,7 @@ class Standard
 	 * @since 2020.10
 	 */
 
-	 /** mshop/review/manager/insert/mysql
+	/** mshop/review/manager/insert/mysql
 	 * Inserts a new review record into the database table
 	 *
 	 * @see mshop/review/manager/insert/ansi
@@ -379,7 +379,7 @@ class Standard
 	 * @see mshop/review/manager/count/ansi
 	 */
 
-	 /** mshop/review/manager/update/mysql
+	/** mshop/review/manager/update/mysql
 	 * Updates an existing review record in the database
 	 *
 	 * @see mshop/review/manager/update/ansi
