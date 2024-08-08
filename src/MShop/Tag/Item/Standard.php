@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Tag
@@ -22,22 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Tag\Item\Iface
 {
-	private ?string $langid;
-
-
-	/**
-	 * Initializes the tag item object with the given values
-	 *
-	 * @param array $values Associative list of item key/value pairs
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'tag.', $values );
-
-		$this->langid = $values['.languageid'] ?? null;
-	}
-
-
 	/**
 	 * Returns the domain of the tag item.
 	 *
@@ -137,7 +120,7 @@ class Standard
 	 */
 	public function isAvailable() : bool
 	{
-		return parent::isAvailable() && $this->getLanguageId() === $this->langid;
+		return parent::isAvailable() && $this->getLanguageId() === $this->get( '.languageid' );
 	}
 
 

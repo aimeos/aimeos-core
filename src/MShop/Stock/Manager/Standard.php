@@ -323,7 +323,7 @@ class Standard
 	 * @see mshop/stock/manager/count/ansi
 	 */
 
-	 /** mshop/stock/manager/submanagers
+	/** mshop/stock/manager/submanagers
 	 * List of manager names that can be instantiated by the stock manager
 	 *
 	 * Managers provide a generic interface to the underlying storage.
@@ -340,7 +340,7 @@ class Standard
 	 * @since 2020.10
 	 */
 
-	 /** mshop/stock/manager/insert/mysql
+	/** mshop/stock/manager/insert/mysql
 	 * Inserts a new stock record into the database table
 	 *
 	 * @see mshop/stock/manager/insert/ansi
@@ -375,7 +375,7 @@ class Standard
 	 * @see mshop/stock/manager/count/ansi
 	 */
 
-	 /** mshop/stock/manager/update/mysql
+	/** mshop/stock/manager/update/mysql
 	 * Updates an existing stock record in the database
 	 *
 	 * @see mshop/stock/manager/update/ansi
