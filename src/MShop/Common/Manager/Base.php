@@ -368,15 +368,23 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		while( $row = $results->fetch() )
+		try
 		{
-			foreach( $attrs as $code => $attr ) {
-				$row[$code] = json_decode( $row[$code], true );
-			}
+			while( $row = $results->fetch() )
+			{
+				foreach( $attrs as $code => $attr ) {
+					$row[$code] = json_decode( $row[$code], true );
+				}
 
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$row[$prefix . 'id']] = $item;
+				if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+					$items[$row[$prefix . 'id']] = $item;
+				}
 			}
+		}
+		catch( \Exception $e )
+		{
+			$results->finish();
+			throw $e;
 		}
 
 		return map( $items );

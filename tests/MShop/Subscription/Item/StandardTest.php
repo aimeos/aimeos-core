@@ -31,11 +31,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.status' => 1,
 			'subscription.mtime' => '2018-01-01 00:00:02',
 			'subscription.ctime' => '2018-01-01 00:00:01',
-			'subscription.editor' => 'unitTestUser'
+			'subscription.editor' => 'unitTestUser',
+			'.orderitem' => \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create()
 		);
 
-		$baseItem = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create();
-		$this->object = new \Aimeos\MShop\Subscription\Item\Standard( $this->values, $baseItem );
+		$this->object = new \Aimeos\MShop\Subscription\Item\Standard( 'subscription.', $this->values );
 	}
 
 
@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetOrderItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $this->object->getOrderItem() );
-		$this->assertNull( ( new \Aimeos\MShop\Subscription\Item\Standard( $this->values ) )->getOrderItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Subscription\Item\Standard( 'subscription.', [] ) )->getOrderItem() );
 	}
 
 
@@ -279,7 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Subscription\Item\Standard();
+		$item = new \Aimeos\MShop\Subscription\Item\Standard( 'subscription.', [] );
 
 		$list = $entries = array(
 			'subscription.id' => 1,
@@ -314,7 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testToArray()
 	{
 		$list = $this->object->toArray( true );
-		$this->assertEquals( count( $this->values ), count( $list ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $list ) );
 
 		$this->assertEquals( $this->object->getId(), $list['subscription.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['subscription.siteid'] );

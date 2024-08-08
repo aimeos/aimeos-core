@@ -21,22 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Subscription\Item\Iface
 {
-	private ?\Aimeos\MShop\Order\Item\Iface $orderItem;
-
-
-	/**
-	 * Initializes the object with the given values.
-	 *
-	 * @param array $values Associative list of values from database
-	 * @param \Aimeos\MShop\Order\Item\Iface|null $orderItem Order if available
-	 */
-	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $orderItem = null )
-	{
-		parent::__construct( 'subscription.', $values );
-		$this->orderItem = $orderItem;
-	}
-
-
 	/**
 	 * Returns the associated order item
 	 *
@@ -44,7 +28,7 @@ class Standard
 	 */
 	public function getOrderItem() : ?\Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->orderItem;
+		return $this->get( '.orderitem' );
 	}
 
 

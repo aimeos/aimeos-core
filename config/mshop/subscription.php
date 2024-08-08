@@ -36,31 +36,6 @@ return array(
 				GROUP BY :keys
 			'
 		),
-		'insert' => array(
-			'ansi' => '
-				INSERT INTO "mshop_subscription" ( :names
-					"orderid", "ordprodid", "next", "end", "interval", "productid", "period",
-					"reason", "status", "mtime", "editor", "siteid", "ctime"
-				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-				)
-			'
-		),
-		'update' => array(
-			'ansi' => '
-				UPDATE "mshop_subscription"
-				SET :names
-					"orderid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
-					"productid" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-				WHERE "siteid" LIKE ? AND "id" = ?
-			'
-		),
-		'delete' => array(
-			'ansi' => '
-				DELETE FROM "mshop_subscription"
-				WHERE :cond AND "siteid" LIKE ?
-			'
-		),
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
@@ -110,15 +85,6 @@ return array(
 					LIMIT 10000 OFFSET 0
 				) AS list
 			'
-		),
-		'newid' => array(
-			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-			'mysql' => 'SELECT LAST_INSERT_ID()',
-			'oracle' => 'SELECT mshop_subscription_seq.CURRVAL FROM DUAL',
-			'pgsql' => 'SELECT lastval()',
-			'sqlite' => 'SELECT last_insert_rowid()',
-			'sqlsrv' => 'SELECT @@IDENTITY',
-			'sqlanywhere' => 'SELECT @@IDENTITY',
 		),
 	),
 );

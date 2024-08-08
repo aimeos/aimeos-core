@@ -21,203 +21,53 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Subscription\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	/** mshop/subscription/manager/name
-	 * Class name of the used subscription manager implementation
-	 *
-	 * Each default manager can be replace by an alternative imlementation.
-	 * To use this implementation, you have to set the last part of the class
-	 * name as configuration value so the manager factory knows which class it
-	 * has to instantiate.
-	 *
-	 * For example, if the name of the default class is
-	 *
-	 *  \Aimeos\MShop\Subscription\Manager\Standard
-	 *
-	 * and you want to replace it with your own version named
-	 *
-	 *  \Aimeos\MShop\Subscription\Manager\Mymanager
-	 *
-	 * then you have to set the this configuration option:
-	 *
-	 *  mshop/subscription/manager/name = Mymanager
-	 *
-	 * The value is the last part of your own class name and it's case sensitive,
-	 * so take care that the configuration value is exactly named like the last
-	 * part of the class name.
-	 *
-	 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
-	 * characters are possible! You should always start the last part of the class
-	 * name with an upper case character and continue only with lower case characters
-	 * or numbers. Avoid chamel case names like "MyManager"!
-	 *
-	 * @param string Last part of the class name
-	 * @since 2018.04
-	 */
-
-	/** mshop/subscription/manager/decorators/excludes
-	 * Excludes decorators added by the "common" option from the subscription manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to remove a decorator added via
-	 * "mshop/common/manager/decorators/default" before they are wrapped
-	 * around the subscription manager.
-	 *
-	 *  mshop/subscription/manager/decorators/excludes = array( 'decorator1' )
-	 *
-	 * This would remove the decorator named "decorator1" from the list of
-	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-	 * "mshop/common/manager/decorators/default" for the subscription manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2018.04
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/subscription/manager/decorators/global
-	 * @see mshop/subscription/manager/decorators/local
-	 */
-
-	/** mshop/subscription/manager/decorators/global
-	 * Adds a list of globally available decorators only to the subscription manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to wrap global decorators
-	 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the subscription
-	 * manager.
-	 *
-	 *  mshop/subscription/manager/decorators/global = array( 'decorator1' )
-	 *
-	 * This would add the decorator named "decorator1" defined by
-	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the
-	 * subscription manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2018.04
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/subscription/manager/decorators/excludes
-	 * @see mshop/subscription/manager/decorators/local
-	 */
-
-	/** mshop/subscription/manager/decorators/local
-	 * Adds a list of local decorators only to the subscription manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to wrap local decorators
-	 * ("\Aimeos\MShop\Subscription\Manager\Decorator\*") around the subscription
-	 * manager.
-	 *
-	 *  mshop/subscription/manager/decorators/local = array( 'decorator2' )
-	 *
-	 * This would add the decorator named "decorator2" defined by
-	 * "\Aimeos\MShop\Subscription\Manager\Decorator\Decorator2" only to the
-	 * subscription manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2018.04
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/subscription/manager/decorators/excludes
-	 * @see mshop/subscription/manager/decorators/global
-	 */
-
-
-	private array $searchConfig = array(
-		'subscription.id' => array(
-			'code' => 'subscription.id',
-			'internalcode' => 'msub."id"',
-			'label' => 'Subscription ID',
-			'type' => 'int',
-		),
-		'subscription.siteid' => array(
-			'code' => 'subscription.siteid',
-			'internalcode' => 'msub."siteid"',
-			'label' => 'Site ID',
-			'public' => false,
-		),
-		'subscription.orderid' => array(
-			'code' => 'subscription.orderid',
-			'internalcode' => 'msub."orderid"',
+	private array $searchConfig = [
+		'subscription.orderid' => [
 			'label' => 'Order ID',
+			'internalcode' => 'orderid',
 			'type' => 'int',
 			'public' => false,
-		),
-		'subscription.ordprodid' => array(
-			'code' => 'subscription.ordprodid',
-			'internalcode' => 'msub."ordprodid"',
+		],
+		'subscription.ordprodid' => [
 			'label' => 'Order product ID',
+			'internalcode' => 'ordprodid',
 			'type' => 'int',
 			'public' => false,
-		),
-		'subscription.datenext' => array(
-			'code' => 'subscription.datenext',
-			'internalcode' => 'msub."next"',
+		],
+		'subscription.datenext' => [
 			'label' => 'Next renewal date/time',
+			'internalcode' => 'next',
 			'type' => 'datetime',
-		),
-		'subscription.dateend' => array(
-			'code' => 'subscription.dateend',
-			'internalcode' => 'msub."end"',
+		],
+		'subscription.dateend' => [
 			'label' => 'End of subscription',
+			'internalcode' => 'end',
 			'type' => 'datetime',
-		),
-		'subscription.interval' => array(
-			'code' => 'subscription.interval',
-			'internalcode' => 'msub."interval"',
+		],
+		'subscription.interval' => [
 			'label' => 'Renewal interval',
-		),
-		'subscription.reason' => array(
-			'code' => 'subscription.reason',
-			'internalcode' => 'msub."reason"',
+			'internalcode' => 'interval',
+		],
+		'subscription.reason' => [
 			'label' => 'Subscription end reason',
+			'internalcode' => 'reason',
 			'type' => 'int',
-		),
-		'subscription.period' => array(
-			'code' => 'subscription.period',
-			'internalcode' => 'msub."period"',
+		],
+		'subscription.period' => [
 			'label' => 'Subscription period count',
+			'internalcode' => 'period',
 			'type' => 'int',
-		),
-		'subscription.productid' => array(
-			'code' => 'subscription.productid',
-			'internalcode' => 'msub."productid"',
+		],
+		'subscription.productid' => [
 			'label' => 'Subscription product ID',
-		),
-		'subscription.status' => array(
-			'code' => 'subscription.status',
-			'internalcode' => 'msub."status"',
+			'internalcode' => 'productid',
+		],
+		'subscription.status' => [
 			'label' => 'Subscription status',
+			'internalcode' => 'status',
 			'type' => 'int',
-		),
-		'subscription.ctime' => array(
-			'code' => 'subscription.ctime',
-			'internalcode' => 'msub."ctime"',
-			'label' => 'Create date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'subscription.mtime' => array(
-			'code' => 'subscription.mtime',
-			'internalcode' => 'msub."mtime"',
-			'label' => 'Modify date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'subscription.editor' => array(
-			'code' => 'subscription.editor',
-			'internalcode' => 'msub."editor"',
-			'label' => 'Editor',
-			'public' => false,
-		),
-	);
+		],
+	];
 
 
 	/**
@@ -310,23 +160,6 @@ class Standard
 
 
 	/**
-	 * Removes old entries from the storage.
-	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Subscription\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$path = 'mshop/subscription/manager/submanagers';
-		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
-		}
-
-		return $this->clearBase( $siteids, 'mshop/subscription/manager/delete' );
-	}
-
-
-	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -335,7 +168,7 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['subscription.siteid'] = $values['subscription.siteid'] ?? $this->context()->locale()->getSiteId();
-		return $this->createItemBase( $values );
+		return new \Aimeos\MShop\Subscription\Item\Standard( 'subscription.', $values );
 	}
 
 
@@ -348,263 +181,26 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		$search = $this->filterBase( 'subscription', $default );
+		$filter = $this->filterBase( 'subscription', $default );
 
-		if( $site === true )
+		if( $site )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$search->add( $this->siteCondition( 'order.product.siteid', $level ) );
+			$filter->add( $this->siteCondition( 'order.product.siteid', $level ) );
 		}
 
-		return $search;
+		return $filter;
 	}
 
 
 	/**
-	 * Creates a one-time subscription in the storage from the given invoice object.
+	 * Returns the additional column/search definitions
 	 *
-	 * @param \Aimeos\MShop\Subscription\Item\Iface $item Subscription item with necessary values
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Updated item including the generated ID
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
-	protected function saveItem( \Aimeos\MShop\Subscription\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function getSaveAttributes() : array
 	{
-		if( $item->getOrderProductId() === null ) {
-			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
-		}
-
-		if( $orderItem = $item->getOrderItem() ) {
-			\Aimeos\MShop::create( $this->context(), 'order' )->save( $orderItem );
-		}
-
-		if( !$item->isModified() ) {
-			return $item;
-		}
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null )
-		{
-			/** mshop/subscription/manager/insert/mysql
-			 * Inserts a new subscription record into the database table
-			 *
-			 * @see mshop/subscription/manager/insert/ansi
-			 */
-
-			/** mshop/subscription/manager/insert/ansi
-			 * Inserts a new subscription record into the database table
-			 *
-			 * Items with no ID yet (i.e. the ID is NULL) will be created in
-			 * the database and the newly created ID retrieved afterwards
-			 * using the "newid" SQL statement.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the subscription item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The subscription of the columns must correspond to the
-			 * subscription in the save() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2018.04
-			 * @see mshop/subscription/manager/update/ansi
-			 * @see mshop/subscription/manager/newid/ansi
-			 * @see mshop/subscription/manager/delete/ansi
-			 * @see mshop/subscription/manager/search/ansi
-			 * @see mshop/subscription/manager/count/ansi
-			 */
-			$path = 'mshop/subscription/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-		}
-		else
-		{
-			/** mshop/subscription/manager/update/mysql
-			 * Updates an existing subscription record in the database
-			 *
-			 * @see mshop/subscription/manager/update/ansi
-			 */
-
-			/** mshop/subscription/manager/update/ansi
-			 * Updates an existing subscription record in the database
-			 *
-			 * Items which already have an ID (i.e. the ID is not NULL) will
-			 * be updated in the database.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the subscription item to the statement before they are
-			 * sent to the database server. The subscription of the columns must
-			 * correspond to the subscription in the save() method, so the
-			 * correct values are bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for updating records
-			 * @since 2018.04
-			 * @see mshop/subscription/manager/insert/ansi
-			 * @see mshop/subscription/manager/newid/ansi
-			 * @see mshop/subscription/manager/delete/ansi
-			 * @see mshop/subscription/manager/search/ansi
-			 * @see mshop/subscription/manager/count/ansi
-			 */
-			$path = 'mshop/subscription/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getOrderId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getDateNext() );
-		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, $item->getInterval() );
-		$stmt->bind( $idx++, $item->getProductId() );
-		$stmt->bind( $idx++, $item->getPeriod(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getReason(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $context->datetime() ); // mtime
-		$stmt->bind( $idx++, $context->editor() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); // ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null && $fetch === true )
-		{
-			/** mshop/subscription/manager/newid/mysql
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * @see mshop/subscription/manager/newid/ansi
-			 */
-
-			/** mshop/subscription/manager/newid/ansi
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * As soon as a new record is inserted into the database table,
-			 * the database server generates a new and unique identifier for
-			 * that record. This ID can be used for retrieving, updating and
-			 * deleting that specific record from the table again.
-			 *
-			 * For MySQL:
-			 *  SELECT LAST_INSERT_ID()
-			 * For PostgreSQL:
-			 *  SELECT currval('seq_msub_id')
-			 * For SQL Server:
-			 *  SELECT SCOPE_IDENTITY()
-			 * For Oracle:
-			 *  SELECT "seq_msub_id".CURRVAL FROM DUAL
-			 *
-			 * There's no way to retrive the new ID by a SQL statements that
-			 * fits for most database servers as they implement their own
-			 * specific way.
-			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
-			 * @since 2018.04
-			 * @see mshop/subscription/manager/insert/ansi
-			 * @see mshop/subscription/manager/update/ansi
-			 * @see mshop/subscription/manager/delete/ansi
-			 * @see mshop/subscription/manager/search/ansi
-			 * @see mshop/subscription/manager/count/ansi
-			 */
-			$path = 'mshop/subscription/manager/newid';
-			$id = $this->newId( $conn, $path );
-		}
-
-		return $item->setId( $id );
-	}
-
-
-	/**
-	 * Returns an subscription invoice item built from database values.
-	 *
-	 * @param string $id Unique id of the subscription invoice
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Returns subscription invoice item of the given id
-	 * @throws \Aimeos\MShop\Subscription\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getItemBase( 'subscription.id', $id, $ref, $default );
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Subscription\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		/** mshop/subscription/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/subscription/manager/delete/ansi
-		 */
-
-		/** mshop/subscription/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the subscription database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2018.04
-		 * @see mshop/subscription/manager/insert/ansi
-		 * @see mshop/subscription/manager/update/ansi
-		 * @see mshop/subscription/manager/newid/ansi
-		 * @see mshop/subscription/manager/search/ansi
-		 * @see mshop/subscription/manager/count/ansi
-		 */
-		$path = 'mshop/subscription/manager/delete';
-
-		return $this->deleteItemsBase( $itemIds, $path );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'mshop/subscription/manager/submanagers';
-		return $this->getResourceTypeBase( 'subscription', $path, [], $withsub );
+		return $this->createAttributes( $this->searchConfig );
 	}
 
 
@@ -616,25 +212,7 @@ class Standard
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		/** mshop/subscription/manager/submanagers
-		 * List of manager names that can be instantiated by the subscription manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2018.04
-		 */
-		$path = 'mshop/subscription/manager/submanagers';
-
-		$list = $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+		$list = parent::getSearchAttributes( $withsub );
 
 		if( $withsub ) {
 			$list += \Aimeos\MShop::create( $this->context(), 'order' )->getSearchAttributes( $withsub );
@@ -655,10 +233,6 @@ class Standard
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-		$map = $items = $orderItems = [];
-
-		$required = array( 'subscription', 'order' );
 
 		/** mshop/subscription/manager/sitemode
 		 * Mode how items from levels below or above in the site tree are handled
@@ -801,13 +375,18 @@ class Standard
 		 */
 		$cfgPathCount = 'mshop/subscription/manager/count';
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-			$required, $total, $level );
+		$items = [];
+		$required = ['subscription', 'order'];
+		$conn = $context->db( $this->getResourceName() );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		try
 		{
-			while( $row = $results->fetch() ) {
-				$map[$row['subscription.id']] = $row;
+			while( $row = $results->fetch() )
+			{
+				if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+					$items[$row['subscription.id']] = $item;
+				}
 			}
 		}
 		catch( \Exception $e )
@@ -819,22 +398,13 @@ class Standard
 
 		if( in_array( 'order', $ref ) )
 		{
-			$ids = [];
-			foreach( $map as $row ) {
-				$ids[] = $row['subscription.orderid'];
-			}
-
-			$manager = \Aimeos\MShop::create( $this->context(), 'order' );
+			$ids = array_column( $items, 'subscription.orderid' );
+			$manager = \Aimeos\MShop::create( $context, 'order' );
 			$search = $manager->filter()->add( 'order.id', '==', $ids )->slice( 0, count( $ids ) );
 			$orderItems = $manager->search( $search, $ref );
-		}
 
-		foreach( $map as $id => $row )
-		{
-			$orderItem = $orderItems[$row['subscription.orderid']] ?? null;
-
-			if( $item = $this->applyFilter( $this->createItemBase( $row, $orderItem ) ) ) {
-				$items[$id] = $item;
+			foreach( $items as $item ) {
+				$item->set( '.orderitem', $orderItems[$item['subscription.orderid']] ?? null );
 			}
 		}
 
@@ -843,27 +413,290 @@ class Standard
 
 
 	/**
-	 * Returns a new manager for subscription extensions
+	 * Returns the prefix for the item properties and search keys.
 	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g base, etc.
+	 * @return string Prefix for the item properties and search keys
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function prefix() : string
 	{
-		return $this->getSubManagerBase( 'subscription', $manager, $name );
+		return 'subscription.';
 	}
 
 
 	/**
-	 * Creates a new subscription item.
+	 * Creates a one-time subscription in the storage from the given invoice object.
 	 *
-	 * @param array $values List of attributes for subscription item
-	 * @param \Aimeos\MShop\Order\Item\Iface|null $order Order basket if requested and available
-	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Subscription item with necessary values
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Updated item including the generated ID
 	 */
-	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $order = null ) : \Aimeos\MShop\Subscription\Item\Iface
+	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return new \Aimeos\MShop\Subscription\Item\Standard( $values, $order );
+		if( $item->getOrderProductId() === null ) {
+			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
+		}
+
+		if( $orderItem = $item->getOrderItem() ) {
+			\Aimeos\MShop::create( $this->context(), 'order' )->save( $orderItem );
+		}
+
+		return parent::saveBase( $item, $fetch );
 	}
+
+
+	/** mshop/subscription/manager/name
+	 * Class name of the used subscription manager implementation
+	 *
+	 * Each default manager can be replace by an alternative imlementation.
+	 * To use this implementation, you have to set the last part of the class
+	 * name as configuration value so the manager factory knows which class it
+	 * has to instantiate.
+	 *
+	 * For example, if the name of the default class is
+	 *
+	 *  \Aimeos\MShop\Subscription\Manager\Standard
+	 *
+	 * and you want to replace it with your own version named
+	 *
+	 *  \Aimeos\MShop\Subscription\Manager\Mymanager
+	 *
+	 * then you have to set the this configuration option:
+	 *
+	 *  mshop/subscription/manager/name = Mymanager
+	 *
+	 * The value is the last part of your own class name and it's case sensitive,
+	 * so take care that the configuration value is exactly named like the last
+	 * part of the class name.
+	 *
+	 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
+	 * characters are possible! You should always start the last part of the class
+	 * name with an upper case character and continue only with lower case characters
+	 * or numbers. Avoid chamel case names like "MyManager"!
+	 *
+	 * @param string Last part of the class name
+	 * @since 2018.04
+	 */
+
+	/** mshop/subscription/manager/decorators/excludes
+	 * Excludes decorators added by the "common" option from the subscription manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to remove a decorator added via
+	 * "mshop/common/manager/decorators/default" before they are wrapped
+	 * around the subscription manager.
+	 *
+	 *  mshop/subscription/manager/decorators/excludes = array( 'decorator1' )
+	 *
+	 * This would remove the decorator named "decorator1" from the list of
+	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
+	 * "mshop/common/manager/decorators/default" for the subscription manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2018.04
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/subscription/manager/decorators/global
+	 * @see mshop/subscription/manager/decorators/local
+	 */
+
+	/** mshop/subscription/manager/decorators/global
+	 * Adds a list of globally available decorators only to the subscription manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to wrap global decorators
+	 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the subscription manager.
+	 *
+	 *  mshop/subscription/manager/decorators/global = array( 'decorator1' )
+	 *
+	 * This would add the decorator named "decorator1" defined by
+	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the subscription
+	 * manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2018.04
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/subscription/manager/decorators/excludes
+	 * @see mshop/subscription/manager/decorators/local
+	 */
+
+	/** mshop/subscription/manager/decorators/local
+	 * Adds a list of local decorators only to the subscription manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to wrap local decorators
+	 * ("\Aimeos\MShop\Subscription\Manager\Decorator\*") around the subscription manager.
+	 *
+	 *  mshop/subscription/manager/decorators/local = array( 'decorator2' )
+	 *
+	 * This would add the decorator named "decorator2" defined by
+	 * "\Aimeos\MShop\Subscription\Manager\Decorator\Decorator2" only to the subscription
+	 * manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2018.04
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/subscription/manager/decorators/excludes
+	 * @see mshop/subscription/manager/decorators/global
+	 */
+
+	/** mshop/subscription/manager/delete/mysql
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * @see mshop/subscription/manager/delete/ansi
+	 */
+
+	/** mshop/subscription/manager/delete/ansi
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * Removes the records specified by the given IDs from the subscription database.
+	 * The records must be from the site that is configured via the
+	 * context item.
+	 *
+	 * The ":cond" placeholder is replaced by the name of the ID column and
+	 * the given ID or list of IDs while the site ID is bound to the question
+	 * mark.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for deleting items
+	 * @since 2018.04
+	 * @see mshop/subscription/manager/insert/ansi
+	 * @see mshop/subscription/manager/update/ansi
+	 * @see mshop/subscription/manager/newid/ansi
+	 * @see mshop/subscription/manager/search/ansi
+	 * @see mshop/subscription/manager/count/ansi
+	 */
+
+	 /** mshop/subscription/manager/submanagers
+	 * List of manager names that can be instantiated by the subscription manager
+	 *
+	 * Managers provide a generic interface to the underlying storage.
+	 * Each manager has or can have sub-managers caring about particular
+	 * aspects. Each of these sub-managers can be instantiated by its
+	 * parent manager using the getSubManager() method.
+	 *
+	 * The search keys from sub-managers can be normally used in the
+	 * manager as well. It allows you to search for items of the manager
+	 * using the search keys of the sub-managers to further limit the
+	 * retrieved list of items.
+	 *
+	 * @param array List of sub-manager names
+	 * @since 2018.04
+	 */
+
+	 /** mshop/subscription/manager/insert/mysql
+	 * Inserts a new subscription record into the database table
+	 *
+	 * @see mshop/subscription/manager/insert/ansi
+	 */
+
+	/** mshop/subscription/manager/insert/ansi
+	 * Inserts a new subscription record into the database table
+	 *
+	 * Items with no ID yet (i.e. the ID is NULL) will be created in
+	 * the database and the newly created ID retrieved afterwards
+	 * using the "newid" SQL statement.
+	 *
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the subscription item to the statement before they are
+	 * sent to the database server. The number of question marks must
+	 * be the same as the number of columns listed in the INSERT
+	 * statement. The catalog of the columns must correspond to the
+	 * catalog in the save() method, so the correct values are
+	 * bound to the columns.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for inserting records
+	 * @since 2018.04
+	 * @see mshop/subscription/manager/update/ansi
+	 * @see mshop/subscription/manager/newid/ansi
+	 * @see mshop/subscription/manager/delete/ansi
+	 * @see mshop/subscription/manager/search/ansi
+	 * @see mshop/subscription/manager/count/ansi
+	 */
+
+	 /** mshop/subscription/manager/update/mysql
+	 * Updates an existing subscription record in the database
+	 *
+	 * @see mshop/subscription/manager/update/ansi
+	 */
+
+	/** mshop/subscription/manager/update/ansi
+	 * Updates an existing subscription record in the database
+	 *
+	 * Items which already have an ID (i.e. the ID is not NULL) will
+	 * be updated in the database.
+	 *
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the subscription item to the statement before they are
+	 * sent to the database server. The catalog of the columns must
+	 * correspond to the catalog in the save() method, so the
+	 * correct values are bound to the columns.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for updating records
+	 * @since 2018.04
+	 * @see mshop/subscription/manager/insert/ansi
+	 * @see mshop/subscription/manager/newid/ansi
+	 * @see mshop/subscription/manager/delete/ansi
+	 * @see mshop/subscription/manager/search/ansi
+	 * @see mshop/subscription/manager/count/ansi
+	 */
+
+	/** mshop/subscription/manager/newid/mysql
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * @see mshop/subscription/manager/newid/ansi
+	 */
+
+	/** mshop/subscription/manager/newid/ansi
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * As soon as a new record is inserted into the database table,
+	 * the database server generates a new and unique identifier for
+	 * that record. This ID can be used for retrieving, updating and
+	 * deleting that specific record from the table again.
+	 *
+	 * For MySQL:
+	 *  SELECT LAST_INSERT_ID()
+	 * For PostgreSQL:
+	 *  SELECT currval('seq_mrul_id')
+	 * For SQL Server:
+	 *  SELECT SCOPE_IDENTITY()
+	 * For Oracle:
+	 *  SELECT "seq_mrul_id".CURRVAL FROM DUAL
+	 *
+	 * There's no way to retrive the new ID by a SQL statements that
+	 * fits for most database servers as they implement their own
+	 * specific way.
+	 *
+	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @since 2018.04
+	 * @see mshop/subscription/manager/insert/ansi
+	 * @see mshop/subscription/manager/update/ansi
+	 * @see mshop/subscription/manager/delete/ansi
+	 * @see mshop/subscription/manager/search/ansi
+	 * @see mshop/subscription/manager/count/ansi
+	 */
 }
