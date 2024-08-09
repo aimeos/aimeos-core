@@ -105,7 +105,7 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'type'], 'unq_msordad_pid_type' );
+			$table->unique( ['parentid', 'type', 'pos'], 'unq_msordad_pid_type_pos' );
 			$table->index( ['parentid', 'lastname'], 'idx_msordad_pid_lname' );
 			$table->index( ['parentid', 'address1'], 'idx_msordad_pid_addr1' );
 			$table->index( ['parentid', 'postal'], 'idx_msordad_pid_postal' );
@@ -204,7 +204,7 @@ return array(
 			$table->int( 'pos' )->default( 0 );
 			$table->meta();
 
-			$table->unique( ['parentid', 'code', 'type', 'siteid'], 'unq_msordse_pid_cd_typ_sid' );
+			$table->unique( ['parentid', 'type', 'pos'], 'unq_msordse_pid_type_pos' );
 			$table->index( ['code', 'type', 'siteid'], 'idx_msordse_code_type_sid' );
 
 			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordse_parentid' );
