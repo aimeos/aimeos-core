@@ -260,13 +260,16 @@ trait DB
 	 */
 	protected function alias( string $attrcode = null ) : string
 	{
-		if( $attrcode ) {
-			$parts = array_slice( explode( '.', $attrcode ), 1, -1 );
-		} else {
-			$parts = explode( '/', $this->getSubPath() );
+		if( $attrcode )
+		{
+			$parts = array_slice( explode( '.', $attrcode ), 0, -1 );
+			$str = 'm' . substr( array_shift( $parts ) ?: $this->getDomain(), 0, 3 );
 		}
-
-		$str = 'm' . substr( $this->getDomain(), 0, 3 );
+		else
+		{
+			$parts = explode( '/', $this->getSubPath() );
+			$str = 'm' . substr( $this->getDomain(), 0, 3 );
+		}
 
 		foreach( $parts as $part ) {
 			$str .= substr( $part, 0, 2 );
