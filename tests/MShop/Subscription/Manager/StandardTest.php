@@ -13,29 +13,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
 		$this->context = \TestHelper::context();
-
 		$this->object = new \Aimeos\MShop\Subscription\Manager\Standard( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
 	public function testAggregate()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'subscription.editor', 'core' ) );
-		$result = $this->object->aggregate( $search, 'subscription.status' )->toArray();
+		$search = $this->object->filter()->add( 'subscription.editor', '==', 'core' );
+		$result = $this->object->aggregate( $search, 'subscription.status' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( '0', $result );
@@ -59,9 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'subscription', $result );
+		$this->assertContains( 'subscription', $this->object->getResourceType() );
 	}
 
 
@@ -73,17 +67,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'subscription.status', 1 ),
-			$search->compare( '==', 'subscription.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( [
+			'subscription.status' => 1,
+			'subscription.editor' => $this->context->editor()
+		] )->slice( 0, 1 );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No subscription found in mshop_subscription with status "%1$s"', 1 ) );
-		}
+		$expected = $this->object->search( $search )
+			->first( new \RuntimeException( 'No subscription found in mshop_subscription with status "1"' ) );
 
 		$actual = $this->object->get( $expected->getId() );
 		$this->assertEquals( $expected, $actual );
@@ -92,17 +82,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'subscription.status', 1 ),
-			$search->compare( '==', 'subscription.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( [
+			'subscription.status' => 1,
+			'subscription.editor' => $this->context->editor()
+		] )->slice( 0, 1 );
 
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No subscription item found.' );
-		}
+		$item = $this->object->search( $search )
+			->first( new \RuntimeException( 'No subscription item found' ) );
 
 		$item->setId( null );
 		$resultSaved = $this->object->save( $item );
@@ -128,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getReason(), $itemSaved->getReason() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -143,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getReason(), $itemUpd->getReason() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -177,10 +163,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearch()
 	{
-		$siteid = $this->context->locale()->getSiteId();
-
-		$total = 0;
 		$search = $this->object->filter();
+		$siteid = $this->context->locale()->getSiteId();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'subscription.id', null );
@@ -196,15 +180,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'subscription.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'subscription.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'subscription.editor', $this->context->editor() );
 
 		$expr[] = $search->compare( '!=', 'order.address.id', null );
 		$expr[] = $search->compare( '==', 'order.address.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'order.address.type', 'payment' );
 
-
-		$search->setConditions( $search->and( $expr ) );
-		$result = $this->object->search( $search, [], $total )->toArray();
+		$total = 0;
+		$result = $this->object->search( $search->add( $search->and( $expr ) ), [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -215,8 +198,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->editor ) );
-		$items = $this->object->search( $search, [], $total )->toArray();
+		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->context->editor() ) );
+		$items = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 2, $total );
@@ -230,8 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchRef()
 	{
 		$total = 0;
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
+		$search = $this->object->filter()->add( 'subscription.dateend', '==', '2010-01-01' )->slice( 0, 1 );
 		$item = $this->object->search( $search, ['order', 'order/product'], $total )->first();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $item->getOrderItem() );

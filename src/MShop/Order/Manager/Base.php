@@ -50,10 +50,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$items = [];
 		$manager = $this->object()->getSubManager( 'address' );
 
-		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
-		$criteria->setConditions( $criteria->compare( '==', 'order.address.parentid', $ids ) );
+		$filter = $manager->filter()
+			->add( 'order.address.parentid', '==', $ids )
+			->order( ['order.address.type', 'order.address.position', 'order.address.id'] )
+			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $criteria, $ref ) as $item ) {
+		foreach( $manager->search( $filter, $ref ) as $item ) {
 			$items[$item->getParentId()][] = $item;
 		}
 
@@ -84,10 +86,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			}
 		}
 
-		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
-		$criteria->setConditions( $criteria->compare( '==', 'order.coupon.parentid', $ids ) );
+		$filter = $manager->filter()
+			->add( 'order.coupon.parentid', '==', $ids )
+			->order( 'order.coupon.code' )
+			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $criteria ) as $item )
+		foreach( $manager->search( $filter ) as $item )
 		{
 			if( !isset( $map[$item->getParentId()][$item->getCode()] ) ) {
 				$map[$item->getParentId()][$item->getCode()] = [];
@@ -116,12 +120,16 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$manager = $this->object()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
-		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
-		$criteria->setConditions( $criteria->compare( '==', 'order.product.parentid', $ids ) );
-		$items = $manager->search( $criteria, $ref )->reverse();
+		$filter = $manager->filter()
+			->add( 'order.product.parentid', '==', $ids )
+			->order( 'order.product.position' )
+			->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter, $ref )->reverse();
 
-		$search = $attrManager->filter()->slice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'order.product.attribute.parentid', $items->keys()->toArray() ) );
+		$search = $attrManager->filter()
+			->add( 'order.product.attribute.parentid', '==', $items->keys() )
+			->order( 'order.product.attribute.id' )
+			->slice( 0, 0x7fffffff );
 
 		foreach( $attrManager->search( $search, $ref ) as $id => $attribute ) {
 			$attributes[$attribute->getParentId()][$id] = $attribute;
@@ -167,10 +175,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$map = [];
 		$manager = $this->object()->getSubManager( 'service' );
 
-		$criteria = $manager->filter()->slice( 0, 0x7fffffff );
-		$criteria->setConditions( $criteria->compare( '==', 'order.service.parentid', $ids ) );
+		$filter = $manager->filter()
+			->add( 'order.service.parentid', '==', $ids )
+			->order( ['order.service.type', 'order.service.position', 'order.service.id'] )
+			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $criteria, $ref ) as $item ) {
+		foreach( $manager->search( $filter, $ref ) as $item ) {
 			$map[$item->getParentId()][] = $item;
 		}
 

@@ -156,7 +156,7 @@ class Standard
 		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
 			'coupon.code.id' => [
 				'label' => 'Code ID',
-				'internaldeps' => ['LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."parentid")'],
+				'internaldeps' => ['LEFT JOIN "mshop_coupon_code" AS mcouco ON ( mcou."id" = mcouco."parentid" )'],
 				'internalcode' => 'id',
 				'type' => 'int',
 				'public' => false,
