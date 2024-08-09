@@ -23,17 +23,6 @@ class Standard
 	implements \Aimeos\MShop\Order\Item\Address\Iface
 {
 	/**
-	 * Initializes the objects with the given array of values.
-	 *
-	 * @param array $values List of address elements
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'order.address.', $values );
-	}
-
-
-	/**
 	 * Returns the original customer address ID.
 	 *
 	 * @return string Customer address ID

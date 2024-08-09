@@ -504,7 +504,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyFrom()
 	{
-		$address = new \Aimeos\MShop\Order\Item\Address\Standard();
+		$address = new \Aimeos\MShop\Order\Item\Address\Standard( 'order.addres.', [] );
 		$item = $this->object->copyFrom( $address->set( 'customprop', 123.0 ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $item );

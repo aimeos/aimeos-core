@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.address.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Address\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Address\Standard( 'order.address.', $this->values );
 	}
 
 
@@ -536,7 +536,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyFrom()
 	{
-		$address = new \Aimeos\MShop\Order\Item\Address\Standard();
+		$address = new \Aimeos\MShop\Order\Item\Address\Standard( 'order.address.', [] );
 		$return = $this->object->copyFrom( $address );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Address\Iface::class, $return );
@@ -553,7 +553,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.address.type' => 'payment',
 		);
 
-		$object = new \Aimeos\MShop\Order\Item\Address\Standard();
+		$object = new \Aimeos\MShop\Order\Item\Address\Standard( 'order.address.', [] );
 		$object = $object->fromArray( $entries, true );
 
 		$this->assertEquals( $list['order.address.id'], $object->getId() );
