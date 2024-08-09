@@ -61,21 +61,17 @@ trait Site
 		}
 
 		$filter = $this->filter();
-		$cond = [$filter->compare( '==', $name, $values )];
+		$cond = $filter->compare( '==', $name, $values );
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
-			$cond[] = $filter->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
+			$cond = $filter->or( [$cond, $filter->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] )] );
 		}
 
-		if( $current && !( $inactive = $this->siteInactive( $current ) )->isEmpty() )
-		{
-			return $filter->and( [
-				$filter->is( $name, '!=', $inactive ),
-				$filter->or( $cond )
-			] );
+		if( $current && !( $inactive = $this->siteInactive( $current ) )->isEmpty() ) {
+			$cond = $filter->and( [$cond, $filter->is( $name, '!=', $inactive )] );
 		}
 
-		return $filter->or( $cond );
+		return $cond;
 	}
 
 

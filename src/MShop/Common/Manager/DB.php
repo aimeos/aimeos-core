@@ -204,7 +204,8 @@ trait DB
 			$expr[] = $search->compare( '!=', $string, null ); // required for the joins
 		}
 
-		$search->add( $search->and( $expr ) )->add( $valkey, '!=', null );
+		$expr[] = $search->compare( '!=', $valkey, null );
+		$search->add( $search->and( $expr ) );
 
 		$sql = $this->getSqlConfig( $cfgPath );
 		$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
@@ -957,16 +958,11 @@ trait DB
 		$keys = $this->getCriteriaKeyList( $search, $required );
 		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
 
-		$attronly = $this->object()->getSearchAttributes( false );
-		$cond = $this->getSiteConditions( $keys, $attributes, $sitelevel );
-
-		if( $conditions !== null ) {
-			$cond[] = $conditions;
+		if( !empty( $cond = $this->getSiteConditions( $keys, $attributes, $sitelevel ) ) ) {
+			$search = ( clone $search )->add( $search->and( $cond ) );
 		}
 
-		$search = clone $search;
-		$search->setConditions( $search->and( $cond ) );
-
+		$attronly = $this->object()->getSearchAttributes( false );
 		$replace = $this->getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
 
 		if( $total !== null )
