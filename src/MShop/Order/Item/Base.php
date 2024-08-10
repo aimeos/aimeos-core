@@ -163,8 +163,7 @@ abstract class Base
 	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Product\Iface as values
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [],
-		array $services = [], array $coupons = [] )
+		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [] )
 	{
 		map( $addresses )->implements( \Aimeos\MShop\Order\Item\Address\Iface::class, true );
 		map( $products )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );

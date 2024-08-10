@@ -955,9 +955,7 @@ trait DB
 		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
 		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
 	{
-		$conditions = $search->getConditions();
 		$attributes = $this->object()->getSearchAttributes();
-
 		$keys = $this->getCriteriaKeyList( $search, $required );
 		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
 
