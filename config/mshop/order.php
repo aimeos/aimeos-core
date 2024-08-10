@@ -694,64 +694,6 @@ return array(
 					GROUP BY :keys
 				'
 			),
-			'delete' => array(
-				'ansi' => '
-					DELETE FROM "mshop_order_status"
-					WHERE :cond AND "siteid" LIKE ?
-				'
-			),
-			'insert' => array(
-				'ansi' => '
-					INSERT INTO "mshop_order_status" ( :names
-						"parentid", "type", "value", "mtime", "editor", "siteid", "ctime"
-					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?
-					)
-				'
-			),
-			'update' => array(
-				'ansi' => '
-					UPDATE "mshop_order_status"
-					SET :names
-						"parentid" = ?, "type" = ?, "value" = ?, "mtime" = ?, "editor" = ?
-					WHERE "siteid" LIKE ? AND "id" = ?
-				'
-			),
-			'search' => array(
-				'ansi' => '
-					SELECT :columns
-					FROM "mshop_order_status" mordst
-					:joins
-					WHERE :cond
-					ORDER BY :order
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				',
-				'mysql' => '
-					SELECT :columns
-					FROM "mshop_order_status" mordst
-					:joins
-					WHERE :cond
-					ORDER BY :order
-					LIMIT :size OFFSET :start
-				'
-			),
-			'count' => array(
-				'ansi' => '
-					SELECT COUNT( DISTINCT mordst."id" ) AS "count"
-					FROM "mshop_order_status" mordst
-					:joins
-					WHERE :cond
-				'
-			),
-			'newid' => array(
-				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-				'mysql' => 'SELECT LAST_INSERT_ID()',
-				'oracle' => 'SELECT mshop_order_status_seq.CURRVAL FROM DUAL',
-				'pgsql' => 'SELECT lastval()',
-				'sqlite' => 'SELECT last_insert_rowid()',
-				'sqlsrv' => 'SELECT @@IDENTITY',
-				'sqlanywhere' => 'SELECT @@IDENTITY',
-			),
 		),
 		'aggregate' => array(
 			'ansi' => '
@@ -855,6 +797,7 @@ return array(
 			'order/coupon' => 'order/coupon',
 			'order/product' => 'order/product',
 			'order/service' => 'order/service',
+			'order/status' => 'order/status',
 		],
 	),
 );

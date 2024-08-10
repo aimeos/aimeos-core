@@ -1,7 +1,6 @@
 <?php
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -21,17 +20,6 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Status\Base
 	implements \Aimeos\MShop\Order\Item\Status\Iface
 {
-	/**
-	 * Initializes the object
-	 *
-	 * @param array $values Associative list of key/value pairs with order status properties
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'order.status.', $values );
-	}
-
-
 	/**
 	 * Returns the parentid of the order status.
 	 *
