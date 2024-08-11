@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -29,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.coupon.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Coupon\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Coupon\Standard( 'order.coupon.', $this->values );
 	}
 
 
@@ -141,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Coupon\Standard();
+		$item = new \Aimeos\MShop\Order\Item\Coupon\Standard( 'order.coupon.', [] );
 
 		$list = $entries = array(
 			'order.coupon.id' => 1,

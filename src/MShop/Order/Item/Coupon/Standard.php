@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -22,17 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Coupon\Iface
 {
-	/**
-	 * Initializes the order base coupon item.
-	 *
-	 * @param array $values Associative list of order coupon values
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'order.coupon.', $values );
-	}
-
-
 	/**
 	 * Returns the base ID of the order.
 	 *
