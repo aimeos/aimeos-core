@@ -303,7 +303,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for deleting items
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/insert/ansi
 	 * @see mshop/order/manager/address/update/ansi
 	 * @see mshop/order/manager/address/newid/ansi
@@ -325,7 +325,7 @@ class Standard
 	 * retrieved list of items.
 	 *
 	 * @param array List of sub-manager names
-	 * @since 2014.03
+	 * @since 2015.10
 	 */
 
 	/** mshop/order/manager/address/name
@@ -358,7 +358,7 @@ class Standard
 	 * or numbers. Avoid chamel case names like "MyAddress"!
 	 *
 	 * @param string Last part of the class name
-	 * @since 2014.03
+	 * @since 2015.10
 	 */
 
 	/** mshop/order/manager/address/decorators/excludes
@@ -380,7 +380,7 @@ class Standard
 	 * "mshop/common/manager/decorators/default" for the order base address manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/address/decorators/global
 	 * @see mshop/order/manager/address/decorators/local
@@ -405,7 +405,7 @@ class Standard
 	 * address manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/address/decorators/excludes
 	 * @see mshop/order/manager/address/decorators/local
@@ -430,7 +430,7 @@ class Standard
 	 * to the order base address manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/address/decorators/excludes
 	 * @see mshop/order/manager/address/decorators/global
@@ -463,7 +463,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for inserting records
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/update/ansi
 	 * @see mshop/order/manager/address/newid/ansi
 	 * @see mshop/order/manager/address/delete/ansi
@@ -495,7 +495,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for updating records
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/insert/ansi
 	 * @see mshop/order/manager/address/newid/ansi
 	 * @see mshop/order/manager/address/delete/ansi
@@ -531,7 +531,7 @@ class Standard
 	 * specific way.
 	 *
 	 * @param string SQL statement for retrieving the last inserted record ID
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/insert/ansi
 	 * @see mshop/order/manager/address/update/ansi
 	 * @see mshop/order/manager/address/delete/ansi
@@ -586,7 +586,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for searching items
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/insert/ansi
 	 * @see mshop/order/manager/address/update/ansi
 	 * @see mshop/order/manager/address/newid/ansi
@@ -637,7 +637,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for counting items
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/order/manager/address/insert/ansi
 	 * @see mshop/order/manager/address/update/ansi
 	 * @see mshop/order/manager/address/newid/ansi
