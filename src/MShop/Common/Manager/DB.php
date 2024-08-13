@@ -411,6 +411,104 @@ trait DB
 
 
 	/**
+	 * Sets the base criteria "status".
+	 * (setConditions overwrites the base criteria)
+	 *
+	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
+	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
+	 * @return \Aimeos\Base\Criteria\Iface Search critery object
+	 */
+	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		$context = $this->context();
+		$db = $this->getResourceName();
+		$conn = $context->db( $db );
+		$config = $context->config();
+
+		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
+			$adapter = $config->get( 'resource/db/adapter' );
+		}
+
+		switch( $adapter )
+		{
+			case 'pgsql':
+				$filter = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
+			default:
+				$filter = new \Aimeos\Base\Criteria\SQL( $conn ); break;
+		}
+
+		if( $default !== false ) {
+			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
+		}
+
+		return $filter;
+	}
+
+
+	/**
+	 * Returns the item for the given search key/value pairs.
+	 *
+	 * @param array $pairs Search key/value pairs for the item
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 */
+	protected function findBase( array $pairs, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$expr = [];
+		$criteria = $this->object()->filter( $default )->slice( 0, 1 );
+
+		foreach( $pairs as $key => $value )
+		{
+			if( $value === null )
+			{
+				$msg = $this->context()->translate( 'mshop', 'Required value for "%1$s" is missing' );
+				throw new \Aimeos\MShop\Exception( sprintf( $msg, $key ) );
+			}
+			$expr[] = $criteria->compare( '==', $key, $value );
+		}
+
+		$criteria->setConditions( $criteria->and( $expr ) );
+
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			return $item;
+		}
+
+		$msg = $this->context()->translate( 'mshop', 'No item found for conditions: %1$s' );
+		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ), 404 );
+	}
+
+
+	/**
+	 * Returns the cached statement for the given key or creates a new prepared statement.
+	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
+	 *
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
+	 * @param string $cfgkey Unique key for the SQL
+	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
+	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object
+	 */
+	protected function getCachedStatement( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgkey,
+		string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
+	{
+		if( !isset( $this->cachedStmts['stmt'][$cfgkey] )
+			|| !isset( $this->cachedStmts['conn'][$cfgkey] )
+			|| $conn !== $this->cachedStmts['conn'][$cfgkey]
+		) {
+			if( $sql === null ) {
+				$sql = $this->getSqlConfig( $cfgkey );
+			}
+
+			$this->cachedStmts['stmt'][$cfgkey] = $conn->create( $sql );
+			$this->cachedStmts['conn'][$cfgkey] = $conn;
+		}
+
+		return $this->cachedStmts['stmt'][$cfgkey];
+	}
+
+
+	/**
 	 * Returns the full configuration key for the passed last part
 	 *
 	 * @param string $name Configuration last part
@@ -461,6 +559,53 @@ trait DB
 
 
 	/**
+	 * Returns the item for the given search key and ID.
+	 *
+	 * @param string $key Search key for the requested ID
+	 * @param string $id Unique ID to search for
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 */
+	protected function getItemBase( string $key, string $id, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$criteria = $this->object()->filter( $default )->add( [$key => $id] )->slice( 0, 1 );
+
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			return $item;
+		}
+
+		$msg = $this->context()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
+		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ), 404 );
+	}
+
+
+	/**
+	 * Returns the SQL strings for joining dependent tables.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
+	 * @param string $prefix Search key prefix
+	 * @return array List of JOIN SQL strings
+	 */
+	protected function getJoins( array $attributes, string $prefix ) : array
+	{
+		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
+		$name = $prefix . '.id';
+
+		if( isset( $attributes[$prefix] ) && $attributes[$prefix] instanceof $iface ) {
+			return $attributes[$prefix]->getInternalDeps();
+		} elseif( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
+			return $attributes[$name]->getInternalDeps();
+		} elseif( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
+			return $attributes['id']->getInternalDeps();
+		}
+
+		return [];
+	}
+
+
+	/**
 	 * Returns the manager path
 	 *
 	 * @return string Manager path e.g. "product/lists/type"
@@ -469,6 +614,28 @@ trait DB
 	{
 		$subPath = $this->getSubPath();
 		return $this->getDomain() . ( $subPath ? '/' . $subPath : '' );
+	}
+
+
+	/**
+	 * Returns the required SQL joins for the critera.
+	 *
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
+	 * @param string $prefix Search key prefix
+	 * @return array|null List of JOIN SQL strings
+	 */
+	protected function getRequiredJoins( array $attributes, array $keys, string $basekey = null ) : array
+	{
+		$joins = [];
+
+		foreach( $keys as $key )
+		{
+			if( $key !== $basekey ) {
+				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
+			}
+		}
+
+		return array_unique( $joins );
 	}
 
 
@@ -488,22 +655,26 @@ trait DB
 
 
 	/**
-	 * Sets the name of the database resource that should be used.
+	 * Returns the available manager types
 	 *
-	 * @param string $name Name of the resource
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @param string $type Main manager type
+	 * @param string $path Configuration path to the sub-domains
+	 * @param string[] $default List of sub-domains if no others are configured
+	 * @param bool $withsub Return also the resource type of sub-managers if true
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function getResourceTypeBase( string $type, string $path, array $default, bool $withsub ) : array
 	{
-		$config = $this->context()->config();
+		$list = [$type];
 
-		if( $config->get( 'resource/' . $name ) === null ) {
-			$this->resourceName = $config->get( 'resource/default', 'db' );
-		} else {
-			$this->resourceName = $name;
+		if( $withsub )
+		{
+			foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
+				$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
+			}
 		}
 
-		return $this;
+		return $list;
 	}
 
 
@@ -644,223 +815,6 @@ trait DB
 
 
 	/**
-	 * Returns the available sub-manager names
-	 *
-	 * @return array Sub-manager names, e.g. ['lists', 'property', 'type']
-	 */
-	protected function getSubManagers() : array
-	{
-		return $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
-	}
-
-
-	/**
-	 * Returns the manager domain sub-path
-	 *
-	 * @return string Manager domain sub-path e.g. "lists/type"
-	 */
-	protected function getSubPath() : string
-	{
-		if( !isset( $this->subpath ) ) {
-			$this->initDb();
-		}
-
-		return $this->subpath;
-	}
-
-
-	/**
-	 * Sets the base criteria "status".
-	 * (setConditions overwrites the base criteria)
-	 *
-	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
-	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
-	 * @return \Aimeos\Base\Criteria\Iface Search critery object
-	 */
-	protected function filterBase( string $domain, ?bool $default = false ) : \Aimeos\Base\Criteria\Iface
-	{
-		$context = $this->context();
-		$db = $this->getResourceName();
-		$conn = $context->db( $db );
-		$config = $context->config();
-
-		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
-			$adapter = $config->get( 'resource/db/adapter' );
-		}
-
-		switch( $adapter )
-		{
-			case 'pgsql':
-				$filter = new \Aimeos\Base\Criteria\PgSQL( $conn ); break;
-			default:
-				$filter = new \Aimeos\Base\Criteria\SQL( $conn ); break;
-		}
-
-		if( $default !== false ) {
-			$filter->add( $domain . '.status', $default ? '==' : '>=', 1 );
-		}
-
-		return $filter;
-	}
-
-
-	/**
-	 * Returns the item for the given search key/value pairs.
-	 *
-	 * @param array $pairs Search key/value pairs for the item
-	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
-	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
-	 */
-	protected function findBase( array $pairs, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$expr = [];
-		$criteria = $this->object()->filter( $default )->slice( 0, 1 );
-
-		foreach( $pairs as $key => $value )
-		{
-			if( $value === null )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Required value for "%1$s" is missing' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $key ) );
-			}
-			$expr[] = $criteria->compare( '==', $key, $value );
-		}
-
-		$criteria->setConditions( $criteria->and( $expr ) );
-
-		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
-			return $item;
-		}
-
-		$msg = $this->context()->translate( 'mshop', 'No item found for conditions: %1$s' );
-		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ), 404 );
-	}
-
-
-	/**
-	 * Returns the cached statement for the given key or creates a new prepared statement.
-	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param string $cfgkey Unique key for the SQL
-	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
-	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object
-	 */
-	protected function getCachedStatement( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgkey,
-		string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
-	{
-		if( !isset( $this->cachedStmts['stmt'][$cfgkey] )
-			|| !isset( $this->cachedStmts['conn'][$cfgkey] )
-			|| $conn !== $this->cachedStmts['conn'][$cfgkey]
-		) {
-			if( $sql === null ) {
-				$sql = $this->getSqlConfig( $cfgkey );
-			}
-
-			$this->cachedStmts['stmt'][$cfgkey] = $conn->create( $sql );
-			$this->cachedStmts['conn'][$cfgkey] = $conn;
-		}
-
-		return $this->cachedStmts['stmt'][$cfgkey];
-	}
-
-
-	/**
-	 * Returns the item for the given search key and ID.
-	 *
-	 * @param string $key Search key for the requested ID
-	 * @param string $id Unique ID to search for
-	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
-	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
-	 */
-	protected function getItemBase( string $key, string $id, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$criteria = $this->object()->filter( $default )->add( [$key => $id] )->slice( 0, 1 );
-
-		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
-			return $item;
-		}
-
-		$msg = $this->context()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
-		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ), 404 );
-	}
-
-
-	/**
-	 * Returns the SQL strings for joining dependent tables.
-	 *
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
-	 * @param string $prefix Search key prefix
-	 * @return array List of JOIN SQL strings
-	 */
-	private function getJoins( array $attributes, string $prefix ) : array
-	{
-		$iface = \Aimeos\Base\Criteria\Attribute\Iface::class;
-		$name = $prefix . '.id';
-
-		if( isset( $attributes[$prefix] ) && $attributes[$prefix] instanceof $iface ) {
-			return $attributes[$prefix]->getInternalDeps();
-		} elseif( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
-			return $attributes[$name]->getInternalDeps();
-		} elseif( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
-			return $attributes['id']->getInternalDeps();
-		}
-
-		return [];
-	}
-
-
-	/**
-	 * Returns the required SQL joins for the critera.
-	 *
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
-	 * @param string $prefix Search key prefix
-	 * @return array|null List of JOIN SQL strings
-	 */
-	private function getRequiredJoins( array $attributes, array $keys, string $basekey = null ) : array
-	{
-		$joins = [];
-
-		foreach( $keys as $key )
-		{
-			if( $key !== $basekey ) {
-				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
-			}
-		}
-
-		return array_unique( $joins );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param string $type Main manager type
-	 * @param string $path Configuration path to the sub-domains
-	 * @param string[] $default List of sub-domains if no others are configured
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	protected function getResourceTypeBase( string $type, string $path, array $default, bool $withsub ) : array
-	{
-		$list = [$type];
-
-		if( $withsub )
-		{
-			foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
-				$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
-			}
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Returns a search object singleton
 	 *
 	 * @return \Aimeos\Base\Criteria\Iface Search object
@@ -930,6 +884,32 @@ trait DB
 
 
 	/**
+	 * Returns the available sub-manager names
+	 *
+	 * @return array Sub-manager names, e.g. ['lists', 'property', 'type']
+	 */
+	protected function getSubManagers() : array
+	{
+		return $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
+	}
+
+
+	/**
+	 * Returns the manager domain sub-path
+	 *
+	 * @return string Manager domain sub-path e.g. "lists/type"
+	 */
+	protected function getSubPath() : string
+	{
+		if( !isset( $this->subpath ) ) {
+			$this->initDb();
+		}
+
+		return $this->subpath;
+	}
+
+
+	/**
 	 * Returns the name of the used table
 	 *
 	 * @return string Table name e.g. "mshop_product_lists_type"
@@ -988,55 +968,6 @@ trait DB
 		$result->finish();
 
 		return $row[0];
-	}
-
-
-	/**
-	 * Returns the search result of the statement combined with the given criteria.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
-	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
-	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
-	 * @param int|null $total Contains the number of all records matching the criteria if not null
-	 * @param int $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
-	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
-	 * @return \Aimeos\Base\DB\Result\Iface SQL result object for accessing the found records
-	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
-	 */
-	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\Base\Criteria\Iface $search,
-		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
-		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
-	{
-		$attributes = $this->object()->getSearchAttributes();
-		$keys = $this->getCriteriaKeyList( $search, $required );
-		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
-
-		if( !empty( $cond = $this->getSiteConditions( $keys, $attributes, $sitelevel ) ) ) {
-			$search = ( clone $search )->add( $search->and( $cond ) );
-		}
-
-		$attronly = $this->object()->getSearchAttributes( false );
-		$replace = $this->getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
-
-		if( $total !== null )
-		{
-			$sql = $this->getSqlConfig( $cfgPathCount, $replace );
-			$result = $this->getSearchResults( $conn, $sql );
-			$row = $result->fetch();
-			$result->finish();
-
-			if( $row === null )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Total results value not found' );
-				throw new \Aimeos\MShop\Exception( $msg );
-			}
-
-			$total = (int) $row['count'];
-		}
-
-		return $this->getSearchResults( $conn, $this->getSqlConfig( $cfgPathSearch, $replace ) );
 	}
 
 
@@ -1215,6 +1146,75 @@ trait DB
 	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $item;
+	}
+
+
+	/**
+	 * Returns the search result of the statement combined with the given criteria.
+	 *
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
+	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
+	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
+	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
+	 * @param int|null $total Contains the number of all records matching the criteria if not null
+	 * @param int $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
+	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
+	 * @return \Aimeos\Base\DB\Result\Iface SQL result object for accessing the found records
+	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
+	 */
+	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\Base\Criteria\Iface $search,
+		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
+		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
+	{
+		$attributes = $this->object()->getSearchAttributes();
+		$keys = $this->getCriteriaKeyList( $search, $required );
+		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
+
+		if( !empty( $cond = $this->getSiteConditions( $keys, $attributes, $sitelevel ) ) ) {
+			$search = ( clone $search )->add( $search->and( $cond ) );
+		}
+
+		$attronly = $this->object()->getSearchAttributes( false );
+		$replace = $this->getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
+
+		if( $total !== null )
+		{
+			$sql = $this->getSqlConfig( $cfgPathCount, $replace );
+			$result = $this->getSearchResults( $conn, $sql );
+			$row = $result->fetch();
+			$result->finish();
+
+			if( $row === null )
+			{
+				$msg = $this->context()->translate( 'mshop', 'Total results value not found' );
+				throw new \Aimeos\MShop\Exception( $msg );
+			}
+
+			$total = (int) $row['count'];
+		}
+
+		return $this->getSearchResults( $conn, $this->getSqlConfig( $cfgPathSearch, $replace ) );
+	}
+
+
+	/**
+	 * Sets the name of the database resource that should be used.
+	 *
+	 * @param string $name Name of the resource
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$config = $this->context()->config();
+
+		if( $config->get( 'resource/' . $name ) === null ) {
+			$this->resourceName = $config->get( 'resource/default', 'db' );
+		} else {
+			$this->resourceName = $name;
+		}
+
+		return $this;
 	}
 
 
