@@ -159,6 +159,9 @@ return array(
 					'sqlanywhere' => 'SELECT @@IDENTITY',
 				),
 			),
+			'submanagers' => [
+				'attribute' => 'attribute'
+			],
 			'aggregate' => array(
 				'ansi' => '
 					SELECT :keys, :type("val") AS "value"
@@ -187,22 +190,13 @@ return array(
 					GROUP BY :keys
 				'
 			),
-			'delete' => array(
-				'ansi' => '
-					DELETE FROM "mshop_order_product"
-					WHERE :cond AND "siteid" LIKE ?
-				'
-			),
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_order_product" ( :names
-						"parentid", "ordprodid", "ordaddrid", "type", "parentprodid", "prodid", "prodcode",
-						"vendor", "stocktype", "name", "description", "mediaurl", "timeframe",
-						"quantity", "currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
-						"flags", "statuspayment", "statusdelivery", "pos", "mtime", "editor", "target",
-						"qtyopen", "notes", "scale", "siteid", "ctime"
+						"currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
+						"mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -210,51 +204,10 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_order_product"
 					SET :names
-						"parentid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?, "parentprodid" = ?,
-						"prodid" = ?, "prodcode" = ?, "vendor" = ?, "stocktype" = ?,
-						"name" = ?, "description" = ?, "mediaurl" = ?, "timeframe" = ?, "quantity" = ?,
-						"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
-						"taxflag" = ?, "flags" = ?, "statuspayment" = ?, "statusdelivery" = ?, "pos" = ?,
-						"mtime" = ?, "editor" = ?, "target" = ?, "qtyopen" = ?, "notes" = ?, "scale" = ?
+						"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?, "taxflag" = ?,
+						"mtime" = ?, "editor" = ?
 					WHERE "siteid" LIKE ? AND "id" = ?
 				'
-			),
-			'search' => array(
-				'ansi' => '
-					SELECT :columns
-					FROM "mshop_order_product" mordpr
-					:joins
-					WHERE :cond
-					GROUP BY :group
-					ORDER BY :order
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				',
-				'mysql' => '
-					SELECT :columns
-					FROM "mshop_order_product" mordpr
-					:joins
-					WHERE :cond
-					GROUP BY :group
-					ORDER BY :order
-					LIMIT :size OFFSET :start
-				'
-			),
-			'count' => array(
-				'ansi' => '
-					SELECT COUNT( DISTINCT mordpr."id" ) AS "count"
-					FROM "mshop_order_product" mordpr
-					:joins
-					WHERE :cond
-				'
-			),
-			'newid' => array(
-				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-				'mysql' => 'SELECT LAST_INSERT_ID()',
-				'oracle' => 'SELECT mshop_order_product_seq.CURRVAL FROM DUAL',
-				'pgsql' => 'SELECT lastval()',
-				'sqlite' => 'SELECT last_insert_rowid()',
-				'sqlsrv' => 'SELECT @@IDENTITY',
-				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
 		),
 		'service' => array(

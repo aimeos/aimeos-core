@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -13,23 +12,23 @@ namespace Aimeos\MShop\Order\Item\Product;
 
 
 /**
- * Product item of order base
+ * Product item of order.
+ *
  * @package MShop
  * @subpackage Order
  */
 class Standard extends Base implements Iface
 {
 	/**
-	 * Initializes the order product instance.
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
-	 * @param array $values Associative list of order product values
-	 * @param \Aimeos\MShop\Order\Item\Product\Attribute\Iface[] $attributes List of order product attribute items
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of ordered subproduct items
+	 * Clones internal objects of the order product item.
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
+	public function __clone()
 	{
-		parent::__construct( $price, $values, $attributes, $products );
+		$this->set( '.attributes', map( $this->get( '.attributes', [] ) )->clone() );
+		$this->set( '.products', map( $this->get( '.products', [] ) )->clone() );
+		$this->set( '.price', clone $this->get( '.price' ) );
+
+		parent::__clone();
 	}
 
 
@@ -63,6 +62,53 @@ class Standard extends Base implements Iface
 	public function getSupplierItem() : ?\Aimeos\MShop\Supplier\Item\Iface
 	{
 		return $this->get( '.supplier' );
+	}
+
+
+	/**
+	 * Returns the price item for the product.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
+	 */
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
+	{
+		return $this->get( '.price' );
+	}
+
+
+	/**
+	 * Sets the price item for the product.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Product\Iface
+	{
+		return $this->set( '.price', $price );
+	}
+
+
+	/**
+	 * Returns all of sub-product items
+	 *
+	 * @return \Aimeos\Map List of product items implementing \Aimeos\MShop\Order\Item\Product\Iface
+	 */
+	public function getProducts() : \Aimeos\Map
+	{
+		return $this->get( '.products', map() );
+	}
+
+
+	/**
+	 * Sets all sub-product items
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of product items
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setProducts( iterable $products ) : \Aimeos\MShop\Order\Item\Product\Iface
+	{
+		( $products = map( $products ) )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
+		return $this->set( '.products', $products );
 	}
 
 
@@ -736,7 +782,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $item Order product item
 	 * @return bool True if the item properties are equal, false if not
-	 * @since 2014.09
+	 * @since 2015.10
 	 */
 	public function compare( \Aimeos\MShop\Order\Item\Product\Iface $item ) : bool
 	{

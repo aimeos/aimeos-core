@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -15,13 +14,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $values;
 	private $price;
-	private $attribute = [];
+	private $attributes;
 	private $subProducts;
 
 
 	protected function setUp() : void
 	{
 		$this->price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create();
+
+		$this->subProducts = map( [
+			new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', ['.price' => clone $this->price] ),
+			new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', ['.price' => clone $this->price] )
+		] );
 
 		$attrValues = array(
 			'order.product.attribute.id' => 4,
@@ -35,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.product.attribute.ctime' => '2011-01-01 00:00:01',
 			'order.product.attribute.editor' => 'unitTestUser'
 		);
-		$this->attribute = array( new \Aimeos\MShop\Order\Item\Product\Attribute\Standard( $attrValues ) );
+		$this->attributes = map( [new \Aimeos\MShop\Order\Item\Product\Attribute\Standard( $attrValues )] );
 
 		$this->values = array(
 			'order.product.id' => 1,
@@ -62,22 +66,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.product.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
 			'order.product.position' => 1,
 			'order.product.notes' => 'test note',
+			'order.product.price' => '0.00',
+			'order.product.costs' => '0.00',
+			'order.product.rebate' => '0.00',
+			'order.product.taxrates' => ['' => '0.00'],
+			'order.product.taxvalue' => '0.0000',
+			'order.product.taxflag' => 1,
 			'order.product.mtime' => '2000-12-31 23:59:59',
 			'order.product.ctime' => '2011-01-01 00:00:01',
 			'order.product.editor' => 'unitTestUser',
 			'.supplier' => \Aimeos\MShop::create( \TestHelper::context(), 'supplier' )->create(),
 			'.parentproduct' => \Aimeos\MShop::create( \TestHelper::context(), 'product' )->create(),
 			'.product' => \Aimeos\MShop::create( \TestHelper::context(), 'product' )->create(),
+			'.attributes' => $this->attributes,
+			'.products' => $this->subProducts,
+			'.price' => $this->price,
 		);
 
-		$this->subProducts = array(
-			new \Aimeos\MShop\Order\Item\Product\Standard( clone $this->price ),
-			new \Aimeos\MShop\Order\Item\Product\Standard( clone $this->price )
-		);
-
-		$this->object = new \Aimeos\MShop\Order\Item\Product\Standard(
-			$this->price, $this->values, $this->attribute, $this->subProducts
-		);
+		$this->object = new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', $this->values );
 	}
 
 
@@ -90,27 +96,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetParentProductItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getParentProductItem() );
-		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( $this->price ) )->getParentProductItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.' ) )->getParentProductItem() );
 	}
 
 
 	public function testGetProductItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getProductItem() );
-		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( $this->price ) )->getProductItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.' ) )->getProductItem() );
 	}
 
 
 	public function testGetSupplierItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $this->object->getSupplierItem() );
-		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( $this->price ) )->getSupplierItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.' ) )->getSupplierItem() );
 	}
 
 
 	public function testCompare()
 	{
-		$product = new \Aimeos\MShop\Order\Item\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
+		$product = new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', $this->values );
 		$this->assertTrue( $this->object->compare( $product ) );
 	}
 
@@ -119,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->values['order.product.stocktype'] = 'default';
 
-		$product = new \Aimeos\MShop\Order\Item\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
+		$product = new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', $this->values );
 		$this->assertFalse( $this->object->compare( $product ) );
 	}
 
@@ -794,19 +800,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItems()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems()->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems() );
 	}
 
 
 	public function testGetAttributeItemsByType()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' )->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems( 'default' ) );
 	}
 
 
 	public function testGetAttributeItemsInvalidType()
 	{
-		$this->assertEquals( [], $this->object->getAttributeItems( 'invalid' )->toArray() );
+		$this->assertEquals( map(), $this->object->getAttributeItems( 'invalid' ) );
 	}
 
 
@@ -860,7 +866,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProducts()
 	{
-		$this->assertEquals( $this->subProducts, $this->object->getProducts()->toArray() );
+		$this->assertEquals( $this->subProducts, $this->object->getProducts() );
 	}
 
 
@@ -869,12 +875,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setProducts( [] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Iface::class, $return );
-		$this->assertEquals( [], $this->object->getProducts()->toArray() );
+		$this->assertEquals( map(), $this->object->getProducts() );
 
 		$return = $this->object->setProducts( $this->subProducts );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Iface::class, $return );
-		$this->assertEquals( $this->subProducts, $this->object->getProducts()->toArray() );
+		$this->assertEquals( $this->subProducts, $this->object->getProducts() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -887,7 +893,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Product\Standard( new \Aimeos\MShop\Price\Item\Standard() );
+		$item = new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', ['.price' => clone $this->price] );
 
 		$list = $entries = array(
 			'order.product.id' => 1,
@@ -983,7 +989,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getPrice()->getValue(), $arrayObject['order.product.price'] );
 		$this->assertEquals( $this->object->getPrice()->getCosts(), $arrayObject['order.product.costs'] );
 		$this->assertEquals( $this->object->getPrice()->getRebate(), $arrayObject['order.product.rebate'] );
-		$this->assertEquals( $this->object->getPrice()->getTaxRate(), $arrayObject['order.product.taxrate'] );
+		$this->assertEquals( $this->object->getPrice()->getTaxRate(), '0.00' );
 		$this->assertEquals( $this->object->getPrice()->getTaxRates(), $arrayObject['order.product.taxrates'] );
 		$this->assertEquals( $this->object->getPrice()->getTaxValue(), $arrayObject['order.product.taxvalue'] );
 		$this->assertEquals( $this->object->getPrice()->getTaxFlag(), $arrayObject['order.product.taxflag'] );
@@ -1011,7 +1017,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'product' );
 		$product = $manager->find( 'CNE', ['text'] );
 
-		$productCopy = new \Aimeos\MShop\Order\Item\Product\Standard( $this->price );
+		$productCopy = new \Aimeos\MShop\Order\Item\Product\Standard( 'order.product.', ['.price' => clone $this->price] );
 		$return = $productCopy->copyFrom( $product->set( 'customprop', 'abc' ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Iface::class, $return );
