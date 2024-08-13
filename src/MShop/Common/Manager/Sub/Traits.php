@@ -123,7 +123,7 @@ trait Traits
 	 * Returns a new manager the given extension name.
 	 *
 	 * @param string $domain Name of the domain (product, text, media, etc.)
-	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
+	 * @param string $manager Name of the sub manager type in lower case (can contain a path like product/attribute)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 * @throws \LogicException If class isn't found

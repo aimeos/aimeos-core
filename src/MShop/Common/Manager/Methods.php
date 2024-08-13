@@ -259,7 +259,7 @@ trait Methods
 	{
 		foreach( $this->filterFcn as $iface => $fcnList )
 		{
-			if( is_object( $item ) && $item instanceof $iface )
+			if( $item instanceof $iface )
 			{
 				foreach( $fcnList as $fcn )
 				{

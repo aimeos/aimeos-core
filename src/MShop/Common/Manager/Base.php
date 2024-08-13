@@ -188,7 +188,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( $this->getDomain(), $manager, $name );
+		return $this->getSubManagerBase( $this->getDomain(), trim( $this->getSubPath() . '/' . $manager, '/'), $name );
 	}
 
 
