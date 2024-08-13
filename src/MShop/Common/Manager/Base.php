@@ -357,8 +357,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 */
 		$cfgPathCount = 'mshop/common/manager/count';
 
-		$items = [];
-		$prefix = $this->prefix();
 		$level = $this->getSiteMode();
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
@@ -368,26 +366,11 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-		try
-		{
-			while( $row = $results->fetch() )
-			{
-				foreach( $attrs as $code => $attr ) {
-					$row[$code] = json_decode( $row[$code], true );
-				}
-
-				if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-					$items[$row[$prefix . 'id']] = $item;
-				}
-			}
+		try {
+			return $this->fetch( $results, $ref, $this->prefix(), $attrs );
+		} catch( \Exception $e ) {
+			$results->finish(); throw $e;
 		}
-		catch( \Exception $e )
-		{
-			$results->finish();
-			throw $e;
-		}
-
-		return map( $items );
 	}
 
 

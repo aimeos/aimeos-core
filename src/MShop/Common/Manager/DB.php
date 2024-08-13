@@ -299,6 +299,20 @@ trait DB
 
 
 	/**
+	 * Binds additional values to the statement before execution.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Database statement object
+	 * @param int $idx Current bind index
+	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object with bound values
+	 */
+	protected function bind( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\Base\DB\Statement\Iface $stmt, int &$idx ) : \Aimeos\Base\DB\Statement\Iface
+	{
+		return $stmt;
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
@@ -365,6 +379,34 @@ trait DB
 		$stmt->execute()->finish();
 
 		return $this;
+	}
+
+
+	/**
+	 * Fetches the rows from the database statement and returns the list of items.
+	 *
+	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
+	 * @param array $ref List of domains whose items should be fetched too
+	 * @param string $prefix Prefix for the property names
+	 * @param array $attrs List of attributes that should be decoded
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
+	{
+		$map = [];
+
+		while( $row = $results->fetch() )
+		{
+			foreach( $attrs as $code => $attr ) {
+				$row[$code] = json_decode( $row[$code], true );
+			}
+
+			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+				$map[$row[$prefix . 'id']] = $item;
+			}
+		}
+
+		return map( $map );
 	}
 
 
@@ -913,6 +955,18 @@ trait DB
 
 
 	/**
+	 * Checks if the item is modified
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @return bool True if the item is modified, false if not
+	 */
+	protected function isModified( \Aimeos\MShop\Common\Item\Iface $item ) : bool
+	{
+		return $item->isModified();
+	}
+
+
+	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
 	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection used to insert the new record
@@ -995,8 +1049,8 @@ trait DB
 	 */
 	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		if( !$item->isModified() ) {
-			return $item;
+		if( !$this->isModified( $item ) ) {
+			return $this->saveDeps( $item );
 		}
 
 		$context = $this->context();
@@ -1092,6 +1146,8 @@ trait DB
 			$stmt->bind( $idx++, $value, \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
+		$stmt = $this->bind( $item, $stmt, $idx );
+
 		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 
@@ -1145,7 +1201,20 @@ trait DB
 			$id = $this->newId( $conn, 'mshop/common/manager/newid' );
 		}
 
-		return $item->setId( $id );
+		return $this->saveDeps( $item->setId( $id ) );
+	}
+
+
+	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $item;
 	}
 
 

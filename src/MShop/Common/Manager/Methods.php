@@ -361,6 +361,19 @@ trait Methods
 
 
 	/**
+	 * Checks if the given domain is in the list of domains
+	 *
+	 * @param array $ref List of domains
+	 * @param string $domain Domain to check for
+	 * @return bool True if domain is in the list, false if not
+	 */
+	protected function hasRef( array $ref, string $domain ) : bool
+	{
+		return isset( $ref[$domain] ) || in_array( $domain, $ref );
+	}
+
+
+	/**
 	 * Returns the outmost decorator of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
