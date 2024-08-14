@@ -712,7 +712,7 @@ trait DB
 	 */
 	protected function getSearchKey( string $name = '' ) : string
 	{
-		$subPath = $this->getSubPath();
+		$subPath = str_replace( '/', '.', $this->getSubPath() );
 		return $this->getDomain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
 	}
 
