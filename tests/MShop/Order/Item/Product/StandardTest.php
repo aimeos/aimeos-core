@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.product.attribute.ctime' => '2011-01-01 00:00:01',
 			'order.product.attribute.editor' => 'unitTestUser'
 		);
-		$this->attributes = map( [new \Aimeos\MShop\Order\Item\Product\Attribute\Standard( $attrValues )] );
+		$this->attributes = map( [new \Aimeos\MShop\Order\Item\Product\Attribute\Standard( 'order.product.attribute.', $attrValues )] );
 
 		$this->values = array(
 			'order.product.id' => 1,
