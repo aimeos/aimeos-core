@@ -40,6 +40,7 @@ class Standard
 		'order.product.attribute.value' => [
 			'label' => 'Product attribute value',
 			'internalcode' => 'value',
+			'type' => 'json',
 		],
 		'order.product.attribute.code' => [
 			'label' => 'Product attribute code',
