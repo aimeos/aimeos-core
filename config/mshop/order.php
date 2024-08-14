@@ -180,66 +180,6 @@ return array(
 						GROUP BY :keys
 					'
 				),
-				'delete' => array(
-					'ansi' => '
-						DELETE FROM "mshop_order_service_attr"
-						WHERE :cond AND "siteid" LIKE ?
-					'
-				),
-				'insert' => array(
-					'ansi' => '
-						INSERT INTO "mshop_order_service_attr" ( :names
-							"attrid", "parentid", "type", "code", "value",
-							"quantity", "price", "name", "mtime", "editor", "siteid", "ctime"
-						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-						)
-					'
-				),
-				'update' => array(
-					'ansi' => '
-						UPDATE "mshop_order_service_attr"
-						SET :names
-							"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?, "value" = ?,
-							"quantity" = ?, "price" = ?, "name" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" LIKE ? AND "id" = ?
-					'
-				),
-				'search' => array(
-					'ansi' => '
-						SELECT :columns
-						FROM "mshop_order_service_attr" mordseat
-						:joins
-						WHERE :cond
-						ORDER BY :order
-						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-					',
-					'mysql' => '
-						SELECT :columns
-						FROM "mshop_order_service_attr" mordseat
-						:joins
-						WHERE :cond
-						ORDER BY :order
-						LIMIT :size OFFSET :start
-					'
-				),
-				'count' => array(
-					'ansi' => '
-						SELECT COUNT( DISTINCT mordseat."id" ) AS "count"
-						FROM "mshop_order_service_attr" mordseat
-						:joins
-						WHERE :cond
-					'
-				),
-				'newid' => array(
-					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_service_attr_seq.CURRVAL FROM DUAL',
-					'pgsql' => 'SELECT lastval()',
-					'sqlite' => 'SELECT last_insert_rowid()',
-					'sqlsrv' => 'SELECT @@IDENTITY',
-					'sqlanywhere' => 'SELECT @@IDENTITY',
-				),
 			),
 			'transaction' => array(
 				'aggregate' => array(

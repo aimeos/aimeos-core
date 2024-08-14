@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -22,17 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 {
-	/**
-	 * Initializes the order item base service attribute item.
-	 *
-	 * @param array $values Associative array of key/value pairs.
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'order.service.attribute.', $values );
-	}
-
-
 	/**
 	 * Returns the ID of the site the item is stored
 	 *
