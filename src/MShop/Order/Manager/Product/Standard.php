@@ -319,7 +319,7 @@ class Standard
 			'order.product.id' => [
 				'code' => 'order.product.id',
 				'internalcode' => 'id',
-				'internaldeps' => [ 'LEFT JOIN "mshop_order_product" AS mordpr ON ( mord."id" = mordpr."parentid" )' ],
+				'internaldeps' => ['LEFT JOIN "mshop_order_product" AS mordpr ON ( mord."id" = mordpr."parentid" )'],
 				'label' => 'Order product ID',
 				'type' => 'int',
 				'public' => false,
