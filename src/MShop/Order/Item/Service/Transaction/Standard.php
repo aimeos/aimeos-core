@@ -23,21 +23,6 @@ class Standard
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
-	private \Aimeos\MShop\Price\Item\Iface $price;
-
-
-	/**
-	 * Initializes the order item base service transaction item.
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
-	 * @param array $values Associative array of key/value pairs
-	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [] )
-	{
-		parent::__construct( 'order.service.transaction.', $values );
-		$this->price = $price;
-	}
-
 
 	/**
 	 * Returns the ID of the site the item is stored
@@ -138,7 +123,7 @@ class Standard
 	 */
 	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->price;
+		return $this->get( '.price' );
 	}
 
 
@@ -150,13 +135,7 @@ class Standard
 	 */
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface
 	{
-		if( $price !== $this->price )
-		{
-			$this->price = $price;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( '.price', $price );
 	}
 
 

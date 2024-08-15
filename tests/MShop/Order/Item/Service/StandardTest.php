@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.attribute.editor' => 'unitTestUser'
 		);
 
-		$this->transactions = [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( $this->price, $txValues )];
+		$this->transactions = [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.transaction.', $txValues )];
 
 
 		$this->values = array(

@@ -18,6 +18,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		$this->price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create()->setValue( '100' );
+
 		$this->values = array(
 			'order.service.transaction.id' => 3,
 			'order.service.transaction.siteid' => 99,
@@ -33,11 +35,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.transaction.status' => -1,
 			'order.service.transaction.mtime' => '2020-12-31 23:59:59',
 			'order.service.transaction.ctime' => '2011-01-01 00:00:01',
-			'order.service.transaction.editor' => 'unitTestUser'
+			'order.service.transaction.editor' => 'unitTestUser',
+			'.price' => $this->price,
 		);
 
-		$this->price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create()->setValue( '100' );
-		$this->object = new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( $this->price, $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.transaction.', $this->values );
 	}
 
 
@@ -175,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( $this->price );
+		$item = new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.transaction.', ['.price' => $this->price] );
 
 		$list = $entries = [
 			'order.service.transaction.id' => 1,
@@ -213,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $list ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $list ) );
 
 		$this->assertEquals( $this->object->getId(), $list['order.service.transaction.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.service.transaction.siteid'] );

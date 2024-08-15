@@ -210,19 +210,13 @@ return array(
 						GROUP BY :keys
 					'
 				),
-				'delete' => array(
-					'ansi' => '
-						DELETE FROM "mshop_order_service_tx"
-						WHERE :cond AND "siteid" LIKE ?
-					'
-				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_order_service_tx" ( :names
-							"parentid", "type", "currencyid", "price", "costs", "rebate", "tax", "taxflag",
-							"status", "config", "mtime", "editor", "siteid", "ctime"
+							"currencyid", "price", "costs", "rebate", "tax", "taxflag",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -230,45 +224,10 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_order_service_tx"
 						SET :names
-							"parentid" = ?, "type" = ?, "currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
-							"tax" = ?, "taxflag" = ?, "status" = ?, "config" = ?, "mtime" = ?, "editor" = ?
+							"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
+							"mtime" = ?, "editor" = ?
 						WHERE "siteid" LIKE ? AND "id" = ?
 					'
-				),
-				'search' => array(
-					'ansi' => '
-						SELECT :columns
-						FROM "mshop_order_service_tx" mordsetx
-						:joins
-						WHERE :cond
-						ORDER BY :order
-						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-					',
-					'mysql' => '
-						SELECT :columns
-						FROM "mshop_order_service_tx" mordsetx
-						:joins
-						WHERE :cond
-						ORDER BY :order
-						LIMIT :size OFFSET :start
-					'
-				),
-				'count' => array(
-					'ansi' => '
-						SELECT COUNT( DISTINCT mordsetx."id" ) AS "count"
-						FROM "mshop_order_service_tx" mordsetx
-						:joins
-						WHERE :cond
-					'
-				),
-				'newid' => array(
-					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-					'mysql' => 'SELECT LAST_INSERT_ID()',
-					'oracle' => 'SELECT mshop_order_service_tx_seq.CURRVAL FROM DUAL',
-					'pgsql' => 'SELECT lastval()',
-					'sqlite' => 'SELECT last_insert_rowid()',
-					'sqlsrv' => 'SELECT @@IDENTITY',
-					'sqlanywhere' => 'SELECT @@IDENTITY',
 				),
 			),
 			'aggregate' => array(
