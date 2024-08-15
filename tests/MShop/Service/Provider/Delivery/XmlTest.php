@@ -84,7 +84,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
 		$this->assertEquals( 3, (string) $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->service->serviceitem[1]['type'] );
-		$this->assertEquals( 0, (string) $xml->orderitem[0]->service->serviceitem[1]['position'] );
+		$this->assertEquals( 1, (string) $xml->orderitem[0]->service->serviceitem[1]['position'] );
 		$this->assertEquals( 9, (string) $xml->orderitem[0]->service->serviceitem[1]->attribute->attributeitem->count() );
 		$this->assertEquals( 2, (string) $xml->orderitem[0]->coupon->couponitem->count() );
 	}

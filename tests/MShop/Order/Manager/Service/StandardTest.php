@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -19,8 +18,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
 		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
+
 		$this->object = new \Aimeos\MShop\Order\Manager\Service\Standard( $this->context );
 	}
 
@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '=~', 'order.service.taxrates', '{' );
 		$expr[] = $search->compare( '==', 'order.service.taxflag', 1 );
 		$expr[] = $search->compare( '==', 'order.service.taxvalue', '0.00' );
-		$expr[] = $search->compare( '==', 'order.service.position', 0 );
+		$expr[] = $search->compare( '==', 'order.service.position', 1 );
 		$expr[] = $search->compare( '>=', 'order.service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.service.editor', $this->editor );
@@ -160,8 +160,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.service.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.service.attribute.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
-		$result = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) );
+		$result = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -266,7 +266,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
-		$item->setCode( 'unittest1' )->setPosition( 1 );
+		$item->setCode( 'unittest1' )->setPosition( 2 );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 

@@ -303,11 +303,16 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
 	{
 		$services = $basket->getServices()->flat( 1 );
+		$pos = (int) $services->max( 'order.service.position' );
 
 		foreach( $services as $service )
 		{
 			if( $service->getParentId() != $basket->getId() ) {
 				$service->setId( null ); // create new item if copied
+			}
+
+			if( !$service->getPosition() ) {
+				$service->setPosition( ++$pos );
 			}
 
 			$service->setParentId( $basket->getId() );

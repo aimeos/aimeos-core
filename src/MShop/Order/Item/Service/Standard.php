@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -13,30 +12,46 @@ namespace Aimeos\MShop\Order\Item\Service;
 
 
 /**
- * Default implementation for order item base service.
+ * Default order service item implementation.
  *
  * @package MShop
  * @subpackage Order
  */
 class Standard extends Base implements Iface
 {
-	private ?\Aimeos\MShop\Service\Item\Iface $serviceItem;
+	/**
+	 * Clones internal objects of the order product item.
+	 */
+	public function __clone()
+	{
+		$this->set( '.transactions', map( $this->get( '.transactions', [] ) )->clone() );
+		$this->set( '.attributes', map( $this->get( '.attributes', [] ) )->clone() );
+		$this->set( '.price', clone $this->get( '.price' ) );
+
+		parent::__clone();
+	}
 
 
 	/**
-	 * Initializes the order base service item
+	 * Returns the price item for the service.
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
-	 * @param array $values Values to be set on initialisation
-	 * @param array $attributes Attributes to be set on initialisation
-	 * @param \Aimeos\MShop\Service\Item\Iface|null $serviceItem Service item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
-		array $transactions = [], ?\Aimeos\MShop\Service\Item\Iface $serviceItem = null )
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
-		parent::__construct( $price, $values, $attributes, $transactions );
+		return $this->get( '.price' );
+	}
 
-		$this->serviceItem = $serviceItem;
+
+	/**
+	 * Sets the price item for the service.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 */
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Service\Iface
+	{
+		return $this->set( '.price', $price );
 	}
 
 
@@ -47,7 +62,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getServiceItem() : ?\Aimeos\MShop\Service\Item\Iface
 	{
-		return $this->serviceItem;
+		return $this->get( '.service' );
 	}
 
 
@@ -219,11 +234,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getPosition() : ?int
 	{
-		if( ( $result = $this->get( 'order.service.position' ) ) !== null ) {
-			return $result;
-		}
-
-		return null;
+		return $this->get( 'order.service.position' );
 	}
 
 

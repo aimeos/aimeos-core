@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -12,6 +11,7 @@ namespace Aimeos\MShop\Order\Item\Service;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 	private $values;
 	private $price;
@@ -21,7 +21,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->price = \Aimeos\MShop::create( \TestHelper::context(), 'price' )->create();
+		$this->context = \TestHelper::context();
+		$this->price = \Aimeos\MShop::create( $this->context, 'price' )->create();
 
 		$attrValues = array(
 			'order.service.attribute.id' => 3,
@@ -36,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.attribute.editor' => 'unitTestUser'
 		);
 
-		$this->attributes = [new \Aimeos\MShop\Order\Item\Service\Attribute\Standard( 'order.service.attribute.', $attrValues )];
+		$this->attributes = map( [new \Aimeos\MShop\Order\Item\Service\Attribute\Standard( 'order.service.attribute.', $attrValues )] );
 
 
 		$txValues = array(
@@ -48,10 +49,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.attribute.status' => 6,
 			'order.service.attribute.mtime' => '2020-12-31 23:59:59',
 			'order.service.attribute.ctime' => '2011-01-01 00:00:01',
-			'order.service.attribute.editor' => 'unitTestUser'
+			'order.service.attribute.editor' => 'unitTestUser',
+			'.price' => clone $this->price,
 		);
 
-		$this->transactions = [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.transaction.', $txValues )];
+		$this->transactions = map( [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.transaction.', $txValues )] );
 
 
 		$this->values = array(
@@ -66,26 +68,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.type' => 'payment',
 			'order.service.mtime' => '2012-01-01 00:00:01',
 			'order.service.ctime' => '2011-01-01 00:00:01',
-			'order.service.editor' => 'unitTestUser'
+			'order.service.editor' => 'unitTestUser',
+			'.service' => \Aimeos\MShop::create( $this->context, 'service' )->create(),
+			'.transactions' => $this->transactions,
+			'.attributes' => $this->attributes,
+			'.price' => $this->price,
 		);
 
-		$servItem = \Aimeos\MShop::create( \TestHelper::context(), 'service' )->create();
-		$this->object = new \Aimeos\MShop\Order\Item\Service\Standard(
-			$this->price, $this->values, $this->attributes, $this->transactions, $servItem
-		);
+		$this->object = new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.', $this->values );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->price, $this->values, $this->attributes, $this->transactions );
 	}
 
 
 	public function testGetServiceItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $this->object->getServiceItem() );
-		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Service\Standard( $this->price ) )->getServiceItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.' ) )->getServiceItem() );
 	}
 
 
@@ -283,7 +286,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddAttributeItems()
 	{
-		$item = \Aimeos\MShop::create( \TestHelper::context(), 'order/service' )->createAttributeItem();
+		$item = \Aimeos\MShop::create( $this->context, 'order/service' )->createAttributeItem();
 
 		$return = $this->object->addAttributeItems( [$item] );
 
@@ -295,7 +298,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttribute()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$attrItem001 = $attManager->create();
 		$attrItem001->setAttributeId( '1' );
@@ -334,7 +337,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeList()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$attrItem001 = $attManager->create();
 		$attrItem001->setAttributeId( '1' );
@@ -357,7 +360,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItem()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$attrItem001 = $attManager->create();
 		$attrItem001->setAttributeId( '1' );
@@ -393,7 +396,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItemList()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$attrItem001 = $attManager->create();
 		$attrItem001->setAttributeId( '1' );
@@ -416,13 +419,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItems()
 	{
-		$this->assertEquals( $this->attributes, $this->object->getAttributeItems()->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems() );
 	}
 
 
 	public function testGetAttributeItemsByType()
 	{
-		$this->assertEquals( $this->attributes, $this->object->getAttributeItems( 'default' )->toArray() );
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems( 'default' ) );
 	}
 
 
@@ -434,7 +437,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItem()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$item = $attManager->create();
 		$item->setAttributeId( '1' );
@@ -464,7 +467,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItems()
 	{
-		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/service/attribute' );
+		$attManager = \Aimeos\MShop::create( $this->context, 'order/service/attribute' );
 
 		$list = array(
 			$attManager->create(),
@@ -481,7 +484,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTransactions()
 	{
-		$this->assertEquals( $this->transactions, $this->object->getTransactions()->toArray() );
+		$this->assertEquals( $this->transactions, $this->object->getTransactions() );
 	}
 
 
@@ -499,7 +502,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.service.attribute.editor' => 'unitTestUser'
 		);
 
-		$list = [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( $this->price, $txValues )];
+		$list = [new \Aimeos\MShop\Order\Item\Service\Transaction\Standard( 'order.service.', $txValues )];
 		$result = $this->object->setTransactions( $list );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Iface::class, $result );
@@ -528,7 +531,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Service\Standard( new \Aimeos\MShop\Price\Item\Standard() );
+		$item = new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.', ['.price' => $this->price] );
 
 		$list = $entries = array(
 			'order.service.id' => 1,
@@ -572,7 +575,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) + 8, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 4 + 7, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.service.id'] );
 		$this->assertEquals( $this->object->getParentId(), $arrayObject['order.service.parentid'] );
@@ -590,7 +593,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $price->getValue(), $arrayObject['order.service.price'] );
 		$this->assertEquals( $price->getCosts(), $arrayObject['order.service.costs'] );
 		$this->assertEquals( $price->getRebate(), $arrayObject['order.service.rebate'] );
-		$this->assertEquals( $price->getTaxRate(), $arrayObject['order.service.taxrate'] );
 		$this->assertEquals( $price->getTaxRates(), $arrayObject['order.service.taxrates'] );
 		$this->assertEquals( $price->getTaxValue(), $arrayObject['order.service.taxvalue'] );
 		$this->assertEquals( $price->getTaxFlag(), $arrayObject['order.service.taxflag'] );
@@ -610,9 +612,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyFrom()
 	{
-		$serviceCopy = new \Aimeos\MShop\Order\Item\Service\Standard( $this->price );
+		$serviceCopy = new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.', ['.price' => $this->price] );
 
-		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'service' );
+		$manager = \Aimeos\MShop::create( $this->context, 'service' );
 
 		$filter = $manager->filter()->add( ['service.provider' => 'Standard'] );
 		$item = $manager->search( $filter )->first( new \RuntimeException( 'No service found' ) );
