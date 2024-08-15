@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Order\Item\Product;
 
 
 /**
- * Basket item abstract class defining available flags.
+ * Order product item abstract class defining available flags.
  *
  * @package MShop
  * @subpackage Order

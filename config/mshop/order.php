@@ -69,6 +69,9 @@ return array(
 			),
 		),
 		'product' => array(
+			'submanagers' => [
+				'attribute' => 'attribute'
+			],
 			'attribute' => array(
 				'aggregate' => array(
 					'ansi' => '
@@ -99,9 +102,6 @@ return array(
 					'
 				),
 			),
-			'submanagers' => [
-				'attribute' => 'attribute'
-			],
 			'aggregate' => array(
 				'ansi' => '
 					SELECT :keys, :type("val") AS "value"

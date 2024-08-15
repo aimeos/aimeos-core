@@ -474,7 +474,7 @@ class Standard
 		{
 			$row['.parentproduct'] = $prodItems[$row['order.product.parentproductid']] ?? null;
 			$row['.product'] = $prodItems[$row['order.product.productid']] ?? null;
-			$row['.attributes'] = $attributes[$id] ?? null;
+			$row['.attributes'] = $attributes[$id] ?? map();
 
 			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
 				$items[$id] = $item;
@@ -514,7 +514,7 @@ class Standard
 		$search = $manager->filter()->add( 'product.id', '==', array_unique( $ids ) )->slice( 0, 0x7fffffff );
 
 		return $manager->search( $search, $ref );
-}
+	}
 
 
 	/**

@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Order\Item\Product;
 
 
 /**
- * Product item of order.
+ * Default order product item implementation.
  *
  * @package MShop
  * @subpackage Order
