@@ -140,10 +140,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'cache.id': !$private ?: $item = $item->setId( $value ); break;
-				case 'cache.value': $item = $item->setValue( $value ); break;
-				case 'cache.expire': $item = $item->setTimeExpire( $value ); break;
-				case 'cache.tags': $item = $item->setTags( $value ); break;
+				case 'cache.id': !$private ?: $item->setId( $value ); break;
+				case 'cache.value': $item->setValue( $value ); break;
+				case 'cache.expire': $item->setTimeExpire( $value ); break;
+				case 'cache.tags': $item->setTags( $value ); break;
 				default: continue 2;
 			}
 

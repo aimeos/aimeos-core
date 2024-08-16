@@ -260,15 +260,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'subscription.orderid': $item = $item->setOrderId( $value ); break;
-				case 'subscription.ordprodid': $item = $item->setOrderProductId( $value ); break;
-				case 'subscription.productid': $item = $item->setProductId( $value ); break;
-				case 'subscription.datenext': $item = $item->setDateNext( $value ); break;
-				case 'subscription.dateend': $item = $item->setDateEnd( $value ); break;
-				case 'subscription.interval': $item = $item->setInterval( $value ); break;
-				case 'subscription.period': $item = $item->setPeriod( (int) $value ); break;
-				case 'subscription.status': $item = $item->setStatus( (int) $value ); break;
-				case 'subscription.reason': $item = $item->setReason( $value !== null ? (int) $value : null ); break;
+				case 'subscription.orderid': $item->setOrderId( $value ); break;
+				case 'subscription.ordprodid': $item->setOrderProductId( $value ); break;
+				case 'subscription.productid': $item->setProductId( $value ); break;
+				case 'subscription.datenext': $item->setDateNext( $value ); break;
+				case 'subscription.dateend': $item->setDateEnd( $value ); break;
+				case 'subscription.interval': $item->setInterval( $value ); break;
+				case 'subscription.period': $item->setPeriod( (int) $value ); break;
+				case 'subscription.status': $item->setStatus( (int) $value ); break;
+				case 'subscription.reason': $item->setReason( $value !== null ? (int) $value : null ); break;
 				default: continue 2;
 			}
 

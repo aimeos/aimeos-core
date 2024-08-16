@@ -80,7 +80,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.address.addressid': $item = $item->setAddressId( $value ); break;
+				case 'order.address.addressid': $item->setAddressId( $value ); break;
 				default: continue 2;
 			}
 

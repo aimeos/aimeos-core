@@ -689,19 +689,19 @@ class Standard extends Base implements Iface
 		{
 			switch( $key )
 			{
-				case 'order.product.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
-				case 'order.product.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.product.orderproductid': !$private ?: $item = $item->setOrderProductId( $value ); break;
-				case 'order.product.orderaddressid': !$private ?: $item = $item->setOrderAddressId( $value ); break;
-				case 'order.product.position': !$private ?: $item = $item->setPosition( (int) $value ); break;
-				case 'order.product.flags': !$private ?: $item = $item->setFlags( (int) $value ); break;
-				case 'order.product.target': !$private ?: $item = $item->setTarget( $value ); break;
-				case 'order.product.parentproductid': $item = $item->setParentProductId( $value ); break;
-				case 'order.product.productid': $item = $item->setProductId( $value ); break;
-				case 'order.product.prodcode': $item = $item->setProductCode( $value ); break;
-				case 'order.product.vendor': $item = $item->setVendor( $value ); break;
-				case 'order.product.stocktype': $item = $item->setStockType( $value ); break;
-				case 'order.product.type': $item = $item->setType( $value ); break;
+				case 'order.product.siteid': !$private ?: $item->setSiteId( $value ); break;
+				case 'order.product.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.product.orderproductid': !$private ?: $item->setOrderProductId( $value ); break;
+				case 'order.product.orderaddressid': !$private ?: $item->setOrderAddressId( $value ); break;
+				case 'order.product.position': !$private ?: $item->setPosition( (int) $value ); break;
+				case 'order.product.flags': !$private ?: $item->setFlags( (int) $value ); break;
+				case 'order.product.target': !$private ?: $item->setTarget( $value ); break;
+				case 'order.product.parentproductid': $item->setParentProductId( $value ); break;
+				case 'order.product.productid': $item->setProductId( $value ); break;
+				case 'order.product.prodcode': $item->setProductCode( $value ); break;
+				case 'order.product.vendor': $item->setVendor( $value ); break;
+				case 'order.product.stocktype': $item->setStockType( $value ); break;
+				case 'order.product.type': $item->setType( $value ); break;
 				case 'order.product.currencyid': $price = $price->setCurrencyId( $value ); break;
 				case 'order.product.price': $price = $price->setValue( $value ); break;
 				case 'order.product.costs': $price = $price->setCosts( $value ); break;
@@ -709,16 +709,16 @@ class Standard extends Base implements Iface
 				case 'order.product.taxrates': $price = $price->setTaxRates( $value ); break;
 				case 'order.product.taxvalue': $price = $price->setTaxValue( $value ); break;
 				case 'order.product.taxflag': $price = $price->setTaxFlag( $value ); break;
-				case 'order.product.name': $item = $item->setName( $value ); break;
-				case 'order.product.description': $item = $item->setDescription( $value ); break;
-				case 'order.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
-				case 'order.product.timeframe': $item = $item->setTimeFrame( $value ); break;
-				case 'order.product.scale': $item = $item->setScale( (float) $value ); break;
-				case 'order.product.quantity': $item = $item->setQuantity( (float) $value ); break;
-				case 'order.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
-				case 'order.product.notes': $item = $item->setNotes( (string) $value ); break;
-				case 'order.product.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
-				case 'order.product.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
+				case 'order.product.name': $item->setName( $value ); break;
+				case 'order.product.description': $item->setDescription( $value ); break;
+				case 'order.product.mediaurl': $item->setMediaUrl( $value ); break;
+				case 'order.product.timeframe': $item->setTimeFrame( $value ); break;
+				case 'order.product.scale': $item->setScale( (float) $value ); break;
+				case 'order.product.quantity': $item->setQuantity( (float) $value ); break;
+				case 'order.product.qtyopen': $item->setQuantityOpen( (float) $value ); break;
+				case 'order.product.notes': $item->setNotes( (string) $value ); break;
+				case 'order.product.statusdelivery': $item->setStatusDelivery( (int) $value ); break;
+				case 'order.product.statuspayment': $item->setStatusPayment( (int) $value ); break;
 				default: continue 2;
 			}
 

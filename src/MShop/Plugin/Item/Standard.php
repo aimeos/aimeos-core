@@ -194,12 +194,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'plugin.type': $item = $item->setType( $value ); break;
-				case 'plugin.label': $item = $item->setLabel( $value ); break;
-				case 'plugin.provider': $item = $item->setProvider( $value ); break;
-				case 'plugin.status': $item = $item->setStatus( (int) $value ); break;
-				case 'plugin.config': $item = $item->setConfig( (array) $value ); break;
-				case 'plugin.position': $item = $item->setPosition( (int) $value ); break;
+				case 'plugin.type': $item->setType( $value ); break;
+				case 'plugin.label': $item->setLabel( $value ); break;
+				case 'plugin.provider': $item->setProvider( $value ); break;
+				case 'plugin.status': $item->setStatus( (int) $value ); break;
+				case 'plugin.config': $item->setConfig( (array) $value ); break;
+				case 'plugin.position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

@@ -212,12 +212,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'text.languageid': $item = $item->setLanguageId( $value ); break;
-				case 'text.type': $item = $item->setType( $value ); break;
-				case 'text.label': $item = $item->setLabel( $value ); break;
-				case 'text.domain': $item = $item->setDomain( $value ); break;
-				case 'text.content': $item = $item->setContent( $value ); break;
-				case 'text.status': $item = $item->setStatus( (int) $value ); break;
+				case 'text.languageid': $item->setLanguageId( $value ); break;
+				case 'text.type': $item->setType( $value ); break;
+				case 'text.label': $item->setLabel( $value ); break;
+				case 'text.domain': $item->setDomain( $value ); break;
+				case 'text.content': $item->setContent( $value ); break;
+				case 'text.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

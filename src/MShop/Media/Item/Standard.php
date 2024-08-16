@@ -404,16 +404,16 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'media.filesystem': $item = $item->setFileSystem( $value ); break;
-				case 'media.domain': $item = $item->setDomain( $value ); break;
-				case 'media.label': $item = $item->setLabel( $value ); break;
-				case 'media.languageid': $item = $item->setLanguageId( $value ); break;
-				case 'media.mimetype': $item = $item->setMimeType( $value ); break;
-				case 'media.type': $item = $item->setType( $value ); break;
-				case 'media.url': $item = $item->setUrl( $value ); break;
-				case 'media.preview': $item = $item->setPreview( $value ); break;
-				case 'media.previews': $item = $item->setPreviews( (array) $value ); break;
-				case 'media.status': $item = $item->setStatus( (int) $value ); break;
+				case 'media.filesystem': $item->setFileSystem( $value ); break;
+				case 'media.domain': $item->setDomain( $value ); break;
+				case 'media.label': $item->setLabel( $value ); break;
+				case 'media.languageid': $item->setLanguageId( $value ); break;
+				case 'media.mimetype': $item->setMimeType( $value ); break;
+				case 'media.type': $item->setType( $value ); break;
+				case 'media.url': $item->setUrl( $value ); break;
+				case 'media.preview': $item->setPreview( $value ); break;
+				case 'media.previews': $item->setPreviews( (array) $value ); break;
+				case 'media.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

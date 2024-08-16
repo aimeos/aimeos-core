@@ -105,9 +105,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.coupon.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.coupon.productid': !$private ?: $item = $item->setProductId( $value ); break;
-				case 'order.coupon.code': $item = $item->setCode( $value ); break;
+				case 'order.coupon.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.coupon.productid': !$private ?: $item->setProductId( $value ); break;
+				case 'order.coupon.code': $item->setCode( $value ); break;
 				default: continue 2;
 			}
 

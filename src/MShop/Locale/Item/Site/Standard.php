@@ -359,14 +359,14 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.site.code': $item = $item->setCode( $value ); break;
-				case 'locale.site.label': $item = $item->setLabel( $value ); break;
-				case 'locale.site.status': $item = $item->setStatus( (int) $value ); break;
-				case 'locale.site.config': $item = $item->setConfig( (array) $value ); break;
-				case 'locale.site.refid': $item = $item->setRefId( $value ); break;
-				case 'locale.site.logo': $item = $item->setLogos( (array) $value ); break;
-				case 'locale.site.theme': $item = $item->setTheme( $value ); break;
-				case 'locale.site.icon': $item = $item->setIcon( $value ); break;
+				case 'locale.site.code': $item->setCode( $value ); break;
+				case 'locale.site.label': $item->setLabel( $value ); break;
+				case 'locale.site.status': $item->setStatus( (int) $value ); break;
+				case 'locale.site.config': $item->setConfig( (array) $value ); break;
+				case 'locale.site.refid': $item->setRefId( $value ); break;
+				case 'locale.site.logo': $item->setLogos( (array) $value ); break;
+				case 'locale.site.theme': $item->setTheme( $value ); break;
+				case 'locale.site.icon': $item->setIcon( $value ); break;
 				default: continue 2;
 			}
 

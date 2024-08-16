@@ -271,12 +271,12 @@ class Standard extends Base implements Iface
 		{
 			switch( $key )
 			{
-				case 'order.service.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
-				case 'order.service.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.service.serviceid': !$private ?: $item = $item->setServiceId( $value ); break;
-				case 'order.service.type': $item = $item->setType( $value ); break;
-				case 'order.service.code': $item = $item->setCode( $value ); break;
-				case 'order.service.name': $item = $item->setName( $value ); break;
+				case 'order.service.siteid': !$private ?: $item->setSiteId( $value ); break;
+				case 'order.service.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.service.serviceid': !$private ?: $item->setServiceId( $value ); break;
+				case 'order.service.type': $item->setType( $value ); break;
+				case 'order.service.code': $item->setCode( $value ); break;
+				case 'order.service.name': $item->setName( $value ); break;
 				case 'order.service.currencyid': $price = $price->setCurrencyId( $value ); break;
 				case 'order.service.price': $price = $price->setValue( $value ); break;
 				case 'order.service.costs': $price = $price->setCosts( $value ); break;
@@ -284,8 +284,8 @@ class Standard extends Base implements Iface
 				case 'order.service.taxrates': $price = $price->setTaxRates( $value ); break;
 				case 'order.service.taxvalue': $price = $price->setTaxValue( $value ); break;
 				case 'order.service.taxflag': $price = $price->setTaxFlag( $value ); break;
-				case 'order.service.position': $item = $item->setPosition( $value ); break;
-				case 'order.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
+				case 'order.service.position': $item->setPosition( $value ); break;
+				case 'order.service.mediaurl': $item->setMediaUrl( $value ); break;
 				default: continue 2;
 			}
 

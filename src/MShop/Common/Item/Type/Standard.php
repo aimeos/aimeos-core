@@ -215,12 +215,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'code': $item = $item->setCode( $value ); break;
-				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
-				case $this->prefix . 'i18n': $item = $item->setI18n( (array) $value ); break;
-				case $this->prefix . 'label': $item = $item->setLabel( $value ); break;
-				case $this->prefix . 'position': $item = $item->setPosition( (int) $value ); break;
-				case $this->prefix . 'status': $item = $item->setStatus( (int) $value ); break;
+				case $this->prefix . 'code': $item->setCode( $value ); break;
+				case $this->prefix . 'domain': $item->setDomain( $value ); break;
+				case $this->prefix . 'i18n': $item->setI18n( (array) $value ); break;
+				case $this->prefix . 'label': $item->setLabel( $value ); break;
+				case $this->prefix . 'position': $item->setPosition( (int) $value ); break;
+				case $this->prefix . 'status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

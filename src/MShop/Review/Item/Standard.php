@@ -254,15 +254,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'review.orderproductid': !$private ?: $item = $item->setOrderProductId( $value ); break;
-				case 'review.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
-				case 'review.refid': $item = $item->setRefId( $value ); break;
-				case 'review.domain': $item = $item->setDomain( $value ); break;
-				case 'review.comment': $item = $item->setComment( $value ); break;
-				case 'review.response': $item = $item->setResponse( $value ); break;
-				case 'review.status': $item = $item->setStatus( (int) $value ); break;
-				case 'review.rating': $item = $item->setRating( (int) $value ); break;
-				case 'review.name': $item = $item->setName( $value ); break;
+				case 'review.orderproductid': !$private ?: $item->setOrderProductId( $value ); break;
+				case 'review.customerid': !$private ?: $item->setCustomerId( $value ); break;
+				case 'review.refid': $item->setRefId( $value ); break;
+				case 'review.domain': $item->setDomain( $value ); break;
+				case 'review.comment': $item->setComment( $value ); break;
+				case 'review.response': $item->setResponse( $value ); break;
+				case 'review.status': $item->setStatus( (int) $value ); break;
+				case 'review.rating': $item->setRating( (int) $value ); break;
+				case 'review.name': $item->setName( $value ); break;
 				default: continue 2;
 			}
 

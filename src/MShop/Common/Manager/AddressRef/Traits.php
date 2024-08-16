@@ -99,7 +99,7 @@ trait Traits
 			}
 
 			$addrItem = $manager->save( $addrItem->setParentId( $item->getId() ), $fetch );
-			$item = $item->addAddressItem( $addrItem, $idx );
+			$item->addAddressItem( $addrItem, $idx );
 		}
 
 		return $item;

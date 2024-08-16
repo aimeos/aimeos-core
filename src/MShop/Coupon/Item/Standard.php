@@ -192,12 +192,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'coupon.label': $item = $item->setLabel( $value ); break;
-				case 'coupon.datestart': $item = $item->setDateStart( $value ); break;
-				case 'coupon.dateend': $item = $item->setDateEnd( $value ); break;
-				case 'coupon.provider': $item = $item->setProvider( $value ); break;
-				case 'coupon.status': $item = $item->setStatus( (int) $value ); break;
-				case 'coupon.config': $item = $item->setConfig( (array) $value ); break;
+				case 'coupon.label': $item->setLabel( $value ); break;
+				case 'coupon.datestart': $item->setDateStart( $value ); break;
+				case 'coupon.dateend': $item->setDateEnd( $value ); break;
+				case 'coupon.provider': $item->setProvider( $value ); break;
+				case 'coupon.status': $item->setStatus( (int) $value ); break;
+				case 'coupon.config': $item->setConfig( (array) $value ); break;
 				default: continue 2;
 			}
 

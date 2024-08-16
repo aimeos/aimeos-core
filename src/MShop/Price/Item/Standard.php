@@ -452,19 +452,19 @@ class Standard extends Base
 		{
 			switch( $key )
 			{
-				case 'price.type': $item = $item->setType( $value ); break;
-				case 'price.currencyid': $item = $item->setCurrencyId( $value ); break;
-				case 'price.quantity': $item = $item->setQuantity( (float) $value ); break;
-				case 'price.domain': $item = $item->setDomain( $value ); break;
-				case 'price.value': $item = $item->setValue( $value ); break;
-				case 'price.costs': $item = $item->setCosts( $value ); break;
-				case 'price.rebate': $item = $item->setRebate( $value ); break;
-				case 'price.taxvalue': $item = $item->setTaxValue( $value ); break;
-				case 'price.taxrate': $item = $item->setTaxRate( $value ); break;
-				case 'price.taxrates': $item = $item->setTaxRates( (array) $value ); break;
-				case 'price.taxflag': $item = $item->setTaxFlag( (bool) $value ); break;
-				case 'price.status': $item = $item->setStatus( (int) $value ); break;
-				case 'price.label': $item = $item->setLabel( $value ); break;
+				case 'price.type': $item->setType( $value ); break;
+				case 'price.currencyid': $item->setCurrencyId( $value ); break;
+				case 'price.quantity': $item->setQuantity( (float) $value ); break;
+				case 'price.domain': $item->setDomain( $value ); break;
+				case 'price.value': $item->setValue( $value ); break;
+				case 'price.costs': $item->setCosts( $value ); break;
+				case 'price.rebate': $item->setRebate( $value ); break;
+				case 'price.taxvalue': $item->setTaxValue( $value ); break;
+				case 'price.taxrate': $item->setTaxRate( $value ); break;
+				case 'price.taxrates': $item->setTaxRates( (array) $value ); break;
+				case 'price.taxflag': $item->setTaxFlag( (bool) $value ); break;
+				case 'price.status': $item->setStatus( (int) $value ); break;
+				case 'price.label': $item->setLabel( $value ); break;
 				default: continue 2;
 			}
 

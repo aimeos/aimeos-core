@@ -255,11 +255,11 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.siteid': $item = $item->setSiteId( $value ); break;
-				case 'locale.languageid': $item = $item->setLanguageId( $value ); break;
-				case 'locale.currencyid': $item = $item->setCurrencyId( $value ); break;
-				case 'locale.position': $item = $item->setPosition( (int) $value ); break;
-				case 'locale.status': $item = $item->setStatus( (int) $value ); break;
+				case 'locale.siteid': $item->setSiteId( $value ); break;
+				case 'locale.languageid': $item->setLanguageId( $value ); break;
+				case 'locale.currencyid': $item->setCurrencyId( $value ); break;
+				case 'locale.position': $item->setPosition( (int) $value ); break;
+				case 'locale.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

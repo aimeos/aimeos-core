@@ -117,9 +117,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'job.path': $item = $item->setPath( (string) $value ); break;
-				case 'job.label': $item = $item->setLabel( (string) $value ); break;
-				case 'job.status': $item = $item->setStatus( (int) $value ); break;
+				case 'job.path': $item->setPath( (string) $value ); break;
+				case 'job.label': $item->setLabel( (string) $value ); break;
+				case 'job.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

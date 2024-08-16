@@ -104,9 +104,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.status.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.status.type': $item = $item->setType( $value ); break;
-				case 'order.status.value': $item = $item->setValue( $value ); break;
+				case 'order.status.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.status.type': $item->setType( $value ); break;
+				case 'order.status.value': $item->setValue( $value ); break;
 				default: continue 2;
 			}
 

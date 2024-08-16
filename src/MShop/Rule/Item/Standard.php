@@ -241,14 +241,14 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'rule.type': $item = $item->setType( $value ); break;
-				case 'rule.label': $item = $item->setLabel( $value ); break;
-				case 'rule.provider': $item = $item->setProvider( $value ); break;
-				case 'rule.status': $item = $item->setStatus( (int) $value ); break;
-				case 'rule.config': $item = $item->setConfig( (array) $value ); break;
-				case 'rule.position': $item = $item->setPosition( (int) $value ); break;
-				case 'rule.datestart': $item = $item->setDateStart( $value ); break;
-				case 'rule.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'rule.type': $item->setType( $value ); break;
+				case 'rule.label': $item->setLabel( $value ); break;
+				case 'rule.provider': $item->setProvider( $value ); break;
+				case 'rule.status': $item->setStatus( (int) $value ); break;
+				case 'rule.config': $item->setConfig( (array) $value ); break;
+				case 'rule.position': $item->setPosition( (int) $value ); break;
+				case 'rule.datestart': $item->setDateStart( $value ); break;
+				case 'rule.dateend': $item->setDateEnd( $value ); break;
 				default: continue 2;
 			}
 

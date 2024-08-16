@@ -152,11 +152,11 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'stock.productid': $item = $item->setProductId( $value ); break;
-				case 'stock.stocklevel': $item = $item->setStockLevel( $value ); break;
-				case 'stock.timeframe': $item = $item->setTimeFrame( $value ); break;
-				case 'stock.dateback': $item = $item->setDateBack( $value ); break;
-				case 'stock.type': $item = $item->setType( $value ); break;
+				case 'stock.productid': $item->setProductId( $value ); break;
+				case 'stock.stocklevel': $item->setStockLevel( $value ); break;
+				case 'stock.timeframe': $item->setTimeFrame( $value ); break;
+				case 'stock.dateback': $item->setDateBack( $value ); break;
+				case 'stock.type': $item->setType( $value ); break;
 				default: continue 2;
 			}
 

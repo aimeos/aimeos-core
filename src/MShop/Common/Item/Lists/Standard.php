@@ -323,15 +323,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
-				case $this->prefix . 'type': $item = $item->setType( $value ); break;
-				case $this->prefix . 'refid': $item = $item->setRefId( $value ); break;
-				case $this->prefix . 'datestart': $item = $item->setDateStart( $value ); break;
-				case $this->prefix . 'dateend': $item = $item->setDateEnd( $value ); break;
-				case $this->prefix . 'status': $item = $item->setStatus( (int) $value ); break;
-				case $this->prefix . 'config': $item = $item->setConfig( (array) $value ); break;
-				case $this->prefix . 'position': $item = $item->setPosition( (int) $value ); break;
+				case $this->prefix . 'parentid': !$private ?: $item->setParentId( $value ); break;
+				case $this->prefix . 'domain': $item->setDomain( $value ); break;
+				case $this->prefix . 'type': $item->setType( $value ); break;
+				case $this->prefix . 'refid': $item->setRefId( $value ); break;
+				case $this->prefix . 'datestart': $item->setDateStart( $value ); break;
+				case $this->prefix . 'dateend': $item->setDateEnd( $value ); break;
+				case $this->prefix . 'status': $item->setStatus( (int) $value ); break;
+				case $this->prefix . 'config': $item->setConfig( (array) $value ); break;
+				case $this->prefix . 'position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

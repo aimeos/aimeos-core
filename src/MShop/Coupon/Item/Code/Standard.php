@@ -197,12 +197,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'coupon.code.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'coupon.code.datestart': $item = $item->setDateStart( $value ); break;
-				case 'coupon.code.dateend': $item = $item->setDateEnd( $value ); break;
-				case 'coupon.code.count': $item = $item->setCount( $value ); break;
-				case 'coupon.code.code': $item = $item->setCode( $value ); break;
-				case 'coupon.code.ref': $item = $item->setRef( $value ); break;
+				case 'coupon.code.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'coupon.code.datestart': $item->setDateStart( $value ); break;
+				case 'coupon.code.dateend': $item->setDateEnd( $value ); break;
+				case 'coupon.code.count': $item->setCount( $value ); break;
+				case 'coupon.code.code': $item->setCode( $value ); break;
+				case 'coupon.code.ref': $item->setRef( $value ); break;
 				default: continue 2;
 			}
 

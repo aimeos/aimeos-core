@@ -133,8 +133,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.basket.customerid': $item = $item->setCustomerId( $value ); break;
-				case 'order.basket.name': $item = $item->setName( $value ); break;
+				case 'order.basket.customerid': $item->setCustomerId( $value ); break;
+				case 'order.basket.name': $item->setName( $value ); break;
 				default: continue 2;
 			}
 

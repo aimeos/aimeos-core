@@ -171,10 +171,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case $this->prefix . 'languageid': $item = $item->setLanguageId( $value ); break;
-				case $this->prefix . 'value': $item = $item->setValue( $value ); break;
-				case $this->prefix . 'type': $item = $item->setType( $value ); break;
+				case $this->prefix . 'parentid': !$private ?: $item->setParentId( $value ); break;
+				case $this->prefix . 'languageid': $item->setLanguageId( $value ); break;
+				case $this->prefix . 'value': $item->setValue( $value ); break;
+				case $this->prefix . 'type': $item->setType( $value ); break;
 				default: continue 2;
 			}
 

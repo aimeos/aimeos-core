@@ -178,12 +178,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.service.transaction.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.service.transaction.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
-				case 'order.service.transaction.config': $item = $item->setConfig( (array) $value ); break;
-				case 'order.service.transaction.status': $item = $item->setStatus( (int) $value ); break;
+				case 'order.service.transaction.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.service.transaction.siteid': !$private ?: $item->setSiteId( $value ); break;
+				case 'order.service.transaction.config': $item->setConfig( (array) $value ); break;
+				case 'order.service.transaction.status': $item->setStatus( (int) $value ); break;
 				case 'order.service.transaction.currencyid': $price->setCurrencyId( $value ); break;
-				case 'order.service.transaction.type': $item = $item->setType( $value ); break;
+				case 'order.service.transaction.type': $item->setType( $value ); break;
 				case 'order.service.transaction.price': $price->setValue( $value ); break;
 				case 'order.service.transaction.costs': $price->setCosts( $value ); break;
 				case 'order.service.transaction.rebate': $price->setRebate( $value ); break;

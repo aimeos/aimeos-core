@@ -455,30 +455,29 @@ class Standard
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
-		$locale = $item->locale();
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.channel': !$private ?: $item = $item->setChannel( $value ); break;
-				case 'order.invoiceno': !$private ?: $item = $item->setInvoiceNumber( $value ); break;
-				case 'order.statusdelivery': !$private ?: $item = $item->setStatusDelivery( (int) $value ); break;
-				case 'order.statuspayment': !$private ?: $item = $item->setStatusPayment( (int) $value ); break;
-				case 'order.datedelivery': !$private ?: $item = $item->setDateDelivery( $value ); break;
-				case 'order.datepayment': !$private ?: $item = $item->setDatePayment( $value ); break;
-				case 'order.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
-				case 'order.customerref': $item = $item->setCustomerReference( $value ); break;
-				case 'order.languageid': $locale = $locale->setLanguageId( $value ); break;
-				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
-				case 'order.comment': $item = $item->setComment( $value ); break;
+				case 'order.channel': !$private ?: $item->setChannel( $value ); break;
+				case 'order.invoiceno': !$private ?: $item->setInvoiceNumber( $value ); break;
+				case 'order.statusdelivery': !$private ?: $item->setStatusDelivery( (int) $value ); break;
+				case 'order.statuspayment': !$private ?: $item->setStatusPayment( (int) $value ); break;
+				case 'order.datedelivery': !$private ?: $item->setDateDelivery( $value ); break;
+				case 'order.datepayment': !$private ?: $item->setDatePayment( $value ); break;
+				case 'order.customerid': !$private ?: $item->setCustomerId( $value ); break;
+				case 'order.customerref': $item->setCustomerReference( $value ); break;
+				case 'order.languageid': $item->locale()->setLanguageId( $value ); break;
+				case 'order.relatedid': $item->setRelatedId( $value ); break;
+				case 'order.comment': $item->setComment( $value ); break;
 				default: continue 2;
 			}
 
 			unset( $list[$key] );
 		}
 
-		return $item->setLocale( $locale );
+		return $item;
 	}
 
 
@@ -491,8 +490,6 @@ class Standard
 	public function toArray( bool $private = false ) : array
 	{
 		$price = $this->getPrice();
-		$locale = $this->locale();
-
 		$list = parent::toArray( $private );
 
 		$list['order.channel'] = $this->getChannel();
@@ -504,7 +501,7 @@ class Standard
 		$list['order.relatedid'] = $this->getRelatedId();
 		$list['order.sitecode'] = $this->getSiteCode();
 		$list['order.customerid'] = $this->getCustomerId();
-		$list['order.languageid'] = $locale->getLanguageId();
+		$list['order.languageid'] = $this->locale()->getLanguageId();
 		$list['order.currencyid'] = $price->getCurrencyId();
 		$list['order.price'] = $price->getValue();
 		$list['order.costs'] = $price->getCosts();

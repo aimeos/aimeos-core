@@ -82,8 +82,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'group.code': $item = $item->setCode( $value ); break;
-				case 'group.label': $item = $item->setLabel( $value ); break;
+				case 'group.code': $item->setCode( $value ); break;
+				case 'group.label': $item->setLabel( $value ); break;
 				default: continue 2;
 			}
 

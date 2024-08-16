@@ -139,10 +139,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'tag.languageid': $item = $item->setLanguageId( $value ); break;
-				case 'tag.domain': $item = $item->setDomain( $value ); break;
-				case 'tag.label': $item = $item->setLabel( $value ); break;
-				case 'tag.type': $item = $item->setType( $value ); break;
+				case 'tag.languageid': $item->setLanguageId( $value ); break;
+				case 'tag.domain': $item->setDomain( $value ); break;
+				case 'tag.label': $item->setLabel( $value ); break;
+				case 'tag.type': $item->setType( $value ); break;
 				default: continue 2;
 			}
 

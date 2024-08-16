@@ -502,13 +502,13 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'catalog.url': $item = $item->setUrl( $value ); break;
-				case 'catalog.code': $item = $item->setCode( $value ); break;
-				case 'catalog.label': $item = $item->setLabel( $value ); break;
-				case 'catalog.target': $item = $item->setTarget( $value ); break;
-				case 'catalog.status': $item = $item->setStatus( (int) $value ); break;
-				case 'catalog.config': $item = $item->setConfig( (array) $value ); break;
-				case 'catalog.id': !$private ?: $item = $item->setId( $value ); break;
+				case 'catalog.url': $item->setUrl( $value ); break;
+				case 'catalog.code': $item->setCode( $value ); break;
+				case 'catalog.label': $item->setLabel( $value ); break;
+				case 'catalog.target': $item->setTarget( $value ); break;
+				case 'catalog.status': $item->setStatus( (int) $value ); break;
+				case 'catalog.config': $item->setConfig( (array) $value ); break;
+				case 'catalog.id': !$private ?: $item->setId( $value ); break;
 				default: continue 2;
 			}
 

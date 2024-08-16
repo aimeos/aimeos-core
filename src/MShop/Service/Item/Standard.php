@@ -286,15 +286,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'service.type': $item = $item->setType( $value ); break;
-				case 'service.code': $item = $item->setCode( $value ); break;
-				case 'service.label': $item = $item->setLabel( $value ); break;
-				case 'service.provider': $item = $item->setProvider( $value ); break;
-				case 'service.datestart': $item = $item->setDateStart( $value ); break;
-				case 'service.dateend': $item = $item->setDateEnd( $value ); break;
-				case 'service.status': $item = $item->setStatus( (int) $value ); break;
-				case 'service.config': $item = $item->setConfig( (array) $value ); break;
-				case 'service.position': $item = $item->setPosition( (int) $value ); break;
+				case 'service.type': $item->setType( $value ); break;
+				case 'service.code': $item->setCode( $value ); break;
+				case 'service.label': $item->setLabel( $value ); break;
+				case 'service.provider': $item->setProvider( $value ); break;
+				case 'service.datestart': $item->setDateStart( $value ); break;
+				case 'service.dateend': $item->setDateEnd( $value ); break;
+				case 'service.status': $item->setStatus( (int) $value ); break;
+				case 'service.config': $item->setConfig( (array) $value ); break;
+				case 'service.position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

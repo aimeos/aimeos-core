@@ -140,9 +140,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.language.code': $item = $item->setCode( $value ); break;
-				case 'locale.language.label': $item = $item->setLabel( $value ); break;
-				case 'locale.language.status': $item = $item->setStatus( (int) $value ); break;
+				case 'locale.language.code': $item->setCode( $value ); break;
+				case 'locale.language.label': $item->setLabel( $value ); break;
+				case 'locale.language.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

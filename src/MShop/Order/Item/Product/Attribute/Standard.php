@@ -263,15 +263,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.product.attribute.attributeid': !$private ?: $item = $item->setAttributeId( $value ); break;
-				case 'order.product.attribute.parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'order.product.attribute.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
-				case 'order.product.attribute.type': $item = $item->setType( $value ); break;
-				case 'order.product.attribute.code': $item = $item->setCode( $value ); break;
-				case 'order.product.attribute.name': $item = $item->setName( $value ); break;
-				case 'order.product.attribute.value': $item = $item->setValue( $value ); break;
-				case 'order.product.attribute.price': $item = $item->setPrice( $value ); break;
-				case 'order.product.attribute.quantity': $item = $item->setQuantity( $value ); break;
+				case 'order.product.attribute.attributeid': !$private ?: $item->setAttributeId( $value ); break;
+				case 'order.product.attribute.parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'order.product.attribute.siteid': !$private ?: $item->setSiteId( $value ); break;
+				case 'order.product.attribute.type': $item->setType( $value ); break;
+				case 'order.product.attribute.code': $item->setCode( $value ); break;
+				case 'order.product.attribute.name': $item->setName( $value ); break;
+				case 'order.product.attribute.value': $item->setValue( $value ); break;
+				case 'order.product.attribute.price': $item->setPrice( $value ); break;
+				case 'order.product.attribute.quantity': $item->setQuantity( $value ); break;
 				default: continue 2;
 			}
 

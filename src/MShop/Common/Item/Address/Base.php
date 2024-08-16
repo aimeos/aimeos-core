@@ -693,31 +693,31 @@ abstract class Base
 
 			switch( $key )
 			{
-				case 'parentid': !$private ?: $item = $item->setParentId( $value ); break;
-				case 'type': $item = $item->setType( $value ); break;
-				case 'salutation': $item = $item->setSalutation( $value ); break;
-				case 'company': $item = $item->setCompany( $value ); break;
-				case 'vatid': $item = $item->setVatID( $value ); break;
-				case 'title': $item = $item->setTitle( $value ); break;
-				case 'firstname': $item = $item->setFirstname( $value ); break;
-				case 'lastname': $item = $item->setLastname( $value ); break;
-				case 'address1': $item = $item->setAddress1( $value ); break;
-				case 'address2': $item = $item->setAddress2( $value ); break;
-				case 'address3': $item = $item->setAddress3( $value ); break;
-				case 'postal': $item = $item->setPostal( $value ); break;
-				case 'city': $item = $item->setCity( $value ); break;
-				case 'state': $item = $item->setState( $value ); break;
-				case 'countryid': $item = $item->setCountryId( $value ); break;
-				case 'languageid': $item = $item->setLanguageId( $value ); break;
-				case 'telephone': $item = $item->setTelephone( $value ); break;
-				case 'telefax': $item = $item->setTelefax( $value ); break;
-				case 'mobile': $item = $item->setMobile( $value ); break;
-				case 'email': $item = $item->setEmail( $value ); break;
-				case 'website': $item = $item->setWebsite( $value ); break;
-				case 'longitude': $item = $item->setLongitude( $value ); break;
-				case 'latitude': $item = $item->setLatitude( $value ); break;
-				case 'birthday': $item = $item->setBirthday( $value ); break;
-				case 'position': $item = $item->setPosition( $value ); break;
+				case 'parentid': !$private ?: $item->setParentId( $value ); break;
+				case 'type': $item->setType( $value ); break;
+				case 'salutation': $item->setSalutation( $value ); break;
+				case 'company': $item->setCompany( $value ); break;
+				case 'vatid': $item->setVatID( $value ); break;
+				case 'title': $item->setTitle( $value ); break;
+				case 'firstname': $item->setFirstname( $value ); break;
+				case 'lastname': $item->setLastname( $value ); break;
+				case 'address1': $item->setAddress1( $value ); break;
+				case 'address2': $item->setAddress2( $value ); break;
+				case 'address3': $item->setAddress3( $value ); break;
+				case 'postal': $item->setPostal( $value ); break;
+				case 'city': $item->setCity( $value ); break;
+				case 'state': $item->setState( $value ); break;
+				case 'countryid': $item->setCountryId( $value ); break;
+				case 'languageid': $item->setLanguageId( $value ); break;
+				case 'telephone': $item->setTelephone( $value ); break;
+				case 'telefax': $item->setTelefax( $value ); break;
+				case 'mobile': $item->setMobile( $value ); break;
+				case 'email': $item->setEmail( $value ); break;
+				case 'website': $item->setWebsite( $value ); break;
+				case 'longitude': $item->setLongitude( $value ); break;
+				case 'latitude': $item->setLatitude( $value ); break;
+				case 'birthday': $item->setBirthday( $value ); break;
+				case 'position': $item->setPosition( $value ); break;
 				default: continue 2;
 			}
 

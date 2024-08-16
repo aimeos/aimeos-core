@@ -151,10 +151,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'log.facility': $item = $item->setFacility( $value ); break;
-				case 'log.priority': $item = $item->setPriority( $value ); break;
-				case 'log.message': $item = $item->setMessage( $value ); break;
-				case 'log.request': $item = $item->setRequest( $value ); break;
+				case 'log.facility': $item->setFacility( $value ); break;
+				case 'log.priority': $item->setPriority( $value ); break;
+				case 'log.message': $item->setMessage( $value ); break;
+				case 'log.request': $item->setRequest( $value ); break;
 				default: continue 2;
 			}
 

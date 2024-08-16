@@ -178,10 +178,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'supplier.code': $item = $item->setCode( $value ); break;
-				case 'supplier.label': $item = $item->setLabel( $value ); break;
-				case 'supplier.status': $item = $item->setStatus( (int) $value ); break;
-				case 'supplier.position': $item = $item->setPosition( (int) $value ); break;
+				case 'supplier.code': $item->setCode( $value ); break;
+				case 'supplier.label': $item->setLabel( $value ); break;
+				case 'supplier.status': $item->setStatus( (int) $value ); break;
+				case 'supplier.position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

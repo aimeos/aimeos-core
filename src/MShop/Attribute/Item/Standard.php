@@ -236,12 +236,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'attribute.domain': $item = $item->setDomain( $value ); break;
-				case 'attribute.code': $item = $item->setCode( $value ); break;
-				case 'attribute.type': $item = $item->setType( $value ); break;
-				case 'attribute.status': $item = $item->setStatus( (int) $value ); break;
-				case 'attribute.position': $item = $item->setPosition( (int) $value ); break;
-				case 'attribute.label': $item = $item->setLabel( $value ); break;
+				case 'attribute.domain': $item->setDomain( $value ); break;
+				case 'attribute.code': $item->setCode( $value ); break;
+				case 'attribute.type': $item->setType( $value ); break;
+				case 'attribute.status': $item->setStatus( (int) $value ); break;
+				case 'attribute.position': $item->setPosition( (int) $value ); break;
+				case 'attribute.label': $item->setLabel( $value ); break;
 				default: continue 2;
 			}
 
