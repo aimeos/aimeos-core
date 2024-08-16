@@ -182,11 +182,6 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	public function addTransaction( \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		return $this->set( '.transactions', map( $this->get( '.transactions', [] ) )->push( $item ) );
-
-		$this->transactions[] = $item;
-		$this->setModified();
-
-		return $this;
 	}
 
 
@@ -215,19 +210,22 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 
 	/**
-	 * Checks if the given flag constant is valid.
+	 * Checks if the given address type is valid
 	 *
-	 * @param int $value Flag constant value
+	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Address\Base
+	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
+	 * @deprecated 2025.01 Use strings instead
 	 */
-	protected function checkFlags( int $value )
+	protected function checkType( string $value )
 	{
-		if( $value < \Aimeos\MShop\Order\Item\Service\Base::FLAG_NONE ||
-			$value > \Aimeos\MShop\Order\Item\Service\Base::FLAG_IMMUTABLE
-		) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
+		switch( $value )
+		{
+			case \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY:
+			case \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT:
+				return;
+			default:
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service of type "%1$s" not available', $value ) );
 		}
-
-		return $value;
 	}
 
 

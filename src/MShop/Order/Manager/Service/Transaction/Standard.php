@@ -148,7 +148,7 @@ class Standard
 		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
 			'order.service.transaction.id' => [
 				'label' => 'Service transaction ID',
-				'internaldeps' => [ 'LEFT JOIN "mshop_order_service_tx" AS mordsetx ON ( mordse."id" = mordsetx."parentid" )' ],
+				'internaldeps' => ['LEFT JOIN "mshop_order_service_tx" AS mordsetx ON ( mordse."id" = mordsetx."parentid" )'],
 				'internalcode' => 'id',
 				'type' => 'int',
 				'public' => false,
