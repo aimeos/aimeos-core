@@ -21,6 +21,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelper::context();
 
+		$this->price = \Aimeos\MShop::create( $context, 'price' )->create()->setValue( 0 );
+		$this->locale = \Aimeos\MShop::create( $context, 'locale' )->create();
+
 		$this->values = array(
 			'order.id' => 15,
 			'order.siteid' => '1.',
@@ -36,12 +39,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.comment' => 'this is a comment from unittest',
 			'order.mtime' => '2011-01-01 00:00:02',
 			'order.ctime' => '2011-01-01 00:00:01',
-			'order.editor' => 'unitTestUser'
+			'order.editor' => 'unitTestUser',
+			'.price' => $this->price,
+			'.locale' => $this->locale
 		);
 
-		$this->price = \Aimeos\MShop::create( $context, 'price' )->create()->setValue( 0 );
-		$this->locale = \Aimeos\MShop::create( $context, 'locale' )->create();
-		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->price, $this->locale, $this->values );
+		$this->object = new \Aimeos\MShop\Order\Item\Standard( 'order.', $this->values );
 	}
 
 
@@ -336,7 +339,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Standard( $this->price, $this->locale );
+		$item = new \Aimeos\MShop\Order\Item\Standard( 'order.', ['.price' => $this->price, '.locale' => $this->locale] );
 
 		$list = $entries = array(
 			'order.id' => 1,
@@ -377,7 +380,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$price = $this->object->getPrice();
 		$list = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) + 8, count( $list ) );
+		$this->assertEquals( 23, count( $list ) );
 
 		$this->assertEquals( $this->object->getId(), $list['order.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.siteid'] );

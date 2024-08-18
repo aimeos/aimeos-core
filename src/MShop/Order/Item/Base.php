@@ -144,6 +144,10 @@ abstract class Base
 
 
 	// protected is a workaround for serialize problem
+	protected ?\Aimeos\MShop\Customer\Item\Iface $customer;
+	protected \Aimeos\MShop\Locale\Item\Iface $locale;
+	protected \Aimeos\MShop\Price\Item\Iface $price;
+	protected bool $recalc = false;
 	protected array $coupons = [];
 	protected array $products = [];
 	protected array $services = [];
@@ -151,22 +155,22 @@ abstract class Base
 
 
 	/**
-	 * Initializes the basket object
+	 * Initializes the order object
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
-	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
+	 * @param string $prefix Prefix for the keys in the associative array
 	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
-	 * @param array $products List of ordered products implementing \Aimeos\MShop\Order\Item\Product\Iface
-	 * @param array $addresses List of order addresses implementing \Aimeos\MShop\Order\Item\Address\Iface
-	 * @param array $services List of order services implementing \Aimeos\MShop\Order\Item\Service\Iface
-	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Product\Iface as values
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'order.', $values );
+		parent::__construct( $prefix, $values );
 
-		foreach( $coupons as $coupon )
+		$this->customer = $values['.customer'] ?? null;
+		$this->locale = $values['.locale'];
+		$this->price = $values['.price'];
+
+		$products = $this->get( '.products', [] );
+
+		foreach( $this->get( '.coupons', [] ) as $coupon )
 		{
 			if( !isset( $this->coupons[$coupon->getCode()] ) ) {
 				$this->coupons[$coupon->getCode()] = [];
@@ -177,17 +181,29 @@ abstract class Base
 			}
 		}
 
-		foreach( $products as $product ) {
+		foreach( $this->get( '.products', [] ) as $product ) {
 			$this->products[$product->getPosition()] = $product;
 		}
 
-		foreach( $addresses as $address ) {
+		foreach( $this->get( '.addresses', [] ) as $address ) {
 			$this->addresses[$address->getType()][] = $address;
 		}
 
-		foreach( $services as $service ) {
+		foreach( $this->get( '.services', [] ) as $service ) {
 			$this->services[$service->getType()][] = $service;
 		}
+	}
+
+
+	/**
+	 * Clones internal objects of the order item.
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+
+		$this->price = clone $this->price;
+		$this->locale = clone $this->locale;
 	}
 
 
@@ -200,10 +216,13 @@ abstract class Base
 	public function jsonSerialize()
 	{
 		return parent::jsonSerialize() + [
-			'coupons' => $this->coupons,
+			'addresses' => $this->addresses,
 			'products' => $this->products,
 			'services' => $this->services,
-			'addresses' => $this->addresses,
+			'coupons' => $this->coupons,
+			'customer' => $this->customer,
+			'locale' => $this->locale,
+			'price' => $this->price,
 		];
 	}
 
@@ -798,6 +817,36 @@ abstract class Base
 
 
 	/**
+	 * Returns a price item with amounts calculated for the products, costs, etc.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate the customer has to pay
+	 */
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
+	{
+		if( $this->recalc )
+		{
+			$price = $this->price->clear();
+
+			foreach( $this->getServices() as $list )
+			{
+				foreach( $list as $service ) {
+					$price = $price->addItem( $service->getPrice() );
+				}
+			}
+
+			foreach( $this->getProducts() as $product ) {
+				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+			}
+
+			$this->price = $price;
+			$this->recalc = false;
+		}
+
+		return $this->price;
+	}
+
+
+	/**
 	 * Returns a list of tax names and values
 	 *
 	 * @return array Associative list of tax names as key and price items as value
@@ -846,14 +895,65 @@ abstract class Base
 
 
 	/**
-	 * Checks if the price uses the same currency as the price in the basket.
+	 * Returns the locales for the basic order item.
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
+	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
+	 *  about site, language, country and currency
 	 */
-	protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item )
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface
 	{
-		$price = clone $this->getPrice();
-		$price->addItem( $item );
+		return $this->get( '.locale' );
+	}
+
+
+	/**
+	 * Sets the locales for the basic order item.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information
+	 *  about site, language, country and currency
+	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 */
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		$this->notify( 'setLocale.before', $locale );
+		$this->set( '.locale', clone $locale );
+		$this->notify( 'setLocale.after', $locale );
+
+		return parent::setModified();
+	}
+
+
+	/**
+	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Order base item for method chaining
+	 */
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface
+	{
+		$this->recalc = true;
+		return parent::setModified();
+	}
+
+
+	/**
+	 * Returns the item values as array.
+	 *
+	 * @param bool True to return private properties, false for public only
+	 * @return array Associative list of item properties and their values
+	 */
+	public function toArray( bool $private = false ) : array
+	{
+		$price = $this->getPrice();
+		$list = parent::toArray( $private );
+
+		$list['order.currencyid'] = $price->getCurrencyId();
+		$list['order.price'] = $price->getValue();
+		$list['order.costs'] = $price->getCosts();
+		$list['order.rebate'] = $price->getRebate();
+		$list['order.taxflag'] = $price->getTaxFlag();
+		$list['order.taxvalue'] = $price->getTaxValue();
+
+		return $list;
 	}
 
 
@@ -888,6 +988,18 @@ abstract class Base
 		}
 
 		return $value;
+	}
+
+
+	/**
+	 * Checks if the price uses the same currency as the price in the basket.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
+	 */
+	protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item )
+	{
+		$price = clone $this->getPrice();
+		$price->addItem( $item );
 	}
 
 

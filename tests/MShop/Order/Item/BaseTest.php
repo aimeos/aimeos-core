@@ -26,7 +26,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$locale = \Aimeos\MShop::create( $context, 'locale' )->create();
 
-		$this->object = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $locale, [] );
+		$this->object = new \Aimeos\MShop\Order\Item\Standard( 'order.', ['.price' => $priceManager->create(), '.locale' => $locale] );
 
 
 		$orderManager = \Aimeos\MShop::create( $context, 'order' );

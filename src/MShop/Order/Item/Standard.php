@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -25,65 +24,6 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Base
 	implements \Aimeos\MShop\Order\Item\Iface
 {
-	// protected is a workaround for serialize problem
-	protected ?\Aimeos\MShop\Customer\Item\Iface $customer;
-	protected \Aimeos\MShop\Locale\Item\Iface $locale;
-	protected \Aimeos\MShop\Price\Item\Iface $price;
-	protected bool $recalc = false;
-
-
-	/**
-	 * Initializes the shopping basket.
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
-	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
-	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of ordered product items
-	 * @param \Aimeos\MShop\Order\Item\Address\Iface[] $addresses List of order address items
-	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $services List of order service items
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $coupons Associative list of coupon codes as keys and order product items as values
-	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object
-	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
-		?\Aimeos\MShop\Customer\Item\Iface $custItem = null )
-	{
-		parent::__construct( $price, $locale, $values, $products, $addresses, $services, $coupons );
-
-		$this->price = $price;
-		$this->locale = $locale;
-		$this->customer = $custItem;
-	}
-
-
-	/**
-	 * Clones internal objects of the order base item.
-	 */
-	public function __clone()
-	{
-		parent::__clone();
-
-		$this->price = clone $this->price;
-		$this->locale = clone $this->locale;
-	}
-
-
-	/**
-	 * Specifies the data which should be serialized to JSON by json_encode().
-	 *
-	 * @return array<string,mixed> Data to serialize to JSON
-	 */
-	#[\ReturnTypeWillChange]
-	public function jsonSerialize()
-	{
-		return parent::jsonSerialize() + [
-			'price' => $this->price,
-			'locale' => $this->locale,
-			'customer' => $this->customer,
-		];
-	}
-
-
 	/**
 	 * Returns the order number
 	 *
@@ -371,80 +311,6 @@ class Standard
 	}
 
 
-	/**
-	 * Returns the locales for the basic order item.
-	 *
-	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
-	 *  about site, language, country and currency
-	 */
-	public function locale() : \Aimeos\MShop\Locale\Item\Iface
-	{
-		return $this->locale;
-	}
-
-
-	/**
-	 * Sets the locales for the basic order item.
-	 *
-	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information
-	 *  about site, language, country and currency
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
-	 */
-	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		$this->notify( 'setLocale.before', $locale );
-
-		$this->locale = clone $locale;
-		$this->setModified();
-
-		$this->notify( 'setLocale.after', $locale );
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns a price item with amounts calculated for the products, costs, etc.
-	 *
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate the customer has to pay
-	 */
-	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
-	{
-		if( $this->recalc )
-		{
-			$price = $this->price->clear();
-
-			foreach( $this->getServices() as $list )
-			{
-				foreach( $list as $service ) {
-					$price = $price->addItem( $service->getPrice() );
-				}
-			}
-
-			foreach( $this->getProducts() as $product ) {
-				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
-			}
-
-			$this->price = $price;
-			$this->recalc = false;
-		}
-
-		return $this->price;
-	}
-
-
-	/**
-	 * Sets the modified flag of the object.
-	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Order base item for method chaining
-	 */
-	public function setModified() : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->recalc = true;
-		return parent::setModified();
-	}
-
-
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
@@ -489,7 +355,6 @@ class Standard
 	 */
 	public function toArray( bool $private = false ) : array
 	{
-		$price = $this->getPrice();
 		$list = parent::toArray( $private );
 
 		$list['order.channel'] = $this->getChannel();
@@ -502,12 +367,6 @@ class Standard
 		$list['order.sitecode'] = $this->getSiteCode();
 		$list['order.customerid'] = $this->getCustomerId();
 		$list['order.languageid'] = $this->locale()->getLanguageId();
-		$list['order.currencyid'] = $price->getCurrencyId();
-		$list['order.price'] = $price->getValue();
-		$list['order.costs'] = $price->getCosts();
-		$list['order.rebate'] = $price->getRebate();
-		$list['order.taxflag'] = $price->getTaxFlag();
-		$list['order.taxvalue'] = $price->getTaxValue();
 		$list['order.customerref'] = $this->getCustomerReference();
 		$list['order.comment'] = $this->getComment();
 

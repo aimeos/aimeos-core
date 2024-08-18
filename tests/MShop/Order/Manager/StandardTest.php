@@ -19,8 +19,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
 		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
 		$this->object = new \Aimeos\MShop\Order\Manager\Standard( $this->context );
 	}
 
@@ -790,10 +790,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( '53.50', $basket->getPrice()->getValue() );
 		$this->assertEquals( '1.50', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '14.50', $basket->getPrice()->getRebate() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
 		$basket->addCoupon( 'CDEF' );
 		$basket->addCoupon( '90AB' );
+
+		$this->assertEquals( '47.05', $basket->getPrice()->getValue() );
+		$this->assertEquals( '1.50', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '20.95', $basket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $basket->getCoupons() ) );
 
 		$this->object->save( $basket );
@@ -803,9 +808,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasket = $this->object->get( $basket->getId(), $ref );
 		$this->object->delete( $newBasket->getId() );
 
-		$this->assertEquals( '53.50', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '47.05', $newBasket->getPrice()->getValue() );
 		$this->assertEquals( '1.50', $newBasket->getPrice()->getCosts() );
-		$this->assertEquals( '14.50', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( '20.95', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 

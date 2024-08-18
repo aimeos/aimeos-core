@@ -43,10 +43,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Returns the coupon map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param \Aimeos\Map $products Associative list of IDs and order product ID/item pairs as values
+	 * @param array $ref List of referenced domains that should be fetched too
 	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and product items as values
 	 */
-	protected function getCoupons( array $ids, \Aimeos\Map $products ) : \Aimeos\Map
+	protected function getCoupons( array $ids, array $ref ) : \Aimeos\Map
 	{
 		$manager = $this->object()->getSubManager( 'coupon' );
 
@@ -55,7 +55,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( 'order.coupon.code' )
 			->slice( 0, 0x7fffffff );
 
-		return $manager->search( $filter )->groupBy( 'order.coupon.parentid' );
+		return $manager->search( $filter, $ref )->groupBy( 'order.coupon.parentid' );
 	}
 
 
