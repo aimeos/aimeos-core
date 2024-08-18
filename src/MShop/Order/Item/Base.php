@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -145,8 +144,8 @@ abstract class Base
 
 
 	// protected is a workaround for serialize problem
-	protected array $coupons;
-	protected array $products;
+	protected array $coupons = [];
+	protected array $products = [];
 	protected array $services = [];
 	protected array $addresses = [];
 
@@ -165,18 +164,22 @@ abstract class Base
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
 		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [] )
 	{
-		map( $addresses )->implements( \Aimeos\MShop\Order\Item\Address\Iface::class, true );
-		map( $products )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
-		map( $services )->implements( \Aimeos\MShop\Order\Item\Service\Iface::class, true );
-
-		foreach( $coupons as $couponProducts ) {
-			map( $couponProducts )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
-		}
-
 		parent::__construct( 'order.', $values );
 
-		$this->coupons = $coupons;
-		$this->products = $products;
+		foreach( $coupons as $coupon )
+		{
+			if( !isset( $this->coupons[$coupon->getCode()] ) ) {
+				$this->coupons[$coupon->getCode()] = [];
+			}
+
+			if( isset( $products[$coupon->getProductId()] ) ) {
+				$this->coupons[$coupon->getCode()][] = $products[$coupon->getProductId()];
+			}
+		}
+
+		foreach( $products as $product ) {
+			$this->products[$product->getPosition()] = $product;
+		}
 
 		foreach( $addresses as $address ) {
 			$this->addresses[$address->getType()][] = $address;
@@ -355,6 +358,17 @@ abstract class Base
 	public function getAddresses() : \Aimeos\Map
 	{
 		return map( $this->addresses );
+	}
+
+
+	/**
+	 * Returns all address items as plain list
+	 *
+	 * @return \Aimeos\Map Associative list of address items implementing \Aimeos\MShop\Order\Item\Address\Iface
+	 */
+	public function getAddressItems() : \Aimeos\Map
+	{
+		return map( $this->addresses )->flat( 1 );
 	}
 
 
@@ -720,6 +734,17 @@ abstract class Base
 	public function getServices() : \Aimeos\Map
 	{
 		return map( $this->services );
+	}
+
+
+	/**
+	 * Returns all service items as	plain list
+	 *
+	 * @return \Aimeos\Map List of service items implementing \Aimeos\MShop\Order\Service\Iface
+	 */
+	public function getServiceItems() : \Aimeos\Map
+	{
+		return map( $this->services )->flat( 1 );
 	}
 
 

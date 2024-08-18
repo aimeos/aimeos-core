@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.address.website', 'www.example.net' );
 		$expr[] = $search->compare( '==', 'order.address.longitude', '11.0' );
 		$expr[] = $search->compare( '==', 'order.address.latitude', '52.0' );
-		$expr[] = $search->compare( '==', 'order.address.position', 0 );
+		$expr[] = $search->compare( '==', 'order.address.position', 1 );
 		$expr[] = $search->compare( '==', 'order.address.birthday', '2001-01-01' );
 		$expr[] = $search->compare( '>=', 'order.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.address.ctime', '1970-01-01 00:00:00' );

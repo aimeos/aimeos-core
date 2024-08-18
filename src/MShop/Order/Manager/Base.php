@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Order
@@ -21,33 +20,14 @@ namespace Aimeos\MShop\Order\Manager;
 abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 {
 	/**
-	 * Returns a new and empty order item (shopping basket).
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
-	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
-	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of ordered product items
-	 * @param \Aimeos\MShop\Order\Item\Address\Iface[] $addresses List of order address items
-	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $services List of order serviceitems
-	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $coupons Associative list of coupon codes as keys and items as values
-	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object if requested
-	 * @return \Aimeos\MShop\Order\Item\Iface Order object
-	 */
-	abstract protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
-		?\Aimeos\MShop\Customer\Item\Iface $custItem = null ) : \Aimeos\MShop\Order\Item\Iface;
-
-
-	/**
 	 * Returns the address item map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return array Multi-dimensional associative list of order IDs as keys and order address type/item pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order address type/item pairs as values
 	 */
-	protected function getAddresses( array $ids, array $ref ) : array
+	protected function getAddresses( array $ids, array $ref ) : \Aimeos\Map
 	{
-		$items = [];
 		$manager = $this->object()->getSubManager( 'address' );
 
 		$filter = $manager->filter()
@@ -55,11 +35,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( ['order.address.type', 'order.address.position', 'order.address.id'] )
 			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $filter, $ref ) as $item ) {
-			$items[$item->getParentId()][] = $item;
-		}
-
-		return $items;
+		return $manager->search( $filter, $ref )->groupBy( 'order.address.parentid' );
 	}
 
 
@@ -67,42 +43,19 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Returns the coupon map for the given order IDs
 	 *
 	 * @param string[] $ids List of order IDs
-	 * @param array $products Associative list of IDs and order product ID/item pairs as values
-	 * @return array Multi-dimensional associative list of order IDs as keys and coupons with product items as values
+	 * @param \Aimeos\Map $products Associative list of IDs and order product ID/item pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and product items as values
 	 */
-	protected function getCoupons( array $ids, array $products = [] ) : array
+	protected function getCoupons( array $ids, \Aimeos\Map $products ) : \Aimeos\Map
 	{
-		$map = $productMap = [];
 		$manager = $this->object()->getSubManager( 'coupon' );
-
-		foreach( $products as $id => $list )
-		{
-			if( !isset( $productMap[$id] ) ) {
-				$productMap[$id] = [];
-			}
-
-			foreach( $list as $key => $product ) {
-				$productMap[$id][$product->getId()] = $product;
-			}
-		}
 
 		$filter = $manager->filter()
 			->add( 'order.coupon.parentid', '==', $ids )
 			->order( 'order.coupon.code' )
 			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $filter ) as $item )
-		{
-			if( !isset( $map[$item->getParentId()][$item->getCode()] ) ) {
-				$map[$item->getParentId()][$item->getCode()] = [];
-			}
-
-			if( $item->getProductId() !== null && isset( $productMap[$item->getParentId()][$item->getProductId()] ) ) {
-				$map[$item->getParentId()][$item->getCode()][] = $productMap[$item->getParentId()][$item->getProductId()];
-			}
-		}
-
-		return $map;
+		return $manager->search( $filter )->groupBy( 'order.coupon.parentid' );
 	}
 
 
@@ -111,55 +64,24 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return array Multi-dimensional associative list of order IDs as keys and order product
-	 *	IDs/items pairs in reversed order as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order product IDs/items pairs as values
 	 */
-	protected function getProducts( array $ids, array $ref ) : array
+	protected function getProducts( array $ids, array $ref ) : \Aimeos\Map
 	{
-		$map = $attributes = $subProducts = [];
 		$manager = $this->object()->getSubManager( 'product' );
-		$attrManager = $manager->getSubManager( 'attribute' );
 
 		$filter = $manager->filter()
 			->add( 'order.product.parentid', '==', $ids )
 			->order( 'order.product.position' )
 			->slice( 0, 0x7fffffff );
-		$items = $manager->search( $filter, $ref )->reverse();
+		$items = $manager->search( $filter, $ref );
+		$map = $items->groupBy( 'order.product.orderproductid' );
 
-		$search = $attrManager->filter()
-			->add( 'order.product.attribute.parentid', '==', $items->keys() )
-			->order( 'order.product.attribute.id' )
-			->slice( 0, 0x7fffffff );
-
-		foreach( $attrManager->search( $search, $ref ) as $id => $attribute ) {
-			$attributes[$attribute->getParentId()][$id] = $attribute;
+		foreach( $map as $id => $list ) {
+			$items[$id]?->setProducts( $list );
 		}
 
-		foreach( $items as $id => $item )
-		{
-			if( isset( $attributes[$id] ) ) {
-				$item->setAttributeItems( $attributes[$id] );
-			}
-
-			if( $item->getOrderProductId() === null )
-			{
-				ksort( $subProducts ); // bring the array into the right order because it's reversed
-				$item->setProducts( $subProducts );
-				$map[$item->getParentId()][$item->getPosition()] = $item;
-
-				$subProducts = [];
-			}
-			else
-			{	// in case it's a sub-product
-				$subProducts[$item->getPosition()] = $item;
-			}
-		}
-
-		foreach( $map as $key => $list ) {
-			ksort( $map[$key] );
-		}
-
-		return $map;
+		return map( $map->get( '' ) )->groupBy( 'order.product.parentid' );
 	}
 
 
@@ -168,11 +90,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return array Multi-dimensional associative list of order IDs as keys and service type/items pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and service type/items pairs as values
 	 */
-	protected function getServices( array $ids, array $ref ) : array
+	protected function getServices( array $ids, array $ref ) : \Aimeos\Map
 	{
-		$map = [];
 		$manager = $this->object()->getSubManager( 'service' );
 
 		$filter = $manager->filter()
@@ -180,34 +101,35 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( ['order.service.type', 'order.service.position', 'order.service.id'] )
 			->slice( 0, 0x7fffffff );
 
-		foreach( $manager->search( $filter, $ref ) as $item ) {
-			$map[$item->getParentId()][] = $item;
-		}
-
-		return $map;
+		return $manager->search( $filter, $ref )->groupBy( 'order.service.parentid' );
 	}
 
 
 	/**
 	 * Saves the addresses of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket containing address items
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Basket containing address items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function saveAddresses( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveAddresses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
-		$addresses = $basket->getAddresses()->flat( 1 );
+		$addresses = $item->getAddresses();
 
-		foreach( $addresses as $address )
+		foreach( $addresses as $type => $list )
 		{
-			if( $address->getParentId() != $basket->getId() ) {
-				$address->setId( null ); // create new item if copied
-			}
+			$pos = 0;
 
-			$address->setParentId( $basket->getId() );
+			foreach( $list as $address )
+			{
+				if( $address->getParentId() != $item->getId() ) {
+					$address->setId( null ); // create new item if copied
+				}
+
+				$address->setParentId( $item->getId() )->setPosition( ++$pos );
+			}
 		}
 
-		$this->object()->getSubManager( 'address' )->save( $addresses );
+		$this->object()->getSubManager( 'address' )->save( $addresses->flat( 1 ) );
 
 		return $this;
 	}
@@ -259,8 +181,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
 	{
+		$pos = 0;
 		$products = $basket->getProducts();
-		$pos = (int) $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.product.position' );
 
 		foreach( $products as $product )
 		{
@@ -268,11 +190,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$product->setId( null ); // create new item if copied
 			}
 
-			if( !$product->getPosition() ) {
-				$product->setPosition( ++$pos );
-			}
-
-			$product->setParentId( $basket->getId() );
+			$product->setParentId( $basket->getId() )->setPosition( ++$pos );
 
 			foreach( $product->getProducts() as $subProduct )
 			{
@@ -280,11 +198,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					$subProduct->setId( null ); // create new item if copied
 				}
 
-				if( !$subProduct->getPosition() ) {
-					$subProduct->setPosition( ++$pos );
-				}
-
-				$subProduct->setParentId( $basket->getId() );
+				$subProduct->setParentId( $basket->getId() )->setPosition( ++$pos );
 			}
 		}
 
@@ -297,28 +211,28 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the services of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket containing service items
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Basket containing service items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
-		$services = $basket->getServices()->flat( 1 );
-		$pos = (int) $services->max( 'order.service.position' );
+		$services = $item->getServices();
 
-		foreach( $services as $service )
+		foreach( $services as $type => $list )
 		{
-			if( $service->getParentId() != $basket->getId() ) {
-				$service->setId( null ); // create new item if copied
-			}
+			$pos = 0;
 
-			if( !$service->getPosition() ) {
-				$service->setPosition( ++$pos );
-			}
+			foreach( $list as $service )
+			{
+				if( $service->getParentId() != $item->getId() ) {
+					$service->setId( null ); // create new item if copied
+				}
 
-			$service->setParentId( $basket->getId() );
+				$service->setParentId( $item->getId() )->setPosition( ++$pos );
+			}
 		}
 
-		$this->object()->getSubManager( 'service' )->save( $services );
+		$this->object()->getSubManager( 'service' )->save( $services->flat( 1 ) );
 
 		return $this;
 	}
