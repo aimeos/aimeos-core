@@ -13,13 +13,12 @@ namespace Aimeos\MShop\Coupon\Provider;
 class FreeShippingTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-
 
 		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'freeshipping.productcode' => 'U:SD' ) );
@@ -31,7 +30,6 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$delPrice->setCosts( '5.00' );
 		$delPrice->setCurrencyId( 'EUR' );
 
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$manager = \Aimeos\MShop::create( $context, 'order/service' );
 
 		$delivery = $manager->create();
@@ -39,9 +37,8 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$delivery->setType( 'delivery' );
 		$delivery->setPrice( $delPrice );
 
-		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
-		$this->orderBase->addService( $delivery, 'delivery' );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
+		$this->order->addService( $delivery, 'delivery' );
 	}
 
 
@@ -53,17 +50,17 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
-		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->order ) );
+		$coupons = $this->order->getCoupons()->get( '90AB', [] );
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		// Test if service delivery item is available
-		$this->orderBase->getService( 'delivery' );
+		$this->order->getService( 'delivery' );
 
-		$this->assertEquals( 1, count( $this->orderBase->getProducts() ) );
+		$this->assertEquals( 1, count( $this->order->getProducts() ) );
 		$this->assertEquals( '-5.00', $product->getPrice()->getCosts() );
 		$this->assertEquals( '5.00', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:SD', $product->getProductCode() );
@@ -82,7 +79,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->update( $this->orderBase );
+		$object->update( $this->order );
 	}
 
 
@@ -115,7 +112,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 }

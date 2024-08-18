@@ -28,13 +28,8 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->product = $manager->save( $newProduct );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
-		$search = $manager->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'order.price', 672.00 ) );
-		$items = $manager->search( $search )->toArray();
-
-		if( ( $this->order = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found.' );
-		}
+		$search = $manager->filter()->add( 'order.price', '==', 672.00 )->slice( 0, 1 );
+		$this->order = $manager->search( $search )->first( new \RuntimeException( 'No order item found' ) )->off();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( $this->context, $plugin );
 	}

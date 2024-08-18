@@ -23,13 +23,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.basket.name' => 'testbasket',
 			'order.basket.mtime' => '2011-01-01 00:00:02',
 			'order.basket.ctime' => '2011-01-01 00:00:01',
-			'order.basket.editor' => 'unitTestUser'
+			'order.basket.editor' => 'unitTestUser',
 		);
 
-		$locale = \TestHelper::context()->locale();
-		$price = new \Aimeos\MShop\Price\Item\Standard();
-
-		$this->basket = new \Aimeos\MShop\Order\Item\Standard( $price, $locale, [] );
+		$this->basket = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create()->off();
 		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values, $this->basket );
 	}
 

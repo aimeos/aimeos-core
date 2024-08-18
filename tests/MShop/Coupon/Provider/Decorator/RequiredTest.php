@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 class RequiredTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 	private $couponItem;
 
 
@@ -44,16 +44,16 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$orderProducts['CNC']->setPrice( clone $price->setValue( 321 ) );
 		$orderProducts['CNE']->setPrice( clone $price->setValue( 123 ) );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
-		$this->orderBase->addProduct( $orderProducts['CNC'] );
-		$this->orderBase->addProduct( $orderProducts['CNE'] );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
+		$this->order->addProduct( $orderProducts['CNC'] );
+		$this->order->addProduct( $orderProducts['CNE'] );
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 		unset( $this->couponItem );
 	}
 
@@ -62,7 +62,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( ['required.productcode' => 'CNC'] );
 
-		$price = $this->object->calcPrice( $this->orderBase );
+		$price = $this->object->calcPrice( $this->order );
 		$this->assertEquals( 444, $price->getValue() + $price->getCosts() );
 	}
 
@@ -71,7 +71,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( ['required.productcode' => 'CNC', 'required.only' => 1] );
 
-		$price = $this->object->calcPrice( $this->orderBase );
+		$price = $this->object->calcPrice( $this->order );
 		$this->assertEquals( 321, $price->getValue() + $price->getCosts() );
 	}
 
@@ -107,7 +107,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -115,7 +115,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'required.productcode' => 'CNC,CNE,ABCD' ) );
 
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -123,7 +123,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'required.productcode' => 'ABCD' ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertFalse( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -131,7 +131,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'required.productcode' => 'CNC' ) );
 
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -139,7 +139,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'required.productcode' => 'ABCD' ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertFalse( $this->object->isAvailable( $this->order ) );
 	}
 
 }

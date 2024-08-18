@@ -12,18 +12,14 @@ namespace Aimeos\MShop\Plugin\Provider\Decorator;
 class SingletonTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
-	private $order;
 	private $object;
+	private $context;
 
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-
-		$priceItem = \Aimeos\MShop::create( $context, 'price' )->create();
-		$this->order = new \Aimeos\MShop\Order\Item\Standard( $priceItem, $context->locale() );
-
-		$pluginManager = \Aimeos\MShop::create( $context, 'plugin' );
+		$this->context = \TestHelper::context();
+		$pluginManager = \Aimeos\MShop::create( $this->context, 'plugin' );
 		$item = $pluginManager->create();
 
 
@@ -32,13 +28,13 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['update', 'checkConfigBE', 'getConfigBE'] )
 			->getMock();
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Decorator\Singleton( $context, $item, $this->mock );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Decorator\Singleton( $this->context, $item, $this->mock );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->order, $this->mock );
+		unset( $this->object, $this->mock );
 	}
 
 
@@ -65,8 +61,10 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 	public function testUpdate()
 	{
 		$value = 'value';
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+
 		$this->mock->expects( $this->once() )->method( 'update' )->willReturn( $value );
 
-		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
+		$this->assertEquals( $value, $this->object->update( $order, 'test', $value ) );
 	}
 }

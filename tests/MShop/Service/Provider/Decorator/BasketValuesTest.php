@@ -27,26 +27,21 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$this->object->setObject( $this->object );
 
 		$orderProductManager = \Aimeos\MShop::create( $context, 'order/product' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$productManager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $productManager->filter();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
-		$products = $productManager->search( $search )->toArray();
+		$search = $productManager->filter()->add( 'product.code', '==', 'CNC' );
 
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$price = $priceManager->create();
-		$price->setValue( 321 );
-
-		foreach( $products as $product )
+		foreach( $productManager->search( $search ) as $product )
 		{
 			$orderProduct = $orderProductManager->create();
 			$orderProduct->copyFrom( $product );
 			$orderProducts[$product->getCode()] = $orderProduct;
 		}
 
-		$orderProducts['CNC']->setPrice( $price );
+		$orderProducts['CNC']->setPrice( $priceManager->create()->setValue( 321 ) );
 
-		$this->order = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
 		$this->order->addProduct( $orderProducts['CNC'] );
 	}
 

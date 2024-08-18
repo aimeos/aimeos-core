@@ -13,7 +13,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
-	private $orderBase;
+	private $order;
 	private $couponItem;
 
 
@@ -27,28 +27,27 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Category( $provider, $this->context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
-		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
 		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create()->setQuantity( 2 );
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $this->context->locale() );
-		$this->orderBase->addProduct( $orderProduct );
+		$this->order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+		$this->order->addProduct( $orderProduct );
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 		unset( $this->couponItem );
 	}
 
 
 	public function testCalcPrice()
 	{
-		$price = $this->object->calcPrice( $this->orderBase );
+		$price = $this->object->calcPrice( $this->order );
 		$this->assertEquals( 39.0, $price->getValue() + $price->getCosts() );
 	}
 
@@ -84,7 +83,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -92,7 +91,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'category.code' => 'cafe' ) );
 
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -100,7 +99,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'category.code' => 'tea' ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertFalse( $this->object->isAvailable( $this->order ) );
 	}
 
 
@@ -108,6 +107,6 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->couponItem->setConfig( array( 'category.code' => 'cafe,tea' ) );
 
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 }

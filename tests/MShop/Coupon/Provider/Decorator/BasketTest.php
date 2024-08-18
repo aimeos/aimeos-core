@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 class BasketTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 	private $couponItem;
 
 
@@ -37,8 +37,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 		$products = $productManager->search( $search )->toArray();
 
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$price = $priceManager->create();
-		$price->setValue( 321 );
+		$price = $priceManager->create()->setValue( 321 );
 
 		foreach( $products as $product )
 		{
@@ -49,15 +48,15 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
-		$this->orderBase->addProduct( $orderProducts['CNC'] );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
+		$this->order->addProduct( $orderProducts['CNC'] );
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 		unset( $this->couponItem );
 	}
 
@@ -103,7 +102,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->couponItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertTrue( $result );
 	}
@@ -117,7 +116,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->couponItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertFalse( $result );
 	}
@@ -131,7 +130,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->couponItem->setConfig( $config );
-		$result = $this->object->isAvailable( $this->orderBase );
+		$result = $this->object->isAvailable( $this->order );
 
 		$this->assertFalse( $result );
 	}

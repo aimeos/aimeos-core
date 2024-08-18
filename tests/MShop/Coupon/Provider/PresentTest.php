@@ -13,19 +13,17 @@ namespace Aimeos\MShop\Coupon\Provider;
 class PresentTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
 
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
-		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 	}
 
@@ -33,16 +31,16 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->order ) );
 
-		$coupons = $this->orderBase->getCoupons();
-		$products = $this->orderBase->getProducts();
+		$coupons = $this->order->getCoupons();
+		$products = $this->order->getProducts();
 
 		if( !isset( $coupons['90AB'][0] ) ) {
 			throw new \RuntimeException( 'Missing coupon product' );
@@ -67,7 +65,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->update( $this->orderBase );
+		$object->update( $this->order );
 	}
 
 
@@ -103,6 +101,6 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 }

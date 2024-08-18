@@ -60,7 +60,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( [$priceItem, $localeItem] )->onlyMethods( ['getProducts'] )->getMock();
+			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
+			->onlyMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
@@ -115,7 +116,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( [$priceItem, $localeItem] )->onlyMethods( ['getProducts'] )->getMock();
+			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
+			->onlyMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
@@ -168,7 +170,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( [$priceItem, $localeItem] )
+			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
 			->onlyMethods( ['getProducts'] )->getMock();
 
 

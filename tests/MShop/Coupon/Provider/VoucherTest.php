@@ -13,34 +13,31 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $couponItem;
-	private $orderBase;
+	private $order;
 	private $object;
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->create();
 		$this->couponItem->setConfig( array( 'voucher.productcode' => 'U:MD' ) );
 
-		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $this->context->locale() );
-
+		$this->order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Voucher( $this->context, $this->couponItem, '90AB' );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->context, $this->couponItem, $this->orderBase );
+		unset( $this->object, $this->context, $this->couponItem, $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->orderBase->addProduct( $this->getOrderProduct() );
+		$this->order->addProduct( $this->getOrderProduct() );
 
 		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create();
 		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
@@ -57,10 +54,10 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getUsedRebate' )
 			->willReturn( 20.0 );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->order ) );
 
-		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
-		$products = $this->orderBase->getProducts();
+		$coupons = $this->order->getCoupons()->get( '90AB', [] );
+		$products = $this->order->getProducts();
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );

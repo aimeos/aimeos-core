@@ -13,19 +13,17 @@ namespace Aimeos\MShop\Coupon\Provider;
 class FixedRebateTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $orderBase;
+	private $order;
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
 
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( array( 'fixedrebate.productcode' => 'U:MD', 'fixedrebate.rebate' => ['EUR' => '2.50'] ) );
 
-		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Standard( $priceManager->create(), $context->locale() );
+		$this->order = \Aimeos\MShop::create( $context, 'order' )->create()->off();
 		$this->object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 	}
 
@@ -33,7 +31,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->object );
-		unset( $this->orderBase );
+		unset( $this->order );
 	}
 
 
@@ -69,19 +67,19 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+		$this->assertTrue( $this->object->isAvailable( $this->order ) );
 	}
 
 
 	public function testUpdate()
 	{
 		$products = $this->getOrderProducts();
-		$this->orderBase->addProduct( $products['CNE'] );
+		$this->order->addProduct( $products['CNE'] );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->order ) );
 
-		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
-		$products = $this->orderBase->getProducts();
+		$coupons = $this->order->getCoupons()->get( '90AB', [] );
+		$products = $this->order->getProducts();
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
@@ -110,17 +108,17 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$products = $this->getOrderProducts();
-		$this->orderBase->addProduct( $products['CNE'] );
+		$this->order->addProduct( $products['CNE'] );
 
 		$couponItem = \Aimeos\MShop::create( $context, 'coupon' )->create();
 		$couponItem->setConfig( $config );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->order ) );
 
-		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
-		$products = $this->orderBase->getProducts();
+		$coupons = $this->order->getCoupons()->get( '90AB', [] );
+		$products = $this->order->getProducts();
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
@@ -143,8 +141,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$products['CNC']->setQuantity( 1 );
 		$products['CNE']->setQuantity( 1 );
 
-		$this->orderBase->addProduct( $products['CNE'] );
-		$this->orderBase->addProduct( $products['CNC'] );
+		$this->order->addProduct( $products['CNE'] );
+		$this->order->addProduct( $products['CNC'] );
 
 		$context = \TestHelper::context();
 		$config = array(
@@ -159,10 +157,10 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->order ) );
 
-		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
-		$products = $this->orderBase->getProducts();
+		$coupons = $this->order->getCoupons()->get( '90AB', [] );
+		$products = $this->order->getProducts();
 
 		if( ( $couponProduct20 = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
@@ -191,7 +189,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->update( $this->orderBase );
+		$object->update( $this->order );
 	}
 
 

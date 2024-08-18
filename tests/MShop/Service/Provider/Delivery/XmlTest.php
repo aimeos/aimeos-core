@@ -99,7 +99,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$itemMock = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
 			->onlyMethods( ['setStatusDelivery', 'setStatusPayment', 'setDateDelivery', 'setDatePayment'] )
-			->setConstructorArgs( [$price, $locale, []] )
+			->setConstructorArgs( ['order.', ['.price' => $price, '.locale' => $locale]] )
 			->getMock();
 
 		$itemMock->expects( $this->once() )->method( 'setStatusDelivery' )->willReturnSelf();

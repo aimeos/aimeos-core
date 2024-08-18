@@ -98,7 +98,7 @@ class ProductStock
 			] );
 		}
 
-		$filter->add( $filter->or( $expr ) )->slice( 0, count( $expr ) );
+		$filter->add( $filter->or( $expr ) )->slice( 0, 0x7fffffff );
 
 		foreach( $manager->search( $filter ) as $item ) {
 			$stockMap[$item->getSiteId()][$item->getProductId()][$item->getType()] = $item;
