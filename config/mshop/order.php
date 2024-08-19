@@ -17,8 +17,8 @@ return array(
 						FROM "mshop_order_address" mordad
 						:joins
 						WHERE :cond
-						GROUP BY mordad.id, :cols
-						ORDER BY mordad.id DESC
+						GROUP BY mordad."id", :cols
+						ORDER BY mordad."id" DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -30,8 +30,8 @@ return array(
 						FROM "mshop_order_address" mordad
 						:joins
 						WHERE :cond
-						GROUP BY mordad.id, :cols
-						ORDER BY mordad.id DESC
+						GROUP BY mordad."id", :cols
+						ORDER BY mordad."id" DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -47,8 +47,8 @@ return array(
 						FROM "mshop_order_coupon" mordco
 						:joins
 						WHERE :cond
-						GROUP BY mordco.id, :cols
-						ORDER BY mordco.id DESC
+						GROUP BY mordco."id", :cols
+						ORDER BY mordco."id" DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -60,8 +60,8 @@ return array(
 						FROM "mshop_order_coupon" mordco
 						:joins
 						WHERE :cond
-						GROUP BY mordco.id, :cols
-						ORDER BY mordco.id DESC
+						GROUP BY mordco."id", :cols
+						ORDER BY mordco."id" DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -81,8 +81,8 @@ return array(
 							FROM "mshop_order_product_attr" mordprat
 							:joins
 							WHERE :cond
-							GROUP BY mordprat.id, :cols
-							ORDER BY mordprat.id DESC
+							GROUP BY mordprat."id", :cols
+							ORDER BY mordprat."id" DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -94,8 +94,8 @@ return array(
 							FROM "mshop_order_product_attr" mordprat
 							:joins
 							WHERE :cond
-							GROUP BY mordprat.id, :cols
-							ORDER BY mordprat.id DESC
+							GROUP BY mordprat."id", :cols
+							ORDER BY mordprat."id" DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -110,8 +110,8 @@ return array(
 						FROM "mshop_order_product" mordpr
 						:joins
 						WHERE :cond
-						GROUP BY mordpr.id, :cols
-						ORDER BY mordpr.id DESC
+						GROUP BY mordpr."id", :cols
+						ORDER BY mordpr."id" DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -123,8 +123,8 @@ return array(
 						FROM "mshop_order_product" mordpr
 						:joins
 						WHERE :cond
-						GROUP BY mordpr.id, :cols
-						ORDER BY mordpr.id DESC
+						GROUP BY mordpr."id", :cols
+						ORDER BY mordpr."id" DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -164,8 +164,8 @@ return array(
 							FROM "mshop_order_service_attr" mordseat
 							:joins
 							WHERE :cond
-							GROUP BY mordseat.id, :cols
-							ORDER BY mordseat.id DESC
+							GROUP BY mordseat."id", :cols
+							ORDER BY mordseat."id" DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -177,8 +177,8 @@ return array(
 							FROM "mshop_order_service_attr" mordseat
 							:joins
 							WHERE :cond
-							GROUP BY mordseat.id, :cols
-							ORDER BY mordseat.id DESC
+							GROUP BY mordseat."id", :cols
+							ORDER BY mordseat."id" DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -194,8 +194,8 @@ return array(
 							FROM "mshop_order_service_tx" mordsetx
 							:joins
 							WHERE :cond
-							GROUP BY mordsetx.id, :cols
-							ORDER BY mordsetx.id DESC
+							GROUP BY mordsetx."id", :cols
+							ORDER BY mordsetx."id" DESC
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
 						GROUP BY :keys
@@ -207,8 +207,8 @@ return array(
 							FROM "mshop_order_service_tx" mordsetx
 							:joins
 							WHERE :cond
-							GROUP BY mordsetx.id, :cols
-							ORDER BY mordsetx.id DESC
+							GROUP BY mordsetx."id", :cols
+							ORDER BY mordsetx."id" DESC
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY :keys
@@ -242,8 +242,8 @@ return array(
 						FROM "mshop_order_service" mordse
 						:joins
 						WHERE :cond
-						GROUP BY mordse.id, :cols
-						ORDER BY mordse.id DESC
+						GROUP BY mordse."id", :cols
+						ORDER BY mordse."id" DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -255,8 +255,8 @@ return array(
 						FROM "mshop_order_service" mordse
 						:joins
 						WHERE :cond
-						GROUP BY mordse.id, :cols
-						ORDER BY mordse.id DESC
+						GROUP BY mordse."id", :cols
+						ORDER BY mordse."id" DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -366,8 +366,8 @@ return array(
 						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
-						GROUP BY mordst.id, :cols
-						ORDER BY mordst.id DESC
+						GROUP BY mordst."id", :cols
+						ORDER BY mordst."id" DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -379,8 +379,8 @@ return array(
 						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
-						GROUP BY mordst.id, :cols
-						ORDER BY mordst.id DESC
+						GROUP BY mordst."id", :cols
+						ORDER BY mordst."id" DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -395,8 +395,8 @@ return array(
 					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols
-					ORDER BY mord.id DESC
+					GROUP BY mord."id", :cols
+					ORDER BY mord."id" DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
 				GROUP BY :keys
@@ -408,8 +408,8 @@ return array(
 					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
-					GROUP BY mord.id, :cols
-					ORDER BY mord.id DESC
+					GROUP BY mord."id", :cols
+					ORDER BY mord."id" DESC
 					LIMIT :size OFFSET :start
 				) AS list
 				GROUP BY :keys
@@ -418,14 +418,12 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_order" ( :names
-					"invoiceno", "channel", "datepayment", "datedelivery",
-					"statusdelivery", "statuspayment", "relatedid",
-					"customerid", "sitecode", "langid", "currencyid",
-					"price", "costs", "rebate", "tax", "taxflag", "customerref",
-					"comment", "mtime", "editor", "siteid", "ctime",
-					"cdate", "cmonth", "cweek", "cwday", "chour"
+					"sitecode", "langid", "currencyid",
+					"price", "costs", "rebate", "tax", "taxflag",
+					"cdate", "cmonth", "cweek", "cwday", "chour",
+					"mtime", "editor", "siteid", "ctime"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -433,56 +431,10 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_order"
 				SET :names
-					"invoiceno" = ?, "channel" = ?, "datepayment" = ?, "datedelivery" = ?,
-					"statusdelivery" = ?, "statuspayment" = ?, "relatedid" = ?,
-					"customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
-					"price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
-					"customerref" = ?, "comment" = ?, "mtime" = ?, "editor" = ?
+					"sitecode" = ?, "langid" = ?, "currencyid" = ?, "price" = ?, "costs" = ?,
+					"rebate" = ?, "tax" = ?, "taxflag" = ?, "mtime" = ?, "editor" = ?
 			WHERE "siteid" LIKE ? AND "id" = ?
 			'
-		),
-		'delete' => array(
-			'ansi' => '
-				DELETE FROM "mshop_order"
-				WHERE :cond AND "siteid" LIKE ?
-			'
-		),
-		'search' => array(
-			'ansi' => '
-				SELECT :columns
-				FROM "mshop_order" mord
-				:joins
-				WHERE :cond
-				GROUP BY :group
-				ORDER BY :order
-				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-			',
-			'mysql' => '
-				SELECT :columns
-				FROM "mshop_order" mord
-				:joins
-				WHERE :cond
-				GROUP BY :group
-				ORDER BY :order
-				LIMIT :size OFFSET :start
-			'
-		),
-		'count' => array(
-			'ansi' => '
-				SELECT COUNT( DISTINCT mord."id" ) AS "count"
-				FROM "mshop_order" mord
-				:joins
-				WHERE :cond
-			'
-		),
-		'newid' => array(
-			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
-			'mysql' => 'SELECT LAST_INSERT_ID()',
-			'oracle' => 'SELECT mshop_order_seq.CURRVAL FROM DUAL',
-			'pgsql' => 'SELECT lastval()',
-			'sqlite' => 'SELECT last_insert_rowid()',
-			'sqlsrv' => 'SELECT @@IDENTITY',
-			'sqlanywhere' => 'SELECT @@IDENTITY',
 		),
 		'subdomains' => [
 			'order/address' => 'order/address',
@@ -490,6 +442,13 @@ return array(
 			'order/product' => 'order/product',
 			'order/service' => 'order/service',
 			'order/status' => 'order/status',
+		],
+		'submanagers' => [
+			'address' => 'address',
+			'coupon' => 'coupon',
+			'product' => 'product',
+			'service' => 'service',
+			'status' => 'status',
 		],
 	),
 );
