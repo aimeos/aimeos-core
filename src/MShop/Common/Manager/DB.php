@@ -198,8 +198,14 @@ trait DB
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
 			}
 
-			$cols[] = $attrItem->getInternalCode();
-			$acols[] = $attrItem->getInternalCode() . ' AS "' . $string . '"';
+			if( strpos( $attrItem->getInternalCode(), '"' ) === false ) {
+				$prefixed = $this->alias( $attrItem->getCode() ) . '."' . $attrItem->getInternalCode() . '"';
+			} else { // @todo: Remove in 2025.01
+				$prefixed = $attrItem->getInternalCode();
+			}
+
+			$acols[] = $prefixed . ' AS "' . $string . '"';
+			$cols[] = $prefixed;
 
 			$expr[] = $search->compare( '!=', $string, null ); // required for the joins
 		}
