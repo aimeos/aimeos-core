@@ -16,8 +16,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $coupons;
 	private $products;
 	private $services;
-	private $statuses;
 	private $addresses;
+	private $statusItem;
 
 
 	protected function setUp() : void
@@ -73,10 +73,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'delivery' => [1 => $orderServiceManager->create()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
 		);
 
-		$this->statuses = array(
-			0 => $orderStatusManager->create()->setType( 'test' )->setValue( 'value' )->setId( null ),
-			1 => $orderStatusManager->create()->setType( 'key' )->setValue( 'v2' )->setId( null ),
-		);
+		$this->statusItem = $orderStatusManager->create()->setType( 'test' )->setValue( 'value' );
 	}
 
 
@@ -500,7 +497,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddStatus()
 	{
-		$result = $this->object->addStatus( $this->statuses[0] );
+		$result = $this->object->addStatus( $this->statusItem );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertTrue( $this->object->isModified() );
@@ -509,7 +506,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStatus()
 	{
-		$this->object->addStatus( $this->statuses[0] );
+		$this->object->addStatus( $this->statusItem );
 		$item = $this->object->getStatus( 'test', 'value' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $item );
@@ -519,19 +516,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStatuses()
 	{
-		$this->object->addStatus( $this->statuses[0] );
+		$this->object->addStatus( $this->statusItem );
 		$items = $this->object->getStatuses();
 
 		$this->assertEquals( 'value', $items['test']['value']->getValue() );
-	}
-
-
-	public function testGetStatusItems()
-	{
-		$this->object->addStatus( $this->statuses[0] );
-		$this->object->addStatus( $this->statuses[1] );
-
-		$this->assertEquals( 2, count( $this->object->getStatusItems() ) );
 	}
 
 

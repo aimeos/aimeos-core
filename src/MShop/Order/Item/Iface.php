@@ -438,11 +438,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *	status value/item pairs implementing \Aimeos\MShop\Order\Status\Iface as values
 	 */
 	public function getStatuses() : \Aimeos\Map;
-
-	/**
-	 * Returns all status items as plain list
-	 *
-	 * @return \Aimeos\Map List of status items implementing \Aimeos\MShop\Order\Status\Iface
-	 */
-	public function getStatusItems() : \Aimeos\Map;
 }

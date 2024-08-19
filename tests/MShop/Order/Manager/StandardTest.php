@@ -875,7 +875,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$basket = $this->getBasket( $newBasketId, ['order/status'] );
 		$this->object->delete( $newBasketId );
 
-		$this->assertGreaterThan( 0, count( $basket->getStatusItems() ) );
+		$this->assertGreaterThan( 0, count( $basket->getStatuses()->flat( 1 ) ) );
 	}
 
 
@@ -906,7 +906,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$basket->getProducts()->merge( $basket->getProducts()->getProducts()->flat( 1 ) )
 				->setParentId( null )->setPosition( null )->setId( null );
 
-			$basket->getStatusItems()->setParentId( null )->setId( null );
+			$basket->getStatuses()->flat( 1 )->setParentId( null )->setId( null );
 		}
 
 		return $basket;

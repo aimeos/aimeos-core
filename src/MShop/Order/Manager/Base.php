@@ -157,21 +157,21 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the coupons of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Order containing coupon items
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing coupon items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function saveCoupons( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveCoupons( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
+		$list = [];
 		$manager = $this->object()->getSubManager( 'coupon' );
-		$filter = $manager->filter()->add( 'order.coupon.parentid', '==', $basket->getId() )->slice( 0, 0x7fffffff );
+		$filter = $manager->filter()->add( 'order.coupon.parentid', '==', $item->getId() )->slice( 0, 0x7fffffff );
 		$items = $manager->search( $filter )->groupBy( 'order.coupon.code' );
 
-		foreach( $basket->getCoupons() as $code => $products )
+		foreach( $item->getCoupons() as $code => $products )
 		{
 			if( empty( $products ) )
 			{
-				$item = !empty( $items[$code] ) ? current( $items[$code] ) : $manager->create()->setParentId( $basket->getId() );
-				$manager->save( $item->setCode( $code ) );
+				$list[] = current( $items[$code] ) ?: $manager->create()->setParentId( $item->getId() )->setCode( $code );
 				continue;
 			}
 
@@ -184,10 +184,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					}
 				}
 
-				$manager->save( $manager->create()->setParentId( $basket->getId() )->setCode( $code )->setProductId( $product->getId() ) );
+				$list[] = $manager->create()->setParentId( $item->getId() )->setCode( $code )->setProductId( $product->getId() );
 			}
 		}
 
+		$manager->save( $list );
 		return $this;
 	}
 
@@ -195,29 +196,29 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the ordered products to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Order containing ordered products or bundles
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing ordered products or bundles
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
 		$pos = 0;
-		$products = $basket->getProducts();
+		$products = $item->getProducts();
 
 		foreach( $products as $product )
 		{
-			if( $product->getParentId() != $basket->getId() ) {
+			if( $product->getParentId() != $item->getId() ) {
 				$product->setId( null ); // create new item if copied
 			}
 
-			$product->setParentId( $basket->getId() )->setPosition( ++$pos );
+			$product->setParentId( $item->getId() )->setPosition( ++$pos );
 
 			foreach( $product->getProducts() as $subProduct )
 			{
-				if( $subProduct->getParentId() != $basket->getId() ) {
+				if( $subProduct->getParentId() != $item->getId() ) {
 					$subProduct->setId( null ); // create new item if copied
 				}
 
-				$subProduct->setParentId( $basket->getId() )->setPosition( ++$pos );
+				$subProduct->setParentId( $item->getId() )->setPosition( ++$pos );
 			}
 		}
 
@@ -265,18 +266,21 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function saveStatuses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
-		$list = $item->getStatusItems();
+		$statuses = $item->getStatuses();
 
-		foreach( $list as $status )
+		foreach( $statuses as $type => $list )
 		{
-			if( $status->getParentId() != $item->getId() ) {
-				$status->setId( null ); // create new item if copied
-			}
+			foreach( $list as $status )
+			{
+				if( $status->getParentId() != $item->getId() ) {
+					$status->setId( null ); // create new item if copied
+				}
 
-			$status->setParentId( $item->getId() );
+				$status->setParentId( $item->getId() );
+			}
 		}
 
-		$this->object()->getSubManager( 'status' )->save( $list );
+		$this->object()->getSubManager( 'status' )->save( $statuses->flat( 1 ) );
 
 		return $this;
 	}

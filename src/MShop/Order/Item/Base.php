@@ -386,17 +386,6 @@ abstract class Base
 
 
 	/**
-	 * Returns all address items as plain list
-	 *
-	 * @return \Aimeos\Map Associative list of address items implementing \Aimeos\MShop\Order\Item\Address\Iface
-	 */
-	public function getAddressItems() : \Aimeos\Map
-	{
-		return map( $this->addresses )->flat( 1 );
-	}
-
-
-	/**
 	 * Replaces all addresses in the current basket with the new ones
 	 *
 	 * @param \Aimeos\Map|array $map Associative list of order addresses as returned by getAddresses()
@@ -762,17 +751,6 @@ abstract class Base
 
 
 	/**
-	 * Returns all service items as plain list
-	 *
-	 * @return \Aimeos\Map List of service items implementing \Aimeos\MShop\Order\Service\Iface
-	 */
-	public function getServiceItems() : \Aimeos\Map
-	{
-		return map( $this->services )->flat( 1 );
-	}
-
-
-	/**
 	 * Replaces all services in the current basket with the new ones
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $map Associative list of order services as returned by getServices()
@@ -844,17 +822,6 @@ abstract class Base
 	public function getStatuses() : \Aimeos\Map
 	{
 		return map( $this->statuses );
-	}
-
-
-	/**
-	 * Returns all status items as plain list
-	 *
-	 * @return \Aimeos\Map List of status items implementing \Aimeos\MShop\Order\Status\Iface
-	 */
-	public function getStatusItems() : \Aimeos\Map
-	{
-		return map( $this->statuses )->flat( 1 );
 	}
 
 
