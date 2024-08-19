@@ -412,4 +412,37 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
 	public function setServices( iterable $map ) : \Aimeos\MShop\Order\Item\Iface;
+
+	/**
+	 * Adds a status item to the order
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Status\Iface $item Order status item
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for method chaining
+	 */
+	public function addStatus( \Aimeos\MShop\Order\Item\Status\Iface $item ) : \Aimeos\MShop\Order\Item\Iface;
+
+	/**
+	 * Returns the status item specified by its type and value
+	 *
+	 * @param string $type Status type
+	 * @param string $value Status value
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface Status item of an order
+	 * @throws \Aimeos\MShop\Order\Exception If status item is not available
+	 */
+	public function getStatus( string $type, string $value ) : \Aimeos\MShop\Order\Item\Status\Iface;
+
+	/**
+	 * Returns the status items
+	 *
+	 * @return \Aimeos\Map Associative list of status types as keys and list of
+	 *	status value/item pairs implementing \Aimeos\MShop\Order\Status\Iface as values
+	 */
+	public function getStatuses() : \Aimeos\Map;
+
+	/**
+	 * Returns all status items as plain list
+	 *
+	 * @return \Aimeos\Map List of status items implementing \Aimeos\MShop\Order\Status\Iface
+	 */
+	public function getStatusItems() : \Aimeos\Map;
 }

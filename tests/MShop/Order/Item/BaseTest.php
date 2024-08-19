@@ -13,10 +13,11 @@ namespace Aimeos\MShop\Order\Item;
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $products;
-	private $addresses;
-	private $services;
 	private $coupons;
+	private $products;
+	private $services;
+	private $statuses;
+	private $addresses;
 
 
 	protected function setUp() : void
@@ -30,6 +31,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderManager = \Aimeos\MShop::create( $context, 'order' );
+		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderAddressManager = $orderManager->getSubManager( 'address' );
 		$orderProductManager = $orderManager->getSubManager( 'product' );
 		$orderServiceManager = $orderManager->getSubManager( 'service' );
@@ -70,12 +72,17 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'payment' => [0 => $orderServiceManager->create()->setType( 'payment' )->setCode( 'testpay' )->setId( null )],
 			'delivery' => [1 => $orderServiceManager->create()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
 		);
+
+		$this->statuses = array(
+			0 => $orderStatusManager->create()->setType( 'test' )->setValue( 'value' )->setId( null ),
+			1 => $orderStatusManager->create()->setType( 'key' )->setValue( 'v2' )->setId( null ),
+		);
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->products, $this->addresses, $this->services, $this->coupons );
+		unset( $this->object, $this->products, $this->addresses, $this->services, $this->coupons, $this->statuses );
 	}
 
 
@@ -488,6 +495,43 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( $this->coupons, $this->object->getCoupons() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testAddStatus()
+	{
+		$result = $this->object->addStatus( $this->statuses[0] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetStatus()
+	{
+		$this->object->addStatus( $this->statuses[0] );
+		$item = $this->object->getStatus( 'test', 'value' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $item );
+		$this->assertEquals( 'value', $item->getValue() );
+	}
+
+
+	public function testGetStatuses()
+	{
+		$this->object->addStatus( $this->statuses[0] );
+		$items = $this->object->getStatuses();
+
+		$this->assertEquals( 'value', $items['test']['value']->getValue() );
+	}
+
+
+	public function testGetStatusItems()
+	{
+		$this->object->addStatus( $this->statuses[0] );
+		$this->object->addStatus( $this->statuses[1] );
+
+		$this->assertEquals( 2, count( $this->object->getStatusItems() ) );
 	}
 
 

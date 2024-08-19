@@ -24,7 +24,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order address type/item pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order address ID/item pairs as values
 	 */
 	protected function getAddresses( array $ids, array $ref ) : \Aimeos\Map
 	{
@@ -44,7 +44,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and product items as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order coupon ID/item pairs as values
 	 */
 	protected function getCoupons( array $ids, array $ref ) : \Aimeos\Map
 	{
@@ -64,7 +64,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order product IDs/items pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order product ID/item pairs as values
 	 */
 	protected function getProducts( array $ids, array $ref ) : \Aimeos\Map
 	{
@@ -90,7 +90,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string[] $ids List of order IDs
 	 * @param array $ref List of referenced domains that should be fetched too
-	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and service type/items pairs as values
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and service ID/item pairs as values
 	 */
 	protected function getServices( array $ids, array $ref ) : \Aimeos\Map
 	{
@@ -106,9 +106,28 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 
 	/**
+	 * Retrieves the order statuses from the storage.
+	 *
+	 * @param string[] $ids List of order IDs
+	 * @param array $ref List of referenced domains that should be fetched too
+	 * @return \Aimeos\Map Multi-dimensional associative list of order IDs as keys and order status ID/item pairs as values
+	 */
+	protected function getStatuses( array $ids, array $ref ) : \Aimeos\Map
+	{
+		$manager = $this->object()->getSubManager( 'status' );
+
+		$filter = $manager->filter()
+			->add( 'order.status.parentid', '==', $ids )
+			->slice( 0, 0x7fffffff );
+
+		return $manager->search( $filter, $ref )->groupBy( 'order.status.parentid' );
+	}
+
+
+	/**
 	 * Saves the addresses of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $item Basket containing address items
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing address items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function saveAddresses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
@@ -138,7 +157,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the coupons of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket containing coupon items
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Order containing coupon items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function saveCoupons( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
@@ -176,7 +195,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the ordered products to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket containing ordered products or bundles
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Order containing ordered products or bundles
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Manager\Iface
@@ -211,7 +230,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Saves the services of the order to the storage.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $item Basket containing service items
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing service items
 	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
@@ -233,6 +252,31 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		}
 
 		$this->object()->getSubManager( 'service' )->save( $services->flat( 1 ) );
+
+		return $this;
+	}
+
+
+	/**
+	 * Saves the statuses of the order to the storage.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing status items
+	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function saveStatuses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	{
+		$list = $item->getStatusItems();
+
+		foreach( $list as $status )
+		{
+			if( $status->getParentId() != $item->getId() ) {
+				$status->setId( null ); // create new item if copied
+			}
+
+			$status->setParentId( $item->getId() );
+		}
+
+		$this->object()->getSubManager( 'status' )->save( $list );
 
 		return $this;
 	}

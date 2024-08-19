@@ -176,6 +176,54 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateAddress()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Address\Iface::class, $this->object->createAddress() );
+	}
+
+
+	public function testCreateCoupon()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Coupon\Iface::class, $this->object->createCoupon() );
+	}
+
+
+	public function testCreateProduct()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Iface::class, $this->object->createProduct() );
+	}
+
+
+	public function testCreateProductAttribute()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, $this->object->createProductAttribute() );
+	}
+
+
+	public function testCreateService()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Iface::class, $this->object->createService() );
+	}
+
+
+	public function testCreateServiceAttribute()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, $this->object->createServiceAttribute() );
+	}
+
+
+	public function testCreateServiceTransaction()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Service\Transaction\Iface::class, $this->object->createServiceTransaction() );
+	}
+
+
+	public function testCreateStatus()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $this->object->createStatus() );
+	}
+
+
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
@@ -815,6 +863,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveStatus()
+	{
+		$item = $this->getOrderItem();
+
+		$basket = $this->getBasket( $item->getId(), ['order/status'], true );
+		$this->object->save( $basket );
+
+		$newBasketId = $basket->getId();
+
+		$basket = $this->getBasket( $newBasketId, ['order/status'] );
+		$this->object->delete( $newBasketId );
+
+		$this->assertGreaterThan( 0, count( $basket->getStatusItems() ) );
+	}
+
+
 	/**
 	 * Returns the basket object
 	 *
@@ -841,6 +905,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 			$basket->getProducts()->merge( $basket->getProducts()->getProducts()->flat( 1 ) )
 				->setParentId( null )->setPosition( null )->setId( null );
+
+			$basket->getStatusItems()->setParentId( null )->setId( null );
 		}
 
 		return $basket;

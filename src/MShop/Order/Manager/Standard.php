@@ -194,6 +194,102 @@ class Standard extends Base
 
 
 	/**
+	 * Creates a new address item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Address\Iface New order address item object
+	 */
+	public function createAddress( array $values = [] ) : \Aimeos\MShop\Order\Item\Address\Iface
+	{
+		return $this->object()->getSubManager( 'address' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new coupon item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface New order coupon item object
+	 */
+	public function createCoupon( array $values = [] ) : \Aimeos\MShop\Order\Item\Coupon\Iface
+	{
+		return $this->object()->getSubManager( 'coupon' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new product item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface New order product item object
+	 */
+	public function createProduct( array $values = [] ) : \Aimeos\MShop\Order\Item\Product\Iface
+	{
+		return $this->object()->getSubManager( 'product' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new product attribute item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Product\Attribute\Iface New order product attribute item object
+	 */
+	public function createProductAttribute( array $values = [] ) : \Aimeos\MShop\Order\Item\Product\Attribute\Iface
+	{
+		return $this->object()->getSubManager( 'product' )->getSubManager( 'attribute' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new service item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface New order service item object
+	 */
+	public function createService( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Iface
+	{
+		return $this->object()->getSubManager( 'service' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new service attribute item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface New order service attribute item object
+	 */
+	public function createServiceAttribute( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	{
+		return $this->object()->getSubManager( 'service' )->getSubManager( 'attribute' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new service transaction item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface New order service transaction item object
+	 */
+	public function createServiceTransaction( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface
+	{
+		return $this->object()->getSubManager( 'service' )->getSubManager( 'transaction' )->create( $values );
+	}
+
+
+	/**
+	 * Creates a new status item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface New order item object
+	 */
+	public function createStatus( array $values = [] ) : \Aimeos\MShop\Order\Item\Status\Iface
+	{
+		return $this->object()->getSubManager( 'status' )->create( $values );
+	}
+
+
+	/**
 	 * Creates a search critera object
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
@@ -239,8 +335,6 @@ class Standard extends Base
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $this->context()->config()->get( 'mshop/order/manager/sitemode', $level );
-
-		$name = 'order:status';
 		$expr = $this->siteString( 'mordst_cs."siteid"', $level );
 
 		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
@@ -358,7 +452,7 @@ class Standard extends Base
 	{
 		if( !$item->isModified() )
 		{
-			$this->saveAddresses( $item )->saveServices( $item )->saveProducts( $item )->saveCoupons( $item );
+			$this->saveAddresses( $item )->saveServices( $item )->saveProducts( $item )->saveCoupons( $item )->saveStatuses( $item );
 			return $item;
 		}
 
@@ -373,8 +467,12 @@ class Standard extends Base
 
 		$item = parent::saveBase( $item, $fetch );
 
-		$this->saveAddresses( $item )->saveServices( $item )->saveProducts( $item )->saveCoupons( $item );
-		$this->addStatus( $item );
+		$this->addStatus( $item )
+			->saveStatuses( $item )
+			->saveAddresses( $item )
+			->saveServices( $item )
+			->saveProducts( $item )
+			->saveCoupons( $item );
 
 		return $item;
 	}
@@ -420,7 +518,7 @@ class Standard extends Base
 		}
 
 		$ids = array_keys( $map );
-		$items = $addresses = $customers = $coupons = $products = $services = [];
+		$items = $addresses = $customers = $coupons = $products = $services = $statuses = [];
 
 		if( $this->hasRef( $ref, 'customer' ) && !( $cids = map( $map )->col( 'order.customerid' )->filter() )->empty() )
 		{
@@ -445,6 +543,10 @@ class Standard extends Base
 			$services = $this->getServices( $ids, $ref );
 		}
 
+		if( $this->hasRef( $ref, 'order/status' ) ) {
+			$statuses = $this->getStatuses( $ids, $ref );
+		}
+
 		foreach( $map as $id => $row )
 		{
 			$row['.customer'] = $customers[$row['order.customerid']] ?? null;
@@ -452,6 +554,7 @@ class Standard extends Base
 			$row['.coupons'] = $coupons[$id] ?? [];
 			$row['.products'] = $products[$id] ?? [];
 			$row['.services'] = $services[$id] ?? [];
+			$row['.statuses'] = $statuses[$id] ?? [];
 
 			if( $item = $this->applyFilter( $item = $this->create( $row ) ) ) {
 				$items[$id] = $item;
@@ -466,29 +569,21 @@ class Standard extends Base
 	 * Adds the new payment and delivery values to the order status log.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item object
+	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item )
+	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
-		$statusManager = \Aimeos\MShop::create( $this->context(), 'order/status' );
+		$object = $this->object();
 
-		$statusItem = $statusManager->create();
-		$statusItem->setParentId( $item->getId() );
-
-		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() )
-		{
-			$statusItem->setId( null )->setValue( $item->getStatusPayment() )
-				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
-
-			$statusManager->save( $statusItem, false );
+		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() ) {
+			$item->addStatus( $object->createStatus()->setType( 'status-payment' )->setValue( $item->getStatusPayment() ) );
 		}
 
-		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() )
-		{
-			$statusItem->setId( null )->setValue( $item->getStatusDelivery() )
-				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_DELIVERY );
-
-			$statusManager->save( $statusItem, false );
+		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() ) {
+			$item->addStatus( $object->createStatus()->setType( 'status-delivery' )->setValue( $item->getStatusDelivery() ) );
 		}
+
+		return $this;
 	}
 
 
