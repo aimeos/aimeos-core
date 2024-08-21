@@ -79,7 +79,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->products, $this->addresses, $this->services, $this->coupons, $this->statuses );
+		unset( $this->object, $this->products, $this->addresses, $this->services, $this->coupons, $this->statusItem );
 	}
 
 
