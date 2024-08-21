@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.currency.ctime' => '2011-01-01 00:00:01',
 			'locale.currency.editor' => 'unitTestUser'
 		);
-		$this->object = new \Aimeos\MShop\Locale\Item\Currency\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Locale\Item\Currency\Standard( 'locale.currency.', $this->values );
 	}
 
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Locale\Item\Currency\Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Currency\Standard( 'locale.currency.' );
 
 		$list = $entries = array(
 			'locale.currency.id' => 'EUR',
