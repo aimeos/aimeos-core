@@ -41,6 +41,14 @@ interface Iface
 	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface;
+
+	/**
 	 * Optimizes the index if necessary.
 	 * This operation can last very long and it shouldn't be called by a script
 	 * executed by a web server.
