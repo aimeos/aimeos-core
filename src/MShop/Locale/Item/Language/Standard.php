@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Locale
@@ -22,17 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Language\Iface
 {
-	/**
-	 * Initialize the language object.
-	 *
-	 * @param array $values Possible params to be set on init.
-	 */
-	public function __construct( array $values = [] )
-	{
-		parent::__construct( 'locale.language.', $values );
-	}
-
-
 	/**
 	 * Sets the id of the language.
 	 *

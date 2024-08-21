@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -26,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.language.ctime' => '2011-01-01 00:00:01',
 			'locale.language.editor' => 'unitTestUser'
 		);
-		$this->object = new \Aimeos\MShop\Locale\Item\Language\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Locale\Item\Language\Standard( 'locale.language.', $this->values );
 	}
 
 
@@ -175,7 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Locale\Item\Language\Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Language\Standard( 'locale.language.' );
 
 		$list = $entries = array(
 				'locale.language.id' => 'de',
