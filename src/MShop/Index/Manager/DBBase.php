@@ -78,6 +78,30 @@ abstract class DBBase
 
 
 	/**
+	 * Creates a new lists item object
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list items object
+	 */
+	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
+	{
+		return $this->manager->createListItem( $values );
+	}
+
+
+	/**
+	 * Creates a new property item object
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property items object
+	 */
+	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
+	{
+		return $this->manager->createPropertyItem( $values );
+	}
+
+
+	/**
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them

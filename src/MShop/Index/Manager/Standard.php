@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Index\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
-	implements \Aimeos\MShop\Index\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface, \Aimeos\MShop\Common\Manager\ListsRef\Iface
+	implements \Aimeos\MShop\Index\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface, \Aimeos\MShop\Product\Manager\Iface
 {
 	/** mshop/index/manager/name
 	 * Class name of the used index manager implementation
@@ -221,18 +221,6 @@ class Standard
 		}
 
 		return $this;
-	}
-
-
-	/**
-	 * Creates a new lists item object
-	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list items object
-	 */
-	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
-	{
-		return $this->getManager()->createListItem( $values );
 	}
 
 

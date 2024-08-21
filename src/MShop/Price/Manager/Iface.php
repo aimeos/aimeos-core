@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Price\Manager;
  * @subpackage Price
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\ListsRef\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\ListsRef\Iface,
+		\Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
