@@ -163,7 +163,7 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
