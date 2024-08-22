@@ -24,7 +24,7 @@ class Standard
 	private array $searchConfig = [
 		'locale.language.id' => [
 			'label' => 'Language ID',
-			'internaldeps' => [ 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ],
+			'internaldeps' => ['LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")'],
 			'internalcode' => 'mlocla."id"',
 			'public' => false,
 		],
