@@ -356,11 +356,12 @@ abstract class DBBase
 		{
 			$names = $search->translate( $search->getSortations(), [], $funcs );
 			$cols = $search->translate( $search->getSortations(), $translations, $funcs );
+			$ops = map( $search->getSortations() )->getOperator();
 
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
 			{
-				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
+				$list[] = ( $ops[$idx] === '-' ? 'MAX' : 'MIN' ) . '(' . $col . ') AS "s' . $idx . '"';
 				$translations[$names[$idx]] = '"s' . $idx . '"';
 			}
 		}
