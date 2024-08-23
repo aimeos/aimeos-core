@@ -321,7 +321,7 @@ abstract class DBBase
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values for the base table
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attronly Associative list of search keys and criteria attribute items as values for the base table
 	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
@@ -333,15 +333,16 @@ abstract class DBBase
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
-		if( !empty( $search->getSortations() ) )
+		if( !empty( $sorts = $search->getSortations() ) )
 		{
-			$names = $search->translate( $search->getSortations(), [], $funcs );
-			$cols = $search->translate( $search->getSortations(), $translations, $funcs );
+			$names = $search->translate( $sorts, [], $funcs );
+			$cols = $search->translate( $sorts, $translations, $funcs );
+			$ops = map( $sorts )->getOperator();
 
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
 			{
-				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
+				$list[] = ( $ops[$idx] === '-' ? 'MAX' : 'MIN' ) . '(' . $col . ') AS "s' . $idx . '"';
 				$translations[$names[$idx]] = '"s' . $idx . '"';
 			}
 		}
