@@ -697,14 +697,22 @@ class Standard
 			$texts[$text->getLanguageId()]['name'] = $text->getContent();
 		}
 
-		$products = $item->getRefItems( 'product', null, 'default' )->push( $item );
+		$products = $item->getRefItems( 'product', null, 'default' )->unshift( $item );
 
 		foreach( $products as $product )
 		{
 			foreach( $this->getLanguageIds() as $langId )
 			{
 				$texts[$langId]['content'][] = $product->getCode();
+				$texts[$langId]['content'][] = $product->getName();
+			}
 
+			foreach( $product->getRefItems( 'text', $types ) as $text ) {
+				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
+			}
+
+			foreach( $this->getLanguageIds() as $langId )
+			{
 				foreach( $product->getRefItems( 'catalog' ) as $catItem ) {
 					$texts[$langId]['content'][] = $catItem->getName();
 				}
@@ -716,10 +724,6 @@ class Standard
 				foreach( $product->getRefItems( 'attribute', null, $attrTypes ) as $attrItem ) {
 					$texts[$langId]['content'][] = $attrItem ->getName();
 				}
-			}
-
-			foreach( $product->getRefItems( 'text', $types ) as $text ) {
-				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
 		}
 
@@ -752,13 +756,8 @@ class Standard
 				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
 			}
 
-			if( !isset( $map['name'] ) )
-			{
-				if( isset( $texts['']['name'] ) ) {
-					$map['name'] = $texts['']['name'];
-				} else {
-					$map['content'][] = $map['name'] = $item->getLabel();
-				}
+			if( !isset( $map['name'] ) ) {
+				$map['name'] = $texts['']['name'] ?? $item->getLabel();
 			}
 
 			$content = ' ' . join( ' ', $map['content'] ); // extra space for SQL POSITION() > 0
