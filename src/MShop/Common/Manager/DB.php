@@ -412,10 +412,13 @@ trait DB
 
 		if( $withsub === true )
 		{
-			$domains = $this->context()->config()->get( $path, $default );
+			$config = $this->context()->config();
+			$domains = $config->get( $path, $default );
 
-			foreach( $domains as $domain ) {
-				$attr += $this->object()->getSubManager( $domain )->getSearchAttributes( true );
+			foreach( $domains as $domain )
+			{
+				$name = $config->get( substr( $path, 0, strrpos( $path, '/' ) ) . '/' . $domain . '/name' );
+				$attr += $this->object()->getSubManager( $domain, $name )->getSearchAttributes( true );
 			}
 		}
 
