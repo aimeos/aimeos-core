@@ -168,95 +168,83 @@ abstract class Base
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
+		$prefix = $this->getDomain() . '.lists.';
+
 		return $this->createAttributes( [
-			'id' => [
-				'code' => $this->getDomain() . '.lists.id',
-				'internalcode' => $this->alias() . '."id"',
+			$prefix . 'id' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."id"',
 				'label' => 'List ID',
 				'type' => 'int',
 				'public' => false,
 			],
-			'siteid' => [
-				'code' => $this->getDomain() . '.lists.siteid',
-				'internalcode' => $this->alias() . '."siteid"',
+			$prefix . 'siteid' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."siteid"',
 				'label' => 'List site ID',
 				'public' => false,
 			],
-			'ctime' => [
-				'code' => $this->getDomain() . '.lists.ctime',
-				'internalcode' => $this->alias() . '."ctime"',
+			$prefix . 'ctime' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."ctime"',
 				'label' => 'List create date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
-			'mtime' => [
-				'code' => $this->getDomain() . '.lists.mtime',
-				'internalcode' => $this->alias() . '."mtime"',
+			$prefix . 'mtime' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."mtime"',
 				'label' => 'List modify date/time',
 				'type' => 'datetime',
 				'public' => false,
 			],
-			'editor' => [
-				'code' => $this->getDomain() . '.lists.editor',
-				'internalcode' => $this->alias() . '."editor"',
+			$prefix . 'editor' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."editor"',
 				'label' => 'List editor',
 				'public' => false,
 			],
-			'parentid' => [
-				'code' => $this->getDomain() . '.lists.parentid',
-				'internalcode' => $this->alias() . '."parentid"',
+			$prefix . 'parentid' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."parentid"',
 				'label' => 'List parent ID',
 				'type' => 'int',
 				'public' => false,
 			],
-			'key' => [
-				'code' => $this->getDomain() . '.lists.key',
-				'internalcode' => $this->alias() . '."key"',
+			$prefix . 'key' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."key"',
 				'label' => 'List key',
 				'public' => false,
 			],
-			'type' => [
-				'code' => $this->getDomain() . '.lists.type',
-				'internalcode' => $this->alias() . '."type"',
+			$prefix . 'type' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."type"',
 				'label' => 'List type',
 			],
-			'refid' => [
-				'code' => $this->getDomain() . '.lists.refid',
-				'internalcode' => $this->alias() . '."refid"',
+			$prefix . 'refid' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."refid"',
 				'label' => 'List reference ID',
 			],
-			'datestart' => [
-				'code' => $this->getDomain() . '.lists.datestart',
-				'internalcode' => $this->alias() . '."start"',
+			$prefix . 'datestart' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."start"',
 				'label' => 'List start date',
 				'type' => 'datetime',
 			],
-			'dateend' => [
-				'code' => $this->getDomain() . '.lists.dateend',
-				'internalcode' => $this->alias() . '."end"',
+			$prefix . 'dateend' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."end"',
 				'label' => 'List end date',
 				'type' => 'datetime',
 			],
-			'domain' => [
+			$prefix . 'domain' => [
 				'code' => $this->getDomain() . '.lists.domain',
-				'internalcode' => $this->alias() . '."domain"',
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."domain"',
 				'label' => 'List domain',
 			],
-			'position' => [
-				'code' => $this->getDomain() . '.lists.position',
-				'internalcode' => $this->alias() . '."pos"',
+			$prefix . 'position' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."pos"',
 				'label' => 'List position',
 				'type' => 'int',
 			],
-			'status' => [
-				'code' => $this->getDomain() . '.lists.status',
-				'internalcode' => $this->alias() . '."status"',
+			$prefix . 'status' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."status"',
 				'label' => 'List status',
 				'type' => 'int',
 			],
-			'config' => [
-				'code' => $this->getDomain() . '.lists.config',
-				'internalcode' => $this->alias() . '."config"',
+			$prefix . 'config' => [
+				'internalcode' => $this->alias( $prefix . 'id' ) . '."config"',
 				'label' => 'List config',
 				'type' => 'json',
 				'public' => false,
@@ -306,7 +294,7 @@ abstract class Base
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$required = [$this->getDomain()];
+		$required = [$this->getDomain() . '.lists'];
 		$conn = $this->context()->db( $this->getResourceName() );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
