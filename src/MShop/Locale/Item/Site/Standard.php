@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Locale
@@ -23,35 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Locale\Item\Site\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
-
-
-	private array $children;
-
-
-	/**
-	 * Initializes the site object.
-	 *
-	 * @param array $values Associative list of item key/value pairs
-	 * @param \Aimeos\MW\Tree\Node\Iface[] $children List of tree nodes
-	 */
-	public function __construct( array $values = [], array $children = [] )
-	{
-		map( $children )->implements( \Aimeos\MShop\Locale\Item\Site\Iface::class, true );
-
-		parent::__construct( 'locale.site.', $values );
-		$this->children = $children;
-	}
-
-
-	/**
-	 * Creates a deep clone of all objects
-	 */
-	public function __clone()
-	{
-		foreach( $this->children as $key => $item ) {
-			$this->children[$key] = clone $item;
-		}
-	}
 
 
 	/**

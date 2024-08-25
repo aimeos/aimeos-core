@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -35,14 +34,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.editor' => 'unitTestUser'
 		);
 
-		$children = array( new \Aimeos\MShop\Locale\Item\Site\Standard() );
-		$this->object = new \Aimeos\MShop\Locale\Item\Site\Standard( $this->values, $children );
+		$this->object = new \Aimeos\MShop\Locale\Item\Site\Standard( 'locale.site.', $this->values );
 	}
 
 
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
 
 
@@ -284,7 +282,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Locale\Item\Site\Standard();
+		$item = new \Aimeos\MShop\Locale\Item\Site\Standard( 'locale.site.' );
 
 		$list = $entries = array(
 			'locale.site.id' => 2,
