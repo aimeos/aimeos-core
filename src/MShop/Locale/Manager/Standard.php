@@ -128,88 +128,97 @@ class Standard
 	 * @see mshop/locale/manager/decorators/global
 	 */
 
-
-	private array $searchConfig = array(
-		'locale.id' => array(
-			'code' => 'locale.id',
-			'internalcode' => 'mloc."id"',
-			'label' => 'ID',
-			'type' => 'int',
-			'public' => false,
-		),
-		'locale.siteid' => array(
-			'code' => 'locale.siteid',
-			'internalcode' => 'mloc."siteid"',
-			'label' => 'Site ID',
-			'public' => false,
-		),
-		'locale.languageid' => array(
-			'code' => 'locale.languageid',
-			'internalcode' => 'mloc."langid"',
-			'label' => 'Language ID',
-		),
-		'locale.currencyid' => array(
-			'code' => 'locale.currencyid',
-			'internalcode' => 'mloc."currencyid"',
-			'label' => 'Currency ID',
-		),
-		'locale.status' => array(
-			'code' => 'locale.status',
-			'internalcode' => 'mloc."status"',
-			'label' => 'Status',
-			'type' => 'int',
-		),
-		'locale.position' => array(
-			'code' => 'locale.position',
-			'internalcode' => 'mloc."pos"',
-			'label' => 'Position',
-			'type' => 'int',
-		),
-		'locale.ctime' => array(
-			'code' => 'locale.ctime',
-			'internalcode' => 'mloc."ctime"',
-			'label' => 'Create date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'locale.mtime' => array(
-			'code' => 'locale.mtime',
-			'internalcode' => 'mloc."mtime"',
-			'label' => 'Modify date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'locale.editor' => array(
-			'code' => 'locale.editor',
-			'internalcode' => 'mloc."editor"',
-			'label' => 'Editor',
-			'public' => false,
-		),
-	);
-
-
-	/**
-	 * Initializes the object.
+	/** mshop/locale/manager/resource
+	 * Name of the database connection resource to use
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
+	 * You can configure a different database connection for each data domain
+	 * and if no such connection name exists, the "db" connection will be used.
+	 * It's also possible to use the same database connection for different
+	 * data domains by configuring the same connection name using this setting.
+	 *
+	 * @param string Database connection name
+	 * @since 2023.04
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		parent::__construct( $context );
 
-		/** mshop/locale/manager/resource
-		 * Name of the database connection resource to use
-		 *
-		 * You can configure a different database connection for each data domain
-		 * and if no such connection name exists, the "db" connection will be used.
-		 * It's also possible to use the same database connection for different
-		 * data domains by configuring the same connection name using this setting.
-		 *
-		 * @param string Database connection name
-		 * @since 2023.04
-		 */
-		$this->setResourceName( $context->config()->get( 'mshop/locale/manager/resource', 'db-locale' ) );
-	}
+	/** mshop/locale/manager/delete/mysql
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * @see mshop/locale/manager/delete/ansi
+	 */
+
+	/** mshop/locale/manager/delete/ansi
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * Removes the records specified by the given IDs from the locale database.
+	 * The records must be from the site that is configured via the
+	 * context item.
+	 *
+	 * The ":cond" placeholder is replaced by the name of the ID column and
+	 * the given ID or list of IDs while the site ID is bound to the question
+	 * mark.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for deleting items
+	 * @since 2014.03
+	 * @see mshop/locale/manager/insert/ansi
+	 * @see mshop/locale/manager/update/ansi
+	 * @see mshop/locale/manager/newid/ansi
+	 * @see mshop/locale/manager/search/ansi
+	 * @see mshop/locale/manager/count/ansi
+	 */
+
+
+	private array $searchConfig = [
+		'locale.id' => [
+			'label' => 'ID',
+			'internalcode' => 'mloc."id"',
+			'type' => 'int',
+			'public' => false,
+		],
+		'locale.siteid' => [
+			'label' => 'Site ID',
+			'internalcode' => 'mloc."siteid"',
+			'public' => false,
+		],
+		'locale.languageid' => [
+			'label' => 'Language ID',
+			'internalcode' => 'mloc."langid"',
+		],
+		'locale.currencyid' => [
+			'label' => 'Currency ID',
+			'internalcode' => 'mloc."currencyid"',
+		],
+		'locale.status' => [
+			'label' => 'Status',
+			'internalcode' => 'mloc."status"',
+			'type' => 'int',
+		],
+		'locale.position' => [
+			'label' => 'Position',
+			'internalcode' => 'mloc."pos"',
+			'type' => 'int',
+		],
+		'locale.ctime' => [
+			'label' => 'Create date/time',
+			'internalcode' => 'mloc."ctime"',
+			'type' => 'datetime',
+			'public' => false,
+		],
+		'locale.mtime' => [
+			'label' => 'Modify date/time',
+			'internalcode' => 'mloc."mtime"',
+			'type' => 'datetime',
+			'public' => false,
+		],
+		'locale.editor' => [
+			'label' => 'Editor',
+			'internalcode' => 'mloc."editor"',
+			'public' => false,
+		],
+	];
 
 
 	/**
@@ -243,18 +252,6 @@ class Standard
 
 
 	/**
-	 * Removes old entries from the storage.
-	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->clearBase( $siteids, 'mshop/locale/manager/delete' );
-	}
-
-
-	/**
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -284,17 +281,33 @@ class Standard
 
 
 	/**
-	 * Returns the item specified by its ID.
+	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param string $id Unique ID of the locale item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Locale\Item\Iface Returns the locale item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		return $this->getItemBase( 'locale.id', $id, $ref, $default );
+		/** mshop/locale/manager/submanagers
+		 * List of manager names that can be instantiated by the locale manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 */
+		$path = 'mshop/locale/manager/submanagers';
+		$default = ['language', 'currency', 'site'];
+
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
@@ -320,273 +333,6 @@ class Standard
 		}
 
 		return map( $items );
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		/** mshop/locale/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/locale/manager/delete/ansi
-		 */
-
-		/** mshop/locale/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the locale database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @see mshop/locale/manager/insert/ansi
-		 * @see mshop/locale/manager/update/ansi
-		 * @see mshop/locale/manager/newid/ansi
-		 * @see mshop/locale/manager/search/ansi
-		 * @see mshop/locale/manager/count/ansi
-		 */
-		$path = 'mshop/locale/manager/delete';
-
-		return $this->deleteItemsBase( $itemIds, $path );
-	}
-
-
-	/**
-	 * Adds or updates an item object.
-	 *
-	 * @param \Aimeos\MShop\Locale\Item\Iface $item Item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Locale\Item\Iface $item Updated item including the generated ID
-	 */
-	protected function saveItem( \Aimeos\MShop\Locale\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Iface
-	{
-		if( !$item->isModified() ) {
-			return $item;
-		}
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null )
-		{
-			/** mshop/locale/manager/insert/mysql
-			 * Inserts a new locale record into the database table
-			 *
-			 * @see mshop/locale/manager/insert/ansi
-			 */
-
-			/** mshop/locale/manager/insert/ansi
-			 * Inserts a new locale record into the database table
-			 *
-			 * Items with no ID yet (i.e. the ID is NULL) will be created in
-			 * the database and the newly created ID retrieved afterwards
-			 * using the "newid" SQL statement.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the locale item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The order of the columns must correspond to the
-			 * order in the save() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2014.03
-			 * @see mshop/locale/manager/update/ansi
-			 * @see mshop/locale/manager/newid/ansi
-			 * @see mshop/locale/manager/delete/ansi
-			 * @see mshop/locale/manager/search/ansi
-			 * @see mshop/locale/manager/count/ansi
-			 */
-			$path = 'mshop/locale/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-		}
-		else
-		{
-			/** mshop/locale/manager/update/mysql
-			 * Updates an existing locale record in the database
-			 *
-			 * @see mshop/locale/manager/update/ansi
-			 */
-
-			/** mshop/locale/manager/update/ansi
-			 * Updates an existing locale record in the database
-			 *
-			 * Items which already have an ID (i.e. the ID is not NULL) will
-			 * be updated in the database.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the locale item to the statement before they are
-			 * sent to the database server. The order of the columns must
-			 * correspond to the order in the save() method, so the
-			 * correct values are bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for updating records
-			 * @since 2014.03
-			 * @see mshop/locale/manager/insert/ansi
-			 * @see mshop/locale/manager/newid/ansi
-			 * @see mshop/locale/manager/delete/ansi
-			 * @see mshop/locale/manager/search/ansi
-			 * @see mshop/locale/manager/count/ansi
-			 */
-			$path = 'mshop/locale/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-		$siteIds = explode( '.', trim( $item->getSiteId(), '.' ) );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getLanguageId() );
-		$stmt->bind( $idx++, $item->getCurrencyId() );
-		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $context->datetime() ); // mtime
-		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, end( $siteIds ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $context->locale()->getSiteId() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $context->datetime() ); // ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null && $fetch === true )
-		{
-			/** mshop/locale/manager/newid/mysql
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * @see mshop/locale/manager/newid/ansi
-			 */
-
-			/** mshop/locale/manager/newid/ansi
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * As soon as a new record is inserted into the database table,
-			 * the database server generates a new and unique identifier for
-			 * that record. This ID can be used for retrieving, updating and
-			 * deleting that specific record from the table again.
-			 *
-			 * For MySQL:
-			 *  SELECT LAST_INSERT_ID()
-			 * For PostgreSQL:
-			 *  SELECT currval('seq_mloc_id')
-			 * For SQL Server:
-			 *  SELECT SCOPE_IDENTITY()
-			 * For Oracle:
-			 *  SELECT "seq_mloc_id".CURRVAL FROM DUAL
-			 *
-			 * There's no way to retrive the new ID by a SQL statements that
-			 * fits for most database servers as they implement their own
-			 * specific way.
-			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
-			 * @since 2014.03
-			 * @see mshop/locale/manager/insert/ansi
-			 * @see mshop/locale/manager/update/ansi
-			 * @see mshop/locale/manager/delete/ansi
-			 * @see mshop/locale/manager/search/ansi
-			 * @see mshop/locale/manager/count/ansi
-			 */
-			$path = 'mshop/locale/manager/newid';
-			$id = $this->newId( $conn, $path );
-		}
-
-		$item->setId( $id );
-
-		return $item;
-	}
-
-
-	/**
-	 * Returns a new manager for locale extensions
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g site, language, currency.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'locale', $manager, $name );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'mshop/locale/manager/submanagers';
-		return $this->getResourceTypeBase( 'locale', $path, array( 'currency', 'language', 'site' ), $withsub );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		/** mshop/locale/manager/submanagers
-		 * List of manager names that can be instantiated by the locale manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 */
-		$path = 'mshop/locale/manager/submanagers';
-		$default = array( 'language', 'currency', 'site' );
-
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
@@ -806,6 +552,198 @@ class Standard
 
 
 	/**
+	 * Returns the site coditions for the search request
+	 *
+	 * @param string[] $keys Sorted list of criteria keys
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
+	 */
+	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
+	{
+		return [];
+	}
+
+
+	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function prefix() : string
+	{
+		return 'locale.';
+	}
+
+
+	/**
+	 * Adds or updates an item object.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Iface $item Item object whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Locale\Item\Iface $item Updated item including the generated ID
+	 */
+	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		if( !$item->isModified() ) {
+			return $item;
+		}
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$id = $item->getId();
+		$columns = $this->object()->getSaveAttributes();
+
+		if( $id === null )
+		{
+			/** mshop/locale/manager/insert/mysql
+			 * Inserts a new locale record into the database table
+			 *
+			 * @see mshop/locale/manager/insert/ansi
+			 */
+
+			/** mshop/locale/manager/insert/ansi
+			 * Inserts a new locale record into the database table
+			 *
+			 * Items with no ID yet (i.e. the ID is NULL) will be created in
+			 * the database and the newly created ID retrieved afterwards
+			 * using the "newid" SQL statement.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the locale item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @see mshop/locale/manager/update/ansi
+			 * @see mshop/locale/manager/newid/ansi
+			 * @see mshop/locale/manager/delete/ansi
+			 * @see mshop/locale/manager/search/ansi
+			 * @see mshop/locale/manager/count/ansi
+			 */
+			$path = 'mshop/locale/manager/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/locale/manager/update/mysql
+			 * Updates an existing locale record in the database
+			 *
+			 * @see mshop/locale/manager/update/ansi
+			 */
+
+			/** mshop/locale/manager/update/ansi
+			 * Updates an existing locale record in the database
+			 *
+			 * Items which already have an ID (i.e. the ID is not NULL) will
+			 * be updated in the database.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the locale item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @see mshop/locale/manager/insert/ansi
+			 * @see mshop/locale/manager/newid/ansi
+			 * @see mshop/locale/manager/delete/ansi
+			 * @see mshop/locale/manager/search/ansi
+			 * @see mshop/locale/manager/count/ansi
+			 */
+			$path = 'mshop/locale/manager/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
+
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$siteIds = explode( '.', trim( $item->getSiteId(), '.' ) );
+
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
+
+		$stmt->bind( $idx++, $item->getLanguageId() );
+		$stmt->bind( $idx++, $item->getCurrencyId() );
+		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $context->datetime() ); // mtime
+		$stmt->bind( $idx++, $context->editor() );
+		$stmt->bind( $idx++, end( $siteIds ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $context->locale()->getSiteId() );
+
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true )
+		{
+			/** mshop/locale/manager/newid/mysql
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * @see mshop/locale/manager/newid/ansi
+			 */
+
+			/** mshop/locale/manager/newid/ansi
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_mloc_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_mloc_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2014.03
+			 * @see mshop/locale/manager/insert/ansi
+			 * @see mshop/locale/manager/update/ansi
+			 * @see mshop/locale/manager/delete/ansi
+			 * @see mshop/locale/manager/search/ansi
+			 * @see mshop/locale/manager/count/ansi
+			 */
+			$path = 'mshop/locale/manager/newid';
+			$id = $this->newId( $conn, $path );
+		}
+
+		$item->setId( $id );
+
+		return $item;
+	}
+
+
+	/**
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Criteria object with conditions, sortations, etc.
@@ -920,19 +858,5 @@ class Standard
 		}
 
 		return $map;
-	}
-
-
-	/**
-	 * Returns the site coditions for the search request
-	 *
-	 * @param string[] $keys Sorted list of criteria keys
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
-	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return \Aimeos\Base\Criteria\Expression\Iface[] List of search conditions
-	 */
-	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
-	{
-		return [];
 	}
 }
