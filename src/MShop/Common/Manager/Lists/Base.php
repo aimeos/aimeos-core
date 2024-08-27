@@ -137,19 +137,6 @@ abstract class Base
 
 
 	/**
-	 * Creates a new manager for list extensions.
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( $this->getDomain(), 'lists/' . $manager, $name );
-	}
-
-
-	/**
 	 * Search for all list items based on the given critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
@@ -161,28 +148,12 @@ abstract class Base
 	{
 		$items = parent::search( $search, $ref, $total );
 
-		return $this->buildItems( $items, $ref );
-	}
-
-
-	/**
-	 * Creates the items with address item, list items and referenced items.
-	 *
-	 * @param iterable $map Associative list of IDs as keys and the associative array of values
-	 * @param string[] $domains List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
-	 */
-	protected function buildItems( iterable $map, array $domains ) : \Aimeos\Map
-	{
-		if( empty( $domains ) ) {
-			return map( $map );
+		if( empty( $ref ) ) {
+			return $items;
 		}
 
-		$refItemMap = $refIdMap = [];
-
-		foreach( $map as $listItem ) {
-			$refIdMap[$listItem->getDomain()][] = $listItem->getRefId();
-		}
+		$refItemMap = [];
+		$refIdMap = $items->groupBy( $this->prefix() . 'domain' );
 
 		foreach( $refIdMap as $domain => $list )
 		{
@@ -194,21 +165,18 @@ abstract class Base
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
-			$search = $manager->filter()->slice( 0, count( $list ) )->add( [$attr->getCode() => $list] );
-
-			foreach( $manager->search( $search, $domains ) as $id => $item ) {
-				$refItemMap[$domain][$id] = $item;
-			}
+			$search = $manager->filter()->slice( 0, count( $list ) )->add( [$attr->getCode() => map( $list )->getRefId()] );
+			$refItemMap[$domain] = $manager->search( $search, $ref );
 		}
 
-		foreach( $map as $id => $listItem )
+		foreach( $items as $listItem )
 		{
 			if( isset( $refItemMap[$listItem->getDomain()][$listItem->getRefId()] ) ) {
 				$listItem->setRefItem( $refItemMap[$listItem->getDomain()][$listItem->getRefId()] );
 			}
 		}
 
-		return map( $map );
+		return $items;
 	}
 
 
