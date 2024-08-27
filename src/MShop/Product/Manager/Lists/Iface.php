@@ -17,6 +17,7 @@ namespace Aimeos\MShop\Product\Manager\Lists;
  *
  * @package MShop
  * @subpackage Product
+ * @deprecated 2025.01 Use \Aimeos\MShop\Common\Manager\Lists\Iface instead
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Manager\Lists;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
+	implements \Aimeos\MShop\Common\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
 	 * Creates a new empty item instance

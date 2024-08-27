@@ -13,25 +13,14 @@ namespace Aimeos\MShop\Text\Manager\Lists;
 
 /**
  * Default text list manager for creating and handling text list items.
+ *
  * @package MShop
  * @subpackage Text
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Lists\Base
-	implements \Aimeos\MShop\Text\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
+	implements \Aimeos\MShop\Text\Manager\Lists\Iface
 {
-	/** mshop/text/manager/resource
-	 * Name of the database connection resource to use
-	 *
-	 * You can configure a different database connection for each data domain
-	 * and if no such connection name exists, the "db" connection will be used.
-	 * It's also possible to use the same database connection for different
-	 * data domains by configuring the same connection name using this setting.
-	 *
-	 * @param string Database connection name
-	 * @since 2023.04
-	 */
-
 	/** mshop/text/manager/lists/submanagers
 	 * List of manager names that can be instantiated by the text list manager
 	 *
@@ -399,54 +388,5 @@ class Standard
 	 * @see mshop/text/manager/lists/delete/ansi
 	 * @see mshop/text/manager/lists/search/ansi
 	 * @see mshop/text/manager/lists/aggregate/ansi
-	 */
-
-	/** mshop/text/manager/lists/aggregate/mysql
-	 * Counts the number of records grouped by the values in the key column and matched by the given criteria
-	 *
-	 * @see mshop/text/manager/lists/aggregate/ansi
-	 */
-
-	/** mshop/text/manager/lists/aggregate/ansi
-	 * Counts the number of records grouped by the values in the key column and matched by the given criteria
-	 *
-	 * Groups all records by the values in the key column and counts their
-	 * occurence. The matched records can be limited by the given criteria
-	 * from the order database. The records must be from one of the sites
-	 * that are configured via the context item. If the current site is part
-	 * of a tree of sites, the statement can count all records from the
-	 * current site and the complete sub-tree of sites.
-	 *
-	 * As the records can normally be limited by criteria from sub-managers,
-	 * their tables must be joined in the SQL context. This is done by
-	 * using the "internaldeps" property from the definition of the ID
-	 * column of the sub-managers. These internal dependencies specify
-	 * the JOIN between the tables and the used columns for joining. The
-	 * ":joins" placeholder is then replaced by the JOIN strings from
-	 * the sub-managers.
-	 *
-	 * To limit the records matched, conditions can be added to the given
-	 * criteria object. It can contain comparisons like column names that
-	 * must match specific values which can be combined by AND, OR or NOT
-	 * operators. The resulting string of SQL conditions replaces the
-	 * ":cond" placeholder before the statement is sent to the database
-	 * server.
-	 *
-	 * This statement doesn't return any records. Instead, it returns pairs
-	 * of the different values found in the key column together with the
-	 * number of records that have been found for that key values.
-	 *
-	 * The SQL statement should conform to the ANSI standard to be
-	 * compatible with most relational database systems. This also
-	 * includes using double quotes for table and column names.
-	 *
-	 * @param string SQL statement for aggregating order items
-	 * @since 2015.10
-	 * @see mshop/text/manager/lists/insert/ansi
-	 * @see mshop/text/manager/lists/update/ansi
-	 * @see mshop/text/manager/lists/newid/ansi
-	 * @see mshop/text/manager/lists/delete/ansi
-	 * @see mshop/text/manager/lists/search/ansi
-	 * @see mshop/text/manager/lists/count/ansi
 	 */
 }
