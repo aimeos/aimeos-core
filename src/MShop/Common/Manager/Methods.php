@@ -21,8 +21,6 @@ trait Methods
 {
 	private ?\Aimeos\MShop\Common\Manager\Iface $object = null;
 	private array $filterFcn = [];
-	private string $domain;
-	private string $subpath;
 
 
 	/**

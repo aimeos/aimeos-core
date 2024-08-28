@@ -80,7 +80,7 @@ abstract class Base
 	 */
 	public function getSaveAttributes( bool $withsub = true ) : array
 	{
-		$prefix = $this->getDomain() . '.lists.';
+		$prefix = $this->prefix();
 
 		return $this->createAttributes( [
 			$prefix . 'parentid' => [
