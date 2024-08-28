@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Supplier\Manager\Lists\Type;
  * @subpackage Supplier
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface
+	extends \Aimeos\MShop\Common\Manager\Type\Iface
 {
 }

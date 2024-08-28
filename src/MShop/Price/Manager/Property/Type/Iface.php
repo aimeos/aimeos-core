@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Price\Manager\Property\Type;
  * @subpackage Price
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Type\Iface
 {
 }

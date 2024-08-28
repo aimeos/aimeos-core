@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Rule\Manager\Type;
  * @subpackage Rule
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface
+	extends \Aimeos\MShop\Common\Manager\Type\Iface
 {
 }

@@ -12,12 +12,12 @@ namespace Aimeos\MShop\Product\Manager\Property\Type;
 
 
 /**
- * Interface for product tag type manager.
+ * Interface for product property type manager.
  *
  * @package MShop
  * @subpackage Product
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Type\Iface
 {
 }
