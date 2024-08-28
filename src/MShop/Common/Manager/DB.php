@@ -921,7 +921,7 @@ trait DB
 	/**
 	 * Returns the name of the used table
 	 *
-	 * @return string Table name e.g. "mshop_product_lists_type"
+	 * @return string Table name e.g. "mshop_product_property_type"
 	 */
 	protected function getTable() : string
 	{
