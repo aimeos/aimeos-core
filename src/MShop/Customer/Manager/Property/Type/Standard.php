@@ -38,7 +38,7 @@ class Standard
 	 * @since 2018.07
 	 */
 
-		/** mshop/customer/manager/property/type/name
+	/** mshop/customer/manager/property/type/name
 	 * Class name of the used customer property type manager implementation
 	 *
 	 * Each default customer property type manager can be replaced by an alternative imlementation.

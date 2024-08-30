@@ -38,7 +38,7 @@ class Standard
 	 * @since 2018.01
 	 */
 
-		/** mshop/media/manager/property/type/name
+	/** mshop/media/manager/property/type/name
 	 * Class name of the used media property type manager implementation
 	 *
 	 * Each default media property type manager can be replaced by an alternative imlementation.

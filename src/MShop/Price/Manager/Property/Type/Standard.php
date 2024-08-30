@@ -38,7 +38,7 @@ class Standard
 	 * @since 2018.01
 	 */
 
-		/** mshop/price/manager/property/type/name
+	/** mshop/price/manager/property/type/name
 	 * Class name of the used price property type manager implementation
 	 *
 	 * Each default price property type manager can be replaced by an alternative imlementation.

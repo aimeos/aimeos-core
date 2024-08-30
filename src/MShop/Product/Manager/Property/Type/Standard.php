@@ -38,7 +38,7 @@ class Standard
 	 * @since 2015.01
 	 */
 
-		/** mshop/product/manager/property/type/name
+	/** mshop/product/manager/property/type/name
 	 * Class name of the used product property type manager implementation
 	 *
 	 * Each default product property type manager can be replaced by an alternative imlementation.

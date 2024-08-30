@@ -38,7 +38,7 @@ class Standard
 	 * @since 2018.01
 	 */
 
-		/** mshop/attribute/manager/property/type/name
+	/** mshop/attribute/manager/property/type/name
 	 * Class name of the used attribute property type manager implementation
 	 *
 	 * Each default attribute property type manager can be replaced by an alternative imlementation.
