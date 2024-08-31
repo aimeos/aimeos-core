@@ -19,44 +19,8 @@ namespace Aimeos\MShop\Common\Manager\Property;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Common\Manager\Property\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private array $searchConfig;
-	private ?string $languageId;
-	private string $prefix;
-
-
-	/**
-	 * Initializes the object.
-	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
-	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		parent::__construct( $context );
-
-		$this->languageId = $context->locale()->getLanguageId();
-		$this->searchConfig = $this->getSearchConfig();
-
-		if( ( $entry = reset( $this->searchConfig ) ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
-			throw new \Aimeos\MShop\Exception( $msg );
-		}
-
-		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
-		}
-
-		if( empty( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
-		}
-	}
-
-
 	/**
 	 * Creates a new empty item instance
 	 *
@@ -65,8 +29,13 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->prefix . 'siteid'] = $values[$this->prefix . 'siteid'] ?? $this->context()->locale()->getSiteId();
-		return $this->createItemBase( $values );
+		$prefix = $this->prefix();
+		$locale = $this->context()->locale();
+
+		$values['.languageid'] = $locale->getLanguageId();
+		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $locale->getSiteId();
+
+		return new \Aimeos\MShop\Common\Item\Property\Standard( $prefix, $values );
 	}
 
 
@@ -79,193 +48,68 @@ abstract class Base
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		$object = parent::filter();
+		$filter = parent::filter();
 
 		if( $default !== false )
 		{
+			$prefix = $this->prefix();
 			$langid = $this->context()->locale()->getLanguageId();
 
-			$expr = array(
-				$object->compare( '==', $this->prefix . 'languageid', null ),
-				$object->compare( '==', $this->prefix . 'languageid', $langid ),
-			);
-
-			$object->setConditions( $object->or( $expr ) );
+			$filter->add( $filter->or( [
+				$filter->compare( '==', $prefix . 'languageid', null ),
+				$filter->compare( '==', $prefix . 'languageid', $langid ),
+			] ) );
 		}
 
-		return $object;
+		return $filter;
 	}
 
 
 	/**
-	 * Inserts the new property items for product item
+	 * Returns the attributes that can be used for saving.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Property item which should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface $item Updated item including the generated ID
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	protected function saveItem( \Aimeos\MShop\Common\Item\Property\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Property\Iface
+	public function getSaveAttributes( bool $withsub = true ) : array
 	{
-		if( !$item->isModified() ) {
-			return $item;
-		}
+		$prefix = $this->prefix();
 
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$path = $this->getConfigPath();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null ) {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-		} else {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getKey() );
-		$stmt->bind( $idx++, $item->getType() );
-		$stmt->bind( $idx++, $item->getLanguageId() );
-		$stmt->bind( $idx++, $item->getValue() );
-		$stmt->bind( $idx++, $context->datetime() ); //mtime
-		$stmt->bind( $idx++, $context->editor() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); //ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null && $fetch === true ) {
-			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-		}
-
-		$item->setId( $id );
-
-		return $item;
+		return $this->createAttributes( [
+			$prefix . 'parentid' => [
+				'internalcode' => 'parentid',
+				'label' => 'Property parent ID',
+				'type' => 'int',
+				'public' => false,
+			],
+			$prefix . 'key' => [
+				'internalcode' => 'key',
+				'label' => 'Property key',
+				'public' => false,
+			],
+			$prefix . 'type' => [
+				'internalcode' => 'type',
+				'label' => 'Property type',
+			],
+			$prefix . 'value' => [
+				'internalcode' => 'value',
+				'label' => 'Property value',
+			],
+			$prefix . 'languageid' => [
+				'internalcode' => 'langid',
+				'label' => 'Property language ID',
+			],
+		] );
 	}
 
 
 	/**
-	 * Removes multiple items.
+	 * Returns the domain prefix.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Property\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
-	}
-
-
-	/**
-	 * Returns product property item with given Id.
-	 *
-	 * @param string $id Id of the product property item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Returns the product property item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getItemBase( $this->prefix . 'id', $id, $ref, $default );
-	}
-
-
-	/**
-	 * Search for all property items based on the given critera.
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Property\Iface with ids as keys
-	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
-	{
-		$items = [];
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$cfgPathSearch = $this->getConfigPath() . 'search';
-		$cfgPathCount = $this->getConfigPath() . 'count';
-		$required = array( trim( $this->prefix, '.' ) );
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-		while( $row = $results->fetch() )
-		{
-			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-				$items[$row[$this->prefix . 'id']] = $item;
-			}
-		}
-
-		return map( $items );
-	}
-
-
-	/**
-	 * Returns a new manager for product extensions
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or "Standard") if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g property types, property lists etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'common', 'property/' . $manager, $name );
-	}
-
-
-	/**
-	 * Returns the config path for retrieving the configuration values.
-	 *
-	 * @return string Configuration path
-	 */
-	abstract protected function getConfigPath() : string;
-
-
-	/**
-	 * Returns the search configuration for searching items.
-	 *
-	 * @return array Associative list of search keys and search definitions
-	 */
-	abstract protected function getSearchConfig() : array;
-
-
-	/**
-	 * Creates new property item object.
-	 *
-	 * @param array $values Associative list of key/value pairs
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
-	 */
-	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
-	{
-		$values['.languageid'] = $this->languageId;
-		return new \Aimeos\MShop\Common\Item\Property\Standard( $this->prefix, $values );
-	}
-
-
-	/**
-	 * Returns the prefix used for the item keys.
-	 *
-	 * @return string Item key prefix
+	 * @return string Domain prefix with sub-domains separated by "."
 	 */
 	protected function prefix() : string
 	{
-		return $this->prefix;
+		return $this->getDomain() . '.property.';
 	}
 }
