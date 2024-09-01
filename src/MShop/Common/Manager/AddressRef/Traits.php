@@ -41,22 +41,17 @@ trait Traits
 	 */
 	protected function getAddressItems( array $parentIds, string $domain ) : array
 	{
-		$list = [];
-
-		if( !empty( $parentIds ) )
-		{
-			$manager = $this->object()->getSubManager( 'address' );
-
-			$search = $manager->filter()->slice( 0, 0x7fffffff );
-			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
-			$search->setSortations( [$search->sort( '+', $domain . '.address.position' )] );
-
-			foreach( $manager->search( $search ) as $id => $addrItem ) {
-				$list[$addrItem->getParentId()][$id] = $addrItem;
-			}
+		if( empty( $parentIds ) ) {
+			return [];
 		}
 
-		return $list;
+		$manager = $this->object()->getSubManager( 'address' );
+
+		$search = $manager->filter()->slice( 0, 0x7fffffff )
+			->add( $domain . '.address.parentid', '==', $parentIds )
+			->order( $domain . '.address.position' );
+
+		return $manager->search( $search )->groupBy( $domain . '.address.parentid' )->all();
 	}
 
 
@@ -90,7 +85,7 @@ trait Traits
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\AddressRef\Iface
 	{
 		$manager = $this->object()->getSubManager( 'address' );
-		$manager->delete( $item->getAddressItemsDeleted()->keys()->toArray() );
+		$manager->delete( $item->getAddressItemsDeleted()->keys() );
 
 		foreach( $item->getAddressItems() as $idx => $addrItem )
 		{
