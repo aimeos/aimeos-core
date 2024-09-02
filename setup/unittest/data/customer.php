@@ -32,6 +32,7 @@ return [
 			'customer.longitude' => '10.0', 'customer.latitude' => '50.0', 'customer.birthday' => '1999-01-01',
 			'customer.password' => 'unittest',
 			'address' => [[
+				'customer.address.type' => 'delivery', 'customer.address.mobile' => '123456789',
 				'customer.address.company' => 'Example company', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr',
 				'customer.address.firstname' => 'Our', 'customer.address.lastname' => 'Unittest',
@@ -71,6 +72,7 @@ return [
 			'customer.label' => 'unitCustomer002', 'customer.code' => 'test2@example.com', 'customer.status' => 1,
 			'customer.countryid' => 'DE', 'customer.languageid' => 'de', 'customer.email' => 'test2@example.com',
 			'address' => [[
+				'customer.address.type' => 'delivery', 'customer.address.mobile' => '123456789',
 				'customer.address.company' => 'Example company LLC', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr.',
 				'customer.address.firstname' => 'Good', 'customer.address.lastname' => 'Unittest',
@@ -83,6 +85,7 @@ return [
 				'customer.address.longitude' => '10.5', 'customer.address.latitude' => '51.0',
 				'customer.address.position' => '0', 'customer.birthday' => '2000-01-01',
 			], [
+				'customer.address.type' => 'delivery', 'customer.address.mobile' => '123456789',
 				'customer.address.company' => 'Example company LLC', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr.',
 				'customer.address.firstname' => 'Good', 'customer.address.lastname' => 'Unittest',
@@ -100,6 +103,7 @@ return [
 			'customer.label' => 'unitCustomer003', 'customer.code' => 'test3@example.com', 'customer.status' => 0,
 			'customer.countryid' => 'DE', 'customer.languageid' => 'de', 'customer.email' => 'test3@example.com',
 			'address' => [[
+				'customer.address.type' => 'delivery', 'customer.address.mobile' => '123456789',
 				'customer.address.company' => 'unitcompany', 'customer.address.vatid' => 'vatnumber',
 				'customer.address.salutation' => 'company', 'customer.address.title' => 'unittitle',
 				'customer.address.firstname' => 'unitfirstname', 'customer.address.lastname' => 'unitlastname',

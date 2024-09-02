@@ -11,39 +11,29 @@ return array(
 		'address' => array(
 			'clear' => array(
 				'ansi' => '
-					DELETE FROM "mshop_customer_address"
+					DELETE FROM ":table"
 					WHERE :cond AND "siteid" LIKE ?
-				',
+				'
 			),
 			'delete' => array(
 				'ansi' => '
-					DELETE FROM "mshop_customer_address"
+					DELETE FROM ":table"
 					WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 				'
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_customer_address" ( :names
-						"parentid", "type", "company", "vatid", "salutation", "title",
-						"firstname", "lastname", "address1", "address2", "address3",
-						"postal", "city", "state", "countryid", "langid", "telephone",
-						"mobile", "email", "telefax", "website", "longitude", "latitude",
-						"pos", "birthday", "mtime", "editor", "siteid", "ctime"
+					INSERT INTO ":table" ( :names
+						"mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?
 					)
 				'
 			),
 			'update' => array(
 				'ansi' => '
-					UPDATE "mshop_customer_address"
+					UPDATE ":table"
 					SET :names
-						"parentid" = ?, "type" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
-						"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
-						"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
-						"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
-						"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
-						"longitude" = ?, "latitude" = ?, "pos" = ?, "birthday" = ?,
 						"mtime" = ?, "editor" = ?
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				'

@@ -21,116 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Address\Base
 	implements \Aimeos\MShop\Supplier\Manager\Address\Iface
 {
-	private array $searchConfig = [
-		'supplier.address.parentid' => [
-			'label' => 'Address parent ID',
-			'internalcode' => 'parentid',
-			'type' => 'int',
-			'public' => false,
-		],
-		'supplier.address.type' => [
-			'label' => 'Address type',
-			'internalcode' => 'type',
-		],
-		'supplier.address.company' => [
-			'label' => 'Address company',
-			'internalcode' => 'company',
-		],
-		'supplier.address.vatid' => [
-			'label' => 'Address Vat ID',
-			'internalcode' => 'vatid',
-		],
-		'supplier.address.salutation' => [
-			'label' => 'Address salutation',
-			'internalcode' => 'salutation',
-		],
-		'supplier.address.title' => [
-			'label' => 'Address title',
-			'internalcode' => 'title',
-		],
-		'supplier.address.firstname' => [
-			'label' => 'Address firstname',
-			'internalcode' => 'firstname',
-		],
-		'supplier.address.lastname' => [
-			'label' => 'Address lastname',
-			'internalcode' => 'lastname',
-		],
-		'supplier.address.address1' => [
-			'label' => 'Address address part one',
-			'internalcode' => 'address1',
-		],
-		'supplier.address.address2' => [
-			'label' => 'Address address part two',
-			'internalcode' => 'address2',
-		],
-		'supplier.address.address3' => [
-			'label' => 'Address address part three',
-			'internalcode' => 'address3',
-		],
-		'supplier.address.postal' => [
-			'label' => 'Address postal',
-			'internalcode' => 'postal',
-		],
-		'supplier.address.city' => [
-			'label' => 'Address city',
-			'internalcode' => 'city',
-		],
-		'supplier.address.state' => [
-			'label' => 'Address state',
-			'internalcode' => 'state',
-		],
-		'supplier.address.languageid' => [
-			'label' => 'Address language',
-			'internalcode' => 'langid',
-		],
-		'supplier.address.countryid' => [
-			'label' => 'Address country',
-			'internalcode' => 'countryid',
-		],
-		'supplier.address.telephone' => [
-			'label' => 'Address telephone',
-			'internalcode' => 'telephone',
-		],
-		'supplier.address.telefax' => [
-			'label' => 'Address telefax',
-			'internalcode' => 'telefax',
-		],
-		'supplier.address.mobile' => [
-			'label' => 'Address mobile number',
-			'internalcode' => 'mobile',
-		],
-		'supplier.address.email' => [
-			'label' => 'Address email',
-			'internalcode' => 'email',
-		],
-		'supplier.address.website' => [
-			'label' => 'Address website',
-			'internalcode' => 'website',
-		],
-		'supplier.address.birthday' => [
-			'label' => 'Address birthday',
-			'internalcode' => 'birthday',
-			'type' => 'date',
-		],
-		'supplier.address.longitude' => [
-			'label' => 'Address longitude',
-			'internalcode' => 'longitude',
-			'type' => 'float',
-		],
-		'supplier.address.latitude' => [
-			'label' => 'Address latitude',
-			'internalcode' => 'latitude',
-			'type' => 'float',
-		],
-		'supplier.address.position' => [
-			'label' => 'Address position',
-			'internalcode' => 'pos',
-			'type' => 'int',
-		],
-	];
-
-
 	/**
 	 * Creates a new empty item instance
 	 *
@@ -140,18 +30,8 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['supplier.address.siteid'] = $values['supplier.address.siteid'] ?? $this->context()->locale()->getSiteId();
+
 		return new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', $values );
-	}
-
-
-	/**
-	 * Returns the additional column/search definitions
-	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
-	 */
-	public function getSaveAttributes() : array
-	{
-		return $this->createAttributes( $this->searchConfig );
 	}
 
 

@@ -21,116 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Address\Base
 	implements \Aimeos\MShop\Customer\Manager\Address\Iface
 {
-	private array $searchConfig = [
-		'customer.address.parentid' => [
-			'label' => 'Address parent ID',
-			'internalcode' => 'parentid',
-			'type' => 'int',
-			'public' => false,
-		],
-		'customer.address.type' => [
-			'label' => 'Address type',
-			'internalcode' => 'type',
-		],
-		'customer.address.company' => [
-			'label' => 'Address company',
-			'internalcode' => 'company',
-		],
-		'customer.address.vatid' => [
-			'label' => 'Address Vat ID',
-			'internalcode' => 'vatid',
-		],
-		'customer.address.salutation' => [
-			'label' => 'Address salutation',
-			'internalcode' => 'salutation',
-		],
-		'customer.address.title' => [
-			'label' => 'Address title',
-			'internalcode' => 'title',
-		],
-		'customer.address.firstname' => [
-			'label' => 'Address firstname',
-			'internalcode' => 'firstname',
-		],
-		'customer.address.lastname' => [
-			'label' => 'Address lastname',
-			'internalcode' => 'lastname',
-		],
-		'customer.address.address1' => [
-			'label' => 'Address address part one',
-			'internalcode' => 'address1',
-		],
-		'customer.address.address2' => [
-			'label' => 'Address address part two',
-			'internalcode' => 'address2',
-		],
-		'customer.address.address3' => [
-			'label' => 'Address address part three',
-			'internalcode' => 'address3',
-		],
-		'customer.address.postal' => [
-			'label' => 'Address postal',
-			'internalcode' => 'postal',
-		],
-		'customer.address.city' => [
-			'label' => 'Address city',
-			'internalcode' => 'city',
-		],
-		'customer.address.state' => [
-			'label' => 'Address state',
-			'internalcode' => 'state',
-		],
-		'customer.address.languageid' => [
-			'label' => 'Address language',
-			'internalcode' => 'langid',
-		],
-		'customer.address.countryid' => [
-			'label' => 'Address country',
-			'internalcode' => 'countryid',
-		],
-		'customer.address.telephone' => [
-			'label' => 'Address telephone',
-			'internalcode' => 'telephone',
-		],
-		'customer.address.telefax' => [
-			'label' => 'Address telefax',
-			'internalcode' => 'telefax',
-		],
-		'customer.address.mobile' => [
-			'label' => 'Address mobile number',
-			'internalcode' => 'mobile',
-		],
-		'customer.address.email' => [
-			'label' => 'Address email',
-			'internalcode' => 'email',
-		],
-		'customer.address.website' => [
-			'label' => 'Address website',
-			'internalcode' => 'website',
-		],
-		'customer.address.birthday' => [
-			'label' => 'Address birthday',
-			'internalcode' => 'birthday',
-			'type' => 'date',
-		],
-		'customer.address.longitude' => [
-			'label' => 'Address longitude',
-			'internalcode' => 'longitude',
-			'type' => 'float',
-		],
-		'customer.address.latitude' => [
-			'label' => 'Address latitude',
-			'internalcode' => 'latitude',
-			'type' => 'float',
-		],
-		'customer.address.position' => [
-			'label' => 'Address position',
-			'internalcode' => 'pos',
-			'type' => 'int',
-		],
-	];
-
-
 	/**
 	 * Removes old entries from the storage.
 	 *
@@ -169,99 +59,15 @@ class Standard
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		return array_replace(
-			parent::getSearchAttributes( $withsub ),
-			$this->createAttributes( $this->searchConfig ),
-			$this->createAttributes( [
-				'customer.address.id' => [
-					'label' => 'Customer address ID',
-					'internalcode' => 'id',
-					'internaldeps' => ['LEFT JOIN "mshop_customer_address" AS mcusad ON ( mcus."id" = mcusad."parentid" )'],
-					'type' => 'int',
-					'public' => false,
-				]
-			] )
-		);
-	}
-
-
-	/**
-	 * Saves a common address item object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item common address item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface $item Updated item including the generated ID
-	 */
-	protected function saveItem( \Aimeos\MShop\Common\Item\Address\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Address\Iface
-	{
-		if( !$item->isModified() ) {
-			return $item;
-		}
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$path = $this->getConfigPath();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null ) {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
-		} else {
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getType() );
-		$stmt->bind( $idx++, $item->getCompany() );
-		$stmt->bind( $idx++, $item->getVatId() );
-		$stmt->bind( $idx++, $item->getSalutation() );
-		$stmt->bind( $idx++, $item->getTitle() );
-		$stmt->bind( $idx++, $item->getFirstname() );
-		$stmt->bind( $idx++, $item->getLastname() );
-		$stmt->bind( $idx++, $item->getAddress1() );
-		$stmt->bind( $idx++, $item->getAddress2() );
-		$stmt->bind( $idx++, $item->getAddress3() );
-		$stmt->bind( $idx++, $item->getPostal() );
-		$stmt->bind( $idx++, $item->getCity() );
-		$stmt->bind( $idx++, $item->getState() );
-		$stmt->bind( $idx++, $item->getCountryId() );
-		$stmt->bind( $idx++, $item->getLanguageId() );
-		$stmt->bind( $idx++, $item->getTelephone() );
-		$stmt->bind( $idx++, $item->getMobile() );
-		$stmt->bind( $idx++, $item->getEmail() );
-		$stmt->bind( $idx++, $item->getTelefax() );
-		$stmt->bind( $idx++, $item->getWebsite() );
-		$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-		$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-		$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getBirthday() );
-		$stmt->bind( $idx++, $context->datetime() ); //mtime
-		$stmt->bind( $idx++, $context->editor() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $context->user()?->getSiteId() );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); // ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null && $fetch === true ) {
-			$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
-		}
-
-		return $item->setId( $id );
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'customer.address.id' => [
+				'label' => 'Customer address ID',
+				'internalcode' => 'id',
+				'internaldeps' => ['LEFT JOIN "mshop_customer_address" AS mcusad ON ( mcus."id" = mcusad."parentid" )'],
+				'type' => 'int',
+				'public' => false,
+			]
+		] ) );
 	}
 
 
@@ -326,6 +132,69 @@ class Standard
 	protected function prefix() : string
 	{
 		return 'customer.address.';
+	}
+
+
+	/**
+	 * Saves a common address item object.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item common address item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface $item Updated item including the generated ID
+	 */
+	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		if( !$item->isModified() ) {
+			return $item;
+		}
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$id = $item->getId();
+		$columns = array_column( $this->object()->getSaveAttributes(), null, 'internalcode' );
+
+		if( $id === null )
+		{
+			$path = 'mshop/customer/manager/address/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			$path = 'mshop/customer/manager/address/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
+
+		$idx = 1;
+		$values = $item->toArray( true );
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+		foreach( $this->object()->getSaveAttributes() as $name => $entry )
+		{
+			$value = $values[$entry->getCode()] ?? null;
+			$value = $entry->getType() === 'json' ? json_encode( $value, JSON_FORCE_OBJECT ) : $value;
+			$stmt->bind( $idx++, $value, \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
+
+		$stmt->bind( $idx++, $context->datetime() ); //mtime
+		$stmt->bind( $idx++, $context->editor() );
+
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
+			$stmt->bind( $idx++, $context->user()?->getSiteId() );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		} else {
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
+			$stmt->bind( $idx++, $context->datetime() ); // ctime
+		}
+
+		$stmt->execute()->finish();
+
+		if( $id === null && $fetch === true ) {
+			$id = $this->newId( $conn, 'mshop/common/manager/newid' );
+		}
+
+		return $item->setId( $id );
 	}
 
 
