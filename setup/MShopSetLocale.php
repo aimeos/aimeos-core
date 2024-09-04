@@ -22,7 +22,7 @@ class MShopSetLocale extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopAddLocaleData'];
+		return ['Log', 'MShopAddLocaleData'];
 	}
 
 

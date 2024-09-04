@@ -21,7 +21,7 @@ class MShopAddLocaleLangCurData extends MShopAddLocaleData
 	 */
 	public function after() : array
 	{
-		return ['Locale'];
+		return ['Log', 'Locale'];
 	}
 
 
