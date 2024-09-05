@@ -20,6 +20,22 @@ namespace Aimeos\MShop\Common\Manager\ListsRef;
 trait Traits
 {
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\ContextIface Context object
+	 */
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
+
+
+	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
+
+
+	/**
 	 * Creates a new lists item object
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -32,45 +48,6 @@ trait Traits
 
 
 	/**
-	 * Creates a new item for the specific manager.
-	 *
-	 * @param array $values Associative list of key/value pairs
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @return \Aimeos\MShop\Common\Item\Iface New item
-	 */
-	abstract protected function createItemBase( array $values = [], array $listItems = [],
-		array $refItems = [] ) : \Aimeos\MShop\Common\Item\Iface;
-
-
-	/**
-	 * Applies the filters for the item type to the item
-	 *
-	 * @param object $item Item to apply the filter to
-	 * @return object|null Object if the item should be used, null if not
-	 */
-	abstract protected function applyFilter( $item );
-
-
-	/**
-	 * Returns the context object.
-	 *
-	 * @return \Aimeos\MShop\ContextIface Context object
-	 */
-	abstract protected function context() : \Aimeos\MShop\ContextIface;
-
-
-	/**
-	 * Creates a new extension manager in the domain.
-	 *
-	 * @param string $domain Name of the domain (product, text, media, etc.)
-	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
-	 */
-	abstract public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
-
-
-	/**
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
@@ -79,6 +56,7 @@ trait Traits
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 * @deprecated 2025.01 Use getListItems() instead
 	 */
 	protected function buildItems( array $map, array $domains, string $prefix, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
@@ -103,7 +81,13 @@ trait Traits
 			$refItems = $refItemMap[$id] ?? [];
 			$listItems = $listItemMap[$id] ?? [];
 
-			if( $item = $this->applyFilter( $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 ) ) ) {
+			if( method_exists( $this, 'createItemBase' ) ) {
+				$item = $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 );
+			} else {
+				$item = $this->create( $values + ['.listitems' => $listItems] );
+			}
+
+			if( !method_exists( $this, 'applyFilter' ) || ( $item = $this->applyFilter( $item ) ) !== null ) {
 				$items[$id] = $item;
 			}
 		}
@@ -148,9 +132,9 @@ trait Traits
 
 
 	/**
-	 * Returns the list items that belong to the given IDs.
+	 * Returns the list items that belong to the given parent item IDs.
 	 *
-	 * @param string[] $ids List of IDs
+	 * @param string[] $ids List of parent item IDs
 	 * @param string[] $domains List of domain names whose referenced items should be attached
 	 * @param string $prefix Domain prefix
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
@@ -190,19 +174,12 @@ trait Traits
 			}
 		}
 
-		$expr[] = $search->or( $list );
-		$search->setConditions( $search->and( $expr ) );
+		if( !empty( $list ) ) {
+			$expr[] = $search->or( $list );
+		}
 
-		return $manager->search( $search, $domains );
+		return $manager->search( $search->add( $search->and( $expr ) ), $domains );
 	}
-
-
-	/**
-	 * Returns the outmost decorator of the decorator stack
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
-	 */
-	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -211,6 +188,7 @@ trait Traits
 	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
 	 * @param string[] $domains List of domain names whose referenced items should be attached
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
+	 * @deprecated 2025.01 Done by lists manager
 	 */
 	protected function getRefItems( array $refIdMap, array $domains ) : array
 	{
