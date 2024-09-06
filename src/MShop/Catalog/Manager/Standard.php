@@ -890,8 +890,10 @@ class Standard extends Base
 			$nodeid = $node->getId();
 			$nodeMap = $this->getNodeMap( $node );
 
-			if( !empty( $ref ) ) {
-				$listItems = $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' )->groupBy( 'catalog.lists.parentid' )->all();
+			if( !empty( $ref ) )
+			{
+				$listItems = map( $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' ) )
+					->groupBy( 'catalog.lists.parentid' )->all();
 			}
 
 			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems[$nodeid] ?? [], [], [], $node ) ) )

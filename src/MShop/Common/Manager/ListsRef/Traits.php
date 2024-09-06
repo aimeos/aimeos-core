@@ -135,13 +135,13 @@ trait Traits
 	 * @param string[] $parentIds List of parent item IDs
 	 * @param string[] $ref List of domain names whose referenced items should be attached
 	 * @param string $domain Domain prefix
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
 	 * @todo 2025.01 Exchange $ref and $domain parameters
 	 */
-	protected function getListItems( array $parentIds, array $ref, string $domain ) : \Aimeos\Map
+	protected function getListItems( array $parentIds, array $ref, string $domain ) : array
 	{
 		if( empty( $ref ) ) {
-			return map();
+			return [];
 		}
 
 		$manager = $this->object()->getSubManager( 'lists' );
@@ -174,7 +174,8 @@ trait Traits
 		}
 
 		return $manager->search( $search->add( $search->and( $expr ) ), $ref )
-			->uasort( fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() );
+			->uasort( fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() )
+			->all();
 	}
 
 
