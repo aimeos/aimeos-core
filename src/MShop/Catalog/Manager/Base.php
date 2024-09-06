@@ -52,37 +52,22 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function buildItems( array $itemMap, array $domains, string $prefix, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
-		$items = $listItemMap = $refItemMap = $refIdMap = [];
+		$items = $listItemMap = [];
 
-		if( count( $domains ) > 0 )
+		if( !empty( $domains ) )
 		{
 			$listItems = $this->getListItems( array_keys( $itemMap ), $domains, $prefix );
 
-			foreach( $listItems as $listItem )
-			{
-				$domain = $listItem->getDomain();
-				$parentid = $listItem->getParentId();
-
-				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
-				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
+			foreach( $this->getListItems( array_keys( $itemMap ), $domains, $prefix ) as $id => $listItem ) {
+				$listItemMap[$listItem->getParentId()][$id] = $listItem;
 			}
-
-			$refItemMap = $this->getRefItems( $refIdMap, $domains );
 		}
 
 		foreach( $itemMap as $id => $node )
 		{
-			$listItems = [];
-			if( isset( $listItemMap[$id] ) ) {
-				$listItems = $listItemMap[$id];
-			}
+			$listItems = $listItemMap[$id] ?? [];
 
-			$refItems = [];
-			if( isset( $refItemMap[$id] ) ) {
-				$refItems = $refItemMap[$id];
-			}
-
-			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, [], [], $node ) ) ) {
 				$items[$id] = $item;
 			}
 		}
@@ -140,12 +125,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$listItems = $listItemMap[$child->getId()];
 			}
 
-			$refItems = [];
-			if( array_key_exists( $child->getId(), $refItemMap ) ) {
-				$refItems = $refItemMap[$child->getId()];
-			}
-
-			if( $newItem = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $child ) ) )
+			if( $newItem = $this->applyFilter( $this->createItemBase( [], $listItems, [], [], $child ) ) )
 			{
 				$item->addChild( $newItem );
 				$this->createTree( $child, $newItem, $listItemMap, $refItemMap );

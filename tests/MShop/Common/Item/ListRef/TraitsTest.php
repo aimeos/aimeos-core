@@ -71,21 +71,21 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) + $values );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
-		$this->listItem1->setRefItem( $this->textItem2 );
+		$this->listItem2->setRefItem( $this->textItem2 );
 		$this->listItem2->setDomain( 'text' );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setStatus( 1 );
 		$this->listItem2->setId( 10 );
 
-		$listItems = array( 'text' => array(
+		$listItems = array(
 			$this->listItem1->getId() => $this->listItem1,
 			$this->listItem2->getId() => $this->listItem2,
-		) );
+		);
 
-		$refItems = array( 'text' => array(
+		$refItems = array(
 			$this->textItem1->getId() => $this->textItem1,
 			$this->textItem2->getId() => $this->textItem2,
-		) );
+		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\ListsRef\Test( $listItems, $refItems );
 	}

@@ -19,9 +19,7 @@ namespace Aimeos\MShop\Common\Item\ListsRef;
  */
 trait Traits
 {
-	private bool $listPrepared = false;
 	private array $listItems = [];
-	private array $listRefItems = [];
 	private array $listRmItems = [];
 	private array $listRmMap = [];
 	private array $listMap = [];
@@ -42,19 +40,44 @@ trait Traits
 			}
 		}
 
-		foreach( $this->listRefItems as $domain => $list )
-		{
-			foreach( $list as $id => $item ) {
-				$this->listRefItems[$domain][$id] = clone $item;
-			}
-		}
-
 		foreach( $this->listRmItems as $key => $item ) {
 			$this->listRmItems[$key] = clone $item;
 		}
-
-		$this->listPrepared = false;
 	}
+
+
+	/**
+	 * Returns the unique ID of the item.
+	 *
+	 * @return string|null ID of the item
+	 */
+	abstract public function getId() : ?string;
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return string Item type, subtypes are separated by slashes
+	 */
+	abstract public function getResourceType() : string;
+
+
+	/**
+	 * Registers a custom macro that has access to the class properties if called non-static
+	 *
+	 * @param string $name Macro name
+	 * @param \Closure|null $function Anonymous function
+	 * @return \Closure|null Registered function
+	 */
+	abstract public static function macro( string $name, \Closure $function = null ) : ?\Closure;
+
+
+	/**
+	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
 
 
 	/**
@@ -75,8 +98,6 @@ trait Traits
 			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
 				$refItem->setDomain( $this->getResourceType() );
 			}
-
-			$this->listRefItems[$domain][$id] = $refItem;
 		}
 
 		$id = $listItem->getId() ?: '_' . $this->getId() . '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
@@ -196,10 +217,6 @@ trait Traits
 				return null;
 			}
 
-			if( isset( $this->listRefItems[$domain][$refId] ) ) {
-				$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
-			}
-
 			return $listItem;
 		}
 
@@ -223,13 +240,11 @@ trait Traits
 	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : \Aimeos\Map
 	{
 		$result = [];
-		$this->prepareListItems();
 		$fcn = static::macro( 'listFilter' );
 
 		$iface = \Aimeos\MShop\Common\Item\TypeRef\Iface::class;
 		$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 		$types = ( is_array( $type ) ? $type : array( $type ) );
-
 
 		foreach( $this->listItems as $dname => $list )
 		{
@@ -330,79 +345,18 @@ trait Traits
 
 
 	/**
-	 * Returns the unique ID of the item.
-	 *
-	 * @return string|null ID of the item
-	 */
-	abstract public function getId() : ?string;
-
-
-	/**
-	 * Sets the modified flag of the object.
-	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
-	 */
-	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
-
-
-	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	abstract public function getResourceType() : string;
-
-
-	/**
-	 * Registers a custom macro that has access to the class properties if called non-static
-	 *
-	 * @param string $name Macro name
-	 * @param \Closure|null $function Anonymous function
-	 * @return \Closure|null Registered function
-	 */
-	abstract public static function macro( string $name, \Closure $function = null ) : ?\Closure;
-
-
-	/**
 	 * Initializes the list items in the trait
 	 *
 	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement \Aimeos\MShop\Common\Item\Iface
+	 * @todo 2025.01 Remove unused $refItems parameter
 	 */
-	protected function initListItems( array $listItems, array $refItems )
+	protected function initListItems( array $listItems, array $refItems = [] )
 	{
-		$this->listItems = $listItems;
-		$this->listRefItems = $refItems;
+		$this->listMax = count( $listItems );
 
-		foreach( $listItems as $list ) {
-			$this->listMax += count( $list );
+		foreach( $listItems as $id => $listItem ) {
+			$this->listItems[$listItem->getDomain()][$id] = $listItem;
 		}
-	}
-
-
-	/**
-	 * Sorts the list items according to their position value and attaches the referenced item
-	 */
-	protected function prepareListItems()
-	{
-		if( $this->listPrepared === true ) {
-			return;
-		}
-
-		foreach( $this->listItems as $domain => $list )
-		{
-			foreach( $list as $listItem )
-			{
-				$refId = $listItem->getRefId();
-
-				if( isset( $this->listRefItems[$domain][$refId] ) ) {
-					$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
-				}
-			}
-
-			uasort( $this->listItems[$domain], fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() );
-		}
-
-		$this->listPrepared = true;
 	}
 }

@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$listValues = ['id' => 1, 'type' => 'default', 'domain' => 'text'];
-		$this->listItems = ['text' => [1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues )]];
+		$this->listItems = [1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues )];
 
 		$this->values = [
 			'id' => 2,

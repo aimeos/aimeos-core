@@ -886,38 +886,17 @@ class Standard extends Base
 				continue;
 			}
 
-			$listItems = $listItemMap = $refIdMap = [];
+			$listItems = [];
+			$nodeid = $node->getId();
 			$nodeMap = $this->getNodeMap( $node );
 
-			if( count( $ref ) > 0 ) {
-				$listItems = $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
+			if( !empty( $ref ) ) {
+				$listItems = $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' )->groupBy( 'catalog.lists.parentid' )->all();
 			}
 
-			foreach( $listItems as $listItem )
+			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems[$nodeid] ?? [], [], [], $node ) ) )
 			{
-				$domain = $listItem->getDomain();
-				$parentid = $listItem->getParentId();
-
-				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
-				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
-			}
-
-			$refItemMap = $this->getRefItems( $refIdMap, $ref );
-			$nodeid = $node->getId();
-
-			$listItems = [];
-			if( array_key_exists( $nodeid, $listItemMap ) ) {
-				$listItems = $listItemMap[$nodeid];
-			}
-
-			$refItems = [];
-			if( array_key_exists( $nodeid, $refItemMap ) ) {
-				$refItems = $refItemMap[$nodeid];
-			}
-
-			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) )
-			{
-				$this->createTree( $node, $item, $listItemMap, $refItemMap );
+				$this->createTree( $node, $item, $listItems, [] );
 				return $item;
 			}
 		}

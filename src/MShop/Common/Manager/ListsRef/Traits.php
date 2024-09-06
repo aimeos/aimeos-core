@@ -20,12 +20,19 @@ namespace Aimeos\MShop\Common\Manager\ListsRef;
 trait Traits
 {
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
+	 */
+	abstract public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\ContextIface Context object
 	 */
 	abstract protected function context() : \Aimeos\MShop\ContextIface;
-
 
 	/**
 	 * Returns the outmost decorator of the decorator stack
@@ -51,38 +58,29 @@ trait Traits
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param string[] $refs List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string $domain Domain prefix
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 * @deprecated 2025.01 Use getListItems() instead
 	 */
-	protected function buildItems( array $map, array $refs, string $domain, array $local = [], array $local2 = [] ) : \Aimeos\Map
+	protected function buildItems( array $map, array $ref, string $domain, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
-		$items = $listItemMap = $refItemMap = [];
+		$items = $listItemMap = [];
 
-		foreach( $this->getListItems( array_keys( $map ), $refs, $domain ) as $id => $listItem )
-		{
-			$domain = $listItem->getDomain();
-			$parentid = $listItem->getParentId();
-
-			$listItemMap[$parentid][$domain][$id] = $listItem;
-
-			if( $refItem = $listItem->getRefItem() ) {
-				$refItemMap[$parentid][$domain][$listItem->getRefId()] = $refItem;
-			}
+		foreach( $this->getListItems( array_keys( $map ), $ref, $domain ) as $id => $listItem ) {
+			$listItemMap[$listItem->getParentId()][$id] = $listItem;
 		}
 
 		foreach( $map as $id => $values )
 		{
 			$localItems = $local[$id] ?? [];
 			$localItems2 = $local2[$id] ?? [];
-			$refItems = $refItemMap[$id] ?? [];
 			$listItems = $listItemMap[$id] ?? [];
 
 			if( method_exists( $this, 'createItemBase' ) ) {
-				$item = $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 );
+				$item = $this->createItemBase( $values, $listItems, [], $localItems, $localItems2 );
 			} else {
 				$item = $this->create( $values + ['.listitems' => $listItems] );
 			}
@@ -135,42 +133,39 @@ trait Traits
 	 * Returns the list items that belong to the given parent item IDs.
 	 *
 	 * @param string[] $parentIds List of parent item IDs
-	 * @param string[] $refs List of domain names whose referenced items should be attached
+	 * @param string[] $ref List of domain names whose referenced items should be attached
 	 * @param string $domain Domain prefix
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
+	 * @todo 2025.01 Exchange $ref and $domain parameters
 	 */
-	protected function getListItems( array $parentIds, array $refs, string $domain ) : \Aimeos\Map
+	protected function getListItems( array $parentIds, array $ref, string $domain ) : \Aimeos\Map
 	{
-		if( empty( $refs ) ) {
+		if( empty( $ref ) ) {
 			return map();
 		}
 
 		$manager = $this->object()->getSubManager( 'lists' );
-		$search = $manager->filter()->slice( 0, 0x7fffffff )->order( [
-			$domain . '.lists.parentid',
-			$domain . '.lists.domain',
-			$domain . '.lists.type'
-		] );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
 
 		$list = [];
 		$len = strlen( $domain );
 		$expr = [$search->compare( '==', $domain . '.lists.parentid', $parentIds )];
 
-		foreach( $refs as $key => $domain )
+		foreach( $ref as $key => $type )
 		{
-			if( is_array( $domain ) )
+			if( is_array( $type ) )
 			{
 				$key = !strncmp( $key, $domain . '/', $len + 1 ) ? [$key, substr( $key, $len + 1 )] : $key; // remove prefix
 
 				$list[] = $search->and( [
 					$search->compare( '==', $domain . '.lists.domain', $key ),
-					$search->compare( '==', $domain . '.lists.type', $domain ),
+					$search->compare( '==', $domain . '.lists.type', $type ),
 				] );
 			}
 			else
 			{
-				$domain = !strncmp( $domain, $domain . '/', $len + 1 ) ? [$domain, substr( $domain, $len + 1 )] : $domain; // remove prefix
-				$list[] = $search->compare( '==', $domain . '.lists.domain', $domain );
+				$type = !strncmp( $type, $domain . '/', $len + 1 ) ? [$type, substr( $type, $len + 1 )] : $type; // remove prefix
+				$list[] = $search->compare( '==', $domain . '.lists.domain', $type );
 			}
 		}
 
@@ -178,7 +173,8 @@ trait Traits
 			$expr[] = $search->or( $list );
 		}
 
-		return $manager->search( $search->add( $search->and( $expr ) ), $refs );
+		return $manager->search( $search->add( $search->and( $expr ) ), $ref )
+			->uasort( fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() );
 	}
 
 
@@ -186,11 +182,11 @@ trait Traits
 	 * Returns the referenced items for the given IDs.
 	 *
 	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
-	 * @param string[] $refs List of domain names whose referenced items should be attached
+	 * @param string[] $ref List of domain names whose referenced items should be attached
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
 	 * @deprecated 2025.01 Done by lists manager
 	 */
-	protected function getRefItems( array $refIdMap, array $refs ) : array
+	protected function getRefItems( array $refIdMap, array $ref ) : array
 	{
 		$items = [];
 
@@ -207,7 +203,7 @@ trait Traits
 			$search = $manager->filter()->slice( 0, count( $list ) )
 				->add( [$attr->getCode() => array_keys( $list )] );
 
-			foreach( $manager->search( $search, $refs ) as $id => $item )
+			foreach( $manager->search( $search, $ref ) as $id => $item )
 			{
 				foreach( $list[$id] as $parentId ) {
 					$items[$parentId][$domain][$id] = $item;
