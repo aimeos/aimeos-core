@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Attribute
@@ -36,17 +35,13 @@ class Standard
 	 * Initializes the attribute item.
 	 *
 	 * @param array $values Associative array with id, domain, code, and status to initialize the item properties; Optional
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( array $values = [], array $listItems = [],
-		array $refItems = [], array $propItems = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'attribute.', $values );
+		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $listItems, $refItems );
-		$this->initPropertyItems( $propItems );
+		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initPropertyItems( $values['.propitems'] ?? [] );
 	}
 
 

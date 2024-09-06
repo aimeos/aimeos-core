@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'attribute.editor' => 'unitTestUser',
 		);
 
-		$this->object = new \Aimeos\MShop\Attribute\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Attribute\Item\Standard( 'attribute.', $this->values );
 	}
 
 
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Attribute\Item\Standard();
+		$item = new \Aimeos\MShop\Attribute\Item\Standard( 'attribute.' );
 
 		$list = $entries = array(
 			'attribute.id' => 1,
