@@ -206,7 +206,7 @@ class Standard
 			$propItems = $this->getPropertyItems( $parentIds, 'attribute', $propTypes );
 		}
 
-		$listItems = map( $this->getListItems( $parentIds, $ref, 'attribute' ) )->groupBy( 'attribute.lists.parentid');
+		$listItems = map( $this->getListItems( $parentIds, $ref, 'attribute' ) )->groupBy( 'attribute.lists.parentid' );
 
 		foreach( $map as $id => $row )
 		{
@@ -245,6 +245,19 @@ class Standard
 		$item = $this->savePropertyItems( $item, 'attribute', $fetch );
 		return $this->saveListItems( $item, 'attribute', $fetch );
 	}
+
+
+	/** mshop/attribute/manager/resource
+	 * Name of the database connection resource to use
+	 *
+	 * You can configure a different database connection for each data domain
+	 * and if no such connection name exists, the "db" connection will be used.
+	 * It's also possible to use the same database connection for different
+	 * data domains by configuring the same connection name using this setting.
+	 *
+	 * @param string Database connection name
+	 * @since 2023.04
+	 */
 
 
 	/** mshop/attribute/manager/submanagers

@@ -34,7 +34,8 @@ class Standard
 	/**
 	 * Initializes the attribute item.
 	 *
-	 * @param array $values Associative array with id, domain, code, and status to initialize the item properties; Optional
+	 * @param string $prefix Domain specific prefix string
+	 * @param array $values Initial values for the item
 	 */
 	public function __construct( string $prefix, array $values = [] )
 	{
