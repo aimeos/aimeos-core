@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'.languageid' => 'de',
 		);
 
-		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Media\Item\Standard( 'media.', $this->values );
 	}
 
 
@@ -291,9 +291,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetNameProperties()
 	{
-		$values = ['media.value' => 'title', 'media.type' => 'name', '.languageid' => null];
-		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.', $values )];
-		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values, [], [], $propItems );
+		$values = ['media.property.value' => 'title', 'media.property.type' => 'name', '.languageid' => null];
+		$propitems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.property.', $values )];
+		$object = new \Aimeos\MShop\Media\Item\Standard( 'media.', $this->values + ['.propitems' => $propitems] );
 
 		$this->assertEquals( 'title', $object->getName() );
 	}
@@ -307,7 +307,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Media\Item\Standard();
+		$item = new \Aimeos\MShop\Media\Item\Standard( 'media.' );
 
 		$list = $entries = array(
 			'media.id' => 1,
