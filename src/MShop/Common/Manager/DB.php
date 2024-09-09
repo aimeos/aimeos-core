@@ -213,12 +213,18 @@ trait DB
 		$expr[] = $search->compare( '!=', $valkey, null );
 		$search->add( $search->and( $expr ) );
 
+		$val = $attrMap[$value]->getInternalCode();
+
+		if( strpos( $val, '"' ) === false ) {
+			$val = $this->alias( $attrMap[$value]->getCode() ) . '."' . $val . '"';
+		}
+
 		$sql = $this->getSqlConfig( $cfgPath );
 		$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
 		$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
 		$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
-		$sql = str_replace( ':val', $attrMap[$value]->getInternalCode(), $sql );
 		$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
+		$sql = str_replace( ':val', $val, $sql );
 
 		return $this->aggregateResult( $search, $sql, $required );
 	}

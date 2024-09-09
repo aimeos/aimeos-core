@@ -366,6 +366,10 @@ abstract class DBBase
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
 			{
+				if( strpos( $col, '"' ) === false ) {
+					$col = $this->alias( $names[$idx] ) . '."' . $col . '"';
+				}
+
 				$list[] = ( $ops[$idx] === '-' ? 'MAX' : 'MIN' ) . '(' . $col . ') AS "s' . $idx . '"';
 				$translations[$names[$idx]] = '"s' . $idx . '"';
 			}
