@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDelete()
 	{
-		$item = ( new \Aimeos\MShop\Product\Item\Standard() )->setId( -1 );
+		$item = ( new \Aimeos\MShop\Product\Item\Standard( 'product.' ) )->setId( -1 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [$item] ) );
@@ -75,6 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $search );
+
 		$this->assertEquals( 'event', $search->getConditions()->getExpressions()[2]->getExpressions()[2]->getValue() );
 	}
 

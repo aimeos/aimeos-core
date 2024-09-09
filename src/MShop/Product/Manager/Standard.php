@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Product
@@ -23,340 +22,11 @@ class Standard
 	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface,
 		\Aimeos\MShop\Common\Manager\ListsRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
-	/** mshop/product/manager/name
-	 * Class name of the used product manager implementation
-	 *
-	 * Each default manager can be replace by an alternative imlementation.
-	 * To use this implementation, you have to set the last part of the class
-	 * name as configuration value so the manager factory knows which class it
-	 * has to instantiate.
-	 *
-	 * For example, if the name of the default class is
-	 *
-	 *  \Aimeos\MShop\Product\Manager\Standard
-	 *
-	 * and you want to replace it with your own version named
-	 *
-	 *  \Aimeos\MShop\Product\Manager\Mymanager
-	 *
-	 * then you have to set the this configuration option:
-	 *
-	 *  mshop/product/manager/name = Mymanager
-	 *
-	 * The value is the last part of your own class name and it's case sensitive,
-	 * so take care that the configuration value is exactly named like the last
-	 * part of the class name.
-	 *
-	 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
-	 * characters are possible! You should always start the last part of the class
-	 * name with an upper case character and continue only with lower case characters
-	 * or numbers. Avoid chamel case names like "MyManager"!
-	 *
-	 * @param string Last part of the class name
-	 * @since 2014.03
-	 */
-
-	/** mshop/product/manager/decorators/excludes
-	 * Excludes decorators added by the "common" option from the product manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to remove a decorator added via
-	 * "mshop/common/manager/decorators/default" before they are wrapped
-	 * around the product manager.
-	 *
-	 *  mshop/product/manager/decorators/excludes = array( 'decorator1' )
-	 *
-	 * This would remove the decorator named "decorator1" from the list of
-	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-	 * "mshop/common/manager/decorators/default" for the product manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2014.03
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/product/manager/decorators/global
-	 * @see mshop/product/manager/decorators/local
-	 */
-
-	/** mshop/product/manager/decorators/global
-	 * Adds a list of globally available decorators only to the product manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to wrap global decorators
-	 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product manager.
-	 *
-	 *  mshop/product/manager/decorators/global = array( 'decorator1' )
-	 *
-	 * This would add the decorator named "decorator1" defined by
-	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product
-	 * manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2014.03
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/product/manager/decorators/excludes
-	 * @see mshop/product/manager/decorators/local
-	 */
-
-	/** mshop/product/manager/decorators/local
-	 * Adds a list of local decorators only to the product manager
-	 *
-	 * Decorators extend the functionality of a class by adding new aspects
-	 * (e.g. log what is currently done), executing the methods of the underlying
-	 * class only in certain conditions (e.g. only for logged in users) or
-	 * modify what is returned to the caller.
-	 *
-	 * This option allows you to wrap local decorators
-	 * ("\Aimeos\MShop\Product\Manager\Decorator\*") around the product manager.
-	 *
-	 *  mshop/product/manager/decorators/local = array( 'decorator2' )
-	 *
-	 * This would add the decorator named "decorator2" defined by
-	 * "\Aimeos\MShop\Product\Manager\Decorator\Decorator2" only to the product
-	 * manager.
-	 *
-	 * @param array List of decorator names
-	 * @since 2014.03
-	 * @see mshop/common/manager/decorators/default
-	 * @see mshop/product/manager/decorators/excludes
-	 * @see mshop/product/manager/decorators/global
-	 */
-
-
 	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private array $searchConfig = array(
-		'product.id' => array(
-			'code' => 'product.id',
-			'internalcode' => 'mpro."id"',
-			'label' => 'ID',
-			'type' => 'int',
-		),
-		'product.siteid' => array(
-			'code' => 'product.siteid',
-			'internalcode' => 'mpro."siteid"',
-			'label' => 'Site ID',
-			'public' => false,
-		),
-		'product.type' => array(
-			'code' => 'product.type',
-			'internalcode' => 'mpro."type"',
-			'label' => 'Type',
-		),
-		'product.label' => array(
-			'code' => 'product.label',
-			'internalcode' => 'mpro."label"',
-			'label' => 'Label',
-		),
-		'product.code' => array(
-			'code' => 'product.code',
-			'internalcode' => 'mpro."code"',
-			'label' => 'SKU',
-		),
-		'product.url' => array(
-			'code' => 'product.url',
-			'internalcode' => 'mpro."url"',
-			'label' => 'URL segment',
-		),
-		'product.dataset' => array(
-			'code' => 'product.dataset',
-			'internalcode' => 'mpro."dataset"',
-			'label' => 'Data set',
-		),
-		'product.datestart' => array(
-			'code' => 'product.datestart',
-			'internalcode' => 'mpro."start"',
-			'label' => 'Start date/time',
-			'type' => 'datetime',
-		),
-		'product.dateend' => array(
-			'code' => 'product.dateend',
-			'internalcode' => 'mpro."end"',
-			'label' => 'End date/time',
-			'type' => 'datetime',
-		),
-		'product.instock' => array(
-			'code' => 'product.instock',
-			'internalcode' => 'mpro."instock"',
-			'label' => 'Product in stock',
-			'type' => 'int',
-		),
-		'product.status' => array(
-			'code' => 'product.status',
-			'internalcode' => 'mpro."status"',
-			'label' => 'Status',
-			'type' => 'int',
-		),
-		'product.scale' => array(
-			'code' => 'product.scale',
-			'internalcode' => 'mpro."scale"',
-			'label' => 'Quantity scale',
-			'type' => 'float',
-		),
-		'product.boost' => array(
-			'code' => 'product.boost',
-			'internalcode' => 'mpro."boost"',
-			'label' => 'Boost factor',
-			'type' => 'float',
-		),
-		'product.config' => array(
-			'code' => 'product.config',
-			'internalcode' => 'mpro."config"',
-			'label' => 'Configuration',
-			'type' => 'json',
-			'public' => false,
-		),
-		'product.target' => array(
-			'code' => 'product.target',
-			'internalcode' => 'mpro."target"',
-			'label' => 'URL target',
-			'public' => false,
-		),
-		'product.ctime' => array(
-			'code' => 'product.ctime',
-			'internalcode' => 'mpro."ctime"',
-			'label' => 'Create date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'product.mtime' => array(
-			'code' => 'product.mtime',
-			'internalcode' => 'mpro."mtime"',
-			'label' => 'Modify date/time',
-			'type' => 'datetime',
-			'public' => false,
-		),
-		'product.editor' => array(
-			'code' => 'product.editor',
-			'internalcode' => 'mpro."editor"',
-			'label' => 'Editor',
-			'public' => false,
-		),
-		'product.rating' => array(
-			'code' => 'product.rating',
-			'internalcode' => 'mpro."rating"',
-			'label' => 'Rating value',
-			'type' => 'decimal',
-			'public' => false,
-		),
-		'product.ratings' => array(
-			'code' => 'product.ratings',
-			'internalcode' => 'mpro."ratings"',
-			'label' => 'Number of ratings',
-			'type' => 'int',
-			'public' => false,
-		),
-		'product:has' => array(
-			'code' => 'product:has()',
-			'internalcode' => ':site AND :key AND mproli."id"',
-			'internaldeps' => ['LEFT JOIN "mshop_product_list" AS mproli ON ( mproli."parentid" = mpro."id" )'],
-			'label' => 'Product has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-			'type' => 'null',
-			'public' => false,
-		),
-		'product:prop' => array(
-			'code' => 'product:prop()',
-			'internalcode' => ':site AND :key AND mpropr."id"',
-			'internaldeps' => ['LEFT JOIN "mshop_product_property" AS mpropr ON ( mpropr."parentid" = mpro."id" )'],
-			'label' => 'Product has property item, parameter(<property type>[,<language code>[,<property value>]])',
-			'type' => 'null',
-			'public' => false,
-		),
-	);
-
-	private string $date;
 	private array $cacheTags = [];
-
-
-	/**
-	 * Creates the product manager that will use the given context object.
-	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
-	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		parent::__construct( $context );
-
-		/** mshop/product/manager/resource
-		 * Name of the database connection resource to use
-		 *
-		 * You can configure a different database connection for each data domain
-		 * and if no such connection name exists, the "db" connection will be used.
-		 * It's also possible to use the same database connection for different
-		 * data domains by configuring the same connection name using this setting.
-		 *
-		 * @param string Database connection name
-		 * @since 2023.04
-		 */
-		$this->setResourceName( $context->config()->get( 'mshop/product/manager/resource', 'db-product' ) );
-		$this->date = $context->datetime();
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
-
-
-		$this->searchConfig['product:has']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-
-			foreach( (array) ( $params[1] ?? '' ) as $type ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-				}
-			}
-
-			$sitestr = $this->siteString( 'mproli."siteid"', $level );
-			$keystr = $this->toExpression( 'mproli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-
-
-		$this->searchConfig['product:prop']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-			foreach( (array) $langs as $lang ) {
-				foreach( (array) ( $params[2] ?? '' ) as $val ) {
-					$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-				}
-			}
-
-			$sitestr = $this->siteString( 'mpropr."siteid"', $level );
-			$keystr = $this->toExpression( 'mpropr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-	}
-
-
-	/**
-	 * Removes old entries from the storage.
-	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$path = 'mshop/product/manager/submanagers';
-		foreach( $this->context()->config()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
-		}
-
-		return $this->clearBase( $siteids, 'mshop/product/manager/delete' );
-	}
 
 
 	/**
@@ -383,8 +53,28 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['product.siteid'] = $values['product.siteid'] ?? $this->context()->locale()->getSiteId();
-		return $this->createItemBase( $values );
+		$context = $this->context();
+
+		$values['.date'] = $context->datetime();
+		$values['product.siteid'] = $values['product.siteid'] ?? $context->locale()->getSiteId();
+
+		return new \Aimeos\MShop\Product\Item\Standard( 'product.', $values );
+	}
+
+
+	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		parent::delete( $items )->deleteRefItems( $items );
+
+		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->copy()->cast()->prefix( 'product-' )->all() );
+
+		return $this;
 	}
 
 
@@ -397,23 +87,22 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
+		$object = $this->filterBase( 'product', $default );
+
 		if( $default !== false )
 		{
-			$object = $this->filterBase( 'product', $default );
+			$date = $this->context()->datetime();
 
-			$expr = [$object->getConditions()];
-
-			$temp = array(
-				$object->compare( '==', 'product.type', 'event' ),
+			$start = [
+				$object->compare( '<=', 'product.datestart', $date ),
 				$object->compare( '==', 'product.datestart', null ),
-				$object->compare( '<=', 'product.datestart', $this->date ),
-			);
-			$expr[] = $object->or( $temp );
+				$object->compare( '==', 'product.type', 'event' ),
+			];
 
-			$temp = array(
+			$end = [
+				$object->compare( '>=', 'product.dateend', $date ),
 				$object->compare( '==', 'product.dateend', null ),
-				$object->compare( '>=', 'product.dateend', $this->date ),
-			);
+			];
 
 			/** mshop/product/manager/strict-events
 			 * Hide events automatically if they are over
@@ -430,65 +119,17 @@ class Standard
 			 * @since 2019.10
 			 */
 			if( !$this->context()->config()->get( 'mshop/product/manager/strict-events', true ) ) {
-				$temp[] = $object->compare( '==', 'product.type', 'event' );
+				$end[] = $object->compare( '==', 'product.type', 'event' );
 			}
 
-			$expr[] = $object->or( $temp );
-
-			$object->setConditions( $object->and( $expr ) );
-
-			return $object;
+			$object->setConditions( $object->and( [
+				$object->getConditions(),
+				$object->or( $start ),
+				$object->or( $end ),
+			] ) );
 		}
 
-		return parent::filter();
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		/** mshop/product/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/product/manager/delete/ansi
-		 */
-
-		/** mshop/product/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the product database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @see mshop/product/manager/insert/ansi
-		 * @see mshop/product/manager/update/ansi
-		 * @see mshop/product/manager/newid/ansi
-		 * @see mshop/product/manager/search/ansi
-		 * @see mshop/product/manager/count/ansi
-		 * @see mshop/product/manager/rate/ansi
-		 * @see mshop/product/manager/stock/ansi
-		 */
-		$path = 'mshop/product/manager/delete';
-
-		$this->deleteItemsBase( $items, $path )->deleteRefItems( $items );
-		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->copy()->cast()->prefix( 'product-' )->all() );
-
-		return $this;
+		return $object;
 	}
 
 
@@ -505,35 +146,92 @@ class Standard
 	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->findBase( array( 'product.code' => $code ), $ref, $default );
+		return $this->findBase( ['product.code' => $code], $ref, $default );
 	}
 
 
 	/**
-	 * Returns the product item for the given product ID.
+	 * Returns the additional column/search definitions
 	 *
-	 * @param string $id Unique ID of the product item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function getSaveAttributes() : array
 	{
-		return $this->getItemBase( 'product.id', $id, $ref, $default );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'mshop/product/manager/submanagers';
-		return $this->getResourceTypeBase( 'product', $path, ['lists', 'property'], $withsub );
+		return $this->createAttributes( [
+			'product.type' => [
+				'label' => 'Type',
+				'internalcode' => 'type',
+			],
+			'product.label' => [
+				'label' => 'Label',
+				'internalcode' => 'label',
+			],
+			'product.code' => [
+				'label' => 'SKU',
+				'internalcode' => 'code',
+			],
+			'product.url' => [
+				'label' => 'URL segment',
+				'internalcode' => 'url',
+			],
+			'product.dataset' => [
+				'label' => 'Data set',
+				'internalcode' => 'dataset',
+			],
+			'product.datestart' => [
+				'label' => 'Start date/time',
+				'internalcode' => 'start',
+				'type' => 'datetime',
+			],
+			'product.dateend' => [
+				'label' => 'End date/time',
+				'internalcode' => 'end',
+				'type' => 'datetime',
+			],
+			'product.instock' => [
+				'label' => 'Product in stock',
+				'internalcode' => 'instock',
+				'type' => 'int',
+			],
+			'product.status' => [
+				'label' => 'Status',
+				'internalcode' => 'status',
+				'type' => 'int',
+			],
+			'product.scale' => [
+				'label' => 'Quantity scale',
+				'internalcode' => 'scale',
+				'type' => 'float',
+			],
+			'product.boost' => [
+				'label' => 'Boost factor',
+				'internalcode' => 'boost',
+				'type' => 'float',
+			],
+			'product.config' => [
+				'label' => 'Configuration',
+				'internalcode' => 'config',
+				'type' => 'json',
+				'public' => false,
+			],
+			'product.target' => [
+				'label' => 'URL target',
+				'internalcode' => 'target',
+				'public' => false,
+			],
+			'product.rating' => [
+				'label' => 'Rating value',
+				'internalcode' => 'rating',
+				'type' => 'decimal',
+				'public' => false,
+			],
+			'product.ratings' => [
+				'label' => 'Number of ratings',
+				'internalcode' => 'ratings',
+				'type' => 'int',
+				'public' => false,
+			],
+		] );
 	}
 
 
@@ -545,38 +243,58 @@ class Standard
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		/** mshop/product/manager/submanagers
-		 * List of manager names that can be instantiated by the product manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 */
-		$path = 'mshop/product/manager/submanagers';
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $this->context()->config()->get( 'mshop/product/manager/sitemode', $level );
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
-	}
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'product:has' => array(
+				'code' => 'product:has()',
+				'internalcode' => ':site AND :key AND mproli."id"',
+				'internaldeps' => ['LEFT JOIN "mshop_product_list" AS mproli ON ( mproli."parentid" = mpro."id" )'],
+				'label' => 'Product has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
+				'type' => 'null',
+				'public' => false,
+					'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
 
+					foreach( (array) ( $params[1] ?? '' ) as $type ) {
+						foreach( (array) ( $params[2] ?? '' ) as $id ) {
+							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+						}
+					}
 
-	/**
-	 * Returns a new manager for product extensions.
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Submanager, e.g. type, property, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'product', $manager, $name );
+					$sitestr = $this->siteString( 'mproli."siteid"', $level );
+					$keystr = $this->toExpression( 'mproli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			),
+			'product:prop' => array(
+				'code' => 'product:prop()',
+				'internalcode' => ':site AND :key AND mpropr."id"',
+				'internaldeps' => ['LEFT JOIN "mshop_product_property" AS mpropr ON ( mpropr."parentid" = mpro."id" )'],
+				'label' => 'Product has property item, parameter(<property type>[,<language code>[,<property value>]])',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
+
+					foreach( (array) $langs as $lang ) {
+						foreach( (array) ( $params[2] ?? '' ) as $val ) {
+							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
+						}
+					}
+
+					$sitestr = $this->siteString( 'mpropr."siteid"', $level );
+					$keystr = $this->toExpression( 'mpropr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			),
+		] ) );
 	}
 
 
@@ -716,400 +434,63 @@ class Standard
 
 
 	/**
-	 * Adds a new product to the storage.
+	 * Fetches the rows from the database statement and returns the list of items.
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item that should be saved to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface Updated item including the generated ID
+	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
+	 * @param array $ref List of domains whose items should be fetched too
+	 * @param string $prefix Prefix for the property names
+	 * @param array $attrs List of attributes that should be decoded
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function saveItem( \Aimeos\MShop\Product\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Product\Item\Iface
+	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
 	{
-		if( !$item->isModified() )
-		{
-			$item = $this->savePropertyItems( $item, 'product', $fetch );
-			return $this->saveListItems( $item, 'product', $fetch );
-		}
-
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null )
-		{
-			/** mshop/product/manager/insert/mysql
-			 * Inserts a new product record into the database table
-			 *
-			 * @see mshop/product/manager/insert/ansi
-			 */
-
-			/** mshop/product/manager/insert/ansi
-			 * Inserts a new product record into the database table
-			 *
-			 * Items with no ID yet (i.e. the ID is NULL) will be created in
-			 * the database and the newly created ID retrieved afterwards
-			 * using the "newid" SQL statement.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the product item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The order of the columns must correspond to the
-			 * order in the save() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2014.03
-			 * @see mshop/product/manager/update/ansi
-			 * @see mshop/product/manager/newid/ansi
-			 * @see mshop/product/manager/delete/ansi
-			 * @see mshop/product/manager/search/ansi
-			 * @see mshop/product/manager/count/ansi
-			 * @see mshop/product/manager/rate/ansi
-			 * @see mshop/product/manager/stock/ansi
-			 */
-			$path = 'mshop/product/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-		}
-		else
-		{
-			/** mshop/product/manager/update/mysql
-			 * Updates an existing product record in the database
-			 *
-			 * @see mshop/product/manager/update/ansi
-			 */
-
-			/** mshop/product/manager/update/ansi
-			 * Updates an existing product record in the database
-			 *
-			 * Items which already have an ID (i.e. the ID is not NULL) will
-			 * be updated in the database.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the product item to the statement before they are
-			 * sent to the database server. The order of the columns must
-			 * correspond to the order in the save() method, so the
-			 * correct values are bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for updating records
-			 * @since 2014.03
-			 * @see mshop/product/manager/insert/ansi
-			 * @see mshop/product/manager/newid/ansi
-			 * @see mshop/product/manager/delete/ansi
-			 * @see mshop/product/manager/search/ansi
-			 * @see mshop/product/manager/count/ansi
-			 * @see mshop/product/manager/rate/ansi
-			 * @see mshop/product/manager/stock/ansi
-			 */
-			$path = 'mshop/product/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getType() );
-		$stmt->bind( $idx++, $item->getCode() );
-		$stmt->bind( $idx++, $item->getDataset() );
-		$stmt->bind( $idx++, $item->getLabel() );
-		$stmt->bind( $idx++, $item->getUrl() );
-		$stmt->bind( $idx++, $item->inStock(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getScale(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-		$stmt->bind( $idx++, $item->getDateStart() );
-		$stmt->bind( $idx++, $item->getDateEnd() );
-		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-		$stmt->bind( $idx++, $item->getTarget() );
-		$stmt->bind( $idx++, $item->boost() );
-		$stmt->bind( $idx++, $context->editor() );
-		$stmt->bind( $idx++, $context->datetime() ); // mtime
-		$stmt->bind( $idx++, $item->getTimeCreated() ?: $context->datetime() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null )
-		{
-			/** mshop/product/manager/newid/mysql
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * @see mshop/product/manager/newid/ansi
-			 */
-
-			/** mshop/product/manager/newid/ansi
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * As soon as a new record is inserted into the database table,
-			 * the database server generates a new and unique identifier for
-			 * that record. This ID can be used for retrieving, updating and
-			 * deleting that specific record from the table again.
-			 *
-			 * For MySQL:
-			 *  SELECT LAST_INSERT_ID()
-			 * For PostgreSQL:
-			 *  SELECT currval('seq_mpro_id')
-			 * For SQL Server:
-			 *  SELECT SCOPE_IDENTITY()
-			 * For Oracle:
-			 *  SELECT "seq_mpro_id".CURRVAL FROM DUAL
-			 *
-			 * There's no way to retrive the new ID by a SQL statements that
-			 * fits for most database servers as they implement their own
-			 * specific way.
-			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
-			 * @since 2014.03
-			 * @see mshop/product/manager/insert/ansi
-			 * @see mshop/product/manager/update/ansi
-			 * @see mshop/product/manager/delete/ansi
-			 * @see mshop/product/manager/search/ansi
-			 * @see mshop/product/manager/count/ansi
-			 * @see mshop/product/manager/rate/ansi
-			 * @see mshop/product/manager/stock/ansi
-			 */
-			$path = 'mshop/product/manager/newid';
-			$id = $this->newId( $conn, $path );
-		}
-
-		$item->setId( $id );
-
-		$item = $this->savePropertyItems( $item, 'product', $fetch );
-		return $this->saveListItems( $item, 'product', $fetch );
-	}
-
-
-	/**
-	 * Search for products based on the given criteria.
-	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
-	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
-	{
-		$map = [];
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$required = ['product'];
-
-		/** mshop/product/manager/sitemode
-		 * Mode how items from levels below or above in the site tree are handled
-		 *
-		 * By default, only items from the current site are fetched from the
-		 * storage. If the ai-sites extension is installed, you can create a
-		 * tree of sites. Then, this setting allows you to define for the
-		 * whole product domain if items from parent sites are inherited,
-		 * sites from child sites are aggregated or both.
-		 *
-		 * Available constants for the site mode are:
-		 * * 0 = only items from the current site
-		 * * 1 = inherit items from parent sites
-		 * * 2 = aggregate items from child sites
-		 * * 3 = inherit and aggregate items at the same time
-		 *
-		 * You also need to set the mode in the locale manager
-		 * (mshop/locale/manager/sitelevel) to one of the constants.
-		 * If you set it to the same value, it will work as described but you
-		 * can also use different modes. For example, if inheritance and
-		 * aggregation is configured the locale manager but only inheritance
-		 * in the domain manager because aggregating items makes no sense in
-		 * this domain, then items wil be only inherited. Thus, you have full
-		 * control over inheritance and aggregation in each domain.
-		 *
-		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @since 2018.01
-		 * @see mshop/locale/manager/sitelevel
-		 */
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
-
-		/** mshop/product/manager/search/mysql
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * @see mshop/product/manager/search/ansi
-		 */
-
-		/** mshop/product/manager/search/ansi
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * Fetches the records matched by the given criteria from the product
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the SELECT statement can retrieve all records
-		 * from the current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * If the records that are retrieved should be ordered by one or more
-		 * columns, the generated string of column / sort direction pairs
-		 * replaces the ":order" placeholder. Columns of
-		 * sub-managers can also be used for ordering the result set but then
-		 * no index can be used.
-		 *
-		 * The number of returned records can be limited and can start at any
-		 * number between the begining and the end of the result set. For that
-		 * the ":size" and ":start" placeholders are replaced by the
-		 * corresponding values from the criteria object. The default values
-		 * are 0 for the start and 100 for the size value.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for searching items
-		 * @since 2014.03
-		 * @see mshop/product/manager/insert/ansi
-		 * @see mshop/product/manager/update/ansi
-		 * @see mshop/product/manager/newid/ansi
-		 * @see mshop/product/manager/delete/ansi
-		 * @see mshop/product/manager/count/ansi
-		 * @see mshop/product/manager/rate/ansi
-		 * @see mshop/product/manager/stock/ansi
-		 */
-		$cfgPathSearch = 'mshop/product/manager/search';
-
-		/** mshop/product/manager/count/mysql
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * @see mshop/product/manager/count/ansi
-		 */
-
-		/** mshop/product/manager/count/ansi
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * Counts all records matched by the given criteria from the product
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the statement can count all records from the
-		 * current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * Both, the strings for ":joins" and for ":cond" are the same as for
-		 * the "search" SQL statement.
-		 *
-		 * Contrary to the "search" statement, it doesn't return any records
-		 * but instead the number of records that have been found. As counting
-		 * thousands of records can be a long running task, the maximum number
-		 * of counted records is limited for performance reasons.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for counting items
-		 * @since 2014.03
-		 * @see mshop/product/manager/insert/ansi
-		 * @see mshop/product/manager/update/ansi
-		 * @see mshop/product/manager/newid/ansi
-		 * @see mshop/product/manager/delete/ansi
-		 * @see mshop/product/manager/search/ansi
-		 * @see mshop/product/manager/rate/ansi
-		 * @see mshop/product/manager/stock/ansi
-		 */
-		$cfgPathCount = 'mshop/product/manager/count';
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$map = $items = $parentIds = $propItems = [];
 
 		while( $row = $results->fetch() )
 		{
-			if( ( $row['product.config'] = json_decode( $row['product.config'], true ) ) === null ) {
-				$row['product.config'] = [];
+			foreach( $attrs as $code => $attr ) {
+				$row[$code] = json_decode( $row[$code], true );
 			}
 
 			$map[$row['product.id']] = $row;
+			$parentIds[] = $row['product.id'];
 		}
 
-
-		$propItems = []; $name = 'product/property';
-		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
-		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'product', $propTypes );
-		}
-
-		if( isset( $ref['stock'] ) || in_array( 'stock', $ref, true ) )
+		if( $this->hasRef( $ref, 'stock' ) )
 		{
 			foreach( $this->getStockItems( array_keys( $map ), $ref ) as $stockId => $stockItem ) {
 				$map[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
 			}
 		}
 
-		if( isset( $ref['locale/site'] ) || in_array( 'locale/site', $ref, true ) )
+		if( $this->hasRef( $ref, 'locale/site' ) )
 		{
 			foreach( $this->getSiteItems( $map ) as $prodId => $item ) {
 				$map[$prodId]['.locale/site'] = $item;
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'product', $propItems );
-	}
+		if( $this->hasRef( $ref, 'product/property' ) )
+		{
+			$name = 'product/property';
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
 
+			$propItems = $this->getPropertyItems( $parentIds, 'product', $propTypes );
+		}
 
-	/**
-	 * Create new product item object initialized with given parameters.
-	 *
-	 * @param array $values Associative list of key/value pairs
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propertyItems List of property items
-	 * @return \Aimeos\MShop\Product\Item\Iface New product item
-	 */
-	protected function createItemBase( array $values = [], array $listItems = [],
-		array $refItems = [], array $propertyItems = [] ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$values['.date'] = $this->date;
+		$listItems = map( $this->getListItems( $parentIds, $ref, 'product' ) )->groupBy( 'product.lists.parentid' );
 
-		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
+		foreach( $map as $id => $row )
+		{
+			$row['.listitems'] = $listItems[$id] ?? [];
+			$row['.propitems'] = $propItems[$id] ?? [];
+
+			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+				$items[$id] = $item;
+			}
+		}
+
+		return map( $items );
 	}
 
 
@@ -1152,4 +533,445 @@ class Standard
 
 		return $manager->search( $filter );
 	}
+
+
+	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function prefix() : string
+	{
+		return 'product.';
+	}
+
+
+	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$item = $this->savePropertyItems( $item, 'product', $fetch );
+		return $this->saveListItems( $item, 'product', $fetch );
+	}
+
+
+	/** mshop/product/manager/resource
+	 * Name of the database connection resource to use
+	 *
+	 * You can configure a different database connection for each data domain
+	 * and if no such connection name exists, the "db" connection will be used.
+	 * It's also possible to use the same database connection for different
+	 * data domains by configuring the same connection name using this setting.
+	 *
+	 * @param string Database connection name
+	 * @since 2023.04
+	 */
+
+	/** mshop/product/manager/name
+	 * Class name of the used product manager implementation
+	 *
+	 * Each default manager can be replace by an alternative imlementation.
+	 * To use this implementation, you have to set the last part of the class
+	 * name as configuration value so the manager factory knows which class it
+	 * has to instantiate.
+	 *
+	 * For example, if the name of the default class is
+	 *
+	 *  \Aimeos\MShop\Product\Manager\Standard
+	 *
+	 * and you want to replace it with your own version named
+	 *
+	 *  \Aimeos\MShop\Product\Manager\Mymanager
+	 *
+	 * then you have to set the this configuration option:
+	 *
+	 *  mshop/product/manager/name = Mymanager
+	 *
+	 * The value is the last part of your own class name and it's case sensitive,
+	 * so take care that the configuration value is exactly named like the last
+	 * part of the class name.
+	 *
+	 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
+	 * characters are possible! You should always start the last part of the class
+	 * name with an upper case character and continue only with lower case characters
+	 * or numbers. Avoid chamel case names like "MyManager"!
+	 *
+	 * @param string Last part of the class name
+	 * @since 2014.03
+	 */
+
+	/** mshop/product/manager/decorators/excludes
+	 * Excludes decorators added by the "common" option from the product manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to remove a decorator added via
+	 * "mshop/common/manager/decorators/default" before they are wrapped
+	 * around the product manager.
+	 *
+	 *  mshop/product/manager/decorators/excludes = array( 'decorator1' )
+	 *
+	 * This would remove the decorator named "decorator1" from the list of
+	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
+	 * "mshop/common/manager/decorators/default" for the product manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2014.03
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/product/manager/decorators/global
+	 * @see mshop/product/manager/decorators/local
+	 */
+
+	/** mshop/product/manager/decorators/global
+	 * Adds a list of globally available decorators only to the product manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to wrap global decorators
+	 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product manager.
+	 *
+	 *  mshop/product/manager/decorators/global = array( 'decorator1' )
+	 *
+	 * This would add the decorator named "decorator1" defined by
+	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product
+	 * manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2014.03
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/product/manager/decorators/excludes
+	 * @see mshop/product/manager/decorators/local
+	 */
+
+	/** mshop/product/manager/decorators/local
+	 * Adds a list of local decorators only to the product manager
+	 *
+	 * Decorators extend the functionality of a class by adding new aspects
+	 * (e.g. log what is currently done), executing the methods of the underlying
+	 * class only in certain conditions (e.g. only for logged in users) or
+	 * modify what is returned to the caller.
+	 *
+	 * This option allows you to wrap local decorators
+	 * ("\Aimeos\MShop\Product\Manager\Decorator\*") around the product manager.
+	 *
+	 *  mshop/product/manager/decorators/local = array( 'decorator2' )
+	 *
+	 * This would add the decorator named "decorator2" defined by
+	 * "\Aimeos\MShop\Product\Manager\Decorator\Decorator2" only to the product
+	 * manager.
+	 *
+	 * @param array List of decorator names
+	 * @since 2014.03
+	 * @see mshop/common/manager/decorators/default
+	 * @see mshop/product/manager/decorators/excludes
+	 * @see mshop/product/manager/decorators/global
+	 */
+
+	/** mshop/product/manager/submanagers
+	 * List of manager names that can be instantiated by the product manager
+	 *
+	 * Managers provide a generic interface to the underlying storage.
+	 * Each manager has or can have sub-managers caring about particular
+	 * aspects. Each of these sub-managers can be instantiated by its
+	 * parent manager using the getSubManager() method.
+	 *
+	 * The search keys from sub-managers can be normally used in the
+	 * manager as well. It allows you to search for items of the manager
+	 * using the search keys of the sub-managers to further limit the
+	 * retrieved list of items.
+	 *
+	 * @param array List of sub-manager names
+	 * @since 2014.03
+	 */
+
+	/** mshop/product/manager/delete/mysql
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * @see mshop/product/manager/delete/ansi
+	 */
+
+	/** mshop/product/manager/delete/ansi
+	 * Deletes the items matched by the given IDs from the database
+	 *
+	 * Removes the records specified by the given IDs from the product database.
+	 * The records must be from the site that is configured via the
+	 * context item.
+	 *
+	 * The ":cond" placeholder is replaced by the name of the ID column and
+	 * the given ID or list of IDs while the site ID is bound to the question
+	 * mark.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for deleting items
+	 * @since 2014.03
+	 * @see mshop/product/manager/insert/ansi
+	 * @see mshop/product/manager/update/ansi
+	 * @see mshop/product/manager/newid/ansi
+	 * @see mshop/product/manager/search/ansi
+	 * @see mshop/product/manager/count/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
+
+	/** mshop/product/manager/insert/mysql
+	 * Inserts a new product record into the database table
+	 *
+	 * @see mshop/product/manager/insert/ansi
+	 */
+
+	/** mshop/product/manager/insert/ansi
+	 * Inserts a new product record into the database table
+	 *
+	 * Items with no ID yet (i.e. the ID is NULL) will be created in
+	 * the database and the newly created ID retrieved afterwards
+	 * using the "newid" SQL statement.
+	 *
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the product item to the statement before they are
+	 * sent to the database server. The number of question marks must
+	 * be the same as the number of columns listed in the INSERT
+	 * statement. The order of the columns must correspond to the
+	 * order in the save() method, so the correct values are
+	 * bound to the columns.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for inserting records
+	 * @since 2014.03
+	 * @see mshop/product/manager/update/ansi
+	 * @see mshop/product/manager/newid/ansi
+	 * @see mshop/product/manager/delete/ansi
+	 * @see mshop/product/manager/search/ansi
+	 * @see mshop/product/manager/count/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
+
+	/** mshop/product/manager/update/mysql
+	 * Updates an existing product record in the database
+	 *
+	 * @see mshop/product/manager/update/ansi
+	 */
+
+	/** mshop/product/manager/update/ansi
+	 * Updates an existing product record in the database
+	 *
+	 * Items which already have an ID (i.e. the ID is not NULL) will
+	 * be updated in the database.
+	 *
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the product item to the statement before they are
+	 * sent to the database server. The order of the columns must
+	 * correspond to the order in the save() method, so the
+	 * correct values are bound to the columns.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for updating records
+	 * @since 2014.03
+	 * @see mshop/product/manager/insert/ansi
+	 * @see mshop/product/manager/newid/ansi
+	 * @see mshop/product/manager/delete/ansi
+	 * @see mshop/product/manager/search/ansi
+	 * @see mshop/product/manager/count/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
+
+	/** mshop/product/manager/newid/mysql
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * @see mshop/product/manager/newid/ansi
+	 */
+
+	/** mshop/product/manager/newid/ansi
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * As soon as a new record is inserted into the database table,
+	 * the database server generates a new and unique identifier for
+	 * that record. This ID can be used for retrieving, updating and
+	 * deleting that specific record from the table again.
+	 *
+	 * For MySQL:
+	 *  SELECT LAST_INSERT_ID()
+	 * For PostgreSQL:
+	 *  SELECT currval('seq_mpro_id')
+	 * For SQL Server:
+	 *  SELECT SCOPE_IDENTITY()
+	 * For Oracle:
+	 *  SELECT "seq_mpro_id".CURRVAL FROM DUAL
+	 *
+	 * There's no way to retrive the new ID by a SQL statements that
+	 * fits for most database servers as they implement their own
+	 * specific way.
+	 *
+	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @since 2014.03
+	 * @see mshop/product/manager/insert/ansi
+	 * @see mshop/product/manager/update/ansi
+	 * @see mshop/product/manager/delete/ansi
+	 * @see mshop/product/manager/search/ansi
+	 * @see mshop/product/manager/count/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
+
+	/** mshop/product/manager/sitemode
+	 * Mode how items from levels below or above in the site tree are handled
+	 *
+	 * By default, only items from the current site are fetched from the
+	 * storage. If the ai-sites extension is installed, you can create a
+	 * tree of sites. Then, this setting allows you to define for the
+	 * whole product domain if items from parent sites are inherited,
+	 * sites from child sites are aggregated or both.
+	 *
+	 * Available constants for the site mode are:
+	 * * 0 = only items from the current site
+	 * * 1 = inherit items from parent sites
+	 * * 2 = aggregate items from child sites
+	 * * 3 = inherit and aggregate items at the same time
+	 *
+	 * You also need to set the mode in the locale manager
+	 * (mshop/locale/manager/sitelevel) to one of the constants.
+	 * If you set it to the same value, it will work as described but you
+	 * can also use different modes. For example, if inheritance and
+	 * aggregation is configured the locale manager but only inheritance
+	 * in the domain manager because aggregating items makes no sense in
+	 * this domain, then items wil be only inherited. Thus, you have full
+	 * control over inheritance and aggregation in each domain.
+	 *
+	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @since 2018.01
+	 * @see mshop/locale/manager/sitelevel
+	 */
+
+	/** mshop/product/manager/search/mysql
+	 * Retrieves the records matched by the given criteria in the database
+	 *
+	 * @see mshop/product/manager/search/ansi
+	 */
+
+	/** mshop/product/manager/search/ansi
+	 * Retrieves the records matched by the given criteria in the database
+	 *
+	 * Fetches the records matched by the given criteria from the product
+	 * database. The records must be from one of the sites that are
+	 * configured via the context item. If the current site is part of
+	 * a tree of sites, the SELECT statement can retrieve all records
+	 * from the current site and the complete sub-tree of sites.
+	 *
+	 * As the records can normally be limited by criteria from sub-managers,
+	 * their tables must be joined in the SQL context. This is done by
+	 * using the "internaldeps" property from the definition of the ID
+	 * column of the sub-managers. These internal dependencies specify
+	 * the JOIN between the tables and the used columns for joining. The
+	 * ":joins" placeholder is then replaced by the JOIN strings from
+	 * the sub-managers.
+	 *
+	 * To limit the records matched, conditions can be added to the given
+	 * criteria object. It can contain comparisons like column names that
+	 * must match specific values which can be combined by AND, OR or NOT
+	 * operators. The resulting string of SQL conditions replaces the
+	 * ":cond" placeholder before the statement is sent to the database
+	 * server.
+	 *
+	 * If the records that are retrieved should be ordered by one or more
+	 * columns, the generated string of column / sort direction pairs
+	 * replaces the ":order" placeholder. Columns of
+	 * sub-managers can also be used for ordering the result set but then
+	 * no index can be used.
+	 *
+	 * The number of returned records can be limited and can start at any
+	 * number between the begining and the end of the result set. For that
+	 * the ":size" and ":start" placeholders are replaced by the
+	 * corresponding values from the criteria object. The default values
+	 * are 0 for the start and 100 for the size value.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for searching items
+	 * @since 2014.03
+	 * @see mshop/product/manager/insert/ansi
+	 * @see mshop/product/manager/update/ansi
+	 * @see mshop/product/manager/newid/ansi
+	 * @see mshop/product/manager/delete/ansi
+	 * @see mshop/product/manager/count/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
+
+	/** mshop/product/manager/count/mysql
+	 * Counts the number of records matched by the given criteria in the database
+	 *
+	 * @see mshop/product/manager/count/ansi
+	 */
+
+	/** mshop/product/manager/count/ansi
+	 * Counts the number of records matched by the given criteria in the database
+	 *
+	 * Counts all records matched by the given criteria from the product
+	 * database. The records must be from one of the sites that are
+	 * configured via the context item. If the current site is part of
+	 * a tree of sites, the statement can count all records from the
+	 * current site and the complete sub-tree of sites.
+	 *
+	 * As the records can normally be limited by criteria from sub-managers,
+	 * their tables must be joined in the SQL context. This is done by
+	 * using the "internaldeps" property from the definition of the ID
+	 * column of the sub-managers. These internal dependencies specify
+	 * the JOIN between the tables and the used columns for joining. The
+	 * ":joins" placeholder is then replaced by the JOIN strings from
+	 * the sub-managers.
+	 *
+	 * To limit the records matched, conditions can be added to the given
+	 * criteria object. It can contain comparisons like column names that
+	 * must match specific values which can be combined by AND, OR or NOT
+	 * operators. The resulting string of SQL conditions replaces the
+	 * ":cond" placeholder before the statement is sent to the database
+	 * server.
+	 *
+	 * Both, the strings for ":joins" and for ":cond" are the same as for
+	 * the "search" SQL statement.
+	 *
+	 * Contrary to the "search" statement, it doesn't return any records
+	 * but instead the number of records that have been found. As counting
+	 * thousands of records can be a long running task, the maximum number
+	 * of counted records is limited for performance reasons.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for counting items
+	 * @since 2014.03
+	 * @see mshop/product/manager/insert/ansi
+	 * @see mshop/product/manager/update/ansi
+	 * @see mshop/product/manager/newid/ansi
+	 * @see mshop/product/manager/delete/ansi
+	 * @see mshop/product/manager/search/ansi
+	 * @see mshop/product/manager/rate/ansi
+	 * @see mshop/product/manager/stock/ansi
+	 */
 }
