@@ -39,6 +39,18 @@ class Standard
 
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return parent::delete( $items )->deleteRefItems( $items );
+	}
+
+
+	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria

@@ -87,6 +87,18 @@ class Standard
 
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Price\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return parent::delete( $items )->deleteRefItems( $items );
+	}
+
+
+	/**
 	 * Returns the additional column/search definitions
 	 *
 	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface

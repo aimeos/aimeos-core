@@ -112,7 +112,7 @@ class Standard
 			}
 		}
 
-		return parent::delete( $items );
+		return parent::delete( $items )->deleteRefItems( $items );
 	}
 
 
