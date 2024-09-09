@@ -22,6 +22,299 @@ class Standard
 	extends \Aimeos\MShop\Price\Manager\Base
 	implements \Aimeos\MShop\Price\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+
+
+	private bool $taxflag;
+	private int $precision;
+
+
+	/**
+	 * Creates the price manager that will use the given context object.
+	 *
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
+	 */
+	public function __construct( \Aimeos\MShop\ContextIface $context )
+	{
+		parent::__construct( $context );
+
+		$config = $context->config();
+
+		/** mshop/price/taxflag
+		 * Configuration setting if prices are inclusive or exclusive tax
+		 *
+		 * In Aimeos, prices can be entered either completely with or without tax. The
+		 * default is that prices contains tax. You must specifiy the tax rate for each
+		 * prices to prevent wrong calculations.
+		 *
+		 * @param bool True if gross prices are used, false for net prices
+		 * @since 2016.02
+		 */
+		$this->taxflag = (bool) $config->get( 'mshop/price/taxflag', true );
+
+		/** mshop/price/precision
+		 * Number of decimal digits prices contain
+		 *
+		 * Sets the number of decimal digits price values will contain. Internally,
+		 * prices are calculated as double values with high precision but these
+		 * values will be rounded after calculation to the configured number of digits.
+		 *
+		 * @param int Positive number of digits
+		 * @since 2019.04
+		 */
+		$this->precision = (int) $config->get( 'mshop/price/precision', 2 );
+	}
+
+
+	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Price\Item\Iface New price item object
+	 */
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$locale = $this->context()->locale();
+
+		$values['price.taxflag'] = $values['price.taxflag'] ?? $this->taxflag;
+		$values['price.precision'] = $values['price.precision'] ?? $this->precision;
+		$values['price.currencyid'] = $values['price.currencyid'] ?? $locale->getCurrencyId();
+		$values['price.siteid'] = $values['price.siteid'] ?? $locale->getSiteId();
+
+		return new \Aimeos\MShop\Price\Item\Standard( 'price.', $values );
+	}
+
+
+	/**
+	 * Returns the additional column/search definitions
+	 *
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
+	 */
+	public function getSaveAttributes() : array
+	{
+		return $this->createAttributes( [
+			'price.type' => [
+				'label' => 'Price type ID',
+				'internalcode' => 'type',
+			],
+			'price.currencyid' => [
+				'label' => 'Price currency code',
+				'internalcode' => 'currencyid',
+			],
+			'price.domain' => [
+				'label' => 'Price domain',
+				'internalcode' => 'domain',
+			],
+			'price.label' => [
+				'label' => 'Price label',
+				'internalcode' => 'label',
+			],
+			'price.quantity' => [
+				'label' => 'Price quantity',
+				'internalcode' => 'quantity',
+				'type' => 'float',
+			],
+			'price.value' => [
+				'label' => 'Price regular value',
+				'internalcode' => 'value',
+				'type' => 'decimal',
+			],
+			'price.costs' => [
+				'label' => 'Price shipping costs',
+				'internalcode' => 'costs',
+				'type' => 'decimal',
+			],
+			'price.rebate' => [
+				'label' => 'Price rebate amount',
+				'internalcode' => 'rebate',
+				'type' => 'decimal',
+			],
+			'price.taxrate' => [
+				'label' => 'Price tax rates as JSON encoded string',
+				'internalcode' => 'taxrate',
+				'type' => 'json',
+			],
+			'price.taxrates' => [
+				'label' => 'Price tax rates as JSON encoded string',
+				'internalcode' => 'taxrate',
+				'type' => 'json',
+			],
+			'price.status' => [
+				'label' => 'Price status',
+				'internalcode' => 'status',
+				'type' => 'int',
+			],
+		] );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
+	 */
+	public function getSearchAttributes( bool $withsub = true ) : array
+	{
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $this->context()->config()->get( 'mshop/price/manager/sitemode', $level );
+
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'price:has' => array(
+				'code' => 'price:has()',
+				'internalcode' => ':site AND :key AND mprili."id"',
+				'internaldeps' => ['LEFT JOIN "mshop_price_list" AS mprili ON ( mprili."parentid" = mpri."id" )'],
+				'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+
+					foreach( (array) ( $params[1] ?? '' ) as $type ) {
+						foreach( (array) ( $params[2] ?? '' ) as $id ) {
+							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+						}
+					}
+
+					$sitestr = $this->siteString( 'mprili."siteid"', $level );
+					$keystr = $this->toExpression( 'mprili."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			),
+			'price:prop' => array(
+				'code' => 'price:prop()',
+				'internalcode' => ':site AND :key AND mpripr."id"',
+				'internaldeps' => ['LEFT JOIN "mshop_price_property" AS mpripr ON ( mpripr."parentid" = mpri."id" )'],
+				'label' => 'Price has property item, parameter(<property type>[,<language code>[,<property value>]])',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
+
+					foreach( (array) $langs as $lang ) {
+						foreach( (array) ( $params[2] ?? '' ) as $val ) {
+							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
+						}
+					}
+
+					$sitestr = $this->siteString( 'mpripr."siteid"', $level );
+					$keystr = $this->toExpression( 'mpripr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			),
+		] ) );
+	}
+
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
+	 */
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
+	{
+		$filter = $this->filterBase( 'price', $default );
+
+		if( $default !== false && ( $currencyid = $this->context()->locale()->getCurrencyId() ) !== null ) {
+			$filter->add( 'price.currencyid', '==', $currencyid );
+		}
+
+		return $filter;
+	}
+
+
+	/**
+	 * Fetches the rows from the database statement and returns the list of items.
+	 *
+	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
+	 * @param array $ref List of domains whose items should be fetched too
+	 * @param string $prefix Prefix for the property names
+	 * @param array $attrs List of attributes that should be decoded
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
+	{
+		$map = $items = $parentIds = $propItems = [];
+
+		while( $row = $results->fetch() )
+		{
+			foreach( $attrs as $code => $attr ) {
+				$row[$code] = json_decode( $row[$code], true );
+			}
+
+			$map[$row['price.id']] = $row;
+			$parentIds[] = $row['price.id'];
+		}
+
+		if( $this->hasRef( $ref, 'price/property' ) )
+		{
+			$name = 'price/property';
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+
+			$propItems = $this->getPropertyItems( $parentIds, 'price', $propTypes );
+		}
+
+		$listItems = map( $this->getListItems( $parentIds, $ref, 'price' ) )->groupBy( 'price.lists.parentid' );
+
+		foreach( $map as $id => $row )
+		{
+			$row['.listitems'] = $listItems[$id] ?? [];
+			$row['.propitems'] = $propItems[$id] ?? [];
+
+			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+				$items[$id] = $item;
+			}
+		}
+
+		return map( $items );
+	}
+
+
+	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function prefix() : string
+	{
+		return 'price.';
+	}
+
+
+	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$item = $this->savePropertyItems( $item, 'price', $fetch );
+		return $this->saveListItems( $item, 'price', $fetch );
+	}
+
+
+	/** mshop/price/manager/resource
+	 * Name of the database connection resource to use
+	 *
+	 * You can configure a different database connection for each data domain
+	 * and if no such connection name exists, the "db" connection will be used.
+	 * It's also possible to use the same database connection for different
+	 * data domains by configuring the same connection name using this setting.
+	 *
+	 * @param string Database connection name
+	 * @since 2023.04
+	 */
+
 	/** mshop/price/manager/name
 	 * Class name of the used price manager implementation
 	 *
@@ -52,7 +345,7 @@ class Standard
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
 	 * @param string Last part of the class name
-	 * @since 2014.03
+	 * @since 2015.10
 	 */
 
 	/** mshop/price/manager/decorators/excludes
@@ -74,7 +367,7 @@ class Standard
 	 * "mshop/common/manager/decorators/default" for the price manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/price/manager/decorators/global
 	 * @see mshop/price/manager/decorators/local
@@ -98,7 +391,7 @@ class Standard
 	 * manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/price/manager/decorators/excludes
 	 * @see mshop/price/manager/decorators/local
@@ -122,758 +415,294 @@ class Standard
 	 * manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2014.03
+	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/price/manager/decorators/excludes
 	 * @see mshop/price/manager/decorators/global
 	 */
 
-
-	private array $searchConfig = array(
-		'price.id' => array(
-			'code' => 'price.id',
-			'internalcode' => 'mpri."id"',
-			'label' => 'Price ID',
-			'type' => 'int',
-		),
-		'price.siteid' => array(
-			'code' => 'price.siteid',
-			'internalcode' => 'mpri."siteid"',
-			'label' => 'Price site ID',
-			'public' => false,
-		),
-		'price.type' => array(
-			'label' => 'Price type ID',
-			'code' => 'price.type',
-			'internalcode' => 'mpri."type"',
-		),
-		'price.currencyid' => array(
-			'code' => 'price.currencyid',
-			'internalcode' => 'mpri."currencyid"',
-			'label' => 'Price currency code',
-		),
-		'price.domain' => array(
-			'code' => 'price.domain',
-			'internalcode' => 'mpri."domain"',
-			'label' => 'Price domain',
-		),
-		'price.label' => array(
-			'code' => 'price.label',
-			'internalcode' => 'mpri."label"',
-			'label' => 'Price label',
-		),
-		'price.quantity' => array(
-			'code' => 'price.quantity',
-			'internalcode' => 'mpri."quantity"',
-			'label' => 'Price quantity',
-			'type' => 'float',
-		),
-		'price.value' => array(
-			'code' => 'price.value',
-			'internalcode' => 'mpri."value"',
-			'label' => 'Price regular value',
-			'type' => 'decimal',
-		),
-		'price.costs' => array(
-			'code' => 'price.costs',
-			'internalcode' => 'mpri."costs"',
-			'label' => 'Price shipping costs',
-			'type' => 'decimal',
-		),
-		'price.rebate' => array(
-			'code' => 'price.rebate',
-			'internalcode' => 'mpri."rebate"',
-			'label' => 'Price rebate amount',
-			'type' => 'decimal',
-		),
-		'price.taxrate' => array(
-			'code' => 'price.taxrate',
-			'internalcode' => 'mpri."taxrate"',
-			'label' => 'Price tax rates as JSON encoded string',
-			'type' => 'json',
-		),
-		'price.status' => array(
-			'code' => 'price.status',
-			'internalcode' => 'mpri."status"',
-			'label' => 'Price status',
-			'type' => 'int',
-		),
-		'price.mtime' => array(
-			'code' => 'price.mtime',
-			'internalcode' => 'mpri."mtime"',
-			'label' => 'Price modify date',
-			'type' => 'datetime',
-		),
-		'price.ctime' => array(
-			'code' => 'price.ctime',
-			'internalcode' => 'mpri."ctime"',
-			'label' => 'Price create date/time',
-			'type' => 'datetime',
-		),
-		'price.editor' => array(
-			'code' => 'price.editor',
-			'internalcode' => 'mpri."editor"',
-			'label' => 'Price editor',
-		),
-		'price:has' => array(
-			'code' => 'price:has()',
-			'internalcode' => ':site AND :key AND mprili."id"',
-			'internaldeps' => ['LEFT JOIN "mshop_price_list" AS mprili ON ( mprili."parentid" = mpri."id" )'],
-			'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-			'type' => 'null',
-			'public' => false,
-		),
-		'price:prop' => array(
-			'code' => 'price:prop()',
-			'internalcode' => ':site AND :key AND mpripr."id"',
-			'internaldeps' => ['LEFT JOIN "mshop_price_property" AS mpripr ON ( mpripr."parentid" = mpri."id" )'],
-			'label' => 'Price has property item, parameter(<property type>[,<language code>[,<property value>]])',
-			'type' => 'null',
-			'public' => false,
-		),
-	);
-
-	private ?string $currencyId;
-	private int $precision;
-	private bool $taxflag;
-
-
-	/**
-	 * Initializes the object.
+	/** mshop/price/manager/submanagers
+	 * List of manager names that can be instantiated by the price manager
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
-	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		parent::__construct( $context );
-
-		/** mshop/price/manager/resource
-		 * Name of the database connection resource to use
-		 *
-		 * You can configure a different database connection for each data domain
-		 * and if no such connection name exists, the "db" connection will be used.
-		 * It's also possible to use the same database connection for different
-		 * data domains by configuring the same connection name using this setting.
-		 *
-		 * @param string Database connection name
-		 * @since 2023.04
-		 */
-		$this->setResourceName( $context->config()->get( 'mshop/price/manager/resource', 'db-price' ) );
-		$this->currencyId = $context->locale()->getCurrencyId();
-
-		/** mshop/price/taxflag
-		 * Configuration setting if prices are inclusive or exclusive tax
-		 *
-		 * In Aimeos, prices can be entered either completely with or without tax. The
-		 * default is that prices contains tax. You must specifiy the tax rate for each
-		 * prices to prevent wrong calculations.
-		 *
-		 * @param bool True if gross prices are used, false for net prices
-		 * @since 2016.02
-		 */
-		$this->taxflag = $context->config()->get( 'mshop/price/taxflag', true );
-
-		/** mshop/price/precision
-		 * Number of decimal digits prices contain
-		 *
-		 * Sets the number of decimal digits price values will contain. Internally,
-		 * prices are calculated as double values with high precision but these
-		 * values will be rounded after calculation to the configured number of digits.
-		 *
-		 * @param int Positive number of digits
-		 * @since 2019.04
-		 */
-		$this->precision = $context->config()->get( 'mshop/price/precision', 2 );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/price/manager/sitemode', $level );
-
-
-		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-
-			foreach( (array) ( $params[1] ?? '' ) as $type ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-				}
-			}
-
-			$sitestr = $this->siteString( 'mprili."siteid"', $level );
-			$keystr = $this->toExpression( 'mprili."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-
-
-		$this->searchConfig['price:prop']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-			foreach( (array) $langs as $lang ) {
-				foreach( (array) ( $params[2] ?? '' ) as $val ) {
-					$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-				}
-			}
-
-			$sitestr = $this->siteString( 'mpripr."siteid"', $level );
-			$keystr = $this->toExpression( 'mpripr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-	}
-
-
-	/**
-	 * Removes old entries from the storage.
+	 * Managers provide a generic interface to the underlying storage.
+	 * Each manager has or can have sub-managers caring about particular
+	 * aspects. Each of these sub-managers can be instantiated by its
+	 * parent manager using the getSubManager() method.
 	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Price\Manager\Iface Manager object for chaining method calls
-	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$path = 'mshop/price/manager/submanagers';
-		foreach( $this->context()->config()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
-		}
-
-		return $this->clearBase( $siteids, 'mshop/price/manager/delete' );
-	}
-
-
-	/**
-	 * Creates a new empty item instance
+	 * The search keys from sub-managers can be normally used in the
+	 * manager as well. It allows you to search for items of the manager
+	 * using the search keys of the sub-managers to further limit the
+	 * retrieved list of items.
 	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Price\Item\Iface New price item object
+	 * @param array List of sub-manager names
+	 * @since 2015.10
 	 */
-	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$locale = $this->context()->locale();
-		$values['price.siteid'] = $values['price.siteid'] ?? $locale->getSiteId();
 
-		if( !isset( $values['price.currencyid'] ) && $locale->getCurrencyId() !== null ) {
-			$values['price.currencyid'] = $locale->getCurrencyId();
-		}
-
-		return $this->createItemBase( $values );
-	}
-
-
-
-	/**
-	 * Returns the available manager types
+	/** mshop/price/manager/delete/mysql
+	 * Deletes the items matched by the given IDs from the database
 	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
+	 * @see mshop/price/manager/delete/ansi
 	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'mshop/price/manager/submanagers';
-		return $this->getResourceTypeBase( 'price', $path, ['property', 'lists'], $withsub );
-	}
 
-
-	/**
-	 * Returns the attributes that can be used for searching.
+	/** mshop/price/manager/delete/ansi
+	 * Deletes the items matched by the given IDs from the database
 	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		/** mshop/price/manager/submanagers
-		 * List of manager names that can be instantiated by the price manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 */
-		$path = 'mshop/price/manager/submanagers';
-
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
-	}
-
-
-	/**
-	 * Removes multiple items.
+	 * Removes the records specified by the given IDs from the price database.
+	 * The records must be from the site that is configured via the
+	 * context item.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Price\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		/** mshop/price/manager/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/price/manager/delete/ansi
-		 */
-
-		/** mshop/price/manager/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the price database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @see mshop/price/manager/insert/ansi
-		 * @see mshop/price/manager/update/ansi
-		 * @see mshop/price/manager/newid/ansi
-		 * @see mshop/price/manager/search/ansi
-		 * @see mshop/price/manager/count/ansi
-		 */
-		$path = 'mshop/price/manager/delete';
-
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
-	}
-
-
-	/**
-	 * Returns the price item object specificed by its ID.
+	 * The ":cond" placeholder is replaced by the name of the ID column and
+	 * the given ID or list of IDs while the site ID is bound to the question
+	 * mark.
 	 *
-	 * @param string $id Unique price ID referencing an existing price
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Price\Item\Iface $item Returns the price item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getItemBase( 'price.id', $id, $ref, $default );
-	}
-
-
-	/**
-	 * Saves a price item object.
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Price\Item\Iface Updated item including the generated ID
-	 * @throws \Aimeos\MShop\Price\Exception If price couldn't be saved
+	 * @param string SQL statement for deleting items
+	 * @since 2015.10
+	 * @see mshop/price/manager/insert/ansi
+	 * @see mshop/price/manager/update/ansi
+	 * @see mshop/price/manager/newid/ansi
+	 * @see mshop/price/manager/search/ansi
+	 * @see mshop/price/manager/count/ansi
 	 */
-	protected function saveItem( \Aimeos\MShop\Price\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Price\Item\Iface
-	{
-		if( !$item->isModified() )
-		{
-			$item = $this->savePropertyItems( $item, 'price', $fetch );
-			return $this->saveListItems( $item, 'price', $fetch );
-		}
 
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
-
-		if( $id === null )
-		{
-			/** mshop/price/manager/insert/mysql
-			 * Inserts a new price record into the database table
-			 *
-			 * @see mshop/price/manager/insert/ansi
-			 */
-
-			/** mshop/price/manager/insert/ansi
-			 * Inserts a new price record into the database table
-			 *
-			 * Items with no ID yet (i.e. the ID is NULL) will be created in
-			 * the database and the newly created ID retrieved afterwards
-			 * using the "newid" SQL statement.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the price item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The order of the columns must correspond to the
-			 * order in the save() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2014.03
-			 * @see mshop/price/manager/update/ansi
-			 * @see mshop/price/manager/newid/ansi
-			 * @see mshop/price/manager/delete/ansi
-			 * @see mshop/price/manager/search/ansi
-			 * @see mshop/price/manager/count/ansi
-			 */
-			$path = 'mshop/price/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-		}
-		else
-		{
-			/** mshop/price/manager/update/mysql
-			 * Updates an existing price record in the database
-			 *
-			 * @see mshop/price/manager/update/ansi
-			 */
-
-			/** mshop/price/manager/update/ansi
-			 * Updates an existing price record in the database
-			 *
-			 * Items which already have an ID (i.e. the ID is not NULL) will
-			 * be updated in the database.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the price item to the statement before they are
-			 * sent to the database server. The order of the columns must
-			 * correspond to the order in the save() method, so the
-			 * correct values are bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for updating records
-			 * @since 2014.03
-			 * @see mshop/price/manager/insert/ansi
-			 * @see mshop/price/manager/newid/ansi
-			 * @see mshop/price/manager/delete/ansi
-			 * @see mshop/price/manager/search/ansi
-			 * @see mshop/price/manager/count/ansi
-			 */
-			$path = 'mshop/price/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-		}
-
-		$idx = 1;
-		$stmt = $this->getCachedStatement( $conn, $path, $sql );
-
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-		}
-
-		$stmt->bind( $idx++, $item->getType() );
-		$stmt->bind( $idx++, $item->getCurrencyId() );
-		$stmt->bind( $idx++, $item->getDomain() );
-		$stmt->bind( $idx++, $item->getLabel() );
-		$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
-		$stmt->bind( $idx++, $item->getValue() );
-		$stmt->bind( $idx++, $item->getCosts() );
-		$stmt->bind( $idx++, $item->getRebate() );
-		$stmt->bind( $idx++, json_encode( $item->getTaxrates(), JSON_FORCE_OBJECT ) );
-		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $context->datetime() ); //mtime
-		$stmt->bind( $idx++, $context->editor() );
-
-		if( $id !== null ) {
-			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		} else {
-			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); //ctime
-		}
-
-		$stmt->execute()->finish();
-
-		if( $id === null )
-		{
-			/** mshop/price/manager/newid/mysql
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * @see mshop/price/manager/newid/ansi
-			 */
-
-			/** mshop/price/manager/newid/ansi
-			 * Retrieves the ID generated by the database when inserting a new record
-			 *
-			 * As soon as a new record is inserted into the database table,
-			 * the database server generates a new and unique identifier for
-			 * that record. This ID can be used for retrieving, updating and
-			 * deleting that specific record from the table again.
-			 *
-			 * For MySQL:
-			 *  SELECT LAST_INSERT_ID()
-			 * For PostgreSQL:
-			 *  SELECT currval('seq_mpri_id')
-			 * For SQL Server:
-			 *  SELECT SCOPE_IDENTITY()
-			 * For Oracle:
-			 *  SELECT "seq_mpri_id".CURRVAL FROM DUAL
-			 *
-			 * There's no way to retrive the new ID by a SQL statements that
-			 * fits for most database servers as they implement their own
-			 * specific way.
-			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
-			 * @since 2014.03
-			 * @see mshop/price/manager/insert/ansi
-			 * @see mshop/price/manager/update/ansi
-			 * @see mshop/price/manager/delete/ansi
-			 * @see mshop/price/manager/search/ansi
-			 * @see mshop/price/manager/count/ansi
-			 */
-			$path = 'mshop/price/manager/newid';
-			$id = $this->newId( $conn, $path );
-		}
-
-		$item->setId( $id );
-
-		$item = $this->savePropertyItems( $item, 'price', $fetch );
-		return $this->saveListItems( $item, 'price', $fetch );
-	}
-
-
-	/**
-	 * Returns the item objects matched by the given search criteria.
+	/** mshop/price/manager/insert/mysql
+	 * Inserts a new price record into the database table
 	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Price\Item\Iface with ids as keys
+	 * @see mshop/price/manager/insert/ansi
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
-	{
-		$map = [];
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
 
-		$required = array( 'price' );
-
-		/** mshop/price/manager/sitemode
-		 * Mode how items from levels below or above in the site tree are handled
-		 *
-		 * By default, only items from the current site are fetched from the
-		 * storage. If the ai-sites extension is installed, you can create a
-		 * tree of sites. Then, this setting allows you to define for the
-		 * whole price domain if items from parent sites are inherited,
-		 * sites from child sites are aggregated or both.
-		 *
-		 * Available constants for the site mode are:
-		 * * 0 = only items from the current site
-		 * * 1 = inherit items from parent sites
-		 * * 2 = aggregate items from child sites
-		 * * 3 = inherit and aggregate items at the same time
-		 *
-		 * You also need to set the mode in the locale manager
-		 * (mshop/locale/manager/sitelevel) to one of the constants.
-		 * If you set it to the same value, it will work as described but you
-		 * can also use different modes. For example, if inheritance and
-		 * aggregation is configured the locale manager but only inheritance
-		 * in the domain manager because aggregating items makes no sense in
-		 * this domain, then items wil be only inherited. Thus, you have full
-		 * control over inheritance and aggregation in each domain.
-		 *
-		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
-		 * @since 2018.01
-		 * @see mshop/locale/manager/sitelevel
-		 */
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/price/manager/sitemode', $level );
-
-		/** mshop/price/manager/search/mysql
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * @see mshop/price/manager/search/ansi
-		 */
-
-		/** mshop/price/manager/search/ansi
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * Fetches the records matched by the given criteria from the price
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the SELECT statement can retrieve all records
-		 * from the current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * If the records that are retrieved should be ordered by one or more
-		 * columns, the generated string of column / sort direction pairs
-		 * replaces the ":order" placeholder. Columns of
-		 * sub-managers can also be used for ordering the result set but then
-		 * no index can be used.
-		 *
-		 * The number of returned records can be limited and can start at any
-		 * number between the begining and the end of the result set. For that
-		 * the ":size" and ":start" placeholders are replaced by the
-		 * corresponding values from the criteria object. The default values
-		 * are 0 for the start and 100 for the size value.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for searching items
-		 * @since 2014.03
-		 * @see mshop/price/manager/insert/ansi
-		 * @see mshop/price/manager/update/ansi
-		 * @see mshop/price/manager/newid/ansi
-		 * @see mshop/price/manager/delete/ansi
-		 * @see mshop/price/manager/count/ansi
-		 */
-		$cfgPathSearch = 'mshop/price/manager/search';
-
-		/** mshop/price/manager/count/mysql
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * @see mshop/price/manager/count/ansi
-		 */
-
-		/** mshop/price/manager/count/ansi
-		 * Counts the number of records matched by the given criteria in the database
-		 *
-		 * Counts all records matched by the given criteria from the price
-		 * database. The records must be from one of the sites that are
-		 * configured via the context item. If the current site is part of
-		 * a tree of sites, the statement can count all records from the
-		 * current site and the complete sub-tree of sites.
-		 *
-		 * As the records can normally be limited by criteria from sub-managers,
-		 * their tables must be joined in the SQL context. This is done by
-		 * using the "internaldeps" property from the definition of the ID
-		 * column of the sub-managers. These internal dependencies specify
-		 * the JOIN between the tables and the used columns for joining. The
-		 * ":joins" placeholder is then replaced by the JOIN strings from
-		 * the sub-managers.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * Both, the strings for ":joins" and for ":cond" are the same as for
-		 * the "search" SQL statement.
-		 *
-		 * Contrary to the "search" statement, it doesn't return any records
-		 * but instead the number of records that have been found. As counting
-		 * thousands of records can be a long running task, the maximum number
-		 * of counted records is limited for performance reasons.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for counting items
-		 * @since 2014.03
-		 * @see mshop/price/manager/insert/ansi
-		 * @see mshop/price/manager/update/ansi
-		 * @see mshop/price/manager/newid/ansi
-		 * @see mshop/price/manager/delete/ansi
-		 * @see mshop/price/manager/search/ansi
-		 */
-		$cfgPathCount = 'mshop/price/manager/count';
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-		while( $row = $results->fetch() )
-		{
-			if( ( $row['price.taxrates'] = json_decode( $row['price.taxrate'], true ) ) === null ) {
-				$row['price.taxrates'] = [];
-			}
-
-			$map[$row['price.id']] = $row;
-		}
-
-		$propItems = []; $name = 'price/property';
-		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
-		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'price', $propTypes );
-		}
-
-		return $this->buildItems( $map, $ref, 'price', $propItems );
-	}
-
-
-	/**
-	 * Creates a filter object.
+	/** mshop/price/manager/insert/ansi
+	 * Inserts a new price record into the database table
 	 *
-	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
-	 */
-	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
-	{
-		if( $default !== false )
-		{
-			$object = $this->filterBase( 'price', $default );
-
-			if( $currencyid = $this->context()->locale()->getCurrencyId() ) {
-				$object->add( ['price.currencyid' => $currencyid] );
-			}
-
-			return $object;
-		}
-
-		return parent::filter();
-	}
-
-
-	/**
-	 * Returns a new manager for price extensions.
+	 * Items with no ID yet (i.e. the ID is NULL) will be created in
+	 * the database and the newly created ID retrieved afterwards
+	 * using the "newid" SQL statement.
 	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'price', $manager, $name );
-	}
-
-
-	/**
-	 * Creates a new price item
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the price item to the statement before they are
+	 * sent to the database server. The number of question marks must
+	 * be the same as the number of columns listed in the INSERT
+	 * statement. The order of the columns must correspond to the
+	 * order in the save() method, so the correct values are
+	 * bound to the columns.
 	 *
-	 * @param array $values List of attributes for price item
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
-	 * @return \Aimeos\MShop\Price\Item\Iface New price item
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for inserting records
+	 * @since 2015.10
+	 * @see mshop/price/manager/update/ansi
+	 * @see mshop/price/manager/newid/ansi
+	 * @see mshop/price/manager/delete/ansi
+	 * @see mshop/price/manager/search/ansi
+	 * @see mshop/price/manager/count/ansi
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-		array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$values['.currencyid'] = $this->currencyId;
-		$values['.precision'] = $this->precision;
 
-		if( !isset( $values['price.taxflag'] ) ) {
-			$values['price.taxflag'] = $this->taxflag;
-		}
+	/** mshop/price/manager/update/mysql
+	 * Updates an existing price record in the database
+	 *
+	 * @see mshop/price/manager/update/ansi
+	 */
 
-		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems, $propItems );
-	}
+	/** mshop/price/manager/update/ansi
+	 * Updates an existing price record in the database
+	 *
+	 * Items which already have an ID (i.e. the ID is not NULL) will
+	 * be updated in the database.
+	 *
+	 * The SQL statement must be a string suitable for being used as
+	 * prepared statement. It must include question marks for binding
+	 * the values from the price item to the statement before they are
+	 * sent to the database server. The order of the columns must
+	 * correspond to the order in the save() method, so the
+	 * correct values are bound to the columns.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for updating records
+	 * @since 2015.10
+	 * @see mshop/price/manager/insert/ansi
+	 * @see mshop/price/manager/newid/ansi
+	 * @see mshop/price/manager/delete/ansi
+	 * @see mshop/price/manager/search/ansi
+	 * @see mshop/price/manager/count/ansi
+	 */
+
+	/** mshop/price/manager/newid/mysql
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * @see mshop/price/manager/newid/ansi
+	 */
+
+	/** mshop/price/manager/newid/ansi
+	 * Retrieves the ID generated by the database when inserting a new record
+	 *
+	 * As soon as a new record is inserted into the database table,
+	 * the database server generates a new and unique identifier for
+	 * that record. This ID can be used for retrieving, updating and
+	 * deleting that specific record from the table again.
+	 *
+	 * For MySQL:
+	 *  SELECT LAST_INSERT_ID()
+	 * For PostgreSQL:
+	 *  SELECT currval('seq_mpri_id')
+	 * For SQL Server:
+	 *  SELECT SCOPE_IDENTITY()
+	 * For Oracle:
+	 *  SELECT "seq_mpri_id".CURRVAL FROM DUAL
+	 *
+	 * There's no way to retrive the new ID by a SQL statements that
+	 * fits for most database servers as they implement their own
+	 * specific way.
+	 *
+	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @since 2015.10
+	 * @see mshop/price/manager/insert/ansi
+	 * @see mshop/price/manager/update/ansi
+	 * @see mshop/price/manager/delete/ansi
+	 * @see mshop/price/manager/search/ansi
+	 * @see mshop/price/manager/count/ansi
+	 */
+
+	/** mshop/price/manager/sitemode
+	 * Mode how items from levels below or above in the site tree are handled
+	 *
+	 * By default, only items from the current site are fetched from the
+	 * storage. If the ai-sites extension is installed, you can create a
+	 * tree of sites. Then, this setting allows you to define for the
+	 * whole price domain if items from parent sites are inherited,
+	 * sites from child sites are aggregated or both.
+	 *
+	 * Available constants for the site mode are:
+	 * * 0 = only items from the current site
+	 * * 1 = inherit items from parent sites
+	 * * 2 = aggregate items from child sites
+	 * * 3 = inherit and aggregate items at the same time
+	 *
+	 * You also need to set the mode in the locale manager
+	 * (mshop/locale/manager/sitelevel) to one of the constants.
+	 * If you set it to the same value, it will work as described but you
+	 * can also use different modes. For example, if inheritance and
+	 * aggregation is configured the locale manager but only inheritance
+	 * in the domain manager because aggregating items makes no sense in
+	 * this domain, then items wil be only inherited. Thus, you have full
+	 * control over inheritance and aggregation in each domain.
+	 *
+	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @since 2018.01
+	 * @see mshop/locale/manager/sitelevel
+	 */
+
+	/** mshop/price/manager/search/mysql
+	 * Retrieves the records matched by the given criteria in the database
+	 *
+	 * @see mshop/price/manager/search/ansi
+	 */
+
+	/** mshop/price/manager/search/ansi
+	 * Retrieves the records matched by the given criteria in the database
+	 *
+	 * Fetches the records matched by the given criteria from the price
+	 * database. The records must be from one of the sites that are
+	 * configured via the context item. If the current site is part of
+	 * a tree of sites, the SELECT statement can retrieve all records
+	 * from the current site and the complete sub-tree of sites.
+	 *
+	 * As the records can normally be limited by criteria from sub-managers,
+	 * their tables must be joined in the SQL context. This is done by
+	 * using the "internaldeps" property from the definition of the ID
+	 * column of the sub-managers. These internal dependencies specify
+	 * the JOIN between the tables and the used columns for joining. The
+	 * ":joins" placeholder is then replaced by the JOIN strings from
+	 * the sub-managers.
+	 *
+	 * To limit the records matched, conditions can be added to the given
+	 * criteria object. It can contain comparisons like column names that
+	 * must match specific values which can be combined by AND, OR or NOT
+	 * operators. The resulting string of SQL conditions replaces the
+	 * ":cond" placeholder before the statement is sent to the database
+	 * server.
+	 *
+	 * If the records that are retrieved should be ordered by one or more
+	 * columns, the generated string of column / sort direction pairs
+	 * replaces the ":order" placeholder. Columns of
+	 * sub-managers can also be used for ordering the result set but then
+	 * no index can be used.
+	 *
+	 * The number of returned records can be limited and can start at any
+	 * number between the begining and the end of the result set. For that
+	 * the ":size" and ":start" placeholders are replaced by the
+	 * corresponding values from the criteria object. The default values
+	 * are 0 for the start and 100 for the size value.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for searching items
+	 * @since 2015.10
+	 * @see mshop/price/manager/insert/ansi
+	 * @see mshop/price/manager/update/ansi
+	 * @see mshop/price/manager/newid/ansi
+	 * @see mshop/price/manager/delete/ansi
+	 * @see mshop/price/manager/count/ansi
+	 */
+
+	/** mshop/price/manager/count/mysql
+	 * Counts the number of records matched by the given criteria in the database
+	 *
+	 * @see mshop/price/manager/count/ansi
+	 */
+
+	/** mshop/price/manager/count/ansi
+	 * Counts the number of records matched by the given criteria in the database
+	 *
+	 * Counts all records matched by the given criteria from the price
+	 * database. The records must be from one of the sites that are
+	 * configured via the context item. If the current site is part of
+	 * a tree of sites, the statement can count all records from the
+	 * current site and the complete sub-tree of sites.
+	 *
+	 * As the records can normally be limited by criteria from sub-managers,
+	 * their tables must be joined in the SQL context. This is done by
+	 * using the "internaldeps" property from the definition of the ID
+	 * column of the sub-managers. These internal dependencies specify
+	 * the JOIN between the tables and the used columns for joining. The
+	 * ":joins" placeholder is then replaced by the JOIN strings from
+	 * the sub-managers.
+	 *
+	 * To limit the records matched, conditions can be added to the given
+	 * criteria object. It can contain comparisons like column names that
+	 * must match specific values which can be combined by AND, OR or NOT
+	 * operators. The resulting string of SQL conditions replaces the
+	 * ":cond" placeholder before the statement is sent to the database
+	 * server.
+	 *
+	 * Both, the strings for ":joins" and for ":cond" are the same as for
+	 * the "search" SQL statement.
+	 *
+	 * Contrary to the "search" statement, it doesn't return any records
+	 * but instead the number of records that have been found. As counting
+	 * thousands of records can be a long running task, the maximum number
+	 * of counted records is limited for performance reasons.
+	 *
+	 * The SQL statement should conform to the ANSI standard to be
+	 * compatible with most relational database systems. This also
+	 * includes using double quotes for table and column names.
+	 *
+	 * @param string SQL statement for counting items
+	 * @since 2015.10
+	 * @see mshop/price/manager/insert/ansi
+	 * @see mshop/price/manager/update/ansi
+	 * @see mshop/price/manager/newid/ansi
+	 * @see mshop/price/manager/delete/ansi
+	 * @see mshop/price/manager/search/ansi
+	 */
 }

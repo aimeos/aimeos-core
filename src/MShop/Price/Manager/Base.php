@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Price
@@ -21,10 +20,6 @@ namespace Aimeos\MShop\Price\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
-	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
-
-
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *

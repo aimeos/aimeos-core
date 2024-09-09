@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'.currencyid' => 'EUR',
 		);
 
-		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Price\Item\Standard( 'price.', $this->values );
 	}
 
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddItem()
 	{
-		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( 'price.', $this->values );
 		$return = $this->object->addItem( $price );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$values = $this->values;
 		$values['price.currencyid'] = 'USD';
 
-		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( 'price.', $values );
 
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->addItem( $price );
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCompare()
 	{
-		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( 'price.', $this->values );
 		$this->assertTrue( $this->object->compare( $price ) );
 	}
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$values = $this->values;
 		$values['price.value'] = '200.00';
 
-		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$price = new \Aimeos\MShop\Price\Item\Standard( 'price.', $values );
 		$this->assertFalse( $this->object->compare( $price ) );
 	}
 
@@ -367,13 +367,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.taxflag' => false,
 		);
 
-		$object = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$object = new \Aimeos\MShop\Price\Item\Standard( 'price.', $values );
 		$this->assertEquals( '51.7080', $object->getTaxValue() );
 
 
 		$values['price.taxflag'] = true;
 
-		$object = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$object = new \Aimeos\MShop\Price\Item\Standard( 'price.', $values );
 		$this->assertEquals( '41.7000', $object->getTaxValue() );
 	}
 
@@ -430,7 +430,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Price\Item\Standard();
+		$item = new \Aimeos\MShop\Price\Item\Standard( 'price.' );
 
 		$list = $entries = array(
 			'price.id' => 1,

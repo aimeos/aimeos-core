@@ -73,16 +73,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
+		$search->add( $search->and( array(
 			$search->compare( '==', 'price.value', 12.00 ),
 			$search->compare( '==', 'price.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		) ) );
 
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No results available' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No results available' ) );
 
 		$itemB = $this->object->get( $item->getId() );
 		$this->assertEquals( 19.00, $itemB->getTaxRate() );

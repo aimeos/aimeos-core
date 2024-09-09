@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Price
@@ -10,6 +9,9 @@
 
 
 namespace Aimeos\MShop\Price\Item;
+
+use \Aimeos\MShop\Common\Item\ListsRef;
+use \Aimeos\MShop\Common\Item\PropertyRef;
 
 
 /**
@@ -20,47 +22,66 @@ namespace Aimeos\MShop\Price\Item;
  */
 class Standard extends Base
 {
-	private ?string $currencyid;
+	use ListsRef\Traits, PropertyRef\Traits {
+		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
+		ListsRef\Traits::__clone as __cloneList;
+		PropertyRef\Traits::__clone as __cloneProperty;
+	}
+
+
+	private int $precision;
 	private ?string $tax;
 
 
 	/**
 	 * Initalizes the object with the given values
 	 *
+	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
+		parent::__construct( 'price.', $values );
 
-		$this->currencyid = $this->get( '.currencyid' );
-		$this->tax = $this->get( 'price.taxvalue' );
+		$this->tax = $values['price.taxvalue'] ?? null;
+		$this->precision = (int) ( $values['.precision'] ?? 2 );
+
+		$this->initPropertyItems( $values['.propitems'] ?? [] );
+		$this->initListItems( $values['.listitems'] ?? [] );
 	}
 
 
 	/**
-	 * Returns the type of the price.
-	 *
-	 * @return string Type of the price
+	 * Creates a deep clone of all objects
 	 */
-	public function getType() : string
+	public function __clone()
 	{
-		return $this->get( 'price.type', 'default' );
+		parent::__clone();
+		$this->__cloneList();
+		$this->__cloneProperty();
+	}
+
+
+   /**
+	 * Returns costs per item.
+	 *
+	 * @return string Costs per item
+	 */
+	public function getCosts() : string
+	{
+		return $this->formatNumber( (float) $this->get( 'price.costs', '0.00' ) );
 	}
 
 
 	/**
-	 * Sets the new type of the price.
+	 * Sets the new costsper item.
 	 *
-	 * @param string $type Type of the price
+	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
+	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.type', $this->checkCode( $type ) );
+		return $this->set( 'price.costs', $this->checkPrice( (string) $price ) );
 	}
 
 
@@ -135,6 +156,17 @@ class Standard extends Base
 
 
 	/**
+	 * Returns the decimal precision of the price
+	 *
+	 * @return int Number of decimal digits
+	 */
+	public function getPrecision() : int
+	{
+		return $this->precision;
+	}
+
+
+	/**
 	 * Returns the quantity the price is valid for.
 	 *
 	 * @return float Quantity
@@ -158,52 +190,6 @@ class Standard extends Base
 
 
 	/**
-	 * Returns the amount of money.
-	 *
-	 * @return string|null Price value or NULL for on request
-	 */
-	public function getValue() : ?string
-	{
-		return $this->formatNumber( $this->get( 'price.value' ) );
-	}
-
-
-	/**
-	 * Sets the new amount of money.
-	 *
-	 * @param string|integer|double|null $price Amount with configured precision or NULL for on request
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	 */
-	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface
-	{
-		return $this->set( 'price.value', $this->checkPrice( $price ) );
-	}
-
-
-	/**
-	 * Returns costs per item.
-	 *
-	 * @return string Costs per item
-	 */
-	public function getCosts() : string
-	{
-		return $this->formatNumber( (float) $this->get( 'price.costs', '0.00' ) );
-	}
-
-
-	/**
-	 * Sets the new costsper item.
-	 *
-	 * @param string|integer|double $price Amount with two digits precision
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	 */
-	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface
-	{
-		return $this->set( 'price.costs', $this->checkPrice( (string) $price ) );
-	}
-
-
-	/**
 	 * Returns the rebate amount.
 	 *
 	 * @return string Rebate amount
@@ -223,6 +209,52 @@ class Standard extends Base
 	public function setRebate( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->set( 'price.rebate', $this->checkPrice( (string) $price ) );
+	}
+
+
+	/**
+	 * Returns the status of the item
+	 *
+	 * @return int Status of the item
+	 */
+	public function getStatus() : int
+	{
+		return $this->get( 'price.status', 1 );
+	}
+
+
+	/**
+	 * Sets the status of the item
+	 *
+	 * @param int $status Status of the item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'price.status', $status );
+	}
+
+
+	/**
+	 * Returns the type of the price.
+	 *
+	 * @return string Type of the price
+	 */
+	public function getType() : string
+	{
+		return $this->get( 'price.type', 'default' );
+	}
+
+
+	/**
+	 * Sets the new type of the price.
+	 *
+	 * @param string $type Type of the price
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'price.type', $this->checkCode( $type ) );
 	}
 
 
@@ -344,25 +376,25 @@ class Standard extends Base
 
 
 	/**
-	 * Returns the status of the item
+	 * Returns the amount of money.
 	 *
-	 * @return int Status of the item
+	 * @return string|null Price value or NULL for on request
 	 */
-	public function getStatus() : int
+	public function getValue() : ?string
 	{
-		return $this->get( 'price.status', 1 );
+		return $this->formatNumber( $this->get( 'price.value' ) );
 	}
 
 
 	/**
-	 * Sets the status of the item
+	 * Sets the new amount of money.
 	 *
-	 * @param int $status Status of the item
+	 * @param string|integer|double|null $price Amount with configured precision or NULL for on request
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.status', $status );
+		return $this->set( 'price.value', $this->checkPrice( $price ) );
 	}
 
 
@@ -385,8 +417,8 @@ class Standard extends Base
 	 */
 	public function isAvailable() : bool
 	{
-		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->currencyid === null || $this->getCurrencyId() === $this->currencyid );
+		$cid = $this->get( '.currencyid' );
+		return parent::isAvailable() && $this->getStatus() > 0 && ( $cid === null || $this->getCurrencyId() === $cid );
 	}
 
 
