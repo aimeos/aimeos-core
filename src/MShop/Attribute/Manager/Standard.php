@@ -259,7 +259,6 @@ class Standard
 	 * @since 2023.04
 	 */
 
-
 	/** mshop/attribute/manager/submanagers
 	 * List of manager names that can be instantiated by the attribute manager
 	 *

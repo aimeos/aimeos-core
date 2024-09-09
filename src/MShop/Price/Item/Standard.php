@@ -62,7 +62,7 @@ class Standard extends Base
 	}
 
 
-   /**
+	/**
 	 * Returns costs per item.
 	 *
 	 * @return string Costs per item
