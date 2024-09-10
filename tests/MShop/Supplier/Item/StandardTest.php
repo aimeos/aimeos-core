@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->values = array(
+		$this->values = [
 			'supplier.id' => 541,
 			'supplier.siteid' => 99,
 			'supplier.label' => 'unitObject',
@@ -28,14 +28,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.mtime' => '2011-01-01 00:00:02',
 			'supplier.ctime' => '2011-01-01 00:00:01',
 			'supplier.editor' => 'unitTestUser'
-		);
+		];
 
-		$addresses = array(
+		$addresses = [
 			new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 0] ),
 			new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 1] ),
-		);
+		];
 
-		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $this->values, [], [], $addresses );
+		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( 'supplier.', $this->values + ['.addritems' => $addresses] );
 	}
 
 
@@ -195,7 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Supplier\Item\Standard();
+		$item = new \Aimeos\MShop\Supplier\Item\Standard( 'supplier.' );
 
 		$list = $entries = array(
 			'supplier.id' => 1,

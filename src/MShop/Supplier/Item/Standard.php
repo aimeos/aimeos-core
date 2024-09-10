@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Supplier
@@ -35,16 +34,15 @@ class Standard
 	/**
 	 * Initializes the supplier item object
 	 *
+	 * @param string $prefix Domain prefix
 	 * @param array $values List of attributes that belong to the supplier item
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'supplier.', $values );
+		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $listItems, $refItems );
-		$this->initAddressItems( $addresses );
+		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initAddressItems( $values['.addritems'] ?? [] );
 	}
 
 
