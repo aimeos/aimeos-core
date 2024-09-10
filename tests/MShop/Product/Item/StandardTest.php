@@ -583,7 +583,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$stock = new \Aimeos\MShop\Stock\Item\Standard( 'stock.', [] );
 		$stocks = [123 => ( clone $stock )->setType( 'something' ), 456 => ( clone $stock )->setType( 'default' )];
-		$object = new \Aimeos\MShop\Product\Item\Standard(  'product.', ['.stock' => $stocks] );
+		$object = new \Aimeos\MShop\Product\Item\Standard( 'product.', ['.stock' => $stocks] );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $object->getStockItems( 'default' ) );
 		$this->assertEquals( 'default', $object->getStockItems( 'default' )->getType()->first() );

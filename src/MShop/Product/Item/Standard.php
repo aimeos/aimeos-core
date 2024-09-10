@@ -33,9 +33,6 @@ class Standard
 	}
 
 
-	private string $date;
-
-
 	/**
 	 * Initializes the item object.
 	 *
