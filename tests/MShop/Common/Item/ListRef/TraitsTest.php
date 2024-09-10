@@ -50,17 +50,17 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$values = ['.languageid' => null, 'text.status' => 1];
 
-		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) + ['.langaugeid' => 'de'] + $values );
+		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( 'text.', ['text.type' => 'name', '.langaugeid' => 'de'] + $values );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setStatus( 1 );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'short' ) + $values );
+		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( 'text.', ['text.type' => 'short'] + $values );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setStatus( 1 );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) + $values );
+		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', ['text.lists.type' => 'test'] + $values );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setRefItem( $this->textItem1 );
 		$this->listItem1->setDomain( 'text' );
@@ -68,8 +68,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->listItem1->setStatus( 1 );
 		$this->listItem1->setId( 11 );
 
-
-		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) + $values );
+		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', ['text.lists.type' => 'default'] + $values );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setRefItem( $this->textItem2 );
 		$this->listItem2->setDomain( 'text' );
@@ -77,15 +76,15 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->listItem2->setStatus( 1 );
 		$this->listItem2->setId( 10 );
 
-		$listItems = array(
+		$listItems = [
 			$this->listItem1->getId() => $this->listItem1,
 			$this->listItem2->getId() => $this->listItem2,
-		);
+		];
 
-		$refItems = array(
+		$refItems = [
 			$this->textItem1->getId() => $this->textItem1,
 			$this->textItem2->getId() => $this->textItem2,
-		);
+		];
 
 		$this->object = new \Aimeos\MShop\Common\Item\ListsRef\Test( $listItems, $refItems );
 	}

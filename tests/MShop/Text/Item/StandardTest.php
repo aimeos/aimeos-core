@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  */
 
@@ -33,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'.languageid' => 'de',
 		);
 
-		$this->object = new \Aimeos\MShop\Text\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Text\Item\Standard( 'text.', $this->values );
 	}
 
 
@@ -194,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Text\Item\Standard();
+		$item = new \Aimeos\MShop\Text\Item\Standard( 'text.' );
 
 		$list = $entries = array(
 			'text.id' => 1,

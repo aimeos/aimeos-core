@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Text
@@ -25,22 +24,17 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 
-	private ?string $langid;
-
-
 	/**
 	 * Initializes the text item object with the given values.
 	 *
+	 * @param string $prefix Domain specific prefix string
 	 * @param array $values Associative list of key/value pairs
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'text.', $values );
+		parent::__construct( $prefix, $values );
 
-		$this->langid = $values['.languageid'] ?? null;
-		$this->initListItems( $listItems, $refItems );
+		$this->initListItems( $values['.listitems'] ?? [] );
 	}
 
 
@@ -191,9 +185,10 @@ class Standard
 	 */
 	public function isAvailable() : bool
 	{
-		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->langid === null || $this->getLanguageId() === null
-			|| $this->getLanguageId() === $this->langid );
+		$langid = $this->get( '.languageid' );
+
+		return parent::isAvailable() && $this->getStatus() > 0 &&
+			( $langid === null || $this->getLanguageId() === null || $langid === $this->getLanguageId() );
 	}
 
 
