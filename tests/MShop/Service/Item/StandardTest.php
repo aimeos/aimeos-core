@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'.date' => date( 'Y-m-d H:i:s' ),
 		);
 
-		$this->object = new \Aimeos\MShop\Service\Item\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Service\Item\Standard( 'service.', $this->values );
 	}
 
 
@@ -244,7 +244,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Service\Item\Standard();
+		$item = new \Aimeos\MShop\Service\Item\Standard( 'service.' );
 
 		$list = $entries = array(
 			'service.id' => 1,
