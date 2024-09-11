@@ -20,9 +20,8 @@ namespace Aimeos\MShop\Customer\Item;
  */
 class Standard extends Base implements Iface
 {
-	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
+	private ?\Aimeos\Base\Password\Iface $passwd = null;
 	private ?array $groups = null;
-	private ?string $salt;
 
 
 	/**
@@ -35,16 +34,12 @@ class Standard extends Base implements Iface
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of delivery addresses
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 * @param \Aimeos\MShop\Common\Helper\Password\Iface|null $helper Password encryption helper object
-	 * @param string|null $salt Password salt
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
-		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
-		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, string $salt = null )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, string $prefix,
+		array $values = [], \Aimeos\Base\Password\Iface $passwd = null )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems );
-
-		$this->helper = $helper;
-		$this->salt = $salt;
+		parent::__construct( $address, $prefix, $values );
+		$this->passwd = $passwd;
 	}
 
 
@@ -157,8 +152,8 @@ class Standard extends Base implements Iface
 	 */
 	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
-			$value = $this->helper->encode( $value, $this->salt );
+		if( $this->passwd && $value !== $this->getPassword() ) {
+			$value = $this->passwd->hash( $value );
 		}
 
 		return $this->set( 'customer.password', $value );

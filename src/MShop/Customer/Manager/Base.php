@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Customer
@@ -26,9 +25,8 @@ abstract class Base
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
-	private ?\Aimeos\MShop\Customer\Item\Iface $user = null;
+	/* @deprecated 2025.01 Use $this->context()->password() instead */
 	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
-	private ?string $salt;
 
 
 	/**
@@ -52,21 +50,6 @@ abstract class Base
 		 * @since 2023.04
 		 */
 		$this->setResourceName( $context->config()->get( 'mshop/customer/manager/resource', 'db-customer' ) );
-
-		/** mshop/customer/manager/salt
-		 * Password salt for all customer passwords of the installation
-		 *
-		 * The default password salt is used if no user-specific salt can be
-		 * stored in the database along with the user data. It's highly recommended
-		 * to set the salt to a random string of at least eight chars using
-		 * characters, digits and special characters
-		 *
-		 * @param string Installation wide password salt
-		 * @since 2014.03
-		 * @see mshop/customer/manager/password/name
-		 * @sse mshop/customer/manager/password/options
-		 */
-		$this->salt = $context->config()->get( 'mshop/customer/manager/salt', 'mshop' );
 	}
 
 
@@ -222,12 +205,12 @@ abstract class Base
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
 		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$helper = $this->getPasswordHelper();
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
+		$values['.listitems'] = $listItems;
+		$values['.propitems'] = $propItems;
+		$values['.addritems'] = $addrItems;
 
-		return new \Aimeos\MShop\Customer\Item\Standard(
-			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $this->salt
-		);
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
+		return new \Aimeos\MShop\Customer\Item\Standard( $address, 'customer.', $values, $this->context()->password() );
 	}
 
 
@@ -278,6 +261,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
 	 * @throws \LogicException If the name is invalid or the class isn't found
+	 * @deprecated 2025.01 Use $this->context()->password() instead
 	 */
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
@@ -331,13 +315,10 @@ abstract class Base
 	 * Returns the currently authenticated user
 	 *
 	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item or NULL if not available
+	 * @deprecated 2025.01 Use $this->context()->user() instead
 	 */
 	protected function getUser() : ?\Aimeos\MShop\Customer\Item\Iface
 	{
-		if( !isset( $this->user ) && ( $userid = $this->context()->user() ) !== null ) {
-			$this->user = $this->search( $this->filter( true )->add( 'customer.id', '==', $userid ) )->first();
-		}
-
-		return $this->user;
+		return $this->context()->user();
 	}
 }

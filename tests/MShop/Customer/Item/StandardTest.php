@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', ['customer.address.position' => 1] ),
 		);
 
-		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, [], [], $addresses, [], null, 'mshop' );
+		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, 'customer.', $this->values + ['.addritems' => $addresses] );
 	}
 
 
@@ -305,7 +305,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testFromArray()
 	{
 		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.' );
-		$item = new \Aimeos\MShop\Customer\Item\Standard( $address );
+		$item = new \Aimeos\MShop\Customer\Item\Standard( $address, 'customer.' );
 
 		$list = $entries = array(
 			'customer.id' => 1,

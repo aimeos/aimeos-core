@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Customer
@@ -35,34 +34,25 @@ abstract class Base
 	}
 
 
-	private \Aimeos\MShop\Common\Item\Address\Iface $billingaddress;
-	private array $data;
+	private \Aimeos\MShop\Common\Item\Address\Iface $payaddress;
 
 
 	/**
 	 * Initializes the customer item object
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item object
+	 * @param string $prefix Property prefix for the values
 	 * @param array $values List of attributes that belong to the customer item
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of referenced address items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
-		array $listItems = [], array $refItems = [], $addrItems = [], array $propItems = [] )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, string $prefix, array $values = [] )
 	{
-		parent::__construct( 'customer.', $values );
+		parent::__construct( $prefix, $values );
 
-		$this->initAddressItems( $addrItems );
-		$this->initPropertyItems( $propItems );
-		$this->initListItems( $listItems, $refItems );
+		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initAddressItems( $values['.addritems'] ?? [] );
+		$this->initPropertyItems( $values['.propitems'] ?? [] );
 
-		// set modified flag to false
-		$address->setId( $this->getId() );
-
-		$this->billingaddress = $address;
-		$this->data = $values;
+		$this->payaddress = $address->setId( $this->getId() ); // set modified flag to false
 	}
 
 
@@ -71,7 +61,7 @@ abstract class Base
 	 */
 	public function __clone()
 	{
-		$this->billingaddress = clone $this->billingaddress;
+		$this->payaddress = clone $this->payaddress;
 
 		parent::__clone();
 		$this->__cloneList();
@@ -81,27 +71,27 @@ abstract class Base
 
 
 	/**
-	 * Returns the billingaddress of the customer item.
+	 * Returns the payaddress of the customer item.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface
 	 */
 	public function getPaymentAddress() : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->billingaddress;
+		return $this->payaddress;
 	}
 
 
 	/**
-	 * Sets the billingaddress of the customer item.
+	 * Sets the payaddress of the customer item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( $address === $this->billingaddress && $address->isModified() === false ) { return $this; }
+		if( $address === $this->payaddress && $address->isModified() === false ) { return $this; }
 
-		$this->billingaddress = $address;
+		$this->payaddress = $address;
 		$this->setModified();
 
 		return $this;
