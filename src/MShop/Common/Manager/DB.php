@@ -1102,7 +1102,7 @@ trait DB
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx++, $context->datetime() ); // ctime
+			$stmt->bind( $idx++, $item->getTimeCreated() ?: $context->datetime() ); // ctime
 		}
 
 		$stmt->execute()->finish();
