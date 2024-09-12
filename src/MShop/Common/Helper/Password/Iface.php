@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  *
  * @package MShop
  * @subpackage Common
- * @deprecated 2022.01
+ * @deprecated 2025.01 Use \Aimeos\Base\Password\Iface instead
  */
 interface Iface
 {

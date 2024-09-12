@@ -16,6 +16,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  *
  * @package MShop
  * @subpackage Common
+ * @deprecated 2025.01 Use \Aimeos\Base\Password\Iface instead
  */
 class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
