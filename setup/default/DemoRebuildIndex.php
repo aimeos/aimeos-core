@@ -37,7 +37,6 @@ class DemoRebuildIndex extends Base
 			return;
 		}
 
-		$timestamp = date( 'Y-m-d H:i:s' );
-		\Aimeos\MShop::create( $this->context(), 'index' )->rebuild()->cleanup( $timestamp );
+		\Aimeos\MShop::create( $this->context(), 'index' )->rebuild()->cleanup( $this->context()->datetime() );
 	}
 }
