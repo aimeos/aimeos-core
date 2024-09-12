@@ -41,8 +41,8 @@ class IndexCreateSQLSrvFulltext extends Base
 				->where( sprintf( 'object_id = OBJECT_ID(\'%1$s.dbo.mshop_index_text\') AND is_primary_key = 1', $db->name() ) )
 				->setMaxResults( 1 )->execute()->fetchOne();
 
-			$db->for( 'mysql', 'CREATE FULLTEXT CATALOG "aimeos"' );
-			$db->for( 'mysql', 'CREATE FULLTEXT INDEX ON "mshop_index_text" ("content") KEY INDEX ' . $name . ' ON "aimeos"' );
+			$db->for( 'mssql', 'CREATE FULLTEXT CATALOG "aimeos"' );
+			$db->for( 'mssql', 'CREATE FULLTEXT INDEX ON "mshop_index_text" ("content") KEY INDEX ' . $name . ' ON "aimeos"' );
 		}
 	}
 }
