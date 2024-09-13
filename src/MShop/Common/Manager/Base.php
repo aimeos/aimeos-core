@@ -54,7 +54,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, $this->getConfigKey( 'delete' ) );
+		return $this->clearBase( $siteids, $this->getConfigKey( 'delete', 'mshop/common/manager/delete' ) );
 	}
 
 
@@ -81,7 +81,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->deleteItemsBase( $itemIds, $this->getConfigKey( 'delete' ) );
+		return $this->deleteItemsBase( $itemIds, $this->getConfigKey( 'delete', 'mshop/common/manager/delete' ) );
 	}
 
 
@@ -303,7 +303,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * @see mshop/common/manager/delete/ansi
 		 * @see mshop/common/manager/count/ansi
 		 */
-		$cfgPathSearch = 'mshop/common/manager/search';
+		$cfgPathSearch = $this->getConfigKey( 'search', 'mshop/common/manager/search' );
 
 		/** mshop/common/manager/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
@@ -355,16 +355,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * @see mshop/common/manager/delete/ansi
 		 * @see mshop/common/manager/search/ansi
 		 */
-		$cfgPathCount = 'mshop/common/manager/count';
+		$cfgPathCount = $this->getConfigKey( 'count', 'mshop/common/manager/count' );
 
 		$level = $this->getSiteMode();
+		$plugins = $this->searchPlugins();
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
 
 		$attrs = array_filter( $this->getSearchAttributes( false ), fn( $attr ) => $attr->getType() === 'json' );
 		$attrs = array_column( $attrs, null, 'code' );
 
-		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $plugins );
 
 		try {
 			return $this->fetch( $results, $ref, $this->prefix(), $attrs );
@@ -429,6 +430,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 	protected function getSiteMode() : int
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		return $this->context()->config()->get( $this->getConfigKey( 'sitemode' ), $level );
+		return $this->context()->config()->get( $this->getConfigKey( 'sitemode', 'mshop/common/manager/sitemode' ), $level );
+	}
+
+
+	/**
+	 * Returns the search plugins for transforming the search criteria
+	 *
+	 * @return \Aimeos\MW\Criteria\Plugin\Iface[] List of search plugins
+	 */
+	protected function searchPlugins() : array
+	{
+		return [];
 	}
 }

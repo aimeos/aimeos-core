@@ -524,12 +524,19 @@ trait DB
 	 * Returns the full configuration key for the passed last part
 	 *
 	 * @param string $name Configuration last part
+	 * @param string $default Default configuration key
 	 * @return string Full configuration key
 	 */
-	protected function getConfigKey( string $name ) : string
+	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
 		$subPath = $this->getSubPath();
-		return 'mshop/' . $this->getDomain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
+		$key = 'mshop/' . $this->getDomain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
+
+		if( $this->context()->config()->get( $key ) ) {
+			return $key;
+		}
+
+		return $default;
 	}
 
 
@@ -1041,7 +1048,7 @@ trait DB
 			 * @see mshop/common/manager/search/ansi
 			 * @see mshop/common/manager/count/ansi
 			 */
-			$path = $this->getConfigKey( 'insert' );
+			$path = $this->getConfigKey( 'insert', 'mshop/common/manager/insert' );
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 		}
 		else
@@ -1077,7 +1084,7 @@ trait DB
 			 * @see mshop/common/manager/search/ansi
 			 * @see mshop/common/manager/count/ansi
 			 */
-			$path = $this->getConfigKey( 'update' );
+			$path = $this->getConfigKey( 'update', 'mshop/common/manager/update' );
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
@@ -1144,7 +1151,7 @@ trait DB
 			 * @see mshop/common/manager/search/ansi
 			 * @see mshop/common/manager/count/ansi
 			 */
-			$id = $this->newId( $conn, 'mshop/common/manager/newid' );
+			$id = $this->newId( $conn, $this->getConfigKey( 'newid', 'mshop/common/manager/newid' ) );
 		}
 
 		return $this->saveDeps( $item->setId( $id ) );

@@ -128,11 +128,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$stub = $this->getMockBuilder( \Aimeos\MShop\Customer\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )
-			->onlyMethods( ['save'] )
+			->onlyMethods( ['save', 'getDomain'] )
 			->getMock();
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Customer\Manager\Standard::class, $stub );
 
+		$stub->method( 'getDomain' )->willReturn( 'customer' );
 		$stub->expects( $this->once() )->method( 'save' );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );

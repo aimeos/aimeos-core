@@ -374,7 +374,7 @@ class Standard
 	 */
 	public function getTimeCreated() : ?string
 	{
-		return $this->get( 'product.ctime', date( 'Y-m-d H:i:s' ) );
+		return $this->get( 'product.ctime' );
 	}
 
 
