@@ -185,9 +185,9 @@ abstract class Base
 	 *
 	 * @return string Table name
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
-		return substr( parent::getTable(), 0, -1 ); // cuts of the "s" from "lists"
+		return substr( parent::table(), 0, -1 ); // cuts of the "s" from "lists"
 	}
 
 
@@ -198,6 +198,6 @@ abstract class Base
 	 */
 	protected function prefix() : string
 	{
-		return $this->getDomain() . '.lists.';
+		return $this->domain() . '.lists.';
 	}
 }

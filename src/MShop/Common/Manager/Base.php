@@ -38,7 +38,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	{
 		$this->context = $context;
 
-		$this->setResourceName( $context->config()->get( 'mshop/' . $this->getDomain() . '/manager/resource', 'db-' . $this->getDomain() ) );
+		$this->setResourceName( $context->config()->get( 'mshop/' . $this->domain() . '/manager/resource', 'db-' . $this->domain() ) );
 	}
 
 
@@ -94,7 +94,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		return $this->filterBase( $this->getDomain() );
+		return $this->filterBase( $this->domain() );
 	}
 
 
@@ -188,7 +188,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( $this->getDomain(), trim( $this->getSubPath() . '/' . $manager, '/' ), $name );
+		return $this->getSubManagerBase( $this->domain(), trim( $this->subpath() . '/' . $manager, '/' ), $name );
 	}
 
 

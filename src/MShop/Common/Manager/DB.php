@@ -275,12 +275,12 @@ trait DB
 		if( $attrcode )
 		{
 			$parts = array_slice( explode( '.', $attrcode ), 0, -1 );
-			$str = 'm' . substr( array_shift( $parts ) ?: $this->getDomain(), 0, 3 );
+			$str = 'm' . substr( array_shift( $parts ) ?: $this->domain(), 0, 3 );
 		}
 		else
 		{
-			$parts = explode( '/', $this->getSubPath() );
-			$str = 'm' . substr( $this->getDomain(), 0, 3 );
+			$parts = explode( '/', $this->subpath() );
+			$str = 'm' . substr( $this->domain(), 0, 3 );
 		}
 
 		foreach( $parts as $part ) {
@@ -529,8 +529,8 @@ trait DB
 	 */
 	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
-		$subPath = $this->getSubPath();
-		$key = 'mshop/' . $this->getDomain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
+		$subPath = $this->subpath();
+		$key = 'mshop/' . $this->domain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
 
 		if( $this->context()->config()->get( $key ) ) {
 			return $key;
@@ -567,7 +567,7 @@ trait DB
 	 *
 	 * @return string Manager domain e.g. "product"
 	 */
-	protected function getDomain() : string
+	protected function domain() : string
 	{
 		if( !isset( $this->domain ) ) {
 			$this->initDb();
@@ -631,8 +631,8 @@ trait DB
 	 */
 	protected function getManagerPath() : string
 	{
-		$subPath = $this->getSubPath();
-		return $this->getDomain() . ( $subPath ? '/' . $subPath : '' );
+		$subPath = $this->subpath();
+		return $this->domain() . ( $subPath ? '/' . $subPath : '' );
 	}
 
 
@@ -666,7 +666,7 @@ trait DB
 	protected function getResourceName() : string
 	{
 		if( $this->resourceName === null ) {
-			$this->setResourceName( 'db-' . $this->getDomain() );
+			$this->setResourceName( 'db-' . $this->domain() );
 		}
 
 		return $this->resourceName;
@@ -734,8 +734,8 @@ trait DB
 	 */
 	protected function getSearchKey( string $name = '' ) : string
 	{
-		$subPath = str_replace( '/', '.', $this->getSubPath() );
-		return $this->getDomain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
+		$subPath = str_replace( '/', '.', $this->subpath() );
+		return $this->domain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
 	}
 
 
@@ -832,7 +832,7 @@ trait DB
 			$sql = str_replace( $key, $value, $sql );
 		}
 
-		return str_replace( [':alias', ':table'], [$this->alias(), $this->getTable()], $sql );
+		return str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
 	}
 
 
@@ -921,7 +921,7 @@ trait DB
 	 *
 	 * @return string Manager domain sub-path e.g. "lists/type"
 	 */
-	protected function getSubPath() : string
+	protected function subpath() : string
 	{
 		if( !isset( $this->subpath ) ) {
 			$this->initDb();
@@ -936,10 +936,10 @@ trait DB
 	 *
 	 * @return string Table name e.g. "mshop_product_property_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
-		$subPath = $this->getSubPath();
-		return 'mshop_' . $this->getDomain() . ( $subPath ? '_' . str_replace( '/', '_', $subPath ) : '' );
+		$subPath = $this->subpath();
+		return 'mshop_' . $this->domain() . ( $subPath ? '_' . str_replace( '/', '_', $subPath ) : '' );
 	}
 
 

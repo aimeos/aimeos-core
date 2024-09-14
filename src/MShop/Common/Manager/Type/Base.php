@@ -118,9 +118,9 @@ abstract class Base
 	 *
 	 * @return string Table name e.g. "mshop_product_list_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
-		return str_replace( '_lists_', '_list_', parent::getTable() );
+		return str_replace( '_lists_', '_list_', parent::table() );
 	}
 
 
@@ -131,6 +131,6 @@ abstract class Base
 	 */
 	protected function prefix() : string
 	{
-		return $this->getDomain() . '.' . str_replace( '/', '.', $this->getSubPath() ) . '.';
+		return $this->domain() . '.' . str_replace( '/', '.', $this->subpath() ) . '.';
 	}
 }

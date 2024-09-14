@@ -110,6 +110,6 @@ abstract class Base
 	 */
 	protected function prefix() : string
 	{
-		return $this->getDomain() . '.property.';
+		return $this->domain() . '.property.';
 	}
 }

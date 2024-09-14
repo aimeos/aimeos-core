@@ -265,7 +265,7 @@ class Standard
 	 *
 	 * @return string Table name e.g. "mshop_service_lists_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'mshop_order_service_tx';
 	}
