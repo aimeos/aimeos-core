@@ -8,9 +8,20 @@
 
 return [
 	'manager' => [
+		'lists' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
+		'property' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
 		'submanagers' => [
 			'lists' => 'lists',
 			'property' => 'property',
-		]
+			'type' => 'type',
+		],
 	],
 ];

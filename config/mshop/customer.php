@@ -8,6 +8,16 @@
 
 return array(
 	'manager' => array(
+		'lists' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
+		'property' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
 		'submanagers' => [
 			'address' => 'address',
 			'lists' => 'lists',

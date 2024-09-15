@@ -8,6 +8,21 @@
 
 return [
 	'manager' => [
+		'lists' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
+		'property' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
+		'submanagers' => [
+			'lists' => 'lists',
+			'property' => 'property',
+			'type' => 'type',
+		],
 		'extensions' => [
 			'application/pdf' => 'pdf',
 			'application/postscript' => 'ps',
@@ -62,9 +77,5 @@ return [
 				'maxwidth' => 1920,
 			]],
 		],
-		'submanagers' => [
-			'lists' => 'lists',
-			'property' => 'property',
-		]
 	],
 ];

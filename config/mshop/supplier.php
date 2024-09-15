@@ -8,9 +8,14 @@
 
 return [
 	'manager' => [
+		'lists' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
 		'submanagers' => [
 			'address' => 'address',
 			'lists' => 'lists',
-		]
+		],
 	],
 ];

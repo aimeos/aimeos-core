@@ -8,6 +8,14 @@
 
 return array(
 	'manager' => array(
+		'lists' => [
+			'submanagers' => [
+				'type' => 'type',
+			]
+		],
+		'submanagers' => [
+			'lists' => 'lists',
+		],
 		'cleanup' => array(
 			'ansi' => '
 				DELETE FROM "mshop_catalog"
