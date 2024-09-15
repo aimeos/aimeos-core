@@ -192,45 +192,47 @@ class Standard
 
 
 	/**
-	 * Fetches the rows from the database statement and returns the list of items.
+	 * Saves the dependent items of the item
 	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
 	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
+	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$map = $items = $parentIds = $propItems = [];
+		$this->savePropertyItems( $item, 'attribute', $fetch );
+		$this->saveListItems( $item, 'attribute', $fetch );
 
-		while( $row = $results->fetch() )
-		{
-			$map[$row['attribute.id']] = $row;
-			$parentIds[] = $row['attribute.id'];
-		}
+		return $item;
+	}
+
+
+	/**
+	 * Merges the data from the given map and the referenced items
+	 *
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
+	 */
+	public function searchRefs( array $entries, array $ref ) : array
+	{
+		$parentIds = array_keys( $entries );
 
 		if( $this->hasRef( $ref, 'attribute/property' ) )
 		{
 			$name = 'attribute/property';
 			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
 
-			$propItems = $this->getPropertyItems( $parentIds, 'attribute', $propTypes );
-		}
-
-		$listItems = map( $this->getListItems( $parentIds, $ref, 'attribute' ) )->groupBy( 'attribute.lists.parentid' );
-
-		foreach( $map as $id => $row )
-		{
-			$row['.listitems'] = $listItems[$id] ?? [];
-			$row['.propitems'] = $propItems[$id] ?? [];
-
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$id] = $item;
+			foreach( $this->getPropertyItems( $parentIds, 'attribute', $propTypes ) as $id => $list ) {
+				$entries[$id]['.propitems'] = $list;
 			}
 		}
 
-		return map( $items );
+		foreach( $this->getListItems( $parentIds, $ref, 'attribute' ) as $id => $listItem ) {
+			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
+		}
+
+		return $entries;
 	}
 
 
@@ -242,20 +244,6 @@ class Standard
 	protected function prefix() : string
 	{
 		return 'attribute.';
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$item = $this->savePropertyItems( $item, 'attribute', $fetch );
-		return $this->saveListItems( $item, 'attribute', $fetch );
 	}
 
 

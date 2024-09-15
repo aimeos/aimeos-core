@@ -222,27 +222,20 @@ class Standard
 
 
 	/**
-	 * Fetches the rows from the database statement and returns the list of items.
+	 * Merges the data from the given map and the referenced items
 	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
 	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
+	public function searchRefs( array $entries, array $ref ) : array
 	{
-		$items = [];
-		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
 
-		while( $row = $results->fetch() )
+		foreach( $entries as $id => $row )
 		{
-			if( ( $row['order.service.transaction.config'] = json_decode( $row['order.service.transaction.config'], true ) ) === null ) {
-				$row['order.service.transaction.config'] = [];
-			}
-
 			// don't use fromArray() or set*() methods to avoid recalculation of tax value
-			$row['.price'] = $priceManager->create( [
+			$entries[$id]['.price'] = $manager->create( [
 				'price.currencyid' => $row['order.service.transaction.currencyid'],
 				'price.value' => $row['order.service.transaction.price'],
 				'price.costs' => $row['order.service.transaction.costs'],
@@ -250,13 +243,9 @@ class Standard
 				'price.taxflag' => $row['order.service.transaction.taxflag'],
 				'price.taxvalue' => $row['order.service.transaction.taxvalue'],
 			] );
-
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$row['order.service.transaction.id']] = $item;
-			}
 		}
 
-		return map( $items );
+		return $entries;
 	}
 
 

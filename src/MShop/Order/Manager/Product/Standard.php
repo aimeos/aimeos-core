@@ -407,6 +407,72 @@ class Standard
 
 
 	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$attrItems = $item->getAttributeItems();
+
+		foreach( $attrItems as $attrItem )
+		{
+			if( $attrItem->getParentId() != $item->getId() ) {
+				$attrItem->setId( null ); // create new property item if copied
+			}
+
+			$attrItem->setParentId( $item->getId() );
+		}
+
+		$this->object()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
+		return $item;
+	}
+
+
+	/**
+	 * Merges the data from the given map and the referenced items
+	 *
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
+	 */
+	public function searchRefs( array $entries, array $ref ) : array
+	{
+		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
+		$attributes = $this->getAttributeItems( array_keys( $entries ) );
+
+		if( $this->hasRef( $ref, 'product' ) )
+		{
+			$ids = map( $entries )->col( 'order.product.productid' );
+			$ids->merge( map( $entries )->col( 'order.product.parentproductid' ) );
+			$prodItems = $this->getProductItems( $ids->filter()->all(), $ref );
+		}
+
+		foreach( $entries as $id => $row )
+		{
+			$entries[$id]['.price'] = $manager->create( [
+				'price.currencyid' => $row['order.product.currencyid'],
+				'price.taxrates' => $row['order.product.taxrates'],
+				'price.value' => $row['order.product.price'],
+				'price.costs' => $row['order.product.costs'],
+				'price.rebate' => $row['order.product.rebate'],
+				'price.taxflag' => $row['order.product.taxflag'],
+				'price.taxvalue' => $row['order.product.taxvalue'],
+				'price.siteid' => $row['order.product.siteid'],
+			] );
+
+			$entries[$id]['.parentproduct'] = $prodItems[$row['order.product.parentproductid']] ?? null;
+			$entries[$id]['.product'] = $prodItems[$row['order.product.productid']] ?? null;
+			$entries[$id]['.attributes'] = $attributes[$id] ?? map();
+		}
+
+		return $entries;
+	}
+
+
+	/**
 	 * Binds additional values to the statement before execution.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
@@ -427,61 +493,6 @@ class Standard
 		$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 		return $stmt;
-	}
-
-
-	/**
-	 * Fetches the rows from the database statement and returns the list of items.
-	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
-	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
-	{
-		$ids = $map = [];
-		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-
-		while( $row = $results->fetch() )
-		{
-			$row['order.product.taxrates'] = json_decode( $row['order.product.taxrates'], true ) ?? [];
-
-			$row['.price'] = $priceManager->create( [
-				'price.currencyid' => $row['order.product.currencyid'],
-				'price.taxrates' => $row['order.product.taxrates'],
-				'price.value' => $row['order.product.price'],
-				'price.costs' => $row['order.product.costs'],
-				'price.rebate' => $row['order.product.rebate'],
-				'price.taxflag' => $row['order.product.taxflag'],
-				'price.taxvalue' => $row['order.product.taxvalue'],
-				'price.siteid' => $row['order.product.siteid'],
-			] );
-
-			$ids[] = $row['order.product.productid'];
-			$ids[] = $row['order.product.parentproductid'];
-
-			$map[$row['order.product.id']] = $row;
-		}
-
-
-		$items = [];
-		$attributes = $this->getAttributeItems( array_keys( $map ) );
-		$prodItems = $this->hasRef( $ref, 'product' ) ? $this->getProductItems( array_filter( $ids ), $ref ) : [];
-
-		foreach( $map as $id => $row )
-		{
-			$row['.parentproduct'] = $prodItems[$row['order.product.parentproductid']] ?? null;
-			$row['.product'] = $prodItems[$row['order.product.productid']] ?? null;
-			$row['.attributes'] = $attributes[$id] ?? map();
-
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$id] = $item;
-			}
-		}
-
-		return map( $items );
 	}
 
 
@@ -537,31 +548,6 @@ class Standard
 	protected function prefix() : string
 	{
 		return 'order.product.';
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$attrItems = $item->getAttributeItems();
-
-		foreach( $attrItems as $attrItem )
-		{
-			if( $attrItem->getParentId() != $item->getId() ) {
-				$attrItem->setId( null ); // create new property item if copied
-			}
-
-			$attrItem->setParentId( $item->getId() );
-		}
-
-		$this->object()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
-		return $item;
 	}
 
 

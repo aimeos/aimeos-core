@@ -24,54 +24,6 @@ class Standard extends Base
 	use Update;
 
 
-	private array $searchConfig = [
-		'order.invoiceno' => [
-			'label' => 'Invoice number',
-			'internalcode' => 'invoiceno',
-		],
-		'order.relatedid' => [
-			'label' => 'Related invoice ID',
-			'internalcode' => 'relatedid',
-		],
-		'order.channel' => [
-			'label' => 'Order channel',
-			'internalcode' => 'channel',
-		],
-		'order.datepayment' => [
-			'label' => 'Purchase date',
-			'internalcode' => 'datepayment',
-			'type' => 'datetime',
-		],
-		'order.datedelivery' => [
-			'label' => 'Delivery date',
-			'internalcode' => 'datedelivery',
-			'type' => 'datetime',
-		],
-		'order.statusdelivery' => [
-			'label' => 'Delivery status',
-			'internalcode' => 'statusdelivery',
-			'type' => 'int',
-		],
-		'order.statuspayment' => [
-			'label' => 'Payment status',
-			'internalcode' => 'statuspayment',
-			'type' => 'int',
-		],
-		'order.customerid' => [
-			'label' => 'Order customer ID',
-			'internalcode' => 'customerid',
-		],
-		'order.customerref' => [
-			'label' => 'Order customer reference',
-			'internalcode' => 'customerref',
-		],
-		'order.comment' => [
-			'label' => 'Order comment',
-			'internalcode' => 'comment',
-		],
-	];
-
-
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
@@ -321,7 +273,52 @@ class Standard extends Base
 	 */
 	public function getSaveAttributes() : array
 	{
-		return $this->createAttributes( $this->searchConfig );
+		return $this->createAttributes( [
+			'order.invoiceno' => [
+				'label' => 'Invoice number',
+				'internalcode' => 'invoiceno',
+			],
+			'order.relatedid' => [
+				'label' => 'Related invoice ID',
+				'internalcode' => 'relatedid',
+			],
+			'order.channel' => [
+				'label' => 'Order channel',
+				'internalcode' => 'channel',
+			],
+			'order.datepayment' => [
+				'label' => 'Purchase date',
+				'internalcode' => 'datepayment',
+				'type' => 'datetime',
+			],
+			'order.datedelivery' => [
+				'label' => 'Delivery date',
+				'internalcode' => 'datedelivery',
+				'type' => 'datetime',
+			],
+			'order.statusdelivery' => [
+				'label' => 'Delivery status',
+				'internalcode' => 'statusdelivery',
+				'type' => 'int',
+			],
+			'order.statuspayment' => [
+				'label' => 'Payment status',
+				'internalcode' => 'statuspayment',
+				'type' => 'int',
+			],
+			'order.customerid' => [
+				'label' => 'Order customer ID',
+				'internalcode' => 'customerid',
+			],
+			'order.customerref' => [
+				'label' => 'Order customer reference',
+				'internalcode' => 'customerref',
+			],
+			'order.comment' => [
+				'label' => 'Order comment',
+				'internalcode' => 'comment',
+			],
+		] );
 	}
 
 
@@ -406,6 +403,122 @@ class Standard extends Base
 
 
 	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$this->addStatus( $item );
+		$this->saveAddresses( $item );
+		$this->saveServices( $item );
+		$this->saveProducts( $item );
+		$this->saveCoupons( $item );
+		$this->saveStatuses( $item );
+
+		return $item;
+	}
+
+
+	/**
+	 * Merges the data from the given map and the referenced items
+	 *
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
+	 */
+	public function searchRefs( array $entries, array $ref ) : array
+	{
+		$context = $this->context();
+		$ids = array_keys( $entries );
+		$addresses = $customers = $coupons = $products = $services = $statuses = [];
+
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
+
+		if( $this->hasRef( $ref, 'customer' ) && !( $cids = map( $entries )->col( 'order.customerid' )->filter() )->empty() )
+		{
+			$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
+			$search = $manager->filter()->slice( 0, 0x7fffffff )->add( ['customer.id' => $cids] );
+			$customers = $manager->search( $search, $ref );
+		}
+
+		if( $this->hasRef( $ref, 'order/address' ) ) {
+			$addresses = $this->getAddresses( $ids, $ref );
+		}
+
+		if( $this->hasRef( $ref, 'order/product' ) || $this->hasRef( $ref, 'order/coupon' ) ) {
+			$products = $this->getProducts( $ids, $ref );
+		}
+
+		if( $this->hasRef( $ref, 'order/coupon' ) ) {
+			$coupons = $this->getCoupons( $ids, $ref );
+		}
+
+		if( $this->hasRef( $ref, 'order/service' ) ) {
+			$services = $this->getServices( $ids, $ref );
+		}
+
+		if( $this->hasRef( $ref, 'order/status' ) ) {
+			$statuses = $this->getStatuses( $ids, $ref );
+		}
+
+		foreach( $entries as $id => $row )
+		{
+			$entries[$id]['.price'] = $priceManager->create( [
+				'price.currencyid' => $row['order.currencyid'],
+				'price.value' => $row['order.price'],
+				'price.costs' => $row['order.costs'],
+				'price.rebate' => $row['order.rebate'],
+				'price.taxflag' => $row['order.taxflag'],
+				'price.taxvalue' => $row['order.taxvalue'],
+				'price.siteid' => $row['order.siteid'],
+			] );
+
+			// you may need the site object! take care!
+			$entries[$id]['.locale'] = $localeManager->create( [
+				'locale.currencyid' => $row['order.currencyid'],
+				'locale.languageid' => $row['order.languageid'],
+				'locale.siteid' => $row['order.siteid'],
+			] );
+
+			$entries[$id]['.customer'] = $customers[$row['order.customerid']] ?? null;
+			$entries[$id]['.addresses'] = $addresses[$id] ?? [];
+			$entries[$id]['.coupons'] = $coupons[$id] ?? [];
+			$entries[$id]['.products'] = $products[$id] ?? [];
+			$entries[$id]['.services'] = $services[$id] ?? [];
+			$entries[$id]['.statuses'] = $statuses[$id] ?? [];
+		}
+
+		return $entries;
+	}
+
+
+	/**
+	 * Adds the new payment and delivery values to the order status log.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item object
+	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	{
+		$object = $this->object();
+
+		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() ) {
+			$item->addStatus( $object->createStatus()->setType( 'status-payment' )->setValue( $item->getStatusPayment() ) );
+		}
+
+		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() ) {
+			$item->addStatus( $object->createStatus()->setType( 'status-delivery' )->setValue( $item->getStatusDelivery() ) );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Binds additional values to the statement before execution.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
@@ -438,152 +551,6 @@ class Standard extends Base
 		}
 
 		return $stmt;
-	}
-
-
-	/**
-	 * Creates a one-time order in the storage from the given invoice object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Order item with necessary values
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 */
-	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$item->isModified() )
-		{
-			$this->saveAddresses( $item )->saveServices( $item )->saveProducts( $item )->saveCoupons( $item )->saveStatuses( $item );
-			return $item;
-		}
-
-		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING )
-		{
-			try {
-				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
-			} catch( \Exception $e ) { // redo on transaction deadlock
-				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
-			}
-		}
-
-		$item = parent::saveBase( $item, $fetch );
-
-		$this->addStatus( $item )
-			->saveStatuses( $item )
-			->saveAddresses( $item )
-			->saveServices( $item )
-			->saveProducts( $item )
-			->saveCoupons( $item );
-
-		return $item;
-	}
-
-
-	/**
-	 * Fetches the rows from the database statement and returns the list of items.
-	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
-	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
-	{
-		$map = [];
-		$context = $this->context();
-
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
-
-		while( $row = $results->fetch() )
-		{
-			$row['.price'] = $priceManager->create( [
-				'price.currencyid' => $row['order.currencyid'],
-				'price.value' => $row['order.price'],
-				'price.costs' => $row['order.costs'],
-				'price.rebate' => $row['order.rebate'],
-				'price.taxflag' => $row['order.taxflag'],
-				'price.taxvalue' => $row['order.taxvalue'],
-				'price.siteid' => $row['order.siteid'],
-			] );
-
-			// you may need the site object! take care!
-			$row['.locale'] = $localeManager->create( [
-				'locale.currencyid' => $row['order.currencyid'],
-				'locale.languageid' => $row['order.languageid'],
-				'locale.siteid' => $row['order.siteid'],
-			] );
-
-			$map[$row['order.id']] = $row;
-		}
-
-		$ids = array_keys( $map );
-		$items = $addresses = $customers = $coupons = $products = $services = $statuses = [];
-
-		if( $this->hasRef( $ref, 'customer' ) && !( $cids = map( $map )->col( 'order.customerid' )->filter() )->empty() )
-		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
-			$search = $manager->filter()->slice( 0, 0x7fffffff )->add( ['customer.id' => $cids] );
-			$customers = $manager->search( $search, $ref );
-		}
-
-		if( $this->hasRef( $ref, 'order/address' ) ) {
-			$addresses = $this->getAddresses( $ids, $ref );
-		}
-
-		if( $this->hasRef( $ref, 'order/product' ) || $this->hasRef( $ref, 'order/coupon' ) ) {
-			$products = $this->getProducts( $ids, $ref );
-		}
-
-		if( $this->hasRef( $ref, 'order/coupon' ) ) {
-			$coupons = $this->getCoupons( $ids, $ref );
-		}
-
-		if( $this->hasRef( $ref, 'order/service' ) ) {
-			$services = $this->getServices( $ids, $ref );
-		}
-
-		if( $this->hasRef( $ref, 'order/status' ) ) {
-			$statuses = $this->getStatuses( $ids, $ref );
-		}
-
-		foreach( $map as $id => $row )
-		{
-			$row['.customer'] = $customers[$row['order.customerid']] ?? null;
-			$row['.addresses'] = $addresses[$id] ?? [];
-			$row['.coupons'] = $coupons[$id] ?? [];
-			$row['.products'] = $products[$id] ?? [];
-			$row['.services'] = $services[$id] ?? [];
-			$row['.statuses'] = $statuses[$id] ?? [];
-
-			if( $item = $this->applyFilter( $item = $this->create( $row ) ) ) {
-				$items[$id] = $item;
-			}
-		}
-
-		return map( $items );
-	}
-
-
-	/**
-	 * Adds the new payment and delivery values to the order status log.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item object
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
-	{
-		$object = $this->object();
-
-		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() ) {
-			$item->addStatus( $object->createStatus()->setType( 'status-payment' )->setValue( $item->getStatusPayment() ) );
-		}
-
-		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() ) {
-			$item->addStatus( $object->createStatus()->setType( 'status-delivery' )->setValue( $item->getStatusDelivery() ) );
-		}
-
-		return $this;
 	}
 
 
@@ -631,6 +598,28 @@ class Standard extends Base
 	protected function prefix() : string
 	{
 		return 'order.';
+	}
+
+
+	/**
+	 * Creates a one-time order in the storage from the given invoice object.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Order item with necessary values
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 */
+	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING )
+		{
+			try {
+				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
+			} catch( \Exception $e ) { // redo on transaction deadlock
+				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
+			}
+		}
+
+		return parent::saveBase( $item, $fetch );
 	}
 
 

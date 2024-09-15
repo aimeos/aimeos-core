@@ -278,6 +278,64 @@ class Standard
 
 
 	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$this->saveAttributeItems( $item, $fetch );
+		$this->saveTransactions( $item, $fetch );
+
+		return $item;
+	}
+
+
+	/**
+	 * Merges the data from the given map and the referenced items
+	 *
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
+	 */
+	public function searchRefs( array $entries, array $ref ) : array
+	{
+		$servItems = [];
+		$parentIds = array_keys( $entries );
+		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
+
+		$attributes = $this->getAttributeItems( $parentIds );
+		$transactions = $this->getTransactions( $parentIds );
+
+		if( $this->hasRef( $ref, 'service' ) ) {
+			$servItems = $this->getServiceItems( map( $entries )->col( 'order.service.serviceid' )->filter()->all(), $ref );
+		}
+
+		foreach( $entries as $id => $row )
+		{
+			$entries[$id]['.price'] = $manager->create( [
+				'price.currencyid' => $row['order.service.currencyid'],
+				'price.taxrates' => $row['order.service.taxrates'],
+				'price.value' => $row['order.service.price'],
+				'price.costs' => $row['order.service.costs'],
+				'price.rebate' => $row['order.service.rebate'],
+				'price.taxflag' => $row['order.service.taxflag'],
+				'price.taxvalue' => $row['order.service.taxvalue'],
+				'price.siteid' => $row['order.service.siteid'],
+			] );
+
+			$entries[$id]['.service'] = $servItems[$row['order.service.serviceid']] ?? null;
+			$entries[$id]['.transactions'] = $transactions[$id] ?? map();
+			$entries[$id]['.attributes'] = $attributes[$id] ?? map();
+		}
+
+		return $entries;
+	}
+
+
+	/**
 	 * Binds additional values to the statement before execution.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
@@ -298,60 +356,6 @@ class Standard
 		$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 		return $stmt;
-	}
-
-
-	/**
-	 * Fetches the rows from the database statement and returns the list of items.
-	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
-	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
-	{
-		$ids = $map = [];
-		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-
-		while( $row = $results->fetch() )
-		{
-			$row['order.service.taxrates'] = json_decode( $row['order.service.taxrates'], true ) ?? [];
-
-			$row['.price'] = $priceManager->create( [
-				'price.currencyid' => $row['order.service.currencyid'],
-				'price.taxrates' => $row['order.service.taxrates'],
-				'price.value' => $row['order.service.price'],
-				'price.costs' => $row['order.service.costs'],
-				'price.rebate' => $row['order.service.rebate'],
-				'price.taxflag' => $row['order.service.taxflag'],
-				'price.taxvalue' => $row['order.service.taxvalue'],
-				'price.siteid' => $row['order.service.siteid'],
-			] );
-
-			$ids[] = $row['order.service.serviceid'];
-
-			$map[$row['order.service.id']] = $row;
-		}
-
-		$items = [];
-		$attributes = $this->getAttributeItems( array_keys( $map ) );
-		$transactions = $this->getTransactions( array_keys( $map ) );
-		$servItems = $this->hasRef( $ref, 'service' ) ? $this->getServiceItems( array_filter( $ids ), $ref ) : [];
-
-		foreach( $map as $id => $row )
-		{
-			$row['.service'] = $servItems[$row['order.service.serviceid']] ?? null;
-			$row['.transactions'] = $transactions[$id] ?? map();
-			$row['.attributes'] = $attributes[$id] ?? map();
-
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$items[$id] = $item;
-			}
-		}
-
-		return map( $items );
 	}
 
 
@@ -423,22 +427,6 @@ class Standard
 	protected function prefix() : string
 	{
 		return 'order.service.';
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->saveAttributeItems( $item, $fetch );
-		$this->saveTransactions( $item, $fetch );
-
-		return $item;
 	}
 
 

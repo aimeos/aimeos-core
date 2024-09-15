@@ -71,7 +71,16 @@ trait Traits
 	{
 		$config = $this->context()->config();
 
-		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
+		$subpath = $this->createSubNames( $managerpath );
+		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\\' . $subpath . '\Decorator\\';
+		$decorators = array_reverse( $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] ) );
+		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
+
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
+		$decorators = array_reverse( $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] ) );
+		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
+
+		$decorators = array_reverse( $config->get( 'mshop/common/manager/decorators/default', [] ) );
 		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
@@ -84,15 +93,7 @@ trait Traits
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
 
-		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
-		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
-
-		$subpath = $this->createSubNames( $managerpath );
-		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\\' . $subpath . '\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
-
-		return $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
+		return $manager;
 	}
 
 

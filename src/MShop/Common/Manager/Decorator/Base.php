@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2024
  * @package MShop
  * @subpackage Common
@@ -48,7 +47,7 @@ abstract class Base
 	 */
 	public function __call( string $name, array $param )
 	{
-		return call_user_func_array( array( $this->manager, $name ), $param );
+		return call_user_func_array( [$this->manager, $name], $param );
 	}
 
 
@@ -242,6 +241,19 @@ abstract class Base
 
 
 	/**
+	 * Saves the dependent items of the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
+	 */
+	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->manager->saveRefs( $item, $fetch );
+	}
+
+
+	/**
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
@@ -252,6 +264,19 @@ abstract class Base
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		return $this->manager->search( $filter, $ref, $total );
+	}
+
+
+	/**
+	 * Merges the data from the given map and the referenced items
+	 *
+	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
+	 * @param array $ref List of referenced items to fetch and add to the entries
+	 * @return array Associative list of ID as key and the updated entries as value
+	 */
+	public function searchRefs( array $entries, array $ref ) : array
+	{
+		return $this->manager->searchRefs( $entries, $ref );
 	}
 
 

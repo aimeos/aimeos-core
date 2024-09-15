@@ -395,34 +395,6 @@ trait DB
 
 
 	/**
-	 * Fetches the rows from the database statement and returns the list of items.
-	 *
-	 * @param \Aimeos\Base\DB\Result\Iface $stmt Database statement object
-	 * @param array $ref List of domains whose items should be fetched too
-	 * @param string $prefix Prefix for the property names
-	 * @param array $attrs List of attributes that should be decoded
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
-	 */
-	protected function fetch( \Aimeos\Base\DB\Result\Iface $results, array $ref, string $prefix = '', array $attrs = [] ) : \Aimeos\Map
-	{
-		$map = [];
-
-		while( $row = $results->fetch() )
-		{
-			foreach( $attrs as $code => $attr ) {
-				$row[$code] = json_decode( $row[$code], true );
-			}
-
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
-				$map[$row[$prefix . 'id']] = $item;
-			}
-		}
-
-		return map( $map );
-	}
-
-
-	/**
 	 * Sets the base criteria "status".
 	 * (setConditions overwrites the base criteria)
 	 *
@@ -1003,7 +975,7 @@ trait DB
 	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( !$this->isModified( $item ) ) {
-			return $this->saveDeps( $item );
+			return $this->object()->saveRefs( $item );
 		}
 
 		$context = $this->context();
@@ -1154,20 +1126,7 @@ trait DB
 			$id = $this->newId( $conn, $this->getConfigKey( 'newid', 'mshop/common/manager/newid' ) );
 		}
 
-		return $this->saveDeps( $item->setId( $id ) );
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	protected function saveDeps( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $item;
+		return $this->object()->saveRefs( $item->setId( $id ) );
 	}
 
 
