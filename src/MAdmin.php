@@ -154,6 +154,14 @@ class MAdmin
 	{
 		$config = $context->config();
 
+		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
+		$decorators = array_reverse( $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] ) );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
+
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
+		$decorators = array_reverse( $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] ) );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
+
 		/** madmin/common/manager/decorators/default
 		 * Configures the list of decorators applied to all admin managers
 		 *
@@ -175,7 +183,7 @@ class MAdmin
 		 * @param array List of decorator names
 		 * @since 2014.03
 		 */
-		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );
+		$decorators = array_reverse( $config->get( 'madmin/common/manager/decorators/default', [] ) );
 		$excludes = $config->get( 'madmin/' . $domain . '/manager/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
@@ -186,14 +194,6 @@ class MAdmin
 		}
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
-
-		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] );
-		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
-
-		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;
