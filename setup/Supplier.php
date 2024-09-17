@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Supplier extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating supplier schema', 'vv' );

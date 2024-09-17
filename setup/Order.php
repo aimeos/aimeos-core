@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Order extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating order schema', 'vv' );

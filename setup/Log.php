@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Log extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating log schema', 'vv' );

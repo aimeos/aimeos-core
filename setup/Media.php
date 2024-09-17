@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Media extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating media schema', 'vv' );

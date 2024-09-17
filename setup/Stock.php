@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Stock extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating stock schema', 'vv' );

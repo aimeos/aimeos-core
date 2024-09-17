@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Price extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating price schema', 'vv' );

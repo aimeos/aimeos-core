@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Group extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating group schema', 'vv' );

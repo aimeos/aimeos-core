@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Index extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function after() : array
 	{
 		return ['Product'];

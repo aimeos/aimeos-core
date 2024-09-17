@@ -22,11 +22,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	public function after() : array
 	{
-		return [
-			'Attribute', 'Cache', 'Catalog', 'Coupon', 'Customer', 'Index', 'Job', 'Locale', 'Log', 'Media', 'Order',
-			'Plugin', 'Price', 'Product', 'Review', 'Rule', 'Service', 'Stock', 'Subscription', 'Supplier', 'Tag', 'Text',
-			'MShopAddLocaleLangCurData'
-		];
+		return ['MShopAddLocaleLangCurData'];
 	}
 
 

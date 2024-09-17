@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Coupon extends Base
 {
+	public function before() : array
+	{
+		return ['Locale'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating coupon schema', 'vv' );
