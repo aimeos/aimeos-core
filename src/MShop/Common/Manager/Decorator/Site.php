@@ -29,15 +29,15 @@ class Site
 	 */
 	public function searchRefs( array $entries, array $ref ) : array
 	{
-        $entries = $this->getManager()->searchRefs( $entries, $ref );
+		$entries = $this->getManager()->searchRefs( $entries, $ref );
 
-		if( $this->hasRef( $ref, 'locale/site' ) && ( $key = $this->getKey( $entries  ) ) !== null )
+		if( $this->hasRef( $ref, 'locale/site' ) && ( $key = $this->getKey( $entries ) ) !== null )
 		{
-            $siteIds = array_column( $entries, $key );
-            $manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
+			$siteIds = array_column( $entries, $key );
+			$manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
 
-            $filter = $manager->filter( true )->add( ['locale.site.siteid' => $siteIds] )->slice( 0, 0x7fffffff );
-            $siteItems = $manager->search( $filter )->col( null, 'locale.site.siteid' );
+			$filter = $manager->filter( true )->add( ['locale.site.siteid' => $siteIds] )->slice( 0, 0x7fffffff );
+			$siteItems = $manager->search( $filter )->col( null, 'locale.site.siteid' );
 
 			foreach( $entries as $id => $entry ) {
 				$entries[$id]['.locale/site'] = $siteItems[$entry[$key]] ?? null;
@@ -48,21 +48,21 @@ class Site
 	}
 
 
-    /**
-     * Returns the key used for the site ID
-     *
-     * @param array $entries List of associative list of property key/value pairs
-     * @return string|null Key used for the site ID or NULL if not found
-     */
-    protected function getKey( array $entries ) : ?string
-    {
-        foreach( current( $entries ) ?: [] as $key => $value )
-        {
-            if( !substr_compare( $key, 'siteid', -6 ) ) {
-                return $key;
-            }
-        }
+	/**
+	 * Returns the key used for the site ID
+	 *
+	 * @param array $entries List of associative list of property key/value pairs
+	 * @return string|null Key used for the site ID or NULL if not found
+	 */
+	protected function getKey( array $entries ) : ?string
+	{
+		foreach( current( $entries ) ?: [] as $key => $value )
+		{
+			if( !substr_compare( $key, 'siteid', -6 ) ) {
+				return $key;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 }
