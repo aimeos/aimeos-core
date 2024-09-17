@@ -228,4 +228,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertNotNull( $refItem );
 		$this->assertEquals( 'Cafe Noire Cappuccino online kaufen', $refItem->getContent() );
 	}
+
+
+	public function testType()
+	{
+		$this->assertEquals( ['product', 'lists'], array_values( $this->object->type() ) );
+	}
 }

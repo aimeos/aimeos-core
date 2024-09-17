@@ -173,6 +173,13 @@ interface Iface
 	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
+	 * Returns the type of the mananger as separate parts
+	 *
+	 * @return string[] List of manager part names
+	 */
+	public function type() : array;
+
+	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls

@@ -150,4 +150,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'unknown' );
 	}
+
+
+	public function testType()
+	{
+		$this->assertEquals( ['product', 'lists', 'type'], array_values( $this->object->type() ) );
+	}
 }

@@ -31,10 +31,11 @@ class Site
 	{
 		$entries = $this->getManager()->searchRefs( $entries, $ref );
 
-		if( $this->hasRef( $ref, 'locale/site' ) && ( $key = $this->getKey( $entries ) ) !== null )
+		if( $this->hasRef( $ref, 'locale/site' ) && !empty( $entries ) )
 		{
-			$siteIds = array_column( $entries, $key );
 			$manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
+			$key = join( '.', $this->getManager()->type() ) . '.siteid';
+			$siteIds = array_column( $entries, $key );
 
 			$filter = $manager->filter( true )->add( ['locale.site.siteid' => $siteIds] )->slice( 0, 0x7fffffff );
 			$siteItems = $manager->search( $filter )->col( null, 'locale.site.siteid' );
@@ -45,24 +46,5 @@ class Site
 		}
 
 		return $entries;
-	}
-
-
-	/**
-	 * Returns the key used for the site ID
-	 *
-	 * @param array $entries List of associative list of property key/value pairs
-	 * @return string|null Key used for the site ID or NULL if not found
-	 */
-	protected function getKey( array $entries ) : ?string
-	{
-		foreach( current( $entries ) ?: [] as $key => $value )
-		{
-			if( !substr_compare( $key, 'siteid', -6 ) ) {
-				return $key;
-			}
-		}
-
-		return null;
 	}
 }

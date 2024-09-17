@@ -295,6 +295,16 @@ abstract class Base
 		return $this;
 	}
 
+	/**
+	 * Returns the type of the mananger as separate parts
+	 *
+	 * @return string[] List of manager part names
+	 */
+	public function type() : array
+	{
+		return $this->manager->type();
+	}
+
 
 	/**
 	 * Starts a database transaction on the connection identified by the given name

@@ -241,6 +241,19 @@ trait Methods
 
 
 	/**
+	 * Returns the type of the mananger as separate parts
+	 *
+	 * @return string[] List of manager part names
+	 */
+	public function type() : array
+	{
+		$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
+		unset( $parts[1] );
+		return $parts;
+	}
+
+
+	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
