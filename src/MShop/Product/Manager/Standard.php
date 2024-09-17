@@ -464,15 +464,6 @@ class Standard
 			$entries[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
 		}
 
-		if( $this->hasRef( $ref, 'locale/site' ) )
-		{
-			$siteItems = $this->getSiteItems( map( $entries )->col( 'product.siteid' )->all() )->all();
-
-			foreach( $entries as $id => $entry ) {
-				$entries[$id]['.locale/site'] = $siteItems[$entry['product.siteid']] ?? null;
-			}
-		}
-
 		if( $this->hasRef( $ref, 'product/property' ) )
 		{
 			$name = 'product/property';
@@ -496,6 +487,7 @@ class Standard
 	 *
 	 * @param array $entries List of product records
 	 * @return \Aimeos\Map List of product IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface as values
+	 * @deprecated 2025.01 Done by site decorator
 	 */
 	protected function getSiteItems( array $siteIds ) : \Aimeos\Map
 	{

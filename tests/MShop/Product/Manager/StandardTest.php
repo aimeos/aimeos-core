@@ -440,7 +440,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchRef()
 	{
-		$item = $this->object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
+		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
+		$object->setObject( $object );
+
+		$item = $object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
@@ -451,7 +455,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchDomains()
 	{
-		$item = $this->object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );
+		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
+		$object->setObject( $object );
+
+		$item = $object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
