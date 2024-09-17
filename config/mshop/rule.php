@@ -7,7 +7,7 @@
 
 
 return [
-    'submanagers' => [
-        'type' => 'type',
-    ],
+	'submanagers' => [
+		'type' => 'type',
+	],
 ];

@@ -377,7 +377,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 					$row[$code] = json_decode( $row[$code], true );
 				}
 
-				$map[$row[$prefix .'id']] = $row;
+				$map[$row[$prefix . 'id']] = $row;
 			}
 		}
 		catch( \Exception $e )
