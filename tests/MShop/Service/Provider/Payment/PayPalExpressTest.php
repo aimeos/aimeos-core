@@ -48,10 +48,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->onlyMethods( ['save', 'domain'] )
+			->onlyMethods( ['save', 'type'] )
 			->getMock();
 
-		$this->orderMock->method( 'domain' )->willReturn( 'order' );
+		$this->orderMock->method( 'type' )->willReturn( ['order'] );
 		$this->orderMock->expects( $this->any() )->method( 'save' )->willReturnArgument( 0 );
 
 		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $this->orderMock );

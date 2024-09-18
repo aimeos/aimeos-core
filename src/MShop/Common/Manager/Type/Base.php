@@ -131,6 +131,6 @@ abstract class Base
 	 */
 	protected function prefix() : string
 	{
-		return $this->domain() . '.' . str_replace( '/', '.', $this->subpath() ) . '.';
+		return join( '.', $this->type() ) . '.';
 	}
 }

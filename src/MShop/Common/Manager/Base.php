@@ -37,8 +37,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$this->context = $context;
+		$domain = $this->domain();
 
-		$this->setResourceName( $context->config()->get( 'mshop/' . $this->domain() . '/manager/resource', 'db-' . $this->domain() ) );
+		$this->setResourceName( $context->config()->get( 'mshop/' . $domain . '/manager/resource', 'db-' . $domain ) );
 	}
 
 
@@ -118,10 +119,11 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 *
 	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
+	 * @deprecated 2025.01 Use type() instead
 	 */
 	public function getResourceType( bool $withsub = true ) : array
 	{
-		return $this->getResourceTypeBase( $this->getManagerPath(), $this->getConfigKey( 'submanagers' ), [], $withsub );
+		return $this->getResourceTypeBase( join( '/', $this->type() ), $this->getConfigKey( 'submanagers' ), [], $withsub );
 	}
 
 
@@ -188,7 +190,10 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( $this->domain(), trim( $this->subpath() . '/' . $manager, '/' ), $name );
+		$type = $this->type();
+		$manager = trim( join( '/', array_slice( $type, 1 ) ) . '/' . $manager, '/' );
+
+		return $this->getSubManagerBase( current( $type ), $manager, $name );
 	}
 
 
@@ -441,6 +446,17 @@ abstract class Base implements \Aimeos\Macro\Iface
 	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
+	}
+
+
+	/**
+	 * Returns the domain of the manager
+	 *
+	 * @return string Domain of the manager
+	 */
+	protected function domain() : string
+	{
+		return current( $this->type() ) ?: '';
 	}
 
 

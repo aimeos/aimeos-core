@@ -28,10 +28,10 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Standard' )
 			->setConstructorArgs( [$this->context] )
-			->onlyMethods( ['delete', 'save', 'domain'] )
+			->onlyMethods( ['delete', 'save', 'type'] )
 			->getMock();
 
-		$this->mock->method( 'domain' )->willReturn( 'product' );
+		$this->mock->method( 'type' )->willReturn( ['product'] );
 		$this->context->setLogger( $this->logger );
 
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Changelog( $this->mock, $this->context );

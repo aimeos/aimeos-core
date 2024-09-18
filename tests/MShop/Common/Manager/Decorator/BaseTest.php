@@ -142,6 +142,16 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveRefs()
+	{
+		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
+
+		$this->mock->expects( $this->once() )->method( 'saveRefs' )->willReturn( $item );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->saveRefs( $item ) );
+	}
+
+
 	public function testSearch()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
@@ -152,6 +162,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->willReturn( map( [$item] ) );
 
 		$this->assertEquals( [$item], $this->object->search( $manager->filter(), [], $total )->toArray() );
+	}
+
+
+	public function testSearchRefs()
+	{
+		$this->mock->expects( $this->once() )->method( 'searchRefs' )->willReturn( [] );
+
+		$this->assertEquals( [], $this->object->searchRefs( [], [] ) );
 	}
 
 
@@ -193,6 +211,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->access( 'getManager' )->invokeArgs( $this->object, [] );
 
 		$this->assertSame( $this->mock, $result );
+	}
+
+
+	public function testType()
+	{
+		$this->mock->expects( $this->once() )->method( 'type' )->willReturn( ['product', 'lists'] );
+
+		$this->assertEquals( ['product', 'lists'], $this->object->type() );
 	}
 
 

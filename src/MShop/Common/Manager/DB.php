@@ -275,12 +275,12 @@ trait DB
 		if( $attrcode )
 		{
 			$parts = array_slice( explode( '.', $attrcode ), 0, -1 );
-			$str = 'm' . substr( array_shift( $parts ) ?: $this->domain(), 0, 3 );
+			$str = 'm' . substr( array_shift( $parts ) ?: current( $this->type() ), 0, 3 );
 		}
 		else
 		{
-			$parts = explode( '/', $this->subpath() );
-			$str = 'm' . substr( $this->domain(), 0, 3 );
+			$parts = $this->type();
+			$str = 'm' . substr( array_shift( $parts ), 0, 3 );
 		}
 
 		foreach( $parts as $part ) {
@@ -501,8 +501,9 @@ trait DB
 	 */
 	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
-		$subPath = $this->subpath();
-		$key = 'mshop/' . $this->domain() . '/manager/' . ( $subPath ? $subPath . '/' : '' ) . $name;
+		$type = $this->type();
+		array_splice( $type, 1, 0, ['manager'] );
+		$key = 'mshop/' . join( '/', $type ) . '/' . $name;
 
 		if( $this->context()->config()->get( $key ) ) {
 			return $key;
@@ -531,21 +532,6 @@ trait DB
 		sort( $keys );
 
 		return $keys;
-	}
-
-
-	/**
-	 * Returns the manager domain
-	 *
-	 * @return string Manager domain e.g. "product"
-	 */
-	protected function domain() : string
-	{
-		if( !isset( $this->domain ) ) {
-			$this->initDb();
-		}
-
-		return $this->domain;
 	}
 
 
@@ -597,18 +583,6 @@ trait DB
 
 
 	/**
-	 * Returns the manager path
-	 *
-	 * @return string Manager path e.g. "product/lists/type"
-	 */
-	protected function getManagerPath() : string
-	{
-		$subPath = $this->subpath();
-		return $this->domain() . ( $subPath ? '/' . $subPath : '' );
-	}
-
-
-	/**
 	 * Returns the required SQL joins for the critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
@@ -638,7 +612,7 @@ trait DB
 	protected function getResourceName() : string
 	{
 		if( $this->resourceName === null ) {
-			$this->setResourceName( 'db-' . $this->domain() );
+			$this->setResourceName( 'db-' . current( $this->type() ) );
 		}
 
 		return $this->resourceName;
@@ -702,12 +676,12 @@ trait DB
 	/**
 	 * Returns the item search key for the passed name
 	 *
+	 * @param string $name Search key name
 	 * @return string Item prefix e.g. "product.lists.type.id"
 	 */
 	protected function getSearchKey( string $name = '' ) : string
 	{
-		$subPath = str_replace( '/', '.', $this->subpath() );
-		return $this->domain() . ( $subPath ? '.' . $subPath : '' ) . ( $name ? '.' . $name : '' );
+		return join( '.', $this->type() ) . ( $name ? '.' . $name : '' );
 	}
 
 
@@ -889,42 +863,13 @@ trait DB
 
 
 	/**
-	 * Returns the manager domain sub-path
-	 *
-	 * @return string Manager domain sub-path e.g. "lists/type"
-	 */
-	protected function subpath() : string
-	{
-		if( !isset( $this->subpath ) ) {
-			$this->initDb();
-		}
-
-		return $this->subpath;
-	}
-
-
-	/**
 	 * Returns the name of the used table
 	 *
 	 * @return string Table name e.g. "mshop_product_property_type"
 	 */
 	protected function table() : string
 	{
-		$subPath = $this->subpath();
-		return 'mshop_' . $this->domain() . ( $subPath ? '_' . str_replace( '/', '_', $subPath ) : '' );
-	}
-
-
-	/**
-	 * Initializes the trait
-	 */
-	protected function initDb()
-	{
-		$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
-
-		$this->domain = array_shift( $parts ) ?: '';
-		array_shift( $parts ); // remove "manager"
-		$this->subpath = join( '/', $parts );
+		return 'mshop_' . join( '_', $this->type() );
 	}
 
 

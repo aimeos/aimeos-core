@@ -573,10 +573,10 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->onlyMethods( array( 'save', 'domain' ) )
+			->onlyMethods( array( 'save', 'type' ) )
 			->getMock();
 
-		$stockStub->method( 'domain' )->willReturn( 'stock' );
+		$stockStub->method( 'type' )->willReturn( ['stock'] );
 
 		$stockStub->expects( $this->once() )->method( 'save' )->with( $this->callback( function( $item ) {
 			return $item->getStockLevel() === 300;

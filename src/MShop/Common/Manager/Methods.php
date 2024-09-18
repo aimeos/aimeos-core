@@ -21,6 +21,7 @@ trait Methods
 {
 	private ?\Aimeos\MShop\Common\Manager\Iface $object = null;
 	private array $filterFcn = [];
+	private array $type;
 
 
 	/**
@@ -247,9 +248,14 @@ trait Methods
 	 */
 	public function type() : array
 	{
-		$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
-		unset( $parts[1] );
-		return $parts;
+		if( !isset( $this->type ) )
+		{
+			$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
+			unset( $parts[1] );
+			$this->type = $parts;
+		}
+
+		return $this->type;
 	}
 
 
