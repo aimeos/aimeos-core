@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Attribute\Item;
 
 use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
+use \Aimeos\MShop\Common\Item\TypeRef;
 
 
 /**
@@ -24,7 +25,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Attribute\Item\Iface
 {
-	use ListsRef\Traits, PropertyRef\Traits  {
+	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
@@ -88,29 +89,6 @@ class Standard
 	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'attribute.domain', $domain );
-	}
-
-
-	/**
-	 * Returns the type code of the attribute item.
-	 *
-	 * @return string Type code of the attribute item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'attribute.type', '' );
-	}
-
-
-	/**
-	 * Sets the new type of the attribute.
-	 *
-	 * @param string $type Type of the attribute
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'attribute.type', $this->checkCode( $type ) );
 	}
 
 

@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Price\Item;
 
 use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
+use \Aimeos\MShop\Common\Item\TypeRef;
 
 
 /**
@@ -22,7 +23,7 @@ use \Aimeos\MShop\Common\Item\PropertyRef;
  */
 class Standard extends Base
 {
-	use ListsRef\Traits, PropertyRef\Traits {
+	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
@@ -236,29 +237,6 @@ class Standard extends Base
 
 
 	/**
-	 * Returns the type of the price.
-	 *
-	 * @return string Type of the price
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'price.type', 'default' );
-	}
-
-
-	/**
-	 * Sets the new type of the price.
-	 *
-	 * @param string $type Type of the price
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'price.type', $this->checkCode( $type ) );
-	}
-
-
-	/**
 	 * Returns the tax rate
 	 *
 	 * @return string Tax rate
@@ -372,6 +350,18 @@ class Standard extends Base
 		$this->tax = $this->checkPrice( (string) $value, $this->getPrecision() + 2 );
 		parent::setModified();
 		return $this;
+	}
+
+
+	/**
+	 * Returns the type of the price item.
+	 * Overwritten for different default value.
+	 *
+	 * @return string Type of the price item
+	 */
+	public function getType() : string
+	{
+		return $this->get( 'price.type', 'default' );
 	}
 
 

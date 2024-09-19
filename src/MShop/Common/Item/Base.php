@@ -595,4 +595,15 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 
 		return null;
 	}
+
+
+	/**
+	 * Returns the prefix for the item properties
+	 *
+	 * @return string Prefix for the item properties
+	 */
+	protected function prefix() : string
+	{
+		return $this->bprefix;
+	}
 }

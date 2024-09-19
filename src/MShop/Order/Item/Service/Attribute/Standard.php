@@ -21,6 +21,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Returns the ID of the site the item is stored
 	 *
@@ -87,29 +90,6 @@ class Standard
 	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.service.attribute.parentid', $id );
-	}
-
-
-	/**
-	 * Returns the type of the service attribute item.
-	 *
-	 * @return string Type of the service attribute item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.service.attribute.type', '' );
-	}
-
-
-	/**
-	 * Sets a new type for the service attribute item.
-	 *
-	 * @param string $type Type of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.service.attribute.type', $this->checkCode( $type ) );
 	}
 
 

@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Stock\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Returns the back in stock date of the
 	 *
@@ -42,29 +45,6 @@ class Standard
 	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return $this->set( 'stock.dateback', $this->checkDateFormat( $dateback ) );
-	}
-
-
-	/**
-	 * Returns the type code of the product stock item.
-	 *
-	 * @return string Type code of the product stock item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'stock.type', 'default' );
-	}
-
-
-	/**
-	 * Sets the new type of the product stock item
-	 *
-	 * @param string $type Type of the product stock item
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'stock.type', $this->checkCode( $type ) );
 	}
 
 
@@ -134,6 +114,18 @@ class Standard
 	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return $this->set( 'stock.timeframe', (string) $timeframe );
+	}
+
+
+	/**
+	 * Returns the type of the stock item.
+	 * Overwritten for different default value.
+	 *
+	 * @return string Type of the stock item
+	 */
+	public function getType() : string
+	{
+		return $this->get( 'stock.type', 'default' );
 	}
 
 

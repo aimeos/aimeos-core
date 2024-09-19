@@ -19,6 +19,9 @@ namespace Aimeos\MShop\Order\Item\Service;
  */
 class Standard extends Base implements Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Clones internal objects of the order product item.
 	 */
@@ -178,29 +181,6 @@ class Standard extends Base implements Iface
 	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
 		return $this->set( 'order.service.name', $name );
-	}
-
-
-	/**
-	 * Returns the type of the service item.
-	 *
-	 * @return string service item type
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.service.type', '' );
-	}
-
-
-	/**
-	 * Sets a new type for the service item.
-	 *
-	 * @param string $type Type of the service item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.service.type', $this->checkCode( $type ) );
 	}
 
 

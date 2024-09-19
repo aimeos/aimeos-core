@@ -13,6 +13,7 @@ namespace Aimeos\MShop\Product\Item;
 use \Aimeos\MShop\Common\Item\Config;
 use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
+use \Aimeos\MShop\Common\Item\TypeRef;
 
 
 /**
@@ -25,7 +26,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Product\Item\Iface
 {
-	use Config\Traits, ListsRef\Traits, PropertyRef\Traits {
+	use Config\Traits, ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		PropertyRef\Traits::__clone as __cloneProperty;
 		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
@@ -90,29 +91,6 @@ class Standard
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Returns the type of the product item.
-	 *
-	 * @return string Type of the product item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'product.type', 'default' );
-	}
-
-
-	/**
-	 * Sets the new type of the product item.
-	 *
-	 * @param string $type New type of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'product.type', $this->checkCode( $type ) );
 	}
 
 
@@ -251,6 +229,29 @@ class Standard
 
 
 	/**
+	 * Returns the configuration values of the item
+	 *
+	 * @return array Configuration values
+	 */
+	public function getConfig() : array
+	{
+		return $this->get( 'product.config', [] );
+	}
+
+
+	/**
+	 * Sets the configuration values of the item.
+	 *
+	 * @param array $config Configuration values
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( 'product.config', $config );
+	}
+
+
+	/**
 	 * Returns the starting point of time, in which the product is available.
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
@@ -299,25 +300,24 @@ class Standard
 
 
 	/**
-	 * Returns the configuration values of the item
+	 * Returns the rating of the item
 	 *
-	 * @return array Configuration values
+	 * @return string Decimal value of the item rating
 	 */
-	public function getConfig() : array
+	public function getRating() : string
 	{
-		return $this->get( 'product.config', [] );
+		return (string) $this->get( 'product.rating', 0 );
 	}
 
 
 	/**
-	 * Sets the configuration values of the item.
+	 * Returns the total number of ratings for the item
 	 *
-	 * @param array $config Configuration values
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return int Total number of ratings for the item
 	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
+	public function getRatings() : int
 	{
-		return $this->set( 'product.config', $config );
+		return (int) $this->get( 'product.ratings', 0 );
 	}
 
 
@@ -391,24 +391,14 @@ class Standard
 
 
 	/**
-	 * Returns the rating of the item
+	 * Returns the type of the product item.
+	 * Overwritten for different default value.
 	 *
-	 * @return string Decimal value of the item rating
+	 * @return string Type of the product item
 	 */
-	public function getRating() : string
+	public function getType() : string
 	{
-		return (string) $this->get( 'product.rating', 0 );
-	}
-
-
-	/**
-	 * Returns the total number of ratings for the item
-	 *
-	 * @return int Total number of ratings for the item
-	 */
-	public function getRatings() : int
-	{
-		return (int) $this->get( 'product.ratings', 0 );
+		return $this->get( 'product.type', 'default' );
 	}
 
 

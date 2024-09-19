@@ -21,6 +21,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Property\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	private ?string $langid;
 	private string $prefix;
 
@@ -94,29 +97,6 @@ class Standard
 	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'parentid', $id );
-	}
-
-
-	/**
-	 * Returns the type code of the property item.
-	 *
-	 * @return string Type code of the property item
-	 */
-	public function getType() : string
-	{
-		return $this->get( $this->prefix . 'type', '' );
-	}
-
-
-	/**
-	 * Sets the new type of the property item
-	 *
-	 * @param string $type Type of the property item
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( $this->prefix . 'type', $this->checkCode( $type ) );
 	}
 
 

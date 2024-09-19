@@ -23,28 +23,18 @@ class Standard
 	implements \Aimeos\MShop\Plugin\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
 
 
 	/**
 	 * Returns the type of the plugin.
+	 * Overwritten for different default value.
 	 *
 	 * @return string Plugin type
 	 */
 	public function getType() : string
 	{
 		return $this->get( 'plugin.type', 'order' );
-	}
-
-
-	/**
-	 * Sets the new type of the plugin item.
-	 *
-	 * @param string $type New plugin type
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'plugin.type', $this->checkCode( $type ) );
 	}
 
 

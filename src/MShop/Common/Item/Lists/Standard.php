@@ -23,6 +23,9 @@ class Standard
 	implements \Aimeos\MShop\Common\Item\Lists\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 
 
 	private string $date;
@@ -178,30 +181,6 @@ class Standard
 
 
 	/**
-	 * Returns the type of the list item.
-	 *
-	 * @return string Type of the list item
-	 */
-	public function getType() : string
-	{
-		return $this->get( $this->prefix . 'type', 'default' );
-	}
-
-
-
-	/**
-	 * Sets the new type of the list item.
-	 *
-	 * @param string $type type of the list item
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( $this->prefix . 'type', $this->checkCode( $type ) );
-	}
-
-
-	/**
 	 * Returns the position of the list item.
 	 *
 	 * @return int Position of the list item
@@ -292,6 +271,18 @@ class Standard
 		$this->refItem = $refItem;
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the type of the text item.
+	 * Overwritten for different default value.
+	 *
+	 * @return string Type of the text item
+	 */
+	public function getType() : string
+	{
+		return $this->get( $this->prefix . 'type', 'default' );
 	}
 
 

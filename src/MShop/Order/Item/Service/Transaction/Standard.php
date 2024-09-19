@@ -22,6 +22,7 @@ class Standard
 	implements \Aimeos\MShop\Order\Item\Service\Transaction\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
 
 
 	/**
@@ -67,29 +68,6 @@ class Standard
 	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.service.transaction.parentid', $id );
-	}
-
-
-	/**
-	 * Returns the type of the service transaction item.
-	 *
-	 * @return string Type of the service transaction item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.service.transaction.type', '' );
-	}
-
-
-	/**
-	 * Sets a new type for the service transaction item.
-	 *
-	 * @param string $type Type of the service transaction
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.service.transaction.type', $this->checkCode( $type ) );
 	}
 
 

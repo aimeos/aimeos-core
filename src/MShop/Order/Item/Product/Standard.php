@@ -19,6 +19,9 @@ namespace Aimeos\MShop\Order\Item\Product;
  */
 class Standard extends Base implements Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Clones internal objects of the order product item.
 	 */
@@ -203,29 +206,6 @@ class Standard extends Base implements Iface
 	public function setOrderProductId( ?string $value ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
 		return $this->set( 'order.product.orderproductid', $value );
-	}
-
-
-	/**
-	 * Returns the type of the ordered product.
-	 *
-	 * @return string Type of the ordered product
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.product.type', '' );
-	}
-
-
-	/**
-	 * Sets the type of the ordered product.
-	 *
-	 * @param string $type Type of the order product
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.product.type', $this->checkCode( $type ) );
 	}
 
 

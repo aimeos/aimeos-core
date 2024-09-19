@@ -21,6 +21,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Tag\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Returns the domain of the tag item.
 	 *
@@ -64,29 +67,6 @@ class Standard
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Tag\Item\Iface
 	{
 		return $this->set( 'tag.languageid', $this->checkLanguageId( $id ) );
-	}
-
-
-	/**
-	 * Returns the type code of the product tag item.
-	 *
-	 * @return string Type code of the product tag item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'tag.type', '' );
-	}
-
-
-	/**
-	 * Sets the new type of the product tag item
-	 *
-	 * @param string $type Type of the product tag item
-	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'tag.type', $this->checkCode( $type ) );
 	}
 
 

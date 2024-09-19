@@ -20,6 +20,9 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Status\Base
 	implements \Aimeos\MShop\Order\Item\Status\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	/**
 	 * Returns the parentid of the order status.
 	 *
@@ -40,29 +43,6 @@ class Standard
 	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.status.parentid', $parentid );
-	}
-
-
-	/**
-	 * Returns the type of the order status.
-	 *
-	 * @return string Type of the order status
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'order.status.type', '' );
-	}
-
-
-	/**
-	 * Sets the type of the order status.
-	 *
-	 * @param string $type Type of the order status
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'order.status.type', $this->checkCode( $type ) );
 	}
 
 

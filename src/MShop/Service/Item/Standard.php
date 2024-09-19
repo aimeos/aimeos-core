@@ -23,6 +23,7 @@ class Standard
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
 
 
 	/**
@@ -59,29 +60,6 @@ class Standard
 	public function setCode( string $code ) : \Aimeos\MShop\Service\Item\Iface
 	{
 		return $this->set( 'service.code', $this->checkCode( $code ) );
-	}
-
-
-	/**
-	 * Returns the type of the service item if available.
-	 *
-	 * @return string Service item type
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'service.type', '' );
-	}
-
-
-	/**
-	 * Sets the type of the service item.
-	 *
-	 * @param string $type Type of the service item
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'service.type', $this->checkCode( $type ) );
 	}
 
 

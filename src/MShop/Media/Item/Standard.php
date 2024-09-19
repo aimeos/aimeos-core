@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Media\Item;
 
 use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
+use \Aimeos\MShop\Common\Item\TypeRef;
 
 
 /**
@@ -24,7 +25,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Media\Item\Iface
 {
-	use ListsRef\Traits, PropertyRef\Traits {
+	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		PropertyRef\Traits::__clone as __cloneProperty;
 		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
@@ -107,29 +108,6 @@ class Standard
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.languageid', $this->checkLanguageId( $id ) );
-	}
-
-
-	/**
-	 * Returns the type code of the media item.
-	 *
-	 * @return string Type code of the media item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'media.type', 'default' );
-	}
-
-
-	/**
-	 * Sets the new type of the media.
-	 *
-	 * @param string $type Type of the media
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'media.type', $this->checkCode( $type ) );
 	}
 
 
@@ -370,6 +348,18 @@ class Standard
 		}
 
 		return $this->getNameList( $type );
+	}
+
+
+	/**
+	 * Returns the type of the media item.
+	 * Overwritten for different default value.
+	 *
+	 * @return string Type of the media item
+	 */
+	public function getType() : string
+	{
+		return $this->get( 'media.type', 'default' );
 	}
 
 

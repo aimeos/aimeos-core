@@ -22,28 +22,18 @@ class Standard
 	implements \Aimeos\MShop\Rule\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
 
 
 	/**
 	 * Returns the type of the rule.
+	 * Overwritten for different default value.
 	 *
 	 * @return string Rule type
 	 */
 	public function getType() : string
 	{
 		return $this->get( 'rule.type', 'catalog' );
-	}
-
-
-	/**
-	 * Sets the new type of the rule item.
-	 *
-	 * @param string $type New rule type
-	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'rule.type', $this->checkCode( $type ) );
 	}
 
 

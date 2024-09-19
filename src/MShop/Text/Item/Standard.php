@@ -22,6 +22,7 @@ class Standard
 	implements \Aimeos\MShop\Text\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
 
 
 	/**
@@ -59,29 +60,6 @@ class Standard
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Text\Item\Iface
 	{
 		return $this->set( 'text.languageid', $this->checkLanguageId( $id ) );
-	}
-
-
-	/**
-	 * Returns the type of the text item.
-	 *
-	 * @return string Type of the text item
-	 */
-	public function getType() : string
-	{
-		return $this->get( 'text.type', '' );
-	}
-
-
-	/**
-	 *  Sets the type of the text item.
-	 *
-	 * @param string $type Type of the text type
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->set( 'text.type', $this->checkCode( $type ) );
 	}
 
 

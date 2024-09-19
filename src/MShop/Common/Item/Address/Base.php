@@ -22,6 +22,9 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Address\Iface
 {
+	use \Aimeos\MShop\Common\Item\TypeRef\Traits;
+
+
 	private string $prefix;
 
 
@@ -615,24 +618,13 @@ abstract class Base
 
 	/**
 	 * Returns the type of the address item.
+	 * Overwritten for different default value.
 	 *
 	 * @return string Address type
 	 */
 	public function getType() : string
 	{
 		return $this->get( $this->prefix . 'type', 'delivery' );
-	}
-
-
-	/**
-	 * Sets the type of the address item.
-	 *
-	 * @param string $type Address type
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address item for chaining method calls
-	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Address\Iface
-	{
-		return $this->set( $this->prefix . 'type', $type );
 	}
 
 
