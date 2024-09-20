@@ -44,11 +44,11 @@ trait Traits
 	 *
 	 * @param string[] $parentIds List of parent IDs
 	 * @param string $domain Domain of the calling manager
-	 * @param array $ref Referenced items that should be fetched too
+	 * @param array|null $ref Referenced items that should be fetched too
 	 * @return array Associative list of parent IDs / property IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Property\Iface as values
 	 */
-	protected function getPropertyItems( array $parentIds, string $domain, array $ref = [] ) : array
+	protected function getPropertyItems( array $parentIds, string $domain, ?array $ref = [] ) : array
 	{
 		if( empty( $parentIds ) ) {
 			return [];
@@ -58,7 +58,7 @@ trait Traits
 		$filter = $manager->filter()->slice( 0, 0x7fffffff )->add( $domain . '.property.parentid', '==', $parentIds );
 
 		$name = $domain . '/property';
-		$types = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+		$types = $ref && isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
 
 		if( !empty( $types ) ) {
 			$filter->add( $domain . '.property.type', '==', $types );
