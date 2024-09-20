@@ -64,7 +64,7 @@ trait Traits
 			$filter->add( $domain . '.property.type', '==', $types );
 		}
 
-		return $manager->search( $filter, $ref )->groupBy( $domain . '.property.parentid' )->all();
+		return $manager->search( $filter, $ref ?? [] )->groupBy( $domain . '.property.parentid' )->all();
 	}
 
 
