@@ -29,14 +29,20 @@ trait Traits
 	abstract public function get( string $name, $default = null );
 
 	/**
-	 * Tests if the code is valid.
+	 * Sets the new item property for the given name
 	 *
-	 * @param string $code New code for an item
-	 * @param int $length Number of allowed characters
-	 * @return string Item code
-	 * @throws \Aimeos\MShop\Exception If the code is invalid
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
 	 */
-	abstract protected function checkCode( string $code, int $length = 64 ) : string;
+	abstract public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Returns the prefix for the item properties
+	 *
+	 * @return string Prefix for the item properties
+	 */
+	abstract protected function prefix() : string;
 
 
 	/**
@@ -69,6 +75,6 @@ trait Traits
 	 */
 	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix() . 'type', $this->checkCode( $type ) );
+		return $this->set( $this->prefix() . 'type', \Aimeos\Utils::code( $type ) );
 	}
 }

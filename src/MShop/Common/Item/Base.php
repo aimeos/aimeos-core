@@ -445,6 +445,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
 	 * @return string|null Clean date or null for no date
 	 * @throws \Aimeos\MShop\Exception If the date is invalid
+	 * @deprecated 2025.01 Use \Aimeos\Utils::datetime() instead
 	 */
 	protected function checkDateFormat( ?string $date ) : ?string
 	{
@@ -471,6 +472,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * Tests if the date param represents an ISO format.
 	 *
 	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
+	 * @deprecated 2025.01 Use \Aimeos\Utils::date() instead
 	 */
 	protected function checkDateOnlyFormat( ?string $date ) : ?string
 	{
@@ -494,6 +496,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param int $length Number of allowed characters
 	 * @return string Item code
 	 * @throws \Aimeos\MShop\Exception If the code is invalid
+	 * @deprecated 2025.01 Use \Aimeos\Utils::code() instead
 	 */
 	protected function checkCode( string $code, int $length = 64 ) : string
 	{
@@ -516,6 +519,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null Two letter ISO country ID or null for no country
 	 * @throws \Aimeos\MShop\Exception If the country ID is invalid
+	 * @deprecated 2025.01 Use \Aimeos\Utils::country() instead
 	 */
 	protected function checkCountryId( ?string $countryid, bool $null = true ) : ?string
 	{
@@ -543,6 +547,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null Three letter ISO currency ID or null for no currency
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
+	 * @deprecated 2025.01 Use \Aimeos\Utils::currency() instead
 	 */
 	protected function checkCurrencyId( ?string $currencyid, bool $null = true ) : ?string
 	{
@@ -570,6 +575,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null ISO language ID or null for no language
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
+	 * @deprecated 2025.01 Use \Aimeos\Utils::language() instead
 	 */
 	protected function checkLanguageId( ?string $langid, bool $null = true ) : ?string
 	{
