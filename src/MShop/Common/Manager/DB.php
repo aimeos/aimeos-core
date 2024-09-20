@@ -100,6 +100,14 @@ trait DB
 
 
 	/**
+	 * Returns the type of the mananger as separate parts
+	 *
+	 * @return string[] List of manager part names
+	 */
+	abstract public function type() : array;
+
+
+	/**
 	 * Adds additional column names to SQL statement
 	 *
 	 * @param string[] $columns List of column names

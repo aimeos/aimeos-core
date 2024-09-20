@@ -96,15 +96,11 @@ class Property
 	public function searchRefs( array $entries, array $ref ) : array
 	{
 		$entries = $this->getManager()->searchRefs( $entries, $ref );
-
 		$domain = $this->domain();
-		$name = $domain . '/property';
 
-		if( $this->hasRef( $ref, $name ) )
+		if( $this->hasRef( $ref, $domain . '/property' ) )
 		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-
-			foreach( $this->getPropertyItems( array_keys( $entries ), $domain, $propTypes ) as $id => $list ) {
+			foreach( $this->getPropertyItems( array_keys( $entries ), $domain, $ref ) as $id => $list ) {
 				$entries[$id]['.propitems'] = $list;
 			}
 		}

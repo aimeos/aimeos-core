@@ -41,18 +41,19 @@ class Type
 			$domain = current( $type );
 			$code = $key . '.code';
 
-			$manager = \Aimeos\MShop::create( $this->context(), $path . '/type' );
-			$filter = $manager->filter( true )->slice( 0, 0x7fffffff )->add( [
-				$code => array_column( $entries, $key ),
-			] );
-			$typeItems = $manager->search( $filter )->groupBy( $code );
-
-			foreach( $entries as $id => $entry )
+			if( !empty( $values = array_column( $entries, $key ) ) )
 			{
-				foreach( $typeItems[$entry[$key]] ?? [] as $typeItem )
+				$manager = \Aimeos\MShop::create( $this->context(), $path . '/type' );
+				$filter = $manager->filter( true )->slice( 0, 0x7fffffff )->add( [$code => $values] );
+				$typeItems = $manager->search( $filter )->groupBy( $code );
+
+				foreach( $entries as $id => $entry )
 				{
-					if( ( $entry[$dkey] ?? $domain ) === $typeItem->getDomain() ) {
-						$entries[$id]['.type'] = $typeItem;
+					foreach( $typeItems[$entry[$key]] ?? [] as $typeItem )
+					{
+						if( ( $entry[$dkey] ?? $domain ) === $typeItem->getDomain() ) {
+							$entries[$id]['.type'] = $typeItem;
+						}
 					}
 				}
 			}
