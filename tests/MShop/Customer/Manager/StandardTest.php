@@ -21,8 +21,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->editor = $this->context->editor();
+
 		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Address( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 
 		$this->fixture = array(
 			'customer.label' => 'unitTest',
@@ -123,11 +127,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$domains = ['text', 'customer/property' => ['newsletter']];
+		$domains = ['text', 'customer/property' => ['newsletter'], 'customer/property/type'];
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'test@example.com' ),
-			$search->compare( '==', 'customer.editor', $this->editor )
+			$search->compare( '==', 'customer.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$expected = $this->object->search( $search, $domains )->first();
@@ -164,6 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $actual->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $actual->getPropertyItems() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $actual->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
@@ -201,7 +206,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
 		$this->assertEquals( $itemSaved->getPaymentAddress()->getId(), $itemSaved->getId() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -214,7 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
 		$this->assertEquals( $itemUpd->getPaymentAddress()->getId(), $itemUpd->getId() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -283,7 +288,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.editor', $this->context->editor() );
 
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.company', 'Example company' );
@@ -353,7 +358,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search )->toArray();
@@ -364,7 +369,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchTotal()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->context->editor() ) );
 		$search->slice( 0, 2 );
 
 		$total = 0;
@@ -383,7 +388,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter( true );
 		$conditions = array(
-			$search->compare( '==', 'customer.address.editor', $this->editor ),
+			$search->compare( '==', 'customer.address.editor', $this->context->editor() ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );

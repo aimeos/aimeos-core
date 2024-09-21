@@ -2,18 +2,30 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015-2024
+ * @copyright Aimeos (aimeos.org], 2015-2024
  */
 
 
-return array(
-	'manager' => array(
+return [
+	'manager' => [
+		'decorators' => [
+			'global' => [
+				'Lists' => 'Lists',
+				'Property' => 'Property',
+				'Address' => 'Address',
+			]
+		],
 		'lists' => [
 			'submanagers' => [
 				'type' => 'type',
 			]
 		],
 		'property' => [
+			'decorators' => [
+				'global' => [
+					'Type' => 'Type',
+				]
+			],
 			'submanagers' => [
 				'type' => 'type',
 			]
@@ -23,20 +35,20 @@ return array(
 			'lists' => 'lists',
 			'property' => 'property',
 		],
-		'address' => array(
-			'clear' => array(
+		'address' => [
+			'clear' => [
 				'ansi' => '
 					DELETE FROM ":table"
 					WHERE :cond AND "siteid" LIKE ?
 				'
-			),
-			'delete' => array(
+			],
+			'delete' => [
 				'ansi' => '
 					DELETE FROM ":table"
 					WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 				'
-			),
-			'insert' => array(
+			],
+			'insert' => [
 				'ansi' => '
 					INSERT INTO ":table" ( :names
 						"mtime", "editor", "siteid", "ctime"
@@ -44,17 +56,17 @@ return array(
 						?, ?, ?, ?
 					)
 				'
-			),
-			'update' => array(
+			],
+			'update' => [
 				'ansi' => '
 					UPDATE ":table"
 					SET :names
 						"mtime" = ?, "editor" = ?
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				'
-			),
-		),
-		'aggregate' => array(
+			],
+		],
+		'aggregate' => [
 			'ansi' => '
 				SELECT :keys, :type("val") AS "value"
 				FROM (
@@ -81,20 +93,20 @@ return array(
 				) AS list
 				GROUP BY :keys
 			'
-		),
-		'clear' => array(
+		],
+		'clear' => [
 			'ansi' => '
 				DELETE FROM "mshop_customer"
 				WHERE :cond AND "siteid" LIKE ?
 			',
-		),
-		'delete' => array(
+		],
+		'delete' => [
 			'ansi' => '
 				DELETE FROM "mshop_customer"
 				WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 			'
-		),
-		'insert' => array(
+		],
+		'insert' => [
 			'ansi' => '
 				INSERT INTO "mshop_customer" ( :names
 					"label", "code", "company", "vatid", "salutation", "title",
@@ -106,8 +118,8 @@ return array(
 					?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 				)
 			'
-		),
-		'update' => array(
+		],
+		'update' => [
 			'ansi' => '
 				UPDATE "mshop_customer"
 				SET :names
@@ -120,8 +132,8 @@ return array(
 					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
 				WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 			'
-		),
-		'newid' => array(
+		],
+		'newid' => [
 			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 			'mysql' => 'SELECT LAST_INSERT_ID()',
 			'oracle' => 'SELECT mshop_customer_seq.CURRVAL FROM DUAL',
@@ -129,6 +141,6 @@ return array(
 			'sqlite' => 'SELECT last_insert_rowid()',
 			'sqlsrv' => 'SELECT @@IDENTITY',
 			'sqlanywhere' => 'SELECT @@IDENTITY',
-		),
-	),
-);
+		],
+	],
+];

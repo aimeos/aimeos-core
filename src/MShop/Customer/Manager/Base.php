@@ -20,11 +20,6 @@ namespace Aimeos\MShop\Customer\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
-	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
-	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
-
-
 	/* @deprecated 2025.01 Use $this->context()->password() instead */
 	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
 

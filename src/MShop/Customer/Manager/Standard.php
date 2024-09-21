@@ -258,18 +258,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Customer\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->deleteItemsBase( $items, 'mshop/customer/manager/delete' )->deleteRefItems( $items );
-	}
-
-
-	/**
 	 * Saves a customer item object.
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
@@ -458,59 +446,6 @@ class Standard
 		}
 
 		return $this->object()->saveRefs( $item->setId( $id ), $fetch );
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->savePropertyItems( $item, 'customer', $fetch );
-		$this->saveAddressItems( $item, 'customer', $fetch );
-		$this->saveListItems( $item, 'customer', $fetch );
-
-		return $item;
-	}
-
-
-	/**
-	 * Merges the data from the given map and the referenced items
-	 *
-	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
-	 * @param array $ref List of referenced items to fetch and add to the entries
-	 * @return array Associative list of ID as key and the updated entries as value
-	 */
-	public function searchRefs( array $entries, array $ref ) : array
-	{
-		$parentIds = array_keys( $entries );
-
-		if( $this->hasRef( $ref, 'customer/address' ) )
-		{
-			foreach( $this->getAddressItems( $parentIds, 'customer' ) as $id => $list ) {
-				$entries[$id]['.addritems'] = $list;
-			}
-		}
-
-		if( $this->hasRef( $ref, 'customer/property' ) )
-		{
-			$name = 'customer/property';
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-
-			foreach( $this->getPropertyItems( $parentIds, 'customer', $propTypes ) as $id => $list ) {
-				$entries[$id]['.propitems'] = $list;
-			}
-		}
-
-		foreach( $this->getListItems( $parentIds, $ref, 'customer' ) as $id => $listItem ) {
-			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
-		}
-
-		return $entries;
 	}
 
 
