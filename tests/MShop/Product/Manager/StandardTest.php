@@ -19,7 +19,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
+
 		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 	protected function tearDown() : void
@@ -139,13 +144,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];
+		$domains = ['text', 'product', 'product/type', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight'], 'product/property/type'];
 		$product = $this->object->find( 'CNC', $domains );
 
 		$this->assertEquals( $product, $this->object->get( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $product->getRefItems( 'media', null, null, false ) ) );
 		$this->assertEquals( 1, count( $product->getPropertyItems() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $product->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $product->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
@@ -442,6 +449,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
 
 		$item = $object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
@@ -457,6 +465,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
 
 		$item = $object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );

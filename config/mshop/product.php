@@ -10,6 +10,9 @@ return [
 	'manager' => [
 		'decorators' => [
 			'global' => [
+				'Lists' => 'Lists',
+				'Property' => 'Property',
+				'Type' => 'Type',
 				'Site' => 'Site',
 			]
 		],
@@ -19,7 +22,12 @@ return [
 			]
 		],
 		'property' => [
-			'submanagers' => [
+			'decorators' => [
+				'global' => [
+					'Type' => 'Type',
+				]
+			],
+				'submanagers' => [
 				'type' => 'type',
 			]
 		],
