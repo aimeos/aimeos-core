@@ -39,18 +39,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Service\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return parent::delete( $items )->deleteRefItems( $items );
-	}
-
-
-	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
@@ -149,77 +137,6 @@ class Standard
 				'public' => false,
 			],
 		] );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/service/manager/sitemode', $level );
-
-		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
-			'service:has' => array(
-				'code' => 'service:has()',
-				'internalcode' => ':site AND :key AND mserli."id"',
-				'internaldeps' => ['LEFT JOIN "mshop_service_list" AS mserli ON ( mserli."parentid" = mser."id" )'],
-				'label' => 'Service has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-				'type' => 'null',
-				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-
-					foreach( (array) ( $params[1] ?? '' ) as $type ) {
-						foreach( (array) ( $params[2] ?? '' ) as $id ) {
-							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-						}
-					}
-
-					$sitestr = $this->siteString( 'mserli."siteid"', $level );
-					$keystr = $this->toExpression( 'mserli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
-			),
-		] ) );
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->saveListItems( $item, 'service', $fetch );
-	}
-
-
-	/**
-	 * Merges the data from the given map and the referenced items
-	 *
-	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
-	 * @param array $ref List of referenced items to fetch and add to the entries
-	 * @return array Associative list of ID as key and the updated entries as value
-	 */
-	public function searchRefs( array $entries, array $ref ) : array
-	{
-		$parentIds = array_keys( $entries );
-
-		foreach( $this->getListItems( $parentIds, $ref, 'service' ) as $id => $listItem ) {
-			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
-		}
-
-		return $entries;
 	}
 
 

@@ -12,20 +12,24 @@ namespace Aimeos\MShop\Service\Manager;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
+		$this->context = \TestHelper::context();
+
 		$this->object = new \Aimeos\MShop\Service\Manager\Standard( \TestHelper::context() );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object, $this->context );
 	}
 
 
@@ -59,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'service.code', 'unitdeliverycode' ),
-			$search->compare( '==', 'service.editor', $this->editor )
+			$search->compare( '==', 'service.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 
@@ -100,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -117,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -142,17 +146,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'service.code', 'unitdeliverycode' ),
-			$search->compare( '==', 'service.editor', $this->editor )
+			$search->compare( '==', 'service.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$result = $this->object->search( $search, array( 'text' ) )->toArray();
+		$item = $this->object->search( $search, ['service/type', 'text'] )->first( new \RuntimeException( 'No item found' ) );
 
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$this->assertEquals( $item, $this->object->get( $item->getId(), array( 'text' ) ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId(), ['service/type', 'text'] ) );
 		$this->assertEquals( 5, count( $item->getRefItems( 'text' ) ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
 	}
 
 
@@ -181,7 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'service.status', 1 );
 		$expr[] = $search->compare( '>=', 'service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'service.editor', $this->context->editor() );
 
 		$param = ['text', 'unittype1', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'service:has', $param ), null );
@@ -208,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'service.provider', 'unitprovider' ),
-			$search->compare( '==', 'service.editor', $this->editor ),
+			$search->compare( '==', 'service.editor', $this->context->editor() ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->and( $expr ) );
@@ -221,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'service.type', 'delivery' ),
-			$search->compare( '==', 'service.editor', $this->editor )
+			$search->compare( '==', 'service.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
