@@ -20,8 +20,7 @@ use Psr\Http\Message\UploadedFileInterface;
  * @subpackage Media
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\ListsRef\Iface,
-		\Aimeos\MShop\Common\Manager\PropertyRef\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Copies the media item and the referenced files

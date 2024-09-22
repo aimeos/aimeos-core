@@ -14,15 +14,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->editor = $this->context->editor();
 
 		$this->object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
@@ -138,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'media.editor', $this->context->editor() );
 
 		$param = ['attribute', 'option', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'media:has', $param ), null );
@@ -172,7 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		//search with base criteria
 		$search = $this->object->filter( true );
 		$conditions = array(
-			$search->compare( '==', 'media.editor', $this->editor ),
+			$search->compare( '==', 'media.editor', $this->context->editor() ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -194,13 +196,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ),
-			$search->compare( '==', 'media.editor', $this->editor )
+			$search->compare( '==', 'media.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$item = $this->object->search( $search, ['media/property'] )->first();
+		$item = $this->object->search( $search, ['media/property', 'media/property/type', 'media/type'] )->first();
 
-		$this->assertEquals( $item, $this->object->get( $item->getId(), ['media/property'] ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId(), ['media/property', 'media/property/type', 'media/type'] ) );
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
@@ -209,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '~=', 'media.label', 'example' ),
-			$search->compare( '==', 'media.editor', $this->editor )
+			$search->compare( '==', 'media.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search )->first();
@@ -247,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( 0, strncmp( $item->getPreview(), $itemSaved->getPreview(), 19 ) );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -263,7 +267,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( 0, strncmp( $itemExp->getPreview(), $itemUpd->getPreview(), 16 ) );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -385,14 +389,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAllowed()
 	{
-		$this->assertTrue( $this->access( 'isAllowed' )->invokeArgs( $this->object, ['image/jpeg'] ) );
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$this->assertTrue( $this->access( 'isAllowed' )->invokeArgs( $object, ['image/jpeg'] ) );
 	}
 
 
 	public function testIsAllowedException()
 	{
 		$this->expectException( \Aimeos\MShop\Media\Exception::class );
-		$this->access( 'isAllowed' )->invokeArgs( $this->object, array( 'application/xxx' ) );
+
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$this->access( 'isAllowed' )->invokeArgs( $object, array( 'application/xxx' ) );
 	}
 
 
@@ -400,7 +407,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
 
-		$img = $this->access( 'image' )->invokeArgs( $this->object, ['test.gif'] );
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$img = $this->access( 'image' )->invokeArgs( $object, ['test.gif'] );
+
 		$this->assertInstanceOf( \Intervention\Image\Interfaces\ImageInterface::class, $img );
 	}
 
