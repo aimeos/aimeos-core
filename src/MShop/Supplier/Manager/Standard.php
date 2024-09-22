@@ -21,10 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Supplier\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
-	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
-
-
 	private array $cacheTags = [];
 
 
@@ -66,7 +62,7 @@ class Standard
 	 */
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		parent::delete( $items )->deleteRefItems( $items );
+		parent::delete( $items );
 
 		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->cast()->prefix( 'supplier-' )->all() );
 
@@ -156,87 +152,6 @@ class Standard
 				'type' => 'int',
 			],
 		] );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/supplier/manager/sitemode', $level );
-
-		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
-			'supplier:has' => array(
-				'code' => 'supplier:has()',
-				'internalcode' => ':site AND :key AND msupli."id"',
-				'internaldeps' => ['LEFT JOIN "mshop_supplier_list" AS msupli ON ( msupli."parentid" = msup."id" )'],
-				'label' => 'Supplier has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-				'type' => 'null',
-				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-
-					foreach( (array) ( $params[1] ?? '' ) as $type ) {
-						foreach( (array) ( $params[2] ?? '' ) as $id ) {
-							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-						}
-					}
-
-					$sitestr = $this->siteString( 'msupli."siteid"', $level );
-					$keystr = $this->toExpression( 'msupli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
-			),
-		] ) );
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->saveAddressItems( $item, 'supplier', $fetch );
-		$this->saveListItems( $item, 'supplier', $fetch );
-
-		return $item;
-	}
-
-
-	/**
-	 * Merges the data from the given map and the referenced items
-	 *
-	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
-	 * @param array $ref List of referenced items to fetch and add to the entries
-	 * @return array Associative list of ID as key and the updated entries as value
-	 */
-	public function searchRefs( array $entries, array $ref ) : array
-	{
-		$parentIds = array_keys( $entries );
-
-		if( $this->hasRef( $ref, 'supplier/address' ) )
-		{
-			foreach( $this->getAddressItems( $parentIds, 'supplier' ) as $id => $list ) {
-				$entries[$id]['.addritems'] = $list;
-			}
-		}
-
-		foreach( $this->getListItems( $parentIds, $ref, 'supplier' ) as $id => $listItem ) {
-			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
-		}
-
-		return $entries;
 	}
 
 

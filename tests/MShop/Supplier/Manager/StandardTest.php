@@ -12,20 +12,24 @@ namespace Aimeos\MShop\Supplier\Manager;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
-	private $object = null;
-	private $editor = '';
+	private $context;
+	private $object;
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
+		$this->context = \TestHelper::context();
+
 		$this->object = new \Aimeos\MShop\Supplier\Manager\Standard( \TestHelper::context() );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Address( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -108,7 +112,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -119,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -152,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.status', 1 );
 		$expr[] = $search->compare( '>=', 'supplier.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'supplier.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'supplier.editor', $this->context->editor() );
 
 		$param = ['text', 'default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'supplier:has', $param ), null );
@@ -186,7 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.address.position', 0 );
 		$expr[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search )->toArray();
@@ -197,7 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemTotal()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->context->editor() ) );
 		$search->slice( 0, 2 );
 
 		$total = 0;
@@ -212,7 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter( true );
 		$conditions = array(
-			$search->compare( '==', 'supplier.editor', $this->editor ),
+			$search->compare( '==', 'supplier.editor', $this->context->editor() ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
