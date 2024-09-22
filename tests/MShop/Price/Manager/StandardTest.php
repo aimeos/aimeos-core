@@ -12,19 +12,24 @@ namespace Aimeos\MShop\Price\Manager;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
+		$this->context = \TestHelper::context();
+
 		$this->object = new \Aimeos\MShop\Price\Manager\Standard( \TestHelper::context() );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -75,13 +80,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$search->add( $search->and( array(
 			$search->compare( '==', 'price.value', 12.00 ),
-			$search->compare( '==', 'price.editor', $this->editor )
+			$search->compare( '==', 'price.editor', $this->context->editor() )
 		) ) );
 
-		$item = $this->object->search( $search )->first( new \RuntimeException( 'No results available' ) );
+		$item = $this->object->search( $search, ['price/type'] )->first( new \RuntimeException( 'No results available' ) );
 
 		$itemB = $this->object->get( $item->getId() );
 		$this->assertEquals( 19.00, $itemB->getTaxRate() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
 	}
 
 
@@ -89,27 +95,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.label', 'product/default/600.00/30.00' ) );
-		$items = $this->object->search( $search, ['price/property'] )->toArray();
-		$item = reset( $items );
+		$item = $this->object->search( $search, ['price/property', 'price/property/type'] )->first();
 
 		$item->setId( null )->setLabel( 'core:property-test' );
 		$this->object->save( $item );
 
 		$search->setConditions( $search->compare( '==', 'price.label', 'core:property-test' ) );
-		$items = $this->object->search( $search, ['price/property'] )->toArray();
-		$item2 = reset( $items );
+		$item2 = $this->object->search( $search, ['price/property', 'price/property/type'] )->first();
 
 		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item2->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'price.editor', $this->context->editor() ) );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -145,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getTaxRates(), $itemSaved->getTaxRates() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -164,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTaxRates(), $itemUpd->getTaxRates() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
