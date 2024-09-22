@@ -12,20 +12,25 @@ namespace Aimeos\MShop\Attribute\Manager;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Attribute\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+
+		$this->object = new \Aimeos\MShop\Attribute\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -93,13 +98,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFind()
 	{
-		$item = $this->object->find( 'm', array( 'text' ), 'product', 'size' );
+		$item = $this->object->find( 'm', ['attribute/type', 'text'], 'product', 'size' );
 
 		$this->assertEquals( 'm', $item->getCode() );
 		$this->assertEquals( 'size', $item->getType() );
 		$this->assertEquals( 'product', $item->getDomain() );
 		$this->assertEquals( 1, count( $item->getListItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getRefItems( 'text', null, null, false ) ) );
+		$this->assertInstanceof( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->get( '.type' ) );
 	}
 
 
@@ -120,11 +126,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$itemA = $this->object->find( 'black', [], 'product', 'color' );
-		$itemB = $this->object->get( $itemA->getId(), ['attribute/property', 'text'] );
+		$itemB = $this->object->get( $itemA->getId(), ['attribute/property', 'attribute/property/type', 'attribute/type', 'text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $itemB->getListItems( null, null, null, false ) ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $itemB->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $itemB->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
@@ -245,7 +253,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.label', 'product/color/black' );
 		$expr[] = $search->compare( '>=', 'attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'attribute.editor', $this->context->editor() );
 
 		$param = array( 'text', 'default', $listItem->getRefId() );
 		$expr[] = $search->compare( '!=', $search->make( 'attribute:has', $param ), null );
@@ -282,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '~=', 'attribute.code', '3' ),
-			$search->compare( '==', 'attribute.editor', $this->editor ),
+			$search->compare( '==', 'attribute.editor', $this->context->editor() ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->and( $expr ) );
@@ -306,7 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions = array(
 			$search->compare( '==', 'attribute.type', 'size' ),
 			$search->compare( '==', 'attribute.domain', 'product' ),
-			$search->compare( '==', 'attribute.editor', $this->editor )
+			$search->compare( '==', 'attribute.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );

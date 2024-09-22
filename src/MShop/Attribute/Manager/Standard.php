@@ -21,10 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Attribute\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
-	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
-
-
 	/**
 	 * Creates a new empty item instance
 	 *
@@ -35,18 +31,6 @@ class Standard
 	{
 		$values['attribute.siteid'] = $values['attribute.siteid'] ?? $this->context()->locale()->getSiteId();
 		return new \Aimeos\MShop\Attribute\Item\Standard( 'attribute.', $values );
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
-	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return parent::delete( $items )->deleteRefItems( $items );
 	}
 
 
@@ -125,114 +109,6 @@ class Standard
 				'type' => 'int',
 			],
 		] );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/attribute/manager/sitemode', $level );
-
-		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
-			'attribute:has' => array(
-				'code' => 'attribute:has()',
-				'internalcode' => ':site AND :key AND mattli."id"',
-				'internaldeps' => ['LEFT JOIN "mshop_attribute_list" AS mattli ON ( mattli."parentid" = matt."id" )'],
-				'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-				'type' => 'null',
-				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-
-					foreach( (array) ( $params[1] ?? '' ) as $type ) {
-						foreach( (array) ( $params[2] ?? '' ) as $id ) {
-							$keys[] = substr( $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id, 0, 255 );
-						}
-					}
-
-					$sitestr = $this->siteString( 'mattli."siteid"', $level );
-					$keystr = $this->toExpression( 'mattli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
-			),
-			'attribute:prop' => array(
-				'code' => 'attribute:prop()',
-				'internalcode' => ':site AND :key AND mattpr."id"',
-				'internaldeps' => ['LEFT JOIN "mshop_attribute_property" AS mattpr ON ( mattpr."parentid" = matt."id" )'],
-				'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
-				'type' => 'null',
-				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-					foreach( (array) $langs as $lang ) {
-						foreach( (array) ( $params[2] ?? '' ) as $val ) {
-							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-						}
-					}
-
-					$sitestr = $this->siteString( 'mattpr."siteid"', $level );
-					$keystr = $this->toExpression( 'mattpr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
-			),
-		] ) );
-	}
-
-
-	/**
-	 * Saves the dependent items of the item
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Updated item
-	 */
-	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->savePropertyItems( $item, 'attribute', $fetch );
-		$this->saveListItems( $item, 'attribute', $fetch );
-
-		return $item;
-	}
-
-
-	/**
-	 * Merges the data from the given map and the referenced items
-	 *
-	 * @param array $entries Associative list of ID as key and the associative list of property key/value pairs as values
-	 * @param array $ref List of referenced items to fetch and add to the entries
-	 * @return array Associative list of ID as key and the updated entries as value
-	 */
-	public function searchRefs( array $entries, array $ref ) : array
-	{
-		$parentIds = array_keys( $entries );
-
-		if( $this->hasRef( $ref, 'attribute/property' ) )
-		{
-			$name = 'attribute/property';
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-
-			foreach( $this->getPropertyItems( $parentIds, 'attribute', $propTypes ) as $id => $list ) {
-				$entries[$id]['.propitems'] = $list;
-			}
-		}
-
-		foreach( $this->getListItems( $parentIds, $ref, 'attribute' ) as $id => $listItem ) {
-			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
-		}
-
-		return $entries;
 	}
 
 
