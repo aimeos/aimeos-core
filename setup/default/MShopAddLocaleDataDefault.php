@@ -46,12 +46,9 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 
 		// Set editor for further tasks
 		$context = $this->context()->setEditor( 'core' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
 
-		$db = $this->db( 'db-locale' );
-
-		if( $context->config()->get( 'setup/site', 'default' ) !== 'default'
-			|| !empty( $db->query( 'SELECT * FROM ' . $db->qi( 'mshop_locale' ) )->fetchAllKeyValue() )
-		) {
+		if( !$localeManager->search( $localeManager->filter() )->isEmpty() ) {
 			return;
 		}
 
@@ -63,7 +60,6 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		}
 
 		$siteIds = [];
-		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
 
 		if( isset( $data['locale/site'] ) ) {
 			$siteIds = $this->addLocaleSiteData( $localeManager, $data['locale/site'] );
