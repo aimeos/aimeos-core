@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'rule.status', 1 );
 		$expr[] = $search->compare( '>=', 'rule.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'rule.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'rule.editor', $this->context->editor());
+		$expr[] = $search->compare( '==', 'rule.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$this->assertEquals( 1, $this->object->search( $search, [], $total )->count() );

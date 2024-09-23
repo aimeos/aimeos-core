@@ -87,7 +87,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
-			$search->compare( '==', 'plugin.editor', $this->context->editor())
+			$search->compare( '==', 'plugin.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$expected = $this->object->search( $search, ['plugin/type'] )->first( new \RuntimeException( 'No plugin item including "Shipping" found' ) );
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
-			$search->compare( '==', 'plugin.editor', $this->context->editor())
+			$search->compare( '==', 'plugin.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 
@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'plugin.status', 1 );
 		$expr[] = $search->compare( '>=', 'plugin.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'plugin.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -195,15 +195,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$expr = $conditions = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'Shipping,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor() );
 		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'ProductLimit,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor() );
 		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'BasketLimits,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor() );
 		$conditions[] = $search->and( $expr );
 
 		//search without base criteria
