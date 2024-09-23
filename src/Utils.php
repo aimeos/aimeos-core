@@ -72,11 +72,11 @@ class Utils
 	 */
 	public static function country( ?string $countryid, bool $null = true ) : ?string
 	{
-		if( $null === false && $countryid == null ) {
+		if( !$null && !$countryid ) {
 			throw new \RuntimeException( sprintf( 'Invalid ISO country code' ) );
 		}
 
-		if( $countryid != null )
+		if( $countryid )
 		{
 			if( preg_match( '/^[A-Za-z]{2}$/', $countryid ) !== 1 ) {
 				throw new \RuntimeException( sprintf( 'Invalid ISO country code' ) );
@@ -99,11 +99,11 @@ class Utils
 	 */
 	public static function currency( ?string $currencyid, bool $null = true ) : ?string
 	{
-		if( $null === false && $currencyid == null ) {
+		if( !$null && !$currencyid ) {
 			throw new \RuntimeException( sprintf( 'Invalid ISO currency code' ) );
 		}
 
-		if( $currencyid != null )
+		if( $currencyid )
 		{
 			if( preg_match( '/^[A-Za-z]{3}$/', $currencyid ) !== 1 ) {
 				throw new \RuntimeException( sprintf( 'Invalid ISO currency code' ) );
@@ -123,7 +123,7 @@ class Utils
 	 */
 	public static function date( ?string $date ) : ?string
 	{
-		if( $date !== null && $date !== '' )
+		if( $date )
 		{
 			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
 				throw new \RuntimeException( sprintf( 'Invalid characters in date, ISO format "YYYY-MM-DD" expected' ) );
@@ -147,7 +147,7 @@ class Utils
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9](( |T)[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?)?$/';
 
-		if( $date != null )
+		if( $date )
 		{
 			if( preg_match( $regex, (string) $date ) !== 1 ) {
 				throw new \RuntimeException( sprintf( 'Invalid characters in date, ISO format "YYYY-MM-DD hh:mm:ss" expected' ) );
@@ -193,11 +193,11 @@ class Utils
 	 */
 	public static function language( ?string $langid, bool $null = true ) : ?string
 	{
-		if( $null === false && $langid == null ) {
+		if( !$null && !$langid ) {
 			throw new \RuntimeException( sprintf( 'Invalid ISO language code' ) );
 		}
 
-		if( $langid != null )
+		if( $langid )
 		{
 			if( preg_match( '/^[a-zA-Z]{2}(_[a-zA-Z]{2})?$/', $langid ) !== 1 ) {
 				throw new \RuntimeException( sprintf( 'Invalid ISO language code' ) );
