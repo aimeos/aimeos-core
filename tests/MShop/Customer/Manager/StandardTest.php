@@ -15,7 +15,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $context;
 	private $fixture;
 	private $address;
-	private $editor = '';
 
 
 	protected function setUp() : void

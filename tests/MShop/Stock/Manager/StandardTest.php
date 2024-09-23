@@ -13,19 +13,22 @@ namespace Aimeos\MShop\Stock\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = '';
+	private $context;
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Stock\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+
+		$this->object = new \Aimeos\MShop\Stock\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -57,7 +60,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'stock.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'stock.editor', $this->context->editor() ) );
 		$search->slice( 0, 1 );
 		$items = $this->object->search( $search )->toArray();
 
@@ -87,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getTimeFrame(), $itemSaved->getTimeFrame() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -99,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeFrame(), $itemUpd->getTimeFrame() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -116,16 +119,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'stock.stocklevel', 2000 ),
-			$search->compare( '==', 'stock.editor', $this->editor )
+			$search->compare( '==', 'stock.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$result = $this->object->search( $search )->toArray();
+		$expected = $this->object->search( $search, ['stock/type'] )->first( new \RuntimeException( sprintf( 'No stock item found for level "%1$s".', 2000 ) ) );
 
-		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
+		$actual = $this->object->get( $expected->getId(), ['stock/type'] );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -161,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'stock.dateback', '2010-04-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'stock.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'stock.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'stock.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'stock.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );

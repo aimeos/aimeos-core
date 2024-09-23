@@ -12,15 +12,18 @@ namespace Aimeos\MShop\Rule\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
+	private $context;
 	private $exampleRule;
 	private $exampleRule2;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Rule\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+
+		$this->object = new \Aimeos\MShop\Rule\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 
 		$this->exampleRule = $this->object->create();
 		$this->exampleRule->setType( 'catalog' );
@@ -33,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -73,21 +76,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
-			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->editor] );
+			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->context->editor()] );
 
-		$expected = $this->object->search( $search )
+		$expected = $this->object->search( $search, ['rule/type'] )
 			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ) );
 
-		$actual = $this->object->get( $expected->getId() );
+		$actual = $this->object->get( $expected->getId(), ['rule/type'] );
 
 		$this->assertEquals( $expected, $actual );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $actual->getTypeItem() );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter()->slice( 0, 1 )
-			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->editor] );
+			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->context->editor()] );
 
 		$item = $this->object->search( $search )
 			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ) );
@@ -120,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -136,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -166,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'rule.status', 1 );
 		$expr[] = $search->compare( '>=', 'rule.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'rule.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'rule.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'rule.editor', $this->context->editor());
 
 		$search->setConditions( $search->and( $expr ) );
 		$this->assertEquals( 1, $this->object->search( $search, [], $total )->count() );

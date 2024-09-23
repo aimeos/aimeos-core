@@ -7,7 +7,14 @@
 
 
 return [
-	'submanagers' => [
-		'type' => 'type',
-	],
+	'manager' => [
+		'decorators' => [
+			'global' => [
+				'Type' => 'Type',
+			]
+		],
+		'submanagers' => [
+			'type' => 'type',
+		],
+	]
 ];

@@ -12,19 +12,22 @@ namespace Aimeos\MShop\Tag\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = '';
+	private $context;
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Tag\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+
+		$this->object = new \Aimeos\MShop\Tag\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -57,7 +60,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDelete()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'tag.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'tag.editor', $this->context->editor() ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -116,16 +119,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'tag.label', 'herb' ),
-			$search->compare( '==', 'tag.editor', $this->editor )
+			$search->compare( '==', 'tag.editor', $this->context->editor() )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$expected = $this->object->search( $search, ['tag/type'] )->first( new \RuntimeException( sprintf( 'No product tag item found for label "%1$s".', 'herb' ) ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No product tag item found for label "%1$s".', 'herb' ) );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
+		$actual = $this->object->get( $expected->getId(), ['tag/type'] );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -158,7 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'tag.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'tag.domain', 'product' );
 		$expr[] = $search->compare( '==', 'tag.label', 'Kaffee' );
-		$expr[] = $search->compare( '==', 'tag.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'tag.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();

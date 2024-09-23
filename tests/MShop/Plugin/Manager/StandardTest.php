@@ -14,13 +14,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $examplePlugin;
 	private $examplePlugin2;
-	private $editor = '';
+	private $context;
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = \Aimeos\MShop::create( \TestHelper::context(), 'plugin' );
+		$this->context = \TestHelper::context();
+
+		$this->object = new \Aimeos\MShop\Plugin\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 
 		$this->examplePlugin = $this->object->create();
 		$this->examplePlugin->setType( 'order' );
@@ -35,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -84,17 +87,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
-			$search->compare( '==', 'plugin.editor', $this->editor )
+			$search->compare( '==', 'plugin.editor', $this->context->editor())
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$result = $this->object->search( $search )->toArray();
-		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
-		}
+		$expected = $this->object->search( $search, ['plugin/type'] )->first( new \RuntimeException( 'No plugin item including "Shipping" found' ) );
 
-		$actual = $this->object->get( $expected->getId() );
+		$actual = $this->object->get( $expected->getId(), ['plugin/type'] );
 
 		$this->assertEquals( $expected, $actual );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $actual->getTypeItem() );
 	}
 
 
@@ -103,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
-			$search->compare( '==', 'plugin.editor', $this->editor )
+			$search->compare( '==', 'plugin.editor', $this->context->editor())
 		);
 		$search->setConditions( $search->and( $conditions ) );
 
@@ -138,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -152,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -180,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'plugin.status', 1 );
 		$expr[] = $search->compare( '>=', 'plugin.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'plugin.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
 
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -194,15 +195,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$expr = $conditions = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'Shipping,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
 		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'ProductLimit,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
 		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'BasketLimits,Example' );
-		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'plugin.editor', $this->context->editor());
 		$conditions[] = $search->and( $expr );
 
 		//search without base criteria

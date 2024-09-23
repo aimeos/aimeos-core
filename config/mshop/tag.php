@@ -8,6 +8,11 @@
 
 return [
 	'manager' => [
+		'decorators' => [
+			'global' => [
+				'Type' => 'Type',
+			]
+		],
 		'submanagers' => [
 			'type' => 'type',
 		]
