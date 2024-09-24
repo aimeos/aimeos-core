@@ -103,7 +103,7 @@ return [
 	],
 
 	'stock/type' => [
-		['domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1],
+		['domain' => 'stock', 'code' => 'default', 'label' => 'Standard', 'status' => 1],
 	],
 
 	'service/type' => [

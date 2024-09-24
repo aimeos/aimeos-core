@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFind()
 	{
-		$item = $this->object->find( 'unitstock', [], 'product' );
+		$item = $this->object->find( 'unitstock', [], 'stock' );
 
 		$this->assertEquals( 'unitstock', $item->getCode() );
 	}
@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'stock.type.id', null );
 		$expr[] = $search->compare( '!=', 'stock.type.siteid', null );
-		$expr[] = $search->compare( '==', 'stock.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'stock.type.domain', 'stock' );
 		$expr[] = $search->compare( '==', 'stock.type.code', 'unitstock' );
 		$expr[] = $search->compare( '>=', 'stock.type.position', 0 );
 		$expr[] = $search->compare( '>=', 'stock.type.status', 0 );

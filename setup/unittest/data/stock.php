@@ -6,8 +6,8 @@
 
 return [
 	'stock/type' => [
-		'product/unitstock' => ['stock.type.domain' => 'product', 'stock.type.code' => 'unitstock', 'stock.type.label' => 'Unittest stock'],
-		'product/default' => ['stock.type.domain' => 'product', 'stock.type.code' => 'default', 'stock.type.label' => 'Standard'],
+		'product/unitstock' => ['stock.type.domain' => 'stock', 'stock.type.code' => 'unitstock', 'stock.type.label' => 'Unittest stock'],
+		'product/default' => ['stock.type.domain' => 'stock', 'stock.type.code' => 'default', 'stock.type.label' => 'Standard'],
 	],
 
 	'stock' => [

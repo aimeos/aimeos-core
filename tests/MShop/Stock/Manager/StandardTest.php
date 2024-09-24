@@ -126,6 +126,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$actual = $this->object->get( $expected->getId(), ['stock/type'] );
 		$this->assertEquals( $expected, $actual );
+		$this->assertNotNull( $expected->getTypeItem() );
+		$this->assertEquals( $expected->getTypeItem(), $actual->getTypeItem() );
 	}
 
 
