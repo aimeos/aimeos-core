@@ -44,14 +44,6 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 	{
 		$this->info( 'Adding data for MShop locale domain', 'vv' );
 
-		// Set editor for further tasks
-		$context = $this->context()->setEditor( 'core' );
-		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
-
-		if( !$localeManager->search( $localeManager->filter() )->isEmpty() ) {
-			return;
-		}
-
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
@@ -60,6 +52,8 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		}
 
 		$siteIds = [];
+		$context = $this->context()->setEditor( 'core' ); // Set editor for further tasks
+		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
 
 		if( isset( $data['locale/site'] ) ) {
 			$siteIds = $this->addLocaleSiteData( $localeManager, $data['locale/site'] );

@@ -92,7 +92,7 @@ class Standard
 	 */
 	public function getSitePath() : array
 	{
-		return (array) ( $this->sites[Locale::SITE_PATH] ?? ( $this->sites[Locale::SITE_ONE] ?? [] ) );
+		return (array) ( $this->sites[Locale::SITE_PATH] ?? ( $this->sites[Locale::SITE_ONE] ?? [$this->get( 'locale.siteid', '' )] ) );
 	}
 
 
@@ -105,10 +105,10 @@ class Standard
 	public function getSites( int $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL )
 	{
 		if( $level === Locale::SITE_ALL ) {
-			return $this->sites;
+			return $this->sites + [Locale::SITE_ONE => $this->get( 'locale.siteid', '' )];
 		}
 
-		return $this->sites[$level] ?? ( $this->sites[Locale::SITE_ONE] ?? [] );
+		return $this->sites[$level] ?? ( $this->sites[Locale::SITE_ONE] ?? $this->get( 'locale.siteid', '' ) );
 	}
 
 

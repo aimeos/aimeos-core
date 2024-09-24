@@ -106,18 +106,28 @@ class MShopAddLocaleData extends Base
 	{
 		$this->info( 'Adding data for MShop locales', 'vv', 1 );
 
+		$map = [];
+
 		foreach( $data as $dataset )
 		{
 			if( !isset( $siteIds[$dataset['site']] ) ) {
 				throw new \RuntimeException( sprintf( 'No ID for site for key "%1$s" found', $dataset['site'] ) );
 			}
 
-			$this->context()->setLocale( $localeManager->create()->setSiteId( $siteIds[$dataset['site']]['site'] ) );
-			$item = $localeManager->create()->fromArray( $dataset, true );
+			$map[$siteIds[$dataset['site']]['site']][] = $dataset;
+		}
 
-			try {
-				$localeManager->save( $item );
-			} catch( \Aimeos\Base\DB\Exception $e ) { ; } // if locale combination was already available
+		foreach( $map as $siteId => $datasets )
+		{
+			$this->context()->setLocale( $localeManager->create()->setSiteId( $siteId ) );
+
+			if( !$localeManager->search( $localeManager->filter() )->isEmpty() ) {
+				continue;
+			}
+
+			foreach( $datasets as $dataset ) {
+				$localeManager->save( $localeManager->create()->fromArray( $dataset, true ) );
+			}
 		}
 	}
 }
