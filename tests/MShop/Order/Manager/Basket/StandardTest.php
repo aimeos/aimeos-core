@@ -56,6 +56,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateOrder()
+	{
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create()->copyFrom( $product );
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->addProduct( $orderProduct );
+		$basket = $this->object->save( $this->object->create()->setItem( $order )->setId( 'unittest-100' ) );
+
+		$basket2 = $this->object->get( $basket->getId() );
+		$this->object->delete( $basket );
+
+		$this->assertEquals( 1, count( $basket2->getItem()->getProducts() ) );
+	}
+
+
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
