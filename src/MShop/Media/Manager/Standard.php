@@ -105,7 +105,7 @@ class Standard
 				}
 				catch( \Exception $e )
 				{
-					$this->context()->logger()->warning( $e->getMessage() );
+					$this->context()->logger()->notice( $e->getMessage() );
 				}
 			}
 		}
