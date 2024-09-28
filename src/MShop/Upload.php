@@ -36,8 +36,10 @@ trait Upload
 	 */
 	protected function deleteFile( string $filepath, string $fsname = 'fs-media' ) : self
 	{
+		$fs = $this->context()->fs( $fsname );
+
 		if( $filepath && $fs->has( $filepath ) ) {
-			$this->context()->fs( $fsname )->rm( $filepath );
+			$fs->rm( $filepath );
 		}
 
 		return $this;
