@@ -158,14 +158,9 @@ abstract class Base
 		foreach( $refIdMap as $domain => $list )
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
+			$search = $manager->filter()->slice( 0, count( $list ) )
+				->add( [str_replace( '/', '.', $domain ) . '.id' => map( $list )->getRefId()] );
 
-			if( ( $attr = current( $manager->getSearchAttributes() ) ) === false )
-			{
-				$msg = sprintf( 'No search configuration available for domain "%1$s', $domain );
-				throw new \Aimeos\MShop\Exception( $msg );
-			}
-
-			$search = $manager->filter()->slice( 0, count( $list ) )->add( [$attr->getCode() => map( $list )->getRefId()] );
 			$refItemMap[$domain] = $manager->search( $search, $ref );
 		}
 
