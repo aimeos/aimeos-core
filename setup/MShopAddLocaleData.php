@@ -38,17 +38,15 @@ class MShopAddLocaleData extends Base
 
 		foreach( $data as $key => $dataset )
 		{
-			$manager->begin();
-
 			try
 			{
+				$item = $manager->find( $key );
+			}
+			catch( \Aimeos\MShop\Exception $e )
+			{
+				$manager->begin();
 				$item = $manager->insert( $manager->create()->fromArray( $dataset ), $parentId );
 				$manager->commit();
-			}
-			catch( \Aimeos\Base\DB\Exception $e )
-			{
-				$manager->rollback();
-				$item = $manager->find( $key );
 			}
 
 			$siteIds[$key] = ['id' => $item->getId(), 'site' => $item->getSiteId()];
