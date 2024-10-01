@@ -27,7 +27,7 @@ class Email
 			'internalcode' => 'email.from',
 			'label' => 'Sender e-mail address',
 			'default' => '',
-			'required' => true,
+			'required' => false,
 		],
 		'email.to' => [
 			'code' => 'email.to',
@@ -139,7 +139,7 @@ class Email
 	{
 		$this->context()->mail()->create()
 			->to( (string) $this->getConfigValue( 'email.to' ) )
-			->from( (string) $this->getConfigValue( 'email.from' ) )
+			->from( (string) $this->getConfigValue( 'email.from' ) ?: $this->context()->config()->get( 'resource/email/from-email' ) )
 			->subject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
 			->attach( $this->getOrderContent( $orderItems ), 'orders.csv', 'text/plain' )
 			->text( $this->getEmailContent( $orderItems ) )
