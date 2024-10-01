@@ -177,8 +177,11 @@ class Autofill
 		) {
 			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
-			$search = $orderManager->filter()->add( ['order.customerid' => $userid] )
-				->order( '-order.id' )->slice( 0, 1 );
+			$search = $orderManager->filter()->add( [
+				'order.customerid' => $userid,
+				'order.languageid' => $order->locale()->getLanguageId(),
+				'order.currencyid' => $order->locale()->getCurrencyId(),
+			] )->order( '-order.id' )->slice( 0, 1 );
 
 			if( ( $item = $orderManager->search( $search, ['order/address', 'order/service', 'service'] )->first() ) !== null )
 			{
