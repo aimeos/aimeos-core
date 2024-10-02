@@ -182,9 +182,7 @@
 	<target name="i18n" description="Creates all translation files">
 		<exec command="find ./src/MAdmin ./src/MShop -type f | xgettext -j -s --no-location --no-wrap --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/mshop/core-mshop.pot -f -"
 			checkreturn="true" logoutput="true" />
-		<exec command="find ./src/Controller -type f | xgettext -j -s --no-location --no-wrap --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/controller/core-controller-common.pot -f -"
-			checkreturn="true" logoutput="true" />
-		<foreach list="i18n/controller,i18n/country,i18n/currency,i18n/language,i18n/mshop" param="i18n-dir" target="i18n-files" />
+		<foreach list="i18n/country,i18n/currency,i18n/language,i18n/mshop" param="i18n-dir" target="i18n-files" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />

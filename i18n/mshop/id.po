@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2024-10-01 14:57+0200\n"
 "PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Indonesian (https://www.transifex.com/aimeos/aimeos-core/language/id/)\n"
@@ -833,6 +833,10 @@ msgstr ""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Status not available"
 msgstr ""
 
 #, php-format
