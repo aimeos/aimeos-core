@@ -92,7 +92,7 @@ class Standard
 	 */
 	public function getI18n() : array
 	{
-		return $this->get( $this->prefix . 'i18n', [] );
+		return (array) $this->get( $this->prefix . 'i18n', [] );
 	}
 
 
