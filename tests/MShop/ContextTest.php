@@ -311,18 +311,20 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetGroups()
 	{
-		$fcn = function() {
-			return [123 => 'admin'];
+		$items = [123 => new \stdClass()];
+
+		$fcn = function() use ( $items ) {
+			return $items;
 		};
 
 		$this->assertEquals( [], $this->object->groups() );
 
 		$return = $this->object->setGroups( $fcn );
-		$this->assertEquals( [123 => 'admin'], $this->object->groups() );
+		$this->assertEquals( $items, $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 
 		$return = $this->object->setGroups( $fcn() );
-		$this->assertEquals( [123 => 'admin'], $this->object->groups() );
+		$this->assertEquals( $items, $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
 	}
 }

@@ -694,7 +694,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Returns the group ID/code pairs of the logged in user.
 	 *
-	 * @return array Group ID/code pairs of the logged in user
+	 * @return array Group ID/item pairs of the logged in user
 	 */
 	public function groups() : array
 	{
@@ -711,7 +711,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Sets the group IDs of the logged in user.
 	 *
-	 * @param \Closure|array $groups Group ID/code pairs of the logged in user or closure to retrieve them
+	 * @param \Closure|array $groups Group ID/item pairs of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
 	 */
 	public function setGroups( $groups ) : \Aimeos\MShop\ContextIface
