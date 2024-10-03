@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
-		$item->setGroups( [$group->getId() => $group->getCode()] );
+		$item->setGroups( [$group->getId()] );
 		$item = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId(), ['group'] );
 

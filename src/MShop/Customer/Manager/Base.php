@@ -148,7 +148,7 @@ abstract class Base
 		$manager = $this->object()->getSubManager( 'lists' );
 		$listItems = $item->getListItems( 'group', 'default', null, false );
 
-		foreach( $item->getGroups() as $refId => $code )
+		foreach( $item->getGroups() as $refId )
 		{
 			if( ( $litem = $item->getListItem( 'group', 'default', $refId, false ) ) !== null ) {
 				unset( $listItems[$litem->getId()], $listItems['__group_default_' . $refId] );

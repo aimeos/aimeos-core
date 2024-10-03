@@ -193,7 +193,7 @@ class Standard extends Base implements Iface
 		if( !isset( $this->groups ) )
 		{
 			if( ( $list = (array) $this->get( 'customer.groups', [] ) ) === [] ) {
-				$list = $this->getRefItems( 'group', null, 'default' )->col( 'group.code', 'group.id' )->all();
+				$list = $this->getRefItems( 'group', null, 'default' )->col( 'group.id' )->all();
 			}
 
 			$this->groups = $list;
@@ -206,16 +206,16 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the group IDs/codes the customer belongs to
 	 *
-	 * @param array $map Associative list of group IDs as keys and group codes as values
+	 * @param array $value List of group IDs
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setGroups( array $map ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setGroups( array $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		$list = $this->getGroups();
 
-		if( array_diff_assoc( $map, $list ) !== [] || array_diff_assoc( $list, $map ) !== [] )
+		if( array_diff( $value, $list ) !== [] || array_diff( $list, $value ) !== [] )
 		{
-			$this->groups = $map;
+			$this->groups = $value;
 			$this->setModified();
 		}
 
