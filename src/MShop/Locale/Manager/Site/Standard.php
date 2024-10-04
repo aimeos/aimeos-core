@@ -58,16 +58,35 @@ class Standard
 			'internalcode' => 'status',
 			'type' => 'int',
 		],
-		'locale.site.position' => [
-			'label' => 'Site position',
-			'internalcode' => 'id',
+		'locale.site.icon' => [
+			'label' => 'Site icon',
+			'internalcode' => 'icon',
+			'type' => 'string',
+		],
+		'locale.site.logo' => [
+			'label' => 'Site logo',
+			'internalcode' => 'logo',
+			'type' => 'json',
+		],
+		'locale.site.rating' => [
+			'label' => 'Rating value',
+			'internalcode' => 'rating',
+			'type' => 'decimal',
+		],
+		'locale.site.ratings' => [
+			'label' => 'Number of ratings',
+			'internalcode' => 'ratings',
 			'type' => 'int',
 		],
-		'locale.site.level' => [
-			'label' => 'Site tree level',
-			'internalcode' => 'level',
-			'type' => 'int',
-			'public' => false,
+		'locale.site.refid' => [
+			'label' => 'Site-related supplier ID',
+			'internalcode' => 'refid',
+			'type' => 'string',
+		],
+		'locale.site.theme' => [
+			'label' => 'Site theme',
+			'internalcode' => 'theme',
+			'type' => 'string',
 		],
 		'locale.site.config' => [
 			'label' => 'Site config',
@@ -75,40 +94,10 @@ class Standard
 			'type' => 'json',
 			'public' => false,
 		],
-		'locale.site.icon' => [
-			'label' => 'Site icon',
-			'internalcode' => 'icon',
-			'type' => 'string',
-			'public' => false,
-		],
-		'locale.site.logo' => [
-			'label' => 'Site logo',
-			'internalcode' => 'logo',
-			'type' => 'json',
-			'public' => false,
-		],
-		'locale.site.rating' => [
-			'label' => 'Rating value',
-			'internalcode' => 'rating',
-			'type' => 'decimal',
-			'public' => false,
-		],
-		'locale.site.ratings' => [
-			'label' => 'Number of ratings',
-			'internalcode' => 'ratings',
+		'locale.site.level' => [
+			'label' => 'Site tree level',
+			'internalcode' => 'level',
 			'type' => 'int',
-			'public' => false,
-		],
-		'locale.site.refid' => [
-			'label' => 'Site-related supplier ID',
-			'internalcode' => 'refid',
-			'type' => 'string',
-			'public' => false,
-		],
-		'locale.site.theme' => [
-			'label' => 'Site theme',
-			'internalcode' => 'theme',
-			'type' => 'string',
 			'public' => false,
 		],
 		'locale.site.ctime' => [
@@ -127,6 +116,12 @@ class Standard
 			'label' => 'Site editor',
 			'internalcode' => 'editor',
 			'type' => 'string',
+			'public' => false,
+		],
+		'locale.site.position' => [
+			'label' => 'Site position',
+			'internalcode' => 'id',
+			'type' => 'int',
 			'public' => false,
 		],
 	];
