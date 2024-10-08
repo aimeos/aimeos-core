@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class OrderAddBaseServiceCurrencyid extends Base
 {
+	public function after() : array
+	{
+		return ['OrderConnectTables'];
+	}
+
+
 	public function before() : array
 	{
 		return ['Order'];
