@@ -27,7 +27,9 @@ class OrderAddBaseProductCurrencyid extends Base
 	{
 		$db = $this->db( 'db-order' );
 
-		if( !$db->hasTable( ['mshop_order_base', 'mshop_order_base_product'] ) ) {
+		if( !$db->hasTable( ['mshop_order_base', 'mshop_order_base_product'] )
+			|| !$db->hasColumn( 'mshop_order_base_product', 'baseid' )
+		) {
 			return;
 		}
 
