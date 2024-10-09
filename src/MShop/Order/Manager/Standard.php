@@ -951,13 +951,9 @@ class Standard extends Base
 	 * ":cond" placeholder before the statement is sent to the database
 	 * server.
 	 *
-	 * If the records that are retrieved should be cataloged by one or more
+	 * If the records that are retrieved should be ordered by one or more
 	 * columns, the generated string of column / sort direction pairs
-	 * replaces the ":catalog" placeholder. In case no cataloging is required,
-	 * the complete ORDER BY part including the "\/*-catalogby*\/...\/*catalogby-*\/"
-	 * markers is removed to speed up retrieving the records. Columns of
-	 * sub-managers can also be used for cataloging the result set but then
-	 * no index can be used.
+	 * replaces the ":order" placeholder.
 	 *
 	 * The number of returned records can be limited and can start at any
 	 * number between the begining and the end of the result set. For that
