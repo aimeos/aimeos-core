@@ -48,11 +48,11 @@ class Standard
 	 *
 	 * For example, if the name of the default class is
 	 *
-	 *  \Aimeos\MShop\Attribute\Manager\Type\Standard
+	 *  \Aimeos\MShop\Text\Manager\Type\Standard
 	 *
 	 * and you want to replace it with your own version named
 	 *
-	 *  \Aimeos\MShop\Attribute\Manager\Type\Mytype
+	 *  \Aimeos\MShop\Text\Manager\Type\Mytype
 	 *
 	 * then you have to set the this configuration option:
 	 *
@@ -130,13 +130,13 @@ class Standard
 	 * modify what is returned to the caller.
 	 *
 	 * This option allows you to wrap local decorators
-	 * ("\Aimeos\MShop\Attribute\Manager\Type\Decorator\*") around the text
+	 * ("\Aimeos\MShop\Text\Manager\Type\Decorator\*") around the text
 	 * type manager.
 	 *
 	 *  mshop/text/manager/type/decorators/local = array( 'decorator2' )
 	 *
 	 * This would add the decorator named "decorator2" defined by
-	 * "\Aimeos\MShop\Attribute\Manager\Type\Decorator\Decorator2" only to the
+	 * "\Aimeos\MShop\Text\Manager\Type\Decorator\Decorator2" only to the
 	 * text type manager.
 	 *
 	 * @param array List of decorator names

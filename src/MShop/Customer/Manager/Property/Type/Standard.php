@@ -48,11 +48,11 @@ class Standard
 	 *
 	 * For example, if the name of the default class is
 	 *
-	 *  \Aimeos\MShop\Attribute\Manager\Lists\Type\Standard
+	 *  \Aimeos\MShop\Customer\Manager\Lists\Type\Standard
 	 *
 	 * and you want to replace it with your own version named
 	 *
-	 *  \Aimeos\MShop\Attribute\Manager\Lists\Type\Mytype
+	 *  \Aimeos\MShop\Customer\Manager\Lists\Type\Mytype
 	 *
 	 * then you have to set the this configuration option:
 	 *
@@ -130,13 +130,13 @@ class Standard
 	 * modify what is returned to the caller.
 	 *
 	 * This option allows you to wrap local decorators
-	 * ("\Aimeos\MShop\Attribute\Manager\Property\Type\Decorator\*") around the
+	 * ("\Aimeos\MShop\Customer\Manager\Property\Type\Decorator\*") around the
 	 * customer property type manager.
 	 *
 	 *  mshop/customer/manager/property/type/decorators/local = array( 'decorator2' )
 	 *
 	 * This would add the decorator named "decorator2" defined by
-	 * "\Aimeos\MShop\Attribute\Manager\Property\Type\Decorator\Decorator2" only to
+	 * "\Aimeos\MShop\Customer\Manager\Property\Type\Decorator\Decorator2" only to
 	 * the customer property type manager.
 	 *
 	 * @param array List of decorator names
