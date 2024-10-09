@@ -230,11 +230,11 @@ class Standard
 	 * For MySQL:
 	 *  SELECT LAST_INSERT_ID()
 	 * For PostgreSQL:
-	 *  SELECT currval('seq_mattpr_id')
+	 *  SELECT currval('seq_pripr_id')
 	 * For SQL Server:
 	 *  SELECT SCOPE_IDENTITY()
 	 * For Oracle:
-	 *  SELECT "seq_mattpr_id".CURRVAL FROM DUAL
+	 *  SELECT "seq_pripr_id".CURRVAL FROM DUAL
 	 *
 	 * There's no way to retrive the new ID by a SQL statements that
 	 * fits for most database servers as they implement their own

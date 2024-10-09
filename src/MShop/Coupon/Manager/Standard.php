@@ -311,8 +311,8 @@ class Standard
 	 * the values from the coupon item to the statement before they are
 	 * sent to the database server. The number of question marks must
 	 * be the same as the number of columns listed in the INSERT
-	 * statement. The catalog of the columns must correspond to the
-	 * catalog in the save() method, so the correct values are
+	 * statement. The order of the columns must correspond to the
+	 * order in the save() method, so the correct values are
 	 * bound to the columns.
 	 *
 	 * The SQL statement should conform to the ANSI standard to be
@@ -343,8 +343,8 @@ class Standard
 	 * The SQL statement must be a string suitable for being used as
 	 * prepared statement. It must include question marks for binding
 	 * the values from the coupon item to the statement before they are
-	 * sent to the database server. The catalog of the columns must
-	 * correspond to the catalog in the save() method, so the
+	 * sent to the database server. The order of the columns must
+	 * correspond to the order in the save() method, so the
 	 * correct values are bound to the columns.
 	 *
 	 * The SQL statement should conform to the ANSI standard to be
