@@ -21,7 +21,8 @@ use \Aimeos\MShop\Locale\Manager\Base as Locale;
  */
 trait Site
 {
-	private static $siteInactive = [];
+	private static array $siteInactive = [];
+	private static int $lastRefresh = 0;
 
 
 	/**
@@ -86,6 +87,12 @@ trait Site
 		// Required for fetching customer item below
 		if( in_array( current( $this->getResourceType( false ) ), ['customer', 'customer/lists', 'group'] ) ) {
 			return map();
+		}
+
+		if( self::$lastRefresh < ( $time = time() ) - 60 ) // clear cache regularly for Laravel Octane
+		{
+			self::$lastRefresh = $time;
+			self::$siteInactive = [];
 		}
 
 		if( !isset( self::$siteInactive[$current] ) )
