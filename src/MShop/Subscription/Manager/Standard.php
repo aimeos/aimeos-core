@@ -295,13 +295,9 @@ class Standard
 		 * ":cond" placeholder before the statement is sent to the database
 		 * server.
 		 *
-		 * If the records that are retrieved should be subscriptioned by one or more
+		 * If the records that are retrieved should be ordered by one or more
 		 * columns, the generated string of column / sort direction pairs
-		 * replaces the ":subscription" placeholder. In case no subscriptioning is required,
-		 * the complete ORDER BY part including the "\/*-subscriptionby*\/...\/*subscriptionby-*\/"
-		 * markers is removed to speed up retrieving the records. Columns of
-		 * sub-managers can also be used for subscriptioning the result set but then
-		 * no index can be used.
+		 * replaces the ":order" placeholder.
 		 *
 		 * The number of returned records can be limited and can start at any
 		 * number between the begining and the end of the result set. For that
