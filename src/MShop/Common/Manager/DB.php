@@ -282,8 +282,8 @@ trait DB
 	{
 		if( $attrcode )
 		{
-			$parts = array_slice( explode( '.', $attrcode ), 0, -1 );
-			$str = 'm' . substr( array_shift( $parts ) ?: current( $this->type() ), 0, 3 );
+			$parts = array_slice( explode( '.', $attrcode ), 0, -1 ) ?: $this->type();
+			$str = 'm' . substr( array_shift( $parts ), 0, 3 );
 		}
 		else
 		{
@@ -877,6 +877,11 @@ trait DB
 	 */
 	protected function table() : string
 	{
+		/** @todo 2025.10 Remove any only use table() */
+		if( method_exists( $this, 'getTable' ) ) {
+			return $this->getTable();
+		}
+
 		return 'mshop_' . join( '_', $this->type() );
 	}
 

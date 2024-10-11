@@ -158,8 +158,12 @@ abstract class Base
 		foreach( $refIdMap as $domain => $list )
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
+			$attr = map( $manager->getSearchAttributes() );
+
+			$key = $attr->get( 'id' )?->getCode() === 'id' ? 'id' : str_replace( '/', '.', $domain ) . '.id';
+
 			$search = $manager->filter()->slice( 0, count( $list ) )
-				->add( [str_replace( '/', '.', $domain ) . '.id' => map( $list )->getRefId()] );
+				->add( [$key => map( $list )->getRefId()] );
 
 			$refItemMap[$domain] = $manager->search( $search, $ref );
 		}
