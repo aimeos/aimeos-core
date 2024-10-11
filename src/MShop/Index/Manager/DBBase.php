@@ -356,6 +356,7 @@ abstract class DBBase
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
+		$translations = $this->aliasTranslations( $translations );
 
 		if( !empty( $sorts = $search->getSortations() ) )
 		{
