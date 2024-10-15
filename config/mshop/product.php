@@ -27,7 +27,7 @@ return [
 					'Type' => 'Type',
 				]
 			],
-				'submanagers' => [
+			'submanagers' => [
 				'type' => 'type',
 			]
 		],

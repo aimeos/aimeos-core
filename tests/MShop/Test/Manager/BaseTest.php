@@ -59,6 +59,28 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateEmpty()
+	{
+		$data = [
+			'id' => 123,
+			'siteid' => '1.',
+			'key' => 'somekey',
+			'value' => 'someval',
+			'json' => ['key' => 'value'],
+			'mtime' => '2000-01-01 00:00:00',
+			'ctime' => '2000-01-01 00:00:00',
+			'editor' => 'testeditor'
+		];
+		$item = $this->object->create()->fromArray( $data, true );
+
+		$this->assertEquals( 123, $item->getId() );
+		$this->assertEquals( '1.', $item->getSiteId() );
+		$this->assertEquals( 'somekey', $item->get( 'key' ) );
+		$this->assertEquals( 'someval', $item->get( 'value' ) );
+		$this->assertEquals( ['key' => 'value'], $item->get( 'json' ) );
+	}
+
+
 	public function testDelete()
 	{
 		$result = $this->object->delete( -1 );
