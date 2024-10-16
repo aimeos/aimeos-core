@@ -47,7 +47,7 @@ class LocaleMigrateSite extends Base
 		$result = $db->stmt()->select( 'id', 'siteid' )->from( 'mshop_locale_site' )->executeQuery();
 		$db2 = $this->db( 'db-locale', true );
 
-		while( $row = $result->fetch() ) {
+		while( $row = $result->fetchAssociative() ) {
 			$db2->update( 'mshop_locale', ['site_id' => $row['id']], ['siteid' => $row['siteid']] );
 		}
 
