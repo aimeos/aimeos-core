@@ -33,15 +33,15 @@ class OrderAddProductParentid extends Base
 		$db->stmt()->update( 'mshop_order_base_product' )
 			->set( 'parentprodid', 'prodid' )
 			->where( 'type = \'select\'' )
-			->execute();
+			->executeStatement();
 
 		$result = $db->stmt()->select( 'siteid', 'prodcode' )
 			->from( 'mshop_order_base_product' )
 			->where( 'type = \'select\'' )
-			->execute();
+			->executeQuery();
 
 		$map = [];
-		while( $row = $result->fetch() ) {
+		while( $row = $result->fetchAssociative() ) {
 			$map[$row['siteid']][] = $row['prodcode'];
 		}
 
@@ -72,7 +72,7 @@ class OrderAddProductParentid extends Base
 					->set( 'prodid', '?' )
 					->where( 'siteid = ?' )->andWhere( 'prodcode = ?' )
 					->setParameters( [$product->getId(), $product->getSiteId(), $product->getCode()] )
-					->execute();
+					->executeStatement();
 			}
 
 			$start += $size;

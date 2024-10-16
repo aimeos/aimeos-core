@@ -54,10 +54,10 @@ class TablesMigrateListsKey extends Base
 
 				$q = $db->stmt();
 				$result = $q->select( 'id', 'domain', 'type', 'refid' )->from( $table )
-					->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
+					->where( $db->qi( 'key' ) . ' = \'\'' )->executeQuery();
 
-				while( $row = $result->fetch() ) {
-					$update->setParameters( [$row['domain'] . '|' . $row['type'] . '|' . $row['refid'], $row['id']] )->execute();
+				while( $row = $result->fetchAssociative() ) {
+					$update->setParameters( [$row['domain'] . '|' . $row['type'] . '|' . $row['refid'], $row['id']] )->executeStatement();
 				}
 
 				$db2->close();

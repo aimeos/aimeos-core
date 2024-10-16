@@ -47,12 +47,12 @@ class TablesMigratePropertyKey extends Base
 
 				$q = $db->stmt();
 				$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
-					->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
+					->where( $db->qi( 'key' ) . ' = \'\'' )->executeQuery();
 
-				while( $row = $result->fetch() )
+				while( $row = $result->fetchAssociative() )
 				{
 					$value = substr( $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . $row['value'], 0, 255 );
-					$update->setParameters( [$value, $row['id']] )->execute();
+					$update->setParameters( [$value, $row['id']] )->executeStatement();
 				}
 
 				$db2->close();

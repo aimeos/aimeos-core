@@ -37,10 +37,10 @@ class AttributeMigrateKey extends Base
 
 		$db->table( 'mshop_attribute' )->string( 'key', 255 )->default( '' )->up();
 
-		$result = $db->stmt()->select( 'id', 'domain', 'type', 'code' )->from( 'mshop_attribute' )->execute();
+		$result = $db->stmt()->select( 'id', 'domain', 'type', 'code' )->from( 'mshop_attribute' )->executeQuery();
 		$db2 = $this->db( 'db-attribute', true );
 
-		while( $row = $result->fetch() )
+		while( $row = $result->fetchAssociative() )
 		{
 			$key = substr( $row['domain'] . '|' . $row['type'] . '|' . $row['code'], 0, 255 );
 			$db2->update( 'mshop_attribute', ['key' => $key], ['id' => $row['id']] );

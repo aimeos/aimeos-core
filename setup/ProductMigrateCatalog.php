@@ -43,7 +43,7 @@ class ProductMigrateCatalog extends Base
 
 			$result = $db2->stmt()->select( '*' )->from( 'mshop_catalog_list' )
 				->where( $db2->qi( 'key' ) . " LIKE 'product|%'" )
-				->setMaxResults( 1000 )->execute();
+				->setMaxResults( 1000 )->executeQuery();
 
 			while( $row = $result->fetchAssociative() )
 			{
@@ -63,7 +63,7 @@ class ProductMigrateCatalog extends Base
 						->setParameter( 11, $row['ctime'] )
 						->setParameter( 12, $row['mtime'] )
 						->setParameter( 13, $row['editor'] )
-						->execute();
+						->executeStatement();
 
 					$ids[] = $row['id'];
 				}
@@ -77,7 +77,7 @@ class ProductMigrateCatalog extends Base
 			{
 				$db2->stmt()->delete( 'mshop_catalog_list' )
 					->where( $db2->qi( 'id' ) . ' IN (' . join( ',', $ids ) . ')' )
-					->execute();
+					->executeStatement();
 			}
 		}
 		while( $count >= 1000 );

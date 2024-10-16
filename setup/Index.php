@@ -43,7 +43,7 @@ class Index extends Base
 
 		if( !$db->hasIndex( 'mshop_index_text', 'idx_msindte_content' ) )
 		{
-			$db->for( 'mysql', 'CREATE FULLTEXT INDEX `idx_msindte_content` ON `mshop_index_text` (`content`)' );
+			$db->for( ['mariadb', 'mysql'], 'CREATE FULLTEXT INDEX `idx_msindte_content` ON `mshop_index_text` (`content`)' );
 
 			try {
 				$db->for( 'postgresql', 'CREATE INDEX "idx_msindte_content" ON "mshop_index_text" USING GIN (to_tsvector(\'english\', "content"))' );

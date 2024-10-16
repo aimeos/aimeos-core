@@ -44,7 +44,7 @@ class LocaleMigrateSite extends Base
 		$db->table( 'mshop_locale' )->int( 'site_id' )->null( true )->up();
 
 
-		$result = $db->stmt()->select( 'id', 'siteid' )->from( 'mshop_locale_site' )->execute();
+		$result = $db->stmt()->select( 'id', 'siteid' )->from( 'mshop_locale_site' )->executeQuery();
 		$db2 = $this->db( 'db-locale', true );
 
 		while( $row = $result->fetch() ) {

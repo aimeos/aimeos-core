@@ -27,6 +27,6 @@ class IndexMigrateTextInnodb extends Base
 
 		$this->info( 'Migrate mshop_index_text table engine to InnoDB', 'vv' );
 
-		$db->for( 'mysql', 'ALTER TABLE mshop_index_text ENGINE=InnoDB' );
+		$db->for( ['mariadb', 'mysql'], 'ALTER TABLE mshop_index_text ENGINE=InnoDB' );
 	}
 }
