@@ -32,6 +32,6 @@ class CouponMigrateBasetValues extends Base
 			->set( 'config', 'REPLACE(' . $db->qi( 'config' ) . ', \'basketvalues\', \'basket\')' )
 			->where( $db->qi( 'provider' ) . ' LIKE \'%BasketValues%\'' )
 			->orWhere( $db->qi( 'config' ) . ' LIKE \'%basketvalues%\'' )
-			->execute();
+			->executeStatement();
 	}
 }

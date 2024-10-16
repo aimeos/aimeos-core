@@ -25,6 +25,6 @@ class PriceMigrateTaxRateName extends Base
 		$db->stmt()->update( 'mshop_price' )
 			->set( 'taxrate', 'REPLACE(' . $db->qi( 'taxrate' ) . ', \'{"":\', \'{"tax":\')' )
 			->where( $db->qi( 'taxrate' ) . ' LIKE \'{"":%\'' )
-			->execute();
+			->executeStatement();
 	}
 }
