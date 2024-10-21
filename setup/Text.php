@@ -39,7 +39,7 @@ class Text extends Base
 		{
 			$db->for( ['mariadb', 'mysql'], 'CREATE INDEX `idx_mstex_sid_dom_cont` ON `mshop_text` (`siteid`, `domain`, `content`(255))' );
 			$db->for( 'postgresql', 'CREATE INDEX "idx_mstex_sid_dom_cont" ON "mshop_text" ("siteid", "domain", left("content", 255) )' );
-			$db->for( 'mssql', 'CREATE INDEX "idx_mstex_sid_dom_cont" ON "mshop_text" ("siteid", "domain")' );
+			$db->for( 'sqlserver', 'CREATE INDEX "idx_mstex_sid_dom_cont" ON "mshop_text" ("siteid", "domain")' );
 		}
 	}
 }
