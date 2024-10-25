@@ -252,7 +252,7 @@ trait Methods
 		{
 			$parts = array_slice( explode( '\\', strtolower( get_class( $this ) ) ), 2, -1 );
 			unset( $parts[1] );
-			$this->type = $parts;
+			$this->type = array_values( $parts );
 		}
 
 		return $this->type;
