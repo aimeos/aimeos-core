@@ -113,6 +113,29 @@ trait Methods
 
 
 	/**
+	 * Creates objects from the given array
+	 *
+	 * @param iterable $entries List of associative arrays with key/value pairs
+	 * @param array $refs List of domains to retrieve list items and referenced items for
+	 * @param array $excludes List of keys which shouldn't be used when creating the items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
+	{
+		$list = [];
+		$keys = array_flip( $excludes );
+
+		foreach( $entries as $key => $entry )
+		{
+			$entry = array_diff_key( $entry, $keys );
+			$list[$key] = $this->create()->fromArray( $entry, true );
+		}
+
+		return map( $list );
+	}
+
+
+	/**
 	 * Returns the item specified by its ID
 	 *
 	 * @param string $id Id of item
@@ -339,17 +362,6 @@ trait Methods
 
 
 	/**
-	 * Returns the prefix for the item properties and search keys.
-	 *
-	 * @return string Prefix for the item properties and search keys
-	 */
-	protected function prefix() : string
-	{
-		return '';
-	}
-
-
-	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
@@ -424,5 +436,16 @@ trait Methods
 	protected function object() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->object ?? $this;
+	}
+
+
+	/**
+	 * Returns the prefix for the item properties and search keys.
+	 *
+	 * @return string Prefix for the item properties and search keys
+	 */
+	protected function prefix() : string
+	{
+		return '';
 	}
 }

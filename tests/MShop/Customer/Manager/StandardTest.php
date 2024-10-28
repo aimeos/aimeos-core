@@ -124,6 +124,36 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFrom()
+	{
+		$items = $this->object->from( [[
+			'customer.id' => 1,
+			'customer.code' => 'test',
+			'customer.label' => 'test',
+			'address' => [[
+				'customer.address.company' => 'test',
+			]],
+			'lists' => [
+				'product' => [[
+					'product.id' => '123',
+				]],
+			],
+			'property' => [[
+				'product.property.type' => 'newsleter',
+				'product.property.value' => '1',
+			]],
+		]] );
+
+		$item = $items->first();
+		$this->assertEquals( 1, count( $items ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $item );
+		$this->assertEquals( 1, count( $item->getListItems( 'product' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'product' ) ) );
+		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
+	}
+
+
 	public function testGet()
 	{
 		$domains = ['text', 'customer/property' => ['newsletter'], 'customer/property/type'];

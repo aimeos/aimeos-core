@@ -154,6 +154,20 @@ abstract class Base
 
 
 	/**
+	 * Creates objects from the given array
+	 *
+	 * @param iterable $entries List of associative arrays with key/value pairs
+	 * @param array $domains List of domains to retrieve list items and referenced items for
+	 * @param array $excludes List of keys which shouldn't be used when creating the items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	public function from( iterable $entries, array $domains = [], array $excludes = [] ) : \Aimeos\Map
+	{
+		return $this->manager->from( $entries, $domains );
+	}
+
+
+	/**
 	 * Returns the item specified by its ID
 	 *
 	 * @param string $id Id of item

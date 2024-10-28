@@ -27,6 +27,35 @@ class Property
 
 
 	/**
+	 * Creates objects from the given array
+	 *
+	 * @param iterable $entries List of associative arrays with key/value pairs
+	 * @param array $refs List of domains to retrieve list items and referenced items for
+	 * @param array $excludes List of keys which shouldn't be used when creating the items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
+	{
+		$keys = array_flip( $excludes );
+		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'property' );
+
+		foreach( $entries as $key => $entry )
+		{
+			if( isset( $entry['property'] ) && ( $item = $items->get( $key ) ) )
+			{
+				foreach( $entry['property'] as $list )
+				{
+					$list = array_diff_key( $list, $keys );
+					$item->addPropertyItem( $this->createPropertyItem()->fromArray( $list, true ) );
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

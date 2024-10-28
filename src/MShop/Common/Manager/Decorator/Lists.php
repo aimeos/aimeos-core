@@ -40,6 +40,44 @@ class Lists
 
 
 	/**
+	 * Creates objects from the given array
+	 *
+	 * @param iterable $entries List of associative arrays with key/value pairs
+	 * @param array $refs List of domains to retrieve list items and referenced items for
+	 * @param array $excludes List of keys which shouldn't be used when creating the items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
+	{
+		$context = $this->context();
+		$keys = array_flip( $excludes );
+		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'lists' );
+
+		foreach( $entries as $key => $entry )
+		{
+			if( isset( $entry['lists'] ) && ( $item = $items->get( $key ) ) )
+			{
+				foreach( $entry['lists'] as $domain => $list )
+				{
+					foreach( $list as $data )
+					{
+						$data = array_diff_key( $data, $keys );
+						$listItem = $this->createListItem()->fromArray( $data, true );
+						$manager = \Aimeos\MShop::create( $context, $domain );
+
+						if( $refItem = $manager->from( [$data] )->first() ) {
+							$item->addListItem( $domain, $listItem, $refItem );
+						}
+					}
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

@@ -24,6 +24,35 @@ class Address
 
 
 	/**
+	 * Creates objects from the given array
+	 *
+	 * @param iterable $entries List of associative arrays with key/value pairs
+	 * @param array $refs List of domains to retrieve list items and referenced items for
+	 * @param array $excludes List of keys which shouldn't be used when creating the items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
+	{
+		$keys = array_flip( $excludes );
+		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'address' );
+
+		foreach( $entries as $key => $entry )
+		{
+			if( isset( $entry['address'] ) && ( $item = $items->get( $key ) ) )
+			{
+				foreach( $entry['address'] as $list )
+				{
+					$list = array_diff_key( $list, $keys );
+					$item->addAddressItem( $this->createAddressItem()->fromArray( $list, true ) );
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Saves the dependent items of the item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object

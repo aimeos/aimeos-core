@@ -85,6 +85,47 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFrom()
+	{
+		$items = $this->object->from( [[
+			'product.id' => 1,
+			'product.type' => 'test',
+			'product.code' => 'test',
+			'product.label' => 'test',
+			'lists' => [
+				'text' => [[
+					'text.type' => 'name',
+					'text.content' => 'test',
+					'text.languageid' => 'de',
+				], [
+					'text.type' => 'short',
+					'text.content' => 'short test',
+					'text.languageid' => 'de',
+				]],
+				'media' => [[
+					'media.url' => 'test.png',
+					'media.languageid' => 'de',
+				]],
+			],
+			'property' => [[
+				'product.property.type' => 'package-weight',
+				'product.property.value' => '10.00',
+			], [
+				'product.property.type' => 'package-width',
+				'product.property.value' => '20.00',
+			]],
+		]] );
+
+		$item = $items->first();
+		$this->assertEquals( 1, count( $items ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $item );
+		$this->assertEquals( 2, count( $item->getListItems( 'text' ) ) );
+		$this->assertEquals( 2, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'media' ) ) );
+		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
+	}
+
+
 	public function testGetResourceType()
 	{
 		$result = $this->object->getResourceType();
