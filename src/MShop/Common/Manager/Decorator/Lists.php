@@ -51,7 +51,9 @@ class Lists
 	{
 		$context = $this->context();
 		$keys = array_flip( $excludes );
-		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'lists' );
+		$excludes[] = 'lists';
+
+		$items = $this->getManager()->from( $entries, $refs, $excludes );
 
 		foreach( $entries as $key => $entry )
 		{

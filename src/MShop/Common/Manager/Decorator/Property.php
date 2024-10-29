@@ -37,7 +37,9 @@ class Property
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
 		$keys = array_flip( $excludes );
-		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'property' );
+		$excludes[] = 'property';
+
+		$items = $this->getManager()->from( $entries, $refs, $excludes );
 
 		foreach( $entries as $key => $entry )
 		{

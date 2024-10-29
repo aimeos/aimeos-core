@@ -34,7 +34,9 @@ class Address
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
 		$keys = array_flip( $excludes );
-		$items = $this->getManager()->from( $entries, $refs, $excludes[] = 'address' );
+		$excludes[] = 'address';
+
+		$items = $this->getManager()->from( $entries, $refs, $excludes );
 
 		foreach( $entries as $key => $entry )
 		{
