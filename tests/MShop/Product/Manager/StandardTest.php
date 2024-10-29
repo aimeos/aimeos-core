@@ -24,6 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $this->object, $this->context );
 		$this->object->setObject( $this->object );
 	}
 
@@ -416,7 +417,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.dataset', 'Coffee' );
 		$expr[] = $search->compare( '==', 'product.label', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'product.url', 'cafe_noire_expresso' );
-		$expr[] = $search->compare( '~=', 'product.config', 'css-class' );
 		$expr[] = $search->compare( '==', 'product.datestart', null );
 		$expr[] = $search->compare( '==', 'product.dateend', null );
 		$expr[] = $search->compare( '==', 'product.status', 1 );
@@ -452,13 +452,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );
 
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$domains = ['attribute', 'media', 'price', 'product', 'product/property', 'tag', 'text', 'stock', 'locale/site'];
+		$results = $this->object->search( $search, $domains, $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		foreach( $results as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
+		if( ( $item = $results->first() ) === null ) {
+			throw new \RuntimeException( 'No item "Cafe Noire Expresso" found' );
 		}
+
+		$this->assertEquals( $results->firstKey(), $item->getId() );
+		$this->assertEquals( 4, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 6, count( $item->getRefItems( 'attribute' ) ) );
+		$this->assertEquals( 3, count( $item->getRefItems( 'media' ) ) );
+		$this->assertEquals( 2, count( $item->getRefItems( 'price' ) ) );
+		$this->assertEquals( 2, count( $item->getListItems( 'product' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'product' ) ) );
+		$this->assertEquals( 3, count( $item->getRefItems( 'tag' ) ) );
+		$this->assertEquals( 7, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getStockItems() ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 	}
 
 

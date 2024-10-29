@@ -401,7 +401,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 		// Add custom columns
 		foreach( $list as $key => $value )
 		{
-			if( ( $value === null || is_scalar( $value ) || is_array( $value ) ) && strpos( $key, '.' ) === false ) {
+			if( ( is_null( $value ) || is_scalar( $value ) || is_array( $value ) ) && strpos( $key, '.' ) === false ) {
 				$this->set( $key, $value );
 			}
 		}

@@ -44,17 +44,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFilter()
-	{
-		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
-		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter( true ) );
-	}
-
-
 	public function testDelete()
 	{
 		$this->expectException( 'Aimeos\MW\Tree\Exception' );
 		$this->object->delete( array( -1 ) );
+	}
+
+
+	public function testFilter()
+	{
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter( true ) );
 	}
 
 
