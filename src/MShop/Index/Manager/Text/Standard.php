@@ -752,7 +752,7 @@ class Standard
 
 			$url = $map['url'] ?? $item->getName( 'url', $langId );
 
-			if( isset( $texts[''] ) ) {
+			if( isset( $texts['']['content'] ) ) {
 				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
 			}
 
