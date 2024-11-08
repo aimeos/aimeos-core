@@ -229,7 +229,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
-	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true, int $level = null,
+	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true, ?int $level = null,
 		bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		$siteItem = $this->object()->getSubManager( 'site' )->find( $site );
@@ -310,7 +310,7 @@ class Standard
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Locale\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
@@ -808,7 +808,7 @@ class Standard
 	 * @param array $sites Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item
 	 */
-	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
+	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Locale\Item\Site\Iface $site = null,
 		array $sites = [] ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sites );
@@ -847,7 +847,7 @@ class Standard
 	 * @param int &$total Number of items that are available in total
 	 * @return array Associative list of key/value pairs
 	 */
-	protected function searchEntries( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	protected function searchEntries( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->context();

@@ -152,7 +152,7 @@ class Standard
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, ?string $value = null, ?string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/order/manager/service/transaction/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -349,7 +349,7 @@ class Standard
 	 * @param string|null $name Name of the implementation (from configuration or "Standard" if null)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g transaction
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/order/manager/service/transaction/name
 		 * Class name of the used order base service transaction manager implementation

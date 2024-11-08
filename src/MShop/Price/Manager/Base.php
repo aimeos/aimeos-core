@@ -35,8 +35,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
-	public function getLowestPrice( \Aimeos\Map $priceItems, float $quantity, string $currencyId = null,
-		string $siteId = null ) : \Aimeos\MShop\Price\Item\Iface
+	public function getLowestPrice( \Aimeos\Map $priceItems, float $quantity, ?string $currencyId = null,
+		?string $siteId = null ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$priceList = $this->getPriceList( $priceItems, $currencyId, $siteId );
 

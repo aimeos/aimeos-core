@@ -44,7 +44,7 @@ abstract class Base
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item object
 	 */
-	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getManager()->find( $code, $ref, $domain, $type, $default );
@@ -73,9 +73,9 @@ abstract class Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [],
+	public function getTree( ?string $id = null, array $ref = [],
 		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
-		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
+		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}
@@ -89,8 +89,8 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, ?string $parentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		return $this->getManager()->insert( $item, $parentId, $refId );
 	}
@@ -105,8 +105,8 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId = null, string $newParentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
+	public function move( string $id, ?string $oldParentId = null, ?string $newParentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->getManager()->move( $id, $oldParentId, $newParentId, $refId );
 		return $this;

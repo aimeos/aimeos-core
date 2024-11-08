@@ -44,7 +44,7 @@ class Bcrypt implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( string $password, string $salt = null ) : string
+	public function encode( string $password, ?string $salt = null ) : string
 	{
 		$options = $this->options;
 

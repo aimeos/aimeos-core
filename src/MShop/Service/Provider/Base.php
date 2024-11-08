@@ -315,7 +315,7 @@ abstract class Base
 	 * @return string Formatted money amount
 	 */
 	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, bool $costs = true, bool $tax = true,
-		int $precision = null ) : string
+		?int $precision = null ) : string
 	{
 		$amount = $price->getValue();
 
@@ -510,7 +510,7 @@ abstract class Base
 	 * @param string|null $domain Translation domain
 	 * @param int $code Custom error code
 	 */
-	protected function throw( string $msg, string $domain = null, int $code = 0 )
+	protected function throw( string $msg, ?string $domain = null, int $code = 0 )
 	{
 		if( $domain ) {
 			$msg = $this->context->translate( $domain, $msg );

@@ -408,7 +408,7 @@ class Standard
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findBase( ['locale.site.code' => $code], $ref, $default );
@@ -773,8 +773,8 @@ class Standard
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site node, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
-		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	public function getTree( ?string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		if( $id !== null )
 		{
@@ -812,7 +812,7 @@ class Standard
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -933,8 +933,8 @@ class Standard
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId = null, string $newParentId = null,
-		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface
+	public function move( string $id, ?string $oldParentId = null, ?string $newParentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface
 	{
 		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for locale site manager not available' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'move()' ) );

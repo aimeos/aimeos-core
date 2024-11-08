@@ -36,7 +36,7 @@ class Standard
 	 * @param string[] $sitePath List of site IDs up to the root site item
 	 * @param string[]|string Site ID prefix or list of site IDs
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null, array $sites = [] )
+	public function __construct( array $values = [], ?\Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null, array $sites = [] )
 	{
 		parent::__construct( 'locale.', $values );
 

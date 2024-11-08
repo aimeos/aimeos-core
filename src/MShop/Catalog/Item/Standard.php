@@ -123,7 +123,7 @@ class Standard
 	 * @param string|null $id Unique ID of the node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->node->setId( $id );
 		return $this;
@@ -172,7 +172,7 @@ class Standard
 	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name', string $langId = null ) : string
+	public function getName( string $type = 'name', ?string $langId = null ) : string
 	{
 		$name = $this->getNameList( $type, $langId );
 

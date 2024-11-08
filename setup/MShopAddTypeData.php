@@ -33,7 +33,7 @@ class MShopAddTypeData extends Base
 	}
 
 
-	protected function add( string $filename = null )
+	protected function add( ?string $filename = null )
 	{
 		$context = $this->context();
 		$sitecode = $context->locale()->getSiteItem()->getCode();

@@ -199,7 +199,7 @@ class Xml
 		$xml = new \XMLReader();
 		$logger = $this->context()->logger();
 
-		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
+		if( $xml->open( $filename, null, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 		{
 			$msg = $this->context()->translate( 'mshop', 'No XML file "%1$s" found' );
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );

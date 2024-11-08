@@ -30,7 +30,7 @@ class Bootstrap
 	 * @param boolean $defaultdir If default extension directory should be included automatically
 	 * @param string|null $basedir Aimeos core path (optional, __DIR__ if null)
 	 */
-	public function __construct( array $extdirs = [], bool $defaultdir = true, string $basedir = null )
+	public function __construct( array $extdirs = [], bool $defaultdir = true, ?string $basedir = null )
 	{
 		$basedir = $basedir ?: __DIR__;
 		$class = '\Composer\InstalledVersions';
@@ -279,7 +279,7 @@ class Bootstrap
 	 * @param string|null $theme Name of the theme to get specific template paths for
 	 * @return array List of paths
 	 */
-	public function getTemplatePaths( string $section, string $theme = null ) : array
+	public function getTemplatePaths( string $section, ?string $theme = null ) : array
 	{
 		$paths = [];
 

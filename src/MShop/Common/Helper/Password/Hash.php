@@ -48,7 +48,7 @@ class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( string $password, string $salt = null ) : string
+	public function encode( string $password, ?string $salt = null ) : string
 	{
 		$encode = isset( $this->options['base64'] ) && $this->options['base64'] == true;
 		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );

@@ -47,7 +47,7 @@ interface Iface
 	 * @param string|null $id Delete the node with the ID and all nodes below
 	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
-	public function deleteNode( string $id = null ) : Iface;
+	public function deleteNode( ?string $id = null ) : Iface;
 
 	/**
 	 * Returns a node and its descendants depending on the given resource.
@@ -57,7 +57,7 @@ interface Iface
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MW\Tree\Node\Iface;
+	public function getNode( ?string $id = null, int $level = Base::LEVEL_TREE, ?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MW\Tree\Node\Iface;
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
@@ -67,7 +67,7 @@ interface Iface
 	 * @param string|null $refId ID of the node where the node node should be inserted before (null to append)
 	 * @return \Aimeos\MW\Tree\Node\Iface Updated node item
 	 */
-	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, string $parentId = null, string $refId = null ) : \Aimeos\MW\Tree\Node\Iface;
+	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MW\Tree\Node\Iface;
 
 	/**
 	 * Moves an existing node to the new parent in the storage.
@@ -78,7 +78,7 @@ interface Iface
 	 * @param string|null $newRefId ID of the node where the node node should be inserted before (null to append)
 	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
-	public function moveNode( string $id, string $oldParentId = null, string $newParentId = null, string $newRefId = null ) : Iface;
+	public function moveNode( string $id, ?string $oldParentId = null, ?string $newParentId = null, ?string $newRefId = null ) : Iface;
 
 	/**
 	 * Stores the values of the given node and it's descendants to the storage.

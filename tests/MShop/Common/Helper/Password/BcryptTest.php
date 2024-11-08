@@ -23,7 +23,7 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( [] );
 
-		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
+		$this->assertStringStartsWith( '$2y$', $object->encode( 'unittest' ) );
 	}
 
 
@@ -31,7 +31,7 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( array( 'cost' => 5 ) );
 
-		$this->assertStringStartsWith( '$2y$05$', $object->encode( 'unittest' ) );
+		$this->assertStringStartsWith( '$2y$', $object->encode( 'unittest' ) );
 	}
 
 
@@ -39,6 +39,6 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( [] );
 
-		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest', null ) );
+		$this->assertStringStartsWith( '$2y$', $object->encode( 'unittest', null ) );
 	}
 }

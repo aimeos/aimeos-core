@@ -15,7 +15,10 @@ if( php_sapi_name() != 'cli' ) {
 
 
 set_error_handler( function( $severity, $message, $file, $line ) {
-	throw new ErrorException( $message, 0, $severity, $file, $line );
+	if( $severity & E_DEPRECATED === 0  ) {
+		throw new ErrorException( $message, 0, $severity, $file, $line );
+	}
+	error_log( $message . ' in ' . $file . ' on line ' . $line );
 });
 
 ini_set( 'display_errors', 1 );

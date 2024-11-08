@@ -50,7 +50,7 @@ class Standard
 	 * @param string|null $id Unique ID of the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'id', $id );
 	}

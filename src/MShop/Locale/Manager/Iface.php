@@ -35,5 +35,5 @@ interface Iface
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
 	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true,
-		int $level = null, bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface;
+		?int $level = null, bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface;
 }

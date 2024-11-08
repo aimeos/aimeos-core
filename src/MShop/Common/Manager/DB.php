@@ -164,7 +164,7 @@ trait DB
 	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\Base\Criteria\Iface $search, $keys, string $cfgPath,
-		array $required = [], string $value = null, string $type = null ) : \Aimeos\Map
+		array $required = [], ?string $value = null, ?string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/common/manager/aggregate/limit
 		 * Limits the number of records that are used when aggregating items
@@ -601,7 +601,7 @@ trait DB
 	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object
 	 */
 	protected function getCachedStatement( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgkey,
-		string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
+		?string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		if( !isset( $this->cachedStmts['stmt'][$cfgkey] )
 			|| !isset( $this->cachedStmts['conn'][$cfgkey] )
@@ -1090,7 +1090,7 @@ trait DB
 	 * @param \Aimeos\Base\Criteria\Expression\Iface|null $expr Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, \Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
+	private function getCriteriaKeys( array $prefix, ?\Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
 	{
 		if( $expr === null ) { return []; }
 

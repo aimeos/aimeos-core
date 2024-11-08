@@ -39,7 +39,7 @@ class Standard extends Base implements Iface
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
 		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
-		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, string $salt = null )
+		?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, ?string $salt = null )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems );
 

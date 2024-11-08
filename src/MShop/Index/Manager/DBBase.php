@@ -116,7 +116,7 @@ abstract class DBBase
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function find( string $code, array $ref = [], ?string $domain = 'product', string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = 'product', ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->manager->find( $code, $ref, $domain, $type, $default );
@@ -410,7 +410,7 @@ abstract class DBBase
 	 * @return \Aimeos\MShop\Product\Item\Iface[] List of product items
 	 */
 	protected function searchItemsIndexBase( \Aimeos\Base\Criteria\Iface $search,
-		array $ref, int &$total = null, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
+		array $ref, ?int &$total, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
 	{
 		$list = $ids = [];
 		$context = $this->context();

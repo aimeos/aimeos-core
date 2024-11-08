@@ -28,7 +28,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
 
 	/**
 	 * Removes a list item which references the given domain item (removed as well if it exists)
@@ -38,7 +38,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
 
 	/**
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
@@ -62,7 +62,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $domain Domain name to get the deleted list items for
 	 * @return \Aimeos\Map Associative list of domains as keys list items as values or list items only
 	 */
-	public function getListItemsDeleted( string $domain = null ) : \Aimeos\Map;
+	public function getListItemsDeleted( ?string $domain = null ) : \Aimeos\Map;
 
 	/**
 	 * Returns the list item for the given reference ID, domain and list type
@@ -110,5 +110,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name', string $langId = null ) : string;
+	public function getName( string $type = 'name', ?string $langId = null ) : string;
 }

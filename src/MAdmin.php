@@ -53,7 +53,7 @@ class MAdmin
 	 * @throws \Aimeos\MAdmin\Exception If the given path is invalid or the manager wasn't found
 	 */
 	public static function create( \Aimeos\MShop\ContextIface $context,
-		string $path, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+		string $path, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $path ) ) {
 			throw new \LogicException( 'Manager path is empty', 400 );
@@ -103,7 +103,7 @@ class MAdmin
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $object Manager object for the given manager path or null to clear
 	 */
-	public static function inject( string $classname, \Aimeos\MShop\Common\Manager\Iface $object = null )
+	public static function inject( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $object = null )
 	{
 		self::$objects['\\' . ltrim( $classname, '\\' )] = $object;
 	}

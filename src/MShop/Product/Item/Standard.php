@@ -223,7 +223,7 @@ class Standard
 	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name', string $langId = null ) : string
+	public function getName( string $type = 'name', ?string $langId = null ) : string
 	{
 		$name = $this->getNameList( $type, $langId );
 

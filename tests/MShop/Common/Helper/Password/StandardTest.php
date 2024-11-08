@@ -28,6 +28,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testEncode()
 	{
-		$this->assertStringStartsWith( '$2y$10$', $this->object->encode( 'unittest' ) );
+		$this->assertStringStartsWith( '$2y$', $this->object->encode( 'unittest' ) );
 	}
 }

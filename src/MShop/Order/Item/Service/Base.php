@@ -265,7 +265,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param string|null $type Filters returned transactions by the given type or null for no filtering
 	 * @return \Aimeos\Map List of transaction items implementing \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	 */
-	public function getTransactions( string $type = null ) : \Aimeos\Map
+	public function getTransactions( ?string $type = null ) : \Aimeos\Map
 	{
 		return map( $this->transactions );
 	}

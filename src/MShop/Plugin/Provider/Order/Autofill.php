@@ -205,7 +205,7 @@ class Autofill
 	 * @return \Aimeos\MShop\Order\Item\Service\Iface|null Order service item if available or null otherwise
 	 */
 	protected function getServiceItem( \Aimeos\MShop\Order\Item\Iface $order, string $type,
-		string $code = null ) : ?\Aimeos\MShop\Order\Item\Service\Iface
+		?string $code = null ) : ?\Aimeos\MShop\Order\Item\Service\Iface
 	{
 		$context = $this->context();
 		$serviceManager = \Aimeos\MShop::create( $context, 'service' );

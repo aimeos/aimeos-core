@@ -237,7 +237,7 @@ abstract class Base
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$conn = $this->context()->db( $this->getResourceName() );

@@ -304,7 +304,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $type Type the name is used for, e.g. "url"
 	 * @return string Returns the localized name of the product
 	 */
-	public function getName( string $type = null ) : string
+	public function getName( ?string $type = null ) : string
 	{
 		if( $type === 'url' ) {
 			return \Aimeos\Base\Str::slug( $this->get( 'order.product.name', '' ) ?: $this->getProductCode() );
