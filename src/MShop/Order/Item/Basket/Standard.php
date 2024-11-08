@@ -29,7 +29,7 @@ class Standard
 	 * @param array $values Associative list of key/value pairs with order status properties
 	 * @param \Aimeos\MShop\Order\Item\Iface|null $item Basket object
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Order\Item\Iface $item = null )
+	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $item = null )
 	{
 		parent::__construct( 'order.basket.', $values );
 		$this->item = $item;

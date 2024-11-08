@@ -116,7 +116,7 @@ interface Iface
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function getSubManager( string $domain, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
 	 * Iterates over all matched items and returns the found ones
@@ -153,7 +153,7 @@ interface Iface
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map;
+	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map;
 
 	/**
 	 * Merges the data from the given map and the referenced items

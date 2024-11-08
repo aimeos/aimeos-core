@@ -37,7 +37,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * @param array $values Associative list of key/value pairs of the item properties
 	 * @param string|null $type Item resource type
 	 */
-	public function __construct( string $prefix, array $values = [], string $type = null )
+	public function __construct( string $prefix, array $values = [], ?string $type = null )
 	{
 		$this->bprefix = $prefix;
 		$this->bdata = $values;

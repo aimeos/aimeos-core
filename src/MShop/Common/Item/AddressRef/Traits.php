@@ -48,7 +48,7 @@ trait Traits
 	 * @param string|null $key Key in the list of address items or null to add the item at the end
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, string $key = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, ?string $key = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$key !== null ? $this->addrItems[$key] = $item : $this->addrItems[] = $item;
 		return $this;

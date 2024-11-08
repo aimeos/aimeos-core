@@ -36,7 +36,7 @@ class Standard extends Base implements Iface
 	 * @param \Aimeos\MShop\Common\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, string $prefix,
-		array $values = [], \Aimeos\Base\Password\Iface $passwd = null )
+		array $values = [], ?\Aimeos\Base\Password\Iface $passwd = null )
 	{
 		parent::__construct( $address, $prefix, $values );
 		$this->passwd = $passwd;

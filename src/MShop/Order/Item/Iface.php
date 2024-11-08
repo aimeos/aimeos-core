@@ -252,7 +252,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null $position Position of the address in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
-	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
@@ -261,7 +261,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null $position Position of the address in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
-	public function deleteAddress( string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteAddress( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the billing or delivery address depending on the given type.
@@ -271,7 +271,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Address\Iface[]|\Aimeos\MShop\Order\Item\Address\Iface
 	 * 	Order address item or list of address items for the requested type
 	 */
-	public function getAddress( string $type, int $position = null );
+	public function getAddress( string $type, ?int $position = null );
 
 	/**
 	 * Returns all addresses of the (future) order.
@@ -335,7 +335,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null $position position of the new order product item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
-	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Deletes an order product item from the (future) order.
@@ -376,7 +376,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null $position Position of the address in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
-	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Deletes the delivery or payment service from the basket.
@@ -385,7 +385,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null $position Position of the address in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
 	 */
-	public function deleteService( string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteService( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the order services depending on the given type
@@ -396,7 +396,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * 	Order service item or list of items for the requested type
 	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and position is found
 	 */
-	public function getService( string $type, int $position = null );
+	public function getService( string $type, ?int $position = null );
 
 	/**
 	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.

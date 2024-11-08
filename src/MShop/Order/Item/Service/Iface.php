@@ -172,7 +172,7 @@ interface Iface
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	 */
-	public function getAttributeItems( string $type = null ) : \Aimeos\Map;
+	public function getAttributeItems( ?string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
@@ -204,7 +204,7 @@ interface Iface
 	 * @param string|null $type Filters returned transactions by the given type or null for no filtering
 	 * @return \Aimeos\Map List of transaction items implementing \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	 */
-	public function getTransactions( string $type = null ) : \Aimeos\Map;
+	public function getTransactions( ?string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Sets the new list of transactions items for the service.

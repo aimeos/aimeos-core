@@ -450,7 +450,7 @@ class Standard extends Base
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item object
 	 */
-	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findBase( array( 'catalog.code' => $code ), $ref, $default );
@@ -523,8 +523,8 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, ?string $parentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -563,8 +563,8 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId = null, string $newParentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
+	public function move( string $id, ?string $oldParentId = null, ?string $newParentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -644,7 +644,7 @@ class Standard extends Base
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$required = ['catalog'];
@@ -866,8 +866,8 @@ class Standard extends Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
-		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function getTree( ?string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$mode = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 		$mode = $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $mode );
@@ -915,7 +915,7 @@ class Standard extends Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'catalog', $manager, $name );
 	}

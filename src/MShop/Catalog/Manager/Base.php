@@ -87,7 +87,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-			array $children = [], \Aimeos\MW\Tree\Node\Iface $node = null ) : \Aimeos\MShop\Common\Item\Iface
+			array $children = [], ?\Aimeos\MW\Tree\Node\Iface $node = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( $node === null )
 		{

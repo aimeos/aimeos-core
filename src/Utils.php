@@ -24,7 +24,7 @@ class Utils
 	 * @throws \LogicException If the class isn't found or doesn't implement the interface
 	 * @todo 2025.01 Allow list of interfaces to check for common and specific interfaces
 	 */
-	public static function create( string $class, array $args, string $iface = null ) : object
+	public static function create( string $class, array $args, ?string $iface = null ) : object
 	{
 		if( class_exists( $class ) === false ) {
 			throw new \LogicException( sprintf( 'Class "%1$s" not found', $class ), 400 );
