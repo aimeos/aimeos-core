@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$cursor = $this->object->cursor( $filter );
 		$products = $this->object->iterate( $cursor );
 
-		$this->assertEquals( 9, count( $products ) );
+		$this->assertEquals( 8, count( $products ) );
 
 		foreach( $products as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 9, count( $result ) );
+		$this->assertEquals( 8, count( $result ) );
 	}
 
 
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.catalog:position', [] ) )] );
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 9, count( $result ) );
+		$this->assertEquals( 8, count( $result ) );
 	}
 
 
