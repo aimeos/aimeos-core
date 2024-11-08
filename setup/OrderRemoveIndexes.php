@@ -48,6 +48,7 @@ class OrderRemoveIndexes extends Base
 			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_bid_sid_qtyo' )
 			->dropIndex( 'mshop_order_base_product', 'idx_msordbapr_ct_sid_pid_bid' )
 			->dropIndex( 'mshop_order_base_service', 'unq_msordbase_bid_sid_cd_typ' )
+			->dropIndex( 'mshop_order_base_service', 'unq_msordbase_sid_bid_cd_typ' )
 			->dropIndex( 'mshop_order_base_service', 'idx_msordbase_sid_code_type' )
 			->dropIndex( 'mshop_order_base_coupon', 'idx_msordbaco_bid_sid_code' );
 	}
