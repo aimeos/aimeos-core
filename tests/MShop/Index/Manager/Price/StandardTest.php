@@ -80,12 +80,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$filter = $this->object->filter();
 		$filter->add( $filter->make( 'index.price:value', ['EUR'] ), '>=', '18.00' );
 
-		$cursor = $this->object->cursor( $filter->slice( 0, 10 ) );
+		$cursor = $this->object->cursor( $filter->slice( 0, 5 ) );
 		$products1 = $this->object->iterate( $cursor );
 		$products2 = $this->object->iterate( $cursor );
 
-		$this->assertEquals( 10, count( $products1 ) );
-		$this->assertEquals( 1, count( $products2 ) );
+		$this->assertEquals( 5, count( $products1 ) );
+		$this->assertEquals( 3, count( $products2 ) );
 
 		foreach( $products1 as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 11, count( $result ) );
+		$this->assertEquals( 8, count( $result ) );
 	}
 
 

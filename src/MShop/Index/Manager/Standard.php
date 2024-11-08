@@ -388,7 +388,15 @@ class Standard
 
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$cursor = $manager->cursor( $manager->filter()->slice( 0, $size ) );
+		$filter = $manager->filter()->slice( 0, $size );
+		$filter->add( $filter->and( [
+			$filter->is( 'product.status', '>', 0 ),
+			$filter->or( [
+				$filter->is( 'product.dateend', '<', $context->datetime() ),
+				$filter->is( 'product.dateend', '==', null )
+			] )
+		] ) );
+		$cursor = $manager->cursor( $filter );
 
 		while( $items = $manager->iterate( $cursor, $domains ) ) {
 			$this->index( $items );
