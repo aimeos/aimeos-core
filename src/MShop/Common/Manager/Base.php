@@ -379,7 +379,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			while( $row = $results->fetch() )
 			{
 				foreach( $attrs as $code => $attr ) {
-					$row[$code] = json_decode( $row[$code], true );
+					$row[$code] = json_decode( $row[$code] ?? '{}', true );
 				}
 
 				$map[$row[$prefix . 'id']] = $row;
