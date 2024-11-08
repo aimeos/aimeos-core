@@ -69,7 +69,7 @@ trait Traits
 	 * @param \Closure|null $function Anonymous function
 	 * @return \Closure|null Registered function
 	 */
-	abstract public static function macro( string $name, \Closure $function = null ) : ?\Closure;
+	abstract public static function macro( string $name, ?\Closure $function = null ) : ?\Closure;
 
 
 	/**
@@ -88,7 +88,7 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		if( $refItem !== null )
 		{
@@ -123,7 +123,7 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		if( isset( $this->listItems[$domain] )
 			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
@@ -177,7 +177,7 @@ trait Traits
 	 * @param string|null $domain Domain name to get the deleted list items for
 	 * @return \Aimeos\Map Associative list of domains as keys list items as values or list items only
 	 */
-	public function getListItemsDeleted( string $domain = null ) : \Aimeos\Map
+	public function getListItemsDeleted( ?string $domain = null ) : \Aimeos\Map
 	{
 		if( $domain !== null ) {
 			return map( $this->listRmMap[$domain] ?? [] );
@@ -331,7 +331,7 @@ trait Traits
 	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name', string $langId = null ) : string
+	public function getName( string $type = 'name', ?string $langId = null ) : string
 	{
 		foreach( $this->getRefItems( 'text', $type ) as $textItem )
 		{

@@ -129,7 +129,7 @@ trait Traits
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 * @throws \LogicException If class isn't found
 	 */
-	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function getSubManagerBase( string $domain, string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
 		$domain = strtolower( $domain );

@@ -146,7 +146,7 @@ abstract class Base
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function find( string $code, array $ref = [], ?string $domain = 'product', string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = 'product', ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->manager->find( $code, $ref, $domain, $type, $default );
@@ -223,7 +223,7 @@ abstract class Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $domain, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->manager->getSubManager( $domain, $name );
 	}
@@ -275,7 +275,7 @@ abstract class Base
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		return $this->manager->search( $filter, $ref, $total );
 	}

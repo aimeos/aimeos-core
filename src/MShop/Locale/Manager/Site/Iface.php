@@ -38,8 +38,8 @@ interface Iface
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site node, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
-		\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+	public function getTree( ?string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Adds a new item object.
@@ -49,8 +49,8 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null,
-		string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $parentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Moves an existing item to the new parent in the storage.
@@ -61,6 +61,6 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId = null, string $newParentId = null,
-		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
+	public function move( string $id, ?string $oldParentId = null, ?string $newParentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
 }

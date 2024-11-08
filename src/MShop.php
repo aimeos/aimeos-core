@@ -54,7 +54,7 @@ class MShop
 	 * @throws \Aimeos\MShop\Exception If the given path is invalid or the manager wasn't found
 	 */
 	public static function create( \Aimeos\MShop\ContextIface $context,
-		string $path, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+		string $path, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = self::checkPath( $path );
 
@@ -88,7 +88,7 @@ class MShop
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $object Manager object for the given manager path or null to clear
 	 */
-	public static function inject( string $classname, \Aimeos\MShop\Common\Manager\Iface $object = null )
+	public static function inject( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $object = null )
 	{
 		self::$objects['\\' . ltrim( $classname, '\\' )] = $object;
 	}
@@ -235,7 +235,7 @@ class MShop
 	 * @param string|null $name Name of the manager implementation
 	 * @return string Manager class name
 	 */
-	protected static function classname( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name = null ) : string
+	protected static function classname( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, ?string $name = null ) : string
 	{
 		$subClass = !empty( $parts ) ? ucwords( join( '\\', $parts ), '\\' ) . '\\' : '';
 		$classname = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subClass;
@@ -259,7 +259,7 @@ class MShop
 	 * @param string $domain Domain name (first part of the path)
 	 * @param string|null $name Name of the manager implementation
 	 */
-	protected static function instantiate( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, string $name = null )
+	protected static function instantiate( \Aimeos\MShop\ContextIface $context, array $parts, string $domain, ?string $name = null )
 	{
 		$classname = self::classname( $context, [], $domain, $name );
 		$iface = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Iface';

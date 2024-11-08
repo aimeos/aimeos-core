@@ -307,7 +307,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\Base\Translation\Iface Internationalization object
 	 */
-	public function i18n( string $locale = null ) : \Aimeos\Base\Translation\Iface
+	public function i18n( ?string $locale = null ) : \Aimeos\Base\Translation\Iface
 	{
 		if( isset( $this->locale ) && $locale === null ) {
 			$locale = $this->locale()->getLanguageId();
@@ -340,7 +340,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	 * @param string|null $locale Locale (e.g. en, en_US, de, etc.) or NULL for current locale
 	 * @return string Translated string if possible
 	 */
-	public function translate( string $domain, string $singular, string $plural = null, int $number = 1, string $locale = null ) : string
+	public function translate( string $domain, string $singular, ?string $plural = null, int $number = 1, ?string $locale = null ) : string
 	{
 		if( empty( $this->i18n ) ) {
 			return $number === 1 ? $singular : $plural;
@@ -432,7 +432,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	 * @param string|null $name Name of the mail configuration, NULL for default mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function mail( string $name = null ) : \Aimeos\Base\Mail\Iface
+	public function mail( ?string $name = null ) : \Aimeos\Base\Mail\Iface
 	{
 		if( !isset( $this->mail ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Mail object not available' ) );

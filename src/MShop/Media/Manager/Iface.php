@@ -54,5 +54,5 @@ interface Iface
 	 * @param \Psr\Http\Message\UploadedFileInterface|null $preview Uploaded preview image
 	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item including file and preview paths
 	 */
-	public function upload( \Aimeos\MShop\Media\Item\Iface $item, UploadedFileInterface $file, UploadedFileInterface $preview = null ) : \Aimeos\MShop\Media\Item\Iface;
+	public function upload( \Aimeos\MShop\Media\Item\Iface $item, UploadedFileInterface $file, ?UploadedFileInterface $preview = null ) : \Aimeos\MShop\Media\Item\Iface;
 }

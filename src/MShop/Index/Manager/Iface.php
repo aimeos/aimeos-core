@@ -29,7 +29,7 @@ interface Iface
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map;
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, ?string $value = null, ?string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Removes all entries not touched after the given timestamp in the index.

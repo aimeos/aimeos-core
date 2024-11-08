@@ -149,7 +149,7 @@ trait DB
 	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\Base\Criteria\Iface $search, $keys, string $cfgPath,
-		array $required = [], string $value = null, string $type = null ) : \Aimeos\Map
+		array $required = [], ?string $value = null, ?string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/common/manager/aggregate/limit
 		 * Limits the number of records that are used when aggregating items
@@ -278,17 +278,17 @@ trait DB
 	 * @param string|null $attrcode Search attribute code
 	 * @return string Table alias name
 	 */
-	protected function alias( string $attrcode = null ) : string
+	protected function alias( ?string $attrcode = null ) : string
 	{
 		if( $attrcode )
 		{
 			$parts = array_slice( explode( '.', $attrcode ), 0, -1 ) ?: $this->type();
-			$str = 'm' . substr( array_shift( $parts ), 0, 3 );
+			$str = 'm' . substr( (string) array_shift( $parts ), 0, 3 );
 		}
 		else
 		{
 			$parts = $this->type();
-			$str = 'm' . substr( array_shift( $parts ), 0, 3 );
+			$str = 'm' . substr( (string) array_shift( $parts ), 0, 3 );
 		}
 
 		foreach( $parts as $part ) {
@@ -482,7 +482,7 @@ trait DB
 	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object
 	 */
 	protected function getCachedStatement( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgkey,
-		string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
+		?string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		if( !isset( $this->cachedStmts['stmt'][$cfgkey] )
 			|| !isset( $this->cachedStmts['conn'][$cfgkey] )
@@ -597,7 +597,7 @@ trait DB
 	 * @param string $prefix Search key prefix
 	 * @return array|null List of JOIN SQL strings
 	 */
-	protected function getRequiredJoins( array $attributes, array $keys, string $basekey = null ) : array
+	protected function getRequiredJoins( array $attributes, array $keys, ?string $basekey = null ) : array
 	{
 		$joins = [];
 
@@ -1103,7 +1103,7 @@ trait DB
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
 	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\Base\Criteria\Iface $search,
-		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
+		string $cfgPathSearch, string $cfgPathCount, array $required, ?int &$total = null,
 		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$attributes = $this->object()->getSearchAttributes();
@@ -1242,7 +1242,7 @@ trait DB
 	 * @param \Aimeos\Base\Criteria\Expression\Iface|null $expr Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, \Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
+	private function getCriteriaKeys( array $prefix, ?\Aimeos\Base\Criteria\Expression\Iface $expr = null ) : array
 	{
 		if( $expr === null ) { return []; }
 

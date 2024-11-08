@@ -392,7 +392,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'log', $manager, $name );
 	}
@@ -602,7 +602,7 @@ class Standard
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing Aimeos\MAdmin\Log\Item\Iface with ids as keys
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$context = $this->context();

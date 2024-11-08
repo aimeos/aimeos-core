@@ -110,7 +110,7 @@ interface ContextIface
 	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\Base\Translation\Iface Internationalization object
 	 */
-	public function i18n( string $locale = null ) : \Aimeos\Base\Translation\Iface;
+	public function i18n( ?string $locale = null ) : \Aimeos\Base\Translation\Iface;
 
 	/**
 	 * Sets the translation/internationalization objects.
@@ -130,7 +130,7 @@ interface ContextIface
 	 * @param string|null $locale Locale (e.g. en, en_US, de, etc.) or NULL for current locale
 	 * @return string Translated string if possible
 	 */
-	public function translate( string $domain, string $singular, string $plural = null, int $number = 1, string $locale = null ) : string;
+	public function translate( string $domain, string $singular, ?string $plural = null, int $number = 1, ?string $locale = null ) : string;
 
 	/**
 	 * Returns the localization object.
@@ -168,7 +168,7 @@ interface ContextIface
 	 * @param string|null $name Name of the mail configuration, NULL for default mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function mail( string $name = null ) : \Aimeos\Base\Mail\Iface;
+	public function mail( ?string $name = null ) : \Aimeos\Base\Mail\Iface;
 
 	/**
 	 * Sets the mail manager object.

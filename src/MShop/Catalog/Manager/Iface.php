@@ -40,9 +40,9 @@ interface Iface
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [],
+	public function getTree( ?string $id = null, array $ref = [],
 		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
-		\Aimeos\Base\Criteria\Iface $criteria = null
+		?\Aimeos\Base\Criteria\Iface $criteria = null
 	) : \Aimeos\MShop\Catalog\Item\Iface;
 
 
@@ -54,8 +54,8 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Inserted catalog item
 	 */
-	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface;
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, ?string $parentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface;
 
 
 	/**
@@ -67,6 +67,6 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId = null, string $newParentId = null,
-		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface;
+	public function move( string $id, ?string $oldParentId = null, ?string $newParentId = null,
+		?string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface;
 }

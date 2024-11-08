@@ -31,7 +31,7 @@ abstract class Base
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $manager Manager object or null for removing the manager object
 	 */
-	public static function injectManager( string $classname, \Aimeos\MShop\Common\Manager\Iface $manager = null )
+	public static function injectManager( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $manager = null )
 	{
 		self::$objects[$classname] = $manager;
 	}

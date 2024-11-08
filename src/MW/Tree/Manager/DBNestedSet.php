@@ -134,7 +134,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param string|null $id Delete the node with the ID and all nodes below
 	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
-	public function deleteNode( string $id = null ) : Iface
+	public function deleteNode( ?string $id = null ) : Iface
 	{
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
@@ -170,7 +170,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $condition Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( string $id = null, int $level = Base::LEVEL_TREE, \Aimeos\Base\Criteria\Iface $condition = null ) : \Aimeos\MW\Tree\Node\Iface
+	public function getNode( ?string $id = null, int $level = Base::LEVEL_TREE, ?\Aimeos\Base\Criteria\Iface $condition = null ) : \Aimeos\MW\Tree\Node\Iface
 	{
 		if( $id === null )
 		{
@@ -227,7 +227,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param string|null $refId ID of the node where the node should be inserted before (null to append)
 	 * @return \Aimeos\MW\Tree\Node\Iface Updated node item
 	 */
-	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, string $parentId = null, string $refId = null ) : \Aimeos\MW\Tree\Node\Iface
+	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MW\Tree\Node\Iface
 	{
 		$node->parentid = $parentId;
 
@@ -306,7 +306,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param string|null $newRefId ID of the node where the node should be inserted before (null to append)
 	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
-	public function moveNode( string $id, string $oldParentId = null, string $newParentId = null, string $newRefId = null ) : Iface
+	public function moveNode( string $id, ?string $oldParentId = null, ?string $newParentId = null, ?string $newRefId = null ) : Iface
 	{
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 		$diff = $node->right - $node->left + 1;
@@ -469,7 +469,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param string|null $id Search nodes starting at the node with the given ID
 	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
-	public function searchNodes( \Aimeos\Base\Criteria\Iface $search, string $id = null ) : array
+	public function searchNodes( \Aimeos\Base\Criteria\Iface $search, ?string $id = null ) : array
 	{
 		$left = 1;
 		$right = 0x7FFFFFFF;

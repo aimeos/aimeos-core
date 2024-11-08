@@ -70,7 +70,7 @@ trait Traits
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	abstract public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
+	abstract public function getSubManager( string $domain, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
