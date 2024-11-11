@@ -87,7 +87,7 @@ class Percent
 			$price->setValue( $value + $diff )->setRebate( $diff < 0 ? $diff : 0 );
 		}
 
-		foreach( $product->getRefItems( 'product' ) as $subproduct ) {
+		foreach( $product->getRefItems( 'product', null, 'default' ) as $subproduct ) {
 			$this->update( $subproduct, $percent );
 		}
 	}
