@@ -13,7 +13,7 @@ class IndexMigrateTextInnodb extends Base
 {
 	public function before() : array
 	{
-		return ['TablesMigrateSiteid'];
+		return [];
 	}
 
 

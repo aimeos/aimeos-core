@@ -19,7 +19,7 @@ class LocaleMigrateSite extends Base
 
 	public function after() : array
 	{
-		return ['TablesMigrateSiteid'];
+		return [];
 	}
 
 
