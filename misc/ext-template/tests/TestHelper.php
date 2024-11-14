@@ -47,7 +47,7 @@ class TestHelper
 	}
 
 
-	public static function view( $site = 'unittest', \Aimeos\Base\Config\Iface $config = null )
+	public static function view( $site = 'unittest', ?\Aimeos\Base\Config\Iface $config = null )
 	{
 		if( $config === null ) {
 			$config = self::context( $site )->config();
