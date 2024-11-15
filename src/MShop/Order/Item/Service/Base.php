@@ -210,26 +210,6 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 
 	/**
-	 * Checks if the given address type is valid
-	 *
-	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Address\Base
-	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
-	 * @deprecated 2025.01 Use strings instead
-	 */
-	protected function checkType( string $value )
-	{
-		switch( $value )
-		{
-			case \Aimeos\MShop\Order\Item\Address\Base::TYPE_DELIVERY:
-			case \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT:
-				return;
-			default:
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service of type "%1$s" not available', $value ) );
-		}
-	}
-
-
-	/**
 	 * Returns the attribute map for the ordered services.
 	 *
 	 * @return array Associative list of type and code as key and an \Aimeos\MShop\Order\Item\Service\Attribute\Iface as value
