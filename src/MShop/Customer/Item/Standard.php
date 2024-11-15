@@ -28,12 +28,9 @@ class Standard extends Base implements Iface
 	 * Initializes the customer item object
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item object
+	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values List of attributes that belong to the customer item
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of delivery addresses
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
-	 * @param \Aimeos\MShop\Common\Helper\Password\Iface|null $helper Password encryption helper object
+	 * @param \Aimeos\Base\Password\Iface|null $passwd Password encryption object
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, string $prefix,
 		array $values = [], ?\Aimeos\Base\Password\Iface $passwd = null )
