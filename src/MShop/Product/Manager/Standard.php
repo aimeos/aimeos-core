@@ -374,52 +374,23 @@ class Standard
 	 */
 	public function searchRefs( array $entries, array $ref ) : array
 	{
-		foreach( $this->getStockItems( array_keys( $entries ), $ref ) as $stockId => $stockItem ) {
-			$entries[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
-		}
-
-		return $entries;
-	}
-
-
-	/**
-	 * Returns the stock items for the given product codes
-	 *
-	 * @param array $entries List of product records
-	 * @return \Aimeos\Map List of product IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface as values
-	 * @deprecated 2025.01 Done by site decorator
-	 */
-	protected function getSiteItems( array $siteIds ) : \Aimeos\Map
-	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'locale/site' );
-		$filter = $manager->filter( true )->add( ['locale.site.siteid' => $siteIds] )->slice( 0, 0x7fffffff );
-
-		return $manager->search( $filter )->col( null, 'locale.site.siteid' );
-	}
-
-
-	/**
-	 * Returns the stock items for the given product codes
-	 *
-	 * @param string[] $ids Unique product codes
-	 * @param string[] $ref List of domains to fetch referenced items for
-	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
-	 * @deprecated 2025.01 Merge to searchRefs()
-	 */
-	protected function getStockItems( array $ids, array $ref ) : \Aimeos\Map
-	{
 		if( !$this->hasRef( $ref, 'stock' ) ) {
-			return map();
+			return $entries;
 		}
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
-		$filter = $manager->filter( true )->add( 'stock.productid', '==', $ids )->slice( 0, 0x7fffffff );
+		$filter = $manager->filter( true )->slice( 0, 0x7fffffff )
+			->add( 'stock.productid', '==', array_keys( $entries ) );
 
 		if( isset( $ref['stock'] ) && is_array( $ref['stock'] ) ) {
 			$filter->add( 'stock.type', '==', $ref['stock'] );
 		}
 
-		return $manager->search( $filter );
+		foreach( $manager->search( $filter ) as $stockId => $stockItem ) {
+			$entries[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
+		}
+
+		return $entries;
 	}
 
 
