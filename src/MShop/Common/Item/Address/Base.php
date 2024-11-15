@@ -337,7 +337,7 @@ abstract class Base
 	 */
 	public function setCountryId( ?string $countryid ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->set( $this->prefix . 'countryid', $this->checkCountryId( $countryid ) );
+		return $this->set( $this->prefix . 'countryid', \Aimeos\Utils::country( $countryid ) );
 	}
 
 
@@ -360,7 +360,7 @@ abstract class Base
 	 */
 	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $langid ) );
+		return $this->set( $this->prefix . 'languageid', \Aimeos\Utils::language( $langid ) );
 	}
 
 
@@ -566,7 +566,7 @@ abstract class Base
 	 */
 	public function setBirthday( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->set( $this->prefix . 'birthday', $this->checkDateOnlyFormat( $value ) );
+		return $this->set( $this->prefix . 'birthday', \Aimeos\Utils::date( $value ) );
 	}
 
 

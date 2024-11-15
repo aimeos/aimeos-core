@@ -155,7 +155,7 @@ class Standard
 	 */
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Locale\Item\Iface
 	{
-		return $this->set( 'locale.languageid', $this->checkLanguageId( $id ) );
+		return $this->set( 'locale.languageid', \Aimeos\Utils::language( $id ) );
 	}
 
 
@@ -179,7 +179,7 @@ class Standard
 	 */
 	public function setCurrencyId( ?string $currencyid ) : \Aimeos\MShop\Locale\Item\Iface
 	{
-		return $this->set( 'locale.currencyid', $this->checkCurrencyId( $currencyid ) );
+		return $this->set( 'locale.currencyid', \Aimeos\Utils::currency( $currencyid ) );
 	}
 
 

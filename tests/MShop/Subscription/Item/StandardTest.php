@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '2020-01-01', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 

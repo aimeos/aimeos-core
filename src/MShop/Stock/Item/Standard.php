@@ -44,7 +44,7 @@ class Standard
 	 */
 	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.dateback', $this->checkDateFormat( $dateback ) );
+		return $this->set( 'stock.dateback', \Aimeos\Utils::datetime( $dateback ) );
 	}
 
 

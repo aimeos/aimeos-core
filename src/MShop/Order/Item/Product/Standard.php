@@ -297,7 +297,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setProductCode( string $code ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		return $this->set( 'order.product.prodcode', $this->checkCode( $code ) );
+		return $this->set( 'order.product.prodcode', \Aimeos\Utils::code( $code ) );
 	}
 
 
@@ -320,7 +320,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setStockType( ?string $code ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		return $this->set( 'order.product.stocktype', $this->checkCode( (string) $code ) );
+		return $this->set( 'order.product.stocktype', \Aimeos\Utils::code( (string) $code ) );
 	}
 
 

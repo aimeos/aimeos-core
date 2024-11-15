@@ -126,7 +126,7 @@ class Standard extends Base implements Iface
 			$this->setDateVerified( null );
 		}
 
-		return $this->set( 'customer.code', $this->checkCode( $value, 255 ) );
+		return $this->set( 'customer.code', \Aimeos\Utils::code( $value, 255 ) );
 	}
 
 
@@ -176,7 +176,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setDateVerified( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		return $this->set( 'customer.dateverified', $this->checkDateOnlyFormat( $value ) );
+		return $this->set( 'customer.dateverified', \Aimeos\Utils::date( $value ) );
 	}
 
 

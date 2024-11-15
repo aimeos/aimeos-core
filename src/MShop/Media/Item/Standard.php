@@ -107,7 +107,7 @@ class Standard
 	 */
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		return $this->set( 'media.languageid', $this->checkLanguageId( $id ) );
+		return $this->set( 'media.languageid', \Aimeos\Utils::language( $id ) );
 	}
 
 

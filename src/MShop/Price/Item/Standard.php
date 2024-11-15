@@ -106,7 +106,7 @@ class Standard extends Base
 	 */
 	public function setCurrencyId( string $currencyid ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.currencyid', $this->checkCurrencyId( $currencyid, false ) );
+		return $this->set( 'price.currencyid', \Aimeos\Utils::currency( $currencyid, false ) );
 	}
 
 

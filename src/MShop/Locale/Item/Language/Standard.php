@@ -29,7 +29,7 @@ class Standard
 	 */
 	public function setId( ?string $key ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return parent::setId( $this->checkLanguageId( $key ) );
+		return parent::setId( \Aimeos\Utils::language( $key ) );
 	}
 
 
@@ -52,7 +52,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'locale.language.code', $this->checkLanguageId( $code, false ) );
+		return $this->set( 'locale.language.code', \Aimeos\Utils::language( $code, false ) );
 	}
 
 

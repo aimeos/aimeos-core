@@ -98,7 +98,7 @@ class Standard
 	 */
 	public function setDateNext( string $date ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return $this->set( 'subscription.datenext', $this->checkDateFormat( $date ) );
+		return $this->set( 'subscription.datenext', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -122,7 +122,7 @@ class Standard
 	 */
 	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return $this->set( 'subscription.dateend', $this->checkDateFormat( $date ) );
+		return $this->set( 'subscription.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
 
 

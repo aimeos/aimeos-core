@@ -131,14 +131,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setLanguageId( 'en-GB' );
 	}
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setCurrencyId( 'TEST' );
 	}
 

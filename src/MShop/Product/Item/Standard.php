@@ -136,7 +136,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.code', $this->checkCode( $code ) );
+		return $this->set( 'product.code', \Aimeos\Utils::code( $code ) );
 	}
 
 
@@ -159,7 +159,7 @@ class Standard
 	 */
 	public function setDataset( ?string $name ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.dataset', $this->checkCode( (string) $name ) );
+		return $this->set( 'product.dataset', \Aimeos\Utils::code( (string) $name ) );
 	}
 
 
@@ -271,7 +271,7 @@ class Standard
 	 */
 	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'product.datestart', $this->checkDateFormat( $date ) );
+		return $this->set( 'product.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -295,7 +295,7 @@ class Standard
 	 */
 	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'product.dateend', $this->checkDateFormat( $date ) );
+		return $this->set( 'product.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -386,7 +386,7 @@ class Standard
 	 */
 	public function setTimeCreated( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.ctime', $this->checkDateFormat( $value ) );
+		return $this->set( 'product.ctime', \Aimeos\Utils::datetime( $value ) );
 	}
 
 

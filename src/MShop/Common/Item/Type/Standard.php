@@ -58,7 +58,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'code', $this->checkCode( $code ) );
+		return $this->set( $this->prefix . 'code', \Aimeos\Utils::code( $code ) );
 	}
 
 

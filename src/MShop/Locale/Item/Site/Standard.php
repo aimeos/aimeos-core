@@ -66,7 +66,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
-		return $this->set( 'locale.site.code', $this->checkCode( $code, 255 ) );
+		return $this->set( 'locale.site.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
 
 

@@ -99,7 +99,7 @@ class Standard
 	 */
 	public function setCode( string $value ) : \Aimeos\MShop\Supplier\Item\Iface
 	{
-		return $this->set( 'supplier.code', $this->checkCode( $value ) );
+		return $this->set( 'supplier.code', \Aimeos\Utils::code( $value ) );
 	}
 
 

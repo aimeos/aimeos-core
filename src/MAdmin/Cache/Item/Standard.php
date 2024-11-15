@@ -98,7 +98,7 @@ class Standard
 	 */
 	public function setTimeExpire( ?string $timestamp ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
-		return $this->set( 'expire', $this->checkDateFormat( $timestamp ) );
+		return $this->set( 'expire', \Aimeos\Utils::datetime( $timestamp ) );
 	}
 
 

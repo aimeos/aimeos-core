@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'rule.datestart', $this->checkDateFormat( $date ) );
+		return $this->set( 'rule.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -155,7 +155,7 @@ class Standard
 	 */
 	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'rule.dateend', $this->checkDateFormat( $date ) );
+		return $this->set( 'rule.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
 
 

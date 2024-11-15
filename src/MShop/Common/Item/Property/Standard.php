@@ -73,7 +73,7 @@ class Standard
 	 */
 	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
-		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $id ) );
+		return $this->set( $this->prefix . 'languageid', \Aimeos\Utils::language( $id ) );
 	}
 
 

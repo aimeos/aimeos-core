@@ -112,7 +112,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	{
-		return $this->set( 'order.service.attribute.code', $this->checkCode( $code, 255 ) );
+		return $this->set( 'order.service.attribute.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
 
 

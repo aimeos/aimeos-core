@@ -85,7 +85,7 @@ class Standard
 	 */
 	public function setChannel( ?string $channel ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.channel', $this->checkCode( (string) $channel ) );
+		return $this->set( 'order.channel', \Aimeos\Utils::code( (string) $channel ) );
 	}
 
 
@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function setDateDelivery( ?string $date ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->set( 'order.datedelivery', $this->checkDateFormat( $date ) );
+		return $this->set( 'order.datedelivery', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -133,7 +133,7 @@ class Standard
 	 */
 	public function setDatePayment( ?string $date ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->set( 'order.datepayment', $this->checkDateFormat( $date ) );
+		return $this->set( 'order.datepayment', \Aimeos\Utils::datetime( $date ) );
 	}
 
 

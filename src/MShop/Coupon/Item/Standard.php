@@ -67,7 +67,7 @@ class Standard
 	 */
 	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'coupon.datestart', $this->checkDateFormat( $date ) );
+		return $this->set( 'coupon.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
 
 
@@ -91,7 +91,7 @@ class Standard
 	 */
 	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'coupon.dateend', $this->checkDateFormat( $date ) );
+		return $this->set( 'coupon.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
 
 

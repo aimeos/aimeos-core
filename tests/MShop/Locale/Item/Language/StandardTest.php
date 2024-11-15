@@ -65,14 +65,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetIdLength()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setId( 'espania' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setId( 123 );
 	}
 
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCodeInvalid()
 	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \RuntimeException::class );
 		$this->object->setCode( 'XXXX' );
 	}
 

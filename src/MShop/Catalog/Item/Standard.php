@@ -251,7 +251,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
-		$this->node->setCode( $this->checkCode( $code ) );
+		$this->node->setCode( \Aimeos\Utils::code( $code ) );
 		return $this;
 	}
 

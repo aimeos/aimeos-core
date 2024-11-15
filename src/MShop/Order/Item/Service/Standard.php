@@ -157,7 +157,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
-		return $this->set( 'order.service.code', $this->checkCode( $code ) );
+		return $this->set( 'order.service.code', \Aimeos\Utils::code( $code ) );
 	}
 
 
