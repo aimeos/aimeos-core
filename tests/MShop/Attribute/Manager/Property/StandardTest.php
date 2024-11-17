@@ -123,14 +123,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'attribute/property', $result );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {

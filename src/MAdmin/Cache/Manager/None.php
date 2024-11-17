@@ -123,19 +123,6 @@ class None
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'madmin/cache/manager/submanagers';
-		return $this->getResourceTypeBase( 'cache', $path, [], $withsub );
-	}
-
-
-	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

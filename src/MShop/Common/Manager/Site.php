@@ -85,7 +85,7 @@ trait Site
 	protected function siteInactive( string $current ) : \Aimeos\Map
 	{
 		// Required for fetching customer item below
-		if( in_array( current( $this->getResourceType( false ) ), ['customer', 'customer/lists', 'group'] ) ) {
+		if( in_array( join( '/', $this->type() ), ['customer', 'customer/lists', 'group'] ) ) {
 			return map();
 		}
 

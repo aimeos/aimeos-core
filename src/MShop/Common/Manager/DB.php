@@ -628,30 +628,6 @@ trait DB
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param string $type Main manager type
-	 * @param string $path Configuration path to the sub-domains
-	 * @param string[] $default List of sub-domains if no others are configured
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	protected function getResourceTypeBase( string $type, string $path, array $default, bool $withsub ) : array
-	{
-		$list = [$type];
-
-		if( $withsub )
-		{
-			foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
-				$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
-			}
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Returns the search attribute objects used for searching.
 	 *
 	 * @param array $list Associative list of search keys and the lists of search definitions

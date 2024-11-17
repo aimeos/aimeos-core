@@ -69,14 +69,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'review', $result );
-	}
-
-
 	public function testCreate()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Review\Item\Iface::class, $this->object->create() );

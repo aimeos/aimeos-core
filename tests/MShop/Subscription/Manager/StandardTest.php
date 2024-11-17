@@ -53,12 +53,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$this->assertContains( 'subscription', $this->object->getResourceType() );
-	}
-
-
 	public function testCreate()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $this->object->create() );

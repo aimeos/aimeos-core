@@ -87,14 +87,6 @@ interface Iface
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array;
-
-	/**
 	 * Returns the attributes used for saving column values.
 	 *
 	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of attribute items

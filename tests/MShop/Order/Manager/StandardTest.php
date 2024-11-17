@@ -155,21 +155,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'order', $result );
-		$this->assertContains( 'order/status', $result );
-		$this->assertContains( 'order/address', $result );
-		$this->assertContains( 'order/coupon', $result );
-		$this->assertContains( 'order/product', $result );
-		$this->assertContains( 'order/product/attribute', $result );
-		$this->assertContains( 'order/service', $result );
-		$this->assertContains( 'order/service/attribute', $result );
-	}
-
-
 	public function testCreate()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $this->object->create() );

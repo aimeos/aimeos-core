@@ -241,18 +241,6 @@ class Standard
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		return $this->getResourceTypeBase( 'index', 'mshop/index/manager/submanagers', [], $withsub );
-	}
-
-
-	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

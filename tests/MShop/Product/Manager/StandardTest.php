@@ -127,18 +127,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'product', $result );
-		$this->assertContains( 'product/lists', $result );
-		$this->assertContains( 'product/property', $result );
-
-		$this->assertEquals( ['product'], $this->object->getResourceType( false ) );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {

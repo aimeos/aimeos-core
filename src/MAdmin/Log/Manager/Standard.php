@@ -343,19 +343,6 @@ class Standard
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		$path = 'madmin/log/manager/submanagers';
-		return $this->getResourceTypeBase( 'log', $path, [], $withsub );
-	}
-
-
-	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

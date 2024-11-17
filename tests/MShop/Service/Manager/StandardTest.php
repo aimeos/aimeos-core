@@ -264,15 +264,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'service', $result );
-		$this->assertContains( 'service/lists', $result );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		$attribs = $this->object->getSearchAttributes();

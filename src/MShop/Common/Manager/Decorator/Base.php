@@ -182,18 +182,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( bool $withsub = true ): array
-	{
-		return $this->manager->getResourceType( $withsub );
-	}
-
-
-	/**
 	 * Returns the additional column/search definitions
 	 *
 	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface

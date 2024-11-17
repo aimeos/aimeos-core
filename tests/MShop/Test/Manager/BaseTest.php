@@ -161,12 +161,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->clear( [$this->context->locale()->getSiteId()] );
 	}
-
-
-	public function testGetResourceType()
-	{
-		$this->assertEquals( ['test'], $this->object->getResourceType() );
-	}
 }
 
 

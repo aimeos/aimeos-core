@@ -115,19 +115,6 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param bool $withsub Return also the resource type of sub-managers if true
-	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
-	 * @deprecated 2025.01 Use type() instead
-	 */
-	public function getResourceType( bool $withsub = true ) : array
-	{
-		return $this->getResourceTypeBase( join( '/', $this->type() ), $this->getConfigKey( 'submanagers' ), [], $withsub );
-	}
-
-
-	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true

@@ -95,15 +95,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$this->mock->expects( $this->once() )->method( 'getResourceType' )
-			->willReturn( [] );
-
-		$this->assertEquals( [], $this->object->getResourceType() );
-	}
-
-
 	public function testGetSaveAttributes()
 	{
 		$this->mock->expects( $this->once() )->method( 'getSaveAttributes' )
