@@ -42,6 +42,14 @@ trait Site
 
 
 	/**
+	 * Returns the type of the mananger as separate parts
+	 *
+	 * @return string[] List of manager part names
+	 */
+	abstract public function type() : array;
+
+
+	/**
 	 * Returns the site expression for the given name
 	 *
 	 * @param string $name Name of the site condition
