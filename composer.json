@@ -26,7 +26,7 @@
 		"ext-PDO": "*",
 		"ext-zip": "*",
 		"aimeos/aimeos-base": "dev-master",
-		"aimeos/upscheme": "~0.9",
+		"aimeos/upscheme": "~1.0",
 		"aimeos/macro": "~1.0",
 		"aimeos/map": "^3.0.1",
 		"nyholm/psr7": "~1.2",
