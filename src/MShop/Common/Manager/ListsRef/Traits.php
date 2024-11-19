@@ -55,46 +55,6 @@ trait Traits
 
 
 	/**
-	 * Creates the items with address item, list items and referenced items.
-	 *
-	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param string $domain Domain prefix
-	 * @param array $local Associative list of IDs as keys and the associative array of items as values
-	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
-	 * @deprecated 2025.01 Use getListItems() instead
-	 */
-	protected function buildItems( array $map, array $ref, string $domain, array $local = [], array $local2 = [] ) : \Aimeos\Map
-	{
-		$items = $listItemMap = [];
-
-		foreach( $this->getListItems( array_keys( $map ), $ref, $domain ) as $id => $listItem ) {
-			$listItemMap[$listItem->getParentId()][$id] = $listItem;
-		}
-
-		foreach( $map as $id => $values )
-		{
-			$localItems = $local[$id] ?? [];
-			$localItems2 = $local2[$id] ?? [];
-			$listItems = $listItemMap[$id] ?? [];
-
-			if( method_exists( $this, 'createItemBase' ) ) {
-				$item = $this->createItemBase( $values, $listItems, [], $localItems, $localItems2 );
-			} else {
-				$item = $this->create( $values + ['.listitems' => $listItems] );
-			}
-
-			if( !method_exists( $this, 'applyFilter' ) || ( $item = $this->applyFilter( $item ) ) !== null ) {
-				$items[$id] = $item;
-			}
-		}
-
-		return map( $items );
-	}
-
-
-	/**
 	 * Removes the items referenced by the given list items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface[]|\Aimeos\Map|array $items List of items with deleted list items
@@ -176,43 +136,6 @@ trait Traits
 		return $manager->search( $search->add( $search->and( $expr ) ), $ref )
 			->uasort( fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() )
 			->all();
-	}
-
-
-	/**
-	 * Returns the referenced items for the given IDs.
-	 *
-	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
-	 * @param string[] $ref List of domain names whose referenced items should be attached
-	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
-	 * @deprecated 2025.01 Done by lists manager
-	 */
-	protected function getRefItems( array $refIdMap, array $ref ) : array
-	{
-		$items = [];
-
-		foreach( $refIdMap as $domain => $list )
-		{
-			$manager = \Aimeos\MShop::create( $this->context(), $domain );
-
-			if( ( $attr = current( $manager->getSearchAttributes() ) ) === false )
-			{
-				$msg = sprintf( 'No search configuration available for domain "%1$s"', $domain );
-				throw new \Aimeos\MShop\Exception( $msg );
-			}
-
-			$search = $manager->filter()->slice( 0, count( $list ) )
-				->add( [$attr->getCode() => array_keys( $list )] );
-
-			foreach( $manager->search( $search, $ref ) as $id => $item )
-			{
-				foreach( $list[$id] as $parentId ) {
-					$items[$parentId][$domain][$id] = $item;
-				}
-			}
-		}
-
-		return $items;
 	}
 
 
