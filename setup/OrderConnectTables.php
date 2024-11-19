@@ -45,6 +45,14 @@ class OrderConnectTables extends Base
 			)
 		' );
 
+		$db->dropIndex( 'mshop_order_base_address', [
+			'unq_msordbaad_bid_type',
+			'idx_msordbaad_bid_lname',
+			'idx_msordbaad_bid_addr1',
+			'idx_msordbaad_bid_postal',
+			'idx_msordbaad_bid_city',
+			'idx_msordbaad_bid_email'
+		] );
 		$db->dropColumn( 'mshop_order_base_address', 'baseid' );
 
 		return $this;
@@ -72,6 +80,7 @@ class OrderConnectTables extends Base
 			)
 		' );
 
+		$db->dropIndex( 'mshop_order_base_coupon', 'idx_msordbaco_bid_code' );
 		$db->dropColumn( 'mshop_order_base_coupon', 'baseid' );
 
 		return $this;
@@ -100,6 +109,13 @@ class OrderConnectTables extends Base
 			)
 		' );
 
+		$db->dropIndex( 'mshop_order_base_product', [
+			'unq_msordbapr_bid_pos',
+			'idx_msordbapr_bid_pid',
+			'idx_msordbapr_bid_pcd',
+			'idx_msordbapr_bid_qtyo',
+			'idx_msordbapr_ct_pid_bid'
+		] );
 		$db->dropColumn( 'mshop_order_base_product', 'baseid' );
 
 		return $this;
@@ -128,6 +144,10 @@ class OrderConnectTables extends Base
 			)
 		' );
 
+		$db->dropIndex( 'mshop_order_base_service', [
+			'unq_msordbase_bid_cd_typ_sid',
+			'idx_msordbase_code_type_sid'
+		] );
 		$db->dropColumn( 'mshop_order_base_service', 'baseid' );
 
 		return $this;
