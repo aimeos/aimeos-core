@@ -501,6 +501,36 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchListDates()
+	{
+		$expr = [];
+		$search = $this->object->filter();
+
+		$param = ['catalog', '2010-01-01 00:00:00', '2010-01-01 12:00:00'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
+
+		$param = ['catalog', '2010-01-01'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
+
+		$param = ['catalog'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
+
+		$param = ['catalog', '2099-01-01 00:00:00', '2099-01-01 12:00:00'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
+
+		$param = ['catalog', '2099-01-01'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
+
+		$param = ['catalog'];
+		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
+
+		$search->setConditions( $search->and( $expr ) );
+		$result = $this->object->search( $search );
+
+		$this->assertEquals( 6, count( $this->object->search( $search ) ) );
+	}
+
+
 	public function testSearchLimit()
 	{
 		$start = 0;
