@@ -568,7 +568,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
 
 		$search->setConditions( $search->and( $expr ) );
-		$result = $this->object->search( $search );
 
 		$this->assertEquals( 6, count( $this->object->search( $search ) ) );
 	}
