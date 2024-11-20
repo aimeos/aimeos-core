@@ -119,6 +119,60 @@ class Lists
 					return $params;
 				}
 			],
+			$domain . ':starts' => [
+				'code' => $domain . ':starts()',
+				'internalcode' => ':site AND :expr AND ' . $alias . '."id"',
+				'internaldeps' => [
+					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
+				],
+				'label' => 'Has list item with start date, parameter(<domain>[,<after>[,<before>)]]',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $alias, $level ) {
+					$expr = [];
+					$expr[] = $this->toExpression( $alias . '."domain"', $params[0] ?? '' );
+
+					if( isset( $params[1] ) ) {
+						$expr[] = $this->toExpression( $alias . '."start"', $params[1], '>=' );
+					}
+
+					if( isset( $params[2] ) ) {
+						$expr[] = $this->toExpression( $alias . '."start"', $params[2], '<=' );
+					}
+
+					$sitestr = $this->siteString( $alias . '."siteid"', $level );
+					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], $source );
+
+					return $params;
+				}
+			],
+			$domain . ':ends' => [
+				'code' => $domain . ':ends()',
+				'internalcode' => ':site AND :expr AND ' . $alias . '."id"',
+				'internaldeps' => [
+					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
+				],
+				'label' => 'Has list item with end date, parameter(<domain>[,<after>[,<before>)]]',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $alias, $level ) {
+					$expr = [];
+					$expr[] = $this->toExpression( $alias . '."domain"', $params[0] ?? '' );
+
+					if( isset( $params[1] ) ) {
+						$expr[] = $this->toExpression( $alias . '."end"', $params[1], '>=' );
+					}
+
+					if( isset( $params[2] ) ) {
+						$expr[] = $this->toExpression( $alias . '."end"', $params[2], '<=' );
+					}
+
+					$sitestr = $this->siteString( $alias . '."siteid"', $level );
+					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], $source );
+
+					return $params;
+				}
+			]
 		] );
 	}
 
