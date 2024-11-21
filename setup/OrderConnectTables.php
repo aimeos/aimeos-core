@@ -46,7 +46,6 @@ class OrderConnectTables extends Base
 		' );
 
 		$db->dropIndex( 'mshop_order_base_address', [
-			'unq_msordbaad_bid_type',
 			'idx_msordbaad_bid_lname',
 			'idx_msordbaad_bid_addr1',
 			'idx_msordbaad_bid_postal',
@@ -110,7 +109,6 @@ class OrderConnectTables extends Base
 		' );
 
 		$db->dropIndex( 'mshop_order_base_product', [
-			'unq_msordbapr_bid_pos',
 			'idx_msordbapr_bid_pid',
 			'idx_msordbapr_bid_pcd',
 			'idx_msordbapr_bid_qtyo',
@@ -131,7 +129,11 @@ class OrderConnectTables extends Base
 		}
 
 		$db->dropForeign( 'mshop_order_base_service', 'fk_msordbase_baseid' );
-		$db->dropIndex( 'mshop_order_base_service', ['unq_msordbase_bid_cd_typ_sid', 'unq_msordbase_bid_sid_cd_typ'] );
+		$db->dropIndex( 'mshop_order_base_service', [
+			'unq_msordbase_bid_cd_typ_sid',
+			'unq_msordbase_bid_sid_cd_typ',
+			'unq_msordbase_sid_bid_cd_typ'
+		] );
 
 		$db->table( 'mshop_order_base_service' )->bigint( 'parentid' )->null( true )->up();
 
@@ -144,10 +146,7 @@ class OrderConnectTables extends Base
 			)
 		' );
 
-		$db->dropIndex( 'mshop_order_base_service', [
-			'unq_msordbase_bid_cd_typ_sid',
-			'idx_msordbase_code_type_sid'
-		] );
+		$db->dropIndex( 'mshop_order_base_service', 'idx_msordbase_code_type_sid' );
 		$db->dropColumn( 'mshop_order_base_service', 'baseid' );
 
 		return $this;
