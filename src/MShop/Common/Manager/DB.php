@@ -121,13 +121,23 @@ trait DB
 
 		if( $mode )
 		{
-			foreach( $columns as $name ) {
+			foreach( $columns as $name )
+			{
+				// @todo: Remove in 2025.01
+				$parts = explode( '.', $name );
+				$name = trim( end( $parts ), '"' );
+
 				$names .= '"' . $name . '", '; $values .= '?, ';
 			}
 		}
 		else
 		{
-			foreach( $columns as $name ) {
+			foreach( $columns as $name )
+			{
+				// @todo: Remove in 2025.01
+				$parts = explode( '.', $name );
+				$name = trim( end( $parts ), '"' );
+
 				$names .= '"' . $name . '" = ?, ';
 			}
 		}
