@@ -549,22 +549,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$search = $this->object->filter();
 
-		$param = ['catalog', '2010-01-01 00:00:00', '2010-01-01 12:00:00'];
+		$param = ['catalog', 'default', '2010-01-01 00:00:00', '2010-01-01 12:00:00'];
 		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
 
-		$param = ['catalog', '2010-01-01'];
+		$param = ['catalog', 'default', '2010-01-01'];
 		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
 
-		$param = ['catalog'];
-		$expr[] = $search->compare( '!=', $search->make( 'product:starts', $param ), null );
-
-		$param = ['catalog', '2099-01-01 00:00:00', '2099-01-01 12:00:00'];
+		$param = ['catalog', 'default', '2099-01-01 00:00:00', '2099-01-01 12:00:00'];
 		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
 
-		$param = ['catalog', '2099-01-01'];
-		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
-
-		$param = ['catalog'];
+		$param = ['catalog', 'default', '2099-01-01'];
 		$expr[] = $search->compare( '!=', $search->make( 'product:ends', $param ), null );
 
 		$search->setConditions( $search->and( $expr ) );
