@@ -60,7 +60,7 @@ class Lists
 				'internaldeps' => [
 					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
 				],
-				'label' => 'Has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
+				'label' => 'Has list item, parameter(<domain>[,<list type>[,<reference ID>]])',
 				'type' => 'null',
 				'public' => false,
 				'function' => function( &$source, array $params ) use ( $alias, $level ) {
@@ -85,19 +85,18 @@ class Lists
 				'internaldeps' => [
 					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
 				],
-				'label' => 'Has list item with start date, parameter(<domain>[,<after>[,<before>)]]',
+				'label' => 'Has list item with start date, parameter(<domain>,<list type>,<after>[,<before>])',
 				'type' => 'null',
 				'public' => false,
 				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$expr = [];
-					$expr[] = $this->toExpression( $alias . '."domain"', $params[0] ?? '' );
+					$expr = [
+						$this->toExpression( $alias . '."domain"', $params[0] ?? '' ),
+						$this->toExpression( $alias . '."type"', $params[1] ?? '' ),
+						$this->toExpression( $alias . '."start"', $params[2] ?? '', '>=' )
+					];
 
-					if( isset( $params[1] ) ) {
-						$expr[] = $this->toExpression( $alias . '."start"', $params[1], '>=' );
-					}
-
-					if( isset( $params[2] ) ) {
-						$expr[] = $this->toExpression( $alias . '."start"', $params[2], '<=' );
+					if( isset( $params[3] ) ) {
+						$expr[] = $this->toExpression( $alias . '."start"', $params[3], '<=' );
 					}
 
 					$sitestr = $this->siteString( $alias . '."siteid"', $level );
@@ -112,19 +111,18 @@ class Lists
 				'internaldeps' => [
 					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
 				],
-				'label' => 'Has list item with end date, parameter(<domain>[,<after>[,<before>)]]',
+				'label' => 'Has list item with end date, parameter(<domain>,<list type>,<after>[,<before>])',
 				'type' => 'null',
 				'public' => false,
 				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$expr = [];
-					$expr[] = $this->toExpression( $alias . '."domain"', $params[0] ?? '' );
+					$expr = [
+						$this->toExpression( $alias . '."domain"', $params[0] ?? '' ),
+						$this->toExpression( $alias . '."type"', $params[1] ?? '' ),
+						$this->toExpression( $alias . '."end"', $params[2] ?? '', '>=' )
+					];
 
-					if( isset( $params[1] ) ) {
-						$expr[] = $this->toExpression( $alias . '."end"', $params[1], '>=' );
-					}
-
-					if( isset( $params[2] ) ) {
-						$expr[] = $this->toExpression( $alias . '."end"', $params[2], '<=' );
+					if( isset( $params[3] ) ) {
+						$expr[] = $this->toExpression( $alias . '."end"', $params[3], '<=' );
 					}
 
 					$sitestr = $this->siteString( $alias . '."siteid"', $level );
