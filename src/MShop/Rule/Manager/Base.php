@@ -45,12 +45,12 @@ abstract class Base
 			}
 		}
 
-		foreach( $this->rules[$type] as $rule )
+		foreach( map( $items ) as $item )
 		{
-			foreach( map( $items ) as $item )
+			foreach( $this->rules[$type] as $rule )
 			{
 				if( $rule->apply( $item ) ) {
-					return $items;
+					break;
 				}
 			}
 		}
