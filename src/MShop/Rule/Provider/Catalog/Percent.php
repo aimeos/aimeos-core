@@ -84,11 +84,23 @@ class Percent
 		{
 			$value = $price->getValue();
 			$diff = $value * $percent / 100;
-			$price->setValue( $value + $diff )->setRebate( $diff < 0 ? $diff : 0 );
+			$price->setValue( $value + $diff )->setRebate( $diff < 0 ? abs( $diff ) : 0 );
 		}
 
-		foreach( $product->getRefItems( 'product', null, 'default' ) as $subproduct ) {
-			$this->update( $subproduct, $percent );
+		$varticles = map();
+		$subproducts = $product->getRefItems( 'product' );
+
+		if( $product->getType() === 'select' )
+		{
+			$varticles = $product->getRefItems( 'product', null, 'default' );
+
+			foreach( $varticles as $subproduct ) {
+				$this->update( $subproduct, $percent );
+			}
+		}
+
+		foreach( $subproducts->except( $varticles->keys() ) as $subproduct ) {
+			$this->object()->apply( $subproduct );
 		}
 	}
 }
