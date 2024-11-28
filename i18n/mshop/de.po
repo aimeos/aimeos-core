@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos, 2015-2023
+# Aimeos, 2015-2024
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos, 2015-2023\n"
+"Last-Translator: Aimeos, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,6 +97,10 @@ msgstr "Suchkonfiguration für Adresse nicht verfügbar"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Anschrift liegt nicht innerhalb des vorgegebenen Wertebereichs"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr "Ein unbekannter Fehler ist mit dem Code %1$d ist aufgetreten"
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -548,6 +552,10 @@ msgstr "Kein Rabatt für die Währung \"%1$s\" verfügbar"
 #, php-format
 msgid "No search configuration available for \"%1$s\""
 msgstr "Keine Konfiguration für die Suche nach \"%1$s\" vorhanden"
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
+msgstr "Keine Suchkonfiguration für die Domäne \"%1$s\" vorhanden"
 
 #, php-format
 msgid "No search keys available"

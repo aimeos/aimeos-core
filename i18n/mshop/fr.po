@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Jean-Marc Kutyla, 2023\n"
 "Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
@@ -102,6 +102,10 @@ msgstr "Configuration de la recherche d'adresse indisponible"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Type d'adresse \"%1$s\" pas dans la plage autorisée"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr ""
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -553,6 +557,10 @@ msgstr "Pas de remise pour la devise \"%1$s\" disponible"
 #, php-format
 msgid "No search configuration available for \"%1$s\""
 msgstr "Aucune configuration de recherche disponible pour \"%1$s\""
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "No search keys available"

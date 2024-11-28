@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 15:47+0200\n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Norwegian (http://app.transifex.com/aimeos/aimeos-core/language/no/)\n"
@@ -93,6 +93,10 @@ msgstr ""
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
 msgstr ""
 
 #, php-format
@@ -544,6 +548,10 @@ msgstr ""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
 msgstr ""
 
 #, php-format
