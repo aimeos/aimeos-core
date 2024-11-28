@@ -67,7 +67,13 @@ class Taxrate
 	 */
 	public function apply( \Aimeos\MShop\Product\Item\Iface $product ) : bool
 	{
-		$product->getRefItems( 'price' )->setTaxrate( $this->getConfigValue( 'taxrate' ) );
+		$taxrate = $this->getConfigValue( 'taxrate' );
+
+		foreach( $product->getRefItems( 'product', null, 'default' ) as $subproduct ) {
+			$subproduct->getRefItems( 'price' )->setTaxrate( $taxrate );
+		}
+
+		$product->getRefItems( 'price' )->setTaxrate( $taxrate );
 		return $this->isLast();
 	}
 }
