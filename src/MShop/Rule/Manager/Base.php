@@ -49,6 +49,10 @@ abstract class Base
 		{
 			foreach( $this->rules[$type] as $rule )
 			{
+				// Selection products are handled by rule providers
+				$articleIds = $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' )->keys() : [];
+				$this->apply( $item->getRefItems( 'product' )->except( $articleIds ), $type );
+
 				if( $rule->apply( $item ) ) {
 					break;
 				}

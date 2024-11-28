@@ -67,7 +67,16 @@ class Percent
 	 */
 	public function apply( \Aimeos\MShop\Product\Item\Iface $product ) : bool
 	{
-		$this->update( $product, (float) $this->getConfigValue( 'percent' ) );
+		$percent = (float) $this->getConfigValue( 'percent', 0 );
+
+		if( $product->getType() === 'select' )
+		{
+			foreach( $product->getRefItems( 'product', null, 'default' ) as $subproduct ) {
+				$this->update( $subproduct, $percent );
+			}
+		}
+
+		$this->update( $product, $percent );
 		return $this->isLast();
 	}
 
@@ -85,22 +94,6 @@ class Percent
 			$value = $price->getValue();
 			$diff = $value * $percent / 100;
 			$price->setValue( $value + $diff )->setRebate( $diff < 0 ? abs( $diff ) : 0 );
-		}
-
-		$varticles = map();
-		$subproducts = $product->getRefItems( 'product' );
-
-		if( $product->getType() === 'select' )
-		{
-			$varticles = $product->getRefItems( 'product', null, 'default' );
-
-			foreach( $varticles as $subproduct ) {
-				$this->update( $subproduct, $percent );
-			}
-		}
-
-		foreach( $subproducts->except( $varticles->keys() ) as $subproduct ) {
-			$this->object()->apply( $subproduct );
 		}
 	}
 }

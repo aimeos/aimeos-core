@@ -67,25 +67,6 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testApplyRebate()
-	{
-		$this->item->setConfig( ['percent' => '-10'] );
-		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE', ['price', 'product'] );
-		$price = $product->getRefItems( 'price' )->first();
-
-		$this->assertFalse( $this->object->apply( $product ) );
-		$this->assertEquals( '16.20', $price?->getValue() );
-		$this->assertEquals( '1.80', $price?->getRebate() );
-
-		foreach( $product->getRefItems( 'product' ) as $subproduct )
-		{
-			foreach( $subproduct->getRefItems( 'price' ) as $price ) {
-				$this->assertGreaterThan( 0, $price->getRebate() );
-			}
-		}
-	}
-
-
 	public function testApplySelection()
 	{
 		$this->item->setConfig( ['percent' => '-10'] );
