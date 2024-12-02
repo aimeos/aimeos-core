@@ -188,7 +188,7 @@ abstract class Base
 			$this->addresses[$address->getType()][] = $address;
 		}
 
-		foreach($values['.services'] ?? [] as $service ) {
+		foreach( $values['.services'] ?? [] as $service ) {
 			$this->services[$service->getType()][] = $service;
 		}
 
@@ -898,7 +898,7 @@ abstract class Base
 
 			foreach( $price->getTaxrates() as $name => $taxrate )
 			{
-				$price = (clone $price)->setTaxRate( $taxrate );
+				$price = ( clone $price )->setTaxRate( $taxrate );
 
 				if( isset( $taxes[$name][$taxrate] ) ) {
 					$taxes[$name][$taxrate]->addItem( $price, $product->getQuantity() );
@@ -916,7 +916,7 @@ abstract class Base
 
 				foreach( $price->getTaxrates() as $name => $taxrate )
 				{
-					$price = (clone $price)->setTaxRate( $taxrate );
+					$price = ( clone $price )->setTaxRate( $taxrate );
 
 					if( isset( $taxes[$name][$taxrate] ) ) {
 						$taxes[$name][$taxrate]->addItem( $price );
