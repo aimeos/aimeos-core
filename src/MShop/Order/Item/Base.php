@@ -163,15 +163,13 @@ abstract class Base
 	 */
 	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( $prefix, $values );
-
 		$this->customer = $values['.customer'] ?? null;
 		$this->locale = $values['.locale'];
 		$this->price = $values['.price'];
 
-		$products = $this->get( '.products', [] );
+		$products = $values['.products'] ?? [];
 
-		foreach( $this->get( '.coupons', [] ) as $coupon )
+		foreach( $values['.coupons'] ?? [] as $coupon )
 		{
 			if( !isset( $this->coupons[$coupon->getCode()] ) ) {
 				$this->coupons[$coupon->getCode()] = [];
@@ -182,21 +180,26 @@ abstract class Base
 			}
 		}
 
-		foreach( $this->get( '.products', [] ) as $product ) {
+		foreach( $values['.products'] ?? [] as $product ) {
 			$this->products[$product->getPosition()] = $product;
 		}
 
-		foreach( $this->get( '.addresses', [] ) as $address ) {
+		foreach( $values['.addresses'] ?? [] as $address ) {
 			$this->addresses[$address->getType()][] = $address;
 		}
 
-		foreach( $this->get( '.services', [] ) as $service ) {
+		foreach($values['.services'] ?? [] as $service ) {
 			$this->services[$service->getType()][] = $service;
 		}
 
-		foreach( $this->get( '.statuses', [] ) as $status ) {
+		foreach( $values['.statuses'] ?? [] as $status ) {
 			$this->statuses[$status->getType()][$status->getValue()] = $status;
 		}
+
+		unset( $values['.customer'], $values['.locale'], $values['.price'], $values['.statuses'] );
+		unset( $values['.products'], $values['.coupons'], $values['.addresses'], $values['.services'] );
+
+		parent::__construct( $prefix, $values );
 	}
 
 
@@ -936,7 +939,7 @@ abstract class Base
 	 */
 	public function locale() : \Aimeos\MShop\Locale\Item\Iface
 	{
-		return $this->get( '.locale' );
+		return $this->locale;
 	}
 
 
@@ -950,7 +953,7 @@ abstract class Base
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->notify( 'setLocale.before', $locale );
-		$this->set( '.locale', clone $locale );
+		$this->locale = clone $locale;
 		$this->notify( 'setLocale.after', $locale );
 
 		return parent::setModified();
