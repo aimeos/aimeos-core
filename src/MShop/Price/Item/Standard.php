@@ -42,10 +42,10 @@ class Standard extends Base
 	 */
 	public function __construct( string $prefix, array $values = [] )
 	{
-		parent::__construct( 'price.', $values );
-
-		$this->tax = $values['price.taxvalue'] ?? null;
 		$this->precision = (int) ( $values['.precision'] ?? 2 );
+		$this->tax = $values['price.taxvalue'] ?? null;
+
+		parent::__construct( 'price.', $values );
 
 		$this->initPropertyItems( $values['.propitems'] ?? [] );
 		$this->initListItems( $values['.listitems'] ?? [] );
