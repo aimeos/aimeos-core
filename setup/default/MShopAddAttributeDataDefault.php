@@ -34,7 +34,7 @@ class MShopAddAttributeDataDefault extends Base
 		$this->info( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 'vv' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'attribute.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'attribute.php';
 
 		if( ( $data = include( $path ) ) == false ) {
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for default codes', $path ) );
