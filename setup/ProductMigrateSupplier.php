@@ -13,7 +13,7 @@ class ProductMigrateSupplier extends Base
 {
 	public function after() : array
 	{
-		return ['Product', 'Supplier', 'TablesMigrateListsKey'];
+		return ['Product', 'Supplier'];
 	}
 
 

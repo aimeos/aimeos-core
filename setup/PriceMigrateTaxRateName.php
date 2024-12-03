@@ -11,12 +11,6 @@ namespace Aimeos\Upscheme\Task;
 
 class PriceMigrateTaxRateName extends Base
 {
-	public function after() : array
-	{
-		return ['PriceMigrateTaxrate'];
-	}
-
-
 	public function up()
 	{
 		$this->info( 'Migrating taxrate name in price table', 'vv' );
