@@ -28,7 +28,7 @@ class MShopAddAttributeDataDefault extends Base
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
 		$site = $this->context()->locale()->getSiteItem()->getCode();
 		$this->info( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 'vv' );
