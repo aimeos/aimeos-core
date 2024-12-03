@@ -64,11 +64,14 @@ class DemoAddOrderData extends MShopAddDataAbstract
 			\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
 			\Aimeos\MShop\Order\Item\Base::PAY_PENDING
 		];
-		$customer = \Aimeos\MShop::create( $this->context(), 'customer' )->find( 'demo@example.com' );
+
+		$context = $this->context();
+		$site = $context->config()->get( 'setup/site', 'default' );
+		$customer = \Aimeos\MShop::create( $context, 'customer' )->find( $site . 'demo@example.com' );
 
 		foreach( $this->locales() as $locale )
 		{
-			$lcontext = clone $this->context();
+			$lcontext = clone $context;
 			$lcontext->setLocale( $locale );
 
 			$products = $this->products( $lcontext );

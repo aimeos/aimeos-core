@@ -32,6 +32,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	public function up()
 	{
 		$context = $this->context();
+		$site = $context->config()->get( 'setup/site', 'default' );
 		$value = $context->config()->get( 'setup/default/demo', '' );
 
 		if( $value === '' ) {
@@ -42,7 +43,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 		$this->info( 'Processing customer demo data', 'vv' );
 
 		$manager = \Aimeos\MShop::create( $context, 'customer' );
-		$search = $manager->filter()->add( ['customer.code' => 'demo@example.com'] );
+		$search = $manager->filter()->add( 'customer.code', '~=', $site . 'demo@example.com' );
 		$manager->delete( $manager->search( $search ) );
 
 
@@ -55,7 +56,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 				throw new \RuntimeException( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 			}
 
-			$this->saveCustomerItems( $data );
+			$this->saveCustomerItems( $data, $site );
 		}
 	}
 
@@ -64,15 +65,16 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	 * Stores the customer items
 	 *
 	 * @param array $data List of arrays containing the customer properties
+	 * @param string $site Site code
 	 */
-	protected function saveCustomerItems( array $data )
+	protected function saveCustomerItems( array $data, string $site )
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
 
 		foreach( $data as $entry )
 		{
 			$item = $manager->create();
-			$item->setCode( $entry['code'] );
+			$item->setCode( $site . $entry['code'] );
 			$item->setLabel( $entry['label'] );
 			$item->setPassword( $entry['password'] );
 			$item->setStatus( $entry['status'] );
@@ -94,7 +96,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 			$addr->setLanguageId( $entry['langid'] );
 			$addr->setCountryId( $entry['countryid'] );
 			$addr->setTelephone( $entry['telephone'] );
-			$addr->setEmail( $entry['email'] );
+			$addr->setEmail( $site . $entry['email'] );
 			$addr->setTelefax( $entry['telefax'] );
 			$addr->setWebsite( $entry['website'] );
 			$addr->setBirthday( $entry['birthday'] );
