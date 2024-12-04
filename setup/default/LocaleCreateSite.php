@@ -56,7 +56,7 @@ class LocaleCreateSite extends Base
 
 		if( $demo === '1' )
 		{
-			foreach( $this->data()['locale'] ?? [] as $entry ) {
+			foreach( $this->data() as $entry ) {
 				$this->createLocale( $siteId, $entry );
 			}
 		}
@@ -84,11 +84,14 @@ class LocaleCreateSite extends Base
 
 	protected function createLocale( string $siteId, array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' );
+		$context = $this->context();
+		$manager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
+
+		$context->setLocale( $manager->create()->setSiteId( $siteId ) );
 
 		try {
 			$manager->save( $manager->create()->fromArray( $data ) );
-		} catch( \Aimeos\MShop\Exception $e ) {
+		} catch( \Aimeos\Base\DB\Exception $e ) {
 		}
 	}
 
