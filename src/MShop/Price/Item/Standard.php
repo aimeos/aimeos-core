@@ -24,7 +24,6 @@ use \Aimeos\MShop\Common\Item\TypeRef;
 class Standard extends Base
 {
 	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
-		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
 	}

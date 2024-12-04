@@ -26,7 +26,6 @@ class Standard
 	implements \Aimeos\MShop\Attribute\Item\Iface
 {
 	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
-		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
 	}

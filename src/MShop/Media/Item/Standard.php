@@ -27,7 +27,6 @@ class Standard
 {
 	use ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		PropertyRef\Traits::__clone as __cloneProperty;
-		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		ListsRef\Traits::getName as getNameList;
 	}

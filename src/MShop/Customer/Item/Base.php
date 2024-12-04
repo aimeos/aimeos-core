@@ -26,8 +26,6 @@ abstract class Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
 	use ListsRef\Traits, PropertyRef\Traits, AddressRef\Traits  {
-		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
-		ListsRef\Traits::__clone insteadof AddressRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		AddressRef\Traits::__clone as __cloneAddress;
 		PropertyRef\Traits::__clone as __cloneProperty;

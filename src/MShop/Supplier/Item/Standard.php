@@ -25,7 +25,6 @@ class Standard
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
 	use ListsRef\Traits, AddressRef\Traits  {
-		ListsRef\Traits::__clone insteadof AddressRef\Traits;
 		ListsRef\Traits::__clone as __cloneList;
 		AddressRef\Traits::__clone as __cloneAddress;
 	}
