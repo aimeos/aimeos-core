@@ -12,7 +12,7 @@ namespace Aimeos\Upscheme\Task;
 /**
  * Adds locale records to tables.
  */
-class LocaleCreateSite extends MShopAddLocaleData
+class LocaleCreateSite extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -32,7 +32,7 @@ class LocaleCreateSite extends MShopAddLocaleData
 	 */
 	public function before() : array
 	{
-		return ['MShopAddLocaleDataDefault'];
+		return ['MShopAddLocaleData'];
 	}
 
 
@@ -44,19 +44,64 @@ class LocaleCreateSite extends MShopAddLocaleData
 		$this->info( 'Create site and locale', 'vv' );
 
 		$context = $this->context()->setEditor( 'core' ); // Set editor for further tasks
-		$localeManager = \Aimeos\MShop::create( $context, 'locale', 'Standard' );
 
 		$config = $context->config();
 		$site = $config->get( 'setup/site', 'default' );
 		$lang = $config->get( 'setup/language', 'en' );
 		$curr = $config->get( 'setup/currency', 'USD' );
+		$demo = $config->get( 'setup/default/demo', '' );
 
-		$siteIds = $this->addLocaleSiteData( $localeManager, [
-			$site => ['locale.site.code' => $site, 'locale.site.label' => ucfirst( $site )]
-		] );
+		$siteId = $this->createSite( $site );
+		$this->createLocale( $siteId, ['locale.languageid' => $lang, 'locale.currencyid' => $curr] );
 
-		$this->addLocaleData( $localeManager, [
-			['site' => $site, 'locale.languageid' => $lang, 'locale.currencyid' => $curr]
-		], $siteIds );
+		if( $demo === '1' )
+		{
+			foreach( $this->data()['locale'] ?? [] as $entry ) {
+				$this->createLocale( $siteId, $entry );
+			}
+		}
+	}
+
+
+	protected function createSite( string $code ) : string
+	{
+		$manager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' )->getSubManager( 'site', 'Standard' );
+
+		try
+		{
+			$item = $manager->find( $code );
+		}
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$manager->begin();
+			$item = $manager->insert( $manager->create()->setCode( $code )->setLabel( ucfirst( $code ) ) );
+			$manager->commit();
+		}
+
+		return $item->getSiteId();
+	}
+
+
+	protected function createLocale( string $siteId, array $data )
+	{
+		$manager = \Aimeos\MShop::create( $this->context(), 'locale', 'Standard' );
+
+		try {
+			$manager->save( $manager->create()->fromArray( $data ) );
+		} catch( \Aimeos\MShop\Exception $e ) {
+		}
+	}
+
+
+	protected function data() : array
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
+
+		if( ( $data = include( $filename ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
+		}
+
+		return $data;
 	}
 }
