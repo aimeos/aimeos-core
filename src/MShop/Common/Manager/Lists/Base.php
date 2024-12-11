@@ -48,11 +48,12 @@ abstract class Base
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
+		$prefix = rtrim( $this->prefix(), '.' );
+		$filter = $this->filterBase( $prefix, $default );
+
 		if( $default !== false )
 		{
 			$date = $this->context()->datetime();
-			$prefix = rtrim( $this->prefix(), '.' );
-			$filter = $this->filterBase( $prefix, $default );
 
 			$filter->add( $filter->and( [
 				$filter->or( [
@@ -64,11 +65,9 @@ abstract class Base
 					$filter->compare( '==', $prefix . '.dateend', null ),
 				] ),
 			] ) );
-
-			return $filter;
 		}
 
-		return parent::filter();
+		return $filter;
 	}
 
 

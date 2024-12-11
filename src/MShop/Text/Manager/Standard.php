@@ -49,7 +49,7 @@ class Standard
 	{
 		$filter = $this->filterBase( 'text', $default );
 
-		if( $default !== false && ( $langid = $this->context()->locale()->getLanguageId() ) !== null )
+		if( $default !== false && ( $langid = $this->context()->locale()->getLanguageId() ) )
 		{
 			$filter->add( $filter->or( [
 				$filter->compare( '==', 'text.languageid', $langid ),

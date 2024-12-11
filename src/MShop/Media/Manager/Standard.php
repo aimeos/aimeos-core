@@ -125,15 +125,12 @@ class Standard
 	{
 		$filter = $this->filterBase( 'media', $default );
 
-		if( $default !== false )
+		if( $default !== false && ( $langid = $this->context()->locale()->getLanguageId() ) )
 		{
-			if( $langid = $this->context()->locale()->getLanguageId() )
-			{
-				$filter->add( $filter->or( [
-					$filter->compare( '==', 'media.languageid', $langid ),
-					$filter->compare( '==', 'media.languageid', null ),
-				] ) );
-			}
+			$filter->add( $filter->or( [
+				$filter->compare( '==', 'media.languageid', $langid ),
+				$filter->compare( '==', 'media.languageid', null ),
+			] ) );
 		}
 
 		return $filter;

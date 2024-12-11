@@ -82,7 +82,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\SQL::class, $search );
 
-		$this->assertEquals( 'event', $search->getConditions()->getExpressions()[2]->getExpressions()[2]->getValue() );
+		$cond = $search->getConditions()->__toArray();
+
+		$this->assertEquals( 'event', $cond['&&'][0]['&&'][0]['||'][2]['==']['product.type'] );
+		$this->assertEquals( 'event', $cond['&&'][0]['&&'][1]['||'][2]['==']['product.type'] );
 	}
 
 
