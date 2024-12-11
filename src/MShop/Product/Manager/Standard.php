@@ -82,21 +82,21 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		$object = $this->filterBase( 'product', $default );
+		$filter = $this->filterBase( 'product', $default );
 
 		if( $default !== false )
 		{
 			$date = $this->context()->datetime();
 
 			$start = [
-				$object->compare( '<=', 'product.datestart', $date ),
-				$object->compare( '==', 'product.datestart', null ),
-				$object->compare( '==', 'product.type', 'event' ),
+				$filter->compare( '<=', 'product.datestart', $date ),
+				$filter->compare( '==', 'product.datestart', null ),
+				$filter->compare( '==', 'product.type', 'event' ),
 			];
 
 			$end = [
-				$object->compare( '>=', 'product.dateend', $date ),
-				$object->compare( '==', 'product.dateend', null ),
+				$filter->compare( '>=', 'product.dateend', $date ),
+				$filter->compare( '==', 'product.dateend', null ),
 			];
 
 			/** mshop/product/manager/strict-events
@@ -114,17 +114,16 @@ class Standard
 			 * @since 2019.10
 			 */
 			if( !$this->context()->config()->get( 'mshop/product/manager/strict-events', true ) ) {
-				$end[] = $object->compare( '==', 'product.type', 'event' );
+				$end[] = $filter->compare( '==', 'product.type', 'event' );
 			}
 
-			$object->setConditions( $object->and( [
-				$object->getConditions(),
-				$object->or( $start ),
-				$object->or( $end ),
+			$filter->add( $filter->and( [
+				$filter->or( $start ),
+				$filter->or( $end ),
 			] ) );
 		}
 
-		return $object;
+		return $filter;
 	}
 
 

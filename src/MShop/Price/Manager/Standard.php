@@ -157,7 +157,7 @@ class Standard
 	{
 		$filter = $this->filterBase( 'price', $default );
 
-		if( $default !== false && ( $currencyid = $this->context()->locale()->getCurrencyId() ) !== null ) {
+		if( $default !== false && ( $currencyid = $this->context()->locale()->getCurrencyId() ) ) {
 			$filter->add( 'price.currencyid', '==', $currencyid );
 		}
 

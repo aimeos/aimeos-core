@@ -53,7 +53,7 @@ class Standard
 		{
 			$date = $this->context()->datetime();
 
-			$filter->setConditions( $filter->and( [
+			$filter->add( $filter->and( [
 				$filter->or( [
 					$filter->compare( '<=', 'service.datestart', $date ),
 					$filter->compare( '==', 'service.datestart', null ),

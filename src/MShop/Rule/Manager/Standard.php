@@ -85,9 +85,10 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
+		$filter = $this->filterBase( 'rule', $default );
+
 		if( $default !== false )
 		{
-			$filter = $this->filterBase( 'rule', $default );
 			$date = $this->context()->datetime();
 
 			return $filter->add( $filter->and( [
@@ -102,7 +103,7 @@ class Standard
 			] ) );
 		}
 
-		return parent::filter();
+		return $filter;
 	}
 
 

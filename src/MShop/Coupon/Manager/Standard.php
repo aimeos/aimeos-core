@@ -78,30 +78,25 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
+		$filter = $this->filterBase( 'coupon', $default );
+
 		if( $default !== false )
 		{
 			$date = $this->context()->datetime();
-			$object = $this->filterBase( 'coupon', $default );
 
-			$expr = [];
-			$expr[] = $object->getConditions();
-
-			$temp = [];
-			$temp[] = $object->compare( '==', 'coupon.datestart', null );
-			$temp[] = $object->compare( '<=', 'coupon.datestart', $date );
-			$expr[] = $object->or( $temp );
-
-			$temp = [];
-			$temp[] = $object->compare( '==', 'coupon.dateend', null );
-			$temp[] = $object->compare( '>=', 'coupon.dateend', $date );
-			$expr[] = $object->or( $temp );
-
-			$object->setConditions( $object->and( $expr ) );
-
-			return $object;
+			$filter->add( $filter->and( [
+				$filter->or( [
+					$filter->compare( '<=', 'coupon.datestart', $date ),
+					$filter->compare( '==', 'coupon.datestart', null ),
+				] ),
+				$filter->or( [
+					$filter->compare( '>=', 'coupon.dateend', $date ),
+					$filter->compare( '==', 'coupon.dateend', null ),
+				] ),
+			] ) );
 		}
 
-		return parent::filter();
+		return $filter;
 	}
 
 
