@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class OrderAddProductParentid extends Base
 {
+	public function after() : array
+	{
+		return ['Product'];
+	}
+
+
 	public function before() : array
 	{
 		return ['Order'];
@@ -40,42 +46,28 @@ class OrderAddProductParentid extends Base
 			->where( 'type = \'select\'' )
 			->executeQuery();
 
-		$map = [];
-		while( $row = $result->fetchAssociative() ) {
-			$map[$row['siteid']][] = $row['prodcode'];
-		}
+		$used = [];
+		$db2 = $this->db( 'db-order', true );
+		$proddb = $this->db( 'db-product' );
 
-		$context = clone $this->context();
-		$manager = \Aimeos\MShop::create( $context, 'locale' );
-
-		foreach( $map as $siteId => $codes )
+		while( $row = $result->fetchAssociative() )
 		{
-			$context->setLocale( $manager->create()->setSiteId( $siteId ) );
-			$this->update( $context, $codes );
-		}
-	}
+			if( isset( $used[$row['siteid']][$row['code']] ) ) {
+				continue;
+			}
 
+			$rows = $proddb->select( 'mshop_product', ['siteid' => $row['siteid'], 'code' => $row['prodcode']] );
 
-	protected function update( \Aimeos\MShop\ContextIface $context, array $codes )
-	{
-		$start = 0; $size = 1000;
-		$pmanager = \Aimeos\MShop::create( $context, 'product' );
-		$db = $this->db( 'db-order' );
-
-		while( !empty( $list = array_slice( $codes, $start, $size ) ) )
-		{
-			$filter = $pmanager->filter()->add( ['product.code' => $list] )->slice( 0, $size );
-
-			foreach( $pmanager->search( $filter ) as $product )
+			foreach( $rows as $product )
 			{
-				$db->stmt()->update( 'mshop_order_base_product' )
+				$db2->stmt()->update( 'mshop_order_base_product' )
 					->set( 'prodid', '?' )
 					->where( 'siteid = ?' )->andWhere( 'prodcode = ?' )
-					->setParameters( [$product->getId(), $product->getSiteId(), $product->getCode()] )
+					->setParameters( [$product['id'], $product['siteid'], $product['code']] )
 					->executeStatement();
 			}
 
-			$start += $size;
+			$used[$row['siteid']][$row['code']] = true;
 		}
 	}
 }
