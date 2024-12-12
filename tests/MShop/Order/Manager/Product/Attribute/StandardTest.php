@@ -138,6 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$actual = $this->object->get( $item->getId() );
 		$this->assertEquals( $item->getId(), $actual->getId() );
+		$this->assertEquals( 's', $actual->getValue() );
 	}
 
 

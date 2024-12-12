@@ -106,6 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 'CreditCard', current( $result )->getValue() );
 
 		$conditions = array(
 			$search->compare( '==', 'order.service.attribute.code', array( 'REFID', 'NAME' ) ),
