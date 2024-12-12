@@ -84,6 +84,8 @@ class Context implements \Aimeos\MShop\ContextIface
 
 	/**
 	 * Cleans up internal objects of the context item
+	 *
+	 * @return array List of object property names
 	 */
 	public function __sleep() : array
 	{
@@ -99,7 +101,7 @@ class Context implements \Aimeos\MShop\ContextIface
 			}
 		}
 
-		return get_object_vars( $this );
+		return array_keys( get_object_vars( $this ) );
 	}
 
 
