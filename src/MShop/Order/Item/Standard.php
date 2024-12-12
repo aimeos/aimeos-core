@@ -295,7 +295,7 @@ class Standard
 	 */
 	public function getCustomerReference() : string
 	{
-		return $this->get( 'order.customerref', '' );
+		return (string) $this->get( 'order.customerref', '' );
 	}
 
 
