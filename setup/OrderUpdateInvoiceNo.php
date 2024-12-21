@@ -34,9 +34,8 @@ class OrderUpdateInvoiceNo extends Base
 			->executeStatement();
 
 		$result = $db->stmt()
-			->select( 'siteid', 'MAX(' . $db->qi( 'invoiceno' ) . ') AS maxnum' )
+			->select( 'MAX(' . $db->qi( 'id' ) . ') AS maxnum' )
 			->from( 'mshop_order' )
-			->groupBy( 'siteid' )
 			->executeQuery();
 
 		while( $row = $result->fetchAssociative() )
