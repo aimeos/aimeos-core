@@ -99,7 +99,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Order\Manager\Basket\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Manager\Iface Manager object for chaining method calls
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
