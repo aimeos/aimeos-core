@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2022-2024
  */
 
-namespace Aimeos\MShop\Order\Manager\Basket;
+namespace Aimeos\MShop\Basket\Manager;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->editor();
 
-		$this->object = new \Aimeos\MShop\Order\Manager\Basket\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Basket\Manager\Standard( $this->context );
 	}
 
 
@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreate()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $this->object->create() );
+		$this->assertInstanceOf( \Aimeos\MShop\Basket\Item\Iface::class, $this->object->create() );
 	}
 
 
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter()->add( ['order.basket.customerid' => -1] )->slice( 0, 1 );
+		$search = $this->object->filter()->add( ['basket.customerid' => -1] )->slice( 0, 1 );
 		$item = $this->object->search( $search )->first( new \Exception( 'No order basket item found' ) );
 
 		$item->setId( 'unittest_1' );
@@ -129,14 +129,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->locale()->getSiteId();
 
 		$expr = [];
-		$expr[] = $search->compare( '!=', 'order.basket.id', null );
-		$expr[] = $search->compare( '==', 'order.basket.siteid', $siteid );
-		$expr[] = $search->compare( '==', 'order.basket.customerid', '-1' );
-		$expr[] = $search->compare( '>=', 'order.basket.name', '' );
-		$expr[] = $search->compare( '>=', 'order.basket.content', '' );
-		$expr[] = $search->compare( '>=', 'order.basket.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'order.basket.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'order.basket.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'basket.id', null );
+		$expr[] = $search->compare( '==', 'basket.siteid', $siteid );
+		$expr[] = $search->compare( '==', 'basket.customerid', '-1' );
+		$expr[] = $search->compare( '>=', 'basket.name', '' );
+		$expr[] = $search->compare( '>=', 'basket.content', '' );
+		$expr[] = $search->compare( '>=', 'basket.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'basket.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'basket.editor', $this->editor );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();

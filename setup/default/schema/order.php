@@ -8,21 +8,6 @@
 
 return array(
 	'table' => array(
-		'mshop_order_basket' => function( \Aimeos\Upscheme\Schema\Table $table ) {
-
-			$table->engine = 'InnoDB';
-
-			$table->string( 'id' )->primary( 'pk_msordca_id' );
-			$table->string( 'siteid' );
-			$table->refid( 'customerid' )->default( '' );
-			$table->text( 'content', 0x7fffff )->default( '' );
-			$table->string( 'name' )->default( '' );
-			$table->meta();
-
-			$table->index( ['customerid'], 'idx_msordca_custid' );
-			$table->index( ['mtime'], 'idx_msordca_mtime' );
-		},
-
 		'mshop_order' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';

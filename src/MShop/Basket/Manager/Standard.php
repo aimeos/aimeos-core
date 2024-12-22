@@ -3,68 +3,68 @@
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2022-2024
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 
-namespace Aimeos\MShop\Order\Manager\Basket;
+namespace Aimeos\MShop\Basket\Manager;
 
 
 /**
- * Default implementation for order basket manager.
+ * Default implementation for basket manager.
  *
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Order\Manager\Basket\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
+	implements \Aimeos\MShop\Basket\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private array $searchConfig = array(
-		'order.basket.id' => array(
-			'code' => 'order.basket.id',
-			'internalcode' => 'mordba."id"',
+		'basket.id' => array(
+			'code' => 'basket.id',
+			'internalcode' => 'mbas."id"',
 			'label' => 'Basket ID',
 			'public' => false,
 		),
-		'order.basket.siteid' => array(
-			'code' => 'order.basket.siteid',
-			'internalcode' => 'mordba."siteid"',
+		'basket.siteid' => array(
+			'code' => 'basket.siteid',
+			'internalcode' => 'mbas."siteid"',
 			'label' => 'Basket site ID',
 			'public' => false,
 		),
-		'order.basket.customerid' => array(
-			'code' => 'order.basket.customerid',
-			'internalcode' => 'mordba."customerid"',
+		'basket.customerid' => array(
+			'code' => 'basket.customerid',
+			'internalcode' => 'mbas."customerid"',
 			'label' => 'Basket customer ID',
 			'public' => false,
 		),
-		'order.basket.name' => array(
-			'code' => 'order.basket.name',
-			'internalcode' => 'mordba."name"',
+		'basket.name' => array(
+			'code' => 'basket.name',
+			'internalcode' => 'mbas."name"',
 			'label' => 'Basket name',
 		),
-		'order.basket.content' => array(
-			'code' => 'order.basket.content',
-			'internalcode' => 'mordba."content"',
+		'basket.content' => array(
+			'code' => 'basket.content',
+			'internalcode' => 'mbas."content"',
 			'label' => 'Basket content',
 		),
-		'order.basket.ctime' => array(
-			'code' => 'order.basket.ctime',
-			'internalcode' => 'mordba."ctime"',
+		'basket.ctime' => array(
+			'code' => 'basket.ctime',
+			'internalcode' => 'mbas."ctime"',
 			'label' => 'Basket create date/time',
 			'type' => 'datetime',
 			'public' => false,
 		),
-		'order.basket.mtime' => array(
-			'code' => 'order.basket.mtime',
-			'internalcode' => 'mordba."mtime"',
+		'basket.mtime' => array(
+			'code' => 'basket.mtime',
+			'internalcode' => 'mbas."mtime"',
 			'label' => 'Basket modify date/time',
 			'type' => 'datetime',
 			'public' => false,
 		),
-		'order.basket.editor' => array(
-			'code' => 'order.basket.editor',
-			'internalcode' => 'mordba."editor"',
+		'basket.editor' => array(
+			'code' => 'basket.editor',
+			'internalcode' => 'mbas."editor"',
 			'label' => 'Basket editor',
 			'public' => false,
 		),
@@ -80,7 +80,7 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		/** mshop/order/manager/resource
+		/** mshop/basket/manager/resource
 		 * Name of the database connection resource to use
 		 *
 		 * You can configure a different database connection for each data domain
@@ -91,7 +91,7 @@ class Standard
 		 * @param string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'mshop/order/manager/resource', 'db-order' ) );
+		$this->setResourceName( $context->config()->get( 'mshop/basket/manager/resource', 'db-basket' ) );
 	}
 
 
@@ -103,12 +103,12 @@ class Standard
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$path = 'mshop/order/manager/basket/submanagers';
+		$path = 'mshop/basket/manager/submanagers';
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/order/manager/basket/delete' );
+		return $this->clearBase( $siteids, 'mshop/basket/manager/delete' );
 	}
 
 
@@ -116,11 +116,11 @@ class Standard
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface New order basket item object
+	 * @return \Aimeos\MShop\Basket\Item\Iface New basket item object
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['order.basket.siteid'] = $values['order.basket.siteid'] ?? $this->context()->locale()->getSiteId();
+		$values['basket.siteid'] = $values['basket.siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -137,7 +137,7 @@ class Standard
 		$filter = parent::filter( $default, $site );
 
 		if( $default !== false ) {
-			$filter->add( 'order.basket.customerid', '==', $this->context()->user() );
+			$filter->add( 'basket.customerid', '==', $this->context()->user() );
 		}
 
 		return $filter;
@@ -145,13 +145,13 @@ class Standard
 
 
 	/**
-	 * Adds or updates an order basket object.
+	 * Adds or updates an basket object.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Basket\Iface $item Order basket object whose data should be saved
+	 * @param \Aimeos\MShop\Basket\Item\Iface $item Order basket object whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Basket\Item\Iface $item Updated item including the generated ID
 	 */
-	protected function saveItem( \Aimeos\MShop\Order\Item\Basket\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	protected function saveItem( \Aimeos\MShop\Basket\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Basket\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -162,12 +162,12 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 		$columns = $this->object()->getSaveAttributes();
 
-		/** mshop/order/manager/basket/insert/mysql
+		/** mshop/basket/manager/insert/mysql
 		 * Inserts a new basket record into the database table or updates an existing one
 		 *
 		 * The SQL statement must be a string suitable for being used as
 		 * prepared statement. It must include question marks for binding
-		 * the values from the order item to the statement before they are
+		 * the values from the basket item to the statement before they are
 		 * sent to the database server. The number of question marks must
 		 * be the same as the number of columns listed in the INSERT
 		 * statement. The order of the columns must correspond to the
@@ -180,12 +180,12 @@ class Standard
 		 *
 		 * @param string SQL statement for inserting or updating records
 		 * @since 2022.10
-		 * @see mshop/order/manager/basket/newid/ansi
-		 * @see mshop/order/manager/basket/delete/ansi
-		 * @see mshop/order/manager/basket/search/ansi
-		 * @see mshop/order/manager/basket/count/ansi
+		 * @see mshop/basket/manager/newid/ansi
+		 * @see mshop/basket/manager/delete/ansi
+		 * @see mshop/basket/manager/search/ansi
+		 * @see mshop/basket/manager/count/ansi
 		 */
-		$path = 'mshop/order/manager/basket/insert';
+		$path = 'mshop/basket/manager/insert';
 
 		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -220,17 +220,17 @@ class Standard
 
 
 	/**
-	 * Returns the order basket item specified by its ID.
+	 * Returns the basket item specified by its ID.
 	 *
-	 * @param string $id Unique ID of the order basket item
+	 * @param string $id Unique ID of the basket item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Returns order basket item of the given id
+	 * @return \Aimeos\MShop\Basket\Item\Iface Returns basket item of the given id
 	 * @throws \Aimeos\MShop\Order\Exception If item couldn't be found
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( 'order.basket.id', $id, $ref, $default );
+		return $this->getItemBase( 'basket.id', $id, $ref, $default );
 	}
 
 
@@ -242,16 +242,16 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/order/manager/basket/delete/mysql
+		/** mshop/basket/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/order/manager/basket/delete/ansi
+		 * @see mshop/basket/manager/delete/ansi
 		 */
 
-		/** mshop/order/manager/basket/delete/ansi
+		/** mshop/basket/manager/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * Removes the records specified by the given IDs from the order database.
+		 * Removes the records specified by the given IDs from the basket database.
 		 * The records must be from the site that is configured via the
 		 * context item.
 		 *
@@ -265,13 +265,13 @@ class Standard
 		 *
 		 * @param string SQL statement for deleting items
 		 * @since 2022.10
-		 * @see mshop/order/manager/basket/insert/ansi
-		 * @see mshop/order/manager/basket/update/ansi
-		 * @see mshop/order/manager/basket/newid/ansi
-		 * @see mshop/order/manager/basket/search/ansi
-		 * @see mshop/order/manager/basket/count/ansi
+		 * @see mshop/basket/manager/insert/ansi
+		 * @see mshop/basket/manager/update/ansi
+		 * @see mshop/basket/manager/newid/ansi
+		 * @see mshop/basket/manager/search/ansi
+		 * @see mshop/basket/manager/count/ansi
 		 */
-		$path = 'mshop/order/manager/basket/delete';
+		$path = 'mshop/basket/manager/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path );
 	}
@@ -285,8 +285,8 @@ class Standard
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		/** mshop/order/manager/basket/submanagers
-		 * List of manager names that can be instantiated by the order basket manager
+		/** mshop/basket/manager/submanagers
+		 * List of manager names that can be instantiated by the basket manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
 		 * Each manager has or can have sub-managers caring about particular
@@ -301,14 +301,14 @@ class Standard
 		 * @param array List of sub-manager names
 		 * @since 2022.10
 		 */
-		$path = 'mshop/order/manager/basket/submanagers';
+		$path = 'mshop/basket/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
 	/**
-	 * Returns a new manager for order basket extensions.
+	 * Returns a new manager for basket extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
@@ -316,10 +316,10 @@ class Standard
 	 */
 	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/order/manager/basket/name
-		 * Class name of the used order basket manager implementation
+		/** mshop/basket/manager/name
+		 * Class name of the used basket manager implementation
 		 *
-		 * Each default order basket manager can be replaced by an alternative imlementation.
+		 * Each default basket manager can be replaced by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
 		 * name as configuration value so the manager factory knows which class it
 		 * has to instantiate.
@@ -334,7 +334,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  mshop/order/manager/basket/name = Mybasket
+		 *  mshop/basket/manager/name = Mybasket
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -349,8 +349,8 @@ class Standard
 		 * @since 2022.10
 		 */
 
-		/** mshop/order/manager/basket/decorators/excludes
-		 * Excludes decorators added by the "common" option from the order basket manager
+		/** mshop/basket/manager/decorators/excludes
+		 * Excludes decorators added by the "common" option from the basket manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -359,23 +359,23 @@ class Standard
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the order basket manager.
+		 * around the basket manager.
 		 *
-		 *  mshop/order/manager/basket/decorators/excludes = array( 'decorator1' )
+		 *  mshop/basket/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-		 * "mshop/common/manager/decorators/default" for the order basket manager.
+		 * "mshop/common/manager/decorators/default" for the basket manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/basket/decorators/global
-		 * @see mshop/order/manager/basket/decorators/local
+		 * @see mshop/basket/manager/decorators/global
+		 * @see mshop/basket/manager/decorators/local
 		 */
 
-		/** mshop/order/manager/basket/decorators/global
-		 * Adds a list of globally available decorators only to the order basket manager
+		/** mshop/basket/manager/decorators/global
+		 * Adds a list of globally available decorators only to the basket manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -383,24 +383,24 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order basket
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the basket
 		 * manager.
 		 *
-		 *  mshop/order/manager/basket/decorators/global = array( 'decorator1' )
+		 *  mshop/basket/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the
 		 * basket manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/basket/decorators/excludes
-		 * @see mshop/order/manager/basket/decorators/local
+		 * @see mshop/basket/manager/decorators/excludes
+		 * @see mshop/basket/manager/decorators/local
 		 */
 
-		/** mshop/order/manager/basket/decorators/local
-		 * Adds a list of local decorators only to the order basket manager
+		/** mshop/basket/manager/decorators/local
+		 * Adds a list of local decorators only to the basket manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -408,23 +408,23 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Order\Manager\Basket\Decorator\*") around the order
+		 * ("\Aimeos\MShop\Order\Manager\Basket\Decorator\*") around the
 		 * basket manager.
 		 *
-		 *  mshop/order/manager/basket/decorators/local = array( 'decorator2' )
+		 *  mshop/basket/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "\Aimeos\MShop\Order\Manager\Basket\Decorator\Decorator2" only to the
-		 * order basket manager.
+		 * basket manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/basket/decorators/excludes
-		 * @see mshop/order/manager/basket/decorators/global
+		 * @see mshop/basket/manager/decorators/excludes
+		 * @see mshop/basket/manager/decorators/global
 		 */
 
-		return $this->getSubManagerBase( 'order', 'basket/' . $manager, $name );
+		return $this->getSubManagerBase( 'basket', $manager, $name );
 	}
 
 
@@ -434,7 +434,7 @@ class Standard
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Basket\Iface with ids as keys
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Basket\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
@@ -442,21 +442,21 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$required = array( 'order.basket' );
+		$required = array( 'basket' );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-		$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/basket/manager/sitemode', $level );
 
-		/** mshop/order/manager/basket/search/mysql
+		/** mshop/basket/manager/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * @see mshop/order/manager/basket/search/ansi
+		 * @see mshop/basket/manager/search/ansi
 		 */
 
-		/** mshop/order/manager/basket/search/ansi
+		/** mshop/basket/manager/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * Fetches the records matched by the given criteria from the order
+		 * Fetches the records matched by the given criteria from the basket
 		 * database. The records must be from one of the sites that are
 		 * configured via the context item. If the current site is part of
 		 * a tree of sites, the SELECT statement can retrieve all records
@@ -495,24 +495,24 @@ class Standard
 		 *
 		 * @param string SQL statement for searching items
 		 * @since 2022.10
-		 * @see mshop/order/manager/basket/insert/ansi
-		 * @see mshop/order/manager/basket/update/ansi
-		 * @see mshop/order/manager/basket/newid/ansi
-		 * @see mshop/order/manager/basket/delete/ansi
-		 * @see mshop/order/manager/basket/count/ansi
+		 * @see mshop/basket/manager/insert/ansi
+		 * @see mshop/basket/manager/update/ansi
+		 * @see mshop/basket/manager/newid/ansi
+		 * @see mshop/basket/manager/delete/ansi
+		 * @see mshop/basket/manager/count/ansi
 		 */
-		$cfgPathSearch = 'mshop/order/manager/basket/search';
+		$cfgPathSearch = 'mshop/basket/manager/search';
 
-		/** mshop/order/manager/basket/count/mysql
+		/** mshop/basket/manager/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/order/manager/basket/count/ansi
+		 * @see mshop/basket/manager/count/ansi
 		 */
 
-		/** mshop/order/manager/basket/count/ansi
+		/** mshop/basket/manager/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * Counts all records matched by the given criteria from the order
+		 * Counts all records matched by the given criteria from the basket
 		 * database. The records must be from one of the sites that are
 		 * configured via the context item. If the current site is part of
 		 * a tree of sites, the statement can count all records from the
@@ -547,28 +547,28 @@ class Standard
 		 *
 		 * @param string SQL statement for counting items
 		 * @since 2022.10
-		 * @see mshop/order/manager/basket/insert/ansi
-		 * @see mshop/order/manager/basket/update/ansi
-		 * @see mshop/order/manager/basket/newid/ansi
-		 * @see mshop/order/manager/basket/delete/ansi
-		 * @see mshop/order/manager/basket/search/ansi
+		 * @see mshop/basket/manager/insert/ansi
+		 * @see mshop/basket/manager/update/ansi
+		 * @see mshop/basket/manager/newid/ansi
+		 * @see mshop/basket/manager/delete/ansi
+		 * @see mshop/basket/manager/search/ansi
 		 */
-		$cfgPathCount = 'mshop/order/manager/basket/count';
+		$cfgPathCount = 'mshop/basket/manager/count';
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() )
 		{
-			$basket = unserialize( base64_decode( $row['order.basket.content'] ) );
+			$basket = unserialize( base64_decode( $row['basket.content'] ) );
 
 			if( !( $basket instanceof \Aimeos\MShop\Order\Item\Iface ) )
 			{
-				$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $row['order.basket.content'] );
-				$context->logger()->warning( $msg, 'core/order' );
+				$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $row['basket.content'] );
+				$context->logger()->warning( $msg, 'core/basket' );
 			}
 
 			if( $item = $this->createItemBase( $row, $basket ?: null ) ) {
-				$items[$row['order.basket.id']] = $item;
+				$items[$row['basket.id']] = $item;
 			}
 		}
 
@@ -577,14 +577,14 @@ class Standard
 
 
 	/**
-	 * Creates a new order basket object.
+	 * Creates a new basket object.
 	 *
-	 * @param array $values List of attributes for the order basket object
+	 * @param array $values List of attributes for the basket object
 	 * @param \Aimeos\MShop\Order\Item\Iface|null $basket Basket object
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface New order basket object
+	 * @return \Aimeos\MShop\Basket\Item\Iface New basket object
 	 */
-	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $basket = null ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $basket = null ) : \Aimeos\MShop\Basket\Item\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Basket\Standard( $values, $basket );
+		return new \Aimeos\MShop\Basket\Item\Standard( $values, $basket );
 	}
 }

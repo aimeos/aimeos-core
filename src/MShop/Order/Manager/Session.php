@@ -54,7 +54,7 @@ trait Session
 
 		try
 		{
-			if( ( $order = \Aimeos\MShop::create( $context, 'order/basket' )->get( $key )->getItem() ) === null ) {
+			if( ( $order = \Aimeos\MShop::create( $context, 'basket' )->get( $key )->getItem() ) === null ) {
 				return $this->object()->create();
 			}
 
@@ -94,7 +94,7 @@ trait Session
 
 		$session->set( 'aimeos/basket/list', $list );
 
-		$manager = \Aimeos\MShop::create( $context, 'order/basket' );
+		$manager = \Aimeos\MShop::create( $context, 'basket' );
 		$manager->save( $manager->create()->setId( $key )->setCustomerId( $context->user() )->setItem( clone $order ) );
 
 		return $this;

@@ -3,17 +3,17 @@
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2022-2024
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 
-namespace Aimeos\MShop\Order\Manager\Basket;
+namespace Aimeos\MShop\Basket\Manager;
 
 
 /**
- * Interface for all order basket manager implementations.
+ * Interface for all basket manager implementations.
  *
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface

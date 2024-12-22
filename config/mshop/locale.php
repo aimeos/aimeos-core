@@ -61,6 +61,7 @@ return array(
 				'shop' => [
 					'domains' => [
 						'attribute' => 'attribute',
+						'basket' => 'basket',
 						'catalog' => 'catalog',
 						'coupon' => 'coupon',
 						'customer' => 'customer',
@@ -68,7 +69,6 @@ return array(
 						'index' => 'index',
 						'media' => 'media',
 						'order' => 'order',
-						'order/basket' => 'order/basket',
 						'plugin' => 'plugin',
 						'price' => 'price',
 						'product' => 'product',

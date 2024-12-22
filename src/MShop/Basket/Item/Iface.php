@@ -3,17 +3,17 @@
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2022-2024
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 
-namespace Aimeos\MShop\Order\Item\Basket;
+namespace Aimeos\MShop\Basket\Item;
 
 
 /**
  * Generic interface for baskets.
  *
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
@@ -28,9 +28,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the basket object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface;
+	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Basket\Item\Iface;
 
 	/**
 	 * Returns the ID of the customer who owns the basket.
@@ -43,9 +43,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the customer who owned the basket.
 	 *
 	 * @param string $customerid Unique ID of the customer
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Basket\Iface;
+	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Basket\Item\Iface;
 
 	/**
 	 * Returns the name of the basket.
@@ -58,7 +58,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the name of the basket.
 	 *
 	 * @param string $name Name for the basket
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setName( ?string $name ) : \Aimeos\MShop\Order\Item\Basket\Iface;
+	public function setName( ?string $name ) : \Aimeos\MShop\Basket\Item\Iface;
 }

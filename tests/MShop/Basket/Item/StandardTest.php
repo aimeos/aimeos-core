@@ -4,7 +4,7 @@
  * @copyright Aimeos (aimeos.org), 2022-2024
  */
 
-namespace Aimeos\MShop\Order\Item\Basket;
+namespace Aimeos\MShop\Basket\Item;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -17,17 +17,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->values = array(
-			'order.basket.id' => '123-456-789',
-			'order.basket.siteid' => '1.',
-			'order.basket.customerid' => '11',
-			'order.basket.name' => 'testbasket',
-			'order.basket.mtime' => '2011-01-01 00:00:02',
-			'order.basket.ctime' => '2011-01-01 00:00:01',
-			'order.basket.editor' => 'unitTestUser',
+			'basket.id' => '123-456-789',
+			'basket.siteid' => '1.',
+			'basket.customerid' => '11',
+			'basket.name' => 'testbasket',
+			'basket.mtime' => '2011-01-01 00:00:02',
+			'basket.ctime' => '2011-01-01 00:00:01',
+			'basket.editor' => 'unitTestUser',
 		);
 
 		$this->basket = \Aimeos\MShop::create( \TestHelper::context(), 'order' )->create()->off();
-		$this->object = new \Aimeos\MShop\Order\Item\Basket\Standard( $this->values, $this->basket );
+		$this->object = new \Aimeos\MShop\Basket\Item\Standard( $this->values, $this->basket );
 	}
 
 
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( '987-654-321' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Basket\Item\Iface::class, $return );
 		$this->assertEquals( '987-654-321', $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -69,7 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCustomerId( '12' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Basket\Item\Iface::class, $return );
 		$this->assertEquals( '12', $this->object->getCustomerId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setItem( $this->basket );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Basket\Item\Iface::class, $return );
 		$this->assertSame( $this->basket, $this->object->getItem() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setName( 'unittest' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Basket\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Basket\Item\Iface::class, $return );
 		$this->assertEquals( 'unittest', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -127,27 +127,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->assertEquals( 'order/basket', $this->object->getResourceType() );
+		$this->assertEquals( 'basket', $this->object->getResourceType() );
 	}
 
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Order\Item\Basket\Standard();
+		$item = new \Aimeos\MShop\Basket\Item\Standard();
 
 		$list = $entries = array(
-			'order.basket.id' => '123-456',
-			'order.basket.customerid' => '123',
-			'order.basket.name' => 'test basket name',
+			'basket.id' => '123-456',
+			'basket.customerid' => '123',
+			'basket.name' => 'test basket name',
 		);
 
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( '', $item->getSiteId() );
-		$this->assertEquals( $list['order.basket.id'], $item->getId() );
-		$this->assertEquals( $list['order.basket.customerid'], $item->getCustomerId() );
-		$this->assertEquals( $list['order.basket.name'], $item->getName() );
+		$this->assertEquals( $list['basket.id'], $item->getId() );
+		$this->assertEquals( $list['basket.customerid'], $item->getCustomerId() );
+		$this->assertEquals( $list['basket.name'], $item->getName() );
 	}
 
 
@@ -157,12 +157,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( count( $this->values ), count( $list ) );
 
-		$this->assertEquals( $this->object->getId(), $list['order.basket.id'] );
-		$this->assertEquals( $this->object->getSiteId(), $list['order.basket.siteid'] );
-		$this->assertEquals( $this->object->getCustomerId(), $list['order.basket.customerid'] );
-		$this->assertEquals( $this->object->getName(), $list['order.basket.name'] ); ;
-		$this->assertEquals( $this->object->getTimeModified(), $list['order.basket.mtime'] );
-		$this->assertEquals( $this->object->getTimeCreated(), $list['order.basket.ctime'] );
-		$this->assertEquals( $this->object->editor(), $list['order.basket.editor'] );
+		$this->assertEquals( $this->object->getId(), $list['basket.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $list['basket.siteid'] );
+		$this->assertEquals( $this->object->getCustomerId(), $list['basket.customerid'] );
+		$this->assertEquals( $this->object->getName(), $list['basket.name'] ); ;
+		$this->assertEquals( $this->object->getTimeModified(), $list['basket.mtime'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $list['basket.ctime'] );
+		$this->assertEquals( $this->object->editor(), $list['basket.editor'] );
 	}
 }

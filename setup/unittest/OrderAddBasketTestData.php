@@ -26,22 +26,22 @@ class OrderAddBasketTestData extends Base
 
 
 	/**
-	 * Adds order test data.
+	 * Adds basket test data.
 	 */
 	public function up()
 	{
-		$this->info( 'Adding order basket test data', 'vv' );
+		$this->info( 'Adding basket test data', 'vv' );
 
 		$context = $this->context()->setEditor( 'core' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'order-basket.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'basket.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order baskets', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for baskets', $path ) );
 		}
 
-		$manager = \Aimeos\MShop::create( $context, 'order/basket', 'Standard' );
+		$manager = \Aimeos\MShop::create( $context, 'basket', 'Standard' );
 		$orderManager = \Aimeos\MShop::create( $context, 'order', 'Standard' );
 
 		foreach( $testdata as $entry ) {

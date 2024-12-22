@@ -6,5 +6,5 @@
  */
 
 return [[
-	'order.basket.id' => 'unittest_id', 'order.basket.customerid' => '-1', 'order.basket.name' => 'unittest name',
+	'basket.id' => 'unittest_id', 'basket.customerid' => '-1', 'basket.name' => 'unittest name',
 ]];

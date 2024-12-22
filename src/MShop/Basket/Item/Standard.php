@@ -3,22 +3,22 @@
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2022-2024
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 
 
-namespace Aimeos\MShop\Order\Item\Basket;
+namespace Aimeos\MShop\Basket\Item;
 
 
 /**
- * Default implementation of the order status object.
+ * Default implementation of the basket item
  *
  * @package MShop
- * @subpackage Order
+ * @subpackage Basket
  */
 class Standard
 	extends \Aimeos\MShop\Common\Item\Base
-	implements \Aimeos\MShop\Order\Item\Basket\Iface
+	implements \Aimeos\MShop\Basket\Item\Iface
 {
 	private ?\Aimeos\MShop\Order\Item\Iface $item;
 
@@ -26,12 +26,12 @@ class Standard
 	/**
 	 * Initializes the object
 	 *
-	 * @param array $values Associative list of key/value pairs with order status properties
+	 * @param array $values Associative list of key/value pairs with basket properties
 	 * @param \Aimeos\MShop\Order\Item\Iface|null $item Basket object
 	 */
 	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Iface $item = null )
 	{
-		parent::__construct( 'order.basket.', $values );
+		parent::__construct( 'basket.', $values );
 		$this->item = $item;
 	}
 
@@ -63,9 +63,9 @@ class Standard
 	 * Sets the basket object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Basket\Item\Iface
 	{
 		$this->item = $basket;
 		return $this->setModified();
@@ -79,7 +79,7 @@ class Standard
 	 */
 	public function getCustomerId() : string
 	{
-		return (string) $this->get( 'order.basket.customerid', '' );
+		return (string) $this->get( 'basket.customerid', '' );
 	}
 
 
@@ -87,11 +87,11 @@ class Standard
 	 * Sets the ID of the customer who owned the basket.
 	 *
 	 * @param string $customerid Unique ID of the customer
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setCustomerId( ?string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	public function setCustomerId( ?string $value ) : \Aimeos\MShop\Basket\Item\Iface
 	{
-		return $this->set( 'order.basket.customerid', (string) $value );
+		return $this->set( 'basket.customerid', (string) $value );
 	}
 
 
@@ -102,7 +102,7 @@ class Standard
 	 */
 	public function getName() : string
 	{
-		return (string) $this->get( 'order.basket.name', '' );
+		return (string) $this->get( 'basket.name', '' );
 	}
 
 
@@ -110,11 +110,11 @@ class Standard
 	 * Sets the name of the basket.
 	 *
 	 * @param string $value Name for the basket
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Basket item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
 	 */
-	public function setName( ?string $value ) : \Aimeos\MShop\Order\Item\Basket\Iface
+	public function setName( ?string $value ) : \Aimeos\MShop\Basket\Item\Iface
 	{
-		return $this->set( 'order.basket.name', (string) $value );
+		return $this->set( 'basket.name', (string) $value );
 	}
 
 
@@ -123,7 +123,7 @@ class Standard
 	 *
 	 * @param array &$list Associative list of item keys and their values
 	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Basket\Iface Order status item for chaining method calls
+	 * @return \Aimeos\MShop\Basket\Item\Iface Order status item for chaining method calls
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
@@ -133,8 +133,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.basket.customerid': $item->setCustomerId( $value ); break;
-				case 'order.basket.name': $item->setName( $value ); break;
+				case 'basket.customerid': $item->setCustomerId( $value ); break;
+				case 'basket.name': $item->setName( $value ); break;
 				default: continue 2;
 			}
 
@@ -156,8 +156,8 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.basket.name'] = $this->getName();
-		$list['order.basket.customerid'] = $this->getCustomerId();
+		$list['basket.name'] = $this->getName();
+		$list['basket.customerid'] = $this->getCustomerId();
 
 		return $list;
 	}
