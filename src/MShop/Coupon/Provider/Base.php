@@ -287,6 +287,8 @@ abstract class Base
 			$orderProducts[] = $orderProduct->setPrice( $price );
 		}
 
+		usort( $orderProducts, fn( $a, $b ) => $a->getPrice()->getValue() <=> $b->getPrice()->getValue() );
+
 		return $orderProducts;
 	}
 
