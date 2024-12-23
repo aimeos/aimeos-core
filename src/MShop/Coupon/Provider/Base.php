@@ -49,14 +49,14 @@ abstract class Base
 	 * The result depends on the configured restrictions and it must be less or
 	 * equal to the passed price.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$price = \Aimeos\MShop::create( $this->context, 'price' )->create();
 
-		foreach( $base->getProducts() as $product ) {
+		foreach( $order->getProducts() as $product ) {
 			$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
@@ -95,10 +95,10 @@ abstract class Base
 	 * The result depends on the configured restrictions and it doesn't test
 	 * again if the coupon or the code itself are still available.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $order ) : bool
 	{
 		return true;
 	}
@@ -242,19 +242,19 @@ abstract class Base
 	/**
 	 * Creates the order products for monetary rebates.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
 	 * @param string $prodcode Unique product code
 	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
 	 * @param float $quantity Number of products in basket
 	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] Order products with monetary rebates
 	 */
-	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Iface $base,
+	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Iface $order,
 		string $prodcode, float &$rebate, float $quantity = 1, string $stockType = 'default' ) : array
 	{
 		$orderProducts = [];
 
-		if( ( $prices = $this->getPriceByTaxRate( $base ) )->isEmpty() ) {
+		if( ( $prices = $this->getPriceByTaxRate( $order ) )->isEmpty() ) {
 			$prices = ['0.00' => \Aimeos\MShop::create( $this->context(), 'price' )->create()];
 		}
 
@@ -268,12 +268,16 @@ abstract class Base
 				continue;
 			}
 
-			if( $amount <= $rebate ) {
-				$value = $price->getValue(); $costs = $price->getCosts(); $rebate -= $amount;
-			} elseif( ( $amount = $price->getValue() ) <= $rebate ) {
-				$value = $amount; $costs = $rebate - $amount; $rebate = 0;
+			if( $price->getValue() <= $rebate ) {
+				$rebate -= $value = $price->getValue();
 			} else {
-				$value = $rebate; $costs = 0; $rebate = 0;
+				$value = $rebate; $rebate = 0;
+			}
+
+			if( $price->getCosts() <= $rebate ) {
+				$rebate -= $costs = $price->getCosts();
+			} else {
+				$costs = $rebate; $rebate = 0;
 			}
 
 			$orderProduct = $this->createProduct( $prodcode, $quantity, $stockType );
@@ -297,6 +301,7 @@ abstract class Base
 	{
 		$prices = map();
 		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
+		$newprice = $manager->create();
 
 		$map = $basket->getCoupons();
 		$products = $map[$this->getCode()] ?? [];
@@ -307,7 +312,7 @@ abstract class Base
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
-				$prices[$rate] = $prices->get( $rate, $manager->create() )->addItem( $price, $item->getQuantity() );
+				$prices[$rate] = $prices->get( $rate, clone $newprice )->addItem( $price, $item->getQuantity() );
 			}
 		}
 
@@ -317,7 +322,7 @@ abstract class Base
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
-				$prices[$rate] = $prices->get( $rate, $manager->create() )->addItem( $price );
+				$prices[$rate] = $prices->get( $rate, clone $newprice )->addItem( $price );
 			}
 		}
 

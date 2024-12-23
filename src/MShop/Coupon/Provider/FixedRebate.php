@@ -70,12 +70,12 @@ class FixedRebate
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
+	public function update( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
-		$currency = $base->getPrice()->getCurrencyId();
+		$currency = $order->getPrice()->getCurrencyId();
 		$rebate = $this->getConfigValue( 'fixedrebate.rebate', [] );
 		$prodcode = $this->getConfigValue( 'fixedrebate.productcode' );
 
@@ -88,10 +88,10 @@ class FixedRebate
 
 		if( isset( $rebate[$currency] ) )
 		{
-			$price = $this->object()->calcPrice( $base );
+			$price = $this->object()->calcPrice( $order );
 			$sum = $price->getValue() + $price->getCosts() + $price->getRebate();
 			$rebate = $rebate[$currency] < $sum ? $rebate[$currency] : $sum;
-			$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
+			$order->setCoupon( $this->getCode(), $this->createRebateProducts( $order, $prodcode, $rebate ) );
 		}
 
 		return $this;

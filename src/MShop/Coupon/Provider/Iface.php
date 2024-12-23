@@ -26,10 +26,10 @@ interface Iface
 	 * The result depends on the configured restrictions and it must be less or
 	 * equal to the passed price.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Price\Item\Iface;
+	public function calcPrice( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Checks the backend configuration attributes for validity.
@@ -54,10 +54,10 @@ interface Iface
 	 * The result depends on the configured restrictions and it doesn't test
 	 * again if the coupon or the code itself are still available.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool;
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $order ) : bool;
 
 	/**
 	 * Injects the reference of the outmost object
@@ -70,8 +70,8 @@ interface Iface
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface;
+	public function update( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Coupon\Provider\Iface;
 }

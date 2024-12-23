@@ -85,10 +85,10 @@ class Tip
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
+	public function update( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$percent = (float) $this->getConfigValue( 'tip.percent', 0 );
 		$prodcode = $this->getConfigValue( 'tip.productcode' );
@@ -100,13 +100,13 @@ class Tip
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$price = $this->object()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
+		$price = $this->object()->calcPrice( $order->setCoupon( $this->getCode(), [] ) );
 		$tip = $this->round( $price->getValue() * $percent / 100 );
 
 		$orderProduct = $this->createProduct( $prodcode, 1, 'default' );
 		$price = $orderProduct->getPrice()->setValue( $tip );
 
-		$base->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
+		$order->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
 
 		return $this;
 	}

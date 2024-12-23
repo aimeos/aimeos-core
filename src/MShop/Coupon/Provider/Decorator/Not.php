@@ -24,11 +24,11 @@ class Not
 	/**
 	 * Tests if a coupon should be granted
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basket object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
 	 * @return bool True if available, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $base ) : bool
+	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $order ) : bool
 	{
-		return !$this->getProvider()->isAvailable( $base );
+		return !$this->getProvider()->isAvailable( $order );
 	}
 }

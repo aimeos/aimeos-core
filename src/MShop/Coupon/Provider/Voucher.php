@@ -60,10 +60,10 @@ class Voucher
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
+	public function update( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$context = $this->context();
 
@@ -80,7 +80,7 @@ class Voucher
 		$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
 		$this->checkVoucher( $orderProductId, $status );
 
-		$orderProduct = $this->getOrderProductItem( $orderProductId, $base->getPrice()->getCurrencyId() );
+		$orderProduct = $this->getOrderProductItem( $orderProductId, $order->getPrice()->getCurrencyId() );
 		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate();
 		$usedRebate = $this->getUsedRebate( $this->getCode() );
 		$rebate = $value - $usedRebate;
@@ -91,10 +91,10 @@ class Voucher
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
 		}
 
-		$orderProducts = $this->createRebateProducts( $base, $prodcode, $rebate );
+		$orderProducts = $this->createRebateProducts( $order, $prodcode, $rebate );
 		$orderProducts = $this->setOrderAttributeRebate( $orderProducts, $rebate );
 
-		$base->setCoupon( $this->getCode(), $orderProducts );
+		$order->setCoupon( $this->getCode(), $orderProducts );
 		return $this;
 	}
 
