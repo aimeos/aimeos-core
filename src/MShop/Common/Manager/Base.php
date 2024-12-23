@@ -166,7 +166,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 				'label' => 'Editor',
 				'public' => false,
 			],
-		] ), $this->getSaveAttributes() );
+		] ), $this->object()->getSaveAttributes() );
 
 		if( $withsub )
 		{
@@ -210,7 +210,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			return null;
 		}
 
-		if( ( $first = current( $this->getSearchAttributes() ) ) === false ) {
+		if( ( $first = current( $this->object()->getSearchAttributes() ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No search configuration available for "%1$s"', get_class( $this ) ) );
 		}
 
@@ -367,7 +367,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$required = [$this->getSearchKey()];
 		$conn = $this->context()->db( $this->getResourceName() );
 
-		$attrs = array_filter( $this->getSearchAttributes( false ), fn( $attr ) => $attr->getType() === 'json' );
+		$attrs = array_filter( $this->object()->getSearchAttributes( false ), fn( $attr ) => $attr->getType() === 'json' );
 		$attrs = array_column( $attrs, null, 'code' );
 
 		$results = $this->searchItemsBase( $conn, $filter, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $plugins );
