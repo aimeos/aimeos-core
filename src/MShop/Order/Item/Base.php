@@ -838,13 +838,6 @@ abstract class Base
 	{
 		$costs = 0;
 
-		if( $type === 'delivery' )
-		{
-			foreach( $this->getProducts() as $product ) {
-				$costs += $product->getPrice()->getCosts() * $product->getQuantity();
-			}
-		}
-
 		foreach( $this->getService( $type ) as $service ) {
 			$costs += $service->getPrice()->getCosts();
 		}

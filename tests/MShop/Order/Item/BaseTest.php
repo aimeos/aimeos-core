@@ -59,18 +59,23 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$prod2->setProductCode( 'prod2' );
 		$prod2->setPrice( $price );
 
+		$price = $priceManager->create();
+		$price->setCosts( '2.00' );
+		$price->setTaxRate( '0.00' );
+		$price->setCurrencyId( 'EUR' );
+
 
 		$this->products = [$prod1, $prod2];
 		$this->coupons = map( ['OPQR' => [$prod1]] );
 
 		$this->addresses = array(
-			'payment' => [0 => $orderAddressManager->create()->setType( 'payment' )->setId( null )],
-			'delivery' => [0 => $orderAddressManager->create()->setType( 'delivery' )->setId( null )],
+			'payment' => [0 => $orderAddressManager->create()->setType( 'payment' )],
+			'delivery' => [0 => $orderAddressManager->create()->setType( 'delivery' )],
 		);
 
 		$this->services = array(
-			'payment' => [0 => $orderServiceManager->create()->setType( 'payment' )->setCode( 'testpay' )->setId( null )],
-			'delivery' => [1 => $orderServiceManager->create()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
+			'payment' => [0 => $orderServiceManager->create()->setType( 'payment' )->setCode( 'testpay' )],
+			'delivery' => [1 => $orderServiceManager->create()->setType( 'delivery' )->setCode( 'testship' )->setPrice( $price )],
 		);
 
 		$this->statusItem = $orderStatusManager->create()->setType( 'test' )->setValue( 'value' );
@@ -540,10 +545,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCosts()
 	{
-		$this->object->setProducts( $this->products );
 		$this->object->setServices( $this->services );
 
-		$this->assertEquals( '3.11', round( $this->object->getCosts( 'delivery' ), 2 ) );
+		$this->assertEquals( '2.00', round( $this->object->getCosts( 'delivery' ), 2 ) );
 		$this->assertEquals( '0.00', $this->object->getCosts( 'payment' ) );
 	}
 
