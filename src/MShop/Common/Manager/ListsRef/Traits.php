@@ -96,7 +96,6 @@ trait Traits
 	 * @param string[] $ref List of domain names whose referenced items should be attached
 	 * @param string $domain Domain prefix
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
-	 * @todo 2025.01 Exchange $ref and $domain parameters
 	 */
 	protected function getListItems( array $parentIds, array $ref, string $domain ) : array
 	{
@@ -199,7 +198,6 @@ trait Traits
 				}
 
 				$listManager->save( $listItem->setParentId( $item->getId() ), $fetch );
-				// @todo update list item in $item
 			}
 
 

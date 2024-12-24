@@ -156,7 +156,6 @@ trait DB
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of aggregation, e.g.  "sum", "min", "max" or NULL for "count"
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
-	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\Base\Criteria\Iface $search, $keys, string $cfgPath,
 		array $required = [], ?string $value = null, ?string $type = null ) : \Aimeos\Map
