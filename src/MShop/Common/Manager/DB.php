@@ -862,11 +862,6 @@ trait DB
 	 */
 	protected function table() : string
 	{
-		/** @todo 2025.10 Remove any only use table() */
-		if( method_exists( $this, 'getTable' ) ) {
-			return $this->getTable();
-		}
-
 		return 'mshop_' . join( '_', $this->type() );
 	}
 
