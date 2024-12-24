@@ -19,12 +19,11 @@ class Utils
 	 *
 	 * @param string $class Name of the class
 	 * @param array $args Constructor arguments
-	 * @param string|null $iface Name of the interface the object must implement
+	 * @param array|string|null $iface Name of the interface(s) the object must implement (one of)
 	 * @return object New object instance
 	 * @throws \LogicException If the class isn't found or doesn't implement the interface
-	 * @todo 2025.01 Allow list of interfaces to check for common and specific interfaces
 	 */
-	public static function create( string $class, array $args, ?string $iface = null ) : object
+	public static function create( string $class, array $args, $iface = null ) : object
 	{
 		if( class_exists( $class ) === false ) {
 			throw new \LogicException( sprintf( 'Class "%1$s" not found', $class ), 400 );
@@ -32,11 +31,7 @@ class Utils
 
 		$object = new $class( ...$args );
 
-		if( $iface && !( $object instanceof $iface ) ) {
-			throw new \LogicException( sprintf( 'Class "%1$s" does not implement "%2$s"', $class, $iface ), 400 );
-		}
-
-		return $object;
+		return !empty( $iface ) ? self::implements( $object, $iface ) : $object;
 	}
 
 
@@ -168,18 +163,20 @@ class Utils
 	 * Checks if the object implements the given interface
 	 *
 	 * @param object $object Object to check
-	 * @param string $iface Name of the interface the object must implement
+	 * @param array|string $iface Name of the interface the object must implement (one of)
 	 * @return object Same object as passed in
 	 * @throws \LogicException If the object doesn't implement the interface
-	 * @todo 2025.01 Allow list of interfaces to check for common and specific interfaces
 	 */
-	public static function implements( object $object, string $iface ) : object
+	public static function implements( object $object, $iface ) : object
 	{
-		if( !( $object instanceof $iface ) ) {
-			throw new \LogicException( sprintf( 'Class "%1$s" does not implement "%2$s"', get_class( $object ), $iface ), 400 );
+		foreach( (array) $iface as $name )
+		{
+			if( $name && $object instanceof $name ) {
+				return $object;
+			}
 		}
 
-		return $object;
+		throw new \LogicException( sprintf( 'Class "%1$s" does not implement "%2$s"', get_class( $object ), $iface ), 400 );
 	}
 
 
