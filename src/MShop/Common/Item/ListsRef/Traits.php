@@ -348,10 +348,8 @@ trait Traits
 	 * Initializes the list items in the trait
 	 *
 	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement \Aimeos\MShop\Common\Item\Iface
-	 * @todo 2025.01 Remove unused $refItems parameter
 	 */
-	protected function initListItems( array $listItems, array $refItems = [] )
+	protected function initListItems( array $listItems )
 	{
 		$this->listMax = count( $listItems );
 
