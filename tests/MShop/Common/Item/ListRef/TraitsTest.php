@@ -14,9 +14,9 @@ class Test extends \Aimeos\MShop\Common\Item\Base implements Iface
 {
 	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
-	public function __construct( array $listItems, array $refItems )
+	public function __construct( array $listItems )
 	{
-		$this->initListItems( $listItems, $refItems );
+		$this->initListItems( $listItems );
 	}
 
 	public function getId() : ?string

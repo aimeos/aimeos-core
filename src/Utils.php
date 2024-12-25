@@ -176,7 +176,7 @@ class Utils
 			}
 		}
 
-		throw new \LogicException( sprintf( 'Class "%1$s" does not implement "%2$s"', get_class( $object ), $iface ), 400 );
+		throw new \LogicException( sprintf( 'Class "%1$s" does not implement %2$s', get_class( $object ), json_encode( $iface ) ), 400 );
 	}
 
 
