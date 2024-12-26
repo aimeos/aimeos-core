@@ -172,7 +172,6 @@ class Standard extends \Aimeos\MShop\Common\Manager\Base implements \Aimeos\MSho
 		return $this->createAttributes( [
 			'key' => [
 				'label' => 'Key',
-				'internalcode' => 'mtes."key"',
 			],
 			'value' => [],
 			'json' => [
