@@ -81,12 +81,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 			$this->listItem2->getId() => $this->listItem2,
 		];
 
-		$refItems = [
-			$this->textItem1->getId() => $this->textItem1,
-			$this->textItem2->getId() => $this->textItem2,
-		];
-
-		$this->object = new \Aimeos\MShop\Common\Item\ListsRef\Test( $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListsRef\Test( $listItems );
 	}
 
 
@@ -268,7 +263,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetName()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [], [] );
+		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [] );
 
 		$this->assertEquals( 'test label', $object->getName() );
 		$this->assertEquals( 'test name', $this->object->getName() );
