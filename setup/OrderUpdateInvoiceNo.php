@@ -43,7 +43,7 @@ class OrderUpdateInvoiceNo extends Base
 			$db2->stmt()->update( 'mshop_locale_site' )
 				->set( 'invoiceno', '?' )
 				->where( 'invoiceno = ?' )
-				->setParameters( [$row['maxnum'], 1] )
+				->setParameters( [$row['maxnum'] ?: 1, 1] )
 				->executeStatement();
 		}
 	}
