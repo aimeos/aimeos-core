@@ -12,7 +12,7 @@ return [
 		['domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1, 'i18n' => ['de' => 'Text']],
 		['domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1, 'i18n' => ['de' => 'Datum']],
 		['domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1, 'i18n' => ['de' => 'Interval']],
-		['domain' => 'product', 'code' => 'customer/group', 'label' => 'Customer group ID', 'status' => 1],
+		['domain' => 'product', 'code' => 'group', 'label' => 'Group ID', 'status' => 1],
 	],
 
 	'attribute/lists/type' => [
@@ -28,7 +28,7 @@ return [
 	],
 
 	'customer/lists/type' => [
-		['domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1],
+		['domain' => 'group', 'code' => 'default', 'label' => 'Standard', 'status' => 1],
 		['domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1],
 		['domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1],
 		['domain' => 'product', 'code' => 'watch', 'label' => 'Watch list', 'status' => 1],
