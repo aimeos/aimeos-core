@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org], 2015-2024
+ * @copyright Aimeos (aimeos.org], 2015-2025
  */
 
 return [
@@ -137,14 +137,14 @@ return [
 		'text' => [
 			[
 				'text.label' => 'New arrivals kurz',
-				'text.content' => '<p><strong>Sommer 2024</strong></p><p>Neue Collection eingetroffen</p>',
+				'text.content' => '<p><strong>Sommer 2025</strong></p><p>Neue Collection eingetroffen</p>',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'catalog.list.type' => 'default', 'catalog.list.position' => 1, 'catalog.list.config' => [],
 				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
 			],
 			[
 				'text.label' => 'New arrivals short',
-				'text.content' => '<p><strong>Summer 2024</strong></p><p>New collection available</p>',
+				'text.content' => '<p><strong>Summer 2025</strong></p><p>New collection available</p>',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'catalog.list.type' => 'default', 'catalog.list.position' => 2, 'catalog.list.config' => [],
 				'catalog.list.start' => null, 'catalog.list.end' => null, 'catalog.list.status' => 1
