@@ -110,7 +110,7 @@ class Standard
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
 	 * @param string Last part of the class name
-	 * @since 2025.12
+	 * @since 2015.12
 	 */
 
 	/** mshop/tag/manager/decorators/excludes
@@ -132,7 +132,7 @@ class Standard
 	 * "mshop/common/manager/decorators/default" for the tag manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/tag/manager/decorators/global
 	 * @see mshop/tag/manager/decorators/local
@@ -156,7 +156,7 @@ class Standard
 	 * manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/tag/manager/decorators/excludes
 	 * @see mshop/tag/manager/decorators/local
@@ -180,7 +180,7 @@ class Standard
 	 * manager.
 	 *
 	 * @param array List of decorator names
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/tag/manager/decorators/excludes
 	 * @see mshop/tag/manager/decorators/global
@@ -221,7 +221,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for deleting items
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/insert/ansi
 	 * @see mshop/tag/manager/update/ansi
 	 * @see mshop/tag/manager/newid/ansi
@@ -243,7 +243,7 @@ class Standard
 	 * retrieved list of items.
 	 *
 	 * @param array List of sub-manager names
-	 * @since 2025.12
+	 * @since 2015.12
 	 */
 
 	/** mshop/tag/manager/insert/mysql
@@ -273,7 +273,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for inserting records
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/update/ansi
 	 * @see mshop/tag/manager/newid/ansi
 	 * @see mshop/tag/manager/delete/ansi
@@ -305,7 +305,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for updating records
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/insert/ansi
 	 * @see mshop/tag/manager/newid/ansi
 	 * @see mshop/tag/manager/delete/ansi
@@ -341,7 +341,7 @@ class Standard
 	 * specific way.
 	 *
 	 * @param string SQL statement for retrieving the last inserted record ID
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/insert/ansi
 	 * @see mshop/tag/manager/update/ansi
 	 * @see mshop/tag/manager/delete/ansi
@@ -423,7 +423,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for searching items
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/insert/ansi
 	 * @see mshop/tag/manager/update/ansi
 	 * @see mshop/tag/manager/newid/ansi
@@ -474,7 +474,7 @@ class Standard
 	 * includes using double quotes for table and column names.
 	 *
 	 * @param string SQL statement for counting items
-	 * @since 2025.12
+	 * @since 2015.12
 	 * @see mshop/tag/manager/insert/ansi
 	 * @see mshop/tag/manager/update/ansi
 	 * @see mshop/tag/manager/newid/ansi

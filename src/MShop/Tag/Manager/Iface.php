@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Tag\Manager;
 
 
 /**
- * Default tag manager implementation
+ * Tag manager implementation
  *
  * @package MShop
  * @subpackage Tag
