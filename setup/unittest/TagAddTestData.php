@@ -27,7 +27,7 @@ class TagAddTestData extends Base
 
 
 	/**
-	 * Adds product test data.
+	 * Adds tag test data.
 	 */
 	public function up()
 	{

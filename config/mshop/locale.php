@@ -79,7 +79,8 @@ return array(
 						'stock' => 'stock',
 						'subscription' => 'subscription',
 						'supplier' => 'supplier',
-						'text' => 'text'
+						'text' => 'text',
+						'type' => 'type'
 					]
 				],
 				'admin' => [
