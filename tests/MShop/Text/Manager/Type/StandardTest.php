@@ -72,15 +72,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		//search with base criteria
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->compare( '==', 'text.type.domain', 'attribute' ),
-			$search->compare( '==', 'text.type.editor', $this->editor ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
-		$search->setSortations( [$search->sort( '-', 'text.type.position' )] );
-		$search->slice( 0, 2 );
+		$search = $this->object->filter( true )->add( [
+			'text.type.domain' => 'attribute',
+			'text.type.editor' => $this->editor,
+		] )->order( '-text.type.position' )->slice( 0, 2 );
+
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );
@@ -94,31 +90,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'text.type.code', 'name' ),
-			$search->compare( '==', 'text.type.editor', $this->editor ),
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No text type found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No text type found for code "%1$s"', 'name' ) );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'text.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'text.type.editor', '==', $this->editor )->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );

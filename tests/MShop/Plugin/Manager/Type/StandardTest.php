@@ -49,75 +49,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearch()
-	{
-		$total = 0;
-		$search = $this->object->filter();
-
-		$expr = [];
-		$expr[] = $search->compare( '!=', 'plugin.type.id', null );
-		$expr[] = $search->compare( '!=', 'plugin.type.siteid', null );
-		$expr[] = $search->compare( '==', 'plugin.type.code', 'order' );
-		$expr[] = $search->compare( '==', 'plugin.type.domain', 'plugin' );
-		$expr[] = $search->compare( '==', 'plugin.type.label', 'Order' );
-		$expr[] = $search->compare( '>=', 'plugin.type.position', 0 );
-		$expr[] = $search->compare( '==', 'plugin.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'plugin.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'plugin.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->editor );
-
-		$search->setConditions( $search->and( $expr ) );
-		$search->slice( 0, 1 );
-		$results = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 1, $total );
-
-		//search with base criteria
-		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'plugin.type.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->setSortations( [$search->sort( '-', 'plugin.type.position' )] );
-		$results = $this->object->search( $search )->toArray();
-		$this->assertEquals( 1, count( $results ) );
-
-		foreach( $results as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
-		}
-	}
-
-
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'plugin.type.editor', $this->editor ),
-			$search->compare( '==', 'plugin.type.code', 'order' )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'plugin.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'plugin.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'plugin.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -160,6 +104,44 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->get( $itemSaved->getId() );
+	}
+
+
+	public function testSearch()
+	{
+		$total = 0;
+		$search = $this->object->filter();
+
+		$expr = [];
+		$expr[] = $search->compare( '!=', 'plugin.type.id', null );
+		$expr[] = $search->compare( '!=', 'plugin.type.siteid', null );
+		$expr[] = $search->compare( '==', 'plugin.type.code', 'order' );
+		$expr[] = $search->compare( '==', 'plugin.type.domain', 'plugin' );
+		$expr[] = $search->compare( '==', 'plugin.type.label', 'Order' );
+		$expr[] = $search->compare( '>=', 'plugin.type.position', 0 );
+		$expr[] = $search->compare( '==', 'plugin.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'plugin.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'plugin.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->editor );
+
+		$search->add( $search->and( $expr ) )->slice( 0, 1 );
+		$results = $this->object->search( $search, [], $total );
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
+
+		//search with base criteria
+		$search = $this->object->filter( true );
+		$search->add( $search->compare( '==', 'plugin.type.editor', $this->editor ), );
+		$search->setSortations( [$search->sort( '-', 'plugin.type.position' )] );
+
+		$results = $this->object->search( $search );
+
+		$this->assertEquals( 1, count( $results ) );
+
+		foreach( $results as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
 	}
 
 

@@ -39,15 +39,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item );
 	}
 
+
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No attribute list type item found' );
-		}
+		$search = $this->object->filter()->add( 'supplier.lists.type.editor', '==', $this->editor );
+		$expected = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
 	}
@@ -55,13 +51,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'supplier.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -106,6 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->get( $itemSaved->getId() );
 	}
 
+
 	public function testSearch()
 	{
 		$total = 0;
@@ -123,10 +115,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) )->slice( 0, 1 );
 		$search->setSortations( [$search->sort( '-', 'supplier.lists.type.position' )] );
-		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

@@ -44,27 +44,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'service.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'service.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No list type item found' );
-		}
-
-		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'service.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'service.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -127,8 +117,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -145,7 +135,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'service.lists.type.position' )] );
 		$search->slice( 0, 1 );
-		$results = $this->object->search( $search, [], $total )->toArray();
+
+		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 

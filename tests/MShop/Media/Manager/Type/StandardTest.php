@@ -49,78 +49,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearch()
-	{
-		//search without base criteria
-		$search = $this->object->filter();
-
-		$expr = [];
-		$expr[] = $search->compare( '!=', 'media.type.id', null );
-		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'media.type.code', 'slideshow' );
-		$expr[] = $search->compare( '>', 'media.type.label', '' );
-		$expr[] = $search->compare( '>=', 'media.type.position', 0 );
-		$expr[] = $search->compare( '==', 'media.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.type.editor', $this->editor );
-
-		$total = 0;
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 1, $total );
-
-		// search with base criteria
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->compare( '==', 'media.type.code', 'default' ),
-			$search->compare( '==', 'media.type.editor', $this->editor ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
-		$search->setSortations( [$search->sort( '-', 'media.type.position' )] );
-		$search->slice( 0, 5 );
-		$results = $this->object->search( $search, [], $total )->toArray();
-		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 8, $total );
-
-		foreach( $results as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
-		}
-	}
-
-
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'media.type.code', 'slideshow' ),
-			$search->compare( '==', 'media.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'media.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$conditions = $search->compare( '==', 'media.type.editor', $this->editor );
-		$search->setCOnditions( $conditions );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'media.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -163,6 +104,51 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->get( $itemSaved->getId() );
+	}
+
+
+	public function testSearch()
+	{
+		//search without base criteria
+		$search = $this->object->filter();
+
+		$expr = [];
+		$expr[] = $search->compare( '!=', 'media.type.id', null );
+		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
+		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'media.type.code', 'slideshow' );
+		$expr[] = $search->compare( '>', 'media.type.label', '' );
+		$expr[] = $search->compare( '>=', 'media.type.position', 0 );
+		$expr[] = $search->compare( '==', 'media.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'media.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'media.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'media.type.editor', $this->editor );
+
+		$total = 0;
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total )->toArray();
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
+
+		// search with base criteria
+		$search = $this->object->filter( true );
+		$expr = array(
+			$search->compare( '==', 'media.type.code', 'default' ),
+			$search->compare( '==', 'media.type.editor', $this->editor ),
+			$search->getConditions(),
+		);
+		$search->add( $search->and( $expr ) )->slice( 0, 5 );
+		$search->setSortations( [$search->sort( '-', 'media.type.position' )] );
+
+		$results = $this->object->search( $search, [], $total )->toArray();
+
+		$this->assertEquals( 5, count( $results ) );
+		$this->assertEquals( 8, $total );
+
+		foreach( $results as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
 	}
 
 

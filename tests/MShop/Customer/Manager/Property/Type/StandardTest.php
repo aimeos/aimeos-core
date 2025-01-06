@@ -50,35 +50,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->add( 'customer.property.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $expected = reset( $results ) ) === false )
-		{
-			throw new \RuntimeException( 'No property type item found.' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.property.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'customer.property.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -141,8 +123,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
@@ -151,10 +133,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search->add( $search->and( $conditions ) )->slice( 0, 1 );
 		$search->setSortations( [$search->sort( '-', 'customer.property.type.position' )] );
-		$search->slice( 0, 1 );
-		$items = $this->object->search( $search, [], $total )->toArray();
+
+		$items = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 1, $total );

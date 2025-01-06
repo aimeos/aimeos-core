@@ -46,25 +46,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'attribute.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No attribute list type item found' );
-		}
-
-		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'attribute.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -128,18 +120,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.lists.type.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
 		// search with base criteria
 		$search = $this->object->filter( true );
-		$search->setConditions( $search->compare( '==', 'attribute.lists.type.editor', $this->editor ) );
+		$search->add( $search->compare( '==', 'attribute.lists.type.editor', $this->editor ) );
 		$search->setSortations( [$search->sort( '-', 'attribute.lists.type.position' )] );
 		$search->slice( 0, 5 );
+
 		$results = $this->object->search( $search, [], $total )->toArray();
+
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 7, $total );
 

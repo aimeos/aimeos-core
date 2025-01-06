@@ -65,9 +65,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'rule.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'rule.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
-		$search->slice( 0, 1 );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) )->slice( 0, 1 );
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -78,9 +77,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'rule.type.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search->add( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'rule.type.position' )] );
-		$results = $this->object->search( $search )->toArray();
+		$results = $this->object->search( $search );
+
 		$this->assertEquals( 1, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
@@ -91,32 +91,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'rule.type.editor', $this->editor ),
-			$search->compare( '==', 'rule.type.code', 'catalog' )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'rule.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'rule.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'rule.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );

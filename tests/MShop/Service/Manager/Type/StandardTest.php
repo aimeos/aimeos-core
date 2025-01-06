@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 		$search->setSortations( [$search->sort( '-', 'service.type.position' )] );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.type.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search->add( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
@@ -92,32 +92,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'service.type.code', 'delivery' ),
-			$search->compare( '==', 'service.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'service.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'service.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'service.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );

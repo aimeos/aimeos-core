@@ -47,27 +47,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'price.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No price list type item found' );
-		}
-
-		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'price.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -127,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'price.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 
 		$results = $this->object->search( $search );
 		$this->assertEquals( 1, count( $results ) );
@@ -139,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 
 		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
+		$search->add( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$search->setSortations( [$search->sort( '-', 'price.lists.type.position' )] );
 
 		$results = $this->object->search( $search, [], $total );

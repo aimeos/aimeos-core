@@ -100,17 +100,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '==', 'stock.type.code', 'unitstock' ),
-			$search->compare( '==', 'stock.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$result = $this->object->search( $search )->toArray();
-
-		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
+		$search = $this->object->filter()->add( 'stock.type.editor', '==', $this->editor );
+		$expected = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$actual = $this->object->get( $expected->getId() );
 		$this->assertEquals( $expected, $actual );
@@ -141,24 +132,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'stock.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'stock.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
 
 	public function testSearchTotal()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'stock.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->add( 'stock.type.editor', '==', $this->editor );
 		$search->setSortations( [$search->sort( '-', 'stock.type.position' )] );
 		$search->slice( 0, 1 );
 
 		$total = 0;
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );

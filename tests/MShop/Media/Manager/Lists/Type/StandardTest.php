@@ -44,27 +44,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'media.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No media list type item found' );
-		}
-
-		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$conditions = $search->compare( '==', 'media.lists.type.editor', $this->editor );
-		$search->setConditions( $conditions );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'media.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -128,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.lists.type.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -136,14 +126,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		// search with base critera
 		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'media.lists.type.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search->add( $search->compare( '==', 'media.lists.type.editor', $this->editor ) )->slice( 0, 7 );
 		$search->setSortations( [$search->sort( '-', 'media.lists.type.position' )] );
-		$search->slice( 0, 7 );
+
 		$results = $this->object->search( $search, [], $total )->toArray();
+
 		$this->assertEquals( 7, count( $results ) );
 		$this->assertEquals( 11, $total );
 

@@ -50,45 +50,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearch()
+	public function testGet()
 	{
-		$search = $this->object->filter();
+		$search = $this->object->filter()->add( 'attribute.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
-		$expr = [];
-		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.type.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'attribute.type.code', 'size' );
-		$expr[] = $search->compare( '==', 'attribute.type.label', 'Size' );
-		$expr[] = $search->compare( '>=', 'attribute.type.position', 0 );
-		$expr[] = $search->compare( '==', 'attribute.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'attribute.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'attribute.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.type.editor', $this->editor );
-
-		$total = 0;
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 1, $total );
-
-
-		// search with base criteria
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->compare( '==', 'attribute.type.code', 'size' ),
-			$search->compare( '==', 'attribute.type.editor', $this->editor ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
-		$search->setSortations( [$search->sort( '-', 'attribute.type.position' )] );
-		$results = $this->object->search( $search )->toArray();
-		$this->assertEquals( 1, count( $results ) );
-
-		foreach( $results as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
-		}
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
@@ -101,28 +68,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGet()
-	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$actual = $this->object->get( $expected->getId() );
-		$this->assertEquals( $expected, $actual );
-	}
-
-
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'attribute.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -166,6 +115,50 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->get( $itemSaved->getId() );
+	}
+
+
+	public function testSearch()
+	{
+		$search = $this->object->filter();
+
+		$expr = [];
+		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.type.siteid', null );
+		$expr[] = $search->compare( '==', 'attribute.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'attribute.type.code', 'size' );
+		$expr[] = $search->compare( '==', 'attribute.type.label', 'Size' );
+		$expr[] = $search->compare( '>=', 'attribute.type.position', 0 );
+		$expr[] = $search->compare( '==', 'attribute.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'attribute.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'attribute.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.type.editor', $this->editor );
+
+		$total = 0;
+		$search->add( $search->and( $expr ) );
+		$results = $this->object->search( $search, [], $total )->toArray();
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
+
+
+		// search with base criteria
+		$search = $this->object->filter( true );
+		$expr = array(
+			$search->compare( '==', 'attribute.type.code', 'size' ),
+			$search->compare( '==', 'attribute.type.editor', $this->editor ),
+			$search->getConditions(),
+		);
+		$search->add( $search->and( $expr ) );
+		$search->setSortations( [$search->sort( '-', 'attribute.type.position' )] );
+
+		$results = $this->object->search( $search );
+
+		$this->assertEquals( 1, count( $results ) );
+
+		foreach( $results as $itemId => $item ) {
+			$this->assertEquals( $itemId, $item->getId() );
+		}
 	}
 
 

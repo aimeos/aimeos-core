@@ -44,27 +44,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
+		$search = $this->object->filter()->add( 'text.lists.type.editor', '==', $this->editor )->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No text list type item found' ) );
 
-		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No text list type item found' );
-		}
-
-		$this->assertEquals( $expected, $this->object->get( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDelete()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->add( 'text.lists.type.editor', '==', $this->editor );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -125,9 +115,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -135,15 +125,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchSlice()
 	{
 		$total = 0;
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'text.lists.type.code', 'default' ),
-			$search->compare( '==', 'text.lists.type.editor', $this->editor ),
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->setSortations( [$search->sort( '-', 'text.lists.type.position' )] );
-		$search->slice( 0, 1 );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search = $this->object->filter()->add( [
+			'text.lists.type.code' => 'default',
+			'text.lists.type.editor' => $this->editor,
+		] )->order( '-text.lists.type.position' )->slice( 0, 1 );
+
+		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 7, $total );
 
