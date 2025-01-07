@@ -132,7 +132,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		//search with base criteria
 		$search = $this->object->filter( true );
-		$search->add( $search->compare( '==', 'plugin.type.editor', $this->editor ), );
+		$search->add( $search->compare( '==', 'plugin.type.editor', $this->editor ) );
 		$search->setSortations( [$search->sort( '-', 'plugin.type.position' )] );
 
 		$results = $this->object->search( $search );
