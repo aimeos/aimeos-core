@@ -86,6 +86,29 @@ class Standard
 
 
 	/**
+	 * Returns the related domain of the type item
+	 *
+	 * @return string Related domain of the type item
+	 */
+	public function getFor() : string
+	{
+		return $this->get( $this->prefix . 'for', '' );
+	}
+
+
+	/**
+	 * Sets the domain of the type item
+	 *
+	 * @param string $value New related domain of the type item
+	 * @return \Aimeos\MShop\Common\Item\Iface Common type item for chaining method calls
+	 */
+	public function setFor( string $value ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->set( $this->prefix . 'for', $value );
+	}
+
+
+	/**
 	 * Returns the translations of the type item label
 	 *
 	 * @return array Translations of the type item label
@@ -215,6 +238,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case $this->prefix . 'for': $item->setFor( $value ); break;
 				case $this->prefix . 'code': $item->setCode( $value ); break;
 				case $this->prefix . 'domain': $item->setDomain( $value ); break;
 				case $this->prefix . 'i18n': $item->setI18n( (array) $value ); break;
@@ -241,6 +265,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
+		$list[$this->prefix . 'for'] = $this->getFor();
 		$list[$this->prefix . 'code'] = $this->getCode();
 		$list[$this->prefix . 'domain'] = $this->getDomain();
 		$list[$this->prefix . 'label'] = $this->getLabel();

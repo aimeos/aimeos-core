@@ -6,22 +6,6 @@
  */
 
 return [
-	'catalog/lists/type' => [
-		'attribute/default' => ['catalog.lists.type.domain' => 'attribute', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'catalog/default' => ['catalog.lists.type.domain' => 'catalog', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'media/default' => ['catalog.lists.type.domain' => 'media', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'price/default' => ['catalog.lists.type.domain' => 'price', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'product/default' => ['catalog.lists.type.domain' => 'product', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'service/default' => ['catalog.lists.type.domain' => 'service', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'text/default' => ['catalog.lists.type.domain' => 'text', 'catalog.lists.type.code' => 'default', 'catalog.lists.type.label' => 'Standard'],
-		'product/promotion' => ['catalog.lists.type.domain' => 'product', 'catalog.lists.type.code' => 'promotion', 'catalog.lists.type.label' => 'Promotion'],
-
-		'text/unittype1' => ['catalog.lists.type.domain' => 'text', 'catalog.lists.type.code' => 'unittype1', 'catalog.lists.type.label' => 'Unit type 1'],
-
-		'product/new' => ['catalog.lists.type.domain' => 'product', 'catalog.lists.type.code' => 'new', 'catalog.lists.type.label' => 'New products'],
-		'product/internet' => ['catalog.lists.type.domain' => 'product', 'catalog.lists.type.code' => 'internet', 'catalog.lists.type.label' => 'Online only'],
-	],
-
 	'catalog' => [[
 		'catalog.code' => 'root', 'catalog.label' => 'Root', 'catalog.url' => 'home', 'catalog.config' => ['css-class' => 'home'],
 		'catalog' => [[

@@ -7,10 +7,6 @@
  */
 
 return [
-	'plugin/type' => [
-		['plugin.type.domain' => 'plugin', 'plugin.type.code' => 'order', 'plugin.type.label' => 'Order', 'plugin.type.status' => 1],
-	],
-
 	'plugin' => [[
 		'plugin.type' => 'order', 'plugin.label' => 'ProductLimit-Plugin', 'plugin.provider' => 'ProductLimit,Example',
 		'plugin.config' => ["single-number-max" => "10"], 'plugin.position' => 0, 'plugin.status' => 1

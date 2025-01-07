@@ -6,34 +6,6 @@
  */
 
 return [
-	'attribute/type' => [
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'color', 'attribute.type.label' => 'Color', 'attribute.type.position' => 0],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'size', 'attribute.type.label' => 'Size', 'attribute.type.position' => 1],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'width', 'attribute.type.label' => 'Width', 'attribute.type.position' => 2],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'length', 'attribute.type.label' => 'Length', 'attribute.type.position' => 3],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'download', 'attribute.type.label' => 'Download'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'date', 'attribute.type.label' => 'Date'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'price', 'attribute.type.label' => 'Price'],
-		['attribute.type.domain' => 'product', 'attribute.type.code' => 'interval', 'attribute.type.label' => 'Interval'],
-		['attribute.type.domain' => 'media', 'attribute.type.code' => 'color', 'attribute.type.label' => 'Color'],
-	],
-
-	'attribute/lists/type' => [
-		['attribute.lists.type.domain' => 'attribute', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'catalog', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'media', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'price', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'product', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'service', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-		['attribute.lists.type.domain' => 'text', 'attribute.lists.type.code' => 'default', 'attribute.lists.type.label' => 'Standard'],
-	],
-
-	'attribute/property/type' => [
-		['attribute.property.type.domain' => 'attribute', 'attribute.property.type.code' => 'size', 'attribute.property.type.label' => 'Size', 'attribute.property.type.position' => 0],
-		['attribute.property.type.domain' => 'attribute', 'attribute.property.type.code' => 'mtime', 'attribute.property.type.label' => 'Modification time', 'attribute.property.type.position' => 1],
-		['attribute.property.type.domain' => 'attribute', 'attribute.property.type.code' => 'htmlcolor', 'attribute.property.type.label' => 'HTML color code', 'attribute.property.type.position' => 2],
-	],
-
 	'attribute' => [
 		'attribute/product/size/xs' => [
 			'attribute.domain' => 'product', 'attribute.type' => 'size', 'attribute.code' => 'xs',

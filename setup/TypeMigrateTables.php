@@ -25,7 +25,6 @@ class TypeMigrateTables extends Base
 
 	public function up()
 	{
-error_log( __METHOD__ );
 		$this->info( 'Migrate types to mshop_type table', 'vv' );
 
 		$map = [

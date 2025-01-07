@@ -6,19 +6,6 @@
  */
 
 return [
-	'customer/lists/type' => [
-		['customer.lists.type.domain' => 'customer/group', 'customer.lists.type.code' => 'default', 'customer.lists.type.label' => 'Standard', 'customer.lists.type.status' => 1],
-		['customer.lists.type.domain' => 'order', 'customer.lists.type.code' => 'download', 'customer.lists.type.label' => 'Download', 'customer.lists.type.status' => 1],
-		['customer.lists.type.domain' => 'product', 'customer.lists.type.code' => 'favorite', 'customer.lists.type.label' => 'Favorite', 'customer.lists.type.status' => 1],
-		['customer.lists.type.domain' => 'product', 'customer.lists.type.code' => 'watch', 'customer.lists.type.label' => 'Watch list', 'customer.lists.type.status' => 1],
-		['customer.lists.type.domain' => 'service', 'customer.lists.type.code' => 'default', 'customer.lists.type.label' => 'Standard', 'customer.lists.type.status' => 1],
-		['customer.lists.type.domain' => 'text', 'customer.lists.type.code' => 'default', 'customer.lists.type.label' => 'Standard', 'customer.lists.type.status' => 1],
-	],
-
-	'customer/property/type' => [
-		['customer.property.type.domain' => 'customer', 'customer.property.type.code' => 'newsletter', 'customer.property.type.label' => 'Newsletter', 'customer.property.type.status' => 1],
-	],
-
 	'customer' => [
 		'customer/test@example.com' => [
 			'customer.label' => 'unitCustomer001', 'customer.code' => 'test@example.com', 'customer.status' => 1,

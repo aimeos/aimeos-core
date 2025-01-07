@@ -6,11 +6,6 @@
  */
 
 return [
-	'tag/type' => [
-		['tag.type.domain' => 'product', 'tag.type.code' => 'sort', 'tag.type.label' => 'Brand', 'tag.type.status' => 1],
-		['tag.type.domain' => 'product', 'tag.type.code' => 'taste', 'tag.type.label' => 'Taste', 'tag.type.status' => 1],
-	],
-
 	'tag' => [
 		['tag.domain' => 'product', 'tag.type' => 'sort', 'tag.languageid' => 'de', 'tag.label' => 'Expresso'],
 		['tag.domain' => 'product', 'tag.type' => 'sort', 'tag.languageid' => 'de', 'tag.label' => 'Kaffee'],

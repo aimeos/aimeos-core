@@ -5,22 +5,6 @@
  */
 
 return [
-	'service/type' => [
-		['service.type.domain' => 'service', 'service.type.code' => 'payment', 'service.type.label' => 'Payment', 'service.type.status' => 1],
-		['service.type.domain' => 'service', 'service.type.code' => 'delivery', 'service.type.label' => 'Delivery', 'service.type.status' => 1],
-	],
-
-	'service/lists/type' => [
-		['service.lists.type.domain' => 'product', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'attribute', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'catalog', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'media', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'price', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'service', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype1', 'service.lists.type.label' => 'Unit type 1', 'service.lists.type.status' => 1],
-	],
-
 	'service' => [
 		'service/delivery/unitdeliverycode' => [
 			'service.type' => 'delivery', 'service.code' => 'unitdeliverycode', 'service.label' => 'unitlabel',

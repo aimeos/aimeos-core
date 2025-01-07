@@ -21,10 +21,7 @@ class MShopAddTypeData extends Base
 	 */
 	public function after() : array
 	{
-		return [
-			'Attribute', 'Catalog', 'Customer', 'Group', 'Media', 'Plugin', 'Price', 'Product',
-			'Rule', 'Stock', 'Service', 'Supplier', 'Tag', 'Text', 'MShopSetLocale'
-		];
+		return ['Type', 'MShopSetLocale'];
 	}
 
 
@@ -64,6 +61,7 @@ class MShopAddTypeData extends Base
 		foreach( $entries as $entry )
 		{
 			$expr[] = $filter->and( [
+				$filter->is( $prefix . 'for', '==', array_slice( explode( '/', $domain ), 0, -1 ) ),
 				$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
 				$filter->is( $prefix . 'code', '==', $entry['code'] )
 			] );

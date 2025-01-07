@@ -6,13 +6,6 @@
  */
 
 return [
-	'supplier/lists/type' => [
-		['supplier.lists.type.domain' => 'attribute', 'supplier.lists.type.code' => 'default', 'supplier.lists.type.label' => 'Standard', 'supplier.lists.type.status' => 1],
-		['supplier.lists.type.domain' => 'media', 'supplier.lists.type.code' => 'default', 'supplier.lists.type.label' => 'Standard', 'supplier.lists.type.status' => 1],
-		['supplier.lists.type.domain' => 'product', 'supplier.lists.type.code' => 'default', 'supplier.lists.type.label' => 'Standard', 'supplier.lists.type.status' => 1],
-		['supplier.lists.type.domain' => 'text', 'supplier.lists.type.code' => 'default', 'supplier.lists.type.label' => 'Standard', 'supplier.lists.type.status' => 1],
-	],
-
 	'supplier' => [[
 		'supplier.label' => 'Unit Supplier 001', 'supplier.code' => 'unitSupplier001', 'supplier.position' => 0, 'supplier.status' => 1,
 		'address' => [[

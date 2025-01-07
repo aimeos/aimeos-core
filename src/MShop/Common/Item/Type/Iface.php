@@ -38,6 +38,21 @@ interface Iface
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
+	 * Returns the related domain of the type item
+	 *
+	 * @return string Related domain of the type item
+	 */
+	public function getFor() : string;
+
+	/**
+	 * Sets the domain of the type item
+	 *
+	 * @param string $value New related domain of the type item
+	 * @return \Aimeos\MShop\Common\Item\Iface Common type item for chaining method calls
+	 */
+	public function setFor( string $value ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
 	 * Returns the translated name for the type item
 	 *
 	 * @return string Translated name of the type item

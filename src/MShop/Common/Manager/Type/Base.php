@@ -34,6 +34,7 @@ abstract class Base
 
 		$values['.language'] = $locale->getLanguageId();
 		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $locale->getSiteId();
+		$values[$prefix . 'for'] = $values[$prefix . 'for'] ?? join( '/', array_slice( $this->type(), 0, -1 ) );
 
 		return new \Aimeos\MShop\Common\Item\Type\Standard( $prefix, $values );
 	}
@@ -48,7 +49,10 @@ abstract class Base
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		return $this->filterBase( substr( $this->prefix(), 0, - 1 ), $default );
+		$prefix = $this->prefix();
+
+		return $this->filterBase( substr( $prefix, 0, -1 ), $default )
+			->add( $prefix . 'for', '==', join( '/', array_slice( $this->type(), 0, -1 ) ) );
 	}
 
 
@@ -63,6 +67,10 @@ abstract class Base
 		$prefix = $this->prefix();
 
 		return $this->createAttributes( [
+			$prefix . 'for' => [
+				'internalcode' => 'for',
+				'label' => 'Related domain',
+			],
 			$prefix . 'label' => [
 				'internalcode' => 'label',
 				'label' => 'Type label',
@@ -109,7 +117,12 @@ abstract class Base
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$prefix = $this->prefix();
-		return $this->findBase( [$prefix . 'code' => $code, $prefix . 'domain' => $domain], $ref, $default );
+
+		return $this->findBase( [
+			$prefix . 'for' => join( '/', array_slice( $this->type(), 0, -1 ) ),
+			$prefix . 'code' => $code,
+			$prefix . 'domain' => $domain
+		], $ref, $default );
 	}
 
 
@@ -120,7 +133,7 @@ abstract class Base
 	 */
 	protected function table() : string
 	{
-		return str_replace( '_lists_', '_list_', parent::table() );
+		return 'mshop_type';
 	}
 
 

@@ -5,11 +5,6 @@
  */
 
 return [
-	'stock/type' => [
-		'product/unitstock' => ['stock.type.domain' => 'stock', 'stock.type.code' => 'unitstock', 'stock.type.label' => 'Unittest stock'],
-		'product/default' => ['stock.type.domain' => 'stock', 'stock.type.code' => 'default', 'stock.type.label' => 'Standard'],
-	],
-
 	'stock' => [
 		['prodcode' => 'CNE', 'stock.type' => 'default', 'stock.stocklevel' => 1000, 'stock.dateback' => '2010-04-01 00:00:00', 'stock.timeframe' => '4-5d'],
 		['prodcode' => 'CNC', 'stock.type' => 'default', 'stock.stocklevel' => 1200, 'stock.dateback' => '2015-05-01 00:00:00'],

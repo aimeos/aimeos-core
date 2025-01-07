@@ -21,6 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'common.type.id'   => 1,
 			'common.type.siteid' => 2,
+			'common.type.for' => 'test',
 			'common.type.code' => 'code',
 			'common.type.domain' => 'domain',
 			'common.type.label' => 'label',
@@ -178,6 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'common.type.id' => 8,
+			'common.type.for' => 'test',
 			'common.type.code' => 'test',
 			'common.type.domain' => 'testDomain',
 			'common.type.i18n' => ['de' => 'test eintrag'],
@@ -191,6 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['common.type.id'], $item->getId() );
+		$this->assertEquals( $list['common.type.for'], $item->getFor() );
 		$this->assertEquals( $list['common.type.code'], $item->getCode() );
 		$this->assertEquals( $list['common.type.domain'], $item->getDomain() );
 		$this->assertEquals( $list['common.type.i18n'], $item->getI18n() );
@@ -208,6 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.type.id'] );
+		$this->assertEquals( $this->object->getFor(), $arrayObject['common.type.for'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['common.type.code'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['common.type.domain'] );
 		$this->assertEquals( $this->object->getI18n(), $arrayObject['common.type.i18n'] );
