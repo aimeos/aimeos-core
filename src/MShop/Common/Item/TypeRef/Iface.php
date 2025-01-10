@@ -22,9 +22,9 @@ interface Iface
 	/**
 	 * Returns the type item of the item if available.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Type\Iface|null Type item or NULL if not available
+	 * @return \Aimeos\MShop\Type\Item\Iface|null Type item or NULL if not available
 	 */
-	public function getTypeItem() : ?\Aimeos\MShop\Common\Item\Type\Iface;
+	public function getTypeItem() : ?\Aimeos\MShop\Type\Item\Iface;
 
 	/**
 	 * Returns the type of the item.

@@ -28,7 +28,7 @@ class Standard
 	 */
 	public function getFor() : string
 	{
-		return $this->get( 'type.for', '' );
+		return $this->get( $this->prefix() . 'for', '' );
 	}
 
 
@@ -40,7 +40,7 @@ class Standard
 	 */
 	public function setFor( string $value ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.for', $value );
+		return $this->set( $this->prefix() . 'for', $value );
 	}
 
 
@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'type.code', '' );
+		return $this->get( $this->prefix() . 'code', '' );
 	}
 
 
@@ -63,7 +63,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.code', \Aimeos\Utils::code( $code ) );
+		return $this->set( $this->prefix() . 'code', \Aimeos\Utils::code( $code ) );
 	}
 
 
@@ -74,7 +74,7 @@ class Standard
 	 */
 	public function getDomain() : string
 	{
-		return $this->get( 'type.domain', '' );
+		return $this->get( $this->prefix() . 'domain', '' );
 	}
 
 
@@ -86,7 +86,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.domain', $domain );
+		return $this->set( $this->prefix() . 'domain', $domain );
 	}
 
 
@@ -97,7 +97,7 @@ class Standard
 	 */
 	public function getI18n() : array
 	{
-		return (array) $this->get( 'type.i18n', [] );
+		return (array) $this->get( $this->prefix() . 'i18n', [] );
 	}
 
 
@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function setI18n( array $value ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.i18n', $value );
+		return $this->set( $this->prefix() . 'i18n', $value );
 	}
 
 
@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'type.label', '' );
+		return $this->get( $this->prefix() . 'label', '' );
 	}
 
 
@@ -143,7 +143,7 @@ class Standard
 	 */
 	public function setLabel( string $label ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.label', $label );
+		return $this->set( $this->prefix() . 'label', $label );
 	}
 
 
@@ -154,7 +154,7 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( 'type.position', 0 );
+		return $this->get( $this->prefix() . 'position', 0 );
 	}
 
 
@@ -166,7 +166,7 @@ class Standard
 	 */
 	public function setPosition( int $pos ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.position', $pos );
+		return $this->set( $this->prefix() . 'position', $pos );
 	}
 
 
@@ -177,7 +177,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'type.status', 1 );
+		return $this->get( $this->prefix() . 'status', 1 );
 	}
 
 
@@ -189,7 +189,18 @@ class Standard
 	 */
 	public function setStatus( int $status ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( 'type.status', $status );
+		return $this->set( $this->prefix() . 'status', $status );
+	}
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return string Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType() : string
+	{
+		return str_replace( '.', '/', trim( $this->prefix(), '.' ) );
 	}
 
 
@@ -213,19 +224,20 @@ class Standard
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Type\Item\Iface
 	{
+		$prefix = $this->prefix();
 		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'type.for': $item->setFor( $value ); break;
-				case 'type.code': $item->setCode( $value ); break;
-				case 'type.domain': $item->setDomain( $value ); break;
-				case 'type.i18n': $item->setI18n( (array) $value ); break;
-				case 'type.label': $item->setLabel( $value ); break;
-				case 'type.position': $item->setPosition( (int) $value ); break;
-				case 'type.status': $item->setStatus( (int) $value ); break;
+				case $prefix . 'for': $item->setFor( $value ); break;
+				case $prefix . 'code': $item->setCode( $value ); break;
+				case $prefix . 'domain': $item->setDomain( $value ); break;
+				case $prefix . 'i18n': $item->setI18n( (array) $value ); break;
+				case $prefix . 'label': $item->setLabel( $value ); break;
+				case $prefix . 'position': $item->setPosition( (int) $value ); break;
+				case $prefix . 'status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 
@@ -244,16 +256,17 @@ class Standard
 	 */
 	public function toArray( bool $private = false ) : array
 	{
+		$prefix = $this->prefix();
 		$list = parent::toArray( $private );
 
-		$list['type.for'] = $this->getFor();
-		$list['type.code'] = $this->getCode();
-		$list['type.domain'] = $this->getDomain();
-		$list['type.label'] = $this->getLabel();
-		$list['type.position'] = $this->getPosition();
-		$list['type.status'] = $this->getStatus();
-		$list['type.i18n'] = $this->getI18n();
-		$list['type.name'] = $this->getName();
+		$list[$prefix . 'for'] = $this->getFor();
+		$list[$prefix . 'code'] = $this->getCode();
+		$list[$prefix . 'domain'] = $this->getDomain();
+		$list[$prefix . 'label'] = $this->getLabel();
+		$list[$prefix . 'position'] = $this->getPosition();
+		$list[$prefix . 'status'] = $this->getStatus();
+		$list[$prefix . 'i18n'] = $this->getI18n();
+		$list[$prefix . 'name'] = $this->getName();
 
 		return $list;
 	}

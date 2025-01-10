@@ -87,7 +87,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$actual = $this->object->get( $expected->getId(), ['plugin/type'] );
 
 		$this->assertEquals( $expected, $actual );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $actual->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $actual->getTypeItem() );
 	}
 
 

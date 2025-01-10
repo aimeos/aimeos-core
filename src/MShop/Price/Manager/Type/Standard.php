@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Price\Manager\Type;
  * @subpackage Price
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Price\Manager\Type\Iface
 {
 	/** mshop/price/manager/type/submanagers

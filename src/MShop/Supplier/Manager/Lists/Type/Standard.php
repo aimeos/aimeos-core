@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Supplier\Manager\Lists\Type;
  * @subpackage Supplier
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Supplier\Manager\Lists\Type\Iface
 {
 	/** mshop/supplier/manager/lists/type/submanagers

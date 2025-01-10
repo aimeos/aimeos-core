@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Service\Manager\Type;
  * @subpackage Service
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Service\Manager\Type\Iface
 {
 	/** mshop/service/manager/type/submanagers

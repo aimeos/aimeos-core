@@ -30,7 +30,7 @@ interface Iface
 	 * Sets the status of the common list type item
 	 *
 	 * @param int $status New status of the common list type item
-	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
+	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
 	 */
 	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface;
 }

@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Plugin\Manager\Type;
  * @subpackage Plugin
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Plugin\Manager\Type\Iface
 {
 	/** mshop/plugin/manager/type/submanagers

@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $actual->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $actual->getPropertyItems() ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $actual->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $actual->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 

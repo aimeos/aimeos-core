@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Stock\Manager\Type;
  * @subpackage Stock
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Type\Iface
+	extends \Aimeos\MShop\Type\Manager\Iface
 {
 }

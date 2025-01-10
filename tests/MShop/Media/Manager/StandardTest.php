@@ -194,8 +194,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $item, $this->object->get( $item->getId(), ['media/property', 'media/property/type', 'media/type'] ) );
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 

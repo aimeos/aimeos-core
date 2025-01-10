@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$itemB = $this->object->get( $item->getId() );
 		$this->assertEquals( 19.00, $itemB->getTaxRate() );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item->getTypeItem() );
 	}
 
 
@@ -98,8 +98,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item2->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item2->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 

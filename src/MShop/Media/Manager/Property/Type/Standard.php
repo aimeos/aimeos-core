@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Media\Manager\Property\Type;
  * @subpackage Media
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Media\Manager\Property\Type\Iface
 {
 	/** mshop/media/manager/property/type/submanagers

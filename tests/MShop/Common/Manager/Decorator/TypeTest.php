@@ -46,6 +46,6 @@ class TypeTest extends \PHPUnit\Framework\TestCase
 
 		$entries = $this->object->searchRefs( $entries, ['product/type'] );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, current( $entries )['.type'] );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, current( $entries )['.type'] );
 	}
 }

@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $item, $this->object->get( $item->getId(), ['service/type', 'text'] ) );
 		$this->assertEquals( 5, count( $item->getRefItems( 'text' ) ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item->getTypeItem() );
 	}
 
 

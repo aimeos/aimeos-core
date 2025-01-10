@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Plugin\Manager\Type;
  * @subpackage Plugin
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Type\Iface
+	extends \Aimeos\MShop\Type\Manager\Iface
 {
 }

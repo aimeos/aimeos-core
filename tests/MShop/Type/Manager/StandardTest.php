@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDelete()
 	{
-		$item = $this->object->find( 'default', [], 'product' );
+		$item = $this->object->find( 'default', [], 'product', 'product' );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );

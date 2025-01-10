@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Media\Manager\Lists\Type;
  * @subpackage Media
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Type\Iface
+	extends \Aimeos\MShop\Type\Manager\Iface
 {
 }

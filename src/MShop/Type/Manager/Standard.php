@@ -29,56 +29,34 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		$prefix = $this->prefix();
 		$locale = $this->context()->locale();
 
 		$values['.language'] = $locale->getLanguageId();
-		$values['type.siteid'] = $values['type.siteid'] ?? $locale->getSiteId();
+		$values[$prefix . 'for'] = $values[$prefix . 'for'] ?? $this->for();
+		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $locale->getSiteId();
 
-		return new \Aimeos\MShop\Type\Item\Standard( 'type.', $values );
+		return new \Aimeos\MShop\Type\Item\Standard( $prefix, $values );
 	}
 
 
 	/**
-	 * Returns the additional column/search definitions
+	 * Creates a filter object.
 	 *
-	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\Base\Criteria\Iface Returns the filter object
 	 */
-	public function getSaveAttributes() : array
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\Base\Criteria\Iface
 	{
-		return $this->createAttributes( [
-			'type.label' => [
-				'internalcode' => 'label',
-				'label' => 'Type label',
-			],
-			'type.for' => [
-				'internalcode' => 'for',
-				'label' => 'Related domain',
-			],
-			'type.code' => [
-				'internalcode' => 'code',
-				'label' => 'Type code',
-			],
-			'type.domain' => [
-				'internalcode' => 'domain',
-				'label' => 'Type domain',
-			],
-			'type.position' => [
-				'internalcode' => 'pos',
-				'label' => 'Type position',
-				'type' => 'int',
-			],
-			'type.status' => [
-				'internalcode' => 'status',
-				'label' => 'Type status',
-				'type' => 'int',
-			],
-			'type.i18n' => [
-				'internalcode' => 'i18n',
-				'label' => 'Type localization',
-				'type' => 'json',
-				'public' => false,
-			],
-		] );
+		$prefix = $this->prefix();
+		$filter = $this->filterBase( substr( $prefix, 0, -1 ), $default );
+
+		if( $prefix !== 'type.' ) {
+			$filter->add( $prefix . 'for', '==', $this->for() );
+		}
+
+		return $filter;
 	}
 
 
@@ -95,18 +73,93 @@ class Standard
 	public function find( string $code, array $ref = [], ?string $domain = 'product', ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->findBase( ['type.code' => $code, 'type.domain' => $domain], $ref, $default );
+		$prefix = $this->prefix();
+
+		return $this->findBase( [
+			$prefix . 'for' => $type ?: $this->for(),
+			$prefix . 'domain' => $domain,
+			$prefix . 'code' => $code
+		], $ref, $default );
 	}
 
 
 	/**
-	 * Returns the prefix for the item properties and search keys.
+	 * Returns the attributes that can be used for saving.
 	 *
-	 * @return string Prefix for the item properties and search keys
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attribute items
+	 */
+	public function getSaveAttributes( bool $withsub = true ) : array
+	{
+		$prefix = $this->prefix();
+
+		return $this->createAttributes( [
+			$prefix . 'for' => [
+				'internalcode' => 'for',
+				'label' => 'Related domain',
+			],
+			$prefix . 'label' => [
+				'internalcode' => 'label',
+				'label' => 'Type label',
+			],
+			$prefix . 'code' => [
+				'internalcode' => 'code',
+				'label' => 'Type code',
+			],
+			$prefix . 'domain' => [
+				'internalcode' => 'domain',
+				'label' => 'Type domain',
+			],
+			$prefix . 'position' => [
+				'internalcode' => 'pos',
+				'label' => 'Type position',
+				'type' => 'int',
+			],
+			$prefix . 'status' => [
+				'internalcode' => 'status',
+				'label' => 'Type status',
+				'type' => 'int',
+			],
+			$prefix . 'i18n' => [
+				'internalcode' => 'i18n',
+				'label' => 'Type localization',
+				'type' => 'json',
+				'public' => false,
+			],
+		] );
+	}
+
+
+	/**
+	 * Returns the domain and sub-domains the items are for.
+	 *
+	 * @return string Domain and sub-domains, e.g. "product/property"
+	 */
+	protected function for() : string
+	{
+		return join( '/', array_slice( $this->type(), 0, -1 ) ) ?: 'type';
+	}
+
+
+	/**
+	 * Returns the prefix used for the item keys.
+	 *
+	 * @return string Item key prefix
 	 */
 	protected function prefix() : string
 	{
-		return 'type.';
+		return join( '.', $this->type() ) . '.';
+	}
+
+
+	/**
+	 * Returns the name of the used table
+	 *
+	 * @return string Table name e.g. "mshop_product_list_type"
+	 */
+	protected function table() : string
+	{
+		return 'mshop_type';
 	}
 
 

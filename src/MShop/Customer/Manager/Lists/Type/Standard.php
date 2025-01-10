@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
  * @subpackage Customer
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Type\Base
+	extends \Aimeos\MShop\Type\Manager\Standard
 	implements \Aimeos\MShop\Customer\Manager\Lists\Type\Iface
 {
 	/** mshop/customer/manager/lists/type/submanagers

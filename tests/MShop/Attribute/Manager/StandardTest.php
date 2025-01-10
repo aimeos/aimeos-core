@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'product', $item->getDomain() );
 		$this->assertEquals( 1, count( $item->getListItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getRefItems( 'text', null, null, false ) ) );
-		$this->assertInstanceof( \Aimeos\MShop\Common\Item\Type\Iface::class, $item->get( '.type' ) );
+		$this->assertInstanceof( \Aimeos\MShop\Type\Item\Iface::class, $item->get( '.type' ) );
 	}
 
 
@@ -122,8 +122,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $itemB->getListItems( null, null, null, false ) ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $itemB->getTypeItem() );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $itemB->getPropertyItems()->first()?->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $itemB->getTypeItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $itemB->getPropertyItems()->first()?->getTypeItem() );
 	}
 
 
