@@ -203,6 +203,7 @@
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
 		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" checkreturn="true" logoutput="true" />
+		<exec command="${bindir}potrans deepl --only ${po-filename}" logoutput="true" />
 	</target>
 
 
