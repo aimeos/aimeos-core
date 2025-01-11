@@ -76,7 +76,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "platba"
 
 #. Subscription reason code
 msgid "reason:0"

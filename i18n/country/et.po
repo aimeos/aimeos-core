@@ -118,13 +118,13 @@ msgid "BR"
 msgstr "Brasiilia"
 
 msgid "BS"
-msgstr ""
+msgstr "BS"
 
 msgid "BT"
 msgstr "Bhutan"
 
 msgid "BV"
-msgstr ""
+msgstr "BV"
 
 msgid "BW"
 msgstr "Botswana"
@@ -142,7 +142,7 @@ msgid "CC"
 msgstr "Kookossaared (Keelingi saared)"
 
 msgid "CD"
-msgstr ""
+msgstr "CD"
 
 msgid "CF"
 msgstr "Kesk-Aafrika Vabariik"
@@ -181,7 +181,7 @@ msgid "CV"
 msgstr "Cabo Verde"
 
 msgid "CW"
-msgstr ""
+msgstr "CW"
 
 msgid "CX"
 msgstr "Jõulusaar"
@@ -208,7 +208,7 @@ msgid "DO"
 msgstr "Dominikaani Vabariik"
 
 msgid "DZ"
-msgstr ""
+msgstr "DZ"
 
 msgid "EC"
 msgstr "Ecuador"
@@ -220,7 +220,7 @@ msgid "EG"
 msgstr "Egiptus"
 
 msgid "EH"
-msgstr ""
+msgstr "EH"
 
 msgid "ER"
 msgstr "Eritrea"
@@ -241,7 +241,7 @@ msgid "FK"
 msgstr "Falklandi saared"
 
 msgid "FM"
-msgstr ""
+msgstr "FM"
 
 msgid "FO"
 msgstr "Fääri saared"
@@ -265,7 +265,7 @@ msgid "GF"
 msgstr "Prantsuse Guajaana"
 
 msgid "GG"
-msgstr ""
+msgstr "GG"
 
 msgid "GH"
 msgstr "Ghana"
@@ -277,7 +277,7 @@ msgid "GL"
 msgstr "Gröönimaa"
 
 msgid "GM"
-msgstr ""
+msgstr "GM"
 
 msgid "GN"
 msgstr "Guinea"
@@ -292,7 +292,7 @@ msgid "GR"
 msgstr "Kreeka"
 
 msgid "GS"
-msgstr ""
+msgstr "GS"
 
 msgid "GT"
 msgstr "Guatemala "
@@ -310,7 +310,7 @@ msgid "HK"
 msgstr "Hong Kong"
 
 msgid "HM"
-msgstr ""
+msgstr "HM"
 
 msgid "HN"
 msgstr "Honduras"
@@ -334,13 +334,13 @@ msgid "IL"
 msgstr "Iisrael"
 
 msgid "IM"
-msgstr ""
+msgstr "IM"
 
 msgid "IN"
 msgstr "India"
 
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgid "IQ"
 msgstr "Iraak"
@@ -355,70 +355,70 @@ msgid "IT"
 msgstr "Itaalia"
 
 msgid "JE"
-msgstr ""
+msgstr "JE"
 
 msgid "JM"
-msgstr ""
+msgstr "JM"
 
 msgid "JO"
-msgstr ""
+msgstr "JO"
 
 msgid "JP"
-msgstr ""
+msgstr "JP"
 
 msgid "KE"
-msgstr ""
+msgstr "KE"
 
 msgid "KG"
-msgstr ""
+msgstr "KG"
 
 msgid "KH"
 msgstr "Kambodža"
 
 msgid "KI"
-msgstr ""
+msgstr "KI"
 
 msgid "KM"
 msgstr "Komoori saared"
 
 msgid "KN"
-msgstr ""
+msgstr "KN"
 
 msgid "KP"
-msgstr ""
+msgstr "KP"
 
 msgid "KR"
-msgstr ""
+msgstr "KR"
 
 msgid "KW"
-msgstr ""
+msgstr "KW"
 
 msgid "KY"
 msgstr "Kaimanisaared"
 
 msgid "KZ"
-msgstr ""
+msgstr "KZ"
 
 msgid "LA"
-msgstr ""
+msgstr "LA"
 
 msgid "LB"
-msgstr ""
+msgstr "LB"
 
 msgid "LC"
-msgstr ""
+msgstr "LC"
 
 msgid "LI"
-msgstr ""
+msgstr "LI"
 
 msgid "LK"
-msgstr ""
+msgstr "LK"
 
 msgid "LR"
-msgstr ""
+msgstr "LR"
 
 msgid "LS"
-msgstr ""
+msgstr "LS"
 
 msgid "LT"
 msgstr "Leedu"
@@ -430,241 +430,241 @@ msgid "LV"
 msgstr "Läti"
 
 msgid "LY"
-msgstr ""
+msgstr "LY"
 
 msgid "MA"
-msgstr ""
+msgstr "MA"
 
 msgid "MC"
-msgstr ""
+msgstr "MC"
 
 msgid "MD"
-msgstr ""
+msgstr "MD"
 
 msgid "ME"
-msgstr ""
+msgstr "ME"
 
 msgid "MF"
-msgstr ""
+msgstr "MF"
 
 msgid "MG"
-msgstr ""
+msgstr "MG"
 
 msgid "MH"
-msgstr ""
+msgstr "MH"
 
 msgid "MK"
-msgstr ""
+msgstr "MK"
 
 msgid "ML"
-msgstr ""
+msgstr "ML"
 
 msgid "MM"
 msgstr "Birma"
 
 msgid "MN"
-msgstr ""
+msgstr "MN"
 
 msgid "MO"
-msgstr ""
+msgstr "MO"
 
 msgid "MP"
-msgstr ""
+msgstr "MP"
 
 msgid "MQ"
-msgstr ""
+msgstr "MQ"
 
 msgid "MR"
-msgstr ""
+msgstr "MR"
 
 msgid "MS"
-msgstr ""
+msgstr "MS"
 
 msgid "MT"
-msgstr ""
+msgstr "MT"
 
 msgid "MU"
-msgstr ""
+msgstr "MU"
 
 msgid "MV"
-msgstr ""
+msgstr "MV"
 
 msgid "MW"
-msgstr ""
+msgstr "MW"
 
 msgid "MX"
-msgstr ""
+msgstr "MX"
 
 msgid "MY"
-msgstr ""
+msgstr "MINU"
 
 msgid "MZ"
-msgstr ""
+msgstr "MZ"
 
 msgid "NA"
-msgstr ""
+msgstr "NA"
 
 msgid "NC"
-msgstr ""
+msgstr "NC"
 
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 msgid "NF"
-msgstr ""
+msgstr "NF"
 
 msgid "NG"
-msgstr ""
+msgstr "NG"
 
 msgid "NI"
-msgstr ""
+msgstr "NI"
 
 msgid "NL"
-msgstr ""
+msgstr "NL"
 
 msgid "NO"
-msgstr ""
+msgstr "EI"
 
 msgid "NP"
-msgstr ""
+msgstr "NP"
 
 msgid "NR"
-msgstr ""
+msgstr "NR"
 
 msgid "NU"
-msgstr ""
+msgstr "NU"
 
 msgid "NZ"
-msgstr ""
+msgstr "NZ"
 
 msgid "OM"
-msgstr ""
+msgstr "OM"
 
 msgid "PA"
-msgstr ""
+msgstr "PA"
 
 msgid "PE"
-msgstr ""
+msgstr "PE"
 
 msgid "PF"
 msgstr "Prantsuse Polüneesia"
 
 msgid "PG"
-msgstr ""
+msgstr "PG"
 
 msgid "PH"
-msgstr ""
+msgstr "PH"
 
 msgid "PK"
-msgstr ""
+msgstr "PK"
 
 msgid "PL"
-msgstr ""
+msgstr "PL"
 
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 msgid "PN"
-msgstr ""
+msgstr "PN"
 
 msgid "PR"
-msgstr ""
+msgstr "PR"
 
 msgid "PS"
-msgstr ""
+msgstr "PS"
 
 msgid "PT"
-msgstr ""
+msgstr "PT"
 
 msgid "PW"
-msgstr ""
+msgstr "PW"
 
 msgid "PY"
-msgstr ""
+msgstr "PY"
 
 msgid "QA"
-msgstr ""
+msgstr "QA"
 
 msgid "RE"
-msgstr ""
+msgstr "RE"
 
 msgid "RO"
-msgstr ""
+msgstr "RO"
 
 msgid "RS"
-msgstr ""
+msgstr "RS"
 
 msgid "RU"
-msgstr ""
+msgstr "RU"
 
 msgid "RW"
-msgstr ""
+msgstr "RW"
 
 msgid "SA"
-msgstr ""
+msgstr "SA"
 
 msgid "SB"
-msgstr ""
+msgstr "SB"
 
 msgid "SC"
-msgstr ""
+msgstr "SC"
 
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 msgid "SG"
-msgstr ""
+msgstr "SG"
 
 msgid "SH"
-msgstr ""
+msgstr "SH"
 
 msgid "SI"
-msgstr ""
+msgstr "SI"
 
 msgid "SJ"
-msgstr ""
+msgstr "SJ"
 
 msgid "SK"
-msgstr ""
+msgstr "SK"
 
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 msgid "SM"
-msgstr ""
+msgstr "SM"
 
 msgid "SN"
-msgstr ""
+msgstr "SN"
 
 msgid "SO"
-msgstr ""
+msgstr "SO"
 
 msgid "SR"
-msgstr ""
+msgstr "SR"
 
 msgid "SS"
-msgstr ""
+msgstr "SS"
 
 msgid "ST"
-msgstr ""
+msgstr "ST"
 
 msgid "SV"
 msgstr "El Salvador"
 
 msgid "SX"
-msgstr ""
+msgstr "SX"
 
 msgid "SY"
-msgstr ""
+msgstr "SY"
 
 msgid "SZ"
-msgstr ""
+msgstr "SZ"
 
 msgid "TC"
-msgstr ""
+msgstr "TC"
 
 msgid "TD"
 msgstr "Tšaad"
@@ -673,103 +673,103 @@ msgid "TF"
 msgstr "Prantsuse Antarktika ja Lõunaalad"
 
 msgid "TG"
-msgstr ""
+msgstr "TG"
 
 msgid "TH"
-msgstr ""
+msgstr "TH"
 
 msgid "TJ"
-msgstr ""
+msgstr "TJ"
 
 msgid "TK"
-msgstr ""
+msgstr "TK"
 
 msgid "TL"
 msgstr "Timor-Leste"
 
 msgid "TM"
-msgstr ""
+msgstr "TM"
 
 msgid "TN"
-msgstr ""
+msgstr "TN"
 
 msgid "TO"
-msgstr ""
+msgstr "TO"
 
 msgid "TR"
-msgstr ""
+msgstr "TR"
 
 msgid "TT"
-msgstr ""
+msgstr "TT"
 
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 msgid "TW"
-msgstr ""
+msgstr "TW"
 
 msgid "TZ"
-msgstr ""
+msgstr "TZ"
 
 msgid "UA"
-msgstr ""
+msgstr "UA"
 
 msgid "UG"
-msgstr ""
+msgstr "UG"
 
 msgid "UM"
-msgstr ""
+msgstr "UM"
 
 msgid "US"
-msgstr ""
+msgstr "USA"
 
 msgid "UY"
-msgstr ""
+msgstr "UY"
 
 msgid "UZ"
-msgstr ""
+msgstr "UZ"
 
 msgid "VA"
 msgstr "Püha Aujärg"
 
 msgid "VC"
-msgstr ""
+msgstr "VC"
 
 msgid "VE"
-msgstr ""
+msgstr "VE"
 
 msgid "VG"
 msgstr "Briti Neitsisaared"
 
 msgid "VI"
-msgstr ""
+msgstr "VI"
 
 msgid "VN"
-msgstr ""
+msgstr "VN"
 
 msgid "VU"
-msgstr ""
+msgstr "VU"
 
 msgid "WF"
-msgstr ""
+msgstr "WF"
 
 msgid "WS"
-msgstr ""
+msgstr "WS"
 
 msgid "XK"
-msgstr ""
+msgstr "XK"
 
 msgid "YE"
-msgstr ""
+msgstr "YE"
 
 msgid "YT"
-msgstr ""
+msgstr "YT"
 
 msgid "ZA"
-msgstr ""
+msgstr "ZA"
 
 msgid "ZM"
-msgstr ""
+msgstr "ZM"
 
 msgid "ZW"
-msgstr ""
+msgstr "ZW"

@@ -1,0 +1,952 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+
+#, php-format
+msgid "Address for domain \"%1$s\" not available"
+msgstr "Η διεύθυνση για τον τομέα \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr "Διεύθυνση για τον τύπο \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Address item for removal not found"
+msgstr "Δεν βρέθηκε στοιχείο διεύθυνσης για αφαίρεση"
+
+#, php-format
+msgid "Address not available"
+msgstr "Η διεύθυνση δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Address salutation \"%1$s\" not within allowed range"
+msgstr "Ο χαιρετισμός διεύθυνσης \"%1$s\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Address search configuration not available"
+msgstr "Δεν είναι διαθέσιμη η ρύθμιση παραμέτρων αναζήτησης διευθύνσεων"
+
+#, php-format
+msgid "Address type \"%1$s\" not within allowed range"
+msgstr "Ο τύπος διεύθυνσης \"%1$s\" δεν είναι εντός της επιτρεπόμενης περιοχής"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr "Προέκυψε άγνωστο σφάλμα με κωδικό %1$d"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr "Απαιτείται τουλάχιστον ένα κλειδί για τη συνάθροιση"
+
+#, php-format
+msgid "Basket empty"
+msgstr "Καλάθι άδειο"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr "Το αγορασμένο κουπόνι είναι σε νόμισμα \"%1$s\", το καλάθι χρησιμοποιεί \"%2$s\""
+
+#, php-format
+msgid "Cache object not available"
+msgstr "Αντικείμενο cache δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Called unknown method \"%1$s\" on class \"%2$s\""
+msgstr "Κλήθηκε άγνωστη μέθοδος \"%1$s\" στην κλάση \"%2$s\""
+
+#, php-format
+msgid "Catalog node for ID \"%1$s\" not available"
+msgstr "Ο κόμβος καταλόγου για το αναγνωριστικό \"%1$s\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "Catalog path for ID \"%1$s\" not found"
+msgstr "Η διαδρομή καταλόγου για το αναγνωριστικό \"%1$s\" δεν βρέθηκε"
+
+#, php-format
+msgid "Checks for available addresses in basket failed"
+msgstr "Οι έλεγχοι για διαθέσιμες διευθύνσεις στο καλάθι απέτυχαν"
+
+#, php-format
+msgid "Checks for available service items in basket failed"
+msgstr "Έλεγχοι για διαθέσιμα στοιχεία υπηρεσίας στο καλάθι απέτυχαν"
+
+#, php-format
+msgid "Child node with index \"%1$d\" not available"
+msgstr "Παιδικός κόμβος με δείκτη \"%1$d\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Η κλάση \"%1$s\" δεν υλοποιεί τη διασύνδεση \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Η κλάση \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than %2$d characters"
+msgstr "Ο κωδικός \"%1$s\" δεν πρέπει να είναι μεγαλύτερος από %2$d χαρακτήρες"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr "Ο κωδικός \"%1$s\" δεν πρέπει να υπερβαίνει τους 32 χαρακτήρες"
+
+#, php-format
+msgid "Code contains invalid characters: \"%1$s\""
+msgstr "Ο κωδικός περιέχει άκυρους χαρακτήρες: \"%1$s\""
+
+#, php-format
+msgid "Code is too long"
+msgstr "Ο κώδικας είναι πολύ μεγάλος"
+
+#, php-format
+msgid "Code must not be longer than 255 characters"
+msgstr "Ο κωδικός δεν πρέπει να υπερβαίνει τους 255 χαρακτήρες"
+
+#, php-format
+msgid "Code must not be longer than 32 characters"
+msgstr "Ο κωδικός δεν πρέπει να υπερβαίνει τους 32 χαρακτήρες"
+
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr "Λείπει η ρύθμιση παραμέτρων για το \"%1$s\""
+
+#, php-format
+msgid "Configuration invalid"
+msgstr "Μη έγκυρη διαμόρφωση"
+
+#, php-format
+msgid "Configuration not available"
+msgstr "Διαμόρφωση δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Configuration object not available"
+msgstr "Αντικείμενο διαμόρφωσης δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr "Η διαμόρφωση της απαραίτητης δήλωσης SQL για το \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Coupon in basket is not available any more"
+msgstr "Το κουπόνι στο καλάθι δεν είναι πλέον διαθέσιμο"
+
+msgid "Coupon is not available any more"
+msgstr "Το κουπόνι δεν είναι πλέον διαθέσιμο"
+
+#, php-format
+msgid "Curl could not be initialized"
+msgstr "Η Curl δεν μπόρεσε να αρχικοποιηθεί"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr "Σφάλμα Curl: \"%1$s\" - \"%2$s\""
+
+#, php-format
+msgid "Database manager object not available"
+msgstr "Το αντικείμενο διαχείρισης βάσης δεδομένων δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr "Τιμή ημερομηνίας πριν από το \"%1$s\""
+
+#, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "Η λήψη του αρχείου \"%1$s\" απέτυχε"
+
+#, php-format
+msgid "Duplicate coupon code"
+msgstr "Διπλό κωδικό κουπονιού"
+
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr "Διπλό κουπόνι με κωδικό \"%1$s\""
+
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr "Η επέκταση του κόμβου \"%1$s\" απέτυχε"
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "Το αρχείο \"%1$s\" δεν βρέθηκε"
+
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr "Το αρχείο ή ο κατάλογος \"%1$s\" δεν υπάρχει"
+
+#, php-format
+msgid "File system manager object not available"
+msgstr "Το αντικείμενο διαχείρισης συστήματος αρχείων δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Finished order status import from \"%1$s\""
+msgstr "Ολοκληρώθηκε η εισαγωγή κατάστασης παραγγελίας από το \"%1$s\""
+
+#, php-format
+msgid "Finished order status import from file \"%1$s\""
+msgstr "Ολοκληρώθηκε η εισαγωγή κατάστασης παραγγελίας από το αρχείο \"%1$s\""
+
+#, php-format
+msgid "Flags \"%1$s\" not within allowed range"
+msgstr "Οι σημαίες \"%1$s\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Flags not within allowed range"
+msgstr "Σημαίες που δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "ID of last inserted database record not available"
+msgstr "Το αναγνωριστικό της τελευταίας εισαχθείσας εγγραφής στη βάση δεδομένων δεν είναι διαθέσιμο"
+
+#. / Locale ID %1$s
+#, php-format
+msgid "Internationalization object not available for \"%1$s\""
+msgstr "Το αντικείμενο διεθνοποίησης δεν είναι διαθέσιμο για το \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO country code"
+msgstr "Μη έγκυρος κωδικός χώρας ISO"
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr "Μη έγκυρος κωδικός χώρας ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO currency code"
+msgstr "Μη έγκυρος κωδικός νομίσματος ISO"
+
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr "Μη έγκυρος κωδικός νομίσματος ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr "Μη έγκυρος κωδικός γλώσσας ISO"
+
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr "Μη έγκυρος κωδικός γλώσσας ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr "Μη έγκυρο JSON ως αποτέλεσμα της αναζήτησης για το αναγνωριστικό \"%2$s\" στο \"%1$s\": %3$s"
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr "Μη έγκυρο χαρακτηριστικό στη θέση \"%1$d\""
+
+#, php-format
+msgid "Invalid characters in ISO currency code \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στον κωδικό νομίσματος ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in ISO language code \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στον κωδικό γλώσσας ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα της κλάσης \"%1$s\""
+
+#, php-format
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία \"%1$s\". Αναμένεται η μορφή ISO \"YYYY-MM-DD hh:mm:ss\"."
+
+#, php-format
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία \"%1$s\". Αναμένεται η μορφή ISO \"YYYY-MM-DD\"."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία, αναμένεται η μορφή ISO \"YYYY-MM-DD hh:mm:ss\""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία, αναμένεται η μορφή ISO \"YYYY-MM-DD\""
+
+#, php-format
+msgid "Invalid characters in domain name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα τομέα \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in email address: \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στη διεύθυνση ηλεκτρονικού ταχυδρομείου: \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα διαχειριστή \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα διαχειριστή \"%1$s\" στο \"%2$s\""
+
+#, php-format
+msgid "Invalid characters in price \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στην τιμή \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in provider name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα του παρόχου \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in purchase date \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία αγοράς \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in type name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα τύπου \"%1$s\""
+
+#, php-format
+msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
+msgstr "Μη έγκυρη ρύθμιση παραμέτρων για τον πάροχο κουπονιών \"%1$s\", χρειάζεται \"%2$s\""
+
+msgid "Invalid delivery type"
+msgstr "Μη έγκυρος τύπος παράδοσης"
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Μη έγκυρο εργοστάσιο \"%1$s\""
+
+#, php-format
+msgid "Invalid mime type \"%1$s\""
+msgstr "Μη έγκυρος τύπος mime \"%1$s\""
+
+#, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr "Μη έγκυρο όνομα παρόχου \"%1$s\""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
+msgstr "Μη έγκυρο σειριοποιημένο καλάθι. Το \"%1$s\" επέστρεψε το \"%2$s\"."
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr "Μη έγκυρο σειριοποιημένο καλάθι. Το \"%1$s\" επιστρέφει το \"%2$s\"."
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
+msgstr "Μη έγκυρη μορφή χρονικού διαστήματος \"%1$s\""
+
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr "Μη έγκυρος τύπος \"%1$s\""
+
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
+msgstr "Μη έγκυρη διεύθυνση URL ιστότοπου \"%1$s\""
+
+#, php-format
+msgid "Item can not be deleted. Site ID of item differs from present site ID."
+msgstr "Το στοιχείο δεν μπορεί να διαγραφεί. Το αναγνωριστικό τοποθεσίας του στοιχείου διαφέρει από το παρόν αναγνωριστικό τοποθεσίας."
+
+#, php-format
+msgid "Item could not be saved using method save(). Item ID not available."
+msgstr "Το στοιχείο δεν μπόρεσε να αποθηκευτεί με τη μέθοδο save(). Το αναγνωριστικό του στοιχείου δεν είναι διαθέσιμο."
+
+#, php-format
+msgid "Item referenced in domain \"%1$s\" not found: %2$s"
+msgstr "Το στοιχείο που αναφέρεται στον τομέα \"%1$s\" δεν βρέθηκε: %2$s"
+
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο με αναγνωριστικό \"%1$s\""
+
+#, php-format
+msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο με αναγνωριστικό \"%2$s\" στο \"%1$s\""
+
+#, php-format
+msgid "Job with ID \"%1$s\" not found"
+msgstr "Δεν βρέθηκε εργασία με αναγνωριστικό \"%1$s\""
+
+#, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο λίστας για αφαίρεση από τον τομέα \"%1$s\""
+
+#, php-format
+msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο λίστας με αναγνωριστικό \"%2$s\" στο \"%1$s\""
+
+#, php-format
+msgid "List type for attribute item with ID \"%1$s\" not available"
+msgstr "Τύπος λίστας για το στοιχείο χαρακτηριστικού με αναγνωριστικό \"%1$s\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "List type for price item with ID \"%1$s\" not available"
+msgstr "Τύπος λίστας για στοιχείο τιμής με αναγνωριστικό \"%1$s\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "List type for text item with ID \"%1$s\" not available"
+msgstr "Τύπος λίστας για στοιχείο κειμένου με αναγνωριστικό \"%1$s\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "Loading of XML response \"%1$s\" from delivery provider failed"
+msgstr "Η φόρτωση της απόκρισης XML \"%1$s\" από τον πάροχο παράδοσης απέτυχε"
+
+#, php-format
+msgid "Locale item for site \"%1$s\" not found"
+msgstr "Το στοιχείο τοπικής γλώσσας για την τοποθεσία \"%1$s\" δεν βρέθηκε"
+
+#, php-format
+msgid "Locale object not available"
+msgstr "Αντικείμενο τοπικής γλώσσας δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Lock flag \"%1$d\" not within allowed range"
+msgstr "Η σημαία κλειδώματος \"%1$d\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Log entry with ID \"%1$s\" not found"
+msgstr "Δεν βρέθηκε εγγραφή καταγραφής με αναγνωριστικό \"%1$s\""
+
+#, php-format
+msgid "Log manager object not available"
+msgstr "Αντικείμενο διαχειριστή αρχείων καταγραφής δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Mail object not available"
+msgstr "Αντικείμενο αλληλογραφίας δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr "Η διαδρομή διαχειριστή \"%1$s\" είναι άκυρη"
+
+#, php-format
+msgid "Manager path is empty"
+msgstr "Η διαδρομή διαχειριστή είναι κενή"
+
+#, php-format
+msgid "Message queue object not available"
+msgstr "Αντικείμενο ουράς μηνυμάτων δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Method \"%1$s\" for locale site manager not available"
+msgstr "Μέθοδος \"%1$s\" για τη διαχείριση τοποθεσίας τοπικής κλίμακας δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Method \"%1$s\" for provider not available"
+msgstr "Η μέθοδος \"%1$s\" για τον πάροχο δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Missing configuration \"%1$s\""
+msgstr "Λείπει η ρύθμιση παραμέτρων \"%1$s\""
+
+#, php-format
+msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr "Το νέο αναγνωριστικό \"%1$s\" για το στοιχείο διαφέρει από το παλιό αναγνωριστικό \"%2$s\""
+
+#, php-format
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
+msgstr "Ο πρόσφατα δημιουργημένος ιστότοπος δεν μπορεί να αποθηκευτεί χρησιμοποιώντας τη μέθοδο \"save()\". Δοκιμάστε να χρησιμοποιήσετε τη μέθοδο \"insert()\"."
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr "Δεν βρέθηκε αρχείο XML \"%1$s\""
+
+#, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr "Δεν υπάρχει διαθέσιμο αγορασμένο κουπόνι για τον κωδικό \"%1$s\""
+
+#, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr "Δεν υπάρχει κόμβος καταλόγου για το αναγνωριστικό \"%1$s\""
+
+#, php-format
+msgid "No item found for conditions: %1$s"
+msgstr "Δεν βρέθηκε κανένα στοιχείο για τις συνθήκες: %1$s"
+
+#, php-format
+msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr "Δεν βρέθηκε στοιχείο με \"%2$s\" στο \"%1$s\""
+
+#, php-format
+msgid "No more credit available for voucher \"%1$s\""
+msgstr "Δεν υπάρχει διαθέσιμη πίστωση για το κουπόνι \"%1$s\""
+
+#, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr "Δεν βρέθηκε παραγγελία για το αναγνωριστικό \"%1$s\""
+
+#, php-format
+msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
+msgstr "Δεν υπάρχει διαθέσιμη τιμή για το αναγνωριστικό προϊόντος \"%1$s\" ή τον κωδικό προϊόντος \"%2$s\""
+
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "Δεν βρέθηκε προϊόν με κωδικό \"%1$s\""
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr "Δεν υπάρχει διαθέσιμη έκπτωση για το νόμισμα \"%1$s\""
+
+#, php-format
+msgid "No search configuration available for \"%1$s\""
+msgstr "Δεν υπάρχουν διαθέσιμες ρυθμίσεις αναζήτησης για το \"%1$s\""
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
+msgstr "Δεν υπάρχουν διαθέσιμες ρυθμίσεις αναζήτησης για τον τομέα \"%1$s\""
+
+#, php-format
+msgid "No search keys available"
+msgstr "Δεν υπάρχουν διαθέσιμα πλήκτρα αναζήτησης"
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr "Δεν βρέθηκε τύπος αποθέματος για τον κωδικό \"%1$s\""
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "Δεν βρέθηκε τύπος για τον κωδικό \"%1$s\""
+
+#, php-format
+msgid "No warehouse for code \"%1$s\" found"
+msgstr "Δεν βρέθηκε αποθήκη για τον κωδικό \"%1$s\""
+
+#, php-format
+msgid "Not a date"
+msgstr "Δεν είναι ημερομηνία"
+
+#, php-format
+msgid "Not a date and time"
+msgstr "Όχι ημερομηνία και ώρα"
+
+#, php-format
+msgid "Not a key/value map"
+msgstr "Όχι ένας χάρτης κλειδιών/τιμών"
+
+#, php-format
+msgid "Not a list item"
+msgstr "Δεν είναι στοιχείο λίστας"
+
+#, php-format
+msgid "Not a listed value"
+msgstr "Δεν είναι αναφερόμενη αξία"
+
+#, php-format
+msgid "Not a number"
+msgstr "Δεν είναι αριθμός"
+
+#, php-format
+msgid "Not a string"
+msgstr "Δεν είναι συμβολοσειρά"
+
+#, php-format
+msgid "Not a time"
+msgstr "Δεν είναι ώρα"
+
+#, php-format
+msgid "Not a true/false value"
+msgstr "Δεν είναι τιμή αληθούς/ψευδούς"
+
+#, php-format
+msgid "Not an integer number"
+msgstr "Δεν είναι ακέραιος αριθμός"
+
+#, php-format
+msgid "Object is not of required type \"%1$s\""
+msgstr "Το αντικείμενο δεν είναι του απαιτούμενου τύπου \"%1$s\""
+
+#, php-format
+msgid "Operation not supported"
+msgstr "Η λειτουργία δεν υποστηρίζεται"
+
+#, php-format
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr "Το αναγνωριστικό παραγγελίας \"%1$s\" στην απάντηση XML του παρόχου παράδοσης διαφέρει από το αποθηκευμένο αναγνωριστικό τιμολογίου \"%2$s\" της παραγγελίας"
+
+#, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr "Η θέση της διεύθυνσης παραγγελίας \"%1$s\" πρέπει να είναι μεγαλύτερη από 0"
+
+#, php-format
+msgid "Order base item with order ID \"%1$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο βάσης παραγγελίας με αναγνωριστικό παραγγελίας \"%1$s\""
+
+#, php-format
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr "Τα δεδομένα παραγγελίας που εστάλησαν στον πάροχο παράδοσης απορρίφθηκαν με κωδικό \"%1$s\" σύμφωνα με την απάντηση XML"
+
+#, php-format
+msgid "Order delivery status \"%1$s\" not within allowed range"
+msgstr "Η κατάσταση παράδοσης της παραγγελίας \"%1$s\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr "Η κατάσταση πληρωμής της παραγγελίας \"%1$s\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
+msgstr "Η θέση του προϊόντος παραγγελίας \"%1$s\" πρέπει να είναι μεγαλύτερη από 0"
+
+#, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr "Η θέση υπηρεσίας παραγγελίας \"%1$s\" πρέπει να είναι μεγαλύτερη από 0"
+
+#, php-format
+msgid "Order type \"%1$s\" not within allowed range"
+msgstr "Ο τύπος παραγγελίας \"%1$s\" δεν είναι εντός του επιτρεπόμενου εύρους"
+
+#, php-format
+msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr "Η παραγγελία με αναγνωριστικό \"%1$s\" απορρίφθηκε με κωδικό \"%2$s\": %3$s"
+
+#, php-format
+msgid "Parameter \"%1$s\" for configuration not available"
+msgstr "Η παράμετρος \"%1$s\" για τη διαμόρφωση δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Password object not available"
+msgstr "Αντικείμενο κωδικού πρόσβασης δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr "PayPal Express: με ID \"%1$s\" και κατάσταση \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr "PayPal Express: με ID \"%1$s\" και κατάσταση \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr "PayPal Express: \"%1$s\""
+
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr "PayPal Express: ID συναλλαγής πληρωμής για ID παραγγελίας \"%1$s\" δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr "PayPal Express: Το αίτημα για το αναγνωριστικό παραγγελίας \"%1$s\" απέτυχε με \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr "PayPal Express: %1$s\" για ID παραγγελίας \"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr "PayPal Express: \"%1$s\""
+
+msgid "Payment costs"
+msgstr "Κόστος πληρωμών"
+
+#, php-format
+msgid "Please have a look at the prices of the products in your basket"
+msgstr "Παρακαλούμε δείτε τις τιμές των προϊόντων στο καλάθι σας."
+
+#, php-format
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr "Η τιμή δεν μπορεί να προστεθεί. Το αναγνωριστικό νομίσματος \"%1$s\" του στοιχείου τιμής και το αναγνωριστικό νομίσματος \"%2$s\" δεν ταιριάζουν."
+
+#, php-format
+msgid "Price for the given quantity \"%1$d\" not available"
+msgstr "Η τιμή για τη δεδομένη ποσότητα \"%1$d\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Price for the given quantity \"%1$s\" not available"
+msgstr "Η τιμή για τη δεδομένη ποσότητα \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Price item not available"
+msgstr "Στοιχείο τιμής δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Process object not available"
+msgstr "Αντικείμενο διεργασίας δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Product  not available"
+msgstr "Το προϊόν δεν είναι διαθέσιμο"
+
+#, php-format
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr "Το προϊόν δεν περιέχει όλες τις απαιτούμενες τιμές. Ο κωδικός προϊόντος για το προϊόν δεν είναι διαθέσιμος."
+
+#, php-format
+msgid "Product does not contain the SKU code"
+msgstr "Το προϊόν δεν περιέχει τον κωδικό SKU"
+
+#, php-format
+msgid "Product matching given properties not found"
+msgstr "Δεν βρέθηκε προϊόν που ταιριάζει με τις συγκεκριμένες ιδιότητες"
+
+#, php-format
+msgid "Product not available"
+msgstr "Το προϊόν δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Product with array key \"%1$d\" not available"
+msgstr "Προϊόν με κλειδί πίνακα \"%1$d\" δεν είναι διαθέσιμο"
+
+#, php-format
+msgid "Products in basket not available"
+msgstr "Προϊόντα στο καλάθι δεν είναι διαθέσιμα"
+
+#, php-format
+msgid "Products out of stock"
+msgstr "Προϊόντα εκτός αποθέματος"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr "Δεν βρέθηκε αντικείμενο ιδιοκτησίας προς αφαίρεση"
+
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
+msgstr "Το όνομα της ιδιότητας \"%1$s\" δεν είναι εντός της επιτρεπόμενης περιοχής"
+
+#, php-format
+msgid "Provider in \"%1$s\" not available"
+msgstr "Ο πάροχος στο \"%1$s\" δεν είναι διαθέσιμος"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr "Η ποσότητα πρέπει να είναι 0 ή μεγαλύτερη και δεν πρέπει να υπερβαίνει το %1$d"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr "Η ποσότητα πρέπει να είναι 0 ή μεγαλύτερη και δεν πρέπει να υπερβαίνει την παραγγελθείσα ποσότητα."
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr "Η ποσότητα πρέπει να είναι μεγαλύτερη από 0 και να μην υπερβαίνει το %1$d"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr "Η ποσότητα πρέπει να είναι μεγαλύτερη από 0 και δεν πρέπει να υπερβαίνει το 2147483647"
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr "Η κλίμακα ποσότητας πρέπει να είναι μεγαλύτερη από 0"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "Η απαιτούμενη παράμετρος \"%1$s\" λείπει"
+
+#, php-format
+msgid "Required value for \"%1$s\" is missing"
+msgstr "Η απαιτούμενη τιμή για το \"%1$s\" λείπει"
+
+#, php-format
+msgid "Search configuration for \"%1$s\" not available"
+msgstr "Διαμόρφωση αναζήτησης για το \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Search configuration not available"
+msgstr "Διαμόρφωση αναζήτησης δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr "Η αποστολή της παραγγελίας απέτυχε: \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
+msgstr "Η αποστολή της παραγγελίας στον πάροχο παράδοσης απέτυχε με κατάσταση HTTP \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr "Η αποστολή παραγγελίας στον πάροχο παράδοσης απέτυχε: \"%1$s\""
+
+#, php-format
+msgid "Service not available"
+msgstr "Η υπηρεσία δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Service of type \"%1$s\" not available"
+msgstr "Υπηρεσία τύπου \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Session object not available"
+msgstr "Αντικείμενο συνεδρίας δεν είναι διαθέσιμο"
+
+#, php-format
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr "Η ιστοσελίδα δεν μπορεί να εισαχθεί. Το αναγνωριστικό τοποθεσίας της τοποθεσίας διαφέρει από το αναγνωριστικό τοποθεσίας της γονικής τοποθεσίας."
+
+#, php-format
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr "Ο ιστότοπος δεν μπορεί να μετακινηθεί. Το αναγνωριστικό τοποθεσίας της τοποθεσίας διαφέρει από το παρόν αναγνωριστικό τοποθεσίας, το αναγνωριστικό τοποθεσίας της υπάρχουσας γονικής τοποθεσίας ή το αναγνωριστικό τοποθεσίας της νέας γονικής τοποθεσίας."
+
+#, php-format
+msgid "Site for code \"%1$s\" not found"
+msgstr "Δεν βρέθηκε τοποθεσία για τον κωδικό \"%1$s\""
+
+#, php-format
+msgid "Started order status import from \"%1$s\""
+msgstr "Ξεκίνησε η εισαγωγή κατάστασης παραγγελίας από το \"%1$s\""
+
+#, php-format
+msgid "Started order status import from file \"%1$s\""
+msgstr "Ξεκίνησε η εισαγωγή κατάστασης παραγγελίας από το αρχείο \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Κατάσταση δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "The algorithm \"%1$s\" is not supported"
+msgstr "Ο αλγόριθμος \"%1$s\" δεν υποστηρίζεται"
+
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr "Έχει ξεπεραστεί η μέγιστη τιμή καλαθιού %1$s"
+
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr "Η μέγιστη ποσότητα προϊόντος είναι %1$d"
+
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr "Έχει ξεπεραστεί η μέγιστη ποσότητα προϊόντος %1$d"
+
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr "Η μέγιστη τιμή του προϊόντος είναι %1$s"
+
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr "Η μέγιστη ποσότητα όλων των προϊόντων είναι %1$d"
+
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr "Η μέγιστη αξία όλων των προϊόντων είναι %1$s"
+
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr "Η ελάχιστη τιμή καλαθιού %1$s δεν έχει επιτευχθεί"
+
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr "Η ελάχιστη ποσότητα προϊόντος %1$d δεν έχει επιτευχθεί"
+
+#, php-format
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr "Ο τύπος της επιλογής διαμόρφωσης με κλειδί \"%1$s\" πρέπει να είναι \"%2$s\""
+
+#, php-format
+msgid "Time value after \"%1$s\""
+msgstr "Τιμή χρόνου μετά το \"%1$s\""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr "Χρονική τιμή πριν από το \"%1$s\""
+
+#, php-format
+msgid "Total results value not found"
+msgstr "Δεν βρέθηκε η συνολική τιμή των αποτελεσμάτων"
+
+#, php-format
+msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
+msgstr "Δεν βρέθηκε ρίζα δέντρου με κωδικό \"%1$s\" στο \"%2$s\""
+
+#, php-format
+msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr "Δεν βρέθηκε στοιχείο τύπου με αναγνωριστικό \"%1$s\" στο \"%2$s\""
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Αδυναμία κλήσης της μεθόδου \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr "Αδυναμία δημιουργίας αρχείου XML παραγγελίας \"%1$s\""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr "Αδυναμία μετακίνησης του εισαγόμενου αρχείου \"%1$s\" στο \"%2$s\""
+
+#, php-format
+msgid "Unable to sort public holidays: \"%1$s\""
+msgstr "Αδυναμία ταξινόμησης αργιών: \"%1$s\""
+
+#, php-format
+msgid "Unknown search key \"%1$s\""
+msgstr "Άγνωστο κλειδί αναζήτησης \"%1$s\""
+
+#, php-format
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr "Η επικύρωση της απόκρισης XML από τον πάροχο παράδοσης έναντι του σχήματος \"%1$s\" απέτυχε"
+
+#, php-format
+msgid "View object not available"
+msgstr "Αντικείμενο προβολής δεν είναι διαθέσιμο"

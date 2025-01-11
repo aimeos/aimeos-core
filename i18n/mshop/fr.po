@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Jean-Marc Kutyla, 2023\n"
 "Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
@@ -105,7 +105,7 @@ msgstr "Type d'adresse \"%1$s\" pas dans la plage autorisée"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Une erreur inconnue s'est produite avec le code %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -560,7 +560,7 @@ msgstr "Aucune configuration de recherche disponible pour \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Aucune configuration de recherche n'est disponible pour le domaine \"%1$s\"."
 
 #, php-format
 msgid "No search keys available"
@@ -864,6 +864,10 @@ msgstr "Import des statuts de commande à partir de \"%1$s\""
 #, php-format
 msgid "Started order status import from file \"%1$s\""
 msgstr "Import des statuts de commande à partir du fichier \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Adresse indisponible"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"

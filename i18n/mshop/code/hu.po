@@ -9,7 +9,7 @@
 # Translators:
 # nzed <nemesreviz@gmail.com>, 2020,2022
 # Nóra Antal <nora1984antal@gmail.com>, 2016
-# nzed <nemesreviz@gmail.com>, 2020
+# nzed <nemesreviz@gmail.com>, 2020,2022
 # Patrik Szakos <szakos0208@gmail.com>, 2021
 # Péter Kozma <kopegrafika@gmail.com>, 2016
 msgid ""

@@ -420,7 +420,7 @@ msgid "pt"
 msgstr "Portoghese"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "pt_BR"
 
 msgid "qu"
 msgstr "Quechua"
@@ -576,7 +576,7 @@ msgid "za"
 msgstr "Zhuang"
 
 msgid "zh"
-msgstr "cinese"
+msgstr "Cinese"
 
 msgid "zu"
 msgstr "Zulu"

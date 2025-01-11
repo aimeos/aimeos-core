@@ -79,7 +79,7 @@ msgstr "Kz"
 #. symbol: $
 #. sequence: n/a
 msgid "ARS"
-msgstr ""
+msgstr "ARS"
 
 #. Australian Dollar
 #. reference: https://en.wikipedia.org/wiki/Australian_dollar
@@ -88,7 +88,7 @@ msgstr ""
 #. symbol: $, A$, AUD
 #. sequence: <sign><amount>
 msgid "AUD"
-msgstr ""
+msgstr "AUD"
 
 #. Aruban Guilder
 #. reference: https://en.wikipedia.org/wiki/Aruban_florin
@@ -97,7 +97,7 @@ msgstr ""
 #. symbol: Afl.
 #. sequence: n/a
 msgid "AWG"
-msgstr ""
+msgstr "AWG"
 
 #. Azerbaijani Manat
 #. reference: https://en.wikipedia.org/wiki/Azerbaijani_manat
@@ -106,7 +106,7 @@ msgstr ""
 #. symbol: m, man., not encoded in unicode
 #. sequence: n/a
 msgid "AZN"
-msgstr ""
+msgstr "AZN"
 
 #. Bosnia-Herzegovina Conv. Mark
 #. reference:
@@ -116,7 +116,7 @@ msgstr ""
 #. symbol: KM
 #. sequence: n/a
 msgid "BAM"
-msgstr ""
+msgstr "BAM"
 
 #. Barbados Dollar
 #. reference: https://en.wikipedia.org/wiki/Barbados_dollar
@@ -125,7 +125,7 @@ msgstr ""
 #. symbol: Bds$
 #. sequence: <sign><amount>
 msgid "BBD"
-msgstr ""
+msgstr "BBD"
 
 #. Bangladeshi taka
 #. reference: https://en.wikipedia.org/wiki/Bangladeshi_taka
@@ -134,7 +134,7 @@ msgstr ""
 #. symbol: ৳
 #. sequence: n/a
 msgid "BDT"
-msgstr ""
+msgstr "BDT"
 
 #. Bulgarian Lev
 #. reference: https://en.wikipedia.org/wiki/Bulgarian_lev
@@ -143,7 +143,7 @@ msgstr ""
 #. symbol: лв
 #. sequence: n/a
 msgid "BGN"
-msgstr ""
+msgstr "BGN"
 
 #. Bahraini Dinar
 #. reference: https://en.wikipedia.org/wiki/Bahraini_dinar
@@ -152,7 +152,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "BHD"
-msgstr ""
+msgstr "BHD"
 
 #. Burundi Franc
 #. reference: https://en.wikipedia.org/wiki/Burundian_franc
@@ -161,7 +161,7 @@ msgstr ""
 #. symbol: FBu
 #. sequence: n/a
 msgid "BIF"
-msgstr ""
+msgstr "BIF"
 
 #. Bermuda Dollar
 #. reference:
@@ -170,7 +170,7 @@ msgstr ""
 #. symbol: $, BD$
 #. sequence: <sign><amount>
 msgid "BMD"
-msgstr ""
+msgstr "BMD"
 
 #. Brunei Dollar
 #. reference: https://en.wikipedia.org/wiki/Brunei_dollar
@@ -179,7 +179,7 @@ msgstr ""
 #. symbol: $, B$
 #. sequence: <sign><amount>
 msgid "BND"
-msgstr ""
+msgstr "BND"
 
 #. Boliviano
 #. reference: https://en.wikipedia.org/wiki/Boliviano
@@ -188,7 +188,7 @@ msgstr ""
 #. symbol: Bs., Bs
 #. sequence: <sign><amount>
 msgid "BOB"
-msgstr ""
+msgstr "BOB"
 
 #. Brazilian Real
 #. reference: https://en.wikipedia.org/wiki/Brazilian_real
@@ -197,7 +197,7 @@ msgstr ""
 #. symbol: R$
 #. sequence: <sign><amount>
 msgid "BRL"
-msgstr ""
+msgstr "BRL"
 
 #. Bahamian Dollar
 #. reference: https://en.wikipedia.org/wiki/Bahamian_dollar
@@ -206,7 +206,7 @@ msgstr ""
 #. symbol: B$
 #. sequence: <sign><amount>
 msgid "BSD"
-msgstr ""
+msgstr "BSD"
 
 #. Bhutanese Ngultrum
 #. reference: https://en.wikipedia.org/wiki/Bhutanese_ngultrum
@@ -215,7 +215,7 @@ msgstr ""
 #. symbol: Nu.
 #. sequence: <sign><amount>
 msgid "BTN"
-msgstr ""
+msgstr "BTN"
 
 #. Botswana pula
 #. reference: https://en.wikipedia.org/wiki/Botswana_pula
@@ -224,7 +224,7 @@ msgstr ""
 #. symbol: P
 #. sequence: n/a
 msgid "BWP"
-msgstr ""
+msgstr "BWP"
 
 #. Belarussian Ruble
 #. reference: https://en.wikipedia.org/wiki/Belarusian_ruble
@@ -233,7 +233,7 @@ msgstr ""
 #. symbol: Br
 #. sequence: n/a
 msgid "BYR"
-msgstr ""
+msgstr "BYR"
 
 #. Belize Dollar
 #. reference: https://en.wikipedia.org/wiki/Belize_dollar
@@ -242,7 +242,7 @@ msgstr ""
 #. symbol: BZ$
 #. sequence: <sign><amount>
 msgid "BZD"
-msgstr ""
+msgstr "BZD"
 
 #. Canadian Dollar
 #. reference: https://en.wikipedia.org/wiki/Canadian_dollar
@@ -251,7 +251,7 @@ msgstr ""
 #. symbol: $, C$, CAD$
 #. sequence: <sign><amount>
 msgid "CAD"
-msgstr ""
+msgstr "CAD"
 
 #. Congolese franc
 #. reference: https://en.wikipedia.org/wiki/Congolese_franc
@@ -260,7 +260,7 @@ msgstr ""
 #. symbol: FC
 #. sequence: n/a
 msgid "CDF"
-msgstr ""
+msgstr "CDF"
 
 #. Fr
 #. reference: https://en.wikipedia.org/wiki/Swiss_franc
@@ -269,7 +269,7 @@ msgstr ""
 #. symbol: CHF
 #. sequence: <amount><sign>
 msgid "CHF"
-msgstr ""
+msgstr "CHF"
 
 #. Chilean Peso
 #. reference: https://en.wikipedia.org/wiki/Chilean_peso
@@ -278,7 +278,7 @@ msgstr ""
 #. symbol: $
 #. sequence: n/a
 msgid "CLP"
-msgstr ""
+msgstr "CLP"
 
 #. Chinese Yuan Renminbi
 #. reference: https://en.wikipedia.org/wiki/Renminbi
@@ -287,7 +287,7 @@ msgstr ""
 #. symbol: ¥
 #. sequence: <sign><amount>
 msgid "CNY"
-msgstr ""
+msgstr "CNY"
 
 #. Colombian Peso
 #. reference: https://en.wikipedia.org/wiki/Colombian_peso
@@ -296,7 +296,7 @@ msgstr ""
 #. symbol: $, COL$
 #. sequence: n/a
 msgid "COP"
-msgstr ""
+msgstr "COP"
 
 #. Costa Rican colón
 #. reference: https://en.wikipedia.org/wiki/Costa_Rican_colon
@@ -305,7 +305,7 @@ msgstr ""
 #. symbol: ₡
 #. sequence: n/a
 msgid "CRC"
-msgstr ""
+msgstr "CRC"
 
 #. Cuban peso
 #. reference: https://en.wikipedia.org/wiki/Cuban_peso
@@ -314,7 +314,7 @@ msgstr ""
 #. symbol: $, $MN
 #. sequence: <sign><amount>
 msgid "CUP"
-msgstr ""
+msgstr "CUP"
 
 #. Cape Verde Escudo
 #. reference: https://en.wikipedia.org/wiki/Cape_Verde_escudo
@@ -323,7 +323,7 @@ msgstr ""
 #. symbol: $, Esc
 #. sequence: <amount @type="amount_minus_tens"><sign><amount @type="tens">
 msgid "CVE"
-msgstr ""
+msgstr "CVE"
 
 #. Czech koruna
 #. reference: https://en.wikipedia.org/wiki/Czech_koruna
@@ -332,7 +332,7 @@ msgstr ""
 #. symbol: Kč
 #. sequence: <amount><sign>
 msgid "CZK"
-msgstr ""
+msgstr "KČ"
 
 #. Djibouti franc
 #. reference: https://en.wikipedia.org/wiki/Djiboutian_franc
@@ -341,7 +341,7 @@ msgstr ""
 #. symbol: Fdj
 #. sequence: <amount><sign>
 msgid "DJF"
-msgstr ""
+msgstr "DJF"
 
 #. Danish krone
 #. reference:
@@ -350,7 +350,7 @@ msgstr ""
 #. symbol: ,- , kr.
 #. sequence: <sign @type="kr."><amount>
 msgid "DKK"
-msgstr ""
+msgstr "DKK"
 
 #. Dominican peso
 #. reference: https://en.wikipedia.org/wiki/Dominican_peso
@@ -359,7 +359,7 @@ msgstr ""
 #. symbol: $, RD$
 #. sequence: <sign><amount>
 msgid "DOP"
-msgstr ""
+msgstr "DOP"
 
 #. Algerian Dinar
 #. reference: https://en.wikipedia.org/wiki/Algerian_dinar
@@ -368,7 +368,7 @@ msgstr ""
 #. symbol: د.ج , DA
 #. sequence: n/a
 msgid "DZD"
-msgstr ""
+msgstr "DZD"
 
 #. Egyptian pound
 #. reference: https://en.wikipedia.org/wiki/Egyptian_pound
@@ -377,7 +377,7 @@ msgstr ""
 #. symbol: EGP, LE, E£, ج.م
 #. sequence: n/a
 msgid "EGP"
-msgstr ""
+msgstr "EGP"
 
 #. Eritrean nakfa
 #. reference: https://en.wikipedia.org/wiki/Eritrean_nakfa
@@ -386,7 +386,7 @@ msgstr ""
 #. symbol: Nfk
 #. sequence: n/a
 msgid "ERN"
-msgstr ""
+msgstr "ERN"
 
 #. Ethiopian birr
 #. reference: https://en.wikipedia.org/wiki/Ethiopian_birr
@@ -395,7 +395,7 @@ msgstr ""
 #. symbol: Br
 #. sequence: n/a
 msgid "ETB"
-msgstr ""
+msgstr "ETB"
 
 #. Euro
 #. reference: https://en.wikipedia.org/wiki/Euro
@@ -404,7 +404,7 @@ msgstr ""
 #. symbol: €
 #. sequence: n/a
 msgid "EUR"
-msgstr ""
+msgstr "EUR"
 
 #. Fijian dollar
 #. reference: https://en.wikipedia.org/wiki/Fiji_dollar
@@ -413,7 +413,7 @@ msgstr ""
 #. symbol: FJ$
 #. sequence: <sign><amount>
 msgid "FJD"
-msgstr ""
+msgstr "FJD"
 
 #. Falkland Islands pound
 #. reference: https://en.wikipedia.org/wiki/Falkland_Islands_pound
@@ -422,7 +422,7 @@ msgstr ""
 #. symbol: £, FK£
 #. sequence: <sign><amount>
 msgid "FKP"
-msgstr ""
+msgstr "FKP"
 
 #. Pound Sterling
 #. reference: https://en.wikipedia.org/wiki/Pound_sterling
@@ -431,7 +431,7 @@ msgstr ""
 #. symbol: £
 #. sequence: <sign><amount>
 msgid "GBP"
-msgstr ""
+msgstr "GBP"
 
 #. Georgian lari
 #. reference: https://en.wikipedia.org/wiki/Georgian_lari
@@ -440,7 +440,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "GEL"
-msgstr ""
+msgstr "GEL"
 
 #. Ghanaian cedi
 #. reference: https://en.wikipedia.org/wiki/Ghanaian_cedi
@@ -449,7 +449,7 @@ msgstr ""
 #. symbol: GH₵, GH¢
 #. sequence: <sign><amount>
 msgid "GHC"
-msgstr ""
+msgstr "GHC"
 
 #. Gibraltar pound
 #. reference: https://en.wikipedia.org/wiki/Gibraltar_pound
@@ -458,7 +458,7 @@ msgstr ""
 #. symbol: £
 #. sequence: n/a
 msgid "GIP"
-msgstr ""
+msgstr "GIP"
 
 #. Gambian dalasi
 #. reference: https://en.wikipedia.org/wiki/Gambian_dalasi
@@ -467,7 +467,7 @@ msgstr ""
 #. symbol: D
 #. sequence: n/a
 msgid "GMD"
-msgstr ""
+msgstr "GMD"
 
 #. Guinea Franc
 #. reference: https://en.wikipedia.org/wiki/Guinean_franc
@@ -476,7 +476,7 @@ msgstr ""
 #. symbol: FG, Fr, GFr
 #. sequence: n/a
 msgid "GNF"
-msgstr ""
+msgstr "GNF"
 
 #. Guatemalan quetzal
 #. reference: https://en.wikipedia.org/wiki/Guatemalan_quetzal
@@ -485,7 +485,7 @@ msgstr ""
 #. symbol: Q
 #. sequence: n/a
 msgid "GTQ"
-msgstr ""
+msgstr "GTQ"
 
 #. Guyana Dollar
 #. reference: https://en.wikipedia.org/wiki/Guyanese_dollar
@@ -494,7 +494,7 @@ msgstr ""
 #. symbol: $, G$
 #. sequence: <sign><amount>
 msgid "GYD"
-msgstr ""
+msgstr "GYD"
 
 #. Hong Kong dollar
 #. reference: https://en.wikipedia.org/wiki/Hong_Kong_dollar
@@ -503,7 +503,7 @@ msgstr ""
 #. symbol: $, HK$
 #. sequence: <sign><amount>
 msgid "HKD"
-msgstr ""
+msgstr "HKD"
 
 #. Honduran lempira
 #. reference: https://en.wikipedia.org/wiki/Honduran_lempira
@@ -521,7 +521,7 @@ msgstr "L"
 #. symbol: kn
 #. sequence: <amount><sign>
 msgid "HRK"
-msgstr ""
+msgstr "HRK"
 
 #. Haitian gourde
 #. reference: https://en.wikipedia.org/wiki/Haitian_gourde
@@ -530,7 +530,7 @@ msgstr ""
 #. symbol: G
 #. sequence: n/a
 msgid "HTG"
-msgstr ""
+msgstr "HTG"
 
 #. Hungarian forint
 #. reference: https://en.wikipedia.org/wiki/Hungarian_forint
@@ -539,7 +539,7 @@ msgstr ""
 #. symbol: Ft
 #. sequence: n/a
 msgid "HUF"
-msgstr ""
+msgstr "HUF"
 
 #. Indonesian rupiah
 #. reference: https://en.wikipedia.org/wiki/Indonesian_rupiah
@@ -548,7 +548,7 @@ msgstr ""
 #. symbol: Rp
 #. sequence: <sign><amount>
 msgid "IDR"
-msgstr ""
+msgstr "IDR"
 
 #. New Israeli Sheqel
 #. reference: https://en.wikipedia.org/wiki/Israeli_new_shekel
@@ -557,7 +557,7 @@ msgstr ""
 #. symbol: ₪
 #. sequence: n/a
 msgid "ILS"
-msgstr ""
+msgstr "ILS"
 
 #. Indian rupee
 #. reference: https://en.wikipedia.org/wiki/Indian_rupee
@@ -566,7 +566,7 @@ msgstr ""
 #. symbol: ₹ (U+20B9), ₨ (U+20A8, generic RUPEE SIGN)
 #. sequence: <sign><amount>
 msgid "INR"
-msgstr ""
+msgstr "INR"
 
 #. Iraqi dinar
 #. reference: https://en.wikipedia.org/wiki/Iraqi_dinar
@@ -575,7 +575,7 @@ msgstr ""
 #. symbol: ع.د
 #. sequence: n/a
 msgid "IQD"
-msgstr ""
+msgstr "IQD"
 
 #. Iranian rial
 #. reference: https://en.wikipedia.org/wiki/Iranian_rial
@@ -584,7 +584,7 @@ msgstr ""
 #. symbol: ﷼
 #. sequence: n/a
 msgid "IRR"
-msgstr ""
+msgstr "IRR"
 
 #. Icelandic króna
 #. reference: https://en.wikipedia.org/wiki/Icelandic_kr%C3%B3na
@@ -593,7 +593,7 @@ msgstr ""
 #. symbol: kr, Íkr
 #. sequence: n/a
 msgid "ISK"
-msgstr ""
+msgstr "ISK"
 
 #. Jamaican dollar
 #. reference: https://en.wikipedia.org/wiki/Jamaican_dollar
@@ -602,7 +602,7 @@ msgstr ""
 #. symbol: $, J$
 #. sequence: n/a
 msgid "JMD"
-msgstr ""
+msgstr "JMD"
 
 #. Jordanian dinar
 #. reference: https://en.wikipedia.org/wiki/Jordanian_dinar
@@ -611,7 +611,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "JOD"
-msgstr ""
+msgstr "JOD"
 
 #. Japanese yen
 #. reference: https://en.wikipedia.org/wiki/Japanese_yen
@@ -620,7 +620,7 @@ msgstr ""
 #. symbol: ¥
 #. sequence: <sign><amount>
 msgid "JPY"
-msgstr ""
+msgstr "JPY"
 
 #. Kenyan shilling
 #. reference: https://en.wikipedia.org/wiki/Kenyan_shilling
@@ -629,7 +629,7 @@ msgstr ""
 #. symbol: KSh
 #. sequence: n/a
 msgid "KES"
-msgstr ""
+msgstr "KES"
 
 #. Kyrgyzstani som
 #. reference: https://en.wikipedia.org/wiki/Kyrgyzstani_som
@@ -639,7 +639,7 @@ msgstr ""
 #. sequence: n/a
 #. name: som (plural)
 msgid "KGS"
-msgstr ""
+msgstr "KGS"
 
 #. Cambodian riel
 #. reference: https://en.wikipedia.org/wiki/Cambodian_riel
@@ -648,7 +648,7 @@ msgstr ""
 #. symbol: ៛
 #. sequence: n/a
 msgid "KHR"
-msgstr ""
+msgstr "KHR"
 
 #. Comorian Franc
 #. reference: https://en.wikipedia.org/wiki/Comoro_franc
@@ -657,7 +657,7 @@ msgstr ""
 #. symbol: CF
 #. sequence: n/a
 msgid "KMF"
-msgstr ""
+msgstr "KMF"
 
 #. North Korean won
 #. reference: https://en.wikipedia.org/wiki/North_Korean_won
@@ -666,7 +666,7 @@ msgstr ""
 #. symbol: ₩
 #. sequence: <sign><amount>
 msgid "KPW"
-msgstr ""
+msgstr "KPW"
 
 #. South Corean won
 #. reference: https://en.wikipedia.org/wiki/South_Korean_won
@@ -675,7 +675,7 @@ msgstr ""
 #. symbol: ₩
 #. sequence: <sign><amount>
 msgid "KRW"
-msgstr ""
+msgstr "KRW"
 
 #. Kuwaiti dinar
 #. reference: https://en.wikipedia.org/wiki/Kuwaiti_dinar
@@ -684,7 +684,7 @@ msgstr ""
 #. symbol: د.ك , K.D.
 #. sequence: n/a
 msgid "KWD"
-msgstr ""
+msgstr "KWD"
 
 #. Cayman Islands Dollar
 #. reference: https://en.wikipedia.org/wiki/Cayman_Islands_dollar
@@ -693,7 +693,7 @@ msgstr ""
 #. symbol: $
 #. sequence: n/a
 msgid "KYD"
-msgstr ""
+msgstr "KYD"
 
 #. Kazakhstani tenge
 #. reference: https://en.wikipedia.org/wiki/Kazakhstani_tenge
@@ -702,7 +702,7 @@ msgstr ""
 #. symbol: ₸ (U+20B8)
 #. sequence: n/a
 msgid "KZT"
-msgstr ""
+msgstr "KZT"
 
 #. Lao kip
 #. reference: https://en.wikipedia.org/wiki/Lao_kip
@@ -711,7 +711,7 @@ msgstr ""
 #. symbol: ₭, ₭N
 #. sequence: n/a
 msgid "LAK"
-msgstr ""
+msgstr "LAK"
 
 #. Lebanese pound
 #. reference: https://en.wikipedia.org/wiki/Lebanese_pound
@@ -720,7 +720,7 @@ msgstr ""
 #. symbol: ل.ل
 #. sequence: n/a
 msgid "LBP"
-msgstr ""
+msgstr "LBP"
 
 #. Sri Lankan rupee
 #. reference: https://en.wikipedia.org/wiki/Sri_Lankan_rupee
@@ -729,7 +729,7 @@ msgstr ""
 #. symbol: රු, Rs, SLRs, /-
 #. sequence: n/a
 msgid "LKR"
-msgstr ""
+msgstr "LKR"
 
 #. Liberian dollar
 #. reference: https://en.wikipedia.org/wiki/Liberian_dollar
@@ -738,7 +738,7 @@ msgstr ""
 #. symbol: L$
 #. sequence: n/a
 msgid "LRD"
-msgstr ""
+msgstr "LRD"
 
 #. Lesotho loti
 #. reference: https://en.wikipedia.org/wiki/Lesotho_loti
@@ -747,7 +747,7 @@ msgstr ""
 #. symbol: L (singular), M (plural)
 #. sequence: <sign><amount>
 msgid "LSL"
-msgstr ""
+msgstr "LSL"
 
 #. Lithuanian litas
 #. reference: https://en.wikipedia.org/wiki/Lithuanian_litas
@@ -756,7 +756,7 @@ msgstr ""
 #. symbol: Lt
 #. sequence: n/a
 msgid "LTL"
-msgstr ""
+msgstr "LTL"
 
 #. Latvian lats
 #. reference: https://en.wikipedia.org/wiki/Latvian_lats
@@ -765,7 +765,7 @@ msgstr ""
 #. symbol: Ls
 #. sequence: n/a
 msgid "LVL"
-msgstr ""
+msgstr "LVL"
 
 #. Libyan dinar
 #. reference: https://en.wikipedia.org/wiki/Libyan_dinar
@@ -774,7 +774,7 @@ msgstr ""
 #. symbol: LD, ل.د
 #. sequence: n/a
 msgid "LYD"
-msgstr ""
+msgstr "LYD"
 
 #. Moroccan dirham
 #. reference: https://en.wikipedia.org/wiki/Moroccan_dirham
@@ -783,7 +783,7 @@ msgstr ""
 #. symbol: د.م.
 #. sequence: n/a
 msgid "MAD"
-msgstr ""
+msgstr "MAD"
 
 #. Moldovan leu
 #. reference: https://en.wikipedia.org/wiki/Moldovan_leu
@@ -793,7 +793,7 @@ msgstr ""
 #. sequence: n/a
 #. name: lei (plural)
 msgid "MDL"
-msgstr ""
+msgstr "MDL"
 
 #. Malagasy ariary
 #. reference: https://en.wikipedia.org/wiki/Malagasy_ariary
@@ -802,7 +802,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: <sign><amount>
 msgid "MGA"
-msgstr ""
+msgstr "MGA"
 
 #. Macedonian denar
 #. reference: https://en.wikipedia.org/wiki/Macedonian_denar
@@ -811,7 +811,7 @@ msgstr ""
 #. symbol: ден
 #. sequence: n/a
 msgid "MKD"
-msgstr ""
+msgstr "MKD"
 
 #. Myanmar kyat, Burmese kyat
 #. reference:
@@ -820,7 +820,7 @@ msgstr ""
 #. symbol: K, Ks
 #. sequence: <sign><amount>, <amount><sign>
 msgid "MMK"
-msgstr ""
+msgstr "MMK"
 
 #. Mongolian tugrug
 #. reference: https://en.wikipedia.org/wiki/Mongolian_t%C3%B6gr%C3%B6g
@@ -829,7 +829,7 @@ msgstr ""
 #. symbol: ₮
 #. sequence: n/a
 msgid "MNT"
-msgstr ""
+msgstr "MNT"
 
 #. Macanese pataca
 #. reference: https://en.wikipedia.org/wiki/Macanese_pataca
@@ -838,7 +838,7 @@ msgstr ""
 #. symbol: MOP$
 #. sequence: <sign><amount>
 msgid "MOP"
-msgstr ""
+msgstr "MOP"
 
 #. Mauritanian ouguiya
 #. reference: https://en.wikipedia.org/wiki/Mauritanian_ouguiya
@@ -847,7 +847,7 @@ msgstr ""
 #. symbol: UM
 #. sequence: n/a
 msgid "MRO"
-msgstr ""
+msgstr "MRO"
 
 #. Mauritian rupee
 #. reference: https://en.wikipedia.org/wiki/Mauritian_rupee
@@ -856,7 +856,7 @@ msgstr ""
 #. symbol: Rs
 #. sequence: <sign><amount>
 msgid "MTL"
-msgstr ""
+msgstr "MTL"
 
 #. Maldivian rufiyaa
 #. reference: https://en.wikipedia.org/wiki/Maldivian_rufiyaa
@@ -865,7 +865,7 @@ msgstr ""
 #. symbol: Rf, Rf., MRf, MVR, .ރ , /-
 #. sequence: n/a
 msgid "MVR"
-msgstr ""
+msgstr "MVR"
 
 #. Malawian kwacha
 #. reference: https://en.wikipedia.org/wiki/Malawian_kwacha
@@ -874,7 +874,7 @@ msgstr ""
 #. symbol: MK
 #. sequence: n/a
 msgid "MWK"
-msgstr ""
+msgstr "MWK"
 
 #. Mexican peso
 #. reference: https://en.wikipedia.org/wiki/Mexican_peso
@@ -883,7 +883,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "MXN"
-msgstr ""
+msgstr "MXN"
 
 #. Malaysian ringgit
 #. reference: https://en.wikipedia.org/wiki/Malaysian_ringgit
@@ -892,7 +892,7 @@ msgstr ""
 #. symbol: RM, $
 #. sequence: <sign><amount>
 msgid "MYR"
-msgstr ""
+msgstr "MYR"
 
 #. Mozambican metical
 #. reference: https://en.wikipedia.org/wiki/Mozambican_metical
@@ -901,7 +901,7 @@ msgstr ""
 #. symbol: MT
 #. sequence: n/a
 msgid "MZM"
-msgstr ""
+msgstr "MZM"
 
 #. Namibian dollar
 #. reference: https://en.wikipedia.org/wiki/Namibian_dollar
@@ -910,7 +910,7 @@ msgstr ""
 #. symbol: N$
 #. sequence: <sign><amount>
 msgid "NAD"
-msgstr ""
+msgstr "NAD"
 
 #. Nigerian naira
 #. reference: https://en.wikipedia.org/wiki/Nigerian_naira
@@ -919,7 +919,7 @@ msgstr ""
 #. symbol: ₦
 #. sequence: n/a
 msgid "NGN"
-msgstr ""
+msgstr "NGN"
 
 #. Nicaraguan córdoba
 #. reference: https://en.wikipedia.org/wiki/Nicaraguan_c%C3%B3rdoba
@@ -928,7 +928,7 @@ msgstr ""
 #. symbol: C$
 #. sequence: n/a
 msgid "NIO"
-msgstr ""
+msgstr "NIO"
 
 #. Norvegian krone
 #. reference: https://en.wikipedia.org/wiki/Norwegian_krone
@@ -937,7 +937,7 @@ msgstr ""
 #. symbol: kr, ,-
 #. sequence: <amount><sign>
 msgid "NOK"
-msgstr ""
+msgstr "NOK"
 
 #. Nepalese rupee
 #. reference: https://en.wikipedia.org/wiki/Nepalese_rupee
@@ -946,7 +946,7 @@ msgstr ""
 #. symbol: Rs, Rs. or ₨, रू.
 #. sequence: n/a
 msgid "NPR"
-msgstr ""
+msgstr "NPR"
 
 #. New Zealand dollar
 #. reference: https://en.wikipedia.org/wiki/New_Zealand_dollar
@@ -955,7 +955,7 @@ msgstr ""
 #. symbol: $, NZ$
 #. sequence: <sign><amount>
 msgid "NZD"
-msgstr ""
+msgstr "NZD"
 
 #. Omani rial
 #. reference: https://en.wikipedia.org/wiki/Omani_rial
@@ -964,7 +964,7 @@ msgstr ""
 #. symbol: ر.ع.
 #. sequence: n/a
 msgid "OMR"
-msgstr ""
+msgstr "OMR"
 
 #. Panamanian balboa
 #. reference: https://en.wikipedia.org/wiki/Panamanian_balboa
@@ -973,7 +973,7 @@ msgstr ""
 #. symbol: B/.
 #. sequence: n/a
 msgid "PAB"
-msgstr ""
+msgstr "PAB"
 
 #. Peruvian nuevo sol
 #. reference: https://en.wikipedia.org/wiki/Peruvian_nuevo_sol
@@ -982,7 +982,7 @@ msgstr ""
 #. symbol: S/.
 #. sequence: n/a
 msgid "PEN"
-msgstr ""
+msgstr "PEN"
 
 #. Papua New Guinean kina
 #. reference: https://en.wikipedia.org/wiki/Papua_New_Guinean_kina
@@ -991,7 +991,7 @@ msgstr ""
 #. symbol: K
 #. sequence: n/a
 msgid "PGK"
-msgstr ""
+msgstr "PGK"
 
 #. Philippine peso
 #. reference: https://en.wikipedia.org/wiki/Philippine_peso
@@ -1000,7 +1000,7 @@ msgstr ""
 #. symbol: ₱
 #. sequence: n/a
 msgid "PHP"
-msgstr ""
+msgstr "PHP"
 
 #. Pakistani rupee
 #. reference: https://en.wikipedia.org/wiki/Pakistani_rupee
@@ -1009,7 +1009,7 @@ msgstr ""
 #. symbol: Rs
 #. sequence: n/a
 msgid "PKR"
-msgstr ""
+msgstr "PKR"
 
 #. Polish złoty
 #. reference: https://en.wikipedia.org/wiki/Polish_z%C5%82oty
@@ -1018,7 +1018,7 @@ msgstr ""
 #. symbol: zł
 #. sequence: n/a
 msgid "PLN"
-msgstr ""
+msgstr "PLN"
 
 #. Paraguayan guaraní
 #. reference: https://en.wikipedia.org/wiki/Paraguayan_guaran%C3%AD
@@ -1027,7 +1027,7 @@ msgstr ""
 #. symbol: ₲
 #. sequence: n/a
 msgid "PYG"
-msgstr ""
+msgstr "PYG"
 
 #. Qatari riyal
 #. reference: https://en.wikipedia.org/wiki/Qatari_riyal
@@ -1036,7 +1036,7 @@ msgstr ""
 #. symbol: QR, ر.ق
 #. sequence: n/a
 msgid "QAR"
-msgstr ""
+msgstr "QAR"
 
 #. Romanian leu
 #. reference: https://en.wikipedia.org/wiki/Romanian_Leu
@@ -1046,7 +1046,7 @@ msgstr ""
 #. sequence: n/a
 #. name: lei (plural)
 msgid "RON"
-msgstr ""
+msgstr "RON"
 
 #. Serbian dinar
 #. reference: https://en.wikipedia.org/wiki/Serbian_dinar
@@ -1055,7 +1055,7 @@ msgstr ""
 #. symbol: RSD, РСД
 #. sequence: n/a
 msgid "RSD"
-msgstr ""
+msgstr "RSD"
 
 #. Russian ruble
 #. reference: https://en.wikipedia.org/wiki/Russian_rouble
@@ -1064,7 +1064,7 @@ msgstr ""
 #. symbol: руб.
 #. sequence: n/a
 msgid "RUB"
-msgstr ""
+msgstr "RUB"
 
 #. Rwandan franc
 #. reference: https://en.wikipedia.org/wiki/Rwandan_franc
@@ -1073,7 +1073,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "RWF"
-msgstr ""
+msgstr "RWF"
 
 #. Saudi riyal
 #. reference: https://en.wikipedia.org/wiki/Saudi_riyal
@@ -1082,7 +1082,7 @@ msgstr ""
 #. symbol: ر.س (Arabic), SR (Latin), ﷼ (Unicode)
 #. sequence: n/a
 msgid "SAR"
-msgstr ""
+msgstr "SAR"
 
 #. Solomon Islands dollar
 #. reference: https://en.wikipedia.org/wiki/Solomon_Islands_dollar
@@ -1091,7 +1091,7 @@ msgstr ""
 #. symbol: $, SI$
 #. sequence: <sign><amount>
 msgid "SBD"
-msgstr ""
+msgstr "SBD"
 
 #. Seychelles rupee
 #. reference: https://en.wikipedia.org/wiki/Seychelles_rupee
@@ -1100,7 +1100,7 @@ msgstr ""
 #. symbol: SR, SRe
 #. sequence: n/a
 msgid "SCR"
-msgstr ""
+msgstr "SCR"
 
 #. Sudanese pound
 #. reference: https://en.wikipedia.org/wiki/Sudanese_pound
@@ -1109,7 +1109,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "SDG"
-msgstr ""
+msgstr "SDG"
 
 #. Swedish krona
 #. reference: https://en.wikipedia.org/wiki/Swedish_krona
@@ -1118,7 +1118,7 @@ msgstr ""
 #. symbol: kr
 #. sequence: <amount><sign>
 msgid "SEK"
-msgstr ""
+msgstr "SEK"
 
 #. Singapore dollar
 #. reference: https://en.wikipedia.org/wiki/Singapore_dollar
@@ -1127,7 +1127,7 @@ msgstr ""
 #. symbol: S$
 #. sequence: <sign><amount>
 msgid "SGD"
-msgstr ""
+msgstr "SGD"
 
 #. Saint Helena pound
 #. reference: https://en.wikipedia.org/wiki/Saint_Helena_pound
@@ -1136,7 +1136,7 @@ msgstr ""
 #. symbol: £
 #. sequence: <sign><amount>
 msgid "SHP"
-msgstr ""
+msgstr "SHP"
 
 #. Sierra Leonean leone
 #. reference: https://en.wikipedia.org/wiki/Sierra_Leonean_leone
@@ -1145,7 +1145,7 @@ msgstr ""
 #. symbol: Le
 #. sequence: <sign><amount>
 msgid "SLL"
-msgstr ""
+msgstr "SLL"
 
 #. Somali shilling
 #. reference: https://en.wikipedia.org/wiki/Somali_shilling
@@ -1154,7 +1154,7 @@ msgstr ""
 #. symbol: Sh.So.
 #. sequence: n/a
 msgid "SOS"
-msgstr ""
+msgstr "SOS"
 
 #. Suriname dollar
 #. reference: https://en.wikipedia.org/wiki/Surinamese_dollar
@@ -1163,7 +1163,7 @@ msgstr ""
 #. symbol: $
 #. sequence: n/a
 msgid "SRD"
-msgstr ""
+msgstr "SRD"
 
 #. São Tomé and Príncipe dobra
 #. reference:
@@ -1173,7 +1173,7 @@ msgstr ""
 #. symbol: Db
 #. sequence: n/a
 msgid "STD"
-msgstr ""
+msgstr "STD"
 
 #. Syrian pound
 #. reference: https://en.wikipedia.org/wiki/Syrian_pound
@@ -1182,7 +1182,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "SYP"
-msgstr ""
+msgstr "SYP"
 
 #. Swazi lilangeni
 #. reference: https://en.wikipedia.org/wiki/Swazi_lilangeni
@@ -1191,7 +1191,7 @@ msgstr ""
 #. symbol: L (singular), E (plural)
 #. sequence: n/a
 msgid "SZL"
-msgstr ""
+msgstr "SZL"
 
 #. Baht
 #. reference: https://en.wikipedia.org/wiki/Thai_baht
@@ -1200,7 +1200,7 @@ msgstr ""
 #. symbol: ฿
 #. sequence: <sign><amount>
 msgid "THB"
-msgstr ""
+msgstr "THB"
 
 #. Tajikistani somoni
 #. reference: https://en.wikipedia.org/wiki/Tajikistani_somoni
@@ -1209,7 +1209,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "TJS"
-msgstr ""
+msgstr "TJS"
 
 #. Turkmenistan manat
 #. reference: https://en.wikipedia.org/wiki/Turkmenistani_manat
@@ -1218,7 +1218,7 @@ msgstr ""
 #. symbol: m
 #. sequence: n/a
 msgid "TMT"
-msgstr ""
+msgstr "TMT"
 
 #. Tunisian dinar
 #. reference: https://en.wikipedia.org/wiki/Tunisian_dinar
@@ -1227,7 +1227,7 @@ msgstr ""
 #. symbol: د.ت , DT
 #. sequence: n/a
 msgid "TND"
-msgstr ""
+msgstr "TND"
 
 #. Tongan pa'anga
 #. reference: https://en.wikipedia.org/wiki/Tongan_pa%CA%BBanga
@@ -1236,7 +1236,7 @@ msgstr ""
 #. symbol: T$, PT
 #. sequence: <sign><amount>
 msgid "TOP"
-msgstr ""
+msgstr "TOP"
 
 #. Turkish new lira
 #. reference: https://en.wikipedia.org/wiki/Turkish_lira
@@ -1246,7 +1246,7 @@ msgstr ""
 #. sequence: <sign><amount>
 #. name: lira
 msgid "TRY"
-msgstr ""
+msgstr "TRY"
 
 #. Trinidad and Tobago dollar
 #. reference: https://en.wikipedia.org/wiki/Trinidad_and_Tobago_dollar
@@ -1255,7 +1255,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: <sign><amount>
 msgid "TTD"
-msgstr ""
+msgstr "TTD"
 
 #. New Taiwan dollar
 #. reference: https://en.wikipedia.org/wiki/New_Taiwan_dollar
@@ -1264,7 +1264,7 @@ msgstr ""
 #. symbol: NT$, $
 #. sequence: <sign><amount>
 msgid "TWD"
-msgstr ""
+msgstr "TWD"
 
 #. Tanzanian shilling
 #. reference: https://en.wikipedia.org/wiki/Tanzanian_shilling
@@ -1274,7 +1274,7 @@ msgstr ""
 #. or y)
 #. sequence: n/a
 msgid "TZS"
-msgstr ""
+msgstr "TZS"
 
 #. Ukrainian hryvnia
 #. reference: https://en.wikipedia.org/wiki/Ukrainian_hryvnia
@@ -1283,7 +1283,7 @@ msgstr ""
 #. symbol: ₴
 #. sequence: n/a
 msgid "UAH"
-msgstr ""
+msgstr "UAH"
 
 #. Ugandan shilling
 #. reference: https://en.wikipedia.org/wiki/Ugandan_shilling
@@ -1292,7 +1292,7 @@ msgstr ""
 #. symbol: USh
 #. sequence: n/a
 msgid "UGX"
-msgstr ""
+msgstr "UGX"
 
 #. United States Dollar
 #. reference: https://en.wikipedia.org/wiki/United_States_dollar
@@ -1301,7 +1301,7 @@ msgstr ""
 #. symbol: $, US$
 #. sequence: <sign><amount>
 msgid "USD"
-msgstr ""
+msgstr "USD"
 
 #. Uruguayan peso
 #. reference: https://en.wikipedia.org/wiki/Uruguayan_peso
@@ -1310,7 +1310,7 @@ msgstr ""
 #. symbol: $, $U
 #. sequence: <sign><amount>
 msgid "UYU"
-msgstr ""
+msgstr "UYU"
 
 #. Uzbekistani som
 #. reference: https://en.wikipedia.org/wiki/Uzbekistan_som
@@ -1320,7 +1320,7 @@ msgstr ""
 #. sequence: n/a
 #. name: som (plural)
 msgid "UZS"
-msgstr ""
+msgstr "UZS"
 
 #. Venezuelan Bolivar
 #. reference: https://en.wikipedia.org/wiki/Venezuelan_bol%C3%ADvar
@@ -1329,7 +1329,7 @@ msgstr ""
 #. symbol: Bs., Bs.F.
 #. sequence: <sign><amount>
 msgid "VEF"
-msgstr ""
+msgstr "VEF"
 
 #. Vietnamese dong
 #. reference: https://en.wikipedia.org/wiki/Vietnamese_dong
@@ -1338,7 +1338,7 @@ msgstr ""
 #. symbol: ₫
 #. sequence: <amount><sign>
 msgid "VND"
-msgstr ""
+msgstr "VND"
 
 #. Vatu
 #. reference: https://en.wikipedia.org/wiki/Vanuatu_vatu
@@ -1347,7 +1347,7 @@ msgstr ""
 #. symbol: VT
 #. sequence: <amount><sign>
 msgid "VUV"
-msgstr ""
+msgstr "VUV"
 
 #. Samoan tala
 #. reference: https://en.wikipedia.org/wiki/Samoan_tala
@@ -1356,7 +1356,7 @@ msgstr ""
 #. symbol: WS$, SAT, ST or T
 #. sequence: n/a
 msgid "WST"
-msgstr ""
+msgstr "WST"
 
 #. CFA Franc BEAC
 #. reference: https://en.wikipedia.org/wiki/Central_African_CFA_franc
@@ -1365,7 +1365,7 @@ msgstr ""
 #. symbol: FCFA
 #. sequence: n/a
 msgid "XAF"
-msgstr ""
+msgstr "XAF"
 
 #. East Caribbean dollar
 #. reference: https://en.wikipedia.org/wiki/East_Caribbean_dollar
@@ -1374,7 +1374,7 @@ msgstr ""
 #. symbol: $
 #. sequence: n/a
 msgid "XCD"
-msgstr ""
+msgstr "XCD"
 
 #. CFA Franc BCEAO
 #. reference: https://en.wikipedia.org/wiki/West_African_CFA_franc
@@ -1383,7 +1383,7 @@ msgstr ""
 #. symbol: CFA
 #. sequence: n/a
 msgid "XOF"
-msgstr ""
+msgstr "XOF"
 
 #. CFP Franc
 #. reference: https://en.wikipedia.org/wiki/CFP_franc
@@ -1392,7 +1392,7 @@ msgstr ""
 #. symbol: F
 #. sequence: n/a
 msgid "XPF"
-msgstr ""
+msgstr "XPF"
 
 #. Yemeni rial
 #. reference: https://en.wikipedia.org/wiki/Yemeni_rial
@@ -1401,7 +1401,7 @@ msgstr ""
 #. symbol: n/a
 #. sequence: n/a
 msgid "YER"
-msgstr ""
+msgstr "YER"
 
 #. South African rand
 #. reference: https://en.wikipedia.org/wiki/South_African_rand
@@ -1410,7 +1410,7 @@ msgstr ""
 #. symbol: R
 #. sequence: <sign><amount>
 msgid "ZAR"
-msgstr ""
+msgstr "ZAR"
 
 #. Zambian kwacha
 #. reference: https://en.wikipedia.org/wiki/Zambian_kwacha
@@ -1419,7 +1419,7 @@ msgstr ""
 #. symbol: ZK
 #. sequence: n/a
 msgid "ZMW"
-msgstr ""
+msgstr "ZMW"
 
 #. Zimbabwean dollar
 #. reference: https://en.wikipedia.org/wiki/Zimbabwean_dollar
@@ -1428,4 +1428,4 @@ msgstr ""
 #. symbol: $, Z$
 #. sequence: <sign><amount>
 msgid "ZWL"
-msgstr ""
+msgstr "ZWL"

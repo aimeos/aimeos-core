@@ -116,7 +116,7 @@ msgid "cy"
 msgstr ""
 
 msgid "da"
-msgstr "danski"
+msgstr "Danski"
 
 msgid "de"
 msgstr ""
@@ -143,7 +143,7 @@ msgid "es"
 msgstr ""
 
 msgid "et"
-msgstr "estonski"
+msgstr "Estonski"
 
 msgid "eu"
 msgstr ""

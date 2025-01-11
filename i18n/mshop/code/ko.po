@@ -75,7 +75,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "결제"
 
 #. Subscription reason code
 msgid "reason:0"

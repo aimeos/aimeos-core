@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Keite Clembet, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
@@ -101,7 +101,7 @@ msgstr "Tipo do endereço \"%1$s\" fora do alcance permitido"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Ocorreu um erro desconhecido com o código %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -301,7 +301,7 @@ msgstr "JSON inválido como resultado da busca pelo ID  \"%2$s\" em \"%1$s\": %3
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Atributo inválido na posição \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
@@ -552,11 +552,11 @@ msgstr "Desconto não disponível para a moeda \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Não há configuração de pesquisa disponível para \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Nenhuma configuração de pesquisa disponível para o domínio \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
@@ -860,6 +860,10 @@ msgstr "Importação do status do pedido iniciada de \"%1$s\""
 #, php-format
 msgid "Started order status import from file \"%1$s\""
 msgstr "Importação de status de pedido iniciado para o arquivo \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Endereço não disponível"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"

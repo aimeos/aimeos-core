@@ -1,0 +1,953 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Martins Nav <mveisis1@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Martins Nav <mveisis1@gmail.com>, 2021\n"
+"Language-Team: Latvian (http://app.transifex.com/aimeos/aimeos-core/language/lv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+
+#, php-format
+msgid "Address for domain \"%1$s\" not available"
+msgstr "Domēna \"%1$s\" adrese nav pieejama"
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr "Tipa \"%1$s\" adrese nav pieejama"
+
+#, php-format
+msgid "Address item for removal not found"
+msgstr "Adreses vienums noņemšanai nav atrasts"
+
+#, php-format
+msgid "Address not available"
+msgstr "Adrese nav pieejama"
+
+#, php-format
+msgid "Address salutation \"%1$s\" not within allowed range"
+msgstr "Adreses sveiciens \"%1$s\" neietilpst atļautajā diapazonā"
+
+#, php-format
+msgid "Address search configuration not available"
+msgstr "Nav pieejama adrešu meklēšanas konfigurācija"
+
+#, php-format
+msgid "Address type \"%1$s\" not within allowed range"
+msgstr "Adreses tips \"%1$s\" neietilpst atļautajā diapazonā"
+
+#, php-format
+msgid "An unknown error occured with code %1$d"
+msgstr "Ar kodu %1$d radusies nezināma kļūda"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr "Apkopošanai ir nepieciešama vismaz viena atslēga"
+
+#, php-format
+msgid "Basket empty"
+msgstr "Tukšs grozs"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr "Iegādātais kupons ir valūtā \"%1$s\", grozā tiek izmantota valūta \"%2$s\"."
+
+#, php-format
+msgid "Cache object not available"
+msgstr "Kešatmiņas objekts nav pieejams"
+
+#, php-format
+msgid "Called unknown method \"%1$s\" on class \"%2$s\""
+msgstr "Izsaukta nezināma metode \"%1$s\" klasē \"%2$s\""
+
+#, php-format
+msgid "Catalog node for ID \"%1$s\" not available"
+msgstr "Kataloga mezgls ID \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "Catalog path for ID \"%1$s\" not found"
+msgstr "Kataloga ceļš ID \"%1$s\" nav atrasts"
+
+#, php-format
+msgid "Checks for available addresses in basket failed"
+msgstr "Pārbaudes par pieejamām adresēm grozā neizdevās"
+
+#, php-format
+msgid "Checks for available service items in basket failed"
+msgstr "Pārbauda, vai grozā pieejamie pakalpojuma vienumi nav"
+
+#, php-format
+msgid "Child node with index \"%1$d\" not available"
+msgstr "Bērnu mezgls ar indeksu \"%1$d\" nav pieejams"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klase \"%1$s\" neimplementē saskarni \"%2$s\"."
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Klase \"%1$s\" nav pieejama"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than %2$d characters"
+msgstr "Kods \"%1$s\" nedrīkst būt garāks par %2$d rakstzīmēm."
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr "Kods \"%1$s\" nedrīkst būt garāks par 32 rakstzīmēm."
+
+#, php-format
+msgid "Code contains invalid characters: \"%1$s\""
+msgstr "Kodā ir nederīgas rakstzīmes: \"%1$s\""
+
+#, php-format
+msgid "Code is too long"
+msgstr "Kods ir pārāk garš"
+
+#, php-format
+msgid "Code must not be longer than 255 characters"
+msgstr "Kods nedrīkst būt garāks par 255 rakstzīmēm"
+
+#, php-format
+msgid "Code must not be longer than 32 characters"
+msgstr "Kods nedrīkst būt garāks par 32 rakstzīmēm"
+
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr "Trūkst \"%1$s\" konfigurācijas"
+
+#, php-format
+msgid "Configuration invalid"
+msgstr "Nederīga konfigurācija"
+
+#, php-format
+msgid "Configuration not available"
+msgstr "Konfigurācija nav pieejama"
+
+#, php-format
+msgid "Configuration object not available"
+msgstr "Konfigurācijas objekts nav pieejams"
+
+#, php-format
+msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr "Nepieciešamā SQL izteikuma \"%1$s\" konfigurācija nav pieejama"
+
+#, php-format
+msgid "Coupon in basket is not available any more"
+msgstr "Kupons grozā vairs nav pieejams"
+
+msgid "Coupon is not available any more"
+msgstr "Kupons vairs nav pieejams"
+
+#, php-format
+msgid "Curl could not be initialized"
+msgstr "Curl nevarēja inicializēt"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr "Curl kļūda: \"%1$s\" - \"%2$s\""
+
+#, php-format
+msgid "Database manager object not available"
+msgstr "Datubāzes pārvaldnieka objekts nav pieejams"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr "Datuma vērtība pirms \"%1$s\""
+
+#, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "Failu \"%1$s\" lejupielādēt neizdevās"
+
+#, php-format
+msgid "Duplicate coupon code"
+msgstr "Kupona koda dublikāts"
+
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr "Kupona koda \"%1$s\" dublikāts"
+
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr "Neizdevās izvērst mezglu \"%1$s\""
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "Faili \"%1$s\" nav atrasts"
+
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr "Failu vai direktoriju \"%1$s\" nav"
+
+#, php-format
+msgid "File system manager object not available"
+msgstr "Failu sistēmas pārvaldnieka objekts nav pieejams"
+
+#, php-format
+msgid "Finished order status import from \"%1$s\""
+msgstr "Pabeigts pasūtījuma statusa imports no \"%1$s\""
+
+#, php-format
+msgid "Finished order status import from file \"%1$s\""
+msgstr "Pabeigts pasūtījuma statusa imports no faila \"%1$s\""
+
+#, php-format
+msgid "Flags \"%1$s\" not within allowed range"
+msgstr "Flags \"%1$s\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Flags not within allowed range"
+msgstr "Flags nav atļautajā diapazonā"
+
+#, php-format
+msgid "ID of last inserted database record not available"
+msgstr "Pēdējā ievietotā datubāzes ieraksta ID nav pieejams"
+
+#. / Locale ID %1$s
+#, php-format
+msgid "Internationalization object not available for \"%1$s\""
+msgstr "Internacionalizācijas objekts nav pieejams \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO country code"
+msgstr "Nederīgs ISO valsts kods"
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr "Nederīgs ISO valsts kods \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO currency code"
+msgstr "Nederīgs ISO valūtas kods"
+
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr "Nederīgs ISO valūtas kods \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr "Nederīgs ISO valodas kods"
+
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr "Nederīgs ISO valodas kods \"%1$s\""
+
+#, php-format
+msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr "Nederīgs JSON kā ID \"%2$s\" meklēšanas rezultāts \"%1$s\": %3$s"
+
+#, php-format
+msgid "Invalid attribute at position \"%1$d\""
+msgstr "Nederīgs atribūts pozīcijā \"%1$d\""
+
+#, php-format
+msgid "Invalid characters in ISO currency code \"%1$s\""
+msgstr "Nederīgas ISO valūtas koda \"%1$s\" zīmes"
+
+#, php-format
+msgid "Invalid characters in ISO language code \"%1$s\""
+msgstr "Nederīgas ISO valodas koda \"%1$s\" zīmes"
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Nepareizas rakstzīmes klases nosaukumā \"%1$s\""
+
+#, php-format
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr "Nederīgas rakstzīmes datumā \"%1$s\". Sagaidāms ISO formāts \"GGGGG-MM-DD hh:mm:ss\"."
+
+#, php-format
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr "Nederīgas rakstzīmes datumā \"%1$s\". Sagaidāms ISO formāts \"GGGGG-MM-DD\"."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr "Nepareizas rakstzīmes datumā, sagaidāms ISO formāts \"GGGGG-MM-DD hh:mm:ss\""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr "Nepareizas rakstzīmes datumā, sagaidāms ISO formāts \"GGGGG-MM-DD\""
+
+#, php-format
+msgid "Invalid characters in domain name \"%1$s\""
+msgstr "Nederīgas rakstzīmes domēna nosaukumā \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in email address: \"%1$s\""
+msgstr "Nepareizas rakstzīmes e-pasta adresē: \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\""
+msgstr "Nederīgas rakstzīmes pārvaldnieka nosaukumā \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
+msgstr "Nederīgas rakstzīmes pārvaldnieka nosaukumā \"%1$s\" sadaļā \"%2$s\""
+
+#, php-format
+msgid "Invalid characters in price \"%1$s\""
+msgstr "Nepareizas rakstzīmes cenā \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in provider name \"%1$s\""
+msgstr "Nepareizas rakstzīmes pakalpojumu sniedzēja nosaukumā \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in purchase date \"%1$s\""
+msgstr "Nederīgas rakstzīmes pirkuma datumā \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in type name \"%1$s\""
+msgstr "Nederīgas rakstzīmes tipa nosaukumā \"%1$s\""
+
+#, php-format
+msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
+msgstr "Nederīga kupona pakalpojumu sniedzēja \"%1$s\" konfigurācija, nepieciešama \"%2$s\"."
+
+msgid "Invalid delivery type"
+msgstr "Nederīgs piegādes veids"
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Nederīga rūpnīca \"%1$s\""
+
+#, php-format
+msgid "Invalid mime type \"%1$s\""
+msgstr "Nederīgs mime tips \"%1$s\""
+
+#, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr "Nederīgs pakalpojumu sniedzēja nosaukums \"%1$s\""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
+msgstr "Nederīgs serializētais grozs. \"%1$s\" atgriezās \"%2$s\"."
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr "Nederīgs serializētais grozs. \"%1$s\" atgriež \"%2$s\"."
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
+msgstr "Nederīgs laika intervāla formāts \"%1$s\""
+
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr "Nederīgs tips \"%1$s\""
+
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
+msgstr "Nederīgs tīmekļa vietnes URL \"%1$s\""
+
+#, php-format
+msgid "Item can not be deleted. Site ID of item differs from present site ID."
+msgstr "Vienumu nevar dzēst. Vienuma vietnes ID atšķiras no pašreizējā vietnes ID."
+
+#, php-format
+msgid "Item could not be saved using method save(). Item ID not available."
+msgstr "Vienumu nevarēja saglabāt, izmantojot metodi save(). Vienuma ID nav pieejams."
+
+#, php-format
+msgid "Item referenced in domain \"%1$s\" not found: %2$s"
+msgstr "Domēnā \"%1$s\" nav atrasts vienums: %2$s"
+
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr "Vienība ar ID \"%1$s\" nav atrasta"
+
+#, php-format
+msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "Vienība ar ID \"%2$s\" sadaļā \"%1$s\" nav atrasta"
+
+#, php-format
+msgid "Job with ID \"%1$s\" not found"
+msgstr "Darbs ar ID \"%1$s\" nav atrasts"
+
+#, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr "Saraksta vienība, kas jādzēš no domēna \"%1$s\", nav atrasta"
+
+#, php-format
+msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "Saraksta vienība ar ID \"%2$s\" sadaļā \"%1$s\" nav atrasta"
+
+#, php-format
+msgid "List type for attribute item with ID \"%1$s\" not available"
+msgstr "Saraksta tips atribūta vienumam ar ID \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "List type for price item with ID \"%1$s\" not available"
+msgstr "Saraksta veids cenas vienībai ar ID \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "List type for text item with ID \"%1$s\" not available"
+msgstr "Saraksta tips teksta vienumam ar ID \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "Loading of XML response \"%1$s\" from delivery provider failed"
+msgstr "XML atbildes \"%1$s\" ielādēšana no piegādes pakalpojumu sniedzēja neizdevās"
+
+#, php-format
+msgid "Locale item for site \"%1$s\" not found"
+msgstr "Vietnes \"%1$s\" vietnes vietrādis nav atrasts"
+
+#, php-format
+msgid "Locale object not available"
+msgstr "Vietnes objekts nav pieejams"
+
+#, php-format
+msgid "Lock flag \"%1$d\" not within allowed range"
+msgstr "Bloķēšanas karodziņš \"%1$d\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Log entry with ID \"%1$s\" not found"
+msgstr "Žurnāla ieraksts ar ID \"%1$s\" nav atrasts"
+
+#, php-format
+msgid "Log manager object not available"
+msgstr "Nav pieejams žurnāla pārvaldnieka objekts"
+
+#, php-format
+msgid "Mail object not available"
+msgstr "Pasta objekts nav pieejams"
+
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr "Pārvaldnieka ceļš \"%1$s\" ir nederīgs"
+
+#, php-format
+msgid "Manager path is empty"
+msgstr "Pārvaldnieka ceļš ir tukšs"
+
+#, php-format
+msgid "Message queue object not available"
+msgstr "Ziņojumu rindas objekts nav pieejams"
+
+#, php-format
+msgid "Method \"%1$s\" for locale site manager not available"
+msgstr "Metode \"%1$s\" vietnes vietnes pārvaldniekam nav pieejama"
+
+#, php-format
+msgid "Method \"%1$s\" for provider not available"
+msgstr "Metode \"%1$s\" pakalpojumu sniedzējam nav pieejama"
+
+#, php-format
+msgid "Missing configuration \"%1$s\""
+msgstr "Trūkst konfigurācijas \"%1$s\""
+
+#, php-format
+msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr "Jaunais preces ID \"%1$s\" atšķiras no vecā ID \"%2$s\"."
+
+#, php-format
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
+msgstr "Jaunizveidoto vietni nevar saglabāt, izmantojot metodi \"save()\". Tā vietā mēģiniet izmantot metodi \"insert()\"."
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr "XML fails \"%1$s\" nav atrasts"
+
+#, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr "Nav pieejams nopirkts kupons ar kodu \"%1$s\"."
+
+#, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr "ID \"%1$s\" nav kataloga mezgla"
+
+#, php-format
+msgid "No item found for conditions: %1$s"
+msgstr "Nav atrasts neviens priekšmets, kas atbilstu nosacījumiem: %1$s"
+
+#, php-format
+msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr "Nav atrasts neviens vienums ar \"%2$s\" sadaļā \"%1$s\"."
+
+#, php-format
+msgid "No more credit available for voucher \"%1$s\""
+msgstr "Kuponam \"%1$s\" vairs nav pieejams kredīts."
+
+#, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr "Nav atrasts neviens ID \"%1$s\" pasūtījums"
+
+#, php-format
+msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
+msgstr "Preces ID \"%1$s\" vai preces koda \"%2$s\" cena nav pieejama."
+
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "Nav atrasts neviens produkts ar kodu \"%1$s\""
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr "Valūtas \"%1$s\" atlaide nav pieejama"
+
+#, php-format
+msgid "No search configuration available for \"%1$s\""
+msgstr "\"%1$s\" meklēšanas konfigurācija nav pieejama"
+
+#, php-format
+msgid "No search configuration available for domain \"%1$s\""
+msgstr "Domēnam \"%1$s\" nav pieejama meklēšanas konfigurācija"
+
+#, php-format
+msgid "No search keys available"
+msgstr "Nav pieejami meklēšanas taustiņi"
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr "Nav atrasts krājumu veids kodam \"%1$s\""
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "Kodam \"%1$s\" nav atrasts tips"
+
+#, php-format
+msgid "No warehouse for code \"%1$s\" found"
+msgstr "Koda \"%1$s\" noliktava nav atrasta"
+
+#, php-format
+msgid "Not a date"
+msgstr "Ne datums"
+
+#, php-format
+msgid "Not a date and time"
+msgstr "Ne datums un laiks"
+
+#, php-format
+msgid "Not a key/value map"
+msgstr "Ne atslēga/vērtība karte"
+
+#, php-format
+msgid "Not a list item"
+msgstr "Nav saraksta postenis"
+
+#, php-format
+msgid "Not a listed value"
+msgstr "Nav uzskaitīta vērtība"
+
+#, php-format
+msgid "Not a number"
+msgstr "Ne skaitlis"
+
+#, php-format
+msgid "Not a string"
+msgstr "Nav virkne"
+
+#, php-format
+msgid "Not a time"
+msgstr "Ne laiks"
+
+#, php-format
+msgid "Not a true/false value"
+msgstr "Nav patiesa/nepatiesa vērtība"
+
+#, php-format
+msgid "Not an integer number"
+msgstr "Nav vesels skaitlis"
+
+#, php-format
+msgid "Object is not of required type \"%1$s\""
+msgstr "Objektam nav obligātā tipa \"%1$s\""
+
+#, php-format
+msgid "Operation not supported"
+msgstr "Darbība netiek atbalstīta"
+
+#, php-format
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr "Pasūtījuma ID \"%1$s\" piegādes pakalpojumu sniedzēja XML atbildē atšķiras no saglabātā pasūtījuma rēķina ID \"%2$s\"."
+
+#, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr "Pasūtījuma adreses pozīcijai \"%1$s\" jābūt lielākai par 0"
+
+#, php-format
+msgid "Order base item with order ID \"%1$s\" not found"
+msgstr "Pasūtījuma bāzes vienība ar pasūtījuma ID \"%1$s\" nav atrasta"
+
+#, php-format
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr "Piegādes pakalpojumu sniedzējam nosūtītie pasūtījuma dati tika noraidīti ar kodu \"%1$s\" saskaņā ar XML atbildi."
+
+#, php-format
+msgid "Order delivery status \"%1$s\" not within allowed range"
+msgstr "Pasūtījuma piegādes statuss \"%1$s\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr "Pasūtījuma maksājuma statuss \"%1$s\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
+msgstr "Pasūtījuma produkta pozīcijai \"%1$s\" jābūt lielākai par 0"
+
+#, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr "Pasūtījuma pakalpojuma pozīcijai \"%1$s\" jābūt lielākai par 0"
+
+#, php-format
+msgid "Order type \"%1$s\" not within allowed range"
+msgstr "Pasūtījuma tips \"%1$s\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr "Pasūtījums ar ID \"%1$s\" tika noraidīts ar kodu \"%2$s\": %3$s"
+
+#, php-format
+msgid "Parameter \"%1$s\" for configuration not available"
+msgstr "Parametrs \"%1$s\" konfigurācijai nav pieejams"
+
+#, php-format
+msgid "Password object not available"
+msgstr "Paroles objekts nav pieejams"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr "PayPal Express: Darījuma dublēšanās ar ID \"%1$s\" un statusu \"%2$s\"."
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr "PayPal Express: Darījuma dublēšanās ar ID \"%1$s\" un statusu \"%2$s\"."
+
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr "PayPal Express: Nederīgs pieprasījums \"%1$s\""
+
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr "PayPal Express: Maksājuma darījuma ID pasūtījumam \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr "PayPal Express: Pieprasījums par pasūtījuma ID \"%1$s\" neizdevās ar \"%2$s\"."
+
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr "PayPal Express: Nepareiza maksājuma summa \"%1$s\" pasūtījumam ar ID \"%2$s\"."
+
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr "PayPal Express: Nepareizs saņēmēja e-pasts \"%1$s\""
+
+msgid "Payment costs"
+msgstr "Maksājumu izmaksas"
+
+#, php-format
+msgid "Please have a look at the prices of the products in your basket"
+msgstr "Lūdzu, apskatiet grozā esošo produktu cenas."
+
+#, php-format
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr "Cenu nevar pievienot. Cenas pozīcijas valūtas ID \"%1$s\" un pašlaik izmantotās valūtas ID \"%2$s\" nesakrīt."
+
+#, php-format
+msgid "Price for the given quantity \"%1$d\" not available"
+msgstr "Cena par norādīto daudzumu \"%1$d\" nav pieejama"
+
+#, php-format
+msgid "Price for the given quantity \"%1$s\" not available"
+msgstr "Cena par norādīto daudzumu \"%1$s\" nav pieejama"
+
+#, php-format
+msgid "Price item not available"
+msgstr "Cenas vienība nav pieejama"
+
+#, php-format
+msgid "Process object not available"
+msgstr "Procesa objekts nav pieejams"
+
+#, php-format
+msgid "Product  not available"
+msgstr "Produkts nav pieejams"
+
+#, php-format
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr "Produktā nav iekļautas visas nepieciešamās vērtības. Preces kods precei nav pieejams."
+
+#, php-format
+msgid "Product does not contain the SKU code"
+msgstr "Produktā nav norādīts SKU kods"
+
+#, php-format
+msgid "Product matching given properties not found"
+msgstr "Produkts, kas atbilst norādītajām īpašībām, nav atrasts"
+
+#, php-format
+msgid "Product not available"
+msgstr "Produkts nav pieejams"
+
+#, php-format
+msgid "Product with array key \"%1$d\" not available"
+msgstr "Produkts ar masīva atslēgu \"%1$d\" nav pieejams"
+
+#, php-format
+msgid "Products in basket not available"
+msgstr "Produkti grozā nav pieejami"
+
+#, php-format
+msgid "Products out of stock"
+msgstr "Produkti, kas nav noliktavā"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr "Īpašuma vienība izņemšanai nav atrasta"
+
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
+msgstr "Īpašuma nosaukums \"%1$s\" nav atļautajā diapazonā"
+
+#, php-format
+msgid "Provider in \"%1$s\" not available"
+msgstr "Nodrošinātājs sadaļā \"%1$s\" nav pieejams"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr "Daudzumam jābūt 0 vai lielākam un tas nedrīkst pārsniegt %1$d"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr "Daudzumam jābūt 0 vai lielākam un tas nedrīkst pārsniegt pasūtīto daudzumu."
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr "Daudzumam jābūt lielākam par 0 un tas nedrīkst pārsniegt %1$d"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr "Daudzumam jābūt lielākam par 0 un tas nedrīkst pārsniegt 2147483647."
+
+#, php-format
+msgid "Quantity scale must be greater than 0"
+msgstr "Daudzuma skalai jābūt lielākai par 0"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "Trūkst obligātā parametra \"%1$s\"."
+
+#, php-format
+msgid "Required value for \"%1$s\" is missing"
+msgstr "Trūkst prasītās vērtības \"%1$s\"."
+
+#, php-format
+msgid "Search configuration for \"%1$s\" not available"
+msgstr "\"%1$s\" meklēšanas konfigurācija nav pieejama"
+
+#, php-format
+msgid "Search configuration not available"
+msgstr "Nav pieejama meklēšanas konfigurācija"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr "Pasūtījuma nosūtīšana neizdevās: \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
+msgstr "Pasūtījuma nosūtīšana piegādes pakalpojumu sniedzējam neizdevās ar HTTP statusu \"%1$s\"."
+
+#, php-format
+msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr "Pasūtījuma nosūtīšana piegādes pakalpojumu sniedzējam neizdevās: \"%1$s\""
+
+#, php-format
+msgid "Service not available"
+msgstr "Pakalpojums nav pieejams"
+
+#, php-format
+msgid "Service of type \"%1$s\" not available"
+msgstr "\"%1$s\" tipa pakalpojums nav pieejams"
+
+#, php-format
+msgid "Session object not available"
+msgstr "Sesijas objekts nav pieejams"
+
+#, php-format
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr "Vietni nevar ievietot. Vietnes vietnes ID atšķiras no mātes vietnes ID."
+
+#, php-format
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr "Vietni nevar pārvietot. Vietnes vietnes ID atšķiras no pašreizējās vietnes ID, esošās vecākās vietnes ID vai jaunās vecākās vietnes ID."
+
+#, php-format
+msgid "Site for code \"%1$s\" not found"
+msgstr "Nav atrasta vietne kodam \"%1$s\""
+
+#, php-format
+msgid "Started order status import from \"%1$s\""
+msgstr "Sākts pasūtījuma statusa imports no \"%1$s\""
+
+#, php-format
+msgid "Started order status import from file \"%1$s\""
+msgstr "Sākts pasūtījuma statusa imports no faila \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Statuss nav pieejams"
+
+#, php-format
+msgid "The algorithm \"%1$s\" is not supported"
+msgstr "Algoritms \"%1$s\" nav atbalstīts"
+
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr "Maksimālā groza vērtība %1$s ir pārsniegta"
+
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr "Maksimālais produkta daudzums ir %1$d"
+
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr "Maksimālais produkta daudzums %1$d ir pārsniegts."
+
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr "Maksimālā produkta vērtība ir %1$s"
+
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr "Visu produktu maksimālais daudzums ir %1$d"
+
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr "Visu produktu maksimālā vērtība ir %1$s"
+
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr "Nav sasniegta minimālā groza vērtība %1$s"
+
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr "Minimālais produkta daudzums %1$d nav sasniegts"
+
+#, php-format
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr "Konfigurācijas opcijas ar atslēgu \"%1$s\" tipam jābūt \"%2$s\"."
+
+#, php-format
+msgid "Time value after \"%1$s\""
+msgstr "Laika vērtība pēc \"%1$s\""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr "Laika vērtība pirms \"%1$s\""
+
+#, php-format
+msgid "Total results value not found"
+msgstr "Kopējā rezultātu vērtība nav atrasta"
+
+#, php-format
+msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
+msgstr "Koku saknes ar kodu \"%1$s\" in \"%2$s\" nav atrastas"
+
+#, php-format
+msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr "Tipa vienība ar ID \"%1$s\" vienībā \"%2$s\" nav atrasta"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Nevar izsaukt metodi \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr "Nav iespējams izveidot pasūtījuma XML failu \"%1$s\""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr "Nav iespējams pārvietot importēto failu \"%1$s\" uz \"%2$s\"."
+
+#, php-format
+msgid "Unable to sort public holidays: \"%1$s\""
+msgstr "Nevar sakārtot svētku dienas: \"%1$s\""
+
+#, php-format
+msgid "Unknown search key \"%1$s\""
+msgstr "Nav zināma meklēšanas atslēga \"%1$s\""
+
+#, php-format
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr "Piegādes pakalpojuma sniedzēja XML atbildes validācija pret shēmu \"%1$s\" neizdevās."
+
+#, php-format
+msgid "View object not available"
+msgstr "Skatīt objektu nav pieejams"

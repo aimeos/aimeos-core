@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Finnish (http://app.transifex.com/aimeos/aimeos-core/language/fi/)\n"
@@ -35,7 +35,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -55,7 +55,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -65,79 +65,79 @@ msgstr ""
 #. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Verkkotunnuksen \"%1$s\" osoitetta ei ole saatavilla."
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Tyypin \"%1$s\" osoitetta ei ole saatavilla."
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Poistettavan kohteen osoitetta ei löydy"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Osoite ei ole saatavilla"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Osoitteen tervehdys \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Osoitehakukonfiguraatio ei ole käytettävissä"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Osoitetyyppi \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Tuntematon virhe tapahtui koodilla %1$d."
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Yhdistämiseen tarvitaan vähintään yksi avain"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Kori tyhjä"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Ostettu kuponki on valuutassa \"%1$s\", korissa käytetään valuuttaa \"%2$s\"."
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Välimuistiobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Kutsuttu tuntematon menetelmä \"%1$s\" luokassa \"%2$s\"."
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Luettelosolmua tunnukselle \"%1$s\" ei ole saatavilla."
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Luettelon polkua ID:lle \"%1$s\" ei löydy."
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Korin käytettävissä olevien osoitteiden tarkistaminen epäonnistui"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Tarkistaa, onko korissa käytettävissä olevia palvelukohteita epäonnistunut"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Lapsisolmua, jonka indeksi on \"%1$d\", ei ole saatavilla."
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -149,163 +149,163 @@ msgstr "Luokka \"%1$s\" ei saatavilla"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Koodi \"%1$s\" ei saa olla pidempi kuin %2$d merkkiä."
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Koodi \"%1$s\" saa olla enintään 32 merkkiä pitkä."
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Koodi sisältää virheellisiä merkkejä: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Koodi on liian pitkä"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Koodi saa olla enintään 255 merkkiä pitkä"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Koodi saa olla enintään 32 merkkiä pitkä"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Konfiguraatio \"%1$s\" puuttuu."
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Konfiguraatio virheellinen"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Konfiguraatio ei ole käytettävissä"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Konfigurointikohde ei ole käytettävissä"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Tarvittavan SQL-lausekkeen konfiguraatio \"%1$s\" ei ole käytettävissä."
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Korissa oleva kuponki ei ole enää käytettävissä"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Kuponki ei ole enää saatavilla"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curlia ei voitu alustaa"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Curl-virhe: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Tietokannan hallintaobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Päivämäärän arvo ennen \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Tiedoston \"%1$s\" lataaminen epäonnistui."
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Kaksinkertainen kuponkikoodi"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Kaksinkertainen kuponkikoodi \"%1$s\""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Solmun \"%1$s\" laajentaminen epäonnistui."
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Tiedostoa \"%1$s\" ei löydy"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Tiedostoa tai hakemistoa \"%1$s\" ei ole olemassa."
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Tiedostojärjestelmän hallintaobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Tilauksen tilauksen tila on saatu valmiiksi \"%1$s\""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Tilauksen tilan tuonti tiedostosta \"%1$s\" on valmis."
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Liput \"%1$s\" eivät ole sallitulla alueella."
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Liput eivät ole sallitulla alueella"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "Viimeksi lisätyn tietokantatietueen ID ei ole käytettävissä"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Kansainvälistämiskohde ei ole saatavilla \"%1$s\" -kohteelle."
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Virheellinen ISO-maakoodi"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Virheellinen ISO-maakoodi \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Virheellinen ISO-valuuttakoodi"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Virheellinen ISO-valuuttakoodi \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Virheellinen ISO-kielikoodi"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Virheellinen ISO-kielikoodi \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Virheellinen JSON hakutuloksena ID:n \"%2$s\" hausta \"%1$s\": %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Virheellinen attribuutti kohdassa \"%1$d\"."
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "ISO-valuuttakoodissa \"%1$s\" on virheellisiä merkkejä."
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "ISO-kielikoodissa \"%1$s\" on virheellisiä merkkejä."
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -315,58 +315,58 @@ msgstr "Virheellisiä merkkejä luokkanimessä \"%1$s\""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Päivämäärän \"%1$s\" virheelliset merkit. ISO-muodossa \"VVVV-KK-PVK hh:mm:ss\" odotetaan."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Päivämäärän \"%1$s\" virheelliset merkit. ISO-muodon \"VVVVV-KK-PP\" odotetaan olevan."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Päivämäärän virheelliset merkit, odotetaan ISO-muodossa \"VVVVV-KK-PP hh:mm:ss\"."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Päivämäärän virheelliset merkit, odotetaan ISO-muodossa \"VVVVV-KK-PP\"."
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Verkkotunnuksessa \"%1$s\" on virheellisiä merkkejä."
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Sähköpostiosoitteessa on virheellisiä merkkejä: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Managerin nimessä \"%1$s\" on virheellisiä merkkejä."
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Virheelliset merkit managerin nimessä \"%1$s\" kohdassa \"%2$s\"."
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Virheelliset merkit hinnassa \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Palveluntarjoajan nimessä \"%1$s\" on virheellisiä merkkejä."
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Ostopäivämäärän \"%1$s\" virheelliset merkit."
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Virheelliset merkit tyypin nimessä \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Kupongin tarjoajan \"%1$s\" virheellinen konfiguraatio, tarvitaan \"%2$s\"."
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Virheellinen toimitustyyppi"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -374,548 +374,552 @@ msgstr "Virheellinen tehdas \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Virheellinen mime-tyyppi \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Virheellinen palveluntarjoajan nimi \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Virheellinen sarjallistettu kori. \"%1$s\" palautti \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Virheellinen sarjallistettu kori. \"%1$s\" palauttaa \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Virheellinen aikaväliformaatti \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Virheellinen tyyppi \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Virheellinen verkkosivuston URL-osoite \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Tuotetta ei voi poistaa. Kohteen sivustotunnus poikkeaa nykyisestä sivustotunnuksesta."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Elementtiä ei voitu tallentaa menetelmällä save(). Kohteen ID ei ole käytettävissä."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Verkkotunnuksessa \"%1$s\" viitattua kohdetta ei löydy: %2$s."
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Tuotetta tunnuksella \"%1$s\" ei löydy."
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Elementtiä, jonka ID \"%2$s\" on \"%1$s\", ei löydy."
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Tehtävää tunnuksella \"%1$s\" ei löydy."
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Luetteloelementtiä poistettavaksi verkkotunnuksesta \"%1$s\" ei löydy."
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Luettelon kohdetta, jonka ID \"%2$s\" on \"%1$s\", ei löydy."
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Luettelotyyppi attribuutille, jonka ID on \"%1$s\", ei ole käytettävissä."
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Luettelotyyppi hintakohteelle, jonka ID on \"%1$s\", ei ole käytettävissä."
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Luettelotyyppi tekstikohdetta varten, jonka ID on \"%1$s\", ei ole käytettävissä."
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "XML-vastauksen \"%1$s\" lataaminen toimituspalvelun tarjoajalta epäonnistui."
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Sivuston \"%1$s\" paikallistunnusta ei löydy."
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Paikkakuntaobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Lukituslippu \"%1$d\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Lokimerkintää tunnuksella \"%1$s\" ei löydy."
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Lokinhallintaobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Mail-objekti ei ole käytettävissä"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Hallintapolku \"%1$s\" on virheellinen."
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Managerin polku on tyhjä"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Viestijono-objekti ei ole käytettävissä"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Menetelmä \"%1$s\" ei ole käytettävissä paikallissivuston hallintaan."
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Menetelmä \"%1$s\" palveluntarjoajaa varten ei ole käytettävissä."
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Puuttuva kokoonpano \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Kohteen uusi tunnus \"%1$s\" eroaa vanhasta tunnuksesta \"%2$s\"."
 
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "Vastikään luotua sivustoa ei voi tallentaa menetelmällä \"save()\". Kokeile sen sijaan menetelmää \"insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "XML-tiedostoa \"%1$s\" ei löytynyt"
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Ei ostettua kuponkia koodille \"%1$s\" saatavilla"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Ei luettelosolmua ID:lle \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Ei löytynyt tuotetta ehdoille: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Ei löytynyt kohdetta \"%2$s\" kohdassa \"%1$s\"."
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Tositteelle \"%1$s\" ei ole enää luottoa saatavilla."
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Tilausta tunnukselle \"%1$s\" ei löytynyt."
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Tuotetunnukselle \"%1$s\" tai tuotekoodille \"%2$s\" ei ole saatavilla hintaa."
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Tuotetta koodilla \"%1$s\" ei löytynyt."
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Ei alennusta valuutalle \"%1$s\" saatavilla"
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Ei hakukonfiguraatiota saatavilla \"%1$s\" varten"
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Verkkotunnukselle \"%1$s\" ei ole saatavilla hakukonfiguraatiota."
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Ei hakunäppäimiä käytettävissä"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Koodille \"%1$s\" ei löytynyt varastotyyppiä."
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Koodille \"%1$s\" ei löytynyt tyyppiä."
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Koodille \"%1$s\" ei löytynyt varastoa."
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Ei treffit"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Ei päivämäärää ja kellonaikaa"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Ei avain/arvokartta"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Ei luettelon kohta"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Ei luetteloitua arvoa"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Ei numero"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Ei merkkijono"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Ei aikaa"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Ei tosia/väärää -arvo"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Ei ole kokonaisluku"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Kohde ei ole vaadittua tyyppiä \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Toimintaa ei tueta"
 
 #, php-format
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "Toimituspalvelun tarjoajan XML-vastauksessa oleva tilauksen tunnus \"%1$s\" eroaa tilauksen tallennetusta laskun tunnuksesta \"%2$s\"."
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Tilausosoitteen \"%1$s\" sijainnin on oltava suurempi kuin 0."
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Tilauksen peruskohtaa, jonka tilaustunnus on \"%1$s\", ei löydy."
 
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "Toimituspalvelun tarjoajalle lähetetyt tilaustiedot hylättiin koodilla \"%1$s\" XML-vastauksen mukaan."
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tilauksen toimitustila \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tilauksen maksun tila \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Tuotteen \"%1$s\" sijainnin on oltava suurempi kuin 0."
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Tilauspalvelun sijainnin \"%1$s\" on oltava suurempi kuin 0."
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tilaustyyppi \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Tilaus tunnuksella \"%1$s\" hylättiin koodilla \"%2$s\": %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Konfiguraation parametri \"%1$s\" ei ole käytettävissä."
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Salasana-objekti ei ole käytettävissä"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: ID \"%1$s\" ja tila \"%2$s\"."
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: ID \"%1$s\" ja tila \"%2$s\"."
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" virheellinen pyyntö."
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: Maksutapahtuman ID tilaustunnukselle \"%1$s\" ei ole saatavilla."
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Pyyntö tilauksen ID \"%1$s\" epäonnistui \"%2$s\"-tapauksella."
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Väärä maksusumma \"%1$s\" tilaustunnukselle \"%2$s\"."
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Väärä vastaanottajan sähköpostiosoite \"%1$s\""
 
 msgid "Payment costs"
 msgstr "Maksukustannukset"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Tutustu korissasi olevien tuotteiden hintoihin."
 
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Hintaa ei voi lisätä. Hintakohteen valuuttatunnus \"%1$s\" ja tällä hetkellä käytetty valuuttatunnus \"%2$s\" eivät täsmää."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Hinta annetulle määrälle \"%1$d\" ei ole saatavilla."
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Hinta annetulle määrälle \"%1$s\" ei ole saatavilla."
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Hintakohde ei ole saatavilla"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Prosessiobjekti ei ole käytettävissä"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Tuote ei ole saatavilla"
 
 #, php-format
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "Tuote ei sisällä kaikkia vaadittuja arvoja. Tuotteen tuotekoodi ei ole saatavilla."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Tuote ei sisällä SKU-koodia"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Tuotetta, joka vastaa annettuja ominaisuuksia, ei löydy"
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Tuote ei ole saatavilla"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Tuote, jonka array-avain on \"%1$d\", ei ole saatavilla."
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Korissa olevia tuotteita ei ole saatavilla"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Tuotteet loppuneet varastosta"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Poistettavaa omaisuuserää ei löydy"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Ominaisuuden nimi \"%1$s\" ei ole sallitulla alueella."
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Palveluntarjoajaa \"%1$s\" ei ole saatavilla"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Määrän on oltava vähintään 0, eikä se saa ylittää %1$d."
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Määrän on oltava vähintään 0, eikä se saa ylittää tilattua määrää."
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Määrän on oltava suurempi kuin 0 eikä se saa ylittää %1$d."
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Määrän on oltava suurempi kuin 0, eikä se saa ylittää 2147483647."
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Määräasteikon on oltava suurempi kuin 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Vaadittu parametri \"%1$s\" puuttuu."
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Vaadittu arvo \"%1$s\" puuttuu."
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Hakukonfiguraatio \"%1$s\" ei ole käytettävissä"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Hakuasetukset eivät ole käytettävissä"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Toimeksiannon lähettäminen epäonnistui: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Tilauksen lähettäminen toimituspalvelun tarjoajalle epäonnistui HTTP-tilalla \"%1$s\"."
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Tilauksen lähettäminen toimituksen toimittajalle epäonnistui: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Palvelu ei ole käytettävissä"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Palvelu tyyppiä \"%1$s\" ei ole saatavilla."
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Istunto-objekti ei ole käytettävissä"
 
 #, php-format
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Sivustoa ei voi lisätä. Sivuston sivustotunnus eroaa emosivuston sivustotunnuksesta."
 
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Sivustoa ei voi siirtää. Sivuston sivustotunnus poikkeaa nykyisestä sivustotunnuksesta, nykyisen emosivuston sivustotunnuksesta tai uuden emosivuston sivustotunnuksesta."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Koodin \"%1$s\" sivustoa ei löydy."
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Käynnistetty tilauksen tilan tuominen \"%1$s\":sta"
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Aloitettiin tilauksen tilan tuonti tiedostosta \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Osoite ei ole saatavilla"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Algoritmia \"%1$s\" ei tueta."
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Korin enimmäisarvo %1$s on ylitetty."
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Tuotteen enimmäismäärä on %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Tuotteen enimmäismäärä %1$d on ylitetty."
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Tuotteen enimmäisarvo on %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Kaikkien tuotteiden enimmäismäärä on %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Kaikkien tuotteiden enimmäisarvo on %1$s."
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Korin vähimmäisarvoa %1$s ei ole saavutettu."
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Tuotteen vähimmäismäärää %1$d ei ole saavutettu."
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Avaimella \"%1$s\" olevan konfigurointivaihtoehdon tyypin on oltava \"%2$s\"."
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Aika-arvo \"%1$s\" jälkeen"
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Aika-arvo ennen \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Kokonaistulosten arvoa ei löydy"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Puun juurta koodilla \"%1$s\" ei löydy paikasta \"%2$s\"."
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Tyyppikohdetta, jonka ID \"%1$s\" on \"%2$s\", ei löydy."
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -923,26 +927,26 @@ msgstr "Toimintoa \"%1$s” ei voitu suorittaa"
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "XML-tiedostoa \"%1$s\" ei pystytä luomaan."
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Tuodun tiedoston \"%1$s\" siirtäminen tiedostoon \"%2$s\" ei onnistu."
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Ei pysty lajittelemaan yleisiä vapaapäiviä: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Tuntematon hakuavain \"%1$s\""
 
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "Toimituspalvelun tarjoajan XML-vastauksen validointi skeemaa \"%1$s\" vastaan epäonnistui."
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Näytä kohde ei ole käytettävissä"
