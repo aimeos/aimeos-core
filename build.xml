@@ -169,7 +169,6 @@
 
 
 	<target name="clean" description="Cleans up temporary files">
-
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -206,6 +205,10 @@
 		<exec command="${bindir}potrans deepl --only ${po-filename}" logoutput="true" />
 	</target>
 
+	<target name="i18next" description="Updates translation message files of specific extension directory">
+		<phing target="i18n" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
+	</target>
+
 
 	<target name="build" description="Creates all files to be generated" >
 		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" passthru="true" />
@@ -226,8 +229,11 @@
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}"
-			checkreturn="true" logoutput="true" passthru="true" />
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" passthru="true" />
+	</target>
+
+	<target name="buildext" description="Generates binary translation files of specific extension directory">
+		<phing target="build" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 
 
