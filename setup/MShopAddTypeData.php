@@ -53,15 +53,15 @@ class MShopAddTypeData extends Base
 
 	protected function existing( string $domain, array $entries ) : array
 	{
-		$prefix = str_replace( '/', '.', $domain ) . '.';
-		$manager = $this->manager( $domain );
-		$filter = $manager->filter();
 		$expr = $map = [];
+		$prefix = str_replace( '/', '.', $domain ) . '.';
+
+		$manager = $this->manager( $domain );
+		$filter = $manager->filter()->slice( 0, 0x7fffffff );
 
 		foreach( $entries as $entry )
 		{
 			$expr[] = $filter->and( [
-				$filter->is( $prefix . 'for', '==', array_slice( explode( '/', $domain ), 0, -1 ) ),
 				$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
 				$filter->is( $prefix . 'code', '==', $entry['code'] )
 			] );
