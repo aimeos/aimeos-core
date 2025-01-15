@@ -42,13 +42,14 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['country-taxrates' => ['US' => '5'], 'state-taxrates' => ['CA' => '6.25']];
+		$attributes = ['country-taxrates' => ['US' => '5'], 'state-taxrates' => ['CA' => '6.25'], 'services' => false];
 
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 3, count( $result ) );
 		$this->assertEquals( null, $result['country-taxrates'] );
 		$this->assertEquals( null, $result['state-taxrates'] );
+		$this->assertEquals( null, $result['services'] );
 	}
 
 
@@ -56,9 +57,10 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getConfigBE();
 
-		$this->assertEquals( 2, count( $list ) );
+		$this->assertEquals( 3, count( $list ) );
 		$this->assertArrayHasKey( 'country-taxrates', $list );
 		$this->assertArrayHasKey( 'state-taxrates', $list );
+		$this->assertArrayHasKey( 'services', $list );
 
 		foreach( $list as $entry ) {
 			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $entry );

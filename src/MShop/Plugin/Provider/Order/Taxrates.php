@@ -49,6 +49,15 @@ class Taxrates
 			'default' => [],
 			'required' => false,
 		),
+		'services' => array(
+			'code' => 'services',
+			'internalcode' => 'services',
+			'label' => 'Apply to services as well',
+			'type' => 'bool',
+			'internaltype' => 'bool',
+			'default' => true,
+			'required' => false,
+		),
 	);
 
 
@@ -140,9 +149,13 @@ class Taxrates
 			$orderProduct->getPrice()->setTaxrate( $taxrate );
 		}
 
-		foreach( $order->getServices() as $orderServiceGroup ) {
-			foreach( $orderServiceGroup as $orderService ) {
-				$orderService->getPrice()->setTaxrate( $taxrate );
+		if( $this->getConfigValue( 'services', true ) )
+		{
+			foreach( $order->getServices() as $orderServiceGroup )
+			{
+				foreach( $orderServiceGroup as $orderService ) {
+					$orderService->getPrice()->setTaxrate( $taxrate );
+				}
 			}
 		}
 
