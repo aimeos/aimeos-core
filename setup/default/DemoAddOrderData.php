@@ -192,7 +192,8 @@ class DemoAddOrderData extends MShopAddDataAbstract
 	protected function services( \Aimeos\MShop\ContextIface $context ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $context, 'service' );
-		$items = $manager->search( $manager->filter(), ['media', 'price', 'text'] );
+		$filter = $manager->filter()->add( 'service.code', '=~', 'demo' );
+		$items = $manager->search( $filter, ['media', 'price', 'text'] );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/service' );
 		$list = [];
