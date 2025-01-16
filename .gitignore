@@ -1,5 +1,6 @@
 config/resource.php
 composer.lock
+.env
 
 Packages/
 public/
