@@ -6,13 +6,14 @@
  */
 
 
-require_once 'phing/Task.php';
+use Phing\Task;
+use Phing\Type\FileSet;
 
 
 /**
  * Generate Markdown pages for the configuration documentation
  */
-class MShopConfigDocTask extends Task
+class ConfigDocTask extends Task
 {
 	private $file;
 	private $outdir;

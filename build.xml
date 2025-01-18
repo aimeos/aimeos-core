@@ -9,21 +9,24 @@
 
 	<target name="setup" description="Sets up database incl. unit test data">
 		<echo msg="Setting up test database" />
-		<exec command="php ${coredir}/up.php -vvv unittest unittest"
-			checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="php" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="${coredir}/up.php -vvv unittest unittest" />
+		</exec>
 	</target>
 
 	<target name="setupperf" description="Sets up database incl. performance test data">
 		<echo msg="Setting up performance data" />
-		<exec command="php ${coredir}/up.php unitperf unitperf"
-			checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="php" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="${coredir}/up.php unitperf unitperf" />
+		</exec>
 	</target>
 
 
 	<target name="coverage" description="Creates coverage reports" depends="clean">
 		<echo msg="Generating code coverage report" />
-		<exec command="${bindir}phpunit --configuration=phpunit-coverage.xml"
-			dir="tests" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpunit" dir="tests" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="--configuration=phpunit-coverage.xml" />
+		</exec>
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -39,8 +42,9 @@
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />
-		<exec command="${bindir}phpunit --configuration=phpunit.xml"
-			dir="tests" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpunit" dir="tests" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="--configuration=phpunit.xml" />
+		</exec>
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -57,8 +61,9 @@
 	<target name="check" description="Executes all checks">
 		<echo msg="Executing code sniffer" />
 		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Aimeos src/ tests/*/"
-			checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpcs" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-n --standard=${codestddir}/Aimeos src/ tests/*/" />
+		</exec>
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -73,7 +78,7 @@
 	</target>
 
 
-	<target name="clean" description="">
+	<target name="clean" description="Clean up temporary files">
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 		<delete file="tests/confdoc.ser" quiet="true" failonerror="false" />
 		<delete file="tests/coverage.xml" quiet="true" failonerror="false" />
@@ -83,11 +88,17 @@
 				<include name="*.log" />
 			</fileset>
 		</delete>
+		<phing target="clean" haltonfailure="true">
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
+				<include name="*/phing.xml" />
+			</fileset>
+		</phing>
 	</target>
 
 
 	<target name="doc" description="Generates the documentation" depends="test">
-		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
+		<taskdef name="confdoc" classname="ConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
 		<confdoc prefix="madmin" keyparts="2"
@@ -168,19 +179,10 @@
 	</target>
 
 
-	<target name="clean" description="Cleans up temporary files">
-		<phing target="clean" haltonfailure="true">
-			<fileset dir="${extdir}" expandsymboliclinks="true" >
-				<exclude name=".*/phing.xml" />
-				<include name="*/phing.xml" />
-			</fileset>
-		</phing>
-	</target>
-
-
 	<target name="i18n" description="Creates all translation files">
-		<exec command="find ./src/MAdmin ./src/MShop -type f | xgettext -j -s --no-location --no-wrap --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/mshop/core-mshop.pot -f -"
-			checkreturn="true" logoutput="true" />
+		<exec executable="find" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="src/MAdmin src/MShop -type f | xgettext -j -s --no-location --no-wrap --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/mshop/core-mshop.pot -f -" />
+		</exec>
 		<foreach list="i18n/country,i18n/currency,i18n/language,i18n/mshop" param="i18n-dir" target="i18n-files" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
@@ -191,7 +193,7 @@
 	</target>
 
 	<target name="i18n-files" description="Updates translation message files in passed directory">
-		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
+		<foreach param="po-fname" absparam="po-filename" inheritall="true" target="i18n-update">
 			<fileset dir="${i18n-dir}">
 				<include name="*.po" />
 			</fileset>
@@ -200,9 +202,16 @@
 
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
-		<echo msg="File: ${po-filename}" />
-		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" checkreturn="true" logoutput="true" />
-		<exec command="${bindir}potrans deepl --only ${po-filename}" logoutput="true" />
+		<echo msg="File: ${po-filename} ${i18n-dir}/*.pot" />
+		<exec executable="msgmerge" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="--no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" />
+		</exec>
+		<exec executable="msgattrib" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-s --no-wrap --no-fuzzy -o ${po-filename} ${po-filename}" />
+		</exec>
+		<exec executable="${bindir}potrans" logoutput="true" passthru="true">
+			<arg line="deepl --only ${po-filename}" />
+		</exec>
 	</target>
 
 	<target name="i18next" description="Updates translation message files of specific extension directory">
@@ -211,9 +220,11 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="tx" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="pull -a -f --minimum-perc=1" />
+		</exec>
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-			<fileset dir="./i18n">
+			<fileset dir="i18n">
 				<include name="**/*.po" />
 			</fileset>
 		</foreach>
@@ -229,7 +240,9 @@
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="msgfmt" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="--statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" />
+		</exec>
 	</target>
 
 	<target name="buildext" description="Generates binary translation files of specific extension directory">
@@ -246,12 +259,12 @@
 		</copy>
 		<reflexive>
 			<fileset dir="${extdir}/${extname}">
-			<include name="**" />
+				<include name="**" />
 			</fileset>
 			<filterchain>
-			<replaceregexp>
-				<regexp pattern="&lt;extname&gt;" replace="${extname}"/>
-			</replaceregexp>
+				<replaceregexp>
+					<regexp pattern="&lt;extname&gt;" replace="${extname}"/>
+				</replaceregexp>
 			</filterchain>
 		</reflexive>
 	</target>
