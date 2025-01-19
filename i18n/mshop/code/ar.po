@@ -47,7 +47,7 @@ msgstr "الشركة"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "السيد"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "السيدة"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "آنسة"
 
 #. Order type value
 msgid "order:repeat"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "السبب: 1"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,19 +91,19 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "الحالة: 0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "السبب: 1"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "الدفع: 2"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "الدفع: 3"
 
 #. Payment status value
 msgid "pay:4"
@@ -111,11 +111,11 @@ msgstr "قيد الانتظار"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "الدفع: 5"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "الدفع: 6"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,7 +127,7 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "الحالة: 0"
 
 #. Delivery status value
 msgid "stat:1"
@@ -139,23 +139,23 @@ msgstr "قيد المعالجة"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "الإحصاء: 3"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "الإحصاء: 4"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "الإحصاء: 5"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "الدفع: 2"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "الإحصاء: 7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

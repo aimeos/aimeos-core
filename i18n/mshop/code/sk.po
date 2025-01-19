@@ -84,7 +84,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "platiť: 1"
 
 #. Payment status value
 msgid "pay:-1"
@@ -92,31 +92,31 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "platiť:0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "platiť: 1"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "platiť: 2"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "platiť: 3"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "štatistika: 1"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "platiť: 5"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "platiť: 6"
 
 #. Payment status value
 msgid "pay:7"
@@ -128,35 +128,35 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "platiť:0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "štatistika: 1"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "štatút: 2"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "štatút: 3"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "štatút: 4"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "štatút: 5"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "platiť: 2"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "štatút: 7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-01 14:57+0200\n"
+"POT-Creation-Date: 2025-01-18 18:06+0100\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Expanding \"%1$s\" node failed"
 msgstr ""
 
-#, fuzzy, php-format
+#, php-format
 msgid "File \"%1$s\" not found"
 msgstr ""
 
