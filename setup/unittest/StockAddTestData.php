@@ -34,30 +34,7 @@ class StockAddTestData extends BaseAddTestData
 		$this->info( 'Adding stock test data', 'vv' );
 		$this->context()->setEditor( 'core' );
 
-		$testdata = $this->getData();
-		$this->addTypeItems( $testdata, ['stock/type'] );
-		$this->createData( $testdata );
-	}
-
-
-	/**
-	 * Creates the type test data
-	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @param array $domains List of domain names
-	 */
-	protected function addTypeItems( array $testdata, array $domains )
-	{
-		foreach( $domains as $domain )
-		{
-			$manager = \Aimeos\MShop::create( $this->context(), $domain );
-
-			foreach( $testdata[$domain] as $key => $entry )
-			{
-				$item = $manager->create()->fromArray( $entry );
-				$manager->save( $item );
-			}
-		}
+		$this->createData( $this->getData() );
 	}
 
 

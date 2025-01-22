@@ -45,21 +45,14 @@ class PluginAddTestData extends Base
 	 */
 	private function addPluginData()
 	{
-		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin', 'Standard' );
-		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'plugin.php';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'plugin.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
+		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin', 'Standard' );
 		$pluginManager->begin();
-
-		foreach( $testdata['plugin/type'] as $dataset ) {
-			$pluginTypeManager->save( $pluginTypeManager->create()->fromArray( $dataset ), false );
-		}
 
 		foreach( $testdata['plugin'] as $dataset ) {
 			$pluginManager->save( $pluginManager->create()->fromArray( $dataset ), false );

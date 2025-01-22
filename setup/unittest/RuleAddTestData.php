@@ -44,21 +44,14 @@ class RuleAddTestData extends Base
 	 */
 	private function addRuleData()
 	{
-		$ruleManager = \Aimeos\MShop::create( $this->context(), 'rule', 'Standard' );
-		$ruleTypeManager = $ruleManager->getSubManager( 'type', 'Standard' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'rule.php';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'rule.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for rule domain', $path ) );
 		}
 
+		$ruleManager = \Aimeos\MShop::create( $this->context(), 'rule', 'Standard' );
 		$ruleManager->begin();
-
-		foreach( $testdata['rule/type'] as $dataset ) {
-			$ruleTypeManager->save( $ruleTypeManager->create()->fromArray( $dataset ), false );
-		}
 
 		foreach( $testdata['rule'] as $dataset ) {
 			$ruleManager->save( $ruleManager->create()->fromArray( $dataset ), false );
