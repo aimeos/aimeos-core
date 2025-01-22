@@ -65,10 +65,6 @@ class CatalogAddTestData extends BaseAddTestData
 	{
 		$manager = $this->getManager( 'catalog' );
 
-		$manager->begin();
-		$this->storeTypes( $testdata, ['catalog/type', 'catalog/lists/type'] );
-		$manager->commit();
-
 		foreach( $testdata['catalog'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );

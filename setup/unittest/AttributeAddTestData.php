@@ -63,10 +63,7 @@ class AttributeAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'attribute' );
-
 		$manager->begin();
-
-		$this->storeTypes( $testdata, ['attribute/type', 'attribute/lists/type', 'attribute/property/type'] );
 
 		foreach( $testdata['attribute'] as $entry )
 		{

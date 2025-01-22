@@ -62,10 +62,7 @@ class SupplierAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'supplier' );
-
 		$manager->begin();
-		$this->storeTypes( $testdata, ['supplier/lists/type'] );
-		$manager->commit();
 
 		foreach( $testdata['supplier'] ?? [] as $entry )
 		{
@@ -75,5 +72,7 @@ class SupplierAddTestData extends BaseAddTestData
 
 			$manager->save( $item );
 		}
+
+		$manager->commit();
 	}
 }

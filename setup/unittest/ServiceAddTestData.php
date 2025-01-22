@@ -63,10 +63,7 @@ class ServiceAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'service' );
-
 		$manager->begin();
-
-		$this->storeTypes( $testdata, ['service/type', 'service/lists/type'] );
 
 		foreach( $testdata['service'] as $entry )
 		{

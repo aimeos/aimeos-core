@@ -63,10 +63,6 @@ class ProductAddTestData extends BaseAddTestData
 	{
 		$manager = $this->getManager( 'product' );
 
-		$manager->begin();
-		$this->storeTypes( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
-		$manager->commit();
-
 		foreach( $testdata['product'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );

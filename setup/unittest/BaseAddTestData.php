@@ -155,34 +155,4 @@ class BaseAddTestData extends Base
 
 		return $list;
 	}
-
-
-	/**
-	 * Creates the type test data
-	 *
-	 * @param array $data List of key/list pairs lists
-	 * @param array $domains List of domain names
-	 */
-	protected function storeTypes( array $testdata, array $domains )
-	{
-		foreach( $domains as $domain )
-		{
-			if( isset( $testdata[$domain] ) )
-			{
-				$subnames = explode( '/', $domain );
-				$manager = $this->getManager( array_shift( $subnames ) );
-
-				foreach( $subnames as $subname ) {
-					$manager = $manager->getSubManager( $subname );
-				}
-
-				foreach( $testdata[$domain] as $entry )
-				{
-					try {
-						$manager->save( $manager->create()->fromArray( $entry ), false );
-					} catch( \Exception $e ) {} // Duplicate entry
-				}
-			}
-		}
-	}
 }

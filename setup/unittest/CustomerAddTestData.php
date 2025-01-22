@@ -51,12 +51,9 @@ class CustomerAddTestData extends BaseAddTestData
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$manager = $this->getManager( 'customer' );
-		$manager->begin();
-
-		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
-
 		$items = [];
+		$manager = $this->getManager( 'customer' );
+
 		foreach( $testdata['customer'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry, true );
@@ -66,6 +63,7 @@ class CustomerAddTestData extends BaseAddTestData
 			$items[] = $this->addListData( $manager, $item, $entry );
 		}
 
+		$manager->begin();
 		$manager->save( $items );
 		$manager->commit();
 	}
