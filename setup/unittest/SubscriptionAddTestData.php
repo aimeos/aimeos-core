@@ -21,7 +21,7 @@ class SubscriptionAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['Subscription', 'OrderAddTestData', 'SubscriptionMigratePeriod', 'SubscriptionMigrateProductId'];
+		return ['Subscription', 'OrderAddTestData'];
 	}
 
 
