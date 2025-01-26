@@ -60,6 +60,17 @@ class Standard
 
 
 	/**
+	 * Returns the parent product items referencing the product
+	 *
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Product\Item\Iface
+	 */
+	public function getParentItems() : \Aimeos\Map
+	{
+		return map( $this->get( '.parent' ) );
+	}
+
+
+	/**
 	 * Returns the supplier items referencing the product
 	 *
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface

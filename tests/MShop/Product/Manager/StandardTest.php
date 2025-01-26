@@ -498,11 +498,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
 
-		$item = $object->find( 'CNC', ['locale/site', 'catalog', 'supplier', 'stock'] );
+		$item = $object->find( 'CNC', ['locale/site', 'catalog', 'parent', 'supplier', 'stock'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
 		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
+		$this->assertEquals( 1, count( $item->getParentItems() ) );
 		$this->assertEquals( 1, count( $item->getStockItems() ) );
 	}
 
@@ -514,12 +515,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
 
-		$item = $object->find( 'CNC', ['locale/site', 'product/catalog', 'product/supplier', 'supplier/stock'] );
+		$item = $object->find( 'CNC', ['locale/site', 'product/catalog', 'product/parent', 'product/supplier', 'supplier/stock'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
 		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
+		$this->assertEquals( 1, count( $item->getParentItems() ) );
 		$this->assertEquals( 0, count( $item->getStockItems() ) );
+	}
+
+
+	public function testSearchParents()
+	{
+		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+
+		$this->assertEquals( 1, count( $object->find( 'U:TESTSUB05', ['parent'] )->getParentItems() ) );
+		$this->assertEquals( 1, count( $object->find( 'U:TESTSUB05', ['product/parent'] )->getParentItems() ) );
 	}
 
 

@@ -24,6 +24,13 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the parent product items referencing the product
+	 *
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Product\Item\Iface
+	 */
+	public function getParentItems() : \Aimeos\Map;
+
+	/**
 	 * Returns the supplier items referencing the product
 	 *
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
