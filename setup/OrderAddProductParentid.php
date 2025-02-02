@@ -52,7 +52,7 @@ class OrderAddProductParentid extends Base
 
 		while( $row = $result->fetchAssociative() )
 		{
-			if( isset( $used[$row['siteid']][$row['code']] ) ) {
+			if( isset( $used[$row['siteid']][$row['prodcode']] ) ) {
 				continue;
 			}
 
@@ -63,11 +63,11 @@ class OrderAddProductParentid extends Base
 				$db2->stmt()->update( 'mshop_order_base_product' )
 					->set( 'prodid', '?' )
 					->where( 'siteid = ?' )->andWhere( 'prodcode = ?' )
-					->setParameters( [$product['id'], $product['siteid'], $product['code']] )
+					->setParameters( [$product['id'], $product['siteid'], $product['prodcode']] )
 					->execute();
 			}
 
-			$used[$row['siteid']][$row['code']] = true;
+			$used[$row['siteid']][$row['prodcode']] = true;
 		}
 	}
 }
