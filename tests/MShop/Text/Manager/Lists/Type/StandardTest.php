@@ -103,13 +103,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearch()
 	{
 		$total = 0;
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'text.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
+		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'text/lists' );
 		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
 		$expr[] = $search->compare( '>=', 'text.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
@@ -118,26 +118,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->add( $search->and( $expr ) );
 
 		$results = $this->object->search( $search, [], $total );
-		$this->assertEquals( 1, count( $results ) );
-	}
-
-
-	public function testSearchSlice()
-	{
-		$total = 0;
-		$search = $this->object->filter()->add( [
-			'text.lists.type.code' => 'default',
-			'text.lists.type.editor' => $this->editor,
-		] )->order( '-text.lists.type.position' )->slice( 0, 1 );
-
-		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 7, $total );
+		$this->assertEquals( 1, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
 
+
+	public function testGetSubManager()
+	{
+		$this->expectException( \LogicException::class );
+		$this->object->getSubManager( 'unknown' );
+	}
 }

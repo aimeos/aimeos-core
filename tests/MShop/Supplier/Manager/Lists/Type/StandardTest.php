@@ -101,12 +101,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearch()
 	{
 		$total = 0;
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'supplier.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'supplier.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'supplier.lists.type.domain', 'supplier/lists' );
 		$expr[] = $search->compare( '==', 'supplier.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'supplier.lists.type.label', 'Standard' );
 		$expr[] = $search->compare( '>=', 'supplier.lists.type.position', 0 );
@@ -117,7 +117,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->add( $search->and( $expr ) )->slice( 0, 1 );
 		$search->setSortations( [$search->sort( '-', 'supplier.lists.type.position' )] );
-		$results = $this->object->search( $search, [], $total )->toArray();
+
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );

@@ -33,7 +33,7 @@ class Standard
 		$locale = $this->context()->locale();
 
 		$values['.language'] = $locale->getLanguageId();
-		$values[$prefix . 'for'] = $values[$prefix . 'for'] ?? $this->for();
+		$values[$prefix . 'domain'] = $values[$prefix . 'domain'] ?? $this->for();
 		$values[$prefix . 'siteid'] = $values[$prefix . 'siteid'] ?? $locale->getSiteId();
 
 		return new \Aimeos\MShop\Type\Item\Standard( $prefix, $values );
@@ -53,7 +53,7 @@ class Standard
 		$filter = $this->filterBase( substr( $prefix, 0, -1 ), $default );
 
 		if( $prefix !== 'type.' ) {
-			$filter->add( $prefix . 'for', '==', $this->for() );
+			$filter->add( $prefix . 'domain', '==', $this->for() );
 		}
 
 		return $filter;
@@ -70,14 +70,13 @@ class Standard
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function find( string $code, array $ref = [], ?string $domain = 'product', ?string $type = null,
+	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$prefix = $this->prefix();
 
 		return $this->findBase( [
-			$prefix . 'for' => $type ?: $this->for(),
-			$prefix . 'domain' => $domain,
+			$prefix . 'domain' => $domain ?? $this->for(),
 			$prefix . 'code' => $code
 		], $ref, $default );
 	}
@@ -94,10 +93,6 @@ class Standard
 		$prefix = $this->prefix();
 
 		return $this->createAttributes( [
-			$prefix . 'for' => [
-				'internalcode' => 'for',
-				'label' => 'Related domain',
-			],
 			$prefix . 'label' => [
 				'internalcode' => 'label',
 				'label' => 'Type label',
@@ -155,7 +150,7 @@ class Standard
 	/**
 	 * Returns the name of the used table
 	 *
-	 * @return string Table name e.g. "mshop_product_list_type"
+	 * @return string Table name
 	 */
 	protected function table() : string
 	{

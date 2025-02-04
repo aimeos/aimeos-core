@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'text.type.id', null );
 		$expr[] = $search->compare( '!=', 'text.type.siteid', null );
 		$expr[] = $search->compare( '==', 'text.type.code', 'long' );
-		$expr[] = $search->compare( '==', 'text.type.domain', 'catalog' );
+		$expr[] = $search->compare( '==', 'text.type.domain', 'text' );
 		$expr[] = $search->compare( '==', 'text.type.label', 'Long description' );
 		$expr[] = $search->compare( '>=', 'text.type.position', 0 );
 		$expr[] = $search->compare( '==', 'text.type.status', 1 );
@@ -73,13 +73,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		//search with base criteria
 		$search = $this->object->filter( true )->add( [
-			'text.type.domain' => 'attribute',
+			'text.type.domain' => 'text',
 			'text.type.editor' => $this->editor,
 		] )->order( '-text.type.position' )->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 17, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

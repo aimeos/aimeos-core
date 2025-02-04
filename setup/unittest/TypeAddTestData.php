@@ -40,18 +40,15 @@ class TypeAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for type domain', $path ) );
 		}
 
+		$items = [];
 		$manager = \Aimeos\MShop::create( $this->context(), 'type', 'Standard' );
-		$manager->begin();
 
-		foreach( $testdata as $for => $entries )
-		{
-			foreach( $entries as $entry )
-			{
-				$entry['type.for'] = $for;
-				$manager->save( $manager->create()->fromArray( $entry ), false );
-			}
+		foreach( $testdata as $entry ) {
+			$items[] = $manager->create()->fromArray( $entry );
 		}
 
+		$manager->begin();
+		$manager->save( $items, false );
 		$manager->commit();
 	}
 }

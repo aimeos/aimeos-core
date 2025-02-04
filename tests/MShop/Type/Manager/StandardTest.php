@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDelete()
 	{
-		$item = $this->object->find( 'default', [], 'product', 'product' );
+		$item = $this->object->find( 'default', [], 'product' );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'type.for', 'product' ),
+			$search->compare( '==', 'type.domain', 'product' ),
 			$search->compare( '==', 'type.code', 'default' ),
 			$search->compare( '==', 'type.editor', $this->editor )
 		);
@@ -121,7 +121,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'type.id', null );
 		$expr[] = $search->compare( '!=', 'type.siteid', null );
-		$expr[] = $search->compare( '==', 'type.for', 'product' );
 		$expr[] = $search->compare( '==', 'type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'type.code', 'select' );
 		$expr[] = $search->compare( '==', 'type.label', 'Selection' );
@@ -138,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'type.for', 'product' ),
+			$search->compare( '==', 'type.domain', 'product' ),
 			$search->compare( '==', 'type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );

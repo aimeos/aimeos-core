@@ -61,10 +61,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFind()
 	{
-		$item = $this->object->find( 'size', [], 'product' );
+		$item = $this->object->find( 'size', [], 'attribute' );
 
 		$this->assertEquals( 'size', $item->getCode() );
-		$this->assertEquals( 'product', $item->getDomain() );
+		$this->assertEquals( 'attribute', $item->getDomain() );
 	}
 
 
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.type.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'attribute.type.domain', 'attribute' );
 		$expr[] = $search->compare( '==', 'attribute.type.code', 'size' );
 		$expr[] = $search->compare( '==', 'attribute.type.label', 'Size' );
 		$expr[] = $search->compare( '>=', 'attribute.type.position', 0 );

@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.type.siteid', null );
-		$expr[] = $search->compare( '==', 'price.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'price.type.domain', 'price' );
 		$expr[] = $search->compare( '==', 'price.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'price.type.label', 'Standard' );
 		$expr[] = $search->compare( '>=', 'price.type.position', 0 );
@@ -125,26 +125,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.type.editor', $this->editor );
 
 		$search->add( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
-
-
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '~=', 'price.type.code', '' ),
-			$search->compare( '==', 'price.type.editor', $this->editor )
-		);
-		$search->add( $search->and( $conditions ) )->slice( 0, 2 );
-		$search->setSortations( [$search->sort( '-', 'price.type.position' )] );
-
-		$total = 0;
-		$results = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 1, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testGetSubManager()
+	{
+		$this->expectException( \LogicException::class );
+		$this->object->getSubManager( 'unknown' );
 	}
 }

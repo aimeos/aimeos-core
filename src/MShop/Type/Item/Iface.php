@@ -22,21 +22,6 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
-	 * Returns the related domain of the type item
-	 *
-	 * @return string Related domain of the type item
-	 */
-	public function getFor() : string;
-
-	/**
-	 * Sets the domain of the type item
-	 *
-	 * @param string $value New related domain of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
-	 */
-	public function setFor( string $value ) : \Aimeos\MShop\Type\Item\Iface;
-
-	/**
 	 * Returns the code of the type item
 	 *
 	 * @return string Code of the type item

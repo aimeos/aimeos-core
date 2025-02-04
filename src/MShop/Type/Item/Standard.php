@@ -22,29 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Type\Item\Iface
 {
 	/**
-	 * Returns the related domain of the type item
-	 *
-	 * @return string Related domain of the type item
-	 */
-	public function getFor() : string
-	{
-		return $this->get( $this->prefix() . 'for', '' );
-	}
-
-
-	/**
-	 * Sets the domain of the type item
-	 *
-	 * @param string $value New related domain of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
-	 */
-	public function setFor( string $value ) : \Aimeos\MShop\Type\Item\Iface
-	{
-		return $this->set( $this->prefix() . 'for', $value );
-	}
-
-
-	/**
 	 * Returns the code of the type item
 	 *
 	 * @return string Code of the type item
@@ -231,7 +208,6 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $prefix . 'for': $item->setFor( $value ); break;
 				case $prefix . 'code': $item->setCode( $value ); break;
 				case $prefix . 'domain': $item->setDomain( $value ); break;
 				case $prefix . 'i18n': $item->setI18n( (array) $value ); break;
@@ -259,7 +235,6 @@ class Standard
 		$prefix = $this->prefix();
 		$list = parent::toArray( $private );
 
-		$list[$prefix . 'for'] = $this->getFor();
 		$list[$prefix . 'code'] = $this->getCode();
 		$list[$prefix . 'domain'] = $this->getDomain();
 		$list[$prefix . 'label'] = $this->getLabel();

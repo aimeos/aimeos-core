@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.property.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.property.type.siteid', null );
-		$expr[] = $search->compare( '==', 'price.property.type.domain', 'price' );
+		$expr[] = $search->compare( '==', 'price.property.type.domain', 'price/property' );
 		$expr[] = $search->compare( '==', 'price.property.type.code', 'zone' );
 		$expr[] = $search->compare( '==', 'price.property.type.label', 'Tax zone' );
 		$expr[] = $search->compare( '>=', 'price.property.type.position', 0 );

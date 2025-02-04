@@ -21,8 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'type.id'   => 1,
 			'type.siteid' => 2,
 			'type.code' => 'code',
-			'type.for' => 'text',
-			'type.domain' => 'domain',
+			'type.domain' => 'text',
 			'type.label' => 'label',
 			'type.i18n' => ['de' => 'name'],
 			'type.position' => 5,
@@ -77,32 +76,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'domain', $this->object->getDomain() );
+		$this->assertEquals( 'text', $this->object->getDomain() );
 	}
 
 
 	public function testSetDomain()
 	{
-		$return = $this->object->setDomain( 'domain2' );
+		$return = $this->object->setDomain( 'media' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $return );
-		$this->assertEquals( 'domain2', $this->object->getDomain() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testGetFor()
-	{
-		$this->assertEquals( 'text', $this->object->getFor() );
-	}
-
-
-	public function testSetFor()
-	{
-		$return = $this->object->setFor( 'media' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $return );
-		$this->assertEquals( 'media', $this->object->getFor() );
+		$this->assertEquals( 'media', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -214,8 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'type.id' => 8,
 			'type.code' => 'test',
-			'type.domain' => 'testDomain',
-			'type.for' => 'product',
+			'type.domain' => 'product',
 			'type.i18n' => ['de' => 'test eintrag'],
 			'type.label' => 'test item',
 			'type.position' => 2,
@@ -229,7 +211,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['type.id'], $item->getId() );
 		$this->assertEquals( $list['type.code'], $item->getCode() );
 		$this->assertEquals( $list['type.domain'], $item->getDomain() );
-		$this->assertEquals( $list['type.for'], $item->getFor() );
 		$this->assertEquals( $list['type.i18n'], $item->getI18n() );
 		$this->assertEquals( $list['type.label'], $item->getLabel() );
 		$this->assertEquals( $list['type.position'], $item->getPosition() );
@@ -248,7 +229,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['type.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['type.code'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['type.domain'] );
-		$this->assertEquals( $this->object->getFor(), $arrayObject['type.for'] );
 		$this->assertEquals( $this->object->getI18n(), $arrayObject['type.i18n'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['type.name'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['type.label'] );

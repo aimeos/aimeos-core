@@ -51,19 +51,18 @@ class MShopAddTypeData extends Base
 	}
 
 
-	protected function existing( string $domain, array $entries ) : array
+	protected function existing( array $entries ) : array
 	{
 		$expr = $map = [];
-		$prefix = str_replace( '/', '.', $domain ) . '.';
 
-		$manager = $this->manager( $domain );
+		$manager = $this->manager( 'type' );
 		$filter = $manager->filter()->slice( 0, 0x7fffffff );
 
 		foreach( $entries as $entry )
 		{
 			$expr[] = $filter->and( [
-				$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
-				$filter->is( $prefix . 'code', '==', $entry['code'] )
+				$filter->is( 'type.domain', '==', $entry['domain'] ),
+				$filter->is( 'type.code', '==', $entry['code'] )
 			] );
 		}
 
@@ -85,28 +84,23 @@ class MShopAddTypeData extends Base
 
 	protected function update( array $data )
 	{
-		foreach( $data as $domain => $entries )
+		$manager = $this->manager( 'type' );
+		$map = $this->existing( $data );
+
+		foreach( $data as $entry )
 		{
-			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'vv' );
-
-			$manager = $this->manager( $domain );
-			$map = $this->existing( $domain, $entries );
-
-			foreach( $entries as $entry )
-			{
-				if( isset( $map[$entry['domain']][$entry['code']] ) ) {
-					continue;
-				}
-
-				$item = $manager->create()
-					->setCode( $entry['code'] )
-					->setDomain( $entry['domain'] )
-					->setLabel( $entry['label'] )
-					->setI18n( $entry['i18n'] ?? [] )
-					->setStatus( $entry['status'] );
-
-				$manager->save( $item );
+			if( isset( $map[$entry['domain']][$entry['code']] ) ) {
+				continue;
 			}
+
+			$item = $manager->create()
+				->setCode( $entry['code'] )
+				->setDomain( $entry['domain'] )
+				->setLabel( $entry['label'] )
+				->setI18n( $entry['i18n'] ?? [] )
+				->setStatus( $entry['status'] );
+
+			$manager->save( $item );
 		}
 	}
 }

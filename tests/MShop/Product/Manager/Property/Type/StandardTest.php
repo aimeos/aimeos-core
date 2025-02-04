@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.property.type.id', null );
 		$expr[] = $search->compare( '!=', 'product.property.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.property.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.property.type.domain', 'product/property' );
 		$expr[] = $search->compare( '==', 'product.property.type.code', 'package-width' );
 		$expr[] = $search->compare( '>', 'product.property.type.label', '' );
 		$expr[] = $search->compare( '>=', 'product.property.type.position', 0 );

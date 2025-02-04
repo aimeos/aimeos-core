@@ -36,9 +36,7 @@ class Type
 
 		if( $this->hasRef( $ref, $path . '/type' ) && !empty( $entries ) )
 		{
-			$dkey = join( '.', $type ) . '.domain';
 			$key = join( '.', $type ) . '.type';
-			$domain = current( $type );
 			$code = $key . '.code';
 
 			if( !empty( $values = array_column( $entries, $key ) ) )
@@ -49,11 +47,8 @@ class Type
 
 				foreach( $entries as $id => $entry )
 				{
-					foreach( $typeItems[$entry[$key]] ?? [] as $typeItem )
-					{
-						if( ( $entry[$dkey] ?? $domain ) === $typeItem->getDomain() ) {
-							$entries[$id]['.type'] = $typeItem;
-						}
+					foreach( $typeItems[$entry[$key]] ?? [] as $typeItem ) {
+						$entries[$id]['.type'] = $typeItem;
 					}
 				}
 			}

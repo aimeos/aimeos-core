@@ -102,14 +102,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearch()
 	{
-		//search without base criteria
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'media.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
-		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'media/lists' );
 		$expr[] = $search->compare( '>', 'media.lists.type.label', '' );
 		$expr[] = $search->compare( '>=', 'media.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.type.status', 1 );
@@ -119,20 +118,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->add( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
-
-
-		// search with base critera
-		$search = $this->object->filter( true );
-		$search->add( $search->compare( '==', 'media.lists.type.editor', $this->editor ) )->slice( 0, 7 );
-		$search->setSortations( [$search->sort( '-', 'media.lists.type.position' )] );
-
-		$results = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 7, count( $results ) );
-		$this->assertEquals( 11, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

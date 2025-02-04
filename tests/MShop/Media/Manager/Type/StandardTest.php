@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'media.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'media.type.domain', 'media' );
 		$expr[] = $search->compare( '==', 'media.type.code', 'slideshow' );
 		$expr[] = $search->compare( '>', 'media.type.label', '' );
 		$expr[] = $search->compare( '>=', 'media.type.position', 0 );
@@ -143,8 +143,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 
-		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 8, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

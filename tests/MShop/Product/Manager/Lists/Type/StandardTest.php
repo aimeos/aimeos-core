@@ -40,6 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item );
 	}
 
+
 	public function testGet()
 	{
 		$search = $this->object->filter()->add( 'product.lists.type.editor', '==', $this->editor );
@@ -97,15 +98,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->get( $itemSaved->getId() );
 	}
 
+
 	public function testSearch()
 	{
 		$total = 0;
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'product.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product/lists' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'product.lists.type.label', 'Standard' );
 		$expr[] = $search->compare( '>=', 'product.lists.type.position', 0 );

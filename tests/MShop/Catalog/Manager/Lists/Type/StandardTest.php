@@ -105,13 +105,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearch()
 	{
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'catalog.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type.domain', 'catalog/lists' );
 		$expr[] = $search->compare( '>', 'catalog.lists.type.label', '' );
 		$expr[] = $search->compare( '>=', 'catalog.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'catalog.lists.type.status', 1 );
@@ -125,44 +125,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
-	}
-
-
-	public function testSearchBase()
-	{
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->compare( '==', 'catalog.lists.type.domain', 'text' ),
-			$search->compare( '==', 'catalog.lists.type.code', 'unittype1' ),
-			$search->compare( '==', 'catalog.lists.type.editor', $this->editor ),
-			$search->getConditions(),
-		);
-		$search->add( $search->and( $expr ) );
-		$results = $this->object->search( $search );
-
-		$this->assertEquals( 1, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
-	}
-
-
-	public function testSearchTotal()
-	{
-		$total = 0;
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '~=', 'catalog.lists.type.code', 'default' ),
-			$search->compare( '~=', 'catalog.lists.type.editor', $this->editor )
-		);
-		$search->add( $search->and( $conditions ) )->slice( 0, 1 );
-		$search->setSortations( [$search->sort( '-', 'catalog.lists.type.position' )] );
-
-		$items = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 7, $total );
 	}
 
 

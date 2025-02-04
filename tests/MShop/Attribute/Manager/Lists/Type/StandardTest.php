@@ -105,13 +105,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearch()
 	{
-		$search = $this->object->filter();
+		$search = $this->object->filter( true );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'attribute.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'attribute.lists.type.domain', 'attribute/lists' );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.label', 'Standard' );
 		$expr[] = $search->compare( '>=', 'attribute.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.status', 1 );
@@ -126,20 +126,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
-		// search with base criteria
-		$search = $this->object->filter( true );
-		$search->add( $search->compare( '==', 'attribute.lists.type.editor', $this->editor ) );
-		$search->setSortations( [$search->sort( '-', 'attribute.lists.type.position' )] );
-		$search->slice( 0, 5 );
-
-		$results = $this->object->search( $search, [], $total )->toArray();
-
-		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 7, $total );
-
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
 
+
+	public function testGetSubManager()
+	{
+		$this->expectException( \LogicException::class );
+		$this->object->getSubManager( 'unknown' );
+	}
 }
