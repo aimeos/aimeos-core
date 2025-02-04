@@ -63,7 +63,7 @@ class OrderAddProductParentid extends Base
 				$db2->stmt()->update( 'mshop_order_base_product' )
 					->set( 'prodid', '?' )
 					->where( 'siteid = ?' )->andWhere( 'prodcode = ?' )
-					->setParameters( [$product['id'], $product['siteid'], $product['prodcode']] )
+					->setParameters( [$product['id'], $product['siteid'], $product['code']] )
 					->executeStatement();
 			}
 
