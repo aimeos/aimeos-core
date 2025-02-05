@@ -440,6 +440,13 @@ interface Iface
 	public function getAttributeItems( ?string $type = null ) : \Aimeos\Map;
 
 	/**
+	 * Returns the deleted attribute items for the ordered product.
+	 *
+	 * @return \Aimeos\Map List of items to be removed
+	 */
+	public function getAttributeItemsDeleted() : \Aimeos\Map;
+
+	/**
 	 * Adds or replaces the attribute item in the list of product attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Attribute\Iface $item Product attribute item

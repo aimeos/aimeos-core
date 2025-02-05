@@ -175,6 +175,13 @@ interface Iface
 	public function getAttributeItems( ?string $type = null ) : \Aimeos\Map;
 
 	/**
+	 * Returns the deleted attribute items for the service.
+	 *
+	 * @return \Aimeos\Map List of items to be removed
+	 */
+	public function getAttributeItemsDeleted() : \Aimeos\Map;
+
+	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item Service attribute item
