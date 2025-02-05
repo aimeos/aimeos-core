@@ -816,6 +816,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetAttributeItemsDeleted()
+	{
+		$this->object->setAttributeItems( $this->attributes );
+		$this->object->setAttributeItems( [] );
+
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItemsDeleted() );
+	}
+
+
 	public function testSetAttributeItem()
 	{
 		$attManager = \Aimeos\MShop::create( \TestHelper::context(), 'order/product/attribute' );

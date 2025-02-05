@@ -426,7 +426,10 @@ class Standard
 			$attrItem->setParentId( $item->getId() );
 		}
 
-		$this->object()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
+		$manager = $this->object()->getSubManager( 'attribute' );
+		$manager->delete( $item->getAttributeItemsDeleted() );
+		$manager->save( $attrItems, $fetch );
+
 		return $item;
 	}
 

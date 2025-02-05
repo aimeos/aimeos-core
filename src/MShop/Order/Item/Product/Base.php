@@ -34,6 +34,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	private ?array $attributesMap = null;
+	private array $attrRmItems = [];
 
 
 	/**
@@ -133,6 +134,17 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Returns the deleted attribute items for the service.
+	 *
+	 * @return \Aimeos\Map List of items to be removed
+	 */
+	public function getAttributeItemsDeleted() : \Aimeos\Map
+	{
+		return map( $this->attrRmItems );
+	}
+
+
+	/**
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Attribute\Iface $item Service attribute item
@@ -153,9 +165,8 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		$this->attributesMap[$type][$code][$attrId]->setValue( $item->getValue() );
-		$this->setModified();
 
-		return $this;
+		return $this->setModified();
 	}
 
 
@@ -167,9 +178,15 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
+		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
 
-		$this->set( '.attributes', $attributes );
+		$this->attrRmItems = map( $this->get( '.attributes', [] ) )
+			->diff( $attributes )
+			->merge( $this->attrRmItems )
+			->unique()
+			->toArray();
+
+		$this->set( '.attributes', iterator_to_array( $attributes ) );
 		$this->attributesMap = null;
 
 		return $this;
