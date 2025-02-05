@@ -178,7 +178,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
+		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
 
 		$this->attrRmItems = map( $this->get( '.attributes', [] ) )
 			->diff( $attributes )
@@ -186,7 +186,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			->unique()
 			->toArray();
 
-		$this->set( '.attributes', iterator_to_array( $attributes ) );
+		$this->set( '.attributes', $attributes->toArray() );
 		$this->attributesMap = null;
 
 		return $this;
