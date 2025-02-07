@@ -141,7 +141,7 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "لا تقوم الفئة \"%1$s\" بتنفيذ الواجهة \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -228,7 +228,7 @@ msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "فشلت عملية توسيع العقدة \"%1$s\""
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -508,7 +508,7 @@ msgstr ""
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "لم يتم العثور على ملف XML \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
