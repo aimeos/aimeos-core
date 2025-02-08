@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/aimeos/aimeos-core/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "장애인"
 
 #. Item status
 msgid "status:-1"
@@ -31,15 +32,15 @@ msgstr "검토"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "장애인"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "활성화됨"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "숨겨진"
 
 #. Address salutation
 msgid "company"
@@ -47,31 +48,31 @@ msgstr "회사"
 
 #. Address salutation
 msgid "mr"
-msgstr "mr"
+msgstr "미스터"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "부인"
 
 #. Address salutation
 msgid "mrs"
-msgstr "mrs"
+msgstr "부인"
 
 #. Address salutation
 msgid "miss"
-msgstr "miss"
+msgstr "미스"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "반복"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "인터넷"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "만료됨"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -79,11 +80,11 @@ msgstr "결제"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "만료됨"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "지불:1"
+msgstr "취소됨"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,35 +92,35 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr "pay:0"
+msgstr "삭제됨"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "지불:1"
+msgstr "취소됨"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "통계:6"
+msgstr "거부됨"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "지불:3"
+msgstr "환불"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "통계:1"
+msgstr "보류 중"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "지불:5"
+msgstr "승인됨"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "지불:6"
+msgstr "받은"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "전송"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -127,31 +128,31 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "pay:0"
+msgstr "삭제됨"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "통계:1"
+msgstr "보류 중"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "통계:2"
+msgstr "진행 중"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "stat:3"
+msgstr "파견"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "stat:4"
+msgstr "배달"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "통계:5"
+msgstr "잃어버린"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "통계:6"
+msgstr "거부됨"
 
 #. Delivery status value
 msgid "stat:7"
@@ -159,52 +160,52 @@ msgstr "통계:7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "청구 주소가 누락되었습니다."
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "배송 주소가 누락되었습니다."
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "청구 주소는 허용되지 않습니다."
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "배송지 주소는 허용되지 않습니다."
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "결제 옵션이 누락되었습니다."
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "배송 옵션이 누락되었습니다."
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "결제 옵션은 허용되지 않습니다."
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "배송 옵션은 허용되지 않습니다."
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "죄송합니다. 하나 이상의 제품이 더 이상 존재하지 않습니다. 계속하려면 장바구니에서 해당 제품을 제거해 주세요."
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "하나 이상의 제품이 비활성화되었습니다. 계속하려면 장바구니에서 해당 제품을 제거해 주세요."
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "죄송합니다. 하나 이상의 제품을 더 이상 사용할 수 없습니다. 계속하려면 장바구니에서 해당 제품을 제거해 주세요."
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "그 사이에 하나 이상의 제품 가격이 변경되어 자동으로 업데이트되었습니다."
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "죄송합니다. 하나 이상의 제품이 품절되었습니다. 계속하려면 장바구니에서 해당 제품을 제거해 주세요."

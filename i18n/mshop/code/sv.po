@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/aimeos/aimeos-core/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "Arkiverad"
 
 #. Item status
 msgid "status:-1"
@@ -31,15 +32,15 @@ msgstr "Granskning"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "Inaktiverad"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "Aktiverad"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "Dolda"
 
 #. Address salutation
 msgid "company"
@@ -47,43 +48,43 @@ msgstr "Företag"
 
 #. Address salutation
 msgid "mr"
-msgstr "herr"
+msgstr "Herr"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "Fru"
 
 #. Address salutation
 msgid "mrs"
-msgstr "fruar"
+msgstr "Fröken"
 
 #. Address salutation
 msgid "miss"
-msgstr "miss"
+msgstr "Herr"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "upprepade"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "internet"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "telefon"
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "Betalning"
+msgstr "betalning"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "utgått"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "betala:1"
+msgstr "avbruten"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,35 +92,35 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr "betala:0"
+msgstr "raderade"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "betala:1"
+msgstr "avbruten"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "betala:2"
+msgstr "vägrade"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "betala:3"
+msgstr "återbetalas"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "lön:4"
+msgstr "väntande"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "lön:5"
+msgstr "auktoriserad"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "lön:6"
+msgstr "mottagna"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "överförd"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -127,84 +128,84 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "betala:0"
+msgstr "raderade"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "lön:4"
+msgstr "väntande"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "stat:2"
+msgstr "pågår"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "stat:3"
+msgstr "avsändes"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "stat:4"
+msgstr "levererade"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "stat:5"
+msgstr "förlorade"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "betala:2"
+msgstr "vägrade"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "stat:7"
+msgstr "återlämnade"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Faktureringsadressen saknas"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Leveransadressen saknas"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "En faktureringsadress är inte tillåten"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "En leveransadress är inte tillåten"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Betalningsalternativet saknas"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Leveransalternativet saknas"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "Ett betalningsalternativ är inte tillåtet"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "Ett leveransalternativ är inte tillåtet"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "Tyvärr, minst en produkt finns inte längre. Vänligen ta bort den från din korg för att fortsätta"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "Tyvärr, minst en produkt var inaktiverad. Vänligen ta bort den från din korg för att fortsätta"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "Tyvärr, minst en produkt är inte längre tillgänglig. Vänligen ta bort den från din korg för att fortsätta"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "Priset på minst en produkt har ändrats under tiden och den uppdaterades automatiskt"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "Tyvärr, minst en produkt är slut i lager. Vänligen ta bort den från din korg för att fortsätta"

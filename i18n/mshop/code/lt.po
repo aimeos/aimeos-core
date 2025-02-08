@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Lithuanian (http://app.transifex.com/aimeos/aimeos-core/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "Archyvuota"
 
 #. Item status
 msgid "status:-1"
@@ -31,15 +32,15 @@ msgstr "Peržiūrėkite"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "Neįgalieji"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "Įjungta"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "Paslėptas"
 
 #. Address salutation
 msgid "company"
@@ -51,27 +52,27 @@ msgstr "ponas"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "Ponia"
 
 #. Address salutation
 msgid "mrs"
-msgstr "ponia"
+msgstr "Ponia"
 
 #. Address salutation
 msgid "miss"
-msgstr "ponia"
+msgstr "Ponia"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "pakartotinai"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "internetas"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "telefonas"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -79,132 +80,132 @@ msgstr "mokėjimas"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "nustojo galioti"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "priežastis: 1"
+msgstr "atšauktas"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr ""
+msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr "statistika: 0"
+msgstr "ištrinta"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "priežastis: 1"
+msgstr "atšauktas"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "mokėti: 2"
+msgstr "atsisakė"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "mokėti: 3"
+msgstr "grąžinamos lėšos"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "statistika: 1"
+msgstr "laukiama"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "darbo užmokestis: 5"
+msgstr "įgaliotas"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "mokėti: 6"
+msgstr "gauta"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "perkelta"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr ""
+msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "statistika: 0"
+msgstr "ištrinta"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "statistika: 1"
+msgstr "laukiama"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "statistika: 2"
+msgstr "vykdoma"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "statistika: 3"
+msgstr "išsiųsta"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "statistika: 4"
+msgstr "pristatytas"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "statistika: 5"
+msgstr "prarastas"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "mokėti: 2"
+msgstr "atsisakė"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "statistika: 7"
+msgstr "grąžinta"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Trūksta atsiskaitymo adreso"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Trūksta pristatymo adreso"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "Atsiskaitymo adresas neleidžiamas"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "Neleidžiama nurodyti pristatymo adreso"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Trūksta mokėjimo parinkties"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Trūksta pristatymo parinkties"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "Mokėjimo parinktis neleidžiama"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "Pristatymo parinktis neleidžiama"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "Atsiprašome, bent vieno gaminio nebėra. Norėdami tęsti, pašalinkite jį iš savo krepšelio"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "Atsiprašome, bent vienas produktas buvo išjungtas. Norėdami tęsti, pašalinkite jį iš savo krepšelio"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "Atsiprašome, bent vieno gaminio nebėra. Norėdami tęsti, pašalinkite jį iš savo krepšelio"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "Per tą laiką pasikeitė bent vieno gaminio kaina ir ji buvo atnaujinta automatiškai."
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "Atsiprašome, bent vieno produkto nėra sandėlyje. Norėdami tęsti, pašalinkite jį iš savo krepšelio"
