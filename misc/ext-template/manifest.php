@@ -17,7 +17,7 @@ return [
 	],
 	'i18n' => [
 		'admin' => 'i18n',
-		'admin/ext' => 'i18n',
+		'admin/code' => 'i18n',
 		'client' => 'i18n',
 		'client/code' => 'i18n',
 		'controller/common' => 'i18n',
