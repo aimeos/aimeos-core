@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Arabic (http://app.transifex.com/aimeos/aimeos-core/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +40,7 @@ msgstr "مفعل"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "مخفي"
 
 #. Address salutation
 msgid "company"
@@ -47,31 +48,31 @@ msgstr "الشركة"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "السيد"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "السيدة"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "السيدة"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "آنسة"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "متكرر"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "الإنترنت"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "الهاتف"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -79,11 +80,11 @@ msgstr "الدفع"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "منتهية الصلاحية"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "ألغيت"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,35 +92,35 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "محذوف"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "ألغيت"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "رفض"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "المستردة"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "قيد الانتظار"
+msgstr "معلقة"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "مصرح به"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "تم الاستلام"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "نقل"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -127,84 +128,84 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "محذوف"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "قيد الانتظار"
+msgstr "معلقة"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "قيد المعالجة"
+msgstr "قيد التنفيذ"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "تم الإرسال"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "تم التسليم"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "مفقود"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "رفض"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "عاد"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "عنوان إرسال الفواتير مفقود"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "عنوان التسليم مفقود"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "عنوان إرسال الفواتير غير مسموح به"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "عنوان التسليم غير مسموح به"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "خيار الدفع مفقود"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "خيار التسليم مفقود"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "خيار الدفع غير مسموح به"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "خيار التسليم غير مسموح به"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "عذرًا، لم يعد هناك منتج واحد على الأقل غير موجود بعد الآن. يرجى إزالته من سلتك للمتابعة"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "عذرًا، تم تعطيل منتج واحد على الأقل. يرجى إزالته من سلتك للمتابعة"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "عذرًا، منتج واحد على الأقل غير متوفر بعد الآن. يرجى إزالته من سلتك للمتابعة"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "لقد تغير سعر منتج واحد على الأقل في هذه الأثناء وتم تحديثه تلقائيًا"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "عذرًا، منتج واحد على الأقل غير متوفر في المخزون. يرجى إزالته من سلتك للمتابعة"

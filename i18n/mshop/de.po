@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Aimeos, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/aimeos/aimeos-core/language/de/)\n"
@@ -859,6 +859,10 @@ msgstr "Bestellstatusimport aus \"%1$s\" wurde gestartet"
 #, php-format
 msgid "Started order status import from file \"%1$s\""
 msgstr "Bestellstatusimport aus Datei \"%1$s\" wurde gestartet"
+
+#, php-format
+msgid "Status not available"
+msgstr "Adresse nicht verfügbar"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"

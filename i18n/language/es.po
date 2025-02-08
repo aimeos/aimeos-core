@@ -418,7 +418,7 @@ msgid "pt"
 msgstr "Portugués"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "pt_BR"
 
 msgid "qu"
 msgstr "Quechua"

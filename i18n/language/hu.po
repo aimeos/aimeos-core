@@ -477,7 +477,7 @@ msgid "sq"
 msgstr "Albán"
 
 msgid "sr"
-msgstr "szerb"
+msgstr "Szerb"
 
 msgid "ss"
 msgstr "Szvázi"

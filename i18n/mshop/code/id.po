@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Indonesian (http://app.transifex.com/aimeos/aimeos-core/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,23 +24,23 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "Diarsipkan"
 
 #. Item status
 msgid "status:-1"
-msgstr ""
+msgstr "Ulasan"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "Dinonaktifkan"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "Diaktifkan"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "Tersembunyi"
 
 #. Address salutation
 msgid "company"
@@ -47,43 +48,43 @@ msgstr "Perusahaan"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "Tuan"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "Nyonya"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "Nyonya"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "Nona"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "diulang"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "internet"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "telepon"
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "pembayaran"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "kadaluarsa"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "dibatalkan"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,35 +92,35 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "dihapus"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "dibatalkan"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "menolak"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "dikembalikan"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "tertunda"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "resmi"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "diterima"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "ditransfer"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -127,84 +128,84 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "dihapus"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "tertunda"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "sedang berlangsung"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "dikirim"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "disampaikan"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "hilang"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "menolak"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "kembali"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Alamat penagihan tidak ada"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Alamat pengiriman tidak ada"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "Alamat penagihan tidak diperbolehkan"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "Alamat pengiriman tidak diperbolehkan"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Opsi pembayaran tidak ada"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Opsi pengiriman tidak ada"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "Opsi pembayaran tidak diperbolehkan"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "Opsi pengiriman tidak diperbolehkan"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "Maaf, setidaknya satu produk sudah tidak ada lagi. Harap keluarkan dari keranjang Anda untuk melanjutkan"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "Maaf, setidaknya ada satu produk yang dinonaktifkan. Harap keluarkan dari keranjang Anda untuk melanjutkan"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "Maaf, setidaknya satu produk tidak tersedia lagi. Harap keluarkan dari keranjang Anda untuk melanjutkan"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "Harga setidaknya satu produk telah berubah sementara itu dan diperbarui secara otomatis"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "Maaf, setidaknya ada satu produk yang sudah habis. Harap keluarkan dari keranjang Anda untuk melanjutkan"

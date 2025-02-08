@@ -7,6 +7,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 # Kevin Peters <kevin@popkorn.be>, 2018
 # Maurice Lourens <mlourens@gmail.com>, 2015
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Maurice Lourens <mlourens@gmail.com>, 2015\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Dutch (http://app.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,23 +26,23 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr "status:gearchiveerd"
+msgstr "Gearchiveerd"
 
 #. Item status
 msgid "status:-1"
-msgstr "status:review"
+msgstr "Beoordeling"
 
 #. Item status
 msgid "status:0"
-msgstr "status:uitgeschakeld"
+msgstr "Uitgeschakeld"
 
 #. Item status
 msgid "status:1"
-msgstr "status:enabled"
+msgstr "Ingeschakeld"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "Verborgen"
 
 #. Address salutation
 msgid "company"
@@ -53,7 +54,7 @@ msgstr "Dhr"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "Mevr"
 
 #. Address salutation
 msgid "mrs"
@@ -77,7 +78,7 @@ msgstr "telefoon"
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "Betaling"
+msgstr "betaling"
 
 #. Subscription reason code
 msgid "reason:0"
@@ -105,7 +106,7 @@ msgstr "geweigerd"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "Terug gestort"
+msgstr "terug gestort"
 
 #. Payment status value
 msgid "pay:4"
@@ -121,7 +122,7 @@ msgstr "ontvangen"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "overgebracht"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -133,7 +134,7 @@ msgstr "verwijderd"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "in behandeling"
+msgstr "in afwachting van"
 
 #. Delivery status value
 msgid "stat:2"

@@ -756,7 +756,7 @@ msgid "WS"
 msgstr "Samoa"
 
 msgid "XK"
-msgstr ""
+msgstr "XK"
 
 msgid "YE"
 msgstr "Jemen"

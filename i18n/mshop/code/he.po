@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # shmuel adler, 2024
+# shmuel adler, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

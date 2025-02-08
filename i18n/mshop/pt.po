@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: b5fdd37cec45d8078af7e530465bb050, 2016\n"
 "Language-Team: Portuguese (http://app.transifex.com/aimeos/aimeos-core/language/pt/)\n"
@@ -230,7 +230,7 @@ msgstr "Código do cupom \"%1$s\" duplicado"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Falha na expansão do nó \"%1$s\""
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -510,7 +510,7 @@ msgstr ""
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Não foi encontrado nenhum ficheiro XML \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
@@ -797,7 +797,7 @@ msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "O parâmetro obrigatório \"%1$s\" está em falta"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -857,6 +857,10 @@ msgstr ""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Status not available"
 msgstr ""
 
 #, php-format

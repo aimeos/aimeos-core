@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Péter Kozma <kopegrafika@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://app.transifex.com/aimeos/aimeos-core/language/hu/)\n"
@@ -38,7 +38,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -58,7 +58,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -68,15 +68,15 @@ msgstr ""
 #. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" tartomány címe nem elérhető"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" típusú cím nem elérhető"
 
 #, php-format
 msgid "Address item for removal not found"
@@ -88,7 +88,7 @@ msgstr "Nem elérhető a cím"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$s\" megszólítás nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Address search configuration not available"
@@ -96,11 +96,11 @@ msgstr "A címkeresés konfigurációja nem érhető el"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$s\" címtípus nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Ismeretlen hiba lépett fel a %1$d kóddal."
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -112,7 +112,7 @@ msgstr "A kosár üres"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "A megvásárolt utalvány pénzneme \"%1$s\", a kosár \"%2$s\" pénznemet használ."
 
 #, php-format
 msgid "Cache object not available"
@@ -120,15 +120,15 @@ msgstr "A gyorsítótár objektum nem érhető el"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Ismeretlen \"%1$s\" metódus hívása a \"%2$s\" osztályon."
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" azonosítóhoz tartozó katalóguscsomópont nem elérhető"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" azonosítóhoz tartozó katalógus elérési útvonala nem található."
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
@@ -140,7 +140,7 @@ msgstr "A kosárban elérhető szolgáltatási cikkek ellenőrzése sikertelen"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "A \"%1$d\" indexű gyermekcsomópont nem elérhető"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -152,15 +152,15 @@ msgstr "A/Az \"%1$s\" osztály nem elérhető."
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "A \"%1$s\" kód nem lehet hosszabb %2$d karakternél"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "A \"%1$s\" kód nem lehet hosszabb 32 karakternél."
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "A kód érvénytelen karaktereket tartalmaz: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
@@ -176,7 +176,7 @@ msgstr "A kód nem lehet hosszabb 32 karakternél."
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "A \"%1$s\" konfiguráció hiányzik"
 
 #, php-format
 msgid "Configuration invalid"
@@ -192,7 +192,7 @@ msgstr "A konfigurációs objektum nem érhető el"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" szükséges SQL utasítás konfigurációja nem áll rendelkezésre"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
@@ -207,7 +207,7 @@ msgstr "Sikertelen curl inicializálás"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Curl hiba: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
@@ -215,7 +215,7 @@ msgstr "Az adatbázis kezelő objektum nem érhető el"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" előtti dátumérték"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
@@ -231,7 +231,7 @@ msgstr "\"%1$s\" kupon kód duplikálása"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "A \"%1$s\" csomópont bővítése sikertelen volt"
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -239,7 +239,7 @@ msgstr "\"%1$s\" állomány nem található"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "A \"%1$s\" fájl vagy könyvtár nem létezik"
 
 #, php-format
 msgid "File system manager object not available"
@@ -247,15 +247,15 @@ msgstr "A fájlrendszer kezelő objektum nem érhető el"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Befejezett rendelés státusz importálása a \"%1$s\"-ból."
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Befejeződött a rendelés státuszának importálása a \"%1$s\" fájlból."
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "\"%1$s\" zászlók nem a megengedett tartományon belül vannak"
 
 #, php-format
 msgid "Flags not within allowed range"
@@ -268,19 +268,19 @@ msgstr "Az utoljára beszúrt adatbázis rekord azonosítója nem érhető el"
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Nem áll rendelkezésre nemzetköziesítési objektum a \"%1$s\" számára."
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Érvénytelen ISO országkód"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen ISO országkód \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Érvénytelen ISO valutakód"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -288,7 +288,7 @@ msgstr "Érvénytelen ISO valutanem jelzés:  \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Érvénytelen ISO nyelvi kód"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -296,11 +296,11 @@ msgstr "Érvénytelen ISO nyelvkód: \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Érvénytelen JSON a \"%2$s\" azonosító keresésének eredményeképpen a \"%1$s\"-ben: %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Érvénytelen attribútum a \"%1$d\" pozícióban."
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
@@ -318,19 +318,19 @@ msgstr "Érvénytelen karakter a/az \"%1$s\" osztály nevében"
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Érvénytelen karakterek a \"%1$s\" dátumban. ISO formátum \"YYYY-MM-DD hh:mm:ss\" várható."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Érvénytelen karakterek a \"%1$s\" dátumban. ISO formátum \"ÉÉÉÉÉ-HH-HH-HH-NN\" várható."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Érvénytelen karakterek a dátumban, ISO formátum \"YYYY-MM-DD hh:mm:ss\" várható"
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Érvénytelen karakterek a dátumban, ISO formátum \"YYYY-MM-DD\" elvárt"
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -342,11 +342,11 @@ msgstr "Érvénytelen karakter az e-mail nevében: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakterek a \"%1$s\" menedzsernévben"
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Érvénytelen karakterek a \"%1$s\" menedzsernévben a \"%2$s\"-ban."
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
@@ -354,7 +354,7 @@ msgstr "Érvénytelen karakter az árban: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakterek a szolgáltató nevében \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
@@ -366,7 +366,7 @@ msgstr "Érvénytelen karakter a típus nevében: \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Érvénytelen konfiguráció a \"%1$s\" kuponszolgáltatóhoz, \"%2$s\" szükséges."
 
 msgid "Invalid delivery type"
 msgstr "Érvénytelen szállítási típus"
@@ -377,23 +377,23 @@ msgstr "Érvénytelen gyártó: \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen mime típus \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen szolgáltató neve \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Érvénytelen szerializált kosár. \"%1$s\" visszaadta \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Érvénytelen szerializált kosár. \"%1$s\" visszatér \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen időintervallum formátum \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
@@ -413,47 +413,47 @@ msgstr "Az elem nem menthető a save () metódussal. Az elem azonosítója nem �
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "A \"%1$s\" tartományban hivatkozott elem nem található: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" azonosítóval rendelkező elem nem található"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "\"%2$s\" azonosítóval rendelkező elem nem található a \"%1$s\" könyvtárban."
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" azonosítóval nem találtak munkát"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" domainről eltávolítandó listaelem nem található"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%2$s\" azonosítóval rendelkező listaelemet a \"%1$s\" listában nem találtuk meg"
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" azonosítójú attribútumelemhez tartozó lista típusa nem elérhető"
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" azonosítóval rendelkező árelemhez tartozó lista típusa nem érhető el"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" azonosítóval rendelkező szöveges elemhez nem áll rendelkezésre lista típusa"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "A \"%1$s\" XML-válasz betöltése a kézbesítési szolgáltatótól sikertelen volt."
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" oldalhoz tartozó helyi elem nem található"
 
 #, php-format
 msgid "Locale object not available"
@@ -461,11 +461,11 @@ msgstr "A területi beállítási objektum nem érhető el"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$d\" zárolási jelző nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" azonosítójú naplóbejegyzés nem található"
 
 #, php-format
 msgid "Log manager object not available"
@@ -477,7 +477,7 @@ msgstr "A levelezési objektum nem érhető el"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "A \"%1$s\" menedzser elérési útvonal érvénytelen"
 
 #, php-format
 msgid "Manager path is empty"
@@ -489,11 +489,11 @@ msgstr "Az üzenetsor objektum nem érhető el"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "A \"%1$s\" módszer a helységnévtár-kezelőhöz nem elérhető"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "\"%1$s\" módszer a szolgáltatóhoz nem elérhető"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
@@ -501,7 +501,7 @@ msgstr "Hiányzó konfiguráció: \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Az elem új azonosítója \"%1$s\" eltér a régi azonosítótól \"%2$s\"."
 
 #, php-format
 msgid ""
@@ -511,51 +511,51 @@ msgstr "Az újonnan létrehozott webhely nem menthető a \"save ()\" módszerrel
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Nem találtunk \"%1$s\" XML fájlt"
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Nincs megvásárolt utalvány a \"%1$s\" kódhoz elérhető"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Nincs katalóguscsomópont a \"%1$s\" azonosítóhoz."
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Nem találtunk elemet a következő feltételekhez: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Nem találtunk \"%2$s\" elemet a \"%1$s\"-ben \"%1$s\" alatt"
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Nincs több kredit a \"%1$s\" utalványhoz."
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Nem találtunk rendelést a \"%1$s\" azonosítóhoz."
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Nincs elérhető ár a \"%1$s\" termékazonosítóhoz vagy a \"%2$s\" termékkódhoz."
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Nem találtunk terméket \"%1$s\" kóddal"
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Nincs kedvezmény a \"%1$s\" pénznemre."
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Nincs elérhető keresési konfiguráció a \"%1$s\" számára."
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Nincs elérhető keresési konfiguráció a \"%1$s\" domainhez."
 
 #, php-format
 msgid "No search keys available"
@@ -563,11 +563,11 @@ msgstr "Nincsenek keresési kulcsok"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "A \"%1$s\" kódhoz nem találtunk készletfajtát."
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nincs típus a \"%1$s\" kódhoz."
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -615,7 +615,7 @@ msgstr "Nem egész szám"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Az objektum nem az előírt \"%1$s\" típusú."
 
 #, php-format
 msgid "Operation not supported"
@@ -625,81 +625,81 @@ msgstr "Nem támogatott művelet"
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "A szállítási szolgáltató XML-válaszában szereplő \"%1$s\" rendelésazonosító eltér a megrendelés \"%2$s\" tárolt számlaazonosítójától."
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "A \"%1$s\" rendelési cím pozíciójának nagyobbnak kell lennie 0-nál."
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" rendelési azonosítóval rendelkező rendelési alaptétel nem található."
 
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "A szállítási szolgáltatónak küldött rendelési adatokat az XML-válasz szerint \"%1$s\" kóddal utasították el."
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$s\" rendelés szállítási státusza nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$s\" fizetési státusz nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "A \"%1$s\" rendelési termék pozíciójának nagyobbnak kell lennie 0-nál."
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "A \"%1$s\" rendelési szolgáltatás pozíciójának nagyobbnak kell lennie 0-nál."
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "\"%1$s\" rendelés típusa nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "A \"%1$s\" azonosítójú megrendelést \"%2$s\" kóddal elutasították: %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "\"%1$s\" paraméter a konfigurációhoz nem elérhető"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Jelszó objektum nem elérhető"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" azonosítóval és \"%2$s\" státusszal rendelkező tranzakció duplikátuma."
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: \"%1$s\" azonosítóval és \"%2$s\" státusszal rendelkező tranzakció duplikátuma."
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Érvénytelen kérés \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: A \"%1$s\" rendelési azonosítóhoz tartozó fizetési tranzakció azonosítója nem elérhető."
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: A \"%1$s\" rendelési azonosító iránti kérés sikertelen volt \"%2$s\"-val."
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: \"%2$s\" rendelési azonosítóhoz \"%1$s\" nem megfelelő összegű fizetés."
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Rossz címzett e-mail \"%1$s\""
 
 msgid "Payment costs"
 msgstr "Fizetési költségek"
@@ -712,15 +712,15 @@ msgstr "Kérjük, tekintse meg a kosárban lévő termékek árait"
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Az ár nem adható hozzá. Az árelem \"%1$s\" valutaazonosítója és a jelenleg használt \"%2$s\" valutaazonosító nem egyezik."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "A megadott \"%1$d\" mennyiség ára nem elérhető."
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "A megadott \"%1$s\" mennyiség ára nem elérhető"
 
 #, php-format
 msgid "Price item not available"
@@ -742,7 +742,7 @@ msgstr "A termék nem tartalmazza az összes szükséges értéket. A termék te
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "A termék nem tartalmazza a SKU kódot"
 
 #, php-format
 msgid "Product matching given properties not found"
@@ -754,7 +754,7 @@ msgstr "A termék nem áll rendelkezésre"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "A \"%1$d\" tömbkulccsal rendelkező termék nem elérhető"
 
 #, php-format
 msgid "Products in basket not available"
@@ -770,15 +770,15 @@ msgstr "Az eltávolítandó elem nem található"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "A \"%1$s\" tulajdonságnév nem a megengedett tartományon belül van"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Szolgáltató a \"%1$s\" területen nem elérhető"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "A mennyiségnek 0-nak vagy nagyobbnak kell lennie, és nem haladhatja meg a %1$d értéket."
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
@@ -786,7 +786,7 @@ msgstr "A mennyiségnek 0 -nak vagy nagyobbnak kell lennie, és nem haladhatja m
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "A mennyiségnek nagyobbnak kell lennie 0-nál, és nem haladhatja meg a %1$d értéket."
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
@@ -794,7 +794,7 @@ msgstr "A mennyiségnek nagyobbnak kell lennie, mint 0, és nem haladhatja meg a
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "A mennyiségi skálának nagyobbnak kell lennie 0-nál"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -802,11 +802,11 @@ msgstr "\"%1$s\" kötelező segédváltozó hiányzik"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "A \"%1$s\" szükséges értéke hiányzik"
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" keresési konfigurációja nem elérhető"
 
 #, php-format
 msgid "Search configuration not available"
@@ -814,15 +814,15 @@ msgstr "A keresett konfiguráció nem elérhető"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "A megrendelés elküldése sikertelen: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "A megrendelés küldése a kézbesítő szolgáltatónak nem sikerült \"%1$s\" HTTP státusszal."
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "A megrendelés küldése a kézbesítő szolgáltatónak sikertelen: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
@@ -830,7 +830,7 @@ msgstr "A szolgáltatás nem elérhető"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "A \"%1$s\" típusú szolgáltatás nem elérhető"
 
 #, php-format
 msgid "Session object not available"
@@ -850,63 +850,67 @@ msgstr "A webhely nem helyezhető át. A webhely webhelyazonosítója eltér a j
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" kódhoz tartozó oldal nem található"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Elkezdődött a rendelés státuszának importálása a \"%1$s\"-ból."
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Megkezdődött a rendelés státuszának importálása a \"%1$s\" fájlból."
+
+#, php-format
+msgid "Status not available"
+msgstr "Nem elérhető a cím"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "A \"%1$s\" algoritmus nem támogatott"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "A %1$s maximális kosárértéket túllépték."
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "A termék maximális mennyisége %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "A %1$d maximális termékmennyiséget túllépték."
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "A termék maximális értéke %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Az összes termék maximális mennyisége %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Az összes termék maximális értéke %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "A %1$s kosár minimális értéke nem éri el a %1$s értéket."
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "A %1$d minimális termékmennyiség nem éri el a %1$d értéket."
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "A \"%1$s\" kulcsú konfigurációs opció típusának \"%2$s\"-nek kell lennie."
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Időérték \"%1$s\" után"
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" előtti időérték"
 
 #, php-format
 msgid "Total results value not found"
@@ -914,11 +918,11 @@ msgstr "A teljes találati érték nem található"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "A \"%1$s\" kódú fa gyökere a \"%2$s\"-ban nem található"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" azonosítóval rendelkező típuselem nem található a \"%2$s\"-ben"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -926,25 +930,25 @@ msgstr "Nem lehet, meghívni a \"%1$s\" eljárást"
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Nem sikerült létrehozni a \"%1$s\" XML rendelési fájlt."
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Az importált \"%1$s\" fájlt nem lehetett áthelyezni a \"%2$s\" helyre."
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Nem tudja rendezni a munkaszüneti napokat: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Ismeretlen keresőkulcs \"%1$s\""
 
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "A kézbesítési szolgáltatótól érkező XML-válasz \"%1$s\" séma szerinti validálása sikertelen."
 
 #, php-format
 msgid "View object not available"

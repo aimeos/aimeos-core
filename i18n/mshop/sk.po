@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Slovak (http://app.transifex.com/aimeos/aimeos-core/language/sk/)\n"
@@ -35,7 +35,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -55,7 +55,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -65,79 +65,79 @@ msgstr ""
 #. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa pre doménu \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa pre typ \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Položka adresy na odstránenie nebola nájdená"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adresa nie je k dispozícii"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Oslovenie \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Konfigurácia vyhľadávania adries nie je k dispozícii"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Typ adresy \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Vyskytla sa neznáma chyba s kódom %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Na agregáciu sa vyžaduje aspoň jeden kľúč"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Kôš je prázdny"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Zakúpený poukaz je v mene \"%1$s\", košík používa \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Objekt vyrovnávacej pamäte nie je k dispozícii"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Vyvolaná neznáma metóda \"%1$s\" na triede \"%2$s\""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Katalógový uzol pre ID \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Katalógová cesta pre ID \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Kontrola dostupných adries v košíku zlyhala"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Kontrola dostupných položiek služieb v košíku zlyhala"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Detský uzol s indexom \"%1$d\" nie je k dispozícii"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -149,163 +149,163 @@ msgstr "Trieda  \"%1$s\" nie je dostupná"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Kód \"%1$s\" nesmie byť dlhší ako %2$d znakov"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Kód \"%1$s\" nesmie byť dlhší ako 32 znakov"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Kód obsahuje neplatné znaky: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Kód je príliš dlhý"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Kód nesmie byť dlhší ako 255 znakov"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Kód nesmie byť dlhší ako 32 znakov"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Chýba konfigurácia pre \"%1$s\""
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Neplatná konfigurácia"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Konfigurácia nie je k dispozícii"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Objekt konfigurácie nie je k dispozícii"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Konfigurácia potrebného príkazu SQL pre \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Kupón v košíku už nie je k dispozícii"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Kupón už nie je k dispozícii"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curl sa nepodarilo inicializovať"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Chyba pri curlovaní: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Objekt správcu databázy nie je k dispozícii"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Hodnota dátumu pred \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Preberanie súboru \"%1$s\" zlyhalo"
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Duplicitný kód kupónu"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Duplicitný kód kupónu \"%1$s\""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Rozbaľovanie uzla \"%1$s\" zlyhalo"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Súbor \"%1$s\" nebol nájdený"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Súbor alebo adresár \"%1$s\" neexistuje"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Objekt správcu súborového systému nie je k dispozícii"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Dokončený import stavu objednávky z \"%1$s\""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Dokončený import stavu objednávky zo súboru \"%1$s\""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Príznaky \"%1$s\" nie sú v povolenom rozsahu"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Príznaky nie sú v povolenom rozsahu"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID posledného vloženého záznamu databázy nie je k dispozícii"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Objekt internacionalizácie nie je k dispozícii pre \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Neplatný kód krajiny ISO"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Neplatný kód krajiny ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Neplatný kód meny ISO"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Neplatný kód meny ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Neplatný kód jazyka ISO"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Neplatný kód jazyka ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Neplatný JSON ako výsledok vyhľadávania ID \"%2$s\" v \"%1$s\": %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Neplatný atribút na pozícii \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v kóde meny ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v kóde jazyka ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -315,58 +315,58 @@ msgstr "Neplatné znaky v triede  \"%1$s\""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Neplatné znaky v dátume \"%1$s\". Očakáva sa formát ISO \"RRRR-MM-DD hh:mm:ss\"."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Neplatné znaky v dátume \"%1$s\". Očakáva sa formát ISO \"RRRR-MM-DD\"."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Neplatné znaky v dátume, očakáva sa formát ISO \"RRRR-MM-DD hh:mm:ss\""
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Neplatné znaky v dátume, očakáva sa formát ISO \"RRRR-MM-DD\""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v názve domény \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v e-mailovej adrese: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v názve manažéra \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Neplatné znaky v názve manažéra \"%1$s\" v \"%2$s\""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v cene \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v názve poskytovateľa \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v dátume nákupu \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Neplatné znaky v názve typu \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Neplatná konfigurácia pre poskytovateľa kupónov \"%1$s\", potrebuje \"%2$s\""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Neplatný typ dodávky"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -374,548 +374,552 @@ msgstr "Neplatná továreň \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Neplatný typ mime \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Neplatný názov poskytovateľa \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Neplatný serializovaný kôš. \"%1$s\" vrátil \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Neplatný serializovaný kôš. \"%1$s\" vráti \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Neplatný formát časového intervalu \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Neplatný typ \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Neplatná adresa URL webového sídla \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Položku nie je možné vymazať. ID lokality položky sa líši od aktuálneho ID lokality."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Položku nebolo možné uložiť pomocou metódy save(). ID položky nie je k dispozícii."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Položka, na ktorú sa odkazuje v doméne \"%1$s\", nebola nájdená: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Položka s ID \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Položka s ID \"%2$s\" v \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Úloha s ID \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Položka zoznamu na odstránenie z domény \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Položka zoznamu s ID \"%2$s\" v \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Typ zoznamu pre položku atribútu s ID \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Typ zoznamu pre cenovú položku s ID \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Typ zoznamu pre textovú položku s ID \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Načítanie odpovede XML \"%1$s\" od poskytovateľa doručenia zlyhalo"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Položka lokálneho jazyka pre lokalitu \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Objekt Locale nie je k dispozícii"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Príznak uzamknutia \"%1$d\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Záznam v denníku s ID \"%1$s\" nebol nájdený"
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Objekt správcu denníka nie je k dispozícii"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Mail objekt nie je k dispozícii"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Cesta správcu \"%1$s\" je neplatná"
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Cesta manažéra je prázdna"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Objekt frontu správ nie je k dispozícii"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Metóda \"%1$s\" pre správcu lokality nie je k dispozícii"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Metóda \"%1$s\" pre poskytovateľa nie je k dispozícii"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Chýbajúca konfigurácia \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Nové ID \"%1$s\" pre položku sa líši od starého ID \"%2$s\""
 
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "Novovytvorenú stránku nemožno uložiť pomocou metódy \"save()\". Skúste namiesto toho použiť metódu \"insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Nenašiel sa žiadny súbor XML \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Žiadny zakúpený kupón pre kód \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Žiadny uzol katalógu pre ID \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Nenašla sa žiadna položka pre podmienky: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Nenašla sa žiadna položka s \"%2$s\" v \"%1$s\""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Pre kupón \"%1$s\" už nie je k dispozícii žiadny kredit"
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Nenašla sa žiadna objednávka pre ID \"%1$s\""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Nie je k dispozícii cena pre ID produktu \"%1$s\" alebo kód produktu \"%2$s\""
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Nenašiel sa žiadny produkt s kódom \"%1$s\""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Nie je k dispozícii žiadna zľava pre menu \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Pre \"%1$s\" nie je k dispozícii žiadna konfigurácia vyhľadávania"
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Pre doménu \"%1$s\" nie je k dispozícii žiadna konfigurácia vyhľadávania"
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Nie sú k dispozícii žiadne vyhľadávacie tlačidlá"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nenašiel sa žiadny typ zásob pre kód \"%1$s\""
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nenašiel sa žiadny typ pre kód \"%1$s\""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Nenašlo sa žiadne skladisko pre kód \"%1$s\""
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Nie je to dátum"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Nie dátum a čas"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Nie mapa kľúč/hodnota"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Nie je to položka zoznamu"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Nie je uvedená hodnota"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Nie je to číslo"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Nie je to reťazec"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Nie je čas"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Nie je to hodnota true/false"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Nie je to celé číslo"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Objekt nie je požadovaného typu \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operácia nie je podporovaná"
 
 #, php-format
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "ID objednávky \"%1$s\" v odpovedi XML poskytovateľa doručenia sa líši od uloženého ID faktúry \"%2$s\" objednávky"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Pozícia adresy objednávky \"%1$s\" musí byť väčšia ako 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Základná položka objednávky s ID objednávky \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "Údaje objednávky odoslané poskytovateľovi doručenia boli podľa odpovede XML zamietnuté s kódom \"%1$s\""
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Stav doručenia objednávky \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Stav platby objednávky \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Pozícia produktu objednávky \"%1$s\" musí byť väčšia ako 0"
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Pozícia služby objednávky \"%1$s\" musí byť väčšia ako 0"
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Typ objednávky \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Objednávka s ID \"%1$s\" bola zamietnutá s kódom \"%2$s\": %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parameter \"%1$s\" pre konfiguráciu nie je k dispozícii"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Objekt hesla nie je k dispozícii"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Duplicitná transakcia s ID \"%1$s\" a statusom \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Duplicitná transakcia s ID \"%1$s\" a statusom \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Neplatná požiadavka \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: ID platobnej transakcie pre ID objednávky \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Požiadavka pre ID objednávky \"%1$s\" zlyhala s \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: nesprávna suma platby \"%1$s\" pre ID objednávky \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: nesprávny e-mail príjemcu \"%1$s\""
 
 msgid "Payment costs"
-msgstr ""
+msgstr "Platobné náklady"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Pozrite sa na ceny produktov v košíku"
 
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Cenu nie je možné pridať. ID meny \"%1$s\" cenovej položky a aktuálne používané ID meny \"%2$s\" sa nezhodujú."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Cena pre dané množstvo \"%1$d\" nie je k dispozícii"
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Cena pre dané množstvo \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Cenová položka nie je k dispozícii"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Objekt procesu nie je k dispozícii"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Produkt nie je k dispozícii"
 
 #, php-format
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "Produkt neobsahuje všetky požadované hodnoty. Kód produktu pre položku nie je k dispozícii."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Produkt neobsahuje kód SKU"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Produkt zodpovedajúci daným vlastnostiam nebol nájdený"
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Produkt nie je k dispozícii"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Produkt s kľúčom poľa \"%1$d\" nie je k dispozícii"
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Produkty v košíku nie sú k dispozícii"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Produkty, ktoré nie sú na sklade"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Položka majetku na odstránenie nebola nájdená"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Názov vlastnosti \"%1$s\" nie je v povolenom rozsahu"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Poskytovateľ v \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Množstvo musí byť 0 alebo väčšie a nesmie presiahnuť %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Množstvo musí byť 0 alebo väčšie a nesmie prekročiť objednané množstvo"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Množstvo musí byť väčšie ako 0 a nesmie presiahnuť %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Množstvo musí byť väčšie ako 0 a nesmie prekročiť 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Stupnica množstva musí byť väčšia ako 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Chýba požadovaný parameter \"%1$s\""
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Chýba požadovaná hodnota pre \"%1$s\""
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Konfigurácia vyhľadávania pre \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Konfigurácia vyhľadávania nie je k dispozícii"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Odoslanie objednávky zlyhalo: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Odoslanie objednávky poskytovateľovi doručenia zlyhalo so stavom HTTP \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Odoslanie objednávky poskytovateľovi doručenia zlyhalo: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Služba nie je k dispozícii"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Služba typu \"%1$s\" nie je k dispozícii"
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Objekt relácie nie je k dispozícii"
 
 #, php-format
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Stránku nie je možné vložiť. ID lokality sa líši od ID nadradenej lokality."
 
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Stránku nie je možné presunúť. ID lokality sa líši od súčasného ID lokality, ID existujúcej nadradenej lokality alebo ID novej nadradenej lokality."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Stránka pre kód \"%1$s\" nebola nájdená"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Spustený import stavu objednávky z \"%1$s\""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Spustený import stavu objednávky zo súboru \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Adresa nie je k dispozícii"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Algoritmus \"%1$s\" nie je podporovaný"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Maximálna hodnota koša %1$s je prekročená"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Maximálne množstvo produktu je %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Maximálne množstvo produktu %1$d je prekročené"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Maximálna hodnota produktu je %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Maximálne množstvo všetkých produktov je %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Maximálna hodnota všetkých produktov je %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Minimálna hodnota koša %1$s nie je dosiahnutá"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Minimálne množstvo produktu %1$d nie je dosiahnuté"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Typ konfiguračnej možnosti s kľúčom \"%1$s\" musí byť \"%2$s\""
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Hodnota času po \"%1$s\""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Hodnota času pred \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Celková hodnota výsledkov nebola nájdená"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Koreň stromu s kódom \"%1$s\" v \"%2$s\" nebol nájdený"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Typ položky s ID \"%1$s\" v \"%2$s\" nebol nájdený"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -923,26 +927,26 @@ msgstr "Nepodarilo sa zavolať metódu \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Nie je možné vytvoriť súbor XML s objednávkou \"%1$s\""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Nie je možné presunúť importovaný súbor \"%1$s\" do \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Nie je možné triediť štátne sviatky: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Neznámy vyhľadávací kľúč \"%1$s\""
 
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "Validácia odpovede XML od poskytovateľa doručenia podľa schémy \"%1$s\" zlyhala"
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Zobrazenie objektu nie je k dispozícii"

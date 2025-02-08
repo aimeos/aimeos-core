@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Last-Translator: Aimeos, 2025\n"
 "Language-Team: Latvian (http://app.transifex.com/aimeos/aimeos-core/language/lv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,23 +24,23 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "Arhivēts"
 
 #. Item status
 msgid "status:-1"
-msgstr ""
+msgstr "Pārskats"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "Invalīdi"
 
 #. Item status
 msgid "status:1"
-msgstr "Iespējots"
+msgstr "Ieslēgts"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "Slēptais"
 
 #. Address salutation
 msgid "company"
@@ -47,31 +48,31 @@ msgstr "Uzņēmums"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "Kungs"
 
 #. Address salutation
 msgid "ms"
-msgstr ""
+msgstr "Kundze"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "Kundze"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "Kundze"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "atkārtoti"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "internets"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "tālrunis"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -79,11 +80,11 @@ msgstr "maksājums"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "beidzās"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "atcelts"
 
 #. Payment status value
 msgid "pay:-1"
@@ -95,23 +96,23 @@ msgstr "dzēsts"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "atcelts"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "atteica"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "atmaksāts"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "gaida"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "autorizēts"
 
 #. Payment status value
 msgid "pay:6"
@@ -119,7 +120,7 @@ msgstr "saņemts"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "pārsūtīts"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -131,80 +132,80 @@ msgstr "dzēsts"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "gaida"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "izstrādes stadijā"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "nosūtīti"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "piegādāts"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "pazaudēts"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "atteica"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "atgriezts"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Trūkst norēķinu adreses"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Nav norādīta piegādes adrese"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "Norēķinu adrese nav atļauta"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "Piegādes adrese nav atļauta"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Trūkst maksājuma opcijas"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Trūkst piegādes opcijas"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "Maksājuma iespēja nav atļauta"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "Piegādes iespēja nav atļauta"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "Atvainojiet, vismaz viens produkts vairs nepastāv. Lūdzu, izņemiet to no sava groza, lai turpinātu"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "Atvainojiet, vismaz viens produkts tika atspējots. Lūdzu, izņemiet to no sava groza, lai turpinātu"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "Atvainojiet, vismaz viens produkts vairs nav pieejams. Lūdzu, izņemiet to no sava groza, lai turpinātu"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "Pa šo laiku ir mainījusies vismaz viena produkta cena, un tā tika atjaunināta automātiski."
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "Atvainojiet, vismaz viens produkts nav noliktavā. Lūdzu, izņemiet to no sava groza, lai turpinātu"

@@ -25,121 +25,121 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "aa"
-msgstr ""
+msgstr "aa"
 
 msgid "ab"
-msgstr ""
+msgstr "ab"
 
 msgid "ae"
-msgstr ""
+msgstr "ae"
 
 msgid "af"
-msgstr ""
+msgstr "af"
 
 msgid "ak"
-msgstr ""
+msgstr "ak"
 
 msgid "am"
-msgstr ""
+msgstr "am"
 
 msgid "an"
-msgstr ""
+msgstr "an"
 
 msgid "ar"
-msgstr ""
+msgstr "ar"
 
 msgid "as"
-msgstr ""
+msgstr "as"
 
 msgid "av"
-msgstr ""
+msgstr "av"
 
 msgid "ay"
-msgstr ""
+msgstr "ay"
 
 msgid "az"
-msgstr ""
+msgstr "az"
 
 msgid "ba"
-msgstr ""
+msgstr "ba"
 
 msgid "be"
-msgstr ""
+msgstr "be"
 
 msgid "bg"
-msgstr ""
+msgstr "bg"
 
 msgid "bh"
-msgstr ""
+msgstr "bh"
 
 msgid "bi"
-msgstr ""
+msgstr "bi"
 
 msgid "bm"
-msgstr ""
+msgstr "bm"
 
 msgid "bn"
-msgstr ""
+msgstr "bn"
 
 msgid "bo"
-msgstr ""
+msgstr "bo"
 
 msgid "br"
-msgstr ""
+msgstr "br"
 
 msgid "bs"
-msgstr ""
+msgstr "bs"
 
 msgid "ca"
-msgstr ""
+msgstr "ca"
 
 msgid "ce"
-msgstr ""
+msgstr "ce"
 
 msgid "ch"
-msgstr ""
+msgstr "ch"
 
 msgid "co"
-msgstr ""
+msgstr "co"
 
 msgid "cr"
-msgstr ""
+msgstr "cr"
 
 msgid "cs"
-msgstr ""
+msgstr "cs"
 
 msgid "cu"
-msgstr ""
+msgstr "cu"
 
 msgid "cv"
-msgstr ""
+msgstr "cv"
 
 msgid "cy"
-msgstr ""
+msgstr "cy"
 
 msgid "da"
-msgstr ""
+msgstr "da"
 
 msgid "de"
 msgstr "Saksa"
 
 msgid "dv"
-msgstr ""
+msgstr "dv"
 
 msgid "dz"
-msgstr ""
+msgstr "dz"
 
 msgid "ee"
-msgstr ""
+msgstr "ee"
 
 msgid "el"
-msgstr ""
+msgstr "el"
 
 msgid "en"
-msgstr ""
+msgstr "et"
 
 msgid "eo"
-msgstr ""
+msgstr "eo"
 
 msgid "es"
 msgstr "Hispaania"
@@ -148,436 +148,436 @@ msgid "et"
 msgstr "Eesti"
 
 msgid "eu"
-msgstr ""
+msgstr "eu"
 
 msgid "fa"
-msgstr ""
+msgstr "fa"
 
 msgid "ff"
-msgstr ""
+msgstr "ff"
 
 msgid "fi"
 msgstr "Soome"
 
 msgid "fj"
-msgstr ""
+msgstr "fj"
 
 msgid "fo"
-msgstr ""
+msgstr "fo"
 
 msgid "fr"
 msgstr "Prantsuse"
 
 msgid "fy"
-msgstr ""
+msgstr "fy"
 
 msgid "ga"
 msgstr "Iiri"
 
 msgid "gd"
-msgstr ""
+msgstr "gd"
 
 msgid "gl"
-msgstr ""
+msgstr "gl"
 
 msgid "gn"
-msgstr ""
+msgstr "gn"
 
 msgid "gu"
-msgstr ""
+msgstr "gu"
 
 msgid "gv"
-msgstr ""
+msgstr "gv"
 
 msgid "ha"
-msgstr ""
+msgstr "ha"
 
 msgid "he"
-msgstr ""
+msgstr "ta"
 
 msgid "hi"
-msgstr ""
+msgstr "Tere"
 
 msgid "ho"
-msgstr ""
+msgstr "ho"
 
 msgid "hr"
-msgstr ""
+msgstr "hr"
 
 msgid "ht"
-msgstr ""
+msgstr "ht"
 
 msgid "hu"
-msgstr ""
+msgstr "hu"
 
 msgid "hy"
-msgstr ""
+msgstr "hy"
 
 msgid "hz"
-msgstr ""
+msgstr "hz"
 
 msgid "ia"
-msgstr ""
+msgstr "ia"
 
 msgid "id"
-msgstr ""
+msgstr "id"
 
 msgid "ie"
-msgstr ""
+msgstr "st"
 
 msgid "ig"
-msgstr ""
+msgstr "ig"
 
 msgid "ii"
-msgstr ""
+msgstr "ii"
 
 msgid "ik"
-msgstr ""
+msgstr "ik"
 
 msgid "io"
-msgstr ""
+msgstr "io"
 
 msgid "is"
-msgstr ""
+msgstr "on"
 
 msgid "it"
-msgstr ""
+msgstr "it"
 
 msgid "iu"
-msgstr ""
+msgstr "iu"
 
 msgid "ja"
-msgstr ""
+msgstr "ja"
 
 msgid "jv"
-msgstr ""
+msgstr "jv"
 
 msgid "ka"
-msgstr ""
+msgstr "ka"
 
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 msgid "ki"
-msgstr ""
+msgstr "ki"
 
 msgid "kj"
-msgstr ""
+msgstr "kj"
 
 msgid "kk"
-msgstr ""
+msgstr "kk"
 
 msgid "kl"
-msgstr ""
+msgstr "kl"
 
 msgid "km"
-msgstr ""
+msgstr "km"
 
 msgid "kn"
-msgstr ""
+msgstr "kn"
 
 msgid "ko"
-msgstr ""
+msgstr "ko"
 
 msgid "kr"
-msgstr ""
+msgstr "kr"
 
 msgid "ks"
-msgstr ""
+msgstr "ks"
 
 msgid "ku"
-msgstr ""
+msgstr "ku"
 
 msgid "kv"
-msgstr ""
+msgstr "kv"
 
 msgid "kw"
-msgstr ""
+msgstr "kw"
 
 msgid "ky"
-msgstr ""
+msgstr "ky"
 
 msgid "la"
-msgstr ""
+msgstr "la"
 
 msgid "lb"
-msgstr ""
+msgstr "lb"
 
 msgid "lg"
-msgstr ""
+msgstr "lg"
 
 msgid "li"
-msgstr ""
+msgstr "li"
 
 msgid "ln"
-msgstr ""
+msgstr "In"
 
 msgid "lo"
-msgstr ""
+msgstr "lo"
 
 msgid "lt"
 msgstr "Leedu"
 
 msgid "lu"
-msgstr ""
+msgstr "lu"
 
 msgid "lv"
-msgstr ""
+msgstr "lv"
 
 msgid "mg"
-msgstr ""
+msgstr "mg"
 
 msgid "mh"
-msgstr ""
+msgstr "mh"
 
 msgid "mi"
-msgstr ""
+msgstr "mi"
 
 msgid "mk"
-msgstr ""
+msgstr "mk"
 
 msgid "ml"
-msgstr ""
+msgstr "ml"
 
 msgid "mn"
-msgstr ""
+msgstr "mn"
 
 msgid "mo"
-msgstr ""
+msgstr "mo"
 
 msgid "mr"
-msgstr ""
+msgstr "hr"
 
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 msgid "mt"
-msgstr ""
+msgstr "mt"
 
 msgid "my"
-msgstr ""
+msgstr "my"
 
 msgid "na"
-msgstr ""
+msgstr "na"
 
 msgid "nb"
-msgstr ""
+msgstr "nb"
 
 msgid "nd"
-msgstr ""
+msgstr "nd"
 
 msgid "ne"
-msgstr ""
+msgstr "ne"
 
 msgid "ng"
-msgstr ""
+msgstr "ng"
 
 msgid "nl"
-msgstr ""
+msgstr "nl"
 
 msgid "nn"
-msgstr ""
+msgstr "nn"
 
 msgid "no"
-msgstr ""
+msgstr "ei"
 
 msgid "nr"
-msgstr ""
+msgstr "nr"
 
 msgid "nv"
-msgstr ""
+msgstr "nv"
 
 msgid "ny"
-msgstr ""
+msgstr "ny"
 
 msgid "oc"
-msgstr ""
+msgstr "oc"
 
 msgid "oj"
-msgstr ""
+msgstr "oj"
 
 msgid "om"
-msgstr ""
+msgstr "om"
 
 msgid "or"
-msgstr ""
+msgstr "või"
 
 msgid "os"
-msgstr ""
+msgstr "os"
 
 msgid "pa"
-msgstr ""
+msgstr "pa"
 
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 msgid "pl"
 msgstr "Poola"
 
 msgid "ps"
-msgstr ""
+msgstr "ps"
 
 msgid "pt"
 msgstr "Portugali"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "pt_BR"
 
 msgid "qu"
-msgstr ""
+msgstr "qu"
 
 msgid "rm"
-msgstr ""
+msgstr "rm"
 
 msgid "rn"
-msgstr ""
+msgstr "rn"
 
 msgid "ro"
-msgstr ""
+msgstr "ro"
 
 msgid "ru"
 msgstr "Vene"
 
 msgid "rw"
-msgstr ""
+msgstr "rw"
 
 msgid "sa"
-msgstr ""
+msgstr "sa"
 
 msgid "sc"
-msgstr ""
+msgstr "sc"
 
 msgid "sd"
-msgstr ""
+msgstr "sd"
 
 msgid "se"
-msgstr ""
+msgstr "se"
 
 msgid "sg"
-msgstr ""
+msgstr "sg"
 
 msgid "si"
-msgstr ""
+msgstr "si"
 
 msgid "sk"
-msgstr ""
+msgstr "sk"
 
 msgid "sl"
-msgstr ""
+msgstr "sl"
 
 msgid "sm"
-msgstr ""
+msgstr "sm"
 
 msgid "sn"
-msgstr ""
+msgstr "sn"
 
 msgid "so"
-msgstr ""
+msgstr "nii et"
 
 msgid "sq"
-msgstr ""
+msgstr "sq"
 
 msgid "sr"
-msgstr ""
+msgstr "sr"
 
 msgid "ss"
-msgstr ""
+msgstr "ss"
 
 msgid "st"
-msgstr ""
+msgstr "st"
 
 msgid "su"
-msgstr ""
+msgstr "su"
 
 msgid "sv"
-msgstr ""
+msgstr "sv"
 
 msgid "sw"
-msgstr ""
+msgstr "sw"
 
 msgid "ta"
-msgstr ""
+msgstr "ta"
 
 msgid "te"
-msgstr ""
+msgstr "te"
 
 msgid "tg"
-msgstr ""
+msgstr "tg"
 
 msgid "th"
-msgstr ""
+msgstr "th"
 
 msgid "ti"
-msgstr ""
+msgstr "ti"
 
 msgid "tk"
-msgstr ""
+msgstr "tk"
 
 msgid "tl"
-msgstr ""
+msgstr "tl"
 
 msgid "tn"
-msgstr ""
+msgstr "tn"
 
 msgid "to"
-msgstr ""
+msgstr "to"
 
 msgid "tr"
-msgstr ""
+msgstr "tr"
 
 msgid "ts"
-msgstr ""
+msgstr "ts"
 
 msgid "tt"
-msgstr ""
+msgstr "tt"
 
 msgid "tw"
-msgstr ""
+msgstr "tw"
 
 msgid "ty"
-msgstr ""
+msgstr "ty"
 
 msgid "ug"
-msgstr ""
+msgstr "ug"
 
 msgid "uk"
-msgstr ""
+msgstr "uk"
 
 msgid "ur"
-msgstr ""
+msgstr "ur"
 
 msgid "uz"
-msgstr ""
+msgstr "uz"
 
 msgid "ve"
-msgstr ""
+msgstr "ve"
 
 msgid "vi"
-msgstr ""
+msgstr "vi"
 
 msgid "vo"
-msgstr ""
+msgstr "vo"
 
 msgid "wa"
-msgstr ""
+msgstr "wa"
 
 msgid "wo"
-msgstr ""
+msgstr "wo"
 
 msgid "xh"
-msgstr ""
+msgstr "xh"
 
 msgid "yi"
-msgstr ""
+msgstr "yi"
 
 msgid "yo"
-msgstr ""
+msgstr "yo"
 
 msgid "za"
-msgstr ""
+msgstr "za"
 
 msgid "zh"
-msgstr ""
+msgstr "zh"
 
 msgid "zu"
-msgstr ""
+msgstr "zu"

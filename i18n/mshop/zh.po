@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Hans He, 2022\n"
 "Language-Team: Chinese (http://app.transifex.com/aimeos/aimeos-core/language/zh/)\n"
@@ -102,7 +102,7 @@ msgstr "地址類型 \"%1$s\" 不在允許的範圍之內"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "代码 %1$d 出现未知错误"
 
 #, php-format
 msgid "At least one key is required for aggregation"
@@ -302,7 +302,7 @@ msgstr "在 \"%1$s\": %3$s 搜尋ID %2$s 得到無效的JSON搜尋結果"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "位置\"%1$d \"处的属性无效"
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
@@ -387,7 +387,7 @@ msgstr "无效的提供者名称 \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "序列化篮子无效。\"%1$s \"返回\"%2$s\"。"
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
@@ -553,11 +553,11 @@ msgstr "币种 \"%1$s\" 无可用折扣"
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "没有\"%1$s \"可用的搜索配置"
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "域\"%1$s \"没有可用的搜索配置"
 
 #, php-format
 msgid "No search keys available"
@@ -796,7 +796,7 @@ msgstr "数量必须大于等于 0 且不能超过 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "数量标尺必须大于 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -861,6 +861,10 @@ msgstr "已开始从 \"%1$s\" 导入订单状态"
 #, php-format
 msgid "Started order status import from file \"%1$s\""
 msgstr "已开始从文件 \"%1$s\" 导入订单状态"
+
+#, php-format
+msgid "Status not available"
+msgstr "無效的地址"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Yolo San, 2021\n"
 "Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -57,7 +57,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -67,79 +67,79 @@ msgstr ""
 #. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa pentru domeniul \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa pentru tipul \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Elementul de adresă pentru eliminare nu a fost găsit"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adresa nu este disponibilă"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Salutul adresei \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Configurația de căutare a adreselor nu este disponibilă"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tipul de adresă \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "A apărut o eroare necunoscută cu codul %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Cel puțin o cheie este necesară pentru agregare"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Coș gol"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Voucherul cumpărat este în moneda \"%1$s\", coșul folosește \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Obiectul cache nu este disponibil"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "A fost apelată metoda necunoscută \"%1$s\" pe clasa \"%2$s\""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Nodul de catalog pentru ID \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Calea de catalog pentru ID-ul \"%1$s\" nu a fost găsită"
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Verifică adresele disponibile în coșul eșuat"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Verifică elementele de serviciu disponibile în coșul eșuat"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Nodul copil cu indexul \"%1$d\" nu este disponibil"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -151,70 +151,70 @@ msgstr "Clasa \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Codul \"%1$s\" nu trebuie să fie mai lung de %2$d caractere"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Codul \"%1$s\" nu trebuie să fie mai lung de 32 de caractere"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Codul conține caractere invalide: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Codul este prea lung"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Codul nu trebuie să fie mai lung de 255 de caractere"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Codul nu trebuie să fie mai lung de 32 de caractere"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Configurația pentru \"%1$s\" lipsește"
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Configurație invalidă"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Configurația nu este disponibilă"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Obiectul de configurare nu este disponibil"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Configurarea instrucțiunii SQL necesare pentru \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Cuponul din coș nu mai este disponibil"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Cuponul nu mai este disponibil"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curl nu a putut fi inițializat"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Eroare Curl: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Obiectul managerului bazei de date nu este disponibil"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Valoarea datei înainte de \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
@@ -222,15 +222,15 @@ msgstr "Descarcarea fisierului \"%1$s\" a esuat"
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Cod cupon duplicat"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Cod cupon duplicat \"%1$s\""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Expandarea nodului \"%1$s\" a eșuat"
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -238,76 +238,76 @@ msgstr "Fisierul \"%1$s\" nu a fost gasit"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Fișierul sau directorul \"%1$s\" nu există"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Obiectul manager de sistem de fișiere nu este disponibil"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Importul stării comenzii finalizate de la \"%1$s\""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Import finalizat al stării comenzii din fișierul \"%1$s\""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Indicatoarele \"%1$s\" nu se află în intervalul permis"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Steagurile nu se află în intervalul permis"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID-ul ultimei înregistrări introduse în baza de date nu este disponibil"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Obiectul de internaționalizare nu este disponibil pentru \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Cod de țară ISO invalid"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Cod de țară ISO invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Cod valutar ISO invalid"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Cod valutar ISO invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Cod de limbă ISO invalid"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Cod de limbă ISO invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "JSON invalid ca rezultat al căutării ID-ului \"%2$s\" în \"%1$s\": %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Atribut invalid la poziția \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în codul valutar ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în codul de limbă ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -317,58 +317,58 @@ msgstr "Caracter incorect în numele clasei \"%1$s\""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Caractere invalide în data \"%1$s\". Se așteaptă formatul ISO \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Caractere invalide în data \"%1$s\". Se așteaptă formatul ISO \"YYYY-MM-DD\"."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Caractere invalide în dată, format ISO \"YYYY-MM-DD hh:mm:ss\" așteptat"
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Caractere invalide în dată, format ISO \"YYYY-MM-DD\" așteptat"
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în numele de domeniu \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în adresa de e-mail: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în numele managerului \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Caractere invalide în numele managerului \"%1$s\" în \"%2$s\""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în prețul \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în numele furnizorului \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în data achiziției \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Caractere invalide în numele tipului \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Configurație invalidă pentru furnizorul de cupoane \"%1$s\", necesită \"%2$s\""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Tip de livrare invalid"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -376,424 +376,424 @@ msgstr "Factory incorect \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Tip mime invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Nume furnizor invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Coș serializat invalid. \"%1$s\" a returnat \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Coș serializat invalid. \"%1$s\" returnează \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Format invalid al intervalului de timp \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Tip invalid \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "URL site web invalid \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Articolul nu poate fi șters. ID-ul site-ului articolului diferă de ID-ul site-ului actual."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Articolul nu a putut fi salvat folosind metoda save(). ID-ul articolului nu este disponibil."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Elementul menționat în domeniul \"%1$s\" nu a fost găsit: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Articolul cu ID-ul \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Articolul cu ID-ul \"%2$s\" în \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Job-ul cu ID-ul \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Elementul de listă pentru eliminarea din domeniul \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Elementul de listă cu ID-ul \"%2$s\" în \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipul de listă pentru elementul de atribut cu ID \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipul de listă pentru elementul de preț cu ID-ul \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipul de listă pentru elementul text cu ID \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Încărcarea răspunsului XML \"%1$s\" de la furnizorul de livrare a eșuat"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Elementul local pentru site-ul \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Obiectul local nu este disponibil"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Indicatorul de blocare \"%1$d\" nu se află în intervalul permis"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Intrarea în jurnal cu ID-ul \"%1$s\" nu a fost găsită"
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Obiectul Log Manager nu este disponibil"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Obiectul poștal nu este disponibil"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Calea managerului \"%1$s\" nu este valabilă"
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Calea managerului este goală"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Obiectul cozii de mesaje nu este disponibil"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Metoda \"%1$s\" pentru managerul site-ului local nu este disponibilă"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Metoda \"%1$s\" pentru furnizor nu este disponibilă"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Lipsește configurația \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Noul ID \"%1$s\" pentru articol diferă de vechiul ID \"%2$s\""
 
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "Site-ul nou creat nu poate fi salvat folosind metoda \"save()\". Încercați să utilizați în schimb metoda \"insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit niciun fișier XML \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Nu există niciun voucher cumpărat pentru codul \"%1$s\" disponibil"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Nu există nod de catalog pentru ID-ul \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Nu s-a găsit niciun articol pentru condițiile: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit niciun element cu \"%2$s\" în \"%1$s\""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Nu mai există credit disponibil pentru voucherul \"%1$s\""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit nicio comandă pentru ID-ul \"%1$s\""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Nu este disponibil niciun preț pentru ID-ul produsului \"%1$s\" sau codul produsului \"%2$s\""
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Nu a fost găsit niciun produs cu codul \"%1$s\""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Nu este disponibilă nicio reducere pentru moneda \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Nu este disponibilă nicio configurație de căutare pentru \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Nu există nicio configurație de căutare disponibilă pentru domeniul \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Nu sunt disponibile taste de căutare"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit niciun tip de stoc pentru codul \"%1$s\""
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit niciun tip pentru codul \"%1$s\""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Nu s-a găsit niciun depozit pentru codul \"%1$s\""
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Nu este o întâlnire"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Nu o dată și o oră"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Nu este o hartă cheie/valoare"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Nu este un element de listă"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Nu este o valoare listată"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Nu un număr"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Nu este un șir"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Nu este un moment"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Nu este o valoare adevărat/fals"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Nu este un număr întreg"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Obiectul nu este de tipul necesar \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operațiunea nu este acceptată"
 
 #, php-format
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "ID-ul comenzii \"%1$s\" din răspunsul XML al furnizorului de servicii de livrare diferă de ID-ul facturii stocate \"%2$s\" a comenzii"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Poziția adresei de comandă \"%1$s\" trebuie să fie mai mare decât 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Articolul de bază al comenzii cu ID-ul comenzii \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "Datele comenzii trimise furnizorului de livrare au fost respinse cu codul \"%1$s\" conform răspunsului XML"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Starea livrării comenzii \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Statutul plății comenzii \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Poziția produsului de comandă \"%1$s\" trebuie să fie mai mare decât 0"
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Poziția serviciului de comandă \"%1$s\" trebuie să fie mai mare decât 0"
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tipul de comandă \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Comanda cu ID-ul \"%1$s\" a fost respinsă cu codul \"%2$s\": %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parametrul \"%1$s\" pentru configurare nu este disponibil"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Obiectul parolă nu este disponibil"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Tranzacție duplicată cu ID \"%1$s\" și status \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Tranzacție duplicată cu ID \"%1$s\" și status \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Cerere invalidă \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: ID-ul tranzacției de plată pentru ID-ul comenzii \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Cererea pentru ID-ul comenzii \"%1$s\" a eșuat cu \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Suma de plată greșită \"%1$s\" pentru ID-ul comenzii \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: E-mail receptor greșit \"%1$s\""
 
 msgid "Payment costs"
 msgstr "Costuri de plată"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Vă rugăm să aruncați o privire la prețurile produselor din coșul dvs."
 
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Prețul nu poate fi adăugat. ID-ul monedei \"%1$s\" al articolului de preț și ID-ul monedei utilizate în prezent \"%2$s\" nu corespund."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Prețul pentru cantitatea dată \"%1$d\" nu este disponibil"
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Prețul pentru cantitatea dată \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Articolul de preț nu este disponibil"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Obiectul procesului nu este disponibil"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Produsul nu este disponibil"
 
 #, php-format
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "Produsul nu conține toate valorile necesare. Codul produsului pentru articol nu este disponibil."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Produsul nu conține codul SKU"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Produsul care corespunde proprietăților date nu a fost găsit"
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Produsul nu este disponibil"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Produsul cu cheia array \"%1$d\" nu este disponibil"
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Produsele din coș nu sunt disponibile"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Produse epuizate din stoc"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Elementul de proprietate pentru eliminare nu a fost găsit"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Numele proprietății \"%1$s\" nu se încadrează în intervalul permis"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Furnizorul din \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Cantitatea trebuie să fie 0 sau mai mare și nu trebuie să depășească %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Cantitatea trebuie să fie 0 sau mai mare și nu trebuie să depășească cantitatea comandată"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Cantitatea trebuie să fie mai mare decât 0 și nu trebuie să depășească %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Cantitatea trebuie să fie mai mare decât 0 și nu trebuie să depășească 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Scala cantității trebuie să fie mai mare decât 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -801,123 +801,127 @@ msgstr "Parametrul obligatoriu \"%1$s\" lipsește"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Valoarea necesară pentru \"%1$s\" lipsește"
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Configurația de căutare pentru \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Configurația de căutare nu este disponibilă"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Trimiterea comenzii a eșuat: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Trimiterea comenzii către furnizorul de livrare a eșuat cu statutul HTTP \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Trimiterea comenzii către furnizorul de livrare a eșuat: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Serviciul nu este disponibil"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Serviciul de tip \"%1$s\" nu este disponibil"
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Obiectul sesiunii nu este disponibil"
 
 #, php-format
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Site-ul nu poate fi introdus. ID-ul site-ului diferă de ID-ul site-ului părinte."
 
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Site-ul nu poate fi mutat. ID-ul site-ului diferă de ID-ul site-ului actual, de ID-ul site-ului părinte existent sau de ID-ul site-ului părinte nou."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Site-ul pentru codul \"%1$s\" nu a fost găsit"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "A început importul stării comenzii de la \"%1$s\""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "A început importul statutului comenzii din fișierul \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Adresa nu este disponibilă"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Algoritmul \"%1$s\" nu este acceptat"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Valoarea maximă a coșului de %1$s este depășită"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Cantitatea maximă de produs este %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Cantitatea maximă de produs de %1$d este depășită"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Valoarea maximă a produsului este %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Cantitatea maximă a tuturor produselor este %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Valoarea maximă a tuturor produselor este %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Valoarea minimă a coșului de %1$s nu este atinsă"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Cantitatea minimă de produs de %1$d nu este atinsă"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Tipul opțiunii de configurare cu cheia \"%1$s\" trebuie să fie \"%2$s\""
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Valoarea timpului după \"%1$s\""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Valoarea timpului înainte de \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Valoarea totală a rezultatelor nu a fost găsită"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Rădăcina copacului cu codul \"%1$s\" în \"%2$s\" nu a fost găsită"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Articolul de tip cu ID-ul \"%1$s\" în \"%2$s\" nu a fost găsit"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -925,26 +929,26 @@ msgstr "Imposibil de apelat metoda \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Nu s-a putut crea fișierul XML de comandă \"%1$s\""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Imposibilitatea de a muta fișierul importat \"%1$s\" în \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Nu se pot sorta sărbătorile legale: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Cheie de căutare necunoscută \"%1$s\""
 
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "Validarea răspunsului XML de la furnizorul de livrare în raport cu schema \"%1$s\" a eșuat"
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Vizualizarea obiectului nu este disponibilă"

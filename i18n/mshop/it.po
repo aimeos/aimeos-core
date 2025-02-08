@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Matteo Breschigliaro <matteo@vg7.it>, 2020\n"
 "Language-Team: Italian (http://app.transifex.com/aimeos/aimeos-core/language/it/)\n"
@@ -101,11 +101,11 @@ msgstr "Il tipo di indirizzo \"%1$s\" non rientra nei parametri consentiti"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Si è verificato un errore sconosciuto con codice %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Per l'aggregazione è necessaria almeno una chiave"
 
 #, php-format
 msgid "Basket empty"
@@ -161,11 +161,11 @@ msgstr "Il codice \"%1$s\" non deve essere più lungo di 32 caratteri "
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Il codice contiene caratteri non validi: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Il codice è troppo lungo"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -273,7 +273,7 @@ msgstr "Oggetto di internazionalizzazione non disponibile per \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Codice paese ISO non valido"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
@@ -281,7 +281,7 @@ msgstr "Codice paese ISO non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Codice valuta ISO non valido"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -289,7 +289,7 @@ msgstr "Codice valuta ISO non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Codice lingua ISO non valido"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -301,7 +301,7 @@ msgstr "JSO non valido come risultato della ricerca dell'ID  \"%2$s\" in \"%1$s\
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Attributo non valido in posizione \"%1$d\"."
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
@@ -327,11 +327,11 @@ msgstr "Caratteri non validi nella data \"%1$s\". Previsto formato ISO \"GG-MM-A
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Caratteri non validi nella data, previsto il formato ISO \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Caratteri non validi nella data, previsto il formato ISO \"AAAA-MM-GG\"."
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -386,7 +386,7 @@ msgstr "Nome del fornitore non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Cestino serializzato non valido. \"%1$s\" ha restituito \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
@@ -410,7 +410,7 @@ msgstr "L'articolo non può essere cancellato. L'ID del sito dell'articolo diffe
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Non è stato possibile salvare l'elemento con il metodo save(). L'ID dell'elemento non è disponibile."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -508,7 +508,7 @@ msgstr "Il nuovo ID \"%1$s\" per l'articolo differisce dal vecchio ID \"%2$s\""
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "Il sito appena creato non può essere salvato con il metodo \"save()\". Provare invece a utilizzare il metodo \"insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -552,11 +552,11 @@ msgstr "Nessuno sconto disponibile per la valuta \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Nessuna configurazione di ricerca disponibile per \"%1$s\"."
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Nessuna configurazione di ricerca disponibile per il dominio \"%1$s\"."
 
 #, php-format
 msgid "No search keys available"
@@ -672,7 +672,7 @@ msgstr "Parametro \"%1$s\" non disponibile per la configurazione"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Oggetto password non disponibile"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
@@ -791,11 +791,11 @@ msgstr "La quantità deve essere maggiore di 0 e non deve superare %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "La quantità deve essere maggiore di 0 e non deve superare 2147483647."
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "La scala delle quantità deve essere maggiore di 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -860,6 +860,10 @@ msgstr "Importazione dello stato dell'ordine da \"%1$s\"  iniziata"
 #, php-format
 msgid "Started order status import from file \"%1$s\""
 msgstr "Avvio importazione dell'ordine dal file \"%1$s\""
+
+#, php-format
+msgid "Status not available"
+msgstr "Indirizzo non disponibile"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"

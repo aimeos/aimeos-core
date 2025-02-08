@@ -24,559 +24,559 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "aa"
-msgstr "afarski"
+msgstr "Afarski"
 
 msgid "ab"
-msgstr "abchaski"
+msgstr "Abchaski"
 
 msgid "ae"
-msgstr "awestyjski"
+msgstr "Awestyjski"
 
 msgid "af"
-msgstr "afrykanerski"
+msgstr "Afrykanerski"
 
 msgid "ak"
-msgstr "akan"
+msgstr "Akan"
 
 msgid "am"
-msgstr "amharski"
+msgstr "Amharski"
 
 msgid "an"
-msgstr "aragoński"
+msgstr "Aragoński"
 
 msgid "ar"
-msgstr "arabski"
+msgstr "Arabski"
 
 msgid "as"
-msgstr "asamski"
+msgstr "Asamski"
 
 msgid "av"
-msgstr "awarski"
+msgstr "Awarski"
 
 msgid "ay"
-msgstr "ajmarski"
+msgstr "Ajmarski"
 
 msgid "az"
-msgstr "azerski"
+msgstr "Azerski"
 
 msgid "ba"
-msgstr "baszkirski"
+msgstr "Baszkirski"
 
 msgid "be"
-msgstr "białoruski"
+msgstr "Białoruski"
 
 msgid "bg"
-msgstr "bułgarski"
+msgstr "Bułgarski"
 
 msgid "bh"
-msgstr "bihari"
+msgstr "Bihari"
 
 msgid "bi"
-msgstr "bislama"
+msgstr "Bislama"
 
 msgid "bm"
-msgstr "bambara"
+msgstr "Bambara"
 
 msgid "bn"
-msgstr "bengalski"
+msgstr "Bengalski"
 
 msgid "bo"
-msgstr "tybetański"
+msgstr "Tybetański"
 
 msgid "br"
-msgstr "bretoński"
+msgstr "Bretoński"
 
 msgid "bs"
-msgstr "bośniacki"
+msgstr "Bośniacki"
 
 msgid "ca"
-msgstr "kataloński"
+msgstr "Kataloński"
 
 msgid "ce"
-msgstr "czeczeński"
+msgstr "Czeczeński"
 
 msgid "ch"
-msgstr "czamorro"
+msgstr "Czamorro"
 
 msgid "co"
-msgstr "korsykański"
+msgstr "Korsykański"
 
 msgid "cr"
-msgstr "kri"
+msgstr "Kri"
 
 msgid "cs"
-msgstr "czeski"
+msgstr "Czeski"
 
 msgid "cu"
-msgstr "cerkiewnosłowiański"
+msgstr "Cerkiewnosłowiański"
 
 msgid "cv"
-msgstr "czuwaski"
+msgstr "Czuwaski"
 
 msgid "cy"
-msgstr "walijski"
+msgstr "Walijski"
 
 msgid "da"
-msgstr "duński"
+msgstr "Duński"
 
 msgid "de"
-msgstr "niemiecki"
+msgstr "Niemiecki"
 
 msgid "dv"
-msgstr "malediwski"
+msgstr "Malediwski"
 
 msgid "dz"
-msgstr "dzongkha"
+msgstr "Dzongkha"
 
 msgid "ee"
-msgstr "ewe"
+msgstr "Ewe"
 
 msgid "el"
-msgstr "grecki"
+msgstr "Grecki"
 
 msgid "en"
-msgstr "angielski"
+msgstr "Angielski"
 
 msgid "eo"
-msgstr "esperanto"
+msgstr "Esperanto"
 
 msgid "es"
-msgstr "hiszpański"
+msgstr "Hiszpański"
 
 msgid "et"
-msgstr "estoński"
+msgstr "Estoński"
 
 msgid "eu"
-msgstr "baskijski"
+msgstr "Baskijski"
 
 msgid "fa"
-msgstr "perski"
+msgstr "Perski"
 
 msgid "ff"
-msgstr "fula"
+msgstr "Fula"
 
 msgid "fi"
-msgstr "fiński"
+msgstr "Fiński"
 
 msgid "fj"
-msgstr "fidżyjski"
+msgstr "Fidżyjski"
 
 msgid "fo"
-msgstr "farerski"
+msgstr "Farerski"
 
 msgid "fr"
-msgstr "francuski"
+msgstr "Francuski"
 
 msgid "fy"
-msgstr "fryzyjski"
+msgstr "Fryzyjski"
 
 msgid "ga"
-msgstr "irlandzki"
+msgstr "Irlandzki"
 
 msgid "gd"
-msgstr "szkocki galijski"
+msgstr "Szkocki galijski"
 
 msgid "gl"
-msgstr "galicyjski"
+msgstr "Galicyjski"
 
 msgid "gn"
-msgstr "guarani"
+msgstr "Guarani"
 
 msgid "gu"
-msgstr "gudźarati"
+msgstr "Gudźarati"
 
 msgid "gv"
-msgstr "manx"
+msgstr "Manx"
 
 msgid "ha"
-msgstr "hausa"
+msgstr "Hausa"
 
 msgid "he"
-msgstr "hebrajski"
+msgstr "Hebrajski"
 
 msgid "hi"
-msgstr "hindi"
+msgstr "Hindi"
 
 msgid "ho"
-msgstr "hiri motu"
+msgstr "Hiri motu"
 
 msgid "hr"
-msgstr "chorwacki"
+msgstr "Chorwacki"
 
 msgid "ht"
-msgstr "haitański"
+msgstr "Haitański"
 
 msgid "hu"
-msgstr "węgierski"
+msgstr "Węgierski"
 
 msgid "hy"
-msgstr "armeński"
+msgstr "Armeński"
 
 msgid "hz"
-msgstr "herero"
+msgstr "Herero"
 
 msgid "ia"
-msgstr "interlingua"
+msgstr "Interlingua"
 
 msgid "id"
-msgstr "indonezyjski"
+msgstr "Indonezyjski"
 
 msgid "ie"
 msgstr "Interlingue"
 
 msgid "ig"
-msgstr "igbo"
+msgstr "Igbo"
 
 msgid "ii"
-msgstr "yi"
+msgstr "Yi"
 
 msgid "ik"
-msgstr "inupiak"
+msgstr "Inupiak"
 
 msgid "io"
-msgstr "ido"
+msgstr "Ido"
 
 msgid "is"
-msgstr "islandzki"
+msgstr "Islandzki"
 
 msgid "it"
-msgstr "włoski"
+msgstr "Włoski"
 
 msgid "iu"
-msgstr "inuktitut"
+msgstr "Inuktitut"
 
 msgid "ja"
-msgstr "japoński"
+msgstr "Japoński"
 
 msgid "jv"
-msgstr "jawajski"
+msgstr "Jawajski"
 
 msgid "ka"
-msgstr "gruziński"
+msgstr "Gruziński"
 
 msgid "kg"
-msgstr "kongo"
+msgstr "Kongo"
 
 msgid "ki"
-msgstr "kikuju"
+msgstr "Kikuju"
 
 msgid "kj"
-msgstr "kwanyama"
+msgstr "Kwanyama"
 
 msgid "kk"
-msgstr "kazachski"
+msgstr "Kazachski"
 
 msgid "kl"
-msgstr "grenlandzki"
+msgstr "Grenlandzki"
 
 msgid "km"
-msgstr "khmerski"
+msgstr "Khmerski"
 
 msgid "kn"
-msgstr "kannada"
+msgstr "Kannada"
 
 msgid "ko"
-msgstr "koreański"
+msgstr "Koreański"
 
 msgid "kr"
-msgstr "kanuri"
+msgstr "Kanuri"
 
 msgid "ks"
-msgstr "kaszmirski"
+msgstr "Kaszmirski"
 
 msgid "ku"
-msgstr "kurdyjski"
+msgstr "Kurdyjski"
 
 msgid "kv"
-msgstr "komi"
+msgstr "Komi"
 
 msgid "kw"
-msgstr "kornijski"
+msgstr "Kornijski"
 
 msgid "ky"
-msgstr "kirgiski"
+msgstr "Kirgiski"
 
 msgid "la"
 msgstr "łaciński"
 
 msgid "lb"
-msgstr "luksemburski"
+msgstr "Luksemburski"
 
 msgid "lg"
-msgstr "luganda"
+msgstr "Luganda"
 
 msgid "li"
-msgstr "limburski"
+msgstr "Limburski"
 
 msgid "ln"
-msgstr "lingala"
+msgstr "Lingala"
 
 msgid "lo"
-msgstr "laotański"
+msgstr "Laotański"
 
 msgid "lt"
-msgstr "litewski"
+msgstr "Litewski"
 
 msgid "lu"
-msgstr "luba-katanga"
+msgstr "Luba-katanga"
 
 msgid "lv"
 msgstr "łotewski"
 
 msgid "mg"
-msgstr "malgaski"
+msgstr "Malgaski"
 
 msgid "mh"
-msgstr "marszalski"
+msgstr "Marszalski"
 
 msgid "mi"
-msgstr "maori"
+msgstr "Maori"
 
 msgid "mk"
-msgstr "macedoński"
+msgstr "Macedoński"
 
 msgid "ml"
-msgstr "malajalam"
+msgstr "Malajalam"
 
 msgid "mn"
-msgstr "mongolski"
+msgstr "Mongolski"
 
 msgid "mo"
-msgstr "mołdawski"
+msgstr "Mołdawski"
 
 msgid "mr"
-msgstr "marathi"
+msgstr "Marathi"
 
 msgid "ms"
-msgstr "malajski"
+msgstr "Malajski"
 
 msgid "mt"
-msgstr "maltański"
+msgstr "Maltański"
 
 msgid "my"
-msgstr "birmański"
+msgstr "Birmański"
 
 msgid "na"
-msgstr "nauruański"
+msgstr "Nauruański"
 
 msgid "nb"
-msgstr "norweski bokmål"
+msgstr "Norweski bokmål"
 
 msgid "nd"
-msgstr "ndebele północny"
+msgstr "Ndebele północny"
 
 msgid "ne"
-msgstr "nepalski"
+msgstr "Nepalski"
 
 msgid "ng"
-msgstr "ndonga"
+msgstr "Ndonga"
 
 msgid "nl"
-msgstr "niderlandzki"
+msgstr "Niderlandzki"
 
 msgid "nn"
-msgstr "norweski nynorsk"
+msgstr "Norweski nynorsk"
 
 msgid "no"
-msgstr "norweski"
+msgstr "Norweski"
 
 msgid "nr"
-msgstr "ndebele południowy"
+msgstr "Ndebele południowy"
 
 msgid "nv"
-msgstr "nawaho"
+msgstr "Nawaho"
 
 msgid "ny"
-msgstr "cziczewa"
+msgstr "Cziczewa"
 
 msgid "oc"
-msgstr "oksytański"
+msgstr "Oksytański"
 
 msgid "oj"
-msgstr "odżibwe"
+msgstr "Odżibwe"
 
 msgid "om"
-msgstr "oromo"
+msgstr "Oromo"
 
 msgid "or"
-msgstr "orija"
+msgstr "Orija"
 
 msgid "os"
-msgstr "osetyjski"
+msgstr "Osetyjski"
 
 msgid "pa"
-msgstr "pendżabski"
+msgstr "Pendżabski"
 
 msgid "pi"
-msgstr "pali"
+msgstr "Pali"
 
 msgid "pl"
-msgstr "polski"
+msgstr "Polski"
 
 msgid "ps"
-msgstr "paszto"
+msgstr "Paszto"
 
 msgid "pt"
-msgstr "portugalski"
+msgstr "Portugalski"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "Pt_BR"
 
 msgid "qu"
-msgstr "keczua"
+msgstr "Keczua"
 
 msgid "rm"
-msgstr "retoromański"
+msgstr "Retoromański"
 
 msgid "rn"
-msgstr "rundi"
+msgstr "Rundi"
 
 msgid "ro"
-msgstr "rumuński"
+msgstr "Rumuński"
 
 msgid "ru"
-msgstr "rosyjski"
+msgstr "Rosyjski"
 
 msgid "rw"
-msgstr "ruanda-rundi"
+msgstr "Ruanda-rundi"
 
 msgid "sa"
-msgstr "sanskryt"
+msgstr "Sanskryt"
 
 msgid "sc"
-msgstr "sardyński"
+msgstr "Sardyński"
 
 msgid "sd"
-msgstr "sindhi"
+msgstr "Sindhi"
 
 msgid "se"
-msgstr "północnolapoński"
+msgstr "Północnolapoński"
 
 msgid "sg"
-msgstr "sangolquí"
+msgstr "Sangolquí"
 
 msgid "si"
-msgstr "syngaleski"
+msgstr "Syngaleski"
 
 msgid "sk"
-msgstr "słowacki"
+msgstr "Słowacki"
 
 msgid "sl"
-msgstr "słoweński"
+msgstr "Słoweński"
 
 msgid "sm"
-msgstr "samoański"
+msgstr "Samoański"
 
 msgid "sn"
-msgstr "shona"
+msgstr "Shona"
 
 msgid "so"
-msgstr "somalijski"
+msgstr "Somalijski"
 
 msgid "sq"
-msgstr "albański"
+msgstr "Albański"
 
 msgid "sr"
-msgstr "serbski"
+msgstr "Serbski"
 
 msgid "ss"
-msgstr "suazi"
+msgstr "Suazi"
 
 msgid "st"
-msgstr "sotho"
+msgstr "Sotho"
 
 msgid "su"
-msgstr "sundajski"
+msgstr "Sundajski"
 
 msgid "sv"
-msgstr "szwedzki"
+msgstr "Szwedzki"
 
 msgid "sw"
-msgstr "suahili"
+msgstr "Suahili"
 
 msgid "ta"
-msgstr "tamilski"
+msgstr "Tamilski"
 
 msgid "te"
-msgstr "telugu"
+msgstr "Telugu"
 
 msgid "tg"
-msgstr "tadżycki"
+msgstr "Tadżycki"
 
 msgid "th"
-msgstr "tajski"
+msgstr "Tajski"
 
 msgid "ti"
-msgstr "tigrinia"
+msgstr "Tigrinia"
 
 msgid "tk"
-msgstr "turkmeński‎"
+msgstr "Turkmeński‎"
 
 msgid "tl"
-msgstr "tagalski"
+msgstr "Tagalski"
 
 msgid "tn"
-msgstr "tswana"
+msgstr "Tswana"
 
 msgid "to"
-msgstr "tagalski"
+msgstr "Tagalski"
 
 msgid "tr"
-msgstr "turecki"
+msgstr "Turecki"
 
 msgid "ts"
-msgstr "tsonga"
+msgstr "Tsonga"
 
 msgid "tt"
-msgstr "tatarski"
+msgstr "Tatarski"
 
 msgid "tw"
-msgstr "twi"
+msgstr "Twi"
 
 msgid "ty"
-msgstr "tahitański"
+msgstr "Tahitański"
 
 msgid "ug"
-msgstr "ujgurski"
+msgstr "Ujgurski"
 
 msgid "uk"
-msgstr "ukraiński"
+msgstr "Ukraiński"
 
 msgid "ur"
-msgstr "urdu"
+msgstr "Urdu"
 
 msgid "uz"
-msgstr "uzbecki"
+msgstr "Uzbecki"
 
 msgid "ve"
-msgstr "venda"
+msgstr "Venda"
 
 msgid "vi"
-msgstr "wietnamski"
+msgstr "Wietnamski"
 
 msgid "vo"
-msgstr "wolapik"
+msgstr "Wolapik"
 
 msgid "wa"
-msgstr "waloński"
+msgstr "Waloński"
 
 msgid "wo"
-msgstr "wolof"
+msgstr "Wolof"
 
 msgid "xh"
-msgstr "xhosa"
+msgstr "Xhosa"
 
 msgid "yi"
 msgstr "Jidysz"
 
 msgid "yo"
-msgstr "joruba‎"
+msgstr "Joruba"
 
 msgid "za"
-msgstr "chiński"
+msgstr "Zhuang"
 
 msgid "zh"
-msgstr "chiński standardowy"
+msgstr "Chiński standardowy"
 
 msgid "zu"
-msgstr "zulu"
+msgstr "Zulu"
