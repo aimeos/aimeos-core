@@ -31,11 +31,11 @@ msgstr "Luokka \"%1$s\" ei löydy"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Tiedoston \"%1$s\" lataaminen epäonnistui."
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Tiedostoa \"%1$s\" ei löydy"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"

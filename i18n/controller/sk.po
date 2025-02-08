@@ -32,11 +32,11 @@ msgstr "Trieda \"%1$s\" nenájdená"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Preberanie súboru \"%1$s\" zlyhalo"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Súbor \"%1$s\" nebol nájdený"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"

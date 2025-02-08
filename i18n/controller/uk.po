@@ -31,11 +31,11 @@ msgstr "Клас \"%1$s\" не знайдено"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Не вдалося завантажити файл \"%1$s\""
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Файл \"%1$s\" не знайдено"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"

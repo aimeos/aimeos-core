@@ -19,23 +19,23 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Klass \"%1$s\" ei rakenda liidest \"%2$s\"."
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Klass \"%1$s\" ei ole saadaval"
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Klassi \"%1$s\" ei leitud"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Faili \"%1$s\" allalaadimine ebaõnnestus"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Faili \"%1$s\" ei leitud"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"
@@ -43,7 +43,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Lubamatud tähemärgid klassi nimes \"%1$s\""
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""

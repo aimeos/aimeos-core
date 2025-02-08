@@ -419,7 +419,7 @@ msgid "pt"
 msgstr "Португалски"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "pt_BR"
 
 msgid "qu"
 msgstr "Кечуа"

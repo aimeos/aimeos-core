@@ -32,7 +32,7 @@ msgstr "Třída \"%1$s\" nenalezena"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Stažení souboru \"%1$s\" se nezdařilo"
 
 #, php-format
 msgid "File \"%1$s\" not found"

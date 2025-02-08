@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-04 16:07+0200\n"
+"PO-Revision-Date: 2015-09-29 12:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Η κλάση \"%1$s\" δεν υλοποιεί τη διασύνδεση \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Η κλάση \"%1$s\" δεν είναι διαθέσιμη"
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Η κλάση \"%1$s\" δεν βρέθηκε"
+
+#, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr "Η λήψη του αρχείου \"%1$s\" απέτυχε"
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr "Το αρχείο \"%1$s\" δεν βρέθηκε"
+
+#, php-format
+msgid "File type \"%1$s\" is not allowed"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Μη έγκυροι χαρακτήρες στο όνομα της κλάσης \"%1$s\""
+
+#, php-format
+msgid "No allowed image types configured for \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#, php-format
+msgid "Unable to create directory \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Unable to create file in \"%1$s\""
+msgstr ""

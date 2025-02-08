@@ -754,7 +754,7 @@ msgid "WS"
 msgstr "Самоа"
 
 msgid "XK"
-msgstr ""
+msgstr "XK"
 
 msgid "YE"
 msgstr "Ємен"

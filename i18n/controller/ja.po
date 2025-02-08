@@ -31,11 +31,11 @@ msgstr "クラス \"1 %1$s\"が見つかりません"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "ファイル \"%1$s\" のダウンロードに失敗しました。"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "ファイル \"%1$s\" が見つかりません。"
 
 #, php-format
 msgid "File type \"%1$s\" is not allowed"

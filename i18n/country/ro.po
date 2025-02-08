@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # George Cojocaru, 2024
+# George Cojocaru, 2024
 # iulian iulian <iulian.abc@gmail.com>, 2020
 msgid ""
 msgstr ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:34+0000\n"
-"Last-Translator: George Cojocaru, 2024\n"
+"Last-Translator: iulian iulian <iulian.abc@gmail.com>, 2020\n"
 "Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,13 +106,13 @@ msgid "BM"
 msgstr "Bermude"
 
 msgid "BN"
-msgstr ""
+msgstr "BN"
 
 msgid "BO"
 msgstr "Statul Plurinational al Boliviei"
 
 msgid "BQ"
-msgstr ""
+msgstr "BQ"
 
 msgid "BR"
 msgstr "Brazilia"
@@ -123,7 +124,7 @@ msgid "BT"
 msgstr "Bhutan"
 
 msgid "BV"
-msgstr ""
+msgstr "BV"
 
 msgid "BW"
 msgstr "Botswana"
@@ -138,7 +139,7 @@ msgid "CA"
 msgstr "Canada"
 
 msgid "CC"
-msgstr ""
+msgstr "CC"
 
 msgid "CD"
 msgstr "Republica Democrata Congo"
@@ -264,7 +265,7 @@ msgid "GF"
 msgstr "Guinea Franceza"
 
 msgid "GG"
-msgstr ""
+msgstr "GG"
 
 msgid "GH"
 msgstr "Ghana"
@@ -333,13 +334,13 @@ msgid "IL"
 msgstr "Israel"
 
 msgid "IM"
-msgstr ""
+msgstr "IM"
 
 msgid "IN"
 msgstr "India"
 
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgid "IQ"
 msgstr "Irag"
@@ -354,7 +355,7 @@ msgid "IT"
 msgstr "Italia"
 
 msgid "JE"
-msgstr ""
+msgstr "JE"
 
 msgid "JM"
 msgstr "Jamaica"
@@ -369,25 +370,25 @@ msgid "KE"
 msgstr "Kenya"
 
 msgid "KG"
-msgstr ""
+msgstr "KG"
 
 msgid "KH"
-msgstr ""
+msgstr "KH"
 
 msgid "KI"
-msgstr ""
+msgstr "KI"
 
 msgid "KM"
-msgstr ""
+msgstr "KM"
 
 msgid "KN"
-msgstr ""
+msgstr "KN"
 
 msgid "KP"
-msgstr ""
+msgstr "KP"
 
 msgid "KR"
-msgstr ""
+msgstr "KR"
 
 msgid "KW"
 msgstr "Kuweit"
@@ -396,10 +397,10 @@ msgid "KY"
 msgstr "Insulele Cayman"
 
 msgid "KZ"
-msgstr ""
+msgstr "KZ"
 
 msgid "LA"
-msgstr ""
+msgstr "LA"
 
 msgid "LB"
 msgstr "Liban"
@@ -414,10 +415,10 @@ msgid "LK"
 msgstr "Sri Lanka"
 
 msgid "LR"
-msgstr ""
+msgstr "LR"
 
 msgid "LS"
-msgstr ""
+msgstr "LS"
 
 msgid "LT"
 msgstr "Lituania"
@@ -444,13 +445,13 @@ msgid "ME"
 msgstr "Muntenegru"
 
 msgid "MF"
-msgstr ""
+msgstr "MF"
 
 msgid "MG"
 msgstr "Madagascar"
 
 msgid "MH"
-msgstr ""
+msgstr "MH"
 
 msgid "MK"
 msgstr "Macedonia"
@@ -468,16 +469,16 @@ msgid "MO"
 msgstr "Macao"
 
 msgid "MP"
-msgstr ""
+msgstr "MP"
 
 msgid "MQ"
 msgstr "Martinica"
 
 msgid "MR"
-msgstr ""
+msgstr "MR"
 
 msgid "MS"
-msgstr ""
+msgstr "SM"
 
 msgid "MT"
 msgstr "Malta"
@@ -489,7 +490,7 @@ msgid "MV"
 msgstr "Maldive"
 
 msgid "MW"
-msgstr ""
+msgstr "MW"
 
 msgid "MX"
 msgstr "Mexic"
@@ -510,7 +511,7 @@ msgid "NE"
 msgstr "Niger"
 
 msgid "NF"
-msgstr ""
+msgstr "NF"
 
 msgid "NG"
 msgstr "Nigeria"
@@ -528,10 +529,10 @@ msgid "NP"
 msgstr "Nepal"
 
 msgid "NR"
-msgstr ""
+msgstr "NR"
 
 msgid "NU"
-msgstr ""
+msgstr "NU"
 
 msgid "NZ"
 msgstr "Noua Zeelanda"
@@ -561,31 +562,31 @@ msgid "PL"
 msgstr "Polonia"
 
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 msgid "PN"
-msgstr ""
+msgstr "PN"
 
 msgid "PR"
 msgstr "Puerto Rico"
 
 msgid "PS"
-msgstr ""
+msgstr "PS"
 
 msgid "PT"
 msgstr "Portugalia"
 
 msgid "PW"
-msgstr ""
+msgstr "PW"
 
 msgid "PY"
-msgstr ""
+msgstr "PY"
 
 msgid "QA"
 msgstr "Qatar"
 
 msgid "RE"
-msgstr ""
+msgstr "RE"
 
 msgid "RO"
 msgstr "Romania"
@@ -597,16 +598,16 @@ msgid "RU"
 msgstr "Federatia Rusa"
 
 msgid "RW"
-msgstr ""
+msgstr "RW"
 
 msgid "SA"
 msgstr "Arabia Saudita"
 
 msgid "SB"
-msgstr ""
+msgstr "SB"
 
 msgid "SC"
-msgstr ""
+msgstr "SC"
 
 msgid "SD"
 msgstr "Sudan"
@@ -618,19 +619,19 @@ msgid "SG"
 msgstr "Singapore"
 
 msgid "SH"
-msgstr ""
+msgstr "SH"
 
 msgid "SI"
 msgstr "Slovenia"
 
 msgid "SJ"
-msgstr ""
+msgstr "SJ"
 
 msgid "SK"
 msgstr "Slovacia"
 
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 msgid "SM"
 msgstr "San Marino"
@@ -642,34 +643,34 @@ msgid "SO"
 msgstr "Somalia"
 
 msgid "SR"
-msgstr ""
+msgstr "SR"
 
 msgid "SS"
 msgstr "Sudanul de Sud"
 
 msgid "ST"
-msgstr ""
+msgstr "ST"
 
 msgid "SV"
 msgstr "Salvador"
 
 msgid "SX"
-msgstr ""
+msgstr "SX"
 
 msgid "SY"
-msgstr ""
+msgstr "SY"
 
 msgid "SZ"
-msgstr ""
+msgstr "SZ"
 
 msgid "TC"
-msgstr ""
+msgstr "TC"
 
 msgid "TD"
-msgstr ""
+msgstr "TD"
 
 msgid "TF"
-msgstr ""
+msgstr "TF"
 
 msgid "TG"
 msgstr "Togo"
@@ -678,22 +679,22 @@ msgid "TH"
 msgstr "Thailanda"
 
 msgid "TJ"
-msgstr ""
+msgstr "TJ"
 
 msgid "TK"
-msgstr ""
+msgstr "TK"
 
 msgid "TL"
 msgstr "Timorul de Est"
 
 msgid "TM"
-msgstr ""
+msgstr "TM"
 
 msgid "TN"
 msgstr "Tunisia"
 
 msgid "TO"
-msgstr ""
+msgstr "TO"
 
 msgid "TR"
 msgstr "Turcia"
@@ -702,13 +703,13 @@ msgid "TT"
 msgstr "Trinidad si Tobago"
 
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 msgid "TW"
-msgstr ""
+msgstr "TW"
 
 msgid "TZ"
-msgstr ""
+msgstr "TZ"
 
 msgid "UA"
 msgstr "Ucraina"
@@ -717,43 +718,43 @@ msgid "UG"
 msgstr "Uganda"
 
 msgid "UM"
-msgstr ""
+msgstr "UM"
 
 msgid "US"
 msgstr "Statele Unite"
 
 msgid "UY"
-msgstr ""
+msgstr "UY"
 
 msgid "UZ"
-msgstr ""
+msgstr "UZ"
 
 msgid "VA"
-msgstr ""
+msgstr "VA"
 
 msgid "VC"
-msgstr ""
+msgstr "VC"
 
 msgid "VE"
-msgstr ""
+msgstr "VE"
 
 msgid "VG"
-msgstr ""
+msgstr "VG"
 
 msgid "VI"
-msgstr ""
+msgstr "VI"
 
 msgid "VN"
-msgstr ""
+msgstr "VN"
 
 msgid "VU"
 msgstr "Vanuatu"
 
 msgid "WF"
-msgstr ""
+msgstr "WF"
 
 msgid "WS"
-msgstr ""
+msgstr "WS"
 
 msgid "XK"
 msgstr "Kosovo"
@@ -762,7 +763,7 @@ msgid "YE"
 msgstr "Yemen"
 
 msgid "YT"
-msgstr ""
+msgstr "YT"
 
 msgid "ZA"
 msgstr "Africa de Sud"
