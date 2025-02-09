@@ -181,7 +181,7 @@
 
 	<target name="i18n" description="Creates all translation files">
 		<exec executable="find" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="src/MAdmin src/MShop -type f | xgettext -j -s --no-location --no-wrap --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/mshop/core-mshop.pot -f -" />
+			<arg line="src/MAdmin src/MShop -type f | xgettext -j -s --no-location --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/mshop/source.pot -f -" />
 		</exec>
 		<foreach list="i18n/country,i18n/currency,i18n/language,i18n/mshop" param="i18n-dir" target="i18n-files" />
 		<phing target="i18n" haltonfailure="true">
@@ -202,12 +202,12 @@
 
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
-		<echo msg="File: ${po-filename} ${i18n-dir}/*.pot" />
+		<echo msg="File: ${po-filename} ${i18n-dir}/source.pot" />
 		<exec executable="msgmerge" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="--no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" />
+			<arg line="-s -N -U --backup=none ${po-filename} ${i18n-dir}/source.pot" />
 		</exec>
 		<exec executable="msgattrib" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="-s --no-wrap --no-fuzzy -o ${po-filename} ${po-filename}" />
+			<arg line="-s --no-fuzzy -o ${po-filename} ${po-filename}" />
 		</exec>
 		<exec executable="${bindir}potrans" logoutput="true" passthru="true">
 			<arg line="deepl --only ${po-filename}" />

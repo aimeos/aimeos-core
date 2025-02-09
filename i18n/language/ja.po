@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ja\n"
+"Language-Team: Japanese (http://app.transifex.com/aimeos/aimeos-core/language/ja/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "アファール"
+
+msgid "ab"
+msgstr "アブハジア語"
+
+msgid "ae"
+msgstr "アベスタン"
+
+msgid "af"
+msgstr "アフリカーンス"
+
+msgid "ak"
+msgstr "阿寒"
+
+msgid "am"
+msgstr "アムハラ語"
+
+msgid "an"
+msgstr "アラゴネーゼ"
+
+msgid "ar"
+msgstr "アラビア語"
+
+msgid "as"
+msgstr "アッサム語"
+
+msgid "av"
+msgstr "アバー"
+
+msgid "ay"
+msgstr "アイマラ語"
+
+msgid "az"
+msgstr "アゼルバイジャン"
+
+msgid "ba"
+msgstr "バシキール"
+
+msgid "be"
+msgstr "ベラルーシ語"
+
+msgid "bg"
+msgstr "ブルガリア語"
+
+msgid "bh"
+msgstr "ビハール"
+
+msgid "bi"
+msgstr "ビスラマ"
+
+msgid "bm"
+msgstr "バンバラ"
+
+msgid "bn"
+msgstr "ベンガル語"
+
+msgid "bo"
+msgstr "チベット語"
+
+msgid "br"
+msgstr "ブルトン"
+
+msgid "bs"
+msgstr "ボスニア語"
+
+msgid "ca"
+msgstr "カタロニア語"
+
+msgid "ce"
+msgstr "チェチェン"
+
+msgid "ch"
+msgstr "チャモロ"
+
+msgid "co"
+msgstr "コルシカ人"
+
+msgid "cr"
+msgstr "クリー"
+
+msgid "cs"
+msgstr "チェコ"
+
+msgid "cu"
+msgstr "教会スラブ語"
+
+msgid "cv"
+msgstr "チュバシュ"
+
+msgid "cy"
+msgstr "ウェールズ"
+
+msgid "da"
+msgstr "デンマーク語"
+
+msgid "de"
+msgstr "ドイツ語"
+
+msgid "dv"
+msgstr "ディベヒ語"
+
+msgid "dz"
+msgstr "ゾンカ"
+
+msgid "ee"
+msgstr "エウ"
+
+msgid "el"
+msgstr "ギリシャ語"
+
+msgid "en"
+msgstr "英語"
+
+msgid "eo"
+msgstr "エスペラント"
+
+msgid "es"
+msgstr "スペイン語"
+
+msgid "et"
+msgstr "エストニア語"
+
+msgid "eu"
+msgstr "バスク"
+
+msgid "fa"
+msgstr "ペルシャ語"
+
+msgid "ff"
+msgstr "フラ"
+
+msgid "fi"
+msgstr "フィンランド語"
+
+msgid "fj"
+msgstr "フィジー"
+
+msgid "fo"
+msgstr "フェロー語"
+
+msgid "fr"
+msgstr "フランス語"
+
+msgid "fy"
+msgstr "フリジア語"
+
+msgid "ga"
+msgstr "アイリッシュ"
+
+msgid "gd"
+msgstr "スコットランド・ゲール語"
+
+msgid "gl"
+msgstr "ガリシア語"
+
+msgid "gn"
+msgstr "グアラニー"
+
+msgid "gu"
+msgstr "グジャラート"
+
+msgid "gv"
+msgstr "マンクス"
+
+msgid "ha"
+msgstr "ハウサ"
+
+msgid "he"
+msgstr "ヘブライ語"
+
+msgid "hi"
+msgstr "ヒンディー語"
+
+msgid "ho"
+msgstr "ヒリ・モツ"
+
+msgid "hr"
+msgstr "クロアチア語"
+
+msgid "ht"
+msgstr "ハイチ・クレオール"
+
+msgid "hu"
+msgstr "ハンガリー語"
+
+msgid "hy"
+msgstr "アルメニア語"
+
+msgid "hz"
+msgstr "ヘレロ"
+
+msgid "ia"
+msgstr "インテルリングア"
+
+msgid "id"
+msgstr "インドネシア語"
+
+msgid "ie"
+msgstr "インターリンク"
+
+msgid "ig"
+msgstr "イボ"
+
+msgid "ii"
+msgstr "イ"
+
+msgid "ik"
+msgstr "イヌピアック"
+
+msgid "io"
+msgstr "イド"
+
+msgid "is"
+msgstr "アイスランド語"
+
+msgid "it"
+msgstr "イタリア語"
+
+msgid "iu"
+msgstr "イヌクティット語"
+
+msgid "ja"
+msgstr "日本語"
+
+msgid "jv"
+msgstr "ジャワ語"
+
+msgid "ka"
+msgstr "ジョージアン"
+
+msgid "kg"
+msgstr "金剛"
+
+msgid "ki"
+msgstr "キクユ"
+
+msgid "kj"
+msgstr "桑山"
+
+msgid "kk"
+msgstr "カザフ"
+
+msgid "kl"
+msgstr "グリーンランド語"
+
+msgid "km"
+msgstr "クメール語"
+
+msgid "kn"
+msgstr "カンナダ語"
+
+msgid "ko"
+msgstr "韓国語"
+
+msgid "kr"
+msgstr "カヌリ"
+
+msgid "ks"
+msgstr "カシミール"
+
+msgid "ku"
+msgstr "クルド"
+
+msgid "kv"
+msgstr "コミ"
+
+msgid "kw"
+msgstr "コーニッシュ"
+
+msgid "ky"
+msgstr "キルギス"
+
+msgid "la"
+msgstr "ラテン語"
+
+msgid "lb"
+msgstr "ルクセンブルク語"
+
+msgid "lg"
+msgstr "ルガンダ語"
+
+msgid "li"
+msgstr "リンブルフ語"
+
+msgid "ln"
+msgstr "リンガラ語"
+
+msgid "lo"
+msgstr "ラオス"
+
+msgid "lt"
+msgstr "リトアニア語"
+
+msgid "lu"
+msgstr "ルバ・カタンガ"
+
+msgid "lv"
+msgstr "ラトビア語"
+
+msgid "mg"
+msgstr "マダガスカル"
+
+msgid "mh"
+msgstr "マーシャル語"
+
+msgid "mi"
+msgstr "マオリ"
+
+msgid "mk"
+msgstr "マケドニア語"
+
+msgid "ml"
+msgstr "マラヤーラム語"
+
+msgid "mn"
+msgstr "モンゴル語"
+
+msgid "mo"
+msgstr "モルダビア語"
+
+msgid "mr"
+msgstr "マラーティー語"
+
+msgid "ms"
+msgstr "マレー語"
+
+msgid "mt"
+msgstr "マルタ語"
+
+msgid "my"
+msgstr "ビルマ語"
+
+msgid "na"
+msgstr "ナウル"
+
+msgid "nb"
+msgstr "ノルウェー語ブークモール"
+
+msgid "nd"
+msgstr "北ンデベレ"
+
+msgid "ne"
+msgstr "ネパール語"
+
+msgid "ng"
+msgstr "ンドンガ"
+
+msgid "nl"
+msgstr "オランダ語"
+
+msgid "nn"
+msgstr "ノルウェー語"
+
+msgid "no"
+msgstr "ノルウェー語"
+
+msgid "nr"
+msgstr "南ンデベレ"
+
+msgid "nv"
+msgstr "ナバホ"
+
+msgid "ny"
+msgstr "チチェワ語"
+
+msgid "oc"
+msgstr "オック語"
+
+msgid "oj"
+msgstr "オジブワ"
+
+msgid "om"
+msgstr "オロモ"
+
+msgid "or"
+msgstr "オリヤ"
+
+msgid "os"
+msgstr "オセティック"
+
+msgid "pa"
+msgstr "パンジャブ語"
+
+msgid "pi"
+msgstr "パリ"
+
+msgid "pl"
+msgstr "ポーランド語"
+
+msgid "ps"
+msgstr "パシュトゥー語"
+
+msgid "pt"
+msgstr "ポルトガル語"
+
+msgid "pt_BR"
+msgstr "ポルトガル語（ブラジル）"
+
+msgid "qu"
+msgstr "ケチュア"
+
+msgid "rm"
+msgstr "レトロマンス"
+
+msgid "rn"
+msgstr "キルンディ"
+
+msgid "ro"
+msgstr "ルーマニア語"
+
+msgid "ru"
+msgstr "ロシア語"
+
+msgid "rw"
+msgstr "キニャルワンダ語"
+
+msgid "sa"
+msgstr "サンスクリット"
+
+msgid "sc"
+msgstr "サルデーニャ人"
+
+msgid "sd"
+msgstr "シンディー語"
+
+msgid "se"
+msgstr "北サーミ"
+
+msgid "sg"
+msgstr "サンゴ"
+
+msgid "si"
+msgstr "シンハラ語"
+
+msgid "sk"
+msgstr "スロバキア語"
+
+msgid "sl"
+msgstr "スロベニア語"
+
+msgid "sm"
+msgstr "サモア人"
+
+msgid "sn"
+msgstr "ショナ"
+
+msgid "so"
+msgstr "ソマリア"
+
+msgid "sq"
+msgstr "アルバニア語"
+
+msgid "sr"
+msgstr "セルビア語"
+
+msgid "ss"
+msgstr "スワティ"
+
+msgid "st"
+msgstr "セソト"
+
+msgid "su"
+msgstr "スンダ"
+
+msgid "sv"
+msgstr "スウェーデン"
+
+msgid "sw"
+msgstr "スワヒリ語"
+
+msgid "ta"
+msgstr "タミル語"
+
+msgid "te"
+msgstr "テルグ語"
+
+msgid "tg"
+msgstr "タジク"
+
+msgid "th"
+msgstr "タイ"
+
+msgid "ti"
+msgstr "ティグリニャ語"
+
+msgid "tk"
+msgstr "トルクメン人"
+
+msgid "tl"
+msgstr "タガログ語"
+
+msgid "tn"
+msgstr "セツワナ語"
+
+msgid "to"
+msgstr "トンガ語"
+
+msgid "tr"
+msgstr "トルコ語"
+
+msgid "ts"
+msgstr "ツォンガ"
+
+msgid "tt"
+msgstr "タタール"
+
+msgid "tw"
+msgstr "トゥイ"
+
+msgid "ty"
+msgstr "タヒチ"
+
+msgid "ug"
+msgstr "ウイグル"
+
+msgid "uk"
+msgstr "ウクライナ語"
+
+msgid "ur"
+msgstr "ウルドゥー語"
+
+msgid "uz"
+msgstr "ウズベク語"
+
+msgid "ve"
+msgstr "ベンダ"
+
+msgid "vi"
+msgstr "ベトナム語"
+
+msgid "vo"
+msgstr "ヴォラピュック"
+
+msgid "wa"
+msgstr "ワロン"
+
+msgid "wo"
+msgstr "ウォロフ"
+
+msgid "xh"
+msgstr "ホサ"
+
+msgid "yi"
+msgstr "イディッシュ語"
+
+msgid "yo"
+msgstr "ヨルバ"
+
+msgid "za"
+msgstr "荘"
+
+msgid "zh"
+msgstr "中国語"
+
+msgid "zu"
+msgstr "ズールー"

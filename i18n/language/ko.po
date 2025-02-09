@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ko\n"
+"Language-Team: Korean (http://app.transifex.com/aimeos/aimeos-core/language/ko/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "멀리"
+
+msgid "ab"
+msgstr "아브카즈어"
+
+msgid "ae"
+msgstr "Avestan"
+
+msgid "af"
+msgstr "아프리칸스어"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "암하라어"
+
+msgid "an"
+msgstr "아라곤어"
+
+msgid "ar"
+msgstr "아랍어"
+
+msgid "as"
+msgstr "아삼어"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "아이마라"
+
+msgid "az"
+msgstr "아제르바이잔"
+
+msgid "ba"
+msgstr "Bashkir"
+
+msgid "be"
+msgstr "벨로루시어"
+
+msgid "bg"
+msgstr "불가리아어"
+
+msgid "bh"
+msgstr "비하리"
+
+msgid "bi"
+msgstr "비슬라마"
+
+msgid "bm"
+msgstr "밤바라"
+
+msgid "bn"
+msgstr "벵골어"
+
+msgid "bo"
+msgstr "티베트어"
+
+msgid "br"
+msgstr "브르타뉴어"
+
+msgid "bs"
+msgstr "보스니아어"
+
+msgid "ca"
+msgstr "카탈루냐어"
+
+msgid "ce"
+msgstr "체첸"
+
+msgid "ch"
+msgstr "차모로"
+
+msgid "co"
+msgstr "코르시카"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "체코어"
+
+msgid "cu"
+msgstr "교회 슬라브어"
+
+msgid "cv"
+msgstr "Chuvash"
+
+msgid "cy"
+msgstr "웨일스어"
+
+msgid "da"
+msgstr "덴마크어"
+
+msgid "de"
+msgstr "독일어"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "그리스어"
+
+msgid "en"
+msgstr "영어"
+
+msgid "eo"
+msgstr "에스페란토"
+
+msgid "es"
+msgstr "스페인어"
+
+msgid "et"
+msgstr "에스토니아어"
+
+msgid "eu"
+msgstr "바스크어"
+
+msgid "fa"
+msgstr "페르시아어"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "핀란드어"
+
+msgid "fj"
+msgstr "Fijian"
+
+msgid "fo"
+msgstr "Faeroese"
+
+msgid "fr"
+msgstr "프랑스어"
+
+msgid "fy"
+msgstr "프리시안"
+
+msgid "ga"
+msgstr "Irish"
+
+msgid "gd"
+msgstr "스코틀랜드 게일어"
+
+msgid "gl"
+msgstr "갈리시아어"
+
+msgid "gn"
+msgstr "과라니"
+
+msgid "gu"
+msgstr "구자라트어"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "하우사어"
+
+msgid "he"
+msgstr "히브리어"
+
+msgid "hi"
+msgstr "힌디어"
+
+msgid "ho"
+msgstr "히리 모투"
+
+msgid "hr"
+msgstr "크로아티아어"
+
+msgid "ht"
+msgstr "하이티안 크리올"
+
+msgid "hu"
+msgstr "헝가리어"
+
+msgid "hy"
+msgstr "아르메니아어"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "인터링구아"
+
+msgid "id"
+msgstr "인도네시아어"
+
+msgid "ie"
+msgstr "인터랭귀지"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "아이슬란드어"
+
+msgid "it"
+msgstr "이탈리아어"
+
+msgid "iu"
+msgstr "이누크티튜트"
+
+msgid "ja"
+msgstr "일본어"
+
+msgid "jv"
+msgstr "자바"
+
+msgid "ka"
+msgstr "그루지야어"
+
+msgid "kg"
+msgstr "콩고"
+
+msgid "ki"
+msgstr "키쿠유"
+
+msgid "kj"
+msgstr "쿠안야마"
+
+msgid "kk"
+msgstr "카자흐어"
+
+msgid "kl"
+msgstr "그린란드어"
+
+msgid "km"
+msgstr "크메르어"
+
+msgid "kn"
+msgstr "칸나다어"
+
+msgid "ko"
+msgstr "한국어"
+
+msgid "kr"
+msgstr "카누리"
+
+msgid "ks"
+msgstr "카슈미르"
+
+msgid "ku"
+msgstr "쿠르드어"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "키르기즈"
+
+msgid "la"
+msgstr "라틴어"
+
+msgid "lb"
+msgstr "룩셈부르크어"
+
+msgid "lg"
+msgstr "루간다"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "리투아니아어"
+
+msgid "lu"
+msgstr "루바-카탕가"
+
+msgid "lv"
+msgstr "라트비아어"
+
+msgid "mg"
+msgstr "마다가스카르"
+
+msgid "mh"
+msgstr "Marshallese"
+
+msgid "mi"
+msgstr "마오리족"
+
+msgid "mk"
+msgstr "마케도니아어"
+
+msgid "ml"
+msgstr "말라얄람어"
+
+msgid "mn"
+msgstr "몽골어"
+
+msgid "mo"
+msgstr "몰다비아어"
+
+msgid "mr"
+msgstr "마라타어"
+
+msgid "ms"
+msgstr "말레이어"
+
+msgid "mt"
+msgstr "Maltese"
+
+msgid "my"
+msgstr "버마어"
+
+msgid "na"
+msgstr "나우루"
+
+msgid "nb"
+msgstr "노르웨이 복말"
+
+msgid "nd"
+msgstr "노스 은데벨레"
+
+msgid "ne"
+msgstr "네팔어"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "네덜란드어"
+
+msgid "nn"
+msgstr "노르웨이 니노르스크"
+
+msgid "no"
+msgstr "Norwegian"
+
+msgid "nr"
+msgstr "사우스 은데벨레"
+
+msgid "nv"
+msgstr "나바호어"
+
+msgid "ny"
+msgstr "치체와"
+
+msgid "oc"
+msgstr "Occitan"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "오스테틱"
+
+msgid "pa"
+msgstr "펀자브어"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "폴란드어"
+
+msgid "ps"
+msgstr "파슈토어"
+
+msgid "pt"
+msgstr "포르투갈어"
+
+msgid "pt_BR"
+msgstr "포르투갈어(브라질)"
+
+msgid "qu"
+msgstr "케추아어"
+
+msgid "rm"
+msgstr "라예토 로맨스"
+
+msgid "rn"
+msgstr "키룬디"
+
+msgid "ro"
+msgstr "루마니아어"
+
+msgid "ru"
+msgstr "러시아어"
+
+msgid "rw"
+msgstr "키냐르완다"
+
+msgid "sa"
+msgstr "산스크리트어"
+
+msgid "sc"
+msgstr "사르디니아 어"
+
+msgid "sd"
+msgstr "신디"
+
+msgid "se"
+msgstr "북부 사미족"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "신할라"
+
+msgid "sk"
+msgstr "슬로바키아어"
+
+msgid "sl"
+msgstr "슬로베니아어"
+
+msgid "sm"
+msgstr "사모아"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somali"
+
+msgid "sq"
+msgstr "알바니아어"
+
+msgid "sr"
+msgstr "세르비아어"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "세소토"
+
+msgid "su"
+msgstr "순단어"
+
+msgid "sv"
+msgstr "스웨덴어"
+
+msgid "sw"
+msgstr "스와힐리어"
+
+msgid "ta"
+msgstr "타밀어"
+
+msgid "te"
+msgstr "텔루구어"
+
+msgid "tg"
+msgstr "타지크어"
+
+msgid "th"
+msgstr "Thai"
+
+msgid "ti"
+msgstr "티그리니아"
+
+msgid "tk"
+msgstr "투르크멘어"
+
+msgid "tl"
+msgstr "타갈로그어"
+
+msgid "tn"
+msgstr "세츠와나"
+
+msgid "to"
+msgstr "통가"
+
+msgid "tr"
+msgstr "터키어"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "타타르"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "타히티어"
+
+msgid "ug"
+msgstr "위구르어"
+
+msgid "uk"
+msgstr "우크라이나어"
+
+msgid "ur"
+msgstr "우르두어"
+
+msgid "uz"
+msgstr "우즈벡"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "베트남어"
+
+msgid "vo"
+msgstr "볼라퓌크"
+
+msgid "wa"
+msgstr "Walloon"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "이디시어"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "중국어"
+
+msgid "zu"
+msgstr "Zulu"

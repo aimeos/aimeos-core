@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-08 13:34+0100\n"
+"POT-Creation-Date: 2025-02-09 13:36+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Henry LIU <dadaycm@hotmail.com>, 2016\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/"
+"language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -307,11 +308,14 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "类名 \"%1$s\"有无效的字符"
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr ""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr ""
 
 #, php-format
@@ -494,7 +498,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr ""
 
 #, php-format
@@ -610,7 +616,9 @@ msgid "Operation not supported"
 msgstr ""
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr ""
 
 #, php-format
@@ -622,7 +630,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr ""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr ""
 
 #, php-format
@@ -658,11 +668,13 @@ msgid "Password object not available"
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
 msgstr ""
 
 #, php-format
@@ -670,7 +682,8 @@ msgid "PayPal Express: Invalid request \"%1$s\""
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgid ""
+"PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
 msgstr ""
 
 #, php-format
@@ -693,7 +706,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr ""
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr ""
 
 #, php-format
@@ -717,7 +732,9 @@ msgid "Product  not available"
 msgstr ""
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr ""
 
 #, php-format
@@ -817,11 +834,15 @@ msgid "Session object not available"
 msgstr ""
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr ""
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID "
+"of existing parent site or site id of new parent site."
 msgstr ""
 
 #, php-format
@@ -834,6 +855,10 @@ msgstr ""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Status not available"
 msgstr ""
 
 #, php-format
@@ -917,7 +942,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr ""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr ""
 
 #, php-format

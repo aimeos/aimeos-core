@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: nb\n"
+"Language-Team: Norwegian Bokmål (http://app.transifex.com/aimeos/aimeos-core/language/nb/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "abkhasisk"
+
+msgid "ae"
+msgstr "Avestansk"
+
+msgid "af"
+msgstr "afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "amharisk"
+
+msgid "an"
+msgstr "Aragonsk"
+
+msgid "ar"
+msgstr "Arabisk"
+
+msgid "as"
+msgstr "assamesisk"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Aserbajdsjansk"
+
+msgid "ba"
+msgstr "Basjkir"
+
+msgid "be"
+msgstr "Hviterussisk"
+
+msgid "bg"
+msgstr "Bulgarsk"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengali"
+
+msgid "bo"
+msgstr "tibetansk"
+
+msgid "br"
+msgstr "Bretonsk"
+
+msgid "bs"
+msgstr "Bosnisk"
+
+msgid "ca"
+msgstr "Katalansk"
+
+msgid "ce"
+msgstr "Tsjetsjenia"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "korsikansk"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Tsjekkisk"
+
+msgid "cu"
+msgstr "Kirkeslavisk"
+
+msgid "cv"
+msgstr "Tsjuvasj"
+
+msgid "cy"
+msgstr "Walisisk"
+
+msgid "da"
+msgstr "Dansk"
+
+msgid "de"
+msgstr "Tysk"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "Gresk"
+
+msgid "en"
+msgstr "Engelsk"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Spansk"
+
+msgid "et"
+msgstr "Estisk"
+
+msgid "eu"
+msgstr "baskisk"
+
+msgid "fa"
+msgstr "Persisk"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Finsk"
+
+msgid "fj"
+msgstr "fijiansk"
+
+msgid "fo"
+msgstr "Færøysk"
+
+msgid "fr"
+msgstr "Fransk"
+
+msgid "fy"
+msgstr "frisisk"
+
+msgid "ga"
+msgstr "Irsk"
+
+msgid "gd"
+msgstr "Skotsk gælisk"
+
+msgid "gl"
+msgstr "Galisisk"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gujarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Hebraisk"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Kroatisk"
+
+msgid "ht"
+msgstr "Haïtiansk kreolsk"
+
+msgid "hu"
+msgstr "Ungarsk"
+
+msgid "hy"
+msgstr "armensk"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonesisk"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandsk"
+
+msgid "it"
+msgstr "Italiensk"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Japansk"
+
+msgid "jv"
+msgstr "javanesisk"
+
+msgid "ka"
+msgstr "georgisk"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "kasakhisk"
+
+msgid "kl"
+msgstr "Grønlandsk"
+
+msgid "km"
+msgstr "Khmer"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Koreansk"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kashmiri"
+
+msgid "ku"
+msgstr "kurdisk"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirgisisk"
+
+msgid "la"
+msgstr "Latin"
+
+msgid "lb"
+msgstr "luxembourgsk"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "limburgsk"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "litauisk"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "latvisk"
+
+msgid "mg"
+msgstr "Madagaskisk"
+
+msgid "mh"
+msgstr "marshallsk"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "makedonsk"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongolsk"
+
+msgid "mo"
+msgstr "moldavisk"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malay"
+
+msgid "mt"
+msgstr "Maltesisk"
+
+msgid "my"
+msgstr "Burmesisk"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "Norsk bokmål"
+
+msgid "nd"
+msgstr "Nord-Ndebele"
+
+msgid "ne"
+msgstr "Nepali"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Nederlandsk"
+
+msgid "nn"
+msgstr "Norsk nynorsk"
+
+msgid "no"
+msgstr "Norsk"
+
+msgid "nr"
+msgstr "Sør-Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "occitansk"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetisk"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Polsk"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "Portugisisk"
+
+msgid "pt_BR"
+msgstr "Portugisisk (Brasil)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "rumensk"
+
+msgid "ru"
+msgstr "Russisk"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanskrit"
+
+msgid "sc"
+msgstr "sardinsk"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Nordsamisk"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "singalesisk"
+
+msgid "sk"
+msgstr "slovakisk"
+
+msgid "sl"
+msgstr "Slovensk"
+
+msgid "sm"
+msgstr "Samoansk"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somalisk"
+
+msgid "sq"
+msgstr "Albansk"
+
+msgid "sr"
+msgstr "Serbisk"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sundanesisk"
+
+msgid "sv"
+msgstr "Svensk"
+
+msgid "sw"
+msgstr "Swahili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "tadsjikisk"
+
+msgid "th"
+msgstr "Thai"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "turkmenere"
+
+msgid "tl"
+msgstr "Tagalog"
+
+msgid "tn"
+msgstr "Setswana"
+
+msgid "to"
+msgstr "tongansk"
+
+msgid "tr"
+msgstr "Tyrkisk"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatar"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitiansk"
+
+msgid "ug"
+msgstr "uigurisk"
+
+msgid "uk"
+msgstr "Ukrainsk"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "usbekisk"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "vietnamesisk"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Vallonsk"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jiddisch"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Kinesisk"
+
+msgid "zu"
+msgstr "Zulu"

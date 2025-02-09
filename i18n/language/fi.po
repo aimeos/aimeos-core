@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fi\n"
+"Language-Team: Finnish (http://app.transifex.com/aimeos/aimeos-core/language/fi/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abhasian"
+
+msgid "ae"
+msgstr "Avestan"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharic"
+
+msgid "an"
+msgstr "Aragonialainen"
+
+msgid "ar"
+msgstr "Arabia"
+
+msgid "as"
+msgstr "Assamilainen"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbaidžan"
+
+msgid "ba"
+msgstr "Baškiiri"
+
+msgid "be"
+msgstr "Valko-Venäjän"
+
+msgid "bg"
+msgstr "Bulgarian"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengali"
+
+msgid "bo"
+msgstr "Tiibetiläinen"
+
+msgid "br"
+msgstr "Breton"
+
+msgid "bs"
+msgstr "Bosnian"
+
+msgid "ca"
+msgstr "Katalaani"
+
+msgid "ce"
+msgstr "Tšetšenia"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsika"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Tšekki"
+
+msgid "cu"
+msgstr "kirkon slaavilainen"
+
+msgid "cv"
+msgstr "Tšuvassit"
+
+msgid "cy"
+msgstr "Welsh"
+
+msgid "da"
+msgstr "Tanskalainen"
+
+msgid "de"
+msgstr "Saksan"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "Kreikkalainen"
+
+msgid "en"
+msgstr "Englanti"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Espanjan"
+
+msgid "et"
+msgstr "Viron"
+
+msgid "eu"
+msgstr "Baskimaan"
+
+msgid "fa"
+msgstr "Persialainen"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Suomalainen"
+
+msgid "fj"
+msgstr "Fidžiläinen"
+
+msgid "fo"
+msgstr "Färsaaret"
+
+msgid "fr"
+msgstr "Ranskan"
+
+msgid "fy"
+msgstr "Friisin kieli"
+
+msgid "ga"
+msgstr "Irlantilainen"
+
+msgid "gd"
+msgstr "Skotlannin gaelin kieli"
+
+msgid "gl"
+msgstr "Galician"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gujarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Heprea"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Kroatian"
+
+msgid "ht"
+msgstr "Haitin kreoli"
+
+msgid "hu"
+msgstr "Unkarilainen"
+
+msgid "hy"
+msgstr "Armenian"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonesialainen"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islantilainen"
+
+msgid "it"
+msgstr "Italian"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Japanilainen"
+
+msgid "jv"
+msgstr "Javanilainen"
+
+msgid "ka"
+msgstr "Georgian"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazakstan"
+
+msgid "kl"
+msgstr "Grönlantilainen"
+
+msgid "km"
+msgstr "Khmer"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Korean"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kashmiri"
+
+msgid "ku"
+msgstr "Kurdi"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirgisia"
+
+msgid "la"
+msgstr "Latinankielinen"
+
+msgid "lb"
+msgstr "Luxemburgilainen"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Liettuan"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Latvian"
+
+msgid "mg"
+msgstr "Malagasy"
+
+msgid "mh"
+msgstr "Marshallilainen"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Makedonia"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongolian"
+
+msgid "mo"
+msgstr "Moldavian"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malaiji"
+
+msgid "mt"
+msgstr "Maltalainen"
+
+msgid "my"
+msgstr "Burman"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "Norjalainen Bokmål"
+
+msgid "nd"
+msgstr "Pohjois-Ndebele"
+
+msgid "ne"
+msgstr "Nepali"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Hollantilainen"
+
+msgid "nn"
+msgstr "norjalainen Nynorsk"
+
+msgid "no"
+msgstr "Norjalainen"
+
+msgid "nr"
+msgstr "Etelä-Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Occitan"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetic"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Puolan"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "Portugalin"
+
+msgid "pt_BR"
+msgstr "portugali (Brasilia)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Romanian"
+
+msgid "ru"
+msgstr "Venäläinen"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanskrit"
+
+msgid "sc"
+msgstr "Sardinian"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Pohjoissaame"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhala"
+
+msgid "sk"
+msgstr "Slovakian"
+
+msgid "sl"
+msgstr "Slovenian"
+
+msgid "sm"
+msgstr "Samoalainen"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somali"
+
+msgid "sq"
+msgstr "Albanian"
+
+msgid "sr"
+msgstr "Serbian"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sundanese"
+
+msgid "sv"
+msgstr "Ruotsalainen"
+
+msgid "sw"
+msgstr "Swahili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tadžikistan"
+
+msgid "th"
+msgstr "Thai"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Turkmenistan"
+
+msgid "tl"
+msgstr "Tagalog"
+
+msgid "tn"
+msgstr "Setswana"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Turkkilainen"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatar"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitilainen"
+
+msgid "ug"
+msgstr "Uiguurit"
+
+msgid "uk"
+msgstr "Ukrainan"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbekistan"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamilainen"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Vallonian"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jiddish"
+
+msgid "yo"
+msgstr "Joruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Kiinalainen"
+
+msgid "zu"
+msgstr "Zulu"

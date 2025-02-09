@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: lt\n"
+"Language-Team: Lithuanian (http://app.transifex.com/aimeos/aimeos-core/language/lt/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abchazijos"
+
+msgid "ae"
+msgstr "Avestų kalba"
+
+msgid "af"
+msgstr "Afrikiečių kalba"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharų kalba"
+
+msgid "an"
+msgstr "Aragoneso"
+
+msgid "ar"
+msgstr "Arabų kalba"
+
+msgid "as"
+msgstr "Asamių kalba"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbaidžanas"
+
+msgid "ba"
+msgstr "Baškirų"
+
+msgid "be"
+msgstr "Baltarusijos"
+
+msgid "bg"
+msgstr "Bulgarų"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengalų kalba"
+
+msgid "bo"
+msgstr "Tibetiečių"
+
+msgid "br"
+msgstr "Bretonai"
+
+msgid "bs"
+msgstr "Bosnijos ir Hercegovinos"
+
+msgid "ca"
+msgstr "Katalonų kalba"
+
+msgid "ce"
+msgstr "Čečėnija"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsikos"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Čekijos"
+
+msgid "cu"
+msgstr "Bažnytinė slavų kalba"
+
+msgid "cv"
+msgstr "Čuvašai"
+
+msgid "cy"
+msgstr "Velso"
+
+msgid "da"
+msgstr "Danų"
+
+msgid "de"
+msgstr "Vokiečių kalba"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Avys"
+
+msgid "el"
+msgstr "Graikų kalba"
+
+msgid "en"
+msgstr "Anglų kalba"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Ispanų kalba"
+
+msgid "et"
+msgstr "Estų kalba"
+
+msgid "eu"
+msgstr "Baskų"
+
+msgid "fa"
+msgstr "Persų kalba"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Suomijos"
+
+msgid "fj"
+msgstr "Fidžio"
+
+msgid "fo"
+msgstr "Farerai"
+
+msgid "fr"
+msgstr "Prancūzų kalba"
+
+msgid "fy"
+msgstr "Fryzų kalba"
+
+msgid "ga"
+msgstr "Airių"
+
+msgid "gd"
+msgstr "Škotų gėlų kalba"
+
+msgid "gl"
+msgstr "Galisijos"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gudžarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Hebrajų kalba"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Kroatijos"
+
+msgid "ht"
+msgstr "Haičio kreolų kalba"
+
+msgid "hu"
+msgstr "Vengrų"
+
+msgid "hy"
+msgstr "Armėnų"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonezijos"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiakų kalba"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandijos"
+
+msgid "it"
+msgstr "Italų kalba"
+
+msgid "iu"
+msgstr "Inuktitutas"
+
+msgid "ja"
+msgstr "Japonų"
+
+msgid "jv"
+msgstr "Javos"
+
+msgid "ka"
+msgstr "Gruzinų kalba"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazachų"
+
+msgid "kl"
+msgstr "Grenlandijos"
+
+msgid "km"
+msgstr "Khmerų"
+
+msgid "kn"
+msgstr "Kanados"
+
+msgid "ko"
+msgstr "Korėjiečių kalba"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kašmyras"
+
+msgid "ku"
+msgstr "Kurdų"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirgizų"
+
+msgid "la"
+msgstr "Lotynų kalba"
+
+msgid "lb"
+msgstr "Liuksemburgo"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgo kalba"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Lietuvių kalba"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Latvijos"
+
+msgid "mg"
+msgstr "Malagasių"
+
+msgid "mh"
+msgstr "Marshallese"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Makedonijos"
+
+msgid "ml"
+msgstr "Malajalamas"
+
+msgid "mn"
+msgstr "Mongoliškas"
+
+msgid "mo"
+msgstr "Moldovos"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malajų kalba"
+
+msgid "mt"
+msgstr "Maltiečių"
+
+msgid "my"
+msgstr "Birmos"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "norvegų kalba Bokmål"
+
+msgid "nd"
+msgstr "Šiaurės Ndebele"
+
+msgid "ne"
+msgstr "Nepalo"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Olandų kalba"
+
+msgid "nn"
+msgstr "Norvegų nynorsk"
+
+msgid "no"
+msgstr "Norvegijos"
+
+msgid "nr"
+msgstr "Pietų Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Čičeva"
+
+msgid "oc"
+msgstr "Occitan"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Osetic"
+
+msgid "pa"
+msgstr "Pandžabo"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Lenkų kalba"
+
+msgid "ps"
+msgstr "Paštu"
+
+msgid "pt"
+msgstr "Portugalų kalba"
+
+msgid "pt_BR"
+msgstr "portugalų kalba (Brazilija)"
+
+msgid "qu"
+msgstr "Kečua"
+
+msgid "rm"
+msgstr "Reeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumunijos"
+
+msgid "ru"
+msgstr "Rusų kalba"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanskritas"
+
+msgid "sc"
+msgstr "Sardinijos"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Šiaurės samiai"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhalų kalba"
+
+msgid "sk"
+msgstr "Slovakų"
+
+msgid "sl"
+msgstr "Slovėnijos"
+
+msgid "sm"
+msgstr "Samoan"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somalio"
+
+msgid "sq"
+msgstr "Albanų kalba"
+
+msgid "sr"
+msgstr "Serbų kalba"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesoto"
+
+msgid "su"
+msgstr "Sundaniečių kalba"
+
+msgid "sv"
+msgstr "Švedų kalba"
+
+msgid "sw"
+msgstr "Svahilių kalba"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tadžikų"
+
+msgid "th"
+msgstr "Tailando"
+
+msgid "ti"
+msgstr "Tigriniečių kalba"
+
+msgid "tk"
+msgstr "Turkmėnų"
+
+msgid "tl"
+msgstr "Tagalų kalba"
+
+msgid "tn"
+msgstr "Setsvana"
+
+msgid "to"
+msgstr "Tongas"
+
+msgid "tr"
+msgstr "Turkijos"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Totorių"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Taitis"
+
+msgid "ug"
+msgstr "Uigūrai"
+
+msgid "uk"
+msgstr "Ukrainiečių"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbekų"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamiečių"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valonijos"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jidiš"
+
+msgid "yo"
+msgstr "Joruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Kinų"
+
+msgid "zu"
+msgstr "Zulu"

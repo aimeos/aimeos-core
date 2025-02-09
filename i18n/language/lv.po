@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: lv\n"
+"Language-Team: Latvian (http://app.transifex.com/aimeos/aimeos-core/language/lv/)\n"
+"Last-Translator: Martins Nav <mveisis1@gmail.com>, 2021\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abhāzija"
+
+msgid "ae"
+msgstr "Avestiešu"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amhāru valodā"
+
+msgid "an"
+msgstr "Aragonese"
+
+msgid "ar"
+msgstr "Arābu valodā"
+
+msgid "as"
+msgstr "Asamēzieši"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbaidžānas"
+
+msgid "ba"
+msgstr "Baškīru"
+
+msgid "be"
+msgstr "Baltkrievu"
+
+msgid "bg"
+msgstr "Bulgāru"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengāļu"
+
+msgid "bo"
+msgstr "Tibetas"
+
+msgid "br"
+msgstr "Bretonas"
+
+msgid "bs"
+msgstr "Bosniešu"
+
+msgid "ca"
+msgstr "Kataloniski"
+
+msgid "ce"
+msgstr "Čečenija"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsikānas"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Čehu"
+
+msgid "cu"
+msgstr "Baznīcas slāvu valoda"
+
+msgid "cv"
+msgstr "Čuvaši"
+
+msgid "cy"
+msgstr "Velsiešu"
+
+msgid "da"
+msgstr "Dānijas"
+
+msgid "de"
+msgstr "Vācu"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Aitas"
+
+msgid "el"
+msgstr "Grieķu"
+
+msgid "en"
+msgstr "Angļu valodā"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Spāņu"
+
+msgid "et"
+msgstr "Igauņu"
+
+msgid "eu"
+msgstr "Basku"
+
+msgid "fa"
+msgstr "Persiešu"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Somu"
+
+msgid "fj"
+msgstr "Fidži"
+
+msgid "fo"
+msgstr "Fēru salas"
+
+msgid "fr"
+msgstr "Franču"
+
+msgid "fy"
+msgstr "Frīzu valodas"
+
+msgid "ga"
+msgstr "Īru"
+
+msgid "gd"
+msgstr "Skotijas galisiešu valoda"
+
+msgid "gl"
+msgstr "Galisijas"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gudžarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Ebreju valodā"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Horvātijas"
+
+msgid "ht"
+msgstr "haitisiešu kreolu valoda"
+
+msgid "hu"
+msgstr "Ungāru"
+
+msgid "hy"
+msgstr "Armēņu"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonēzijas"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandiešu"
+
+msgid "it"
+msgstr "Itāļu"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Japāņu"
+
+msgid "jv"
+msgstr "Javas"
+
+msgid "ka"
+msgstr "Gruzīnu"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazahstānas"
+
+msgid "kl"
+msgstr "Grenlandiešu"
+
+msgid "km"
+msgstr "Khmeru"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Korejas"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kašmiras"
+
+msgid "ku"
+msgstr "Kurdu"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirghiz"
+
+msgid "la"
+msgstr "Latīņu"
+
+msgid "lb"
+msgstr "Luksemburgas"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Lietuviešu"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Latviešu"
+
+msgid "mg"
+msgstr "Madagaskaras"
+
+msgid "mh"
+msgstr "Marshallese"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Maķedonijas"
+
+msgid "ml"
+msgstr "Malajāļu valodā"
+
+msgid "mn"
+msgstr "Mongoļu"
+
+msgid "mo"
+msgstr "Moldovas"
+
+msgid "mr"
+msgstr "Marati"
+
+msgid "ms"
+msgstr "Malay"
+
+msgid "mt"
+msgstr "Maltas"
+
+msgid "my"
+msgstr "Birmas"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "Norvēģu bokmål"
+
+msgid "nd"
+msgstr "Ziemeļu Ndebele"
+
+msgid "ne"
+msgstr "Nepālieši"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Holandiešu"
+
+msgid "nn"
+msgstr "Norvēģu valodas norvēģu valoda nynorsk"
+
+msgid "no"
+msgstr "Norvēģu"
+
+msgid "nr"
+msgstr "Dienvidu Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Okcitāņu"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Osetic"
+
+msgid "pa"
+msgstr "Pendžabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Polijas"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "Portugāļu"
+
+msgid "pt_BR"
+msgstr "portugāļu (Brazīlija)"
+
+msgid "qu"
+msgstr "Kečua"
+
+msgid "rm"
+msgstr "Reto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumāņu"
+
+msgid "ru"
+msgstr "Krievu"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanskrits"
+
+msgid "sc"
+msgstr "Sardīnijas"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Ziemeļu sāmji"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhala"
+
+msgid "sk"
+msgstr "Slovākijas"
+
+msgid "sl"
+msgstr "Slovēņu"
+
+msgid "sm"
+msgstr "Samoan"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somālijas"
+
+msgid "sq"
+msgstr "Albāņu"
+
+msgid "sr"
+msgstr "Serbijas"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesoto"
+
+msgid "su"
+msgstr "Sundanē"
+
+msgid "sv"
+msgstr "Zviedru"
+
+msgid "sw"
+msgstr "Svahili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tadžiku"
+
+msgid "th"
+msgstr "Taizemes"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Turkmēņu"
+
+msgid "tl"
+msgstr "Tagalo valodā"
+
+msgid "tn"
+msgstr "Setsvāna"
+
+msgid "to"
+msgstr "Tongas"
+
+msgid "tr"
+msgstr "Turcijas"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatāru"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitijas"
+
+msgid "ug"
+msgstr "Uiguru"
+
+msgid "uk"
+msgstr "Ukraiņu"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbekistāna"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vjetnamiešu"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valonijas"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jidiš"
+
+msgid "yo"
+msgstr "Joruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Ķīniešu"
+
+msgid "zu"
+msgstr "Zulu"

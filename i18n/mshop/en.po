@@ -11,7 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2025-01-18 18:06+0100\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
-"Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
+"Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/"
+"en/)\n"
 "Language: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -356,13 +357,16 @@ msgstr ""
 # error domain: misc.
 # error type: invalid characters in name or value
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr ""
 
 # error domain: misc.
 # error type: invalid characters in name or value
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr ""
 
 #, php-format
@@ -595,7 +599,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr ""
 
 #, php-format
@@ -715,7 +721,9 @@ msgstr ""
 # error domain: service
 # error type: failure in communication with delivery provider
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr ""
 
 #, php-format
@@ -731,7 +739,9 @@ msgstr ""
 # error domain: service
 # error type: failure in communication with delivery provider
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr ""
 
 # error domain: order
@@ -777,11 +787,13 @@ msgid "Password object not available"
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
 msgstr ""
 
 #, php-format
@@ -789,7 +801,8 @@ msgid "PayPal Express: Invalid request \"%1$s\""
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgid ""
+"PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
 msgstr ""
 
 #, php-format
@@ -812,7 +825,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr ""
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr ""
 
 # error domain: price
@@ -842,7 +857,9 @@ msgstr ""
 # error type: value, parameter, object etc. not available
 # error domain: order
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr ""
 
 #, php-format
@@ -968,13 +985,17 @@ msgstr ""
 # error domain: catalog
 # error type: action failed
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr ""
 
 # error domain: catalog
 # error type: action failed
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID "
+"of existing parent site or site id of new parent site."
 msgstr ""
 
 # error domain: search
@@ -1082,7 +1103,9 @@ msgstr ""
 # error domain: service
 # error type: failure in communication with delivery provider
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr ""
 
 # error domain: context

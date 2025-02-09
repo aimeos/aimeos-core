@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ko\n"
+"Language-Team: Korean (http://app.transifex.com/aimeos/aimeos-core/language/ko/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "AD"
+msgstr "안도라"
+
+msgid "AE"
+msgstr "아랍 에미리트"
+
+msgid "AF"
+msgstr "아프가니스탄"
+
+msgid "AG"
+msgstr "앤티가 바부다"
+
+msgid "AI"
+msgstr "앵 귈라"
+
+msgid "AL"
+msgstr "알바니아"
+
+msgid "AM"
+msgstr "아르메니아"
+
+msgid "AO"
+msgstr "앙골라"
+
+msgid "AQ"
+msgstr "남극 대륙"
+
+msgid "AR"
+msgstr "아르헨티나"
+
+msgid "AS"
+msgstr "아메리칸 사모아"
+
+msgid "AT"
+msgstr "오스트리아"
+
+msgid "AU"
+msgstr "호주"
+
+msgid "AW"
+msgstr "아루바"
+
+msgid "AX"
+msgstr "올란드 제도"
+
+msgid "AZ"
+msgstr "아제르바이잔"
+
+msgid "BA"
+msgstr "보스니아 헤르체고비나"
+
+msgid "BB"
+msgstr "바베이도스"
+
+msgid "BD"
+msgstr "방글라데시"
+
+msgid "BE"
+msgstr "벨기에"
+
+msgid "BF"
+msgstr "부르키나파소"
+
+msgid "BG"
+msgstr "불가리아"
+
+msgid "BH"
+msgstr "바레인"
+
+msgid "BI"
+msgstr "부룬디"
+
+msgid "BJ"
+msgstr "베냉"
+
+msgid "BL"
+msgstr "생 바르텔레미"
+
+msgid "BM"
+msgstr "버뮤다"
+
+msgid "BN"
+msgstr "브루나이 다루살람"
+
+msgid "BO"
+msgstr "볼리비아, 다민족 국가"
+
+msgid "BQ"
+msgstr "보네르, 신트 유스타티우스 및 사바"
+
+msgid "BR"
+msgstr "브라질"
+
+msgid "BS"
+msgstr "바하마"
+
+msgid "BT"
+msgstr "부탄"
+
+msgid "BV"
+msgstr "부베 섬"
+
+msgid "BW"
+msgstr "보츠와나"
+
+msgid "BY"
+msgstr "벨로루시"
+
+msgid "BZ"
+msgstr "벨리즈"
+
+msgid "CA"
+msgstr "캐나다"
+
+msgid "CC"
+msgstr "코코스(킬링) 제도"
+
+msgid "CD"
+msgstr "콩고민주공화국"
+
+msgid "CF"
+msgstr "중앙 아프리카 공화국"
+
+msgid "CG"
+msgstr "콩고"
+
+msgid "CH"
+msgstr "스위스"
+
+msgid "CI"
+msgstr "코트디부아르"
+
+msgid "CK"
+msgstr "쿡 제도"
+
+msgid "CL"
+msgstr "칠레"
+
+msgid "CM"
+msgstr "카메룬"
+
+msgid "CN"
+msgstr "중국"
+
+msgid "CO"
+msgstr "콜롬비아"
+
+msgid "CR"
+msgstr "코스타리카"
+
+msgid "CU"
+msgstr "쿠바"
+
+msgid "CV"
+msgstr "카보베르데"
+
+msgid "CW"
+msgstr "큐라소"
+
+msgid "CX"
+msgstr "크리스마스 아일랜드"
+
+msgid "CY"
+msgstr "키프로스"
+
+msgid "CZ"
+msgstr "체코 공화국"
+
+msgid "DE"
+msgstr "독일"
+
+msgid "DJ"
+msgstr "지부티"
+
+msgid "DK"
+msgstr "덴마크"
+
+msgid "DM"
+msgstr "도미니카"
+
+msgid "DO"
+msgstr "도미니카 공화국"
+
+msgid "DZ"
+msgstr "알제리"
+
+msgid "EC"
+msgstr "에콰도르"
+
+msgid "EE"
+msgstr "에스토니아"
+
+msgid "EG"
+msgstr "이집트"
+
+msgid "EH"
+msgstr "서사하라"
+
+msgid "ER"
+msgstr "에리트레아"
+
+msgid "ES"
+msgstr "스페인"
+
+msgid "ET"
+msgstr "에티오피아"
+
+msgid "FI"
+msgstr "핀란드"
+
+msgid "FJ"
+msgstr "피지"
+
+msgid "FK"
+msgstr "포클랜드 제도(말비나스)"
+
+msgid "FM"
+msgstr "미크로네시아, 연방"
+
+msgid "FO"
+msgstr "페로 제도"
+
+msgid "FR"
+msgstr "프랑스"
+
+msgid "GA"
+msgstr "가봉"
+
+msgid "GB"
+msgstr "영국"
+
+msgid "GD"
+msgstr "그레나다"
+
+msgid "GE"
+msgstr "조지아"
+
+msgid "GF"
+msgstr "프랑스령 기아나"
+
+msgid "GG"
+msgstr "건지 섬"
+
+msgid "GH"
+msgstr "Ghana"
+
+msgid "GI"
+msgstr "지브롤터"
+
+msgid "GL"
+msgstr "그린란드"
+
+msgid "GM"
+msgstr "감비아"
+
+msgid "GN"
+msgstr "기니"
+
+msgid "GP"
+msgstr "과들루프"
+
+msgid "GQ"
+msgstr "적도 기니"
+
+msgid "GR"
+msgstr "그리스"
+
+msgid "GS"
+msgstr "사우스 조지아 및 사우스 샌드위치 제도"
+
+msgid "GT"
+msgstr "과테말라"
+
+msgid "GU"
+msgstr "괌"
+
+msgid "GW"
+msgstr "기니 비사우"
+
+msgid "GY"
+msgstr "가이아나"
+
+msgid "HK"
+msgstr "홍콩"
+
+msgid "HM"
+msgstr "허드 아일랜드와 맥도날드 제도"
+
+msgid "HN"
+msgstr "온두라스"
+
+msgid "HR"
+msgstr "크로아티아"
+
+msgid "HT"
+msgstr "아이티"
+
+msgid "HU"
+msgstr "헝가리"
+
+msgid "ID"
+msgstr "인도네시아"
+
+msgid "IE"
+msgstr "아일랜드"
+
+msgid "IL"
+msgstr "이스라엘"
+
+msgid "IM"
+msgstr "맨섬"
+
+msgid "IN"
+msgstr "인도"
+
+msgid "IO"
+msgstr "영국령 인도양 영토"
+
+msgid "IQ"
+msgstr "이라크"
+
+msgid "IR"
+msgstr "이란, 이슬람 공화국"
+
+msgid "IS"
+msgstr "아이슬란드"
+
+msgid "IT"
+msgstr "이탈리아"
+
+msgid "JE"
+msgstr "저지"
+
+msgid "JM"
+msgstr "자메이카"
+
+msgid "JO"
+msgstr "Jordan"
+
+msgid "JP"
+msgstr "일본"
+
+msgid "KE"
+msgstr "케냐"
+
+msgid "KG"
+msgstr "키르기스스탄"
+
+msgid "KH"
+msgstr "캄보디아"
+
+msgid "KI"
+msgstr "키리바시"
+
+msgid "KM"
+msgstr "코모로"
+
+msgid "KN"
+msgstr "세인트 키츠 네비스"
+
+msgid "KP"
+msgstr "대한민국, 조선민주주의인민공화국"
+
+msgid "KR"
+msgstr "대한민국, 공화국"
+
+msgid "KW"
+msgstr "쿠웨이트"
+
+msgid "KY"
+msgstr "케이맨 제도"
+
+msgid "KZ"
+msgstr "카자흐스탄"
+
+msgid "LA"
+msgstr "라오스 인민 민주 공화국"
+
+msgid "LB"
+msgstr "레바논"
+
+msgid "LC"
+msgstr "세인트 루시아"
+
+msgid "LI"
+msgstr "리히텐슈타인"
+
+msgid "LK"
+msgstr "스리랑카"
+
+msgid "LR"
+msgstr "라이베리아"
+
+msgid "LS"
+msgstr "레소토"
+
+msgid "LT"
+msgstr "리투아니아"
+
+msgid "LU"
+msgstr "룩셈부르크"
+
+msgid "LV"
+msgstr "라트비아"
+
+msgid "LY"
+msgstr "리비아"
+
+msgid "MA"
+msgstr "모로코"
+
+msgid "MC"
+msgstr "모나코"
+
+msgid "MD"
+msgstr "몰도바, 공화국"
+
+msgid "ME"
+msgstr "몬테네그로"
+
+msgid "MF"
+msgstr "생 마르탱(프랑스 지역)"
+
+msgid "MG"
+msgstr "마다가스카르"
+
+msgid "MH"
+msgstr "마셜 제도"
+
+msgid "MK"
+msgstr "마케도니아"
+
+msgid "ML"
+msgstr "말리"
+
+msgid "MM"
+msgstr "미얀마"
+
+msgid "MN"
+msgstr "몽골"
+
+msgid "MO"
+msgstr "마카오"
+
+msgid "MP"
+msgstr "북마리아나 제도"
+
+msgid "MQ"
+msgstr "마르티니크"
+
+msgid "MR"
+msgstr "모리타니아"
+
+msgid "MS"
+msgstr "몬세라트"
+
+msgid "MT"
+msgstr "Malta"
+
+msgid "MU"
+msgstr "모리셔스"
+
+msgid "MV"
+msgstr "몰디브"
+
+msgid "MW"
+msgstr "말라위"
+
+msgid "MX"
+msgstr "멕시코"
+
+msgid "MY"
+msgstr "말레이시아"
+
+msgid "MZ"
+msgstr "모잠비크"
+
+msgid "NA"
+msgstr "나미비아"
+
+msgid "NC"
+msgstr "뉴칼레도니아"
+
+msgid "NE"
+msgstr "니제르"
+
+msgid "NF"
+msgstr "노퍽 아일랜드"
+
+msgid "NG"
+msgstr "나이지리아"
+
+msgid "NI"
+msgstr "니카라과"
+
+msgid "NL"
+msgstr "네덜란드"
+
+msgid "NO"
+msgstr "노르웨이"
+
+msgid "NP"
+msgstr "네팔"
+
+msgid "NR"
+msgstr "나우루"
+
+msgid "NU"
+msgstr "Niue"
+
+msgid "NZ"
+msgstr "뉴질랜드"
+
+msgid "OM"
+msgstr "Oman"
+
+msgid "PA"
+msgstr "파나마"
+
+msgid "PE"
+msgstr "페루"
+
+msgid "PF"
+msgstr "프렌치 폴리네시아"
+
+msgid "PG"
+msgstr "파푸아뉴기니"
+
+msgid "PH"
+msgstr "필리핀"
+
+msgid "PK"
+msgstr "파키스탄"
+
+msgid "PL"
+msgstr "폴란드"
+
+msgid "PM"
+msgstr "생 피에르 미끌롱"
+
+msgid "PN"
+msgstr "핏케언"
+
+msgid "PR"
+msgstr "푸에르토리코"
+
+msgid "PS"
+msgstr "팔레스타인, 주"
+
+msgid "PT"
+msgstr "포르투갈"
+
+msgid "PW"
+msgstr "팔라우"
+
+msgid "PY"
+msgstr "파라과이"
+
+msgid "QA"
+msgstr "카타르"
+
+msgid "RE"
+msgstr "레유니온"
+
+msgid "RO"
+msgstr "루마니아"
+
+msgid "RS"
+msgstr "세르비아"
+
+msgid "RU"
+msgstr "러시아 연방"
+
+msgid "RW"
+msgstr "르완다"
+
+msgid "SA"
+msgstr "사우디 아라비아"
+
+msgid "SB"
+msgstr "솔로몬 제도"
+
+msgid "SC"
+msgstr "세이셸"
+
+msgid "SD"
+msgstr "수단"
+
+msgid "SE"
+msgstr "스웨덴"
+
+msgid "SG"
+msgstr "싱가포르"
+
+msgid "SH"
+msgstr "세인트 헬레나, 어센션, 트리스탄 다 쿠냐"
+
+msgid "SI"
+msgstr "슬로베니아"
+
+msgid "SJ"
+msgstr "스발바르와 얀 마옌"
+
+msgid "SK"
+msgstr "슬로바키아"
+
+msgid "SL"
+msgstr "시에라리온"
+
+msgid "SM"
+msgstr "산 마리노"
+
+msgid "SN"
+msgstr "세네갈"
+
+msgid "SO"
+msgstr "소말리아"
+
+msgid "SR"
+msgstr "수리남"
+
+msgid "SS"
+msgstr "남수단"
+
+msgid "ST"
+msgstr "상투메 프린시페"
+
+msgid "SV"
+msgstr "엘살바도르"
+
+msgid "SX"
+msgstr "신트마르턴(네덜란드 부분)"
+
+msgid "SY"
+msgstr "시리아 아랍 공화국"
+
+msgid "SZ"
+msgstr "스와질란드"
+
+msgid "TC"
+msgstr "터크스케이커스 제도"
+
+msgid "TD"
+msgstr "Chad"
+
+msgid "TF"
+msgstr "프랑스 남부 준주"
+
+msgid "TG"
+msgstr "Togo"
+
+msgid "TH"
+msgstr "태국"
+
+msgid "TJ"
+msgstr "타지키스탄"
+
+msgid "TK"
+msgstr "토켈라우"
+
+msgid "TL"
+msgstr "동티모르"
+
+msgid "TM"
+msgstr "투르크메니스탄"
+
+msgid "TN"
+msgstr "튀니지"
+
+msgid "TO"
+msgstr "통가"
+
+msgid "TR"
+msgstr "터키"
+
+msgid "TT"
+msgstr "트리니다드 토바고"
+
+msgid "TV"
+msgstr "투발루"
+
+msgid "TW"
+msgstr "대만"
+
+msgid "TZ"
+msgstr "탄자니아, 연합 공화국"
+
+msgid "UA"
+msgstr "우크라이나"
+
+msgid "UG"
+msgstr "우간다"
+
+msgid "UM"
+msgstr "미국 군소 외곽 섬"
+
+msgid "US"
+msgstr "미국"
+
+msgid "UY"
+msgstr "우루과이"
+
+msgid "UZ"
+msgstr "우즈베키스탄"
+
+msgid "VA"
+msgstr "바티칸 시국(교황청)"
+
+msgid "VC"
+msgstr "세인트 빈센트 그레나딘"
+
+msgid "VE"
+msgstr "베네수엘라, 볼리바르 공화국"
+
+msgid "VG"
+msgstr "버진 아일랜드, 영국"
+
+msgid "VI"
+msgstr "버진 아일랜드, 미국령"
+
+msgid "VN"
+msgstr "베트남"
+
+msgid "VU"
+msgstr "바누아투"
+
+msgid "WF"
+msgstr "월리스 푸투나"
+
+msgid "WS"
+msgstr "사모아"
+
+msgid "XK"
+msgstr "코소보"
+
+msgid "YE"
+msgstr "예멘"
+
+msgid "YT"
+msgstr "마요트"
+
+msgid "ZA"
+msgstr "남아프리카 공화국"
+
+msgid "ZM"
+msgstr "잠비아"
+
+msgid "ZW"
+msgstr "짐바브웨"

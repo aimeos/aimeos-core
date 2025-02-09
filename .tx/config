@@ -3,30 +3,30 @@ host = https://www.transifex.com
 
 [o:aimeos:p:aimeos-core:r:core-country]
 file_filter = i18n/country/<lang>.po
-source_file = i18n/country/core-country.pot
+source_file = i18n/country/source.pot
 source_lang = en
 type = PO
 
 [o:aimeos:p:aimeos-core:r:core-language]
 file_filter = i18n/language/<lang>.po
-source_file = i18n/language/core-language.pot
+source_file = i18n/language/source.pot
 source_lang = en
 type = PO
 
 [o:aimeos:p:aimeos-core:r:core-currency]
 file_filter = i18n/currency/<lang>.po
-source_file = i18n/currency/core-currency.pot
+source_file = i18n/currency/source.pot
 source_lang = en
 type = PO
 
 [o:aimeos:p:aimeos-core:r:core-mshop]
 file_filter = i18n/mshop/<lang>.po
-source_file = i18n/mshop/core-mshop.pot
+source_file = i18n/mshop/source.pot
 source_lang = en
 type = PO
 
 [o:aimeos:p:aimeos-core:r:core-mshop-code]
 file_filter = i18n/mshop/code/<lang>.po
-source_file = i18n/mshop/code/core-mshop-code.pot
+source_file = i18n/mshop/code/source.pot
 source_lang = en
 type = PO

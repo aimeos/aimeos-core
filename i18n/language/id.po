@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: id\n"
+"Language-Team: Indonesian (http://app.transifex.com/aimeos/aimeos-core/language/id/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Jauh"
+
+msgid "ab"
+msgstr "Abkhazian"
+
+msgid "ae"
+msgstr "Avestan"
+
+msgid "af"
+msgstr "Bahasa Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharic"
+
+msgid "an"
+msgstr "Aragon"
+
+msgid "ar"
+msgstr "Bahasa Arab"
+
+msgid "as"
+msgstr "Assam"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbaijan"
+
+msgid "ba"
+msgstr "Bashkir"
+
+msgid "be"
+msgstr "Belarusia"
+
+msgid "bg"
+msgstr "Bulgaria"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengali"
+
+msgid "bo"
+msgstr "Tibet"
+
+msgid "br"
+msgstr "Breton"
+
+msgid "bs"
+msgstr "Bosnia"
+
+msgid "ca"
+msgstr "Catalan"
+
+msgid "ce"
+msgstr "Chechnya"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsika"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Ceko"
+
+msgid "cu"
+msgstr "Gereja Slavia"
+
+msgid "cv"
+msgstr "Chuvash"
+
+msgid "cy"
+msgstr "Welsh"
+
+msgid "da"
+msgstr "Denmark"
+
+msgid "de"
+msgstr "Bahasa Jerman"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "Bahasa Yunani"
+
+msgid "en"
+msgstr "Bahasa Inggris"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Bahasa Spanyol"
+
+msgid "et"
+msgstr "Estonia"
+
+msgid "eu"
+msgstr "Basque"
+
+msgid "fa"
+msgstr "Persia"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Finlandia"
+
+msgid "fj"
+msgstr "Fiji"
+
+msgid "fo"
+msgstr "Faeroese"
+
+msgid "fr"
+msgstr "Bahasa Prancis"
+
+msgid "fy"
+msgstr "Frisian"
+
+msgid "ga"
+msgstr "Irlandia"
+
+msgid "gd"
+msgstr "Bahasa Gaelik Skotlandia"
+
+msgid "gl"
+msgstr "Galicia"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gujarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Bahasa Ibrani"
+
+msgid "hi"
+msgstr "Bahasa Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Kroasia"
+
+msgid "ht"
+msgstr "Kreol Haïtian"
+
+msgid "hu"
+msgstr "Hongaria"
+
+msgid "hy"
+msgstr "Armenia"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Bahasa Indonesia"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandia"
+
+msgid "it"
+msgstr "Bahasa Italia"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Bahasa Jepang"
+
+msgid "jv"
+msgstr "Bahasa Jawa"
+
+msgid "ka"
+msgstr "Georgia"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazakh"
+
+msgid "kl"
+msgstr "Greenland"
+
+msgid "km"
+msgstr "Khmer"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Bahasa Korea"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kashmir"
+
+msgid "ku"
+msgstr "Kurdi"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirghiz"
+
+msgid "la"
+msgstr "Bahasa Latin"
+
+msgid "lb"
+msgstr "Luksemburg"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Lithuania"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Latvia"
+
+msgid "mg"
+msgstr "Malagasi"
+
+msgid "mh"
+msgstr "Marshallese"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Macedonia"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongolia"
+
+msgid "mo"
+msgstr "Moldavia"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Bahasa Melayu"
+
+msgid "mt"
+msgstr "Malta"
+
+msgid "my"
+msgstr "Burma"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "Bokmål Norwegia"
+
+msgid "nd"
+msgstr "Ndebele Utara"
+
+msgid "ne"
+msgstr "Nepal"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Belanda"
+
+msgid "nn"
+msgstr "Nynorsk Norwegia"
+
+msgid "no"
+msgstr "Norwegia"
+
+msgid "nr"
+msgstr "Ndebele Selatan"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Occitan"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetic"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Polandia"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "Bahasa Portugis"
+
+msgid "pt_BR"
+msgstr "Bahasa Portugis (Brasil)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumania"
+
+msgid "ru"
+msgstr "Rusia"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Bahasa Sanskerta"
+
+msgid "sc"
+msgstr "Sardinia"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Sami Utara"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhala"
+
+msgid "sk"
+msgstr "Slowakia"
+
+msgid "sl"
+msgstr "Slovenia"
+
+msgid "sm"
+msgstr "Samoa"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somalia"
+
+msgid "sq"
+msgstr "Bahasa Albania"
+
+msgid "sr"
+msgstr "Serbia"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Bahasa Sunda"
+
+msgid "sv"
+msgstr "Swedia"
+
+msgid "sw"
+msgstr "Swahili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tajik"
+
+msgid "th"
+msgstr "Thailand"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Turkmenistan"
+
+msgid "tl"
+msgstr "Bahasa Tagalog"
+
+msgid "tn"
+msgstr "Setswana"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Bahasa Turki"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatar"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahiti"
+
+msgid "ug"
+msgstr "Uighur"
+
+msgid "uk"
+msgstr "Ukraina"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbek"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnam"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Walloon"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Yiddish"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Cina"
+
+msgid "zu"
+msgstr "Zulu"

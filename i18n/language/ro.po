@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ro\n"
+"Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abhaziană"
+
+msgid "ae"
+msgstr "Avestană"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharic"
+
+msgid "an"
+msgstr "Aragoneză"
+
+msgid "ar"
+msgstr "arabă"
+
+msgid "as"
+msgstr "Assamese"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbaidjan"
+
+msgid "ba"
+msgstr "Bașchir"
+
+msgid "be"
+msgstr "bielorusă"
+
+msgid "bg"
+msgstr "bulgară"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengaleză"
+
+msgid "bo"
+msgstr "Tibetană"
+
+msgid "br"
+msgstr "Breton"
+
+msgid "bs"
+msgstr "bosniacă"
+
+msgid "ca"
+msgstr "catalană"
+
+msgid "ce"
+msgstr "cecen"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Corsican"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Cehă"
+
+msgid "cu"
+msgstr "Slavonă bisericească"
+
+msgid "cv"
+msgstr "Chuvash"
+
+msgid "cy"
+msgstr "Galeză"
+
+msgid "da"
+msgstr "daneză"
+
+msgid "de"
+msgstr "germană"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "Greacă"
+
+msgid "en"
+msgstr "Engleză"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "spaniolă"
+
+msgid "et"
+msgstr "Estonă"
+
+msgid "eu"
+msgstr "bască"
+
+msgid "fa"
+msgstr "Persană"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "finlandeză"
+
+msgid "fj"
+msgstr "Fijiană"
+
+msgid "fo"
+msgstr "Faeroese"
+
+msgid "fr"
+msgstr "franceză"
+
+msgid "fy"
+msgstr "Frisonă"
+
+msgid "ga"
+msgstr "Irlandeză"
+
+msgid "gd"
+msgstr "Gaelică scoțiană"
+
+msgid "gl"
+msgstr "galiciană"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gujarati"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "ebraică"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "croată"
+
+msgid "ht"
+msgstr "Creolă haitiană"
+
+msgid "hu"
+msgstr "maghiară"
+
+msgid "hy"
+msgstr "armeană"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indoneziană"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "islandeză"
+
+msgid "it"
+msgstr "Italiană"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Japoneză"
+
+msgid "jv"
+msgstr "javaneză"
+
+msgid "ka"
+msgstr "georgiană"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "kazahă"
+
+msgid "kl"
+msgstr "Groenlandeză"
+
+msgid "km"
+msgstr "Khmer"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Coreeană"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kashmiri"
+
+msgid "ku"
+msgstr "kurdă"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirghiz"
+
+msgid "la"
+msgstr "Latină"
+
+msgid "lb"
+msgstr "luxemburgheză"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "lituaniană"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Letonă"
+
+msgid "mg"
+msgstr "Malgașă"
+
+msgid "mh"
+msgstr "marsallese"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "macedoneană"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongolă"
+
+msgid "mo"
+msgstr "moldovenească"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malay"
+
+msgid "mt"
+msgstr "Malteză"
+
+msgid "my"
+msgstr "birmaneză"
+
+msgid "na"
+msgstr "NR"
+
+msgid "nb"
+msgstr "Norvegiană Bokmål"
+
+msgid "nd"
+msgstr "Nord Ndebele"
+
+msgid "ne"
+msgstr "Nepaleză"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "olandeză"
+
+msgid "nn"
+msgstr "Norvegiană Nynorsk"
+
+msgid "no"
+msgstr "Norvegiană"
+
+msgid "nr"
+msgstr "Ndebele de Sud"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Occitană"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetic"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "poloneză"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "portugheză"
+
+msgid "pt_BR"
+msgstr "Portugheză (Brazilia)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "română"
+
+msgid "ru"
+msgstr "Rusă"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanscrită"
+
+msgid "sc"
+msgstr "Sardă"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Sami de Nord"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhala"
+
+msgid "sk"
+msgstr "Slovacă"
+
+msgid "sl"
+msgstr "Slovenă"
+
+msgid "sm"
+msgstr "Samoan"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "somaleză"
+
+msgid "sq"
+msgstr "albaneză"
+
+msgid "sr"
+msgstr "sârbă"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sundaneză"
+
+msgid "sv"
+msgstr "suedeză"
+
+msgid "sw"
+msgstr "swahili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tadjik"
+
+msgid "th"
+msgstr "Thailandeză"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Turkmenă"
+
+msgid "tl"
+msgstr "Tagalog"
+
+msgid "tn"
+msgstr "Setswana"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Turcă"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tătar"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitian"
+
+msgid "ug"
+msgstr "Uigură"
+
+msgid "uk"
+msgstr "Ucraineană"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "uzbecă"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "vietnameză"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valonă"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Yiddish"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Chineză"
+
+msgid "zu"
+msgstr "Zulu"

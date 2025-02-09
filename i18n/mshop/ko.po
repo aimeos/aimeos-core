@@ -1,28 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ko\n"
+"Language-Team: Korean (http://app.transifex.com/aimeos/aimeos-core/language/ko/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2025-02-09 13:40+0100\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 19:54+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Korean (http://app.transifex.com/aimeos/aimeos-core/language/ko/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: ko\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -35,14 +28,22 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -55,14 +56,24 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+""
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -312,9 +323,7 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "클래스 이름 \"%1$s\"에 잘못된 문자가 있습니다."
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr "날짜 \"%1$s\"에 잘못된 문자가 있습니다. ISO 형식 \"YYYY-MM-DD hh:mm:ss\"가 예상됩니다."
 
 #, php-format
@@ -501,9 +510,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "항목의 새 ID \"%1$s\"가 이전 ID \"%2$s\"와 다릅니다."
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
 msgstr "새로 만든 사이트는 \"save()\" 메서드를 사용하여 저장할 수 없습니다. 대신 \"insert()\" 메서드를 사용해 보세요."
 
 #, php-format
@@ -619,9 +626,7 @@ msgid "Operation not supported"
 msgstr "지원되지 않는 작업"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr "배송 공급자의 XML 응답에 있는 주문 ID \"%1$s\"가 주문의 저장된 송장 ID \"%2$s\"와 다릅니다."
 
 #, php-format
@@ -633,9 +638,7 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "주문 ID \"%1$s\"의 주문 기본 품목을 찾을 수 없습니다."
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr "XML 응답에 따라 배달 공급자에게 전송된 주문 데이터가 \"%1$s\" 코드와 함께 거부되었습니다."
 
 #, php-format
@@ -706,9 +709,7 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "장바구니에 담긴 제품의 가격을 확인하세요."
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr "가격을 추가할 수 없습니다. 가격 항목의 통화 ID \"%1$s\"와 현재 사용 중인 통화 ID \"%2$s\"가 일치하지 않습니다."
 
 #, php-format
@@ -732,9 +733,7 @@ msgid "Product  not available"
 msgstr "사용할 수 없는 제품"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr "제품에 필요한 값이 모두 포함되어 있지 않습니다. 품목의 제품 코드를 사용할 수 없습니다."
 
 #, php-format
@@ -834,15 +833,11 @@ msgid "Session object not available"
 msgstr "세션 개체를 사용할 수 없음"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr "사이트를 삽입할 수 없습니다. 사이트의 사이트 ID가 상위 사이트의 사이트 ID와 다릅니다."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr "사이트를 이동할 수 없습니다. 사이트의 사이트 ID가 현재 사이트 ID, 기존 상위 사이트의 사이트 ID 또는 새 상위 사이트의 사이트 ID와 다릅니다."
 
 #, php-format
@@ -942,9 +937,7 @@ msgid "Unknown search key \"%1$s\""
 msgstr "알 수 없는 검색 키 \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr "스키마 \"%1$s\"에 대한 배달 공급자의 XML 응답의 유효성을 검사하지 못했습니다."
 
 #, php-format

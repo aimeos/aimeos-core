@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: sk\n"
+"Language-Team: Slovak (http://app.transifex.com/aimeos/aimeos-core/language/sk/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abcházsko"
+
+msgid "ae"
+msgstr "Avestský"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharčina"
+
+msgid "an"
+msgstr "Aragónsky"
+
+msgid "ar"
+msgstr "Arabčina"
+
+msgid "as"
+msgstr "Assamese"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerbajdžan"
+
+msgid "ba"
+msgstr "Baškirsko"
+
+msgid "be"
+msgstr "Bieloruský"
+
+msgid "bg"
+msgstr "Bulharský"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengálčina"
+
+msgid "bo"
+msgstr "Tibeťan"
+
+msgid "br"
+msgstr "Breton"
+
+msgid "bs"
+msgstr "Bosnianska"
+
+msgid "ca"
+msgstr "Katalánčina"
+
+msgid "ce"
+msgstr "Čečensko"
+
+msgid "ch"
+msgstr "Šamorínsky"
+
+msgid "co"
+msgstr "Korzičania"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Český"
+
+msgid "cu"
+msgstr "Cirkevná slovančina"
+
+msgid "cv"
+msgstr "Čuvaš"
+
+msgid "cy"
+msgstr "Welsh"
+
+msgid "da"
+msgstr "Dánsky"
+
+msgid "de"
+msgstr "Nemčina"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ovce"
+
+msgid "el"
+msgstr "Grécky"
+
+msgid "en"
+msgstr "Angličtina"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Španielčina"
+
+msgid "et"
+msgstr "Estónčina"
+
+msgid "eu"
+msgstr "Baskicko"
+
+msgid "fa"
+msgstr "Perzský"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Fínsky"
+
+msgid "fj"
+msgstr "Fidži"
+
+msgid "fo"
+msgstr "Faeroese"
+
+msgid "fr"
+msgstr "Francúzsky"
+
+msgid "fy"
+msgstr "Frízština"
+
+msgid "ga"
+msgstr "Írsky"
+
+msgid "gd"
+msgstr "Škótska gaelčina"
+
+msgid "gl"
+msgstr "Galícia"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Gudžarátčina"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Hebrejčina"
+
+msgid "hi"
+msgstr "Hindčina"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Chorvátsky"
+
+msgid "ht"
+msgstr "haitská kreolčina"
+
+msgid "hu"
+msgstr "Maďarský"
+
+msgid "hy"
+msgstr "Arménsky"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonézsky"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandský"
+
+msgid "it"
+msgstr "Taliansky"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Japonský"
+
+msgid "jv"
+msgstr "Javánčina"
+
+msgid "ka"
+msgstr "Gruzínsky"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazachstan"
+
+msgid "kl"
+msgstr "Grónsko"
+
+msgid "km"
+msgstr "Khméri"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Kórejský"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kašmír"
+
+msgid "ku"
+msgstr "Kurdská"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirgiz"
+
+msgid "la"
+msgstr "Latinčina"
+
+msgid "lb"
+msgstr "Luxembursko"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburský"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Litovský"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Lotyšský"
+
+msgid "mg"
+msgstr "Malgašsko"
+
+msgid "mh"
+msgstr "Marshallese"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Macedónčina"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongolský"
+
+msgid "mo"
+msgstr "Moldavsko"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malajčina"
+
+msgid "mt"
+msgstr "Maltský"
+
+msgid "my"
+msgstr "Barmský"
+
+msgid "na"
+msgstr "Nauru"
+
+msgid "nb"
+msgstr "Nórsky jazyk Bokmål"
+
+msgid "nd"
+msgstr "Severná Ndebele"
+
+msgid "ne"
+msgstr "Nepálsky"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Holandský"
+
+msgid "nn"
+msgstr "Nórsky nynorsk"
+
+msgid "no"
+msgstr "Nórsky"
+
+msgid "nr"
+msgstr "Južní Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Occitan"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetic"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Poľský"
+
+msgid "ps"
+msgstr "Pashto"
+
+msgid "pt"
+msgstr "Portugalčina"
+
+msgid "pt_BR"
+msgstr "Portugalčina (Brazília)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumunský"
+
+msgid "ru"
+msgstr "Ruský"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sanskrit"
+
+msgid "sc"
+msgstr "Sardínia"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Severní Laponci"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Sinhálčina"
+
+msgid "sk"
+msgstr "Slovenská"
+
+msgid "sl"
+msgstr "Slovinčina"
+
+msgid "sm"
+msgstr "Samoan"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somálsko"
+
+msgid "sq"
+msgstr "Albánčina"
+
+msgid "sr"
+msgstr "Srbský"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sundanese"
+
+msgid "sv"
+msgstr "Švédsky"
+
+msgid "sw"
+msgstr "Svahilčina"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tadžik"
+
+msgid "th"
+msgstr "Thai"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Turkméni"
+
+msgid "tl"
+msgstr "Tagalog"
+
+msgid "tn"
+msgstr "Setswana"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Turecký"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatar"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitský"
+
+msgid "ug"
+msgstr "Ujgur"
+
+msgid "uk"
+msgstr "Ukrajinský"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbek"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamci"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valónsky"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jidiš"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Čínsky"
+
+msgid "zu"
+msgstr "Zulu"

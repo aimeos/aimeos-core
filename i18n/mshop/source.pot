@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-08 13:34+0100\n"
+"POT-Creation-Date: 2025-02-09 13:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -306,12 +306,18 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Invalid characters in class name \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
-msgstr "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
@@ -493,7 +499,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr ""
 
 #, php-format
@@ -609,8 +617,12 @@ msgid "Operation not supported"
 msgstr "Operation not supported"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
-msgstr "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
@@ -621,8 +633,12 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Order base item with order ID \"%1$s\" not found"
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
-msgstr "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
@@ -657,20 +673,25 @@ msgid "Password object not available"
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgid ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr ""
+"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
 msgstr "PayPal Express: Invalid request \"%1$s\""
 
 #, php-format
-msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgid ""
+"PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr ""
+"PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
@@ -692,8 +713,12 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Please have a look at the prices of the products in your basket"
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
-msgstr "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
@@ -716,8 +741,12 @@ msgid "Product  not available"
 msgstr ""
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
-msgstr "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr ""
+"Product does not contain all required values. Product code for item not "
+"available."
 
 #, php-format
 msgid "Product does not contain the SKU code"
@@ -816,12 +845,20 @@ msgid "Session object not available"
 msgstr "Session object not available"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
-msgstr "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
-msgstr "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID "
+"of existing parent site or site id of new parent site."
+msgstr ""
+"Site can not be moved. Site ID of site differs from present site id, site ID "
+"of existing parent site or site id of new parent site."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
@@ -877,7 +914,8 @@ msgstr "The minimum product quantity of %1$d isn't reached"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr ""
+"The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 
 #, php-format
 msgid "Time value after \"%1$s\""
@@ -920,8 +958,12 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Unknown search key \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
-msgstr "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 
 #, php-format
 msgid "View object not available"

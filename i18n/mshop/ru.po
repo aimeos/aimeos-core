@@ -1,29 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ru\n"
+"Language-Team: Russian (http://app.transifex.com/aimeos/aimeos-core/language/ru/)\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2025-02-09 13:40+0100\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 19:54+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015\n"
-"Language-Team: Russian (http://app.transifex.com/aimeos/aimeos-core/language/ru/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -36,14 +28,22 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,14 +56,24 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+""
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -313,9 +323,7 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые символы в названии класса \"%1$s\""
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr "Недопустимые символы в дате \"%1$s\". Ожидается соблюдение формата ISO \"ГГГГ-ММ-ДД чч:мм:сс\"."
 
 #, php-format
@@ -502,9 +510,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Новый ID \"%1$s\" элемента отличается от старого ID \"%2$s\""
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
 msgstr "Вновь созданный сайт не может быть сохранен с помощью метода \"save()\". Попробуйте вместо этого использовать метод \"insert()\"."
 
 #, php-format
@@ -620,9 +626,7 @@ msgid "Operation not supported"
 msgstr "Операция не поддерживается"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr "ID заказа \"%1$s\" в ответе XML поставщика доставки отличается от хранящегося в счёте ID \"%2$s\" заказа"
 
 #, php-format
@@ -634,9 +638,7 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Не найден базовый элемент заказа с ID заказа \"%1$s\""
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr "Данные по заказу, отосланные поставщику доставки были отвергнуты с кодом \"%1$s\", относящимся к ответу XML"
 
 #, php-format
@@ -707,9 +709,7 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Взгляните на цены на товары в своей корзине"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr "Невозможно добавить цену. Несоответствие в ID валюты \"%1$s\" цены в элементе и используемой валюте с ID \"%2$s\"."
 
 #, php-format
@@ -733,9 +733,7 @@ msgid "Product  not available"
 msgstr "Товар недоступен"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr "Товар не содержит всех требуемых значений. Недоступен код товара для элемента."
 
 #, php-format
@@ -835,15 +833,11 @@ msgid "Session object not available"
 msgstr "Недоступен объект сессии"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr "Невозможно добавить сайт. ID сайта отличается от ID родительского сайта."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr "Невозможно переместить сайт. ID сайта отличается от существующего ID сайта, ID существующего родительского сайта, либо ID нового родительского сайта."
 
 #, php-format
@@ -943,9 +937,7 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Неизвестный ключ поиска \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr "Ошибка проверки ответа XML от поставщика доставки, в соответствие со схемой \"%1$s\""
 
 #, php-format

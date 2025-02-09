@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: el\n"
+"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Αμπχαζία"
+
+msgid "ae"
+msgstr "Αβεστάν"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Αμχαρικά"
+
+msgid "an"
+msgstr "Αραγονική"
+
+msgid "ar"
+msgstr "Αραβικά"
+
+msgid "as"
+msgstr "Assamese"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Αζερμπαϊτζάν"
+
+msgid "ba"
+msgstr "Μπασκίρ"
+
+msgid "be"
+msgstr "Λευκορωσία"
+
+msgid "bg"
+msgstr "Βουλγαρική"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Μπενγκάλι"
+
+msgid "bo"
+msgstr "Θιβέτ"
+
+msgid "br"
+msgstr "Μπρέτον"
+
+msgid "bs"
+msgstr "Βοσνιακή"
+
+msgid "ca"
+msgstr "Καταλανικά"
+
+msgid "ce"
+msgstr "Τσετσενία"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Κορσική"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Τσεχική"
+
+msgid "cu"
+msgstr "Εκκλησία Σλαβικά"
+
+msgid "cv"
+msgstr "Chuvash"
+
+msgid "cy"
+msgstr "Ουαλικά"
+
+msgid "da"
+msgstr "Δανικά"
+
+msgid "de"
+msgstr "Γερμανικά"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Προβατίνα"
+
+msgid "el"
+msgstr "Ελληνική"
+
+msgid "en"
+msgstr "Αγγλικά"
+
+msgid "eo"
+msgstr "Εσπεράντο"
+
+msgid "es"
+msgstr "Ισπανικά"
+
+msgid "et"
+msgstr "Εσθονικά"
+
+msgid "eu"
+msgstr "Βάσκοι"
+
+msgid "fa"
+msgstr "Περσικό"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Φινλανδική"
+
+msgid "fj"
+msgstr "Φίτζι"
+
+msgid "fo"
+msgstr "Φερόες"
+
+msgid "fr"
+msgstr "Γαλλικά"
+
+msgid "fy"
+msgstr "Frisian"
+
+msgid "ga"
+msgstr "Ιρλανδική"
+
+msgid "gd"
+msgstr "Σκωτσέζικα γαελικά"
+
+msgid "gl"
+msgstr "Γαλικία"
+
+msgid "gn"
+msgstr "Γκουαρανί"
+
+msgid "gu"
+msgstr "Γκουτζαράτι"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Χάουσα"
+
+msgid "he"
+msgstr "Εβραϊκά"
+
+msgid "hi"
+msgstr "Χίντι"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Κροατικά"
+
+msgid "ht"
+msgstr "Αϊτινή κρεολική"
+
+msgid "hu"
+msgstr "Ουγγρικό"
+
+msgid "hy"
+msgstr "Αρμένιοι"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Ινδονησιακή"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Ισλανδική"
+
+msgid "it"
+msgstr "Ιταλικά"
+
+msgid "iu"
+msgstr "Inuktitut"
+
+msgid "ja"
+msgstr "Ιαπωνικά"
+
+msgid "jv"
+msgstr "Τζαβανέζικα"
+
+msgid "ka"
+msgstr "Γεωργιανή"
+
+msgid "kg"
+msgstr "Kongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Καζακστάν"
+
+msgid "kl"
+msgstr "Γροιλανδική"
+
+msgid "km"
+msgstr "Χμερ"
+
+msgid "kn"
+msgstr "Κανάντα"
+
+msgid "ko"
+msgstr "Κορεάτικα"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Κασμίρι"
+
+msgid "ku"
+msgstr "Κούρδος"
+
+msgid "kv"
+msgstr "Κόμι"
+
+msgid "kw"
+msgstr "Cornish"
+
+msgid "ky"
+msgstr "Kirghiz"
+
+msgid "la"
+msgstr "Λατινικά"
+
+msgid "lb"
+msgstr "Λουξεμβούργο"
+
+msgid "lg"
+msgstr "Λουγκάντα"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Λάος"
+
+msgid "lt"
+msgstr "Λιθουανικά"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Λετονία"
+
+msgid "mg"
+msgstr "Μαδαγασκάρη"
+
+msgid "mh"
+msgstr "Μάρσαλ"
+
+msgid "mi"
+msgstr "Māori"
+
+msgid "mk"
+msgstr "Μακεδονικό"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Μογγολικά"
+
+msgid "mo"
+msgstr "Μολδαβική"
+
+msgid "mr"
+msgstr "Μαράθι"
+
+msgid "ms"
+msgstr "Μαλαισία"
+
+msgid "mt"
+msgstr "Μαλτέζικα"
+
+msgid "my"
+msgstr "Βιρμανίας"
+
+msgid "na"
+msgstr "Ναούρου"
+
+msgid "nb"
+msgstr "Νορβηγικό Bokmål"
+
+msgid "nd"
+msgstr "Βόρεια Ndebele"
+
+msgid "ne"
+msgstr "Νεπάλ"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Ολλανδικά"
+
+msgid "nn"
+msgstr "Νορβηγικά Nynorsk"
+
+msgid "no"
+msgstr "Νορβηγικό"
+
+msgid "nr"
+msgstr "Νότιο Ντεντεμπέλε"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Οξιτανικά"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Οστικό"
+
+msgid "pa"
+msgstr "Punjabi"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Πολωνικά"
+
+msgid "ps"
+msgstr "Παστού"
+
+msgid "pt"
+msgstr "Πορτογαλικά"
+
+msgid "pt_BR"
+msgstr "Πορτογαλικά (Βραζιλία)"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rhaeto-Romance"
+
+msgid "rn"
+msgstr "Κιρούντι"
+
+msgid "ro"
+msgstr "Ρουμανικά"
+
+msgid "ru"
+msgstr "Ρωσική"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Σανσκριτικά"
+
+msgid "sc"
+msgstr "Σαρδηνία"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Βόρειοι Σάμι"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Σινχάλα"
+
+msgid "sk"
+msgstr "Σλοβακική"
+
+msgid "sl"
+msgstr "Σλοβενική"
+
+msgid "sm"
+msgstr "Σαμόα"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Σομαλοί"
+
+msgid "sq"
+msgstr "Αλβανικά"
+
+msgid "sr"
+msgstr "Σέρβικα"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sundanese"
+
+msgid "sv"
+msgstr "Σουηδικά"
+
+msgid "sw"
+msgstr "Σουαχίλι"
+
+msgid "ta"
+msgstr "Ταμίλ"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Τατζικιστάν"
+
+msgid "th"
+msgstr "Ταϊλάνδης"
+
+msgid "ti"
+msgstr "Tigrinya"
+
+msgid "tk"
+msgstr "Τουρκμενιστάν"
+
+msgid "tl"
+msgstr "Ταγκαλόγκ"
+
+msgid "tn"
+msgstr "Σετσουάνα"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Τουρκικά"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Τατάρ"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Ταϊτινή"
+
+msgid "ug"
+msgstr "Ουιγούρ"
+
+msgid "uk"
+msgstr "Ουκρανικό"
+
+msgid "ur"
+msgstr "Ουρντού"
+
+msgid "uz"
+msgstr "Ουζμπεκιστάν"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Βιετναμέζικα"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Walloon"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Γίντις"
+
+msgid "yo"
+msgstr "Γιορούμπα"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Κινέζικα"
+
+msgid "zu"
+msgstr "Ζουλού"

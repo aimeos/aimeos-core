@@ -1,36 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
-# a270031086f2a0d3514bc0cb507b48f6, 2019
-# a270031086f2a0d3514bc0cb507b48f6, 2019
-# Jean-Marc Kutyla, 2023
-# Laurent Georget <laurent@lgeorget.eu>, 2020-2021
-# Medzo Zeng <medzozeng@hotmail.fr>, 2019
-# Amiskatonic, 2023
-# nsendetzky, 2014
-# Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+"Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
+"Last-Translator: Jean-Marc Kutyla, 2023\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2025-02-09 13:40+0100\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 19:54+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Jean-Marc Kutyla, 2023\n"
-"Language-Team: French (http://app.transifex.com/aimeos/aimeos-core/language/fr/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -43,14 +28,22 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -63,14 +56,27 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr "%1$s\n%2$s\n%3$s\n %4$s\n%5$s\n%6$s \n%7$s\n%8$s \n%9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+""
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s\n"
+" %4$s\n"
+"%5$s\n"
+"%6$s \n"
+"%7$s\n"
+"%8$s \n"
+"%9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s, %4$s, %6$s, %7$s"
@@ -320,9 +326,7 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caractères invalides dans le nom de la catégorie \"%1$s\""
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr "Caractères invalides dans la date \"%1$s\". Le format ISO \"AAAA-MM-JJ hh:mm:ss\" est attendu."
 
 #, php-format
@@ -509,9 +513,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "La nouvelle valeur \"%1$s\" de l'entrée diffère de l'ancienne valeur \"%2$s\""
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
 msgstr "La nouvelle création de site ne peut être enregistré avec la méthode \"save()\". Essayez avec la méthode 'insert()\"."
 
 #, php-format
@@ -627,9 +629,7 @@ msgid "Operation not supported"
 msgstr "Opération non supportée"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr "La commande \"%1$s\" en réponse XML du prestataire de service diffère de la facture stockée \"%2$s\" de la commande"
 
 #, php-format
@@ -641,9 +641,7 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "L'entrée de base de commande avec la commande \"%1$s\" est introuvable"
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr "La donnée de commande envoyée au prestataire de livraison a été rejetée avec le code \"%1$s\" selon la réponse XML"
 
 #, php-format
@@ -714,9 +712,7 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Merci de vérifier les prix des produits dans votre panier"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr "Le prix ne peut pas être ajouté. La devise \"%1$s\" de l'entrée de prix et la devise \"%2$s\" actuellement utilisée ne correspondent pas."
 
 #, php-format
@@ -740,9 +736,7 @@ msgid "Product  not available"
 msgstr "Produit indisponible"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr "Le produit ne contient pas toutes les valeurs nécessaires. Code de produit pour l'entrée indisponible."
 
 #, php-format
@@ -842,15 +836,11 @@ msgid "Session object not available"
 msgstr "Objet de session indisponible"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr "Le site ne peut être ajouté. La valeur du site diffère de la valeur du site du site parent."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr "Le site ne peut être déplacé. La valeur de site du site diffère de la valeur de site actuelle, la valeur de site du site parent existant ou de la valeur de site du nouveau site parent."
 
 #, php-format
@@ -950,9 +940,7 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Clé de recherche inconnue \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr "Validation de la réponse XML du prestataire de service contre le schéma \"%1$s\" échouée"
 
 #, php-format

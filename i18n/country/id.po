@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: id\n"
+"Language-Team: Indonesian (http://app.transifex.com/aimeos/aimeos-core/language/id/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "AD"
+msgstr "Andorra"
+
+msgid "AE"
+msgstr "Uni Emirat Arab"
+
+msgid "AF"
+msgstr "Afghanistan"
+
+msgid "AG"
+msgstr "Antigua dan Barbuda"
+
+msgid "AI"
+msgstr "Anguilla"
+
+msgid "AL"
+msgstr "Albania"
+
+msgid "AM"
+msgstr "Armenia"
+
+msgid "AO"
+msgstr "Angola"
+
+msgid "AQ"
+msgstr "Antartika"
+
+msgid "AR"
+msgstr "Argentina"
+
+msgid "AS"
+msgstr "Samoa Amerika"
+
+msgid "AT"
+msgstr "Austria"
+
+msgid "AU"
+msgstr "Australia"
+
+msgid "AW"
+msgstr "Aruba"
+
+msgid "AX"
+msgstr "Kepulauan Åland"
+
+msgid "AZ"
+msgstr "Azerbaijan"
+
+msgid "BA"
+msgstr "Bosnia dan Herzegovina"
+
+msgid "BB"
+msgstr "Barbados"
+
+msgid "BD"
+msgstr "Bangladesh"
+
+msgid "BE"
+msgstr "Belgia"
+
+msgid "BF"
+msgstr "Burkina Faso"
+
+msgid "BG"
+msgstr "Bulgaria"
+
+msgid "BH"
+msgstr "Bahrain"
+
+msgid "BI"
+msgstr "Burundi"
+
+msgid "BJ"
+msgstr "Benin"
+
+msgid "BL"
+msgstr "Saint Barthélemy"
+
+msgid "BM"
+msgstr "Bermuda"
+
+msgid "BN"
+msgstr "Brunei Darussalam"
+
+msgid "BO"
+msgstr "Bolivia, Negara Plurinasional"
+
+msgid "BQ"
+msgstr "Bonaire, Sint Eustatius dan Saba"
+
+msgid "BR"
+msgstr "Brasil"
+
+msgid "BS"
+msgstr "Bahama"
+
+msgid "BT"
+msgstr "Bhutan"
+
+msgid "BV"
+msgstr "Pulau Bouvet"
+
+msgid "BW"
+msgstr "Botswana"
+
+msgid "BY"
+msgstr "Belarus"
+
+msgid "BZ"
+msgstr "Belize"
+
+msgid "CA"
+msgstr "Kanada"
+
+msgid "CC"
+msgstr "Kepulauan Cocos (Keeling)"
+
+msgid "CD"
+msgstr "Kongo, Republik Demokratik Kongo"
+
+msgid "CF"
+msgstr "Republik Afrika Tengah"
+
+msgid "CG"
+msgstr "Kongo"
+
+msgid "CH"
+msgstr "Swiss"
+
+msgid "CI"
+msgstr "Pantai Gading"
+
+msgid "CK"
+msgstr "Kepulauan Cook"
+
+msgid "CL"
+msgstr "Chili"
+
+msgid "CM"
+msgstr "Kamerun"
+
+msgid "CN"
+msgstr "Cina"
+
+msgid "CO"
+msgstr "Kolombia"
+
+msgid "CR"
+msgstr "Kosta Rika"
+
+msgid "CU"
+msgstr "Kuba"
+
+msgid "CV"
+msgstr "Tanjung Verde"
+
+msgid "CW"
+msgstr "Curaçao"
+
+msgid "CX"
+msgstr "Pulau Natal"
+
+msgid "CY"
+msgstr "Siprus"
+
+msgid "CZ"
+msgstr "Republik Ceko"
+
+msgid "DE"
+msgstr "Jerman"
+
+msgid "DJ"
+msgstr "Djibouti"
+
+msgid "DK"
+msgstr "Denmark"
+
+msgid "DM"
+msgstr "Dominika"
+
+msgid "DO"
+msgstr "Republik Dominika"
+
+msgid "DZ"
+msgstr "Aljazair"
+
+msgid "EC"
+msgstr "Ekuador"
+
+msgid "EE"
+msgstr "Estonia"
+
+msgid "EG"
+msgstr "Mesir"
+
+msgid "EH"
+msgstr "Sahara Barat"
+
+msgid "ER"
+msgstr "Eritrea"
+
+msgid "ES"
+msgstr "Spanyol"
+
+msgid "ET"
+msgstr "Ethiopia"
+
+msgid "FI"
+msgstr "Finlandia"
+
+msgid "FJ"
+msgstr "Fiji"
+
+msgid "FK"
+msgstr "Kepulauan Falkland (Malvinas)"
+
+msgid "FM"
+msgstr "Mikronesia, Negara Federasi"
+
+msgid "FO"
+msgstr "Kepulauan Faroe"
+
+msgid "FR"
+msgstr "Prancis"
+
+msgid "GA"
+msgstr "Gabon"
+
+msgid "GB"
+msgstr "Inggris Raya"
+
+msgid "GD"
+msgstr "Grenada"
+
+msgid "GE"
+msgstr "Georgia"
+
+msgid "GF"
+msgstr "Guyana Prancis"
+
+msgid "GG"
+msgstr "Guernsey"
+
+msgid "GH"
+msgstr "Ghana"
+
+msgid "GI"
+msgstr "Gibraltar"
+
+msgid "GL"
+msgstr "Greenland"
+
+msgid "GM"
+msgstr "Gambia"
+
+msgid "GN"
+msgstr "Guinea"
+
+msgid "GP"
+msgstr "Guadeloupe"
+
+msgid "GQ"
+msgstr "Guinea Khatulistiwa"
+
+msgid "GR"
+msgstr "Yunani"
+
+msgid "GS"
+msgstr "Georgia Selatan dan Kepulauan Sandwich Selatan"
+
+msgid "GT"
+msgstr "Guatemala"
+
+msgid "GU"
+msgstr "Guam"
+
+msgid "GW"
+msgstr "Guinea-Bissau"
+
+msgid "GY"
+msgstr "Guyana"
+
+msgid "HK"
+msgstr "Hong Kong"
+
+msgid "HM"
+msgstr "Pulau Heard dan Kepulauan McDonald"
+
+msgid "HN"
+msgstr "Honduras"
+
+msgid "HR"
+msgstr "Kroasia"
+
+msgid "HT"
+msgstr "Haiti"
+
+msgid "HU"
+msgstr "Hongaria"
+
+msgid "ID"
+msgstr "Indonesia"
+
+msgid "IE"
+msgstr "Irlandia"
+
+msgid "IL"
+msgstr "Israel"
+
+msgid "IM"
+msgstr "Isle of Man"
+
+msgid "IN"
+msgstr "India"
+
+msgid "IO"
+msgstr "Wilayah Samudra Hindia Inggris"
+
+msgid "IQ"
+msgstr "Irak"
+
+msgid "IR"
+msgstr "Iran, Republik Islam"
+
+msgid "IS"
+msgstr "Islandia"
+
+msgid "IT"
+msgstr "Italia"
+
+msgid "JE"
+msgstr "Jersey"
+
+msgid "JM"
+msgstr "Jamaika"
+
+msgid "JO"
+msgstr "Jordan"
+
+msgid "JP"
+msgstr "Jepang"
+
+msgid "KE"
+msgstr "Kenya"
+
+msgid "KG"
+msgstr "Kyrgyzstan"
+
+msgid "KH"
+msgstr "Kamboja"
+
+msgid "KI"
+msgstr "Kiribati"
+
+msgid "KM"
+msgstr "Komoro"
+
+msgid "KN"
+msgstr "Saint Kitts dan Nevis"
+
+msgid "KP"
+msgstr "Korea, Republik Rakyat Demokratik"
+
+msgid "KR"
+msgstr "Korea, Republik Korea"
+
+msgid "KW"
+msgstr "Kuwait"
+
+msgid "KY"
+msgstr "Kepulauan Cayman"
+
+msgid "KZ"
+msgstr "Kazakhstan"
+
+msgid "LA"
+msgstr "Republik Demokratik Rakyat Laos"
+
+msgid "LB"
+msgstr "Lebanon"
+
+msgid "LC"
+msgstr "Saint Lucia"
+
+msgid "LI"
+msgstr "Liechtenstein"
+
+msgid "LK"
+msgstr "Sri Lanka"
+
+msgid "LR"
+msgstr "Liberia"
+
+msgid "LS"
+msgstr "Lesotho"
+
+msgid "LT"
+msgstr "Lithuania"
+
+msgid "LU"
+msgstr "Luksemburg"
+
+msgid "LV"
+msgstr "Latvia"
+
+msgid "LY"
+msgstr "Libya"
+
+msgid "MA"
+msgstr "Maroko"
+
+msgid "MC"
+msgstr "Monaco"
+
+msgid "MD"
+msgstr "Moldova, Republik Moldova"
+
+msgid "ME"
+msgstr "Montenegro"
+
+msgid "MF"
+msgstr "Saint Martin (bagian Prancis)"
+
+msgid "MG"
+msgstr "Madagaskar"
+
+msgid "MH"
+msgstr "Kepulauan Marshall"
+
+msgid "MK"
+msgstr "Makedonia"
+
+msgid "ML"
+msgstr "Mali"
+
+msgid "MM"
+msgstr "Myanmar"
+
+msgid "MN"
+msgstr "Mongolia"
+
+msgid "MO"
+msgstr "Macao"
+
+msgid "MP"
+msgstr "Kepulauan Mariana Utara"
+
+msgid "MQ"
+msgstr "Martinique"
+
+msgid "MR"
+msgstr "Mauritania"
+
+msgid "MS"
+msgstr "Montserrat"
+
+msgid "MT"
+msgstr "Malta"
+
+msgid "MU"
+msgstr "Mauritius"
+
+msgid "MV"
+msgstr "Maladewa"
+
+msgid "MW"
+msgstr "Malawi"
+
+msgid "MX"
+msgstr "Meksiko"
+
+msgid "MY"
+msgstr "Malaysia"
+
+msgid "MZ"
+msgstr "Mozambik"
+
+msgid "NA"
+msgstr "Namibia"
+
+msgid "NC"
+msgstr "Kaledonia Baru"
+
+msgid "NE"
+msgstr "Niger"
+
+msgid "NF"
+msgstr "Pulau Norfolk"
+
+msgid "NG"
+msgstr "Nigeria"
+
+msgid "NI"
+msgstr "Nikaragua"
+
+msgid "NL"
+msgstr "Belanda"
+
+msgid "NO"
+msgstr "Norwegia"
+
+msgid "NP"
+msgstr "Nepal"
+
+msgid "NR"
+msgstr "Nauru"
+
+msgid "NU"
+msgstr "Niue"
+
+msgid "NZ"
+msgstr "Selandia Baru"
+
+msgid "OM"
+msgstr "Oman"
+
+msgid "PA"
+msgstr "Panama"
+
+msgid "PE"
+msgstr "Peru"
+
+msgid "PF"
+msgstr "Polinesia Prancis"
+
+msgid "PG"
+msgstr "Papua Nugini"
+
+msgid "PH"
+msgstr "Filipina"
+
+msgid "PK"
+msgstr "Pakistan"
+
+msgid "PL"
+msgstr "Polandia"
+
+msgid "PM"
+msgstr "Saint Pierre dan Miquelon"
+
+msgid "PN"
+msgstr "Pitcairn"
+
+msgid "PR"
+msgstr "Puerto Rico"
+
+msgid "PS"
+msgstr "Palestina, Negara Bagian"
+
+msgid "PT"
+msgstr "Portugal"
+
+msgid "PW"
+msgstr "Palau"
+
+msgid "PY"
+msgstr "Paraguay"
+
+msgid "QA"
+msgstr "Qatar"
+
+msgid "RE"
+msgstr "Réunion"
+
+msgid "RO"
+msgstr "Rumania"
+
+msgid "RS"
+msgstr "Serbia"
+
+msgid "RU"
+msgstr "Federasi Rusia"
+
+msgid "RW"
+msgstr "Rwanda"
+
+msgid "SA"
+msgstr "Arab Saudi"
+
+msgid "SB"
+msgstr "Kepulauan Solomon"
+
+msgid "SC"
+msgstr "Seychelles"
+
+msgid "SD"
+msgstr "Sudan"
+
+msgid "SE"
+msgstr "Swedia"
+
+msgid "SG"
+msgstr "Singapura"
+
+msgid "SH"
+msgstr "Saint Helena, Ascension dan Tristan da Cunha"
+
+msgid "SI"
+msgstr "Slovenia"
+
+msgid "SJ"
+msgstr "Svalbard dan Jan Mayen"
+
+msgid "SK"
+msgstr "Slovakia"
+
+msgid "SL"
+msgstr "Sierra Leone"
+
+msgid "SM"
+msgstr "San Marino"
+
+msgid "SN"
+msgstr "Senegal"
+
+msgid "SO"
+msgstr "Somalia"
+
+msgid "SR"
+msgstr "Suriname"
+
+msgid "SS"
+msgstr "Sudan Selatan"
+
+msgid "ST"
+msgstr "Sao Tome dan Principe"
+
+msgid "SV"
+msgstr "El Salvador"
+
+msgid "SX"
+msgstr "Sint Maarten (bagian Belanda)"
+
+msgid "SY"
+msgstr "Republik Arab Suriah"
+
+msgid "SZ"
+msgstr "Swaziland"
+
+msgid "TC"
+msgstr "Kepulauan Turks dan Caicos"
+
+msgid "TD"
+msgstr "Chad"
+
+msgid "TF"
+msgstr "Wilayah Selatan Prancis"
+
+msgid "TG"
+msgstr "Togo"
+
+msgid "TH"
+msgstr "Thailand"
+
+msgid "TJ"
+msgstr "Tajikistan"
+
+msgid "TK"
+msgstr "Tokelau"
+
+msgid "TL"
+msgstr "Timor-Leste"
+
+msgid "TM"
+msgstr "Turkmenistan"
+
+msgid "TN"
+msgstr "Tunisia"
+
+msgid "TO"
+msgstr "Tonga"
+
+msgid "TR"
+msgstr "Turki"
+
+msgid "TT"
+msgstr "Trinidad dan Tobago"
+
+msgid "TV"
+msgstr "Tuvalu"
+
+msgid "TW"
+msgstr "Taiwan"
+
+msgid "TZ"
+msgstr "Tanzania, Republik Demokratik Kongo"
+
+msgid "UA"
+msgstr "Ukraina"
+
+msgid "UG"
+msgstr "Uganda"
+
+msgid "UM"
+msgstr "Pulau-Pulau Kecil Terluar Amerika Serikat"
+
+msgid "US"
+msgstr "Amerika Serikat"
+
+msgid "UY"
+msgstr "Uruguay"
+
+msgid "UZ"
+msgstr "Uzbekistan"
+
+msgid "VA"
+msgstr "Negara Kota Vatikan (Tahta Suci)"
+
+msgid "VC"
+msgstr "Saint Vincent dan Grenadines"
+
+msgid "VE"
+msgstr "Venezuela, Republik Bolivarian"
+
+msgid "VG"
+msgstr "Kepulauan Virgin, Inggris"
+
+msgid "VI"
+msgstr "Kepulauan Virgin, A.S."
+
+msgid "VN"
+msgstr "Vietnam"
+
+msgid "VU"
+msgstr "Vanuatu"
+
+msgid "WF"
+msgstr "Wallis dan Futuna"
+
+msgid "WS"
+msgstr "Samoa"
+
+msgid "XK"
+msgstr "Kosovo"
+
+msgid "YE"
+msgstr "Yaman"
+
+msgid "YT"
+msgstr "Mayotte"
+
+msgid "ZA"
+msgstr "Afrika Selatan"
+
+msgid "ZM"
+msgstr "Zambia"
+
+msgid "ZW"
+msgstr "Zimbabwe"

@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: lv\n"
+"Language-Team: Latvian (http://app.transifex.com/aimeos/aimeos-core/language/lv/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "AD"
+msgstr "Andora"
+
+msgid "AE"
+msgstr "Apvienotie Arābu Emirāti"
+
+msgid "AF"
+msgstr "Afganistāna"
+
+msgid "AG"
+msgstr "Antigva un Barbuda"
+
+msgid "AI"
+msgstr "Angilija"
+
+msgid "AL"
+msgstr "Albānija"
+
+msgid "AM"
+msgstr "Armēnija"
+
+msgid "AO"
+msgstr "Angola"
+
+msgid "AQ"
+msgstr "Antarktīda"
+
+msgid "AR"
+msgstr "Argentīna"
+
+msgid "AS"
+msgstr "Amerikas Samoa"
+
+msgid "AT"
+msgstr "Austrija"
+
+msgid "AU"
+msgstr "Austrālija"
+
+msgid "AW"
+msgstr "Aruba"
+
+msgid "AX"
+msgstr "Ālandu salas"
+
+msgid "AZ"
+msgstr "Azerbaidžāna"
+
+msgid "BA"
+msgstr "Bosnija un Hercegovina"
+
+msgid "BB"
+msgstr "Barbadosa"
+
+msgid "BD"
+msgstr "Bangladeša"
+
+msgid "BE"
+msgstr "Beļģija"
+
+msgid "BF"
+msgstr "Burkinafaso"
+
+msgid "BG"
+msgstr "Bulgārija"
+
+msgid "BH"
+msgstr "Bahreina"
+
+msgid "BI"
+msgstr "Burundi"
+
+msgid "BJ"
+msgstr "Benina"
+
+msgid "BL"
+msgstr "Senbartelmī"
+
+msgid "BM"
+msgstr "Bermudu salas"
+
+msgid "BN"
+msgstr "Bruneja Darusalama"
+
+msgid "BO"
+msgstr "Bolīvija, daudznacionālā valsts"
+
+msgid "BQ"
+msgstr "Bonaire, Sint Eustatius un Saba"
+
+msgid "BR"
+msgstr "Brazīlija"
+
+msgid "BS"
+msgstr "Bahamu salas"
+
+msgid "BT"
+msgstr "Butāns"
+
+msgid "BV"
+msgstr "Bouvet sala"
+
+msgid "BW"
+msgstr "Botsvāna"
+
+msgid "BY"
+msgstr "Baltkrievija"
+
+msgid "BZ"
+msgstr "Beliza"
+
+msgid "CA"
+msgstr "Kanāda"
+
+msgid "CC"
+msgstr "Kokosu (Kīlinga) salas"
+
+msgid "CD"
+msgstr "Kongo, Kongo Demokrātiskā Republika"
+
+msgid "CF"
+msgstr "Centrālāfrikas Republika"
+
+msgid "CG"
+msgstr "Kongo"
+
+msgid "CH"
+msgstr "Šveice"
+
+msgid "CI"
+msgstr "Kotdivuāra"
+
+msgid "CK"
+msgstr "Kuka salas"
+
+msgid "CL"
+msgstr "Čīle"
+
+msgid "CM"
+msgstr "Kamerūna"
+
+msgid "CN"
+msgstr "Ķīna"
+
+msgid "CO"
+msgstr "Kolumbija"
+
+msgid "CR"
+msgstr "Kostarika"
+
+msgid "CU"
+msgstr "Kuba"
+
+msgid "CV"
+msgstr "Kaboverde"
+
+msgid "CW"
+msgstr "Kirasao"
+
+msgid "CX"
+msgstr "Ziemassvētku sala"
+
+msgid "CY"
+msgstr "Kipra"
+
+msgid "CZ"
+msgstr "Čehija"
+
+msgid "DE"
+msgstr "Vācija"
+
+msgid "DJ"
+msgstr "Džibutija"
+
+msgid "DK"
+msgstr "Dānija"
+
+msgid "DM"
+msgstr "Dominika"
+
+msgid "DO"
+msgstr "Dominikānas Republika"
+
+msgid "DZ"
+msgstr "Alžīrija"
+
+msgid "EC"
+msgstr "Ekvadora"
+
+msgid "EE"
+msgstr "Igaunija"
+
+msgid "EG"
+msgstr "Ēģipte"
+
+msgid "EH"
+msgstr "Rietumsahāra"
+
+msgid "ER"
+msgstr "Eritreja"
+
+msgid "ES"
+msgstr "Spānija"
+
+msgid "ET"
+msgstr "Etiopija"
+
+msgid "FI"
+msgstr "Somija"
+
+msgid "FJ"
+msgstr "Fidži"
+
+msgid "FK"
+msgstr "Folklendu salas (Malvīnas)"
+
+msgid "FM"
+msgstr "Mikronēzijas Federatīvās Valstis"
+
+msgid "FO"
+msgstr "Fēru salas"
+
+msgid "FR"
+msgstr "Francija"
+
+msgid "GA"
+msgstr "Gabona"
+
+msgid "GB"
+msgstr "Apvienotā Karaliste"
+
+msgid "GD"
+msgstr "Grenāda"
+
+msgid "GE"
+msgstr "Gruzija"
+
+msgid "GF"
+msgstr "Franču Gviāna"
+
+msgid "GG"
+msgstr "Gērnsija"
+
+msgid "GH"
+msgstr "Gana"
+
+msgid "GI"
+msgstr "Gibraltārs"
+
+msgid "GL"
+msgstr "Grenlande"
+
+msgid "GM"
+msgstr "Gambija"
+
+msgid "GN"
+msgstr "Gvineja"
+
+msgid "GP"
+msgstr "Gvadelupa"
+
+msgid "GQ"
+msgstr "Ekvatoriālā Gvineja"
+
+msgid "GR"
+msgstr "Grieķija"
+
+msgid "GS"
+msgstr "Dienviddžordžija un Dienvidsendvičas salas"
+
+msgid "GT"
+msgstr "Gvatemala"
+
+msgid "GU"
+msgstr "Guama"
+
+msgid "GW"
+msgstr "Gvineja-Bisava"
+
+msgid "GY"
+msgstr "Gajāna"
+
+msgid "HK"
+msgstr "Honkonga"
+
+msgid "HM"
+msgstr "Hērda sala un Makdonalda salas"
+
+msgid "HN"
+msgstr "Hondurasa"
+
+msgid "HR"
+msgstr "Horvātija"
+
+msgid "HT"
+msgstr "Haiti"
+
+msgid "HU"
+msgstr "Ungārija"
+
+msgid "ID"
+msgstr "Indonēzija"
+
+msgid "IE"
+msgstr "Īrija"
+
+msgid "IL"
+msgstr "Izraēla"
+
+msgid "IM"
+msgstr "Menas sala"
+
+msgid "IN"
+msgstr "Indija"
+
+msgid "IO"
+msgstr "Britu Indijas okeāna teritorija"
+
+msgid "IQ"
+msgstr "Irāka"
+
+msgid "IR"
+msgstr "Irāna, Islāma Republika"
+
+msgid "IS"
+msgstr "Islande"
+
+msgid "IT"
+msgstr "Itālija"
+
+msgid "JE"
+msgstr "Jersey"
+
+msgid "JM"
+msgstr "Jamaika"
+
+msgid "JO"
+msgstr "Jordan"
+
+msgid "JP"
+msgstr "Japāna"
+
+msgid "KE"
+msgstr "Kenija"
+
+msgid "KG"
+msgstr "Kirgizstāna"
+
+msgid "KH"
+msgstr "Kambodža"
+
+msgid "KI"
+msgstr "Kiribati"
+
+msgid "KM"
+msgstr "Komoru salas"
+
+msgid "KN"
+msgstr "Sentkitsa un Nevisa"
+
+msgid "KP"
+msgstr "Koreja, Korejas Tautas Demokrātiskā Republika"
+
+msgid "KR"
+msgstr "Koreja, Korejas Republika"
+
+msgid "KW"
+msgstr "Kuveita"
+
+msgid "KY"
+msgstr "Kaimanu salas"
+
+msgid "KZ"
+msgstr "Kazahstāna"
+
+msgid "LA"
+msgstr "Laosas Tautas Demokrātiskā Republika"
+
+msgid "LB"
+msgstr "Libāna"
+
+msgid "LC"
+msgstr "Sentlūsija"
+
+msgid "LI"
+msgstr "Lihtenšteina"
+
+msgid "LK"
+msgstr "Šrilanka"
+
+msgid "LR"
+msgstr "Libērija"
+
+msgid "LS"
+msgstr "Lesoto"
+
+msgid "LT"
+msgstr "Lietuva"
+
+msgid "LU"
+msgstr "Luksemburga"
+
+msgid "LV"
+msgstr "Latvija"
+
+msgid "LY"
+msgstr "Lībija"
+
+msgid "MA"
+msgstr "Maroka"
+
+msgid "MC"
+msgstr "Monako"
+
+msgid "MD"
+msgstr "Moldova, Moldovas Republika"
+
+msgid "ME"
+msgstr "Melnkalne"
+
+msgid "MF"
+msgstr "Senmartēna (Francijas daļa)"
+
+msgid "MG"
+msgstr "Madagaskara"
+
+msgid "MH"
+msgstr "Māršala salas"
+
+msgid "MK"
+msgstr "Maķedonija"
+
+msgid "ML"
+msgstr "Mali"
+
+msgid "MM"
+msgstr "Mjanma"
+
+msgid "MN"
+msgstr "Mongolija"
+
+msgid "MO"
+msgstr "Makao"
+
+msgid "MP"
+msgstr "Ziemeļu Marianas salas"
+
+msgid "MQ"
+msgstr "Martinika"
+
+msgid "MR"
+msgstr "Mauritānija"
+
+msgid "MS"
+msgstr "Montserrata"
+
+msgid "MT"
+msgstr "Malta"
+
+msgid "MU"
+msgstr "Maurīcija"
+
+msgid "MV"
+msgstr "Maldīvu salas"
+
+msgid "MW"
+msgstr "Malāvija"
+
+msgid "MX"
+msgstr "Meksika"
+
+msgid "MY"
+msgstr "Malaizija"
+
+msgid "MZ"
+msgstr "Mozambika"
+
+msgid "NA"
+msgstr "Namībija"
+
+msgid "NC"
+msgstr "Jaunā Kaledonija"
+
+msgid "NE"
+msgstr "Nigēra"
+
+msgid "NF"
+msgstr "Norfolkas sala"
+
+msgid "NG"
+msgstr "Nigērija"
+
+msgid "NI"
+msgstr "Nikaragva"
+
+msgid "NL"
+msgstr "Nīderlande"
+
+msgid "NO"
+msgstr "Norvēģija"
+
+msgid "NP"
+msgstr "Nepāla"
+
+msgid "NR"
+msgstr "Nauru"
+
+msgid "NU"
+msgstr "Niue"
+
+msgid "NZ"
+msgstr "Jaunzēlande"
+
+msgid "OM"
+msgstr "Omāna"
+
+msgid "PA"
+msgstr "Panama"
+
+msgid "PE"
+msgstr "Peru"
+
+msgid "PF"
+msgstr "Franču Polinēzija"
+
+msgid "PG"
+msgstr "Papua-Jaungvineja"
+
+msgid "PH"
+msgstr "Filipīnas"
+
+msgid "PK"
+msgstr "Pakistāna"
+
+msgid "PL"
+msgstr "Polija"
+
+msgid "PM"
+msgstr "Senpjēra un Mikelona"
+
+msgid "PN"
+msgstr "Pitkērna"
+
+msgid "PR"
+msgstr "Puertoriko"
+
+msgid "PS"
+msgstr "Palestīna, valsts"
+
+msgid "PT"
+msgstr "Portugāle"
+
+msgid "PW"
+msgstr "Palau"
+
+msgid "PY"
+msgstr "Paragvaja"
+
+msgid "QA"
+msgstr "Katara"
+
+msgid "RE"
+msgstr "Reinjona"
+
+msgid "RO"
+msgstr "Rumānija"
+
+msgid "RS"
+msgstr "Serbija"
+
+msgid "RU"
+msgstr "Krievijas Federācija"
+
+msgid "RW"
+msgstr "Ruanda"
+
+msgid "SA"
+msgstr "Saūda Arābija"
+
+msgid "SB"
+msgstr "Zālamana salas"
+
+msgid "SC"
+msgstr "Seišelu salas"
+
+msgid "SD"
+msgstr "Sudāna"
+
+msgid "SE"
+msgstr "Zviedrija"
+
+msgid "SG"
+msgstr "Singapūra"
+
+msgid "SH"
+msgstr "Svētās Helēnas sala, Augšāmcelšanās un Tristana da Kunha"
+
+msgid "SI"
+msgstr "Slovēnija"
+
+msgid "SJ"
+msgstr "Svalbāra un Jana Majena"
+
+msgid "SK"
+msgstr "Slovākija"
+
+msgid "SL"
+msgstr "Sjerraleone"
+
+msgid "SM"
+msgstr "Sanmarīno"
+
+msgid "SN"
+msgstr "Senegāla"
+
+msgid "SO"
+msgstr "Somālija"
+
+msgid "SR"
+msgstr "Surinama"
+
+msgid "SS"
+msgstr "Dienvidsudāna"
+
+msgid "ST"
+msgstr "Santome un Prinsipi"
+
+msgid "SV"
+msgstr "Salvadora"
+
+msgid "SX"
+msgstr "Sintmartena (holandiešu daļa)"
+
+msgid "SY"
+msgstr "Sīrijas Arābu Republika"
+
+msgid "SZ"
+msgstr "Svazilenda"
+
+msgid "TC"
+msgstr "Tērksas un Kaikosas salas"
+
+msgid "TD"
+msgstr "Chad"
+
+msgid "TF"
+msgstr "Francijas dienvidu teritorijas"
+
+msgid "TG"
+msgstr "Togo"
+
+msgid "TH"
+msgstr "Taizeme"
+
+msgid "TJ"
+msgstr "Tadžikistāna"
+
+msgid "TK"
+msgstr "Tokelau"
+
+msgid "TL"
+msgstr "Austrumtimora"
+
+msgid "TM"
+msgstr "Turkmenistāna"
+
+msgid "TN"
+msgstr "Tunisija"
+
+msgid "TO"
+msgstr "Tonga"
+
+msgid "TR"
+msgstr "Turcija"
+
+msgid "TT"
+msgstr "Trinidāda un Tobāgo"
+
+msgid "TV"
+msgstr "Tuvalu"
+
+msgid "TW"
+msgstr "Taivāna"
+
+msgid "TZ"
+msgstr "Tanzānija, Apvienotā Republika"
+
+msgid "UA"
+msgstr "Ukraina"
+
+msgid "UG"
+msgstr "Uganda"
+
+msgid "UM"
+msgstr "Amerikas Savienotās Valstis Mazās attālās salas"
+
+msgid "US"
+msgstr "Amerikas Savienotās Valstis"
+
+msgid "UY"
+msgstr "Urugvaja"
+
+msgid "UZ"
+msgstr "Uzbekistāna"
+
+msgid "VA"
+msgstr "Vatikāna Pilsētvalsts (Svētais Krēsls)"
+
+msgid "VC"
+msgstr "Sentvinsenta un Grenadīnas"
+
+msgid "VE"
+msgstr "Venecuēla, Bolīvāra Republika"
+
+msgid "VG"
+msgstr "Virdžīnu salas, Britu"
+
+msgid "VI"
+msgstr "Virdžīnu salas, ASV"
+
+msgid "VN"
+msgstr "Vjetnama"
+
+msgid "VU"
+msgstr "Vanuatu"
+
+msgid "WF"
+msgstr "Volisa un Futuna"
+
+msgid "WS"
+msgstr "Samoa"
+
+msgid "XK"
+msgstr "Kosova"
+
+msgid "YE"
+msgstr "Jemena"
+
+msgid "YT"
+msgstr "Majota"
+
+msgid "ZA"
+msgstr "Dienvidāfrika"
+
+msgid "ZM"
+msgstr "Zambija"
+
+msgid "ZW"
+msgstr "Zimbabve"

@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: el\n"
+"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "AD"
+msgstr "Ανδόρα"
+
+msgid "AE"
+msgstr "Ηνωμένα Αραβικά Εμιράτα"
+
+msgid "AF"
+msgstr "Αφγανιστάν"
+
+msgid "AG"
+msgstr "Αντίγκουα και Μπαρμπούντα"
+
+msgid "AI"
+msgstr "Ανγκουίλα"
+
+msgid "AL"
+msgstr "Αλβανία"
+
+msgid "AM"
+msgstr "Αρμενία"
+
+msgid "AO"
+msgstr "Αγκόλα"
+
+msgid "AQ"
+msgstr "Ανταρκτική"
+
+msgid "AR"
+msgstr "Αργεντινή"
+
+msgid "AS"
+msgstr "Αμερικανική Σαμόα"
+
+msgid "AT"
+msgstr "Αυστρία"
+
+msgid "AU"
+msgstr "Αυστραλία"
+
+msgid "AW"
+msgstr "Αρούμπα"
+
+msgid "AX"
+msgstr "Νησιά Åland"
+
+msgid "AZ"
+msgstr "Αζερμπαϊτζάν"
+
+msgid "BA"
+msgstr "Βοσνία-Ερζεγοβίνη"
+
+msgid "BB"
+msgstr "Μπαρμπάντος"
+
+msgid "BD"
+msgstr "Μπαγκλαντές"
+
+msgid "BE"
+msgstr "Βέλγιο"
+
+msgid "BF"
+msgstr "Μπουρκίνα Φάσο"
+
+msgid "BG"
+msgstr "Βουλγαρία"
+
+msgid "BH"
+msgstr "Μπαχρέιν"
+
+msgid "BI"
+msgstr "Μπουρούντι"
+
+msgid "BJ"
+msgstr "Μπενίν"
+
+msgid "BL"
+msgstr "Saint Barthélemy"
+
+msgid "BM"
+msgstr "Βερμούδες"
+
+msgid "BN"
+msgstr "Μπρουνέι Νταρουσαλάμ"
+
+msgid "BO"
+msgstr "Βολιβία, Πολυεθνικό Κράτος της"
+
+msgid "BQ"
+msgstr "Bonaire, Sint Eustatius και Saba"
+
+msgid "BR"
+msgstr "Βραζιλία"
+
+msgid "BS"
+msgstr "Μπαχάμες"
+
+msgid "BT"
+msgstr "Μπουτάν"
+
+msgid "BV"
+msgstr "Νήσος Μπουβέ"
+
+msgid "BW"
+msgstr "Μποτσουάνα"
+
+msgid "BY"
+msgstr "Λευκορωσία"
+
+msgid "BZ"
+msgstr "Μπελίζ"
+
+msgid "CA"
+msgstr "Καναδάς"
+
+msgid "CC"
+msgstr "Νήσοι Κόκος (Keeling)"
+
+msgid "CD"
+msgstr "Κονγκό, Λαϊκή Δημοκρατία του"
+
+msgid "CF"
+msgstr "Κεντροαφρικανική Δημοκρατία"
+
+msgid "CG"
+msgstr "Κονγκό"
+
+msgid "CH"
+msgstr "Ελβετία"
+
+msgid "CI"
+msgstr "Ακτή Ελεφαντοστού"
+
+msgid "CK"
+msgstr "Νήσοι Κουκ"
+
+msgid "CL"
+msgstr "Χιλή"
+
+msgid "CM"
+msgstr "Καμερούν"
+
+msgid "CN"
+msgstr "Κίνα"
+
+msgid "CO"
+msgstr "Κολομβία"
+
+msgid "CR"
+msgstr "Κόστα Ρίκα"
+
+msgid "CU"
+msgstr "Κούβα"
+
+msgid "CV"
+msgstr "Πράσινο Ακρωτήριο"
+
+msgid "CW"
+msgstr "Κουρασάο"
+
+msgid "CX"
+msgstr "Νησί των Χριστουγέννων"
+
+msgid "CY"
+msgstr "Κύπρος"
+
+msgid "CZ"
+msgstr "Τσεχική Δημοκρατία"
+
+msgid "DE"
+msgstr "Γερμανία"
+
+msgid "DJ"
+msgstr "Τζιμπουτί"
+
+msgid "DK"
+msgstr "Δανία"
+
+msgid "DM"
+msgstr "Ντομίνικα"
+
+msgid "DO"
+msgstr "Δομινικανή Δημοκρατία"
+
+msgid "DZ"
+msgstr "Αλγερία"
+
+msgid "EC"
+msgstr "Εκουαδόρ"
+
+msgid "EE"
+msgstr "Εσθονία"
+
+msgid "EG"
+msgstr "Αίγυπτος"
+
+msgid "EH"
+msgstr "Δυτική Σαχάρα"
+
+msgid "ER"
+msgstr "Ερυθραία"
+
+msgid "ES"
+msgstr "Ισπανία"
+
+msgid "ET"
+msgstr "Αιθιοπία"
+
+msgid "FI"
+msgstr "Φινλανδία"
+
+msgid "FJ"
+msgstr "Φίτζι"
+
+msgid "FK"
+msgstr "Νήσοι Φόκλαντ (Μαλβίνες)"
+
+msgid "FM"
+msgstr "Μικρονησία, Ομόσπονδες Πολιτείες της"
+
+msgid "FO"
+msgstr "Νήσοι Φερόε"
+
+msgid "FR"
+msgstr "Γαλλία"
+
+msgid "GA"
+msgstr "Γκαμπόν"
+
+msgid "GB"
+msgstr "Ηνωμένο Βασίλειο"
+
+msgid "GD"
+msgstr "Γρενάδα"
+
+msgid "GE"
+msgstr "Γεωργία"
+
+msgid "GF"
+msgstr "Γαλλική Γουιάνα"
+
+msgid "GG"
+msgstr "Guernsey"
+
+msgid "GH"
+msgstr "Γκάνα"
+
+msgid "GI"
+msgstr "Γιβραλτάρ"
+
+msgid "GL"
+msgstr "Γροιλανδία"
+
+msgid "GM"
+msgstr "Γκάμπια"
+
+msgid "GN"
+msgstr "Γουινέα"
+
+msgid "GP"
+msgstr "Γουαδελούπη"
+
+msgid "GQ"
+msgstr "Ισημερινή Γουινέα"
+
+msgid "GR"
+msgstr "Ελλάδα"
+
+msgid "GS"
+msgstr "Νότια Γεωργία και Νότιες Σάντουιτς Νήσοι"
+
+msgid "GT"
+msgstr "Γουατεμάλα"
+
+msgid "GU"
+msgstr "Γκουάμ"
+
+msgid "GW"
+msgstr "Γουινέα-Μπισσάου"
+
+msgid "GY"
+msgstr "Γουιάνα"
+
+msgid "HK"
+msgstr "Χονγκ Κονγκ"
+
+msgid "HM"
+msgstr "Νήσος Heard και νησιά McDonald"
+
+msgid "HN"
+msgstr "Ονδούρα"
+
+msgid "HR"
+msgstr "Κροατία"
+
+msgid "HT"
+msgstr "Αϊτή"
+
+msgid "HU"
+msgstr "Ουγγαρία"
+
+msgid "ID"
+msgstr "Ινδονησία"
+
+msgid "IE"
+msgstr "Ιρλανδία"
+
+msgid "IL"
+msgstr "Ισραήλ"
+
+msgid "IM"
+msgstr "Νήσος Μαν"
+
+msgid "IN"
+msgstr "Ινδία"
+
+msgid "IO"
+msgstr "Βρετανικό έδαφος του Ινδικού Ωκεανού"
+
+msgid "IQ"
+msgstr "Ιράκ"
+
+msgid "IR"
+msgstr "Ιράν, Ισλαμική Δημοκρατία του"
+
+msgid "IS"
+msgstr "Ισλανδία"
+
+msgid "IT"
+msgstr "Ιταλία"
+
+msgid "JE"
+msgstr "Τζέρσεϊ"
+
+msgid "JM"
+msgstr "Τζαμάικα"
+
+msgid "JO"
+msgstr "Ιορδανία"
+
+msgid "JP"
+msgstr "Ιαπωνία"
+
+msgid "KE"
+msgstr "Κένυα"
+
+msgid "KG"
+msgstr "Κιργιστάν"
+
+msgid "KH"
+msgstr "Καμπότζη"
+
+msgid "KI"
+msgstr "Κιριμπάτι"
+
+msgid "KM"
+msgstr "Κομόρες"
+
+msgid "KN"
+msgstr "Άγιος Χριστόφορος και Νέβις"
+
+msgid "KP"
+msgstr "Κορέα, Λαϊκή Δημοκρατία της Κορέας"
+
+msgid "KR"
+msgstr "Κορέα, Δημοκρατία της Κορέας"
+
+msgid "KW"
+msgstr "Κουβέιτ"
+
+msgid "KY"
+msgstr "Νησιά Κέιμαν"
+
+msgid "KZ"
+msgstr "Καζακστάν"
+
+msgid "LA"
+msgstr "Λαϊκή Δημοκρατία του Λάος"
+
+msgid "LB"
+msgstr "Λίβανος"
+
+msgid "LC"
+msgstr "Αγία Λουκία"
+
+msgid "LI"
+msgstr "Λιχτενστάιν"
+
+msgid "LK"
+msgstr "Σρι Λάνκα"
+
+msgid "LR"
+msgstr "Λιβερία"
+
+msgid "LS"
+msgstr "Λεσότο"
+
+msgid "LT"
+msgstr "Λιθουανία"
+
+msgid "LU"
+msgstr "Λουξεμβούργο"
+
+msgid "LV"
+msgstr "Λετονία"
+
+msgid "LY"
+msgstr "Λιβύη"
+
+msgid "MA"
+msgstr "Μαρόκο"
+
+msgid "MC"
+msgstr "Μονακό"
+
+msgid "MD"
+msgstr "Μολδαβία, Δημοκρατία της"
+
+msgid "ME"
+msgstr "Μαυροβούνιο"
+
+msgid "MF"
+msgstr "Άγιος Μαρτίνος (γαλλικό τμήμα)"
+
+msgid "MG"
+msgstr "Μαδαγασκάρη"
+
+msgid "MH"
+msgstr "Νήσοι Μάρσαλ"
+
+msgid "MK"
+msgstr "Μακεδονία"
+
+msgid "ML"
+msgstr "Μάλι"
+
+msgid "MM"
+msgstr "Μιανμάρ"
+
+msgid "MN"
+msgstr "Μογγολία"
+
+msgid "MO"
+msgstr "Μακάο"
+
+msgid "MP"
+msgstr "Βόρειες Μαριάνες"
+
+msgid "MQ"
+msgstr "Μαρτινίκα"
+
+msgid "MR"
+msgstr "Μαυριτανία"
+
+msgid "MS"
+msgstr "Montserrat"
+
+msgid "MT"
+msgstr "Μάλτα"
+
+msgid "MU"
+msgstr "Μαυρίκιος"
+
+msgid "MV"
+msgstr "Μαλδίβες"
+
+msgid "MW"
+msgstr "Μαλάουι"
+
+msgid "MX"
+msgstr "Μεξικό"
+
+msgid "MY"
+msgstr "Μαλαισία"
+
+msgid "MZ"
+msgstr "Μοζαμβίκη"
+
+msgid "NA"
+msgstr "Ναμίμπια"
+
+msgid "NC"
+msgstr "Νέα Καληδονία"
+
+msgid "NE"
+msgstr "Νίγηρας"
+
+msgid "NF"
+msgstr "Νήσος Νόρφολκ"
+
+msgid "NG"
+msgstr "Νιγηρία"
+
+msgid "NI"
+msgstr "Νικαράγουα"
+
+msgid "NL"
+msgstr "Ολλανδία"
+
+msgid "NO"
+msgstr "Νορβηγία"
+
+msgid "NP"
+msgstr "Νεπάλ"
+
+msgid "NR"
+msgstr "Ναούρου"
+
+msgid "NU"
+msgstr "Niue"
+
+msgid "NZ"
+msgstr "Νέα Ζηλανδία"
+
+msgid "OM"
+msgstr "Ομάν"
+
+msgid "PA"
+msgstr "Παναμάς"
+
+msgid "PE"
+msgstr "Περού"
+
+msgid "PF"
+msgstr "Γαλλική Πολυνησία"
+
+msgid "PG"
+msgstr "Παπούα Νέα Γουινέα"
+
+msgid "PH"
+msgstr "Φιλιππίνες"
+
+msgid "PK"
+msgstr "Πακιστάν"
+
+msgid "PL"
+msgstr "Πολωνία"
+
+msgid "PM"
+msgstr "Σαιν Πιερ και Μικελόν"
+
+msgid "PN"
+msgstr "Pitcairn"
+
+msgid "PR"
+msgstr "Πουέρτο Ρίκο"
+
+msgid "PS"
+msgstr "Παλαιστίνη, κράτος της"
+
+msgid "PT"
+msgstr "Πορτογαλία"
+
+msgid "PW"
+msgstr "Παλάου"
+
+msgid "PY"
+msgstr "Παραγουάη"
+
+msgid "QA"
+msgstr "Κατάρ"
+
+msgid "RE"
+msgstr "Ρεϋνιόν"
+
+msgid "RO"
+msgstr "Ρουμανία"
+
+msgid "RS"
+msgstr "Σερβία"
+
+msgid "RU"
+msgstr "Ρωσική Ομοσπονδία"
+
+msgid "RW"
+msgstr "Ρουάντα"
+
+msgid "SA"
+msgstr "Σαουδική Αραβία"
+
+msgid "SB"
+msgstr "Νήσοι Σολομώντος"
+
+msgid "SC"
+msgstr "Σεϋχέλλες"
+
+msgid "SD"
+msgstr "Σουδάν"
+
+msgid "SE"
+msgstr "Σουηδία"
+
+msgid "SG"
+msgstr "Σιγκαπούρη"
+
+msgid "SH"
+msgstr "Αγία Ελένη, Ανάληψη και Tristan da Cunha"
+
+msgid "SI"
+msgstr "Σλοβενία"
+
+msgid "SJ"
+msgstr "Svalbard και Jan Mayen"
+
+msgid "SK"
+msgstr "Σλοβακία"
+
+msgid "SL"
+msgstr "Σιέρα Λεόνε"
+
+msgid "SM"
+msgstr "Άγιος Μαρίνος"
+
+msgid "SN"
+msgstr "Σενεγάλη"
+
+msgid "SO"
+msgstr "Σομαλία"
+
+msgid "SR"
+msgstr "Σουρινάμ"
+
+msgid "SS"
+msgstr "Νότιο Σουδάν"
+
+msgid "ST"
+msgstr "Σάο Τομέ και Πρίνσιπε"
+
+msgid "SV"
+msgstr "Ελ Σαλβαδόρ"
+
+msgid "SX"
+msgstr "Sint Maarten (ολλανδικό τμήμα)"
+
+msgid "SY"
+msgstr "Συριακή Αραβική Δημοκρατία"
+
+msgid "SZ"
+msgstr "Σουαζιλάνδη"
+
+msgid "TC"
+msgstr "Νήσοι Τερκς και Κάικος"
+
+msgid "TD"
+msgstr "Τσαντ"
+
+msgid "TF"
+msgstr "Γαλλικά νότια εδάφη"
+
+msgid "TG"
+msgstr "Τόγκο"
+
+msgid "TH"
+msgstr "Ταϊλάνδη"
+
+msgid "TJ"
+msgstr "Τατζικιστάν"
+
+msgid "TK"
+msgstr "Τοκελάου"
+
+msgid "TL"
+msgstr "Τιμόρ-Λέστε"
+
+msgid "TM"
+msgstr "Τουρκμενιστάν"
+
+msgid "TN"
+msgstr "Τυνησία"
+
+msgid "TO"
+msgstr "Τόνγκα"
+
+msgid "TR"
+msgstr "Τουρκία"
+
+msgid "TT"
+msgstr "Τρινιντάντ και Τομπάγκο"
+
+msgid "TV"
+msgstr "Τουβαλού"
+
+msgid "TW"
+msgstr "Ταϊβάν"
+
+msgid "TZ"
+msgstr "Τανζανία, Ηνωμένη Δημοκρατία της"
+
+msgid "UA"
+msgstr "Ουκρανία"
+
+msgid "UG"
+msgstr "Ουγκάντα"
+
+msgid "UM"
+msgstr "Μικρά απομακρυσμένα νησιά των Ηνωμένων Πολιτειών"
+
+msgid "US"
+msgstr "Ηνωμένες Πολιτείες"
+
+msgid "UY"
+msgstr "Ουρουγουάη"
+
+msgid "UZ"
+msgstr "Ουζμπεκιστάν"
+
+msgid "VA"
+msgstr "Κράτος της Πόλης του Βατικανού (Αγία Έδρα)"
+
+msgid "VC"
+msgstr "Άγιος Βικέντιος και Γρεναδίνες"
+
+msgid "VE"
+msgstr "Βενεζουέλα, Μπολιβαριανή Δημοκρατία της"
+
+msgid "VG"
+msgstr "Παρθένοι Νήσοι, Βρετανικές"
+
+msgid "VI"
+msgstr "Παρθένοι Νήσοι, ΗΠΑ"
+
+msgid "VN"
+msgstr "Βιετνάμ"
+
+msgid "VU"
+msgstr "Βανουάτου"
+
+msgid "WF"
+msgstr "Wallis και Futuna"
+
+msgid "WS"
+msgstr "Σαμόα"
+
+msgid "XK"
+msgstr "Κόσοβο"
+
+msgid "YE"
+msgstr "Υεμένη"
+
+msgid "YT"
+msgstr "Μαγιότ"
+
+msgid "ZA"
+msgstr "Νότια Αφρική"
+
+msgid "ZM"
+msgstr "Ζάμπια"
+
+msgid "ZW"
+msgstr "Ζιμπάμπουε"

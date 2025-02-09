@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ja\n"
+"Language-Team: Japanese (http://app.transifex.com/aimeos/aimeos-core/language/ja/)\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+
+msgid "AD"
+msgstr "アンドラ"
+
+msgid "AE"
+msgstr "アラブ首長国連邦"
+
+msgid "AF"
+msgstr "アフガニスタン"
+
+msgid "AG"
+msgstr "アンティグア・バーブーダ"
+
+msgid "AI"
+msgstr "アングィラ"
+
+msgid "AL"
+msgstr "アルバニア"
+
+msgid "AM"
+msgstr "アルメニア"
+
+msgid "AO"
+msgstr "アンゴラ"
+
+msgid "AQ"
+msgstr "南極大陸"
+
+msgid "AR"
+msgstr "アルゼンチン"
+
+msgid "AS"
+msgstr "米領サモア"
+
+msgid "AT"
+msgstr "オーストリア"
+
+msgid "AU"
+msgstr "オーストラリア"
+
+msgid "AW"
+msgstr "アルバ"
+
+msgid "AX"
+msgstr "オーランド諸島"
+
+msgid "AZ"
+msgstr "アゼルバイジャン"
+
+msgid "BA"
+msgstr "ボスニア・ヘルツェゴビナ"
+
+msgid "BB"
+msgstr "バルバドス"
+
+msgid "BD"
+msgstr "バングラデシュ"
+
+msgid "BE"
+msgstr "ベルギー"
+
+msgid "BF"
+msgstr "ブルキナファソ"
+
+msgid "BG"
+msgstr "ブルガリア"
+
+msgid "BH"
+msgstr "バーレーン"
+
+msgid "BI"
+msgstr "ブルンジ"
+
+msgid "BJ"
+msgstr "ベナン"
+
+msgid "BL"
+msgstr "サン・バルテルミー島"
+
+msgid "BM"
+msgstr "バーミューダ"
+
+msgid "BN"
+msgstr "ブルネイ"
+
+msgid "BO"
+msgstr "ボリビア多民族国"
+
+msgid "BQ"
+msgstr "ボネール島、シント・ユースタティウス島、サバ島"
+
+msgid "BR"
+msgstr "ブラジル"
+
+msgid "BS"
+msgstr "バハマ"
+
+msgid "BT"
+msgstr "ブータン"
+
+msgid "BV"
+msgstr "ブーベ島"
+
+msgid "BW"
+msgstr "ボツワナ"
+
+msgid "BY"
+msgstr "ベラルーシ"
+
+msgid "BZ"
+msgstr "ベリーズ"
+
+msgid "CA"
+msgstr "カナダ"
+
+msgid "CC"
+msgstr "ココス（キーリング）諸島"
+
+msgid "CD"
+msgstr "コンゴ民主共和国"
+
+msgid "CF"
+msgstr "中央アフリカ共和国"
+
+msgid "CG"
+msgstr "コンゴ"
+
+msgid "CH"
+msgstr "スイス"
+
+msgid "CI"
+msgstr "コートジボワール"
+
+msgid "CK"
+msgstr "クック諸島"
+
+msgid "CL"
+msgstr "チリ"
+
+msgid "CM"
+msgstr "カメルーン"
+
+msgid "CN"
+msgstr "中国"
+
+msgid "CO"
+msgstr "コロンビア"
+
+msgid "CR"
+msgstr "コスタリカ"
+
+msgid "CU"
+msgstr "キューバ"
+
+msgid "CV"
+msgstr "カーボベルデ"
+
+msgid "CW"
+msgstr "キュラソー"
+
+msgid "CX"
+msgstr "クリスマス島"
+
+msgid "CY"
+msgstr "キプロス"
+
+msgid "CZ"
+msgstr "チェコ共和国"
+
+msgid "DE"
+msgstr "ドイツ"
+
+msgid "DJ"
+msgstr "ジブチ"
+
+msgid "DK"
+msgstr "デンマーク"
+
+msgid "DM"
+msgstr "ドミニカ"
+
+msgid "DO"
+msgstr "ドミニカ共和国"
+
+msgid "DZ"
+msgstr "アルジェリア"
+
+msgid "EC"
+msgstr "エクアドル"
+
+msgid "EE"
+msgstr "エストニア"
+
+msgid "EG"
+msgstr "エジプト"
+
+msgid "EH"
+msgstr "西サハラ"
+
+msgid "ER"
+msgstr "エリトリア"
+
+msgid "ES"
+msgstr "スペイン"
+
+msgid "ET"
+msgstr "エチオピア"
+
+msgid "FI"
+msgstr "フィンランド"
+
+msgid "FJ"
+msgstr "フィジー"
+
+msgid "FK"
+msgstr "フォークランド諸島"
+
+msgid "FM"
+msgstr "ミクロネシア連邦"
+
+msgid "FO"
+msgstr "フェロー諸島"
+
+msgid "FR"
+msgstr "フランス"
+
+msgid "GA"
+msgstr "ガボン"
+
+msgid "GB"
+msgstr "イギリス"
+
+msgid "GD"
+msgstr "グレナダ"
+
+msgid "GE"
+msgstr "グルジア"
+
+msgid "GF"
+msgstr "フランス領ギアナ"
+
+msgid "GG"
+msgstr "ガーンジー"
+
+msgid "GH"
+msgstr "ガーナ"
+
+msgid "GI"
+msgstr "ジブラルタル"
+
+msgid "GL"
+msgstr "グリーンランド"
+
+msgid "GM"
+msgstr "ガンビア"
+
+msgid "GN"
+msgstr "ギニア"
+
+msgid "GP"
+msgstr "グアドループ"
+
+msgid "GQ"
+msgstr "赤道ギニア"
+
+msgid "GR"
+msgstr "ギリシャ"
+
+msgid "GS"
+msgstr "サウスジョージア・サウスサンドウィッチ諸島"
+
+msgid "GT"
+msgstr "グアテマラ"
+
+msgid "GU"
+msgstr "グアム"
+
+msgid "GW"
+msgstr "ギニアビサウ"
+
+msgid "GY"
+msgstr "ガイアナ"
+
+msgid "HK"
+msgstr "香港"
+
+msgid "HM"
+msgstr "ハード島とマクドナルド諸島"
+
+msgid "HN"
+msgstr "ホンジュラス"
+
+msgid "HR"
+msgstr "クロアチア"
+
+msgid "HT"
+msgstr "ハイチ"
+
+msgid "HU"
+msgstr "ハンガリー"
+
+msgid "ID"
+msgstr "インドネシア"
+
+msgid "IE"
+msgstr "アイルランド"
+
+msgid "IL"
+msgstr "イスラエル"
+
+msgid "IM"
+msgstr "マン島"
+
+msgid "IN"
+msgstr "インド"
+
+msgid "IO"
+msgstr "英領インド洋地域"
+
+msgid "IQ"
+msgstr "イラク"
+
+msgid "IR"
+msgstr "イラン・イスラム共和国"
+
+msgid "IS"
+msgstr "アイスランド"
+
+msgid "IT"
+msgstr "イタリア"
+
+msgid "JE"
+msgstr "ジャージー"
+
+msgid "JM"
+msgstr "ジャマイカ"
+
+msgid "JO"
+msgstr "ヨルダン"
+
+msgid "JP"
+msgstr "日本"
+
+msgid "KE"
+msgstr "ケニア"
+
+msgid "KG"
+msgstr "キルギス"
+
+msgid "KH"
+msgstr "カンボジア"
+
+msgid "KI"
+msgstr "キリバス"
+
+msgid "KM"
+msgstr "コモロ"
+
+msgid "KN"
+msgstr "セントクリストファー・ネイビス"
+
+msgid "KP"
+msgstr "朝鮮民主主義人民共和国"
+
+msgid "KR"
+msgstr "大韓民国"
+
+msgid "KW"
+msgstr "クウェート"
+
+msgid "KY"
+msgstr "ケイマン諸島"
+
+msgid "KZ"
+msgstr "カザフスタン"
+
+msgid "LA"
+msgstr "ラオス人民民主共和国"
+
+msgid "LB"
+msgstr "レバノン"
+
+msgid "LC"
+msgstr "セントルシア"
+
+msgid "LI"
+msgstr "リヒテンシュタイン"
+
+msgid "LK"
+msgstr "スリランカ"
+
+msgid "LR"
+msgstr "リベリア"
+
+msgid "LS"
+msgstr "レソト"
+
+msgid "LT"
+msgstr "リトアニア"
+
+msgid "LU"
+msgstr "ルクセンブルク"
+
+msgid "LV"
+msgstr "ラトビア"
+
+msgid "LY"
+msgstr "リビア"
+
+msgid "MA"
+msgstr "モロッコ"
+
+msgid "MC"
+msgstr "モナコ"
+
+msgid "MD"
+msgstr "モルドバ共和国"
+
+msgid "ME"
+msgstr "モンテネグロ"
+
+msgid "MF"
+msgstr "セント・マーチン島（フランス領）"
+
+msgid "MG"
+msgstr "マダガスカル"
+
+msgid "MH"
+msgstr "マーシャル諸島"
+
+msgid "MK"
+msgstr "マケドニア"
+
+msgid "ML"
+msgstr "マリ"
+
+msgid "MM"
+msgstr "ミャンマー"
+
+msgid "MN"
+msgstr "モンゴル"
+
+msgid "MO"
+msgstr "マカオ"
+
+msgid "MP"
+msgstr "北マリアナ諸島"
+
+msgid "MQ"
+msgstr "マルティニーク"
+
+msgid "MR"
+msgstr "モーリタニア"
+
+msgid "MS"
+msgstr "モンセラット"
+
+msgid "MT"
+msgstr "マルタ"
+
+msgid "MU"
+msgstr "モーリシャス"
+
+msgid "MV"
+msgstr "モルディブ"
+
+msgid "MW"
+msgstr "マラウイ"
+
+msgid "MX"
+msgstr "メキシコ"
+
+msgid "MY"
+msgstr "マレーシア"
+
+msgid "MZ"
+msgstr "モザンビーク"
+
+msgid "NA"
+msgstr "ナミビア"
+
+msgid "NC"
+msgstr "ニューカレドニア"
+
+msgid "NE"
+msgstr "ニジェール"
+
+msgid "NF"
+msgstr "ノーフォーク島"
+
+msgid "NG"
+msgstr "ナイジェリア"
+
+msgid "NI"
+msgstr "ニカラグア"
+
+msgid "NL"
+msgstr "オランダ"
+
+msgid "NO"
+msgstr "ノルウェー"
+
+msgid "NP"
+msgstr "ネパール"
+
+msgid "NR"
+msgstr "ナウル"
+
+msgid "NU"
+msgstr "ニウエ"
+
+msgid "NZ"
+msgstr "ニュージーランド"
+
+msgid "OM"
+msgstr "オマーン"
+
+msgid "PA"
+msgstr "パナマ"
+
+msgid "PE"
+msgstr "ペルー"
+
+msgid "PF"
+msgstr "フランス領ポリネシア"
+
+msgid "PG"
+msgstr "パプアニューギニア"
+
+msgid "PH"
+msgstr "フィリピン"
+
+msgid "PK"
+msgstr "パキスタン"
+
+msgid "PL"
+msgstr "ポーランド"
+
+msgid "PM"
+msgstr "サンピエール島・ミクロン島"
+
+msgid "PN"
+msgstr "ピトケアン"
+
+msgid "PR"
+msgstr "プエルトリコ"
+
+msgid "PS"
+msgstr "パレスチナ"
+
+msgid "PT"
+msgstr "ポルトガル"
+
+msgid "PW"
+msgstr "パラオ"
+
+msgid "PY"
+msgstr "パラグアイ"
+
+msgid "QA"
+msgstr "カタール"
+
+msgid "RE"
+msgstr "レユニオン"
+
+msgid "RO"
+msgstr "ルーマニア"
+
+msgid "RS"
+msgstr "セルビア"
+
+msgid "RU"
+msgstr "ロシア連邦"
+
+msgid "RW"
+msgstr "ルワンダ"
+
+msgid "SA"
+msgstr "サウジアラビア"
+
+msgid "SB"
+msgstr "ソロモン諸島"
+
+msgid "SC"
+msgstr "セーシェル"
+
+msgid "SD"
+msgstr "スーダン"
+
+msgid "SE"
+msgstr "スウェーデン"
+
+msgid "SG"
+msgstr "シンガポール"
+
+msgid "SH"
+msgstr "セントヘレナ、アセンション、トリスタン・ダ・クーニャ"
+
+msgid "SI"
+msgstr "スロベニア"
+
+msgid "SJ"
+msgstr "スバールバル諸島とヤンマイエン島"
+
+msgid "SK"
+msgstr "スロバキア"
+
+msgid "SL"
+msgstr "シエラレオネ"
+
+msgid "SM"
+msgstr "サンマリノ"
+
+msgid "SN"
+msgstr "セネガル"
+
+msgid "SO"
+msgstr "ソマリア"
+
+msgid "SR"
+msgstr "スリナム"
+
+msgid "SS"
+msgstr "南スーダン"
+
+msgid "ST"
+msgstr "サントメ・プリンシペ"
+
+msgid "SV"
+msgstr "エルサルバドル"
+
+msgid "SX"
+msgstr "シント・マールテン島（オランダ領）"
+
+msgid "SY"
+msgstr "シリア・アラブ共和国"
+
+msgid "SZ"
+msgstr "スワジランド"
+
+msgid "TC"
+msgstr "タークス・カイコス諸島"
+
+msgid "TD"
+msgstr "チャド"
+
+msgid "TF"
+msgstr "フランス領南方領土"
+
+msgid "TG"
+msgstr "トーゴ"
+
+msgid "TH"
+msgstr "タイ"
+
+msgid "TJ"
+msgstr "タジキスタン"
+
+msgid "TK"
+msgstr "トケラウ"
+
+msgid "TL"
+msgstr "東ティモール"
+
+msgid "TM"
+msgstr "トルクメニスタン"
+
+msgid "TN"
+msgstr "チュニジア"
+
+msgid "TO"
+msgstr "トンガ"
+
+msgid "TR"
+msgstr "トルコ"
+
+msgid "TT"
+msgstr "トリニダード・トバゴ"
+
+msgid "TV"
+msgstr "ツバル"
+
+msgid "TW"
+msgstr "台湾"
+
+msgid "TZ"
+msgstr "タンザニア連合共和国"
+
+msgid "UA"
+msgstr "ウクライナ"
+
+msgid "UG"
+msgstr "ウガンダ"
+
+msgid "UM"
+msgstr "合衆国領有小離島"
+
+msgid "US"
+msgstr "米国"
+
+msgid "UY"
+msgstr "ウルグアイ"
+
+msgid "UZ"
+msgstr "ウズベキスタン"
+
+msgid "VA"
+msgstr "バチカン市国（ローマ教皇庁）"
+
+msgid "VC"
+msgstr "セントビンセント・グレナディーン"
+
+msgid "VE"
+msgstr "ベネズエラ・ボリバル共和国"
+
+msgid "VG"
+msgstr "英領ヴァージン諸島"
+
+msgid "VI"
+msgstr "米バージン諸島"
+
+msgid "VN"
+msgstr "ベトナム"
+
+msgid "VU"
+msgstr "バヌアツ"
+
+msgid "WF"
+msgstr "ウォリス・フテュナ"
+
+msgid "WS"
+msgstr "サモア"
+
+msgid "XK"
+msgstr "コソボ"
+
+msgid "YE"
+msgstr "イエメン"
+
+msgid "YT"
+msgstr "マヨット"
+
+msgid "ZA"
+msgstr "南アフリカ"
+
+msgid "ZM"
+msgstr "ザンビア"
+
+msgid "ZW"
+msgstr "ジンバブエ"
