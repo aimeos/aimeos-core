@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Aimeos, 2024
 # Aimeos, 2024
@@ -9,22 +9,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 13:36+0100\n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Aimeos, 2024\n"
-"Language-Team: Hebrew (http://app.transifex.com/aimeos/aimeos-core/language/"
-"he/)\n"
-"Language: he\n"
+"Language-Team: Hebrew (http://app.transifex.com/aimeos/aimeos-core/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
-"1 == 0) ? 1: 2;\n"
+"Language: he\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -37,22 +37,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -65,22 +57,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -336,8 +320,7 @@ msgid ""
 msgstr "תווים לא חוקיים בתאריך \"%1$s\". "
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "תווים לא חוקיים בתאריך \"%1$s\". "
 
 #, php-format
@@ -523,9 +506,7 @@ msgstr "המזהה החדש \"%1$s\" לפריט שונה מהמזהה הישן \
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
-"לא ניתן לשמור אתר חדש שנוצר באמצעות השיטה \"save()\". נסה להשתמש בשיטה "
-"\"insert()\" במקום זאת."
+msgstr "לא ניתן לשמור אתר חדש שנוצר באמצעות השיטה \"save()\". נסה להשתמש בשיטה \"insert()\" במקום זאת."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -643,9 +624,7 @@ msgstr "פעולה לא נתמכת"
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
-"מזהה ההזמנה \"%1$s\" בתגובת ה-XML של ספק המשלוח שונה מזהה החשבונית המאוחסנת "
-"\"%2$s\" של ההזמנה"
+msgstr "מזהה ההזמנה \"%1$s\" בתגובת ה-XML של ספק המשלוח שונה מזהה החשבונית המאוחסנת \"%2$s\" של ההזמנה"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
@@ -694,13 +673,11 @@ msgid "Password object not available"
 msgstr "אובייקט סיסמה אינו זמין"
 
 #, php-format
-msgid ""
-"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr "PayPal Express: עסקה משוכפלת עם המזהה \"%1$s\" והסטטוס \"%2$s\""
 
 #, php-format
-msgid ""
-"PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
 msgstr "PayPal Express: עסקה כפולה עם המזהה \"%1$s\" והסטטוס \"%2$s\""
 
 #, php-format
@@ -708,8 +685,7 @@ msgid "PayPal Express: Invalid request \"%1$s\""
 msgstr "PayPal Express: בקשה לא חוקית \"%1$s\""
 
 #, php-format
-msgid ""
-"PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
 msgstr "PayPal Express: מזהה עסקת תשלום עבור מזהה הזמנה \"%1$s\" אינו זמין"
 
 #, php-format
@@ -735,9 +711,7 @@ msgstr "אנא עיין במחירי המוצרים בסל שלך"
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
-"לא ניתן להוסיף מחיר. מזהה המטבע \"%1$s\" של פריט המחיר ומזהה המטבע הנוכחי "
-"\"%2$s\" אינו תואם."
+msgstr "לא ניתן להוסיף מחיר. מזהה המטבע \"%1$s\" של פריט המחיר ומזהה המטבע הנוכחי \"%2$s\" אינו תואם."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
@@ -869,8 +843,8 @@ msgstr "לא ניתן להכניס אתר. "
 
 #, php-format
 msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID "
-"of existing parent site or site id of new parent site."
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "לא ניתן להזיז את האתר. "
 
 #, php-format

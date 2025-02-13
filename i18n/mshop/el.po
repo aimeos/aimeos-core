@@ -1,21 +1,28 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: el\n"
-"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"POT-Creation-Date: 2025-02-09 13:40+0100\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Greek (http://app.transifex.com/aimeos/aimeos-core/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -28,22 +35,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,24 +55,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-""
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -323,7 +312,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Μη έγκυροι χαρακτήρες στο όνομα της κλάσης \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "Μη έγκυροι χαρακτήρες στην ημερομηνία \"%1$s\". Αναμένεται η μορφή ISO \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
@@ -510,7 +501,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Το νέο αναγνωριστικό \"%1$s\" για το στοιχείο διαφέρει από το παλιό αναγνωριστικό \"%2$s\""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr "Ο πρόσφατα δημιουργημένος ιστότοπος δεν μπορεί να αποθηκευτεί χρησιμοποιώντας τη μέθοδο \"save()\". Δοκιμάστε να χρησιμοποιήσετε τη μέθοδο \"insert()\"."
 
 #, php-format
@@ -626,7 +619,9 @@ msgid "Operation not supported"
 msgstr "Η λειτουργία δεν υποστηρίζεται"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "Το αναγνωριστικό παραγγελίας \"%1$s\" στην απάντηση XML του παρόχου παράδοσης διαφέρει από το αποθηκευμένο αναγνωριστικό τιμολογίου \"%2$s\" της παραγγελίας"
 
 #, php-format
@@ -638,7 +633,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Δεν βρέθηκε στοιχείο βάσης παραγγελίας με αναγνωριστικό παραγγελίας \"%1$s\""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Τα δεδομένα παραγγελίας που εστάλησαν στον πάροχο παράδοσης απορρίφθηκαν με κωδικό \"%1$s\" σύμφωνα με την απάντηση XML"
 
 #, php-format
@@ -709,7 +706,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Παρακαλούμε δείτε τις τιμές των προϊόντων στο καλάθι σας."
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Η τιμή δεν μπορεί να προστεθεί. Το αναγνωριστικό νομίσματος \"%1$s\" του στοιχείου τιμής και το αναγνωριστικό νομίσματος \"%2$s\" δεν ταιριάζουν."
 
 #, php-format
@@ -733,7 +732,9 @@ msgid "Product  not available"
 msgstr "Το προϊόν δεν είναι διαθέσιμο"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Το προϊόν δεν περιέχει όλες τις απαιτούμενες τιμές. Ο κωδικός προϊόντος για το προϊόν δεν είναι διαθέσιμος."
 
 #, php-format
@@ -833,11 +834,15 @@ msgid "Session object not available"
 msgstr "Αντικείμενο συνεδρίας δεν είναι διαθέσιμο"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Η ιστοσελίδα δεν μπορεί να εισαχθεί. Το αναγνωριστικό τοποθεσίας της τοποθεσίας διαφέρει από το αναγνωριστικό τοποθεσίας της γονικής τοποθεσίας."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Ο ιστότοπος δεν μπορεί να μετακινηθεί. Το αναγνωριστικό τοποθεσίας της τοποθεσίας διαφέρει από το παρόν αναγνωριστικό τοποθεσίας, το αναγνωριστικό τοποθεσίας της υπάρχουσας γονικής τοποθεσίας ή το αναγνωριστικό τοποθεσίας της νέας γονικής τοποθεσίας."
 
 #, php-format
@@ -937,7 +942,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Άγνωστο κλειδί αναζήτησης \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Η επικύρωση της απόκρισης XML από τον πάροχο παράδοσης έναντι του σχήματος \"%1$s\" απέτυχε"
 
 #, php-format

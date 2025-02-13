@@ -1,21 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Metal <meteoramic@yahoo.com>, 2015-2025
 msgid ""
 msgstr ""
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: tr\n"
-"Language-Team: Turkish (http://app.transifex.com/aimeos/aimeos-core/language/tr/)\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2025\n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"POT-Creation-Date: 2025-02-09 13:40+0100\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2025\n"
+"Language-Team: Turkish (http://app.transifex.com/aimeos/aimeos-core/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -28,22 +36,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s%4$s\n"
-"%5$s\n"
-"%6$s%7$s\n"
-"%8$s%9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
+msgstr "%1$s\n%2$s\n%3$s%4$s\n%5$s\n%6$s%7$s\n%8$s%9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,24 +56,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-""
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s%4$s\n"
-"%5$s\n"
-"%6$s%7$s\n"
-"%8$s%9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-""
+msgstr "%1$s\n%2$s\n%3$s%4$s\n%5$s\n%6$s%7$s\n%8$s%9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -323,7 +313,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "\"%1$s\" class adında geçersiz karakterler"
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "\"%1$s\" tarihinde geçersiz karakterler mevcut. ISO formatı \"YYYY-MM-DD hh:mm:ss\" gerekli."
 
 #, php-format
@@ -510,7 +502,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Öğe için yeni \"%1$s\" kimlik numarası, eski \"%2$s\" kimlik numarası ile farklılık gösteriyor"
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr "Yeni oluşturulan site \"save()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insert()\" metodunu kullanmayı deneyin."
 
 #, php-format
@@ -626,7 +620,9 @@ msgid "Operation not supported"
 msgstr "Operasyon desteklenmiyor"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "Teslimat sağlayıcının XML yanıtındaki sipariş kimlik numarası olan \"%1$s\", siparişin kayıtlı fatura kimlik numarası olan \"%2$s\" ile farklılık gösteriyor"
 
 #, php-format
@@ -638,7 +634,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "\"%1$s\" sipariş kimlik numaralı sipariş temel öğesi bulunamadı"
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Teslimat sağlayıcıya gönderilen sipariş bilgisi XML yanıtına göre \"%1$s\" koduyla reddedildi "
 
 #, php-format
@@ -709,7 +707,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Lütfen sepetinizdeki ürünlerin fiyatlarına göz atın"
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Fiyat eklenemiyor.  Fiyat öğesinin para birimi kimlik numarası \"%1$s\" ve şu anda kullanılan para birimi kimlik numarası \"%2$s\" eşleşmiyor."
 
 #, php-format
@@ -733,7 +733,9 @@ msgid "Product  not available"
 msgstr "Ürün mevcut değil"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Ürün gerekli tüm değerleri içermiyor. Öğe için ürün kodu mevcut değil."
 
 #, php-format
@@ -833,11 +835,15 @@ msgid "Session object not available"
 msgstr "Oturum nesnesi mevcut değil"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Site eklenemiyor. Sitenin kimlik numarası üst sitenin kimlik numarasından farklı."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Sitesi taşınamaz. Sitenin kimlik numarası mevcut sitenin kimlik numarasından, varolan üst sitenin kimlik numarasından veya yeni üst sitenin kimlik numarasından farklı."
 
 #, php-format
@@ -937,7 +943,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Bilinmeyene arama anahtarı \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Teslimat sağlayıcıdan XML yanıtının doğrulaması \"%1$s\" şemasına karşı başarısız oldu"
 
 #, php-format

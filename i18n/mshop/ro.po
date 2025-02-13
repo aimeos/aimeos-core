@@ -1,21 +1,30 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Yolo San, 2021
+# Yolo San, 2021
 msgid ""
 msgstr ""
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: ro\n"
-"Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
-"Last-Translator: Yolo San, 2021\n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"POT-Creation-Date: 2025-02-09 13:40+0100\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Yolo San, 2021\n"
+"Language-Team: Romanian (http://app.transifex.com/aimeos/aimeos-core/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -28,22 +37,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,24 +57,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-""
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -323,7 +314,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracter incorect în numele clasei \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "Caractere invalide în data \"%1$s\". Se așteaptă formatul ISO \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
@@ -510,7 +503,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Noul ID \"%1$s\" pentru articol diferă de vechiul ID \"%2$s\""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr "Site-ul nou creat nu poate fi salvat folosind metoda \"save()\". Încercați să utilizați în schimb metoda \"insert()\"."
 
 #, php-format
@@ -626,7 +621,9 @@ msgid "Operation not supported"
 msgstr "Operațiunea nu este acceptată"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "ID-ul comenzii \"%1$s\" din răspunsul XML al furnizorului de servicii de livrare diferă de ID-ul facturii stocate \"%2$s\" a comenzii"
 
 #, php-format
@@ -638,7 +635,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Articolul de bază al comenzii cu ID-ul comenzii \"%1$s\" nu a fost găsit"
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Datele comenzii trimise furnizorului de livrare au fost respinse cu codul \"%1$s\" conform răspunsului XML"
 
 #, php-format
@@ -709,7 +708,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Vă rugăm să aruncați o privire la prețurile produselor din coșul dvs."
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Prețul nu poate fi adăugat. ID-ul monedei \"%1$s\" al articolului de preț și ID-ul monedei utilizate în prezent \"%2$s\" nu corespund."
 
 #, php-format
@@ -733,7 +734,9 @@ msgid "Product  not available"
 msgstr "Produsul nu este disponibil"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Produsul nu conține toate valorile necesare. Codul produsului pentru articol nu este disponibil."
 
 #, php-format
@@ -833,11 +836,15 @@ msgid "Session object not available"
 msgstr "Obiectul sesiunii nu este disponibil"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Site-ul nu poate fi introdus. ID-ul site-ului diferă de ID-ul site-ului părinte."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Site-ul nu poate fi mutat. ID-ul site-ului diferă de ID-ul site-ului actual, de ID-ul site-ului părinte existent sau de ID-ul site-ului părinte nou."
 
 #, php-format
@@ -937,7 +944,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Cheie de căutare necunoscută \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Validarea răspunsului XML de la furnizorul de livrare în raport cu schema \"%1$s\" a eșuat"
 
 #, php-format

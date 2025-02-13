@@ -1,21 +1,30 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bistra Kumanova <b.kumanova@creato.bg>, 2015
+# Plamen Petkov <mcplamen@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: bg\n"
-"Language-Team: Bulgarian (http://app.transifex.com/aimeos/aimeos-core/language/bg/)\n"
-"Last-Translator: Plamen Petkov <mcplamen@gmail.com>, 2016\n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"POT-Creation-Date: 2025-02-09 13:40+0100\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: Plamen Petkov <mcplamen@gmail.com>, 2016\n"
+"Language-Team: Bulgarian (http://app.transifex.com/aimeos/aimeos-core/language/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -28,22 +37,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,24 +57,14 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-""
-msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
@@ -323,7 +314,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустими символи в името на класа \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "Невалидни символи в датата \"%1$s\". Очаква ce съответствие с ISO форматa \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
@@ -510,7 +503,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Новото ID \"%1$s\" на елемента се различава от старото ID \"%2$s\""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
 msgstr "Новосъздаденият сайт не може да бъде запазен чрез метода \"save()\". Вместо това опитайте да използвате метода \"insert()\"."
 
 #, php-format
@@ -626,7 +621,9 @@ msgid "Operation not supported"
 msgstr "Операцията не се поддържа"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "Номера на поръчката \"%1$s\" в XML отговора на изпълнителя на доставката се различава от съхранената фактура с номер \"%2$s\" на поръчката."
 
 #, php-format
@@ -638,7 +635,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Не е намерен основния елемент на поръчка с поръчка номер \"%1$s\""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Данните на поръчката, изпратени до изпълнителя на доставката бяха отхвърлени с код \"%1$s\", според XML отговора"
 
 #, php-format
@@ -709,7 +708,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Моля, прегледайте цените на продуктите във Вашата кошница"
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Цената не може да бъде добавена. Валутата на цената \"%1$s\" не съвпада с текущата валута \"%2$s\"."
 
 #, php-format
@@ -733,7 +734,9 @@ msgid "Product  not available"
 msgstr "Продуктът не е наличен"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Продуктът не съдържа всички изисквани стойности. Кодът на продукта не е наличен."
 
 #, php-format
@@ -833,11 +836,15 @@ msgid "Session object not available"
 msgstr "Сесийният обект не е наличен"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Сайтът не може да бъде добавен. Номера на сайта се различава от номера на родителския сайт."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Сайта не може да бъде преместван. Номера на сайта се различава от текущия номер на сайт, от номера на съществуващия родителски сайт или от номера на новия родителски сайт."
 
 #, php-format
@@ -937,7 +944,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Неизвестен ключ на търсене \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Грешка при валидацията на XML отговора от изпълнителя на доставката в съответствие със схема \"%1$s\""
 
 #, php-format
