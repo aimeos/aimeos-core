@@ -296,7 +296,7 @@ trait Update
 
 
 	/**
-	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
+	 * Increases or decreases the stock levels of the products referenced in the order by the given value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param int $how Positive or negative integer number for increasing or decreasing the stock levels
