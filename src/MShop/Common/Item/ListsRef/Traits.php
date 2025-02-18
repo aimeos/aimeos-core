@@ -23,7 +23,6 @@ trait Traits
 	private array $listItems = [];
 	private array $listRefItems = [];
 	private array $listRmItems = [];
-	private array $listRmMap = [];
 	private array $listMap = [];
 	private int $listMax = 0;
 
@@ -77,12 +76,13 @@ trait Traits
 			}
 
 			$this->listRefItems[$domain][$id] = $refItem;
+			$listItem->setRefItem( $refItem );
 		}
 
 		$id = $listItem->getId() ?: '_' . $this->getId() . '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
 
 		unset( $this->listItems[$domain][$id] ); // append at the end
-		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
+		$this->listItems[$domain][$id] = $listItem->setDomain( $domain );
 
 		if( isset( $this->listMap[$domain] ) )
 		{
@@ -107,7 +107,7 @@ trait Traits
 		if( isset( $this->listItems[$domain] )
 			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
 		) {
-			$this->listRmItems[] = $this->listRmMap[$domain][] = $listItem->setRefItem( $refItem );
+			$this->listRmItems[] = $listItem->setRefItem( $refItem );
 
 			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
 			unset( $this->listItems[$domain][$key] );
@@ -159,7 +159,7 @@ trait Traits
 	public function getListItemsDeleted( ?string $domain = null ) : \Aimeos\Map
 	{
 		if( $domain !== null ) {
-			return map( $this->listRmMap[$domain] ?? [] );
+			return map( $this->listRmItems )->filter( fn( $item ) => $item->getDomain() === $domain );
 		}
 
 		return map( $this->listRmItems );
@@ -227,13 +227,14 @@ trait Traits
 		$fcn = static::macro( 'listFilter' );
 
 		$iface = \Aimeos\MShop\Common\Item\TypeRef\Iface::class;
-		$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
-		$types = ( is_array( $type ) ? $type : array( $type ) );
+		$listTypes = is_array( $listtype ) ? $listtype : [$listtype];
+		$domains = is_array( $domain ) ? $domain : [$domain];
+		$types = is_array( $type ) ? $type : [$type];
 
 
 		foreach( $this->listItems as $dname => $list )
 		{
-			if( is_array( $domain ) && !in_array( $dname, $domain ) || is_string( $domain ) && $dname !== $domain ) {
+			if( $domain && !in_array( $dname, $domains ) ) {
 				continue;
 			}
 
