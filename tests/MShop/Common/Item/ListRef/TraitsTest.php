@@ -268,7 +268,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsAdded()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [] );
+		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [], [] );
 		$object->addListItem( 'text', $this->listItem1, $this->textItem1 );
 		$object->addListItem( 'text', $this->listItem2, $this->textItem2 );
 
@@ -280,7 +280,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithRefItemsAdded()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [] );
+		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [], [] );
 		$object->addListItem( 'text', $this->listItem1->setRefItem( $this->textItem1 ) );
 		$object->addListItem( 'text', $this->listItem2->setRefItem( $this->textItem2 ) );
 
