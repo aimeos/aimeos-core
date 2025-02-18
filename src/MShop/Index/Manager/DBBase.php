@@ -166,7 +166,7 @@ abstract class DBBase
 		$items = $this->search( $filter, $ref );
 
 		$cursor->setValue( $items->lastKey() ?: '' );
-		return $items;
+		return !$items->isEmpty() ? $items : null;
 	}
 
 
