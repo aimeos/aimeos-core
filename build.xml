@@ -210,7 +210,7 @@
 			<arg line="-s --no-fuzzy -o ${po-filename} ${po-filename}" />
 		</exec>
 		<exec executable="${bindir}potrans" logoutput="true" passthru="true">
-			<arg line="deepl --only ${po-filename}" />
+			<arg line="deepl --ignore='%[0-9]+\\\$[-0-9.]+[sdfF]' --only --pot=${i18n-dir}/source.pot ${po-filename}" />
 		</exec>
 	</target>
 
