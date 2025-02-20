@@ -78,6 +78,7 @@ class OrderConnectTables extends Base
 				SELECT ' . $db->qi( 'id' ) . '
 				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
 				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+				LIMIT 1
 			)
 		' );
 
@@ -107,6 +108,7 @@ class OrderConnectTables extends Base
 				SELECT ' . $db->qi( 'id' ) . '
 				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
 				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+				LIMIT 1
 			)
 		' );
 
@@ -142,6 +144,7 @@ class OrderConnectTables extends Base
 				SELECT ' . $db->qi( 'id' ) . '
 				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
 				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+				LIMIT 1
 			)
 		' );
 
@@ -173,6 +176,7 @@ class OrderConnectTables extends Base
 				SELECT ' . $db->qi( 'id' ) . '
 				FROM ' . $db->qi( 'mshop_order' ) . ' AS src
 				WHERE dest.' . $db->qi( 'baseid' ) . ' = src.' . $db->qi( 'baseid' ) . '
+				LIMIT 1
 			)
 		' );
 
