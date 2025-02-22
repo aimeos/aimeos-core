@@ -94,7 +94,7 @@ trait Traits
 			$id = $refItem->getId() ?: '#' . $this->listMax++;
 			$listItem->setRefId( $id );
 
-			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
+			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface && !$refItem->getDomain() ) {
 				$refItem->setDomain( $this->getResourceType() );
 			}
 
