@@ -89,19 +89,18 @@ trait Traits
 	 */
 	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
+		$id = '_' . $this->listMax++;
+
 		if( $refItem !== null )
 		{
-			$id = $refItem->getId() ?: '#' . $this->listMax++;
-			$listItem->setRefId( $id );
-
 			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface && !$refItem->getDomain() ) {
 				$refItem->setDomain( $this->getResourceType() );
 			}
 
-			$listItem->setRefItem( $refItem );
+			$listItem->setRefItem( $refItem )->setRefId( $refItem->getId() ?: $id );
 		}
 
-		$id = $listItem->getId() ?: '_' . $this->getId() . '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
+		$id = $listItem->getId() ?: $id;
 
 		unset( $this->listItems[$domain][$id] ); // append at the end
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain );
@@ -126,9 +125,7 @@ trait Traits
 	 */
 	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		if( isset( $this->listItems[$domain] )
-			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
-		) {
+		if( ( $key = array_search( $listItem, $this->listItems[$domain] ?? [], true ) ) !== false ) {
 			$this->listRmItems[] = $listItem->setRefItem( $refItem );
 
 			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
@@ -153,7 +150,7 @@ trait Traits
 
 		foreach( $items as $item )
 		{
-			$refItem = ( $all === true ? $item->getRefItem() : null );
+			$refItem = $all ? $item->getRefItem() : null;
 			$this->deleteListItem( $item->getDomain(), $item, $refItem );
 		}
 
@@ -180,7 +177,7 @@ trait Traits
 	 */
 	public function getListItemsDeleted( ?string $domain = null ) : \Aimeos\Map
 	{
-		if( $domain !== null ) {
+		if( $domain ) {
 			return map( $this->listRmItems )->filter( fn( $item ) => $item->getDomain() === $domain );
 		}
 
@@ -214,7 +211,7 @@ trait Traits
 		{
 			$listItem = $this->listMap[$domain][$listtype][$refId];
 
-			if( $active === true && $listItem->isAvailable() === false ) {
+			if( $active && !$listItem->isAvailable() ) {
 				return null;
 			}
 
@@ -260,7 +257,7 @@ trait Traits
 			{
 				$refItem = $item->getRefItem();
 
-				if( $type && ( !$refItem || !( $refItem instanceof $iface ) || !in_array( $refItem->getType(), $types ) ) ) {
+				if( $type && !( $refItem && $refItem instanceof $iface && in_array( $refItem->getType(), $types ) ) ) {
 					continue;
 				}
 
@@ -301,16 +298,20 @@ trait Traits
 
 		foreach( $this->getListItems( $domain, $listtype, $type, $active ) as $listItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null && ( $active === false || $refItem->isAvailable() ) ) {
+			if( ( $refItem = $listItem->getRefItem() ) && ( !$active || $refItem->isAvailable() ) ) {
 				$list[$listItem->getDomain()][$listItem->getRefId()] = $refItem;
 			}
 		}
 
-		if( is_array( $domain ) || $domain === null ) {
-			return map( $list );
+		if( is_array( $domain ) ) {
+			return map( $list )->only( $domain );
 		}
 
-		return map( $list[$domain] ?? [] );
+		if( $domain ) {
+			return map( $list[$domain] ?? [] );
+		}
+
+		return map( $list );
 	}
 
 
