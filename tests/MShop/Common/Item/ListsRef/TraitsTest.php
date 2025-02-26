@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2025
  */
 
@@ -104,8 +103,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addListItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
 
-		$this->assertEquals( ['_id_test_test_#2' => $this->listItem1], $this->object->getListItems( 'test' )->toArray() );
-		$this->assertEquals( ['#2' => $this->textItem1], $this->object->getRefItems( 'test' )->toArray() );
+		$this->assertEquals( ['_2' => $this->listItem1], $this->object->getListItems( 'test' )->toArray() );
+		$this->assertEquals( ['_2' => $this->textItem1], $this->object->getRefItems( 'test' )->toArray() );
 	}
 
 
