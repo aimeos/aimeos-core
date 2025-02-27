@@ -35,6 +35,13 @@ trait Traits
 	abstract protected function context() : \Aimeos\MShop\ContextIface;
 
 	/**
+	 * Returns the domain of the manager
+	 *
+	 * @return string Domain of the manager
+	 */
+	abstract protected function domain() : string;
+
+	/**
 	 * Returns the outmost decorator of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
@@ -57,7 +64,6 @@ trait Traits
 		$values[$domain . '.lists.siteid'] = $values[$domain . '.lists.siteid'] ?? $context->locale()->getSiteId();
 
 		return new \Aimeos\MShop\Common\Item\Lists\Standard( $domain . '.lists.', $values );
-		return $this->object()->getSubManager( 'lists' )->create( $values );
 	}
 
 

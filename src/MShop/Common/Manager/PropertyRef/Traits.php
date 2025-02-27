@@ -20,6 +20,13 @@ namespace Aimeos\MShop\Common\Manager\PropertyRef;
 trait Traits
 {
 	/**
+	 * Returns the domain of the manager
+	 *
+	 * @return string Domain of the manager
+	 */
+	abstract protected function domain() : string;
+
+	/**
 	 * Returns the outmost decorator of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
