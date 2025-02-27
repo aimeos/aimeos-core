@@ -55,26 +55,33 @@ class TypeMigrateTables extends Base
 					continue;
 				}
 
+				$map = [];
 				$for = $domain;
 
 				if( strpos( $table, '_list_' ) !== false ) {
 					$for .= '/lists';
+				} elseif( strpos( $table, '_property_' ) !== false ) {
+					$for .= '/property';
 				}
 
-				if( strpos( $table, '_property_' ) !== false ) {
-					$for .= '/property';
+				$result = $db->query( 'SELECT ' . $db->qi( 'code' )
+					. ' FROM ' . $db->qi( 'mshop_type' )
+					. ' WHERE ' . $db->qi( 'domain' ) . ' = ' . $db->q( $for ) );
+
+				while( $row = $result->fetchAssociative() ) {
+					$map[$row['code']] = true;
 				}
 
 				$result = $db2->query( 'SELECT * FROM ' . $db2->qi( $table ) );
 
 				while( $row = $result->fetchAssociative() )
 				{
-					try
+					if( !isset( $map[$row['code']] ) )
 					{
-						unset( $row['id'] );
-						$db->insert( 'mshop_type', $row + ['for' => $for] );
+						unset( $row['id'], $row['domain'] );
+						$db->insert( 'mshop_type', $row + ['domain' => $for] );
+						$map[$row['code']] = true;
 					}
-					catch( \Exception $e ) {} // Ignore duplicate entries
 				}
 			}
 		}
