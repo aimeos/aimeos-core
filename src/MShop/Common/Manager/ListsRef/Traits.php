@@ -20,14 +20,6 @@ namespace Aimeos\MShop\Common\Manager\ListsRef;
 trait Traits
 {
 	/**
-	 * Creates a new empty item instance
-	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
-	 */
-	abstract public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
-
-	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\ContextIface Context object

@@ -20,6 +20,14 @@ namespace Aimeos\MShop\Common\Manager\AddressRef;
 trait Traits
 {
 	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
+
+
+	/**
 	 * Creates a new address item object
 	 *
 	 * @param array $values Values the item should be initialized with
@@ -53,24 +61,6 @@ trait Traits
 
 		return $manager->search( $search )->groupBy( $domain . '.address.parentid' )->all();
 	}
-
-
-	/**
-	 * Returns the outmost decorator of the decorator stack
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
-	 */
-	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
-
-
-	/**
-	 * Creates a new extension manager in the domain.
-	 *
-	 * @param string $domain Name of the domain (product, text, media, etc.)
-	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
-	 */
-	abstract public function getSubManager( string $domain, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**

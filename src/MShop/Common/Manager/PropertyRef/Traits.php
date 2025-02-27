@@ -20,6 +20,13 @@ namespace Aimeos\MShop\Common\Manager\PropertyRef;
 trait Traits
 {
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\ContextIface Context object
+	 */
+	abstract protected function context() : \Aimeos\MShop\ContextIface;
+
+	/**
 	 * Returns the domain of the manager
 	 *
 	 * @return string Domain of the manager
