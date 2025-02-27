@@ -99,17 +99,16 @@ class ServiceAddPerfData extends Base
 		$numServices = $this->context()->config()->get( 'setup/unitperf/max-services', 100 );
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
-		$listManager = \Aimeos\MShop::create( $this->context(), 'service/lists' );
 		$mediaManager = \Aimeos\MShop::create( $this->context(), 'media' );
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 		$textManager = \Aimeos\MShop::create( $this->context(), 'text' );
 
-		$mListItem = $listManager->create()->setType( 'default' );
-		$pListItem = $listManager->create()->setType( 'default' );
-		$tListItem = $listManager->create()->setType( 'default' );
+		$mListItem = $manager->createListItem();
+		$pListItem = $manager->createListItem();
+		$tListItem = $manager->createListItem();
 
 		$mediaItem = $mediaManager->create()->setType( 'icon' )->setMimeType( 'image/png' );
-		$priceItem = $priceManager->create()->setType( 'default' )->setCurrencyId( 'EUR' );
+		$priceItem = $priceManager->create()->setCurrencyId( 'EUR' );
 		$textItem = $textManager->create()->setType( 'short' );
 
 

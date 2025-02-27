@@ -156,7 +156,7 @@ class CatalogAddPerfData extends Base
 	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $catLabel )
 	{
 		$textManager = \Aimeos\MShop::create( $this->context(), 'text' );
-		$catalogListManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
+		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
 		$textItem = $textManager->create()
 			->setContent( 'Category ' . $catLabel )
@@ -165,7 +165,7 @@ class CatalogAddPerfData extends Base
 			->setType( 'name' )
 			->setStatus( 1 );
 
-		$listItem = $catalogListManager->create()->setType( 'default' );
+		$listItem = $catalogManager->createListItem();
 
 		return $catItem->addListItem( 'text', $listItem, $textItem );
 	}
@@ -173,15 +173,15 @@ class CatalogAddPerfData extends Base
 
 	protected function addProductAttributes( \Aimeos\MShop\Product\Item\Iface $prodItem, array $attrIds )
 	{
-		$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$listItem = $productListManager->create()->setType( 'default' );
+		$listItem = $productManager->createListItem();
 
 		foreach( $attrIds as $attrId ) {
 			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
 		}
 
-		$listItem = $productListManager->create()->setType( 'config' );
+		$listItem = $productManager->createListItem()->setType( 'config' );
 
 		foreach( $this->attributes['sticker'] as $attrId => $label ) {
 			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
@@ -280,10 +280,10 @@ class CatalogAddPerfData extends Base
 		$prefix = 'https://aimeos.org/media/';
 
 		$mediaManager = \Aimeos\MShop::create( $this->context(), 'media' );
-		$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$litem = $productListManager->create()->setType( 'default' );
-		$newItem = $mediaManager->create()->setType( 'default' );
+		$litem = $productManager->createListItem();
+		$newItem = $mediaManager->create();
 
 		foreach( array_values( $this->shuffle( range( 0, 3 ) ) ) as $pos => $i )
 		{
@@ -305,19 +305,17 @@ class CatalogAddPerfData extends Base
 			->setLabel( 'PDF download' )
 			->setStatus( 1 );
 
-		$litem = $productListManager->create()->setType( 'download' );
-
-		return $prodItem->addListItem( 'media', ( clone $litem ), $mediaItem );
+		return $prodItem->addListItem( 'media', ( clone $litem )->setType( 'download' ), $mediaItem );
 	}
 
 
 	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-		$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$litem = $productListManager->create()->setType( 'default' );
-		$newItem = $priceManager->create()->setType( 'default' );
+		$litem = $productManager->createListItem();
+		$newItem = $priceManager->create();
 		$base = rand( 0, 896 );
 
 		for( $i = 0; $i < 3; $i++ )
@@ -341,9 +339,9 @@ class CatalogAddPerfData extends Base
 	{
 		if( ( $catItem = reset( $catItems ) ) !== false )
 		{
-			$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+			$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-			$listItem = $productListManager->create()->setType( 'suggestion' );
+			$listItem = $productManager->createListItem()->setType( 'suggestion' );
 			$listItems = $catItem->getListItems( 'product' );
 			$ids = []; $num = 5;
 
@@ -365,9 +363,9 @@ class CatalogAddPerfData extends Base
 	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label, $catLabel )
 	{
 		$textManager = \Aimeos\MShop::create( $this->context(), 'text' );
-		$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
-		$listItem = $productListManager->create()->setType( 'default' );
+		$listItem = $productManager->createListItem();
 
 		$textItem = $textManager->create()
 			->setContent( str_replace( ' ', '_', $label . '_' . $catLabel ) )
@@ -412,11 +410,10 @@ class CatalogAddPerfData extends Base
 	protected function addProductVariants( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
-		$productListManager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
 
-		$defListItem = $productListManager->create()->setType( 'default' );
-		$varListItem = $productListManager->create()->setType( 'variant' );
-		$newItem = $productManager->create()->setType( 'default' );
+		$defListItem = $productManager->createListItem();
+		$varListItem = $productManager->createListItem()->setType( 'variant' );
+		$newItem = $productManager->create();
 
 		$length = $this->attributes['length'];
 		$width = $this->attributes['width'];
@@ -461,7 +458,7 @@ class CatalogAddPerfData extends Base
 	{
 		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
-		$stockItem = $stockManager->create()->setType( 'default' );
+		$stockItem = $stockManager->create();
 		$stocklevels = $this->shuffle( [null, 100, 80, 60, 40, 20, 10, 5, 2, 0] );
 		$list = [];
 

@@ -118,7 +118,6 @@ class AttributeAddPerfData extends Base
 
 		$mediaManager = \Aimeos\MShop::create( $this->context(), 'media' );
 		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
-		$listManager = \Aimeos\MShop::create( $this->context(), 'attribute/lists' );
 
 		$attrItem = $attrManager->create()
 			->setDomain( 'product' )
@@ -130,7 +129,7 @@ class AttributeAddPerfData extends Base
 			->setType( 'icon' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->create()->setType( 'default' );
+		$listItem = $attrManager->createListItem();
 		$pos = 0;
 
 		foreach( $colors as $code => $name )
@@ -156,12 +155,11 @@ class AttributeAddPerfData extends Base
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
-		$listManager = \Aimeos\MShop::create( $this->context(), 'attribute/lists' );
 
 		$priceItem = $priceManager->create()
 			->setCurrencyId( 'EUR' )
 			->setTaxRate( '20.00' )
-			->setType( 'default' )
+
 			->setStatus( 1 );
 
 		$attrItem = $attrManager->create()
@@ -169,7 +167,7 @@ class AttributeAddPerfData extends Base
 			->setType( 'sticker' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->create()->setType( 'sticker' );
+		$listItem = $attrManager->createListItem()->setType( 'sticker' );
 		$pos = 0;
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )
