@@ -35,7 +35,13 @@ trait Traits
 	 */
 	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
-		return $this->object()->getSubManager( 'property' )->create( $values );
+		$domain = $this->domain();
+		$context = $this->context();
+
+		$values['.languageid'] = $context->locale()->getLanguageId();
+		$values[$domain . '.property.siteid'] = $values[$domain . '.property.siteid'] ?? $context->locale()->getSiteId();
+
+		return new \Aimeos\MShop\Common\Item\Property\Standard( $domain . '.property.', $values );
 	}
 
 

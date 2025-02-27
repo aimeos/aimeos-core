@@ -50,6 +50,13 @@ trait Traits
 	 */
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
+		$domain = $this->domain();
+		$context = $this->context();
+
+		$values['.date'] = $context->datetime();
+		$values[$domain . '.lists.siteid'] = $values[$domain . '.lists.siteid'] ?? $context->locale()->getSiteId();
+
+		return new \Aimeos\MShop\Common\Item\Lists\Standard( $domain . '.lists.', $values );
 		return $this->object()->getSubManager( 'lists' )->create( $values );
 	}
 
