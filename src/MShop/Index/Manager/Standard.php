@@ -380,7 +380,7 @@ class Standard
 		$filter->add( $filter->and( [
 			$filter->is( 'product.status', '>', 0 ),
 			$filter->or( [
-				$filter->is( 'product.dateend', '<', $context->datetime() ),
+				$filter->is( 'product.dateend', '>', $context->datetime() ),
 				$filter->is( 'product.dateend', '==', null )
 			] )
 		] ) );
