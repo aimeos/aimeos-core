@@ -48,11 +48,9 @@ class Changelog
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		$log = map( $items )->isModified()->filter()->sum();
-
 		$items = $this->getManager()->save( $items, true );
 
-		if( $log ) {
+		if( map( $items )->isModified()->some( true ) ) {
 			$this->context()->logger()->notice( $items, 'changelog:save' );
 		}
 
