@@ -25,27 +25,6 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php81-pgsql":
-    docker:
-      - image: aimeos/ci-php:8.1
-      - image: postgres:latest
-        environment:
-          POSTGRES_PASSWORD: aimeos
-          POSTGRES_USER: aimeos
-          POSTGRES_DB: aimeos
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - php81-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php81-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test
-
   "php82-mysql80":
     docker:
       - image: aimeos/ci-php:8.2
@@ -69,9 +48,30 @@ jobs:
       - run: ./vendor/bin/phing setup coverage
       - run: ./vendor/bin/php-coveralls -o coveralls.json -vvv -x tests/coverage.xml
 
-  "php83-mysql":
+  "php83-pgsql":
     docker:
       - image: aimeos/ci-php:8.3
+      - image: postgres:latest
+        environment:
+          POSTGRES_PASSWORD: aimeos
+          POSTGRES_USER: aimeos
+          POSTGRES_DB: aimeos
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - php83-{{ checksum "composer.json" }}
+      - run: composer update -n --prefer-dist
+      - save_cache:
+          key: php83-{{ checksum "composer.json" }}
+          paths: [./vendor]
+      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
+      - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
+      - run: ./vendor/bin/phing setup test
+
+  "php84-mysql":
+    docker:
+      - image: aimeos/ci-php:8.4
       - image: mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
@@ -82,10 +82,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - php83-{{ checksum "composer.json" }}
+            - php84-{{ checksum "composer.json" }}
       - run: composer update -n --prefer-dist
       - save_cache:
-          key: php83-{{ checksum "composer.json" }}
+          key: php84-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 3, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
@@ -96,6 +96,6 @@ workflows:
   unittest:
     jobs:
       - "php81-mssql"
-      - "php81-pgsql"
       - "php82-mysql80"
-      - "php83-mysql"
+      - "php83-pgsql"
+      - "php84-mysql"
