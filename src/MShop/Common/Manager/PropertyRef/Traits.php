@@ -100,7 +100,7 @@ trait Traits
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$propManager = $this->object()->getSubManager( 'property' );
-		$propManager->delete( $item->getPropertyItemsDeleted()->keys()->toArray() );
+		$propManager->delete( $item->getPropertyItemsDeleted() );
 
 		$propItems = $item->getPropertyItems( null, false );
 
