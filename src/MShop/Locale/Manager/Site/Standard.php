@@ -118,9 +118,9 @@ class Standard
 			'type' => 'string',
 			'public' => false,
 		],
-		'locale.site.position' => [
+		'sort:locale.site:position' => [
 			'label' => 'Site position',
-			'internalcode' => 'id',
+			'internalcode' => 'nleft',
 			'type' => 'int',
 			'public' => false,
 		],
