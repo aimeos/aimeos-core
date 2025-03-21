@@ -788,13 +788,13 @@ class Standard extends Base
 		$cfgPathCount = 'mshop/catalog/manager/count';
 
 		if( $search->getSortations() === [] ) {
-			$search->setSortations( [$search->sort( '+', 'catalog.left' )] );
+			$search->setSortations( [$search->sort( '+', 'sort:catalog:position' )] );
 		}
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() ) {
-			$map[$row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
+			$map[$row['id']] = new \Aimeos\MW\Tree\Node\DBNestedSet( $row );
 		}
 
 		return $this->buildItems( $map, $ref, 'catalog' );
