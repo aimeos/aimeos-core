@@ -534,7 +534,7 @@ class Standard extends Base
 		$stmt->bind( $idx++, $context->locale()->getSiteItem()->getCode() );
 		$stmt->bind( $idx++, $item->locale()->getLanguageId() );
 		$stmt->bind( $idx++, $price->getCurrencyId() );
-		$stmt->bind( $idx++, $price->getValue() );
+		$stmt->bind( $idx++, $price->getValue() ?: '0.00' );
 		$stmt->bind( $idx++, $price->getCosts() );
 		$stmt->bind( $idx++, $price->getRebate() );
 		$stmt->bind( $idx++, $price->getTaxValue() );
