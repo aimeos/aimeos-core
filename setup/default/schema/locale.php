@@ -40,7 +40,7 @@ return array(
 			$table->engine = 'InnoDB';
 
 			$table->id()->primary( 'pk_mslocsi_id' );
-			$table->int( 'parentid' )->null( true );
+			$table->int( 'parentid' )->default( 0 );
 			$table->string( 'siteid' )->default( '' );
 			$table->code()->length( 255 )->default( '' );
 			$table->string( 'label' )->default( '' );

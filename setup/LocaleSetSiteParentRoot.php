@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class LocaleSetSiteParentRoot extends Base
 {
-	public function after() : array
+	public function before() : array
 	{
 		return ['Locale'];
 	}
@@ -19,8 +19,12 @@ class LocaleSetSiteParentRoot extends Base
 
 	public function up()
 	{
-		$this->info( 'Set locale site root parent IDs to NULL', 'vv' );
+		$this->info( 'Set locale site root parent IDs to "0"', 'vv' );
 
-		$this->db( 'db-locale' )->update( 'mshop_locale_site', ['parentid' => null], ['parentid' => 0] );
+		$db = $this->db( 'db-locale' );
+
+		if( $db->hasTable( 'mshop_locale_site' ) ) {
+			$db->update( 'mshop_locale_site', ['parentid' => 0], ['parentid' => null] );
+		}
 	}
 }

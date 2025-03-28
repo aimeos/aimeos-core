@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class CatalogSetParentRoot extends Base
 {
-	public function after() : array
+	public function before() : array
 	{
 		return ['Catalog'];
 	}
@@ -19,8 +19,12 @@ class CatalogSetParentRoot extends Base
 
 	public function up()
 	{
-		$this->info( 'Set catalog root parent IDs to NULL', 'vv' );
+		$this->info( 'Set catalog root parent IDs to "0"', 'vv' );
 
-		$this->db( 'db-catalog' )->update( 'mshop_catalog', ['parentid' => null], ['parentid' => 0] );
+		$db = $this->db( 'db-catalog' );
+
+		if( $db->hasTable( 'mshop_catalog' ) ) {
+			$db->update( 'mshop_catalog', ['parentid' => 0], ['parentid' => null] );
+		}
 	}
 }
