@@ -250,7 +250,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$node->left = 1;
 			$node->right = 2;
 			$node->level = 0;
-			$node->parentid = 0;
+			$node->parentid = null;
 
 			if( ( $root = $this->getRootNode( '-' ) ) !== null )
 			{
@@ -277,7 +277,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$stmt->bind( 1, $node->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 2, $node->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 3, $node->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 4, (int) $node->parentid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 4, $node->parentid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 5, $node->level, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 6, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 7, $node->right, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
