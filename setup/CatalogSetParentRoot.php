@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class CatalogSetParentRoot extends Base
 {
-	public function before() : array
+	public function after() : array
 	{
 		return ['Catalog'];
 	}
