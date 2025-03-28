@@ -93,7 +93,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->servItem->setConfig( array( 'free.show' => '1' ) );
 		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
-		$basket->getPrice()->setValue( '0.01' );
+		$basket->getPrice()->setValue( '0.01' )->setId( '' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 
@@ -114,7 +114,7 @@ class FreeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->servItem->setConfig( array( 'free.show' => '0' ) );
 		$basket = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
-		$basket->getPrice()->setValue( '0.01' );
+		$basket->getPrice()->setValue( '0.01' )->setId( '' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
 

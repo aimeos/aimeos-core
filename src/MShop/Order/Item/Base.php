@@ -147,7 +147,6 @@ abstract class Base
 	protected ?\Aimeos\MShop\Customer\Item\Iface $customer;
 	protected \Aimeos\MShop\Locale\Item\Iface $locale;
 	protected \Aimeos\MShop\Price\Item\Iface $price;
-	protected bool $recalc = false;
 	protected array $coupons = [];
 	protected array $products = [];
 	protected array $services = [];
@@ -317,6 +316,7 @@ abstract class Base
 			$this->addresses[$type][] = $address;
 		}
 
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'addAddress.after', $address );
@@ -345,6 +345,7 @@ abstract class Base
 				unset( $this->addresses[$type] );
 			}
 
+			$this->price->setModified();
 			$this->setModified();
 
 			$this->notify( 'deleteAddress.after', $old );
@@ -404,6 +405,8 @@ abstract class Base
 
 		$old = $this->addresses;
 		$this->addresses = is_map( $map ) ? $map->toArray() : $map;
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'setAddresses.after', $old );
@@ -423,8 +426,9 @@ abstract class Base
 		if( !isset( $this->coupons[$code] ) )
 		{
 			$code = $this->notify( 'addCoupon.before', $code );
-
 			$this->coupons[$code] = [];
+
+			$this->price->setModified();
 			$this->setModified();
 
 			$this->notify( 'addCoupon.after', $code );
@@ -455,6 +459,8 @@ abstract class Base
 			}
 
 			unset( $this->coupons[$code] );
+
+			$this->price->setModified();
 			$this->setModified();
 
 			$this->notify( 'deleteCoupon.after', $old );
@@ -505,6 +511,8 @@ abstract class Base
 
 		$old = isset( $this->coupons[$code] ) ? [$code => $this->coupons[$code]] : [];
 		$this->coupons[$code] = is_map( $products ) ? $products->toArray() : $products;
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'setCoupon.after', $old );
@@ -546,6 +554,8 @@ abstract class Base
 
 		$old = $this->coupons;
 		$this->coupons = is_map( $map ) ? $map->toArray() : $map;
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'setCoupons.after', $old );
@@ -577,6 +587,8 @@ abstract class Base
 		}
 
 		ksort( $this->products );
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'addProduct.after', $item );
@@ -599,6 +611,8 @@ abstract class Base
 			$old = $this->notify( 'deleteProduct.before', $old );
 
 			unset( $this->products[$position] );
+
+			$this->price->setModified();
 			$this->setModified();
 
 			$this->notify( 'deleteProduct.after', $old );
@@ -649,6 +663,8 @@ abstract class Base
 
 		$old = $this->products;
 		$this->products = is_map( $map ) ? $map->toArray() : $map;
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'setProducts.after', $old );
@@ -680,6 +696,7 @@ abstract class Base
 			$this->services[$type][] = $service;
 		}
 
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'addService.after', $service );
@@ -708,6 +725,7 @@ abstract class Base
 				unset( $this->services[$type] );
 			}
 
+			$this->price->setModified();
 			$this->setModified();
 
 			$this->notify( 'deleteService.after', $old );
@@ -769,6 +787,8 @@ abstract class Base
 
 		$old = $this->services;
 		$this->services = is_map( $map ) ? $map->toArray() : $map;
+
+		$this->price->setModified();
 		$this->setModified();
 
 		$this->notify( 'setServices.after', $old );
@@ -794,7 +814,7 @@ abstract class Base
 			$this->statuses[$type][$value] = $item;
 		}
 
-		return $this->setModified();
+		return $this;
 	}
 
 
@@ -853,7 +873,7 @@ abstract class Base
 	 */
 	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
-		if( $this->recalc )
+		if( $this->price->isModified() )
 		{
 			$price = $this->price->clear();
 
@@ -868,8 +888,7 @@ abstract class Base
 				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 
-			$this->price = $price;
-			$this->recalc = false;
+			$this->price = $price->setId( '' ); // clear modified flag
 		}
 
 		return $this->price;
@@ -949,19 +968,7 @@ abstract class Base
 		$this->locale = clone $locale;
 		$this->notify( 'setLocale.after', $locale );
 
-		return parent::setModified();
-	}
-
-
-	/**
-	 * Sets the modified flag of the object.
-	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Order base item for method chaining
-	 */
-	public function setModified() : \Aimeos\MShop\Common\Item\Iface
-	{
-		$this->recalc = true;
-		return parent::setModified();
+		return $this->setModified();
 	}
 
 
