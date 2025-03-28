@@ -988,40 +988,6 @@ abstract class Base
 
 
 	/**
-	 * Checks if the given delivery status is a valid constant.
-	 *
-	 * @param int $value Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
-	 * @return int Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
-	 * @throws \Aimeos\MShop\Order\Exception If delivery status is invalid
-	 */
-	protected function checkDeliveryStatus( int $value )
-	{
-		if( $value < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
-		}
-
-		return $value;
-	}
-
-
-	/**
-	 * Checks the given payment status is a valid constant.
-	 *
-	 * @param int $value Payment status constant defined in \Aimeos\MShop\Order\Item\Base
-	 * @return int Payment status constant defined in \Aimeos\MShop\Order\Item\Base
-	 * @throws \Aimeos\MShop\Order\Exception If payment status is invalid
-	 */
-	protected function checkPaymentStatus( int $value )
-	{
-		if( $value < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
-		}
-
-		return $value;
-	}
-
-
-	/**
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
