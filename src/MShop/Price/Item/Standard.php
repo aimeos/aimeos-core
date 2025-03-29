@@ -454,7 +454,7 @@ class Standard extends Base
 		$this->setTaxRate( '0.00' );
 		$this->tax = null;
 
-		return $this;
+		return $this->setModified();
 	}
 
 

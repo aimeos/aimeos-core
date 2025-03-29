@@ -98,6 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '0.0000', $this->object->getTaxValue() );
 		$this->assertEquals( true, $this->object->getTaxFlag() );
 		$this->assertEquals( 1, $this->object->getQuantity() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
