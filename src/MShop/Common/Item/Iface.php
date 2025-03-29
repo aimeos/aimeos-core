@@ -151,6 +151,14 @@ interface Iface
 	public function isModified() : bool;
 
 	/**
+	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface;
+
+
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array $list Associative list of item keys and their values
