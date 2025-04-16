@@ -386,6 +386,24 @@ class Standard
 
 
 	/**
+	 * Binds additional values to the statement before execution.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Database statement object
+	 * @param int $idx Current bind index
+	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object with bound values
+	 */
+	protected function bind( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\Base\DB\Statement\Iface $stmt, int &$idx ) : \Aimeos\Base\DB\Statement\Iface
+	{
+		if( $item->getId() !== null ) {
+			$stmt->bind( $idx++, $item->get( 'product.ctime' ) );
+		}
+
+		return $stmt;
+	}
+
+
+	/**
 	 * Returns the prefix for the item properties and search keys.
 	 *
 	 * @return string Prefix for the item properties and search keys

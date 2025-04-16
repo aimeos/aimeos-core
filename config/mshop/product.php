@@ -50,5 +50,12 @@ return [
 				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		],
+		'update' => [
+			'ansi' => '
+				UPDATE ":table"
+				SET :names "ctime" = ?, "mtime" = ?, "editor" = ?
+				WHERE "siteid" LIKE ? AND "id" = ?
+			'
+		],
 	],
 ];
