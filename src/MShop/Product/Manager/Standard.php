@@ -392,7 +392,7 @@ class Standard
 	protected function bind( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\Base\DB\Statement\Iface $stmt, int &$idx ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		if( $item->getId() !== null ) {
-			$stmt->bind( $idx++, $item->get( 'product.ctime' ) );
+			$stmt->bind( $idx++, $item->get( 'product.ctime' ) ?: $this->context()->datetime() );
 		}
 
 		return $stmt;
