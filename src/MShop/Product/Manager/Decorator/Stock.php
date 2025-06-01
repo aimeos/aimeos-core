@@ -105,11 +105,11 @@ class Stock
 	 * Returns the stock items for the given parent IDs
 	 *
 	 * @param string[] $prodIds List of parent IDs
-	 * @param array|null $ref Referenced items that should be fetched too
+	 * @param array $ref Referenced items that should be fetched too
 	 * @return array Associative list of parent IDs / stock IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Stock\Item\Iface as values
 	 */
-	protected function getStockItems( array $prodIds, ?array $ref = [] ) : array
+	protected function getStockItems( array $prodIds, array $ref = [] ) : array
 	{
 		if( empty( $prodIds ) ) {
 			return [];
@@ -118,7 +118,7 @@ class Stock
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 		$filter = $manager->filter()->slice( 0, 0x7fffffff )->add( 'stock.productid', '==', $prodIds );
 
-		$types = $ref && isset( $ref['stock'] ) && is_array( $ref['stock'] ) ? $ref['stock'] : null;
+		$types = isset( $ref['stock'] ) && is_array( $ref['stock'] ) ? $ref['stock'] : null;
 
 		if( !empty( $types ) ) {
 			$filter->add( 'stock.type', '==', $types );
@@ -141,7 +141,7 @@ class Stock
 		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
 		$stockManager->delete( $item->getStockItemsDeleted() );
 
-		$stockItems = $item->getStockItems( null, false );
+		$stockItems = $item->getStockItems();
 
 		foreach( $stockItems as $stockItem )
 		{

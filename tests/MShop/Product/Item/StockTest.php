@@ -50,7 +50,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
 		$expected = ['_id_test' => $this->stockItem, '_id_test2' => $this->stockItem2];
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Iface', $result );
-		$this->assertEquals( $expected, $object->getStockItems( null, false )->toArray() );
+		$this->assertEquals( $expected, $object->getStockItems()->toArray() );
 	}
 
 
@@ -58,7 +58,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deleteStockItem( $this->stockItem->setId( 123 ) );
 
-		$this->assertEquals( ['_id_test2' => $this->stockItem2], $this->object->getStockItems( null, false )->toArray() );
+		$this->assertEquals( ['_id_test2' => $this->stockItem2], $this->object->getStockItems()->toArray() );
 		$this->assertEquals( ['_id_test' => $this->stockItem], $this->object->getStockItemsDeleted()->toArray() );
 	}
 
@@ -67,7 +67,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deleteStockItems( [$this->stockItem] );
 
-		$this->assertEquals( ['_id_test2' => $this->stockItem2], $this->object->getStockItems( null, false )->toArray() );
+		$this->assertEquals( ['_id_test2' => $this->stockItem2], $this->object->getStockItems()->toArray() );
 		$this->assertEquals( ['_id_test' => $this->stockItem], $this->object->getStockItemsDeleted()->toArray() );
 	}
 
@@ -112,7 +112,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setStockItems( $expected );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Iface', $result );
-		$this->assertEquals( $expected, $this->object->getStockItems( null, false )->toArray() );
+		$this->assertEquals( $expected, $this->object->getStockItems()->toArray() );
 	}
 
 
@@ -122,7 +122,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setStockItems( $expected );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Iface', $result );
-		$this->assertEquals( $expected, $this->object->getStockItems( null, false )->toArray() );
+		$this->assertEquals( $expected, $this->object->getStockItems()->toArray() );
 		$this->assertEquals( ['_id_test' => $this->stockItem], $this->object->getStockItemsDeleted()->toArray() );
 	}
 }
