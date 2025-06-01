@@ -14,6 +14,9 @@ return [
 				'Property' => 'Property',
 				'Type' => 'Type',
 				'Site' => 'Site',
+			],
+			'local' => [
+				'Stock' => 'Stock',
 			]
 		],
 		'lists' => [

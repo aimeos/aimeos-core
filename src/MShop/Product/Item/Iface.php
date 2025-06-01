@@ -38,12 +38,59 @@ interface Iface
 	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
+	 * Adds a new stock item or overwrite an existing one
+	 *
+	 * @param \Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
+	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 */
+	public function addStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Adds new stock items or overwrite existing ones
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
+	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 */
+	public function addStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Removes an existing stock item
+	 *
+	 * @param \Aimeos\MShop\Stock\Item\Iface $item Existing stock item
+	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 */
+	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Removes a list of existing stock items
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items Existing stock items
+	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 */
+	public function deleteStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Returns the deleted stock items
+	 *
+	 * @return \Aimeos\Map Stock items implementing \Aimeos\MShop\Stock\Item\Iface
+	 */
+	public function getStockItemsDeleted() : \Aimeos\Map;
+
+	/**
 	 * Returns the stock items associated to the product
 	 *
 	 * @param string|null $type Type of the stock item
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
 	 */
 	public function getStockItems( $type = null ) : \Aimeos\Map;
+
+	/**
+	 * Adds a new stock item or overwrite an existing one
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items New list of stock items
+	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 */
+	public function setStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the code of the product item.

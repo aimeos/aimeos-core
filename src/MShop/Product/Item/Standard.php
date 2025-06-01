@@ -26,10 +26,11 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Product\Item\Iface
 {
-	use Config\Traits, ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
+	use Stock, Config\Traits, ListsRef\Traits, PropertyRef\Traits, TypeRef\Traits {
 		PropertyRef\Traits::__clone as __cloneProperty;
 		ListsRef\Traits::__clone as __cloneList;
 		ListsRef\Traits::getName as getNameList;
+		Stock::__clone as __cloneStock;
 	}
 
 
@@ -45,6 +46,7 @@ class Standard
 
 		$this->initPropertyItems( $values['.propitems'] ?? [] );
 		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initStockItems( $values['.stock'] ?? [] );
 	}
 
 
@@ -55,6 +57,7 @@ class Standard
 	{
 		parent::__clone();
 		$this->__cloneList();
+		$this->__cloneStock();
 		$this->__cloneProperty();
 	}
 
@@ -78,29 +81,6 @@ class Standard
 	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		return $this->get( '.locale/site' );
-	}
-
-
-	/**
-	 * Returns the stock items associated to the product
-	 *
-	 * @param array|string|null $type Type or types of the stock item
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
-	 */
-	public function getStockItems( $type = null ) : \Aimeos\Map
-	{
-		$list = map( $this->get( '.stock', [] ) );
-
-		if( $type !== null )
-		{
-			$list = $list->filter( function( $item ) use ( $type ) {
-				foreach( (array) $type as $name ) {
-					return $item->getType() === $name;
-				}
-			});
-		}
-
-		return $list;
 	}
 
 
