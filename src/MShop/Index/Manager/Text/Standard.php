@@ -799,7 +799,7 @@ class Standard
 		$stmt->bind( 2, $lang );
 		$stmt->bind( 3, $url );
 		$stmt->bind( 4, $name );
-		$stmt->bind( 5, mb_strtolower( $content ) ); // for case insensitive searches
+		$stmt->bind( 5, mb_strtolower( strip_tags( $content ) ) ); // for case insensitive searches
 		$stmt->bind( 6, $date ); //mtime
 		$stmt->bind( 7, $siteid );
 
