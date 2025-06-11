@@ -625,7 +625,9 @@ class Standard
 		{
 			$list = [];
 			$manager = \Aimeos\MShop::create( $this->context(), 'locale' );
-			$items = $manager->search( $manager->filter()->slice( 0, 10000 ) );
+			$filter = $manager->filter();
+			$filter->add('locale.status','==', 1);
+			$items = $manager->search( $filter->slice( 0, 10000 ) );
 
 			foreach( $items as $item ) {
 				$list[$item->getLanguageId()] = null;
