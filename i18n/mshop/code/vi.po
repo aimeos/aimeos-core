@@ -47,7 +47,7 @@ msgstr "Công ty"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "ông"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "bà"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "thiếu"
 
 #. Order type value
 msgid "order:repeat"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "Lý do: 1"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,31 +91,31 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "Thanh toán: 0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "Lý do: 1"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "Thống kê: 6"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "Lương: 3"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "Thống kê: 1"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "Thanh toán: 5"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "Lương: 6"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,35 +127,35 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "Thanh toán: 0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "Thống kê: 1"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "Thống kê: 2"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "Thống kê: 3"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "Thống kê: 4"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "Thống kê: 5"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "Thống kê: 6"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "Thống kê: 7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

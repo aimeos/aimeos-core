@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 19:54+0100\n"
+"POT-Creation-Date: 2025-02-09 12:21+0100\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>, 2015-2025\n"
 "Language-Team: Turkish (http://app.transifex.com/aimeos/aimeos-core/language/tr/)\n"
@@ -213,7 +213,7 @@ msgstr "Veritabanı yöneticisi nesnesi mevcut değil"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr "\"%1$s\" öncesinde tarih değeri"
+msgstr "Tarih \"%1$s\" öncesi olamaz"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
@@ -371,7 +371,7 @@ msgstr "Geçersiz teslimat türü"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr "Geçersiz fabrika \"%1$s\""
+msgstr "Geçersiz üretici \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
@@ -904,11 +904,11 @@ msgstr "\"%1$s\" anahtarlı yapılandırma seçeneğinin türü \"%2$s\" olmalı
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr "\"%1$s\"  'dan sonraki zaman değeri"
+msgstr "Saat \"%1$s\" sonrası olamaz"
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr "\"%1$s\" 'dan önceki zaman değeri"
+msgstr "Saat \"%1$s\" öncesi olamaz"
 
 #, php-format
 msgid "Total results value not found"

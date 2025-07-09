@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Jean-Marc Kutyla, 2023
+# Jean-Marc Kutyla, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
