@@ -32,7 +32,7 @@
 		"nyholm/psr7": "~1.2",
 		"psr/http-message": "~1.0||~2.0",
 		"voku/portable-ascii": "~1.4||~2.0",
-		"enshrined/svg-sanitize": "~0.18",
+		"enshrined/svg-sanitize": "~0.22",
 		"intervention/image": "^3.0"
 	},
 	"require-dev": {
