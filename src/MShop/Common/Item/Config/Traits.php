@@ -50,6 +50,28 @@ trait Traits
 
 
 	/**
+	 * Sets all configuration values at once
+	 *
+	 * @param array $flat Associative list of keys (with "/" for nested arrays) and values
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	public function setConfigFlat( array $flat ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		$config = [];
+
+		foreach( $flat as $key => $value ) {
+			$config = $this->setArrayValue( $config, explode( '/', trim( $key, '/' ) ), $value );
+		}
+
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			return $this->setConfig( $config );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Sets the configuration value for the specified path
 	 *
 	 *  Setting "value" by using "path/to" as key would result in:
@@ -66,6 +88,39 @@ trait Traits
 	public function setConfigValue( string $key, $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->setConfig( $this->setArrayValue( $this->getConfig(), explode( '/', trim( $key, '/' ) ), $value ) );
+	}
+
+
+	/**
+	 * Returns if two associative arrays with string keys are equal
+	 *
+	 * @param array $a First associative array
+	 * @param array $b Second associative array
+	 * @return bool TRUE if arrays are loosly equal, FALSE if there are differences other than the order of keys
+	 */
+	protected function compareConfig( array $a, array $b ) : bool
+	{
+		if( count( $a ) !== count( $b ) || array_diff_key( $a, $b ) ) {
+			return false;
+		}
+
+		foreach( $a as $k => $v )
+		{
+			$bv = $b[$k];
+
+			if( is_array( $v ) && is_array( $bv ) )
+			{
+				if( !$this->compareConfig( $v, $bv ) ) {
+					return false;
+				}
+			}
+			elseif( $v != $bv )
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 

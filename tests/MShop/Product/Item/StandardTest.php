@@ -375,6 +375,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetConfigFlat()
+	{
+		$result = $this->object->setConfigFlat( ['css-class' => 'test'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $result );
+		$this->assertEquals( ['css-class' => 'test'], $this->object->getConfig() );
+		$this->assertFalse( $this->object->isModified() );
+
+		$result = $this->object->setConfigFlat( ['path/to/value' => 'test'] );
+		$expected = ['path' => ['to' => ['value' => 'test']]];
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $result );
+		$this->assertEquals( $expected, $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetTarget()
 	{
 		$this->assertEquals( 'testtarget', $this->object->getTarget() );
