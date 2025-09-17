@@ -84,12 +84,16 @@ class Standard
 	/**
 	 * Sets the config property of the site.
 	 *
-	 * @param array $options Options to be set for the Site
+	 * @param array $config Configuration to be set for the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setConfig( array $options ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'locale.site.config', $options );
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			$this->set( 'locale.site.config', $config );
+		}
+
+		return $this;
 	}
 
 

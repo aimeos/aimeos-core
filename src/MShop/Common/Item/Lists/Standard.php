@@ -245,7 +245,11 @@ class Standard
 	 */
 	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'config', $config );
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			return $this->set( $this->prefix . 'config', $config );
+		}
+
+		return $this;
 	}
 
 

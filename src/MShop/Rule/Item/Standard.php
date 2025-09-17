@@ -107,7 +107,11 @@ class Standard
 	 */
 	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'rule.config', $config );
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			$this->set( 'rule.config', $config );
+		}
+
+		return $this;
 	}
 
 

@@ -215,19 +215,22 @@ class Standard
 	 */
 	public function getConfig() : array
 	{
-		return (array) parent::get( 'config', [] );
+		return (array) $this->get( 'config', [] );
 	}
 
 
 	/**
 	 * Sets the config property of the catalog item.
 	 *
-	 * @param array $options Options to be set for the catalog node
+	 * @param array $config Configuration to be set for the catalog node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setConfig( array $options ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		parent::set( 'config', $options );
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			$this->set( 'config', $config );
+		}
+
 		return $this;
 	}
 

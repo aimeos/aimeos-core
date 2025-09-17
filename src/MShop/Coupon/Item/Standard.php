@@ -137,7 +137,11 @@ class Standard
 	 */
 	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'coupon.config', $config );
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			$this->set( 'coupon.config', $config );
+		}
+
+		return $this;
 	}
 
 
