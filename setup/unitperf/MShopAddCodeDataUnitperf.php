@@ -26,7 +26,7 @@ class MShopAddCodeDataUnitperf extends MShopAddCodeData
 
 
 	/**
-	 * Executes the task for MySQL databases
+	 * Executes the task for databases
 	 */
 	public function up()
 	{

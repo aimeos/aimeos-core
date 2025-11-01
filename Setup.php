@@ -202,36 +202,36 @@ class Setup
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'code', function( string $name = 'code' ) use ( $codelen ) {
 			return $this->string( $name, $codelen )
-				->opt( 'charset', 'utf8mb4', 'mysql' )
-				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
+				->opt( 'charset', 'utf8mb4', ['mariadb', 'mysql'] )
+				->opt( 'collation', 'utf8mb4_bin', ['mariadb', 'mysql'] )
 				->default( '' );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'config', function( string $name = 'config' ) {
 			return $this->text( $name )
-				->opt( 'charset', 'utf8mb4', 'mysql' )
-				->opt( 'collation', 'utf8mb4_general_ci', 'mysql' )
+				->opt( 'charset', 'utf8mb4', ['mariadb', 'mysql'] )
+				->opt( 'collation', 'utf8mb4_general_ci', ['mariadb', 'mysql'] )
 				->null( true );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'type', function( string $name = 'type' ) use ( $codelen ) {
 			return $this->string( $name, $codelen )
-				->opt( 'charset', 'utf8mb4', 'mysql' )
-				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
+				->opt( 'charset', 'utf8mb4', ['mariadb', 'mysql'] )
+				->opt( 'collation', 'utf8mb4_bin', ['mariadb', 'mysql'] )
 				->default( '' );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'refid', function( string $name = 'refid' ) {
 			return $this->string( $name, 36 )
-				->opt( 'charset', 'utf8mb4', 'mysql' )
-				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
+				->opt( 'charset', 'utf8mb4', ['mariadb', 'mysql'] )
+				->opt( 'collation', 'utf8mb4_bin', ['mariadb', 'mysql'] )
 				->default( '' );
 		} );
 
 		\Aimeos\Upscheme\Schema\Table::macro( 'i18n', function( string $name = 'i18n' ) {
 			return $this->text( $name )
-				->opt( 'charset', 'utf8mb4', 'mysql' )
-				->opt( 'collation', 'utf8mb4_bin', 'mysql' )
+				->opt( 'charset', 'utf8mb4', ['mariadb', 'mysql'] )
+				->opt( 'collation', 'utf8mb4_bin', ['mariadb', 'mysql'] )
 				->null( true );
 		} );
 

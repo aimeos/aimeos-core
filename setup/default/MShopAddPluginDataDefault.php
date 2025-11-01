@@ -27,7 +27,7 @@ class MShopAddPluginDataDefault extends MShopAddPluginData
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Executes the task for databases.
 	 */
 	public function up()
 	{
