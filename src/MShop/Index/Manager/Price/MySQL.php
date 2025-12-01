@@ -24,7 +24,7 @@ class MySQL
 	private array $searchConfig = array(
 		'index.price.id' => array(
 			'code' => 'index.price.id',
-			'internalcode' => 'mindpr."priceid"',
+			'internalcode' => 'mindpr."prodid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr USE INDEX ("unq_msindpr_pid_sid_cid", "idx_msindpr_sid_cid_val") ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
 		),
