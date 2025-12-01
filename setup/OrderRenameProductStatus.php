@@ -21,12 +21,12 @@ class OrderRenameProductStatus extends Base
 	{
 		$db = $this->db( 'db-order' );
 
-		if( $db->hasTable( 'mshop_order_base_product' )
-			&& !$db->hasColumn( 'mshop_order_base_product', 'statusdelivery' )
+		if( $db->hasTable( 'mshop_order_product' )
+			&& !$db->hasColumn( 'mshop_order_product', 'statusdelivery' )
 		) {
-			$this->info( 'Rename "status" to "statusdelivery" in "mshop_order_base_product" table', 'vv' );
+			$this->info( 'Rename "status" to "statusdelivery" in "mshop_order_product" table', 'vv' );
 
-			$db->renameColumn( 'mshop_order_base_product', 'status', 'statusdelivery' );
+			$db->renameColumn( 'mshop_order_product', 'status', 'statusdelivery' );
 		}
 	}
 }
