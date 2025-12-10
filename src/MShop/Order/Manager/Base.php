@@ -201,8 +201,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
 	{
-		$pos = 0;
 		$products = $item->getProducts();
+		$pos = (int) $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.product.position' );
 
 		foreach( $products as $product )
 		{
@@ -210,7 +210,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$product->setId( null ); // create new item if copied
 			}
 
-			$product->setParentId( $item->getId() )->setPosition( ++$pos );
+			if( !$product->getPosition() ) {
+				$product->setPosition( ++$pos );
+			}
+
+			$product->setParentId( $item->getId() );
 
 			foreach( $product->getProducts() as $subProduct )
 			{
@@ -218,7 +222,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					$subProduct->setId( null ); // create new item if copied
 				}
 
-				$subProduct->setParentId( $item->getId() )->setPosition( ++$pos );
+				if( !$subProduct->getPosition() ) {
+					$subProduct->setPosition( ++$pos );
+				}
+
+				$subProduct->setParentId( $item->getId() );
 			}
 		}
 
