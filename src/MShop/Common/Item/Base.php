@@ -401,7 +401,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 		// Add custom columns
 		foreach( $list as $key => $value )
 		{
-			if( ( is_null( $value ) || is_scalar( $value ) || is_array( $value ) ) && strpos( $key, '.' ) === false ) {
+			if( ( is_null( $value ) || is_scalar( $value ) || is_array( $value ) ) && ( $key[0] ?? null ) !== '.' ) {
 				$this->set( $key, $value );
 			}
 		}
@@ -428,9 +428,10 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 			$list[$this->bprefix . 'editor'] = $this->editor();
 		}
 
+		// Add custom columns
 		foreach( $this->bdata as $key => $value )
 		{
-			if( strpos( $key, '.' ) === false ) {
+			if( ( $key[0] ?? null ) !== '.' ) { // skip private properties
 				$list[$key] = $value;
 			}
 		}
