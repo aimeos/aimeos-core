@@ -22,8 +22,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.label' => 'test coupon',
 			'coupon.provider' => 'None',
 			'coupon.config' => array( 'key'=>'test' ),
-			'coupon.start' => null,
-			'coupon.end' => null,
+			'coupon.datestart' => null,
+			'coupon.dateend' => null,
 			'coupon.status' => 1,
 			'coupon.mtime' => '2011-01-01 00:00:02',
 			'coupon.ctime' => '2011-01-01 00:00:01',
@@ -222,6 +222,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['coupon.config'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['coupon.label'] );
 		$this->assertEquals( $this->object->getProvider(), $arrayObject['coupon.provider'] );
+		$this->assertEquals( $this->object->getDateStart(), $arrayObject['coupon.datestart'] );
+		$this->assertEquals( $this->object->getDateEnd(), $arrayObject['coupon.dateend'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['coupon.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.mtime'] );
