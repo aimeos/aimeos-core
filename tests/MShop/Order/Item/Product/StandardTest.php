@@ -810,6 +810,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetAttributeItemsByTypes()
+	{
+		$this->assertEquals( $this->attributes, $this->object->getAttributeItems( ['default', 'test'] ) );
+	}
+
+
 	public function testGetAttributeItemsInvalidType()
 	{
 		$this->assertEquals( map(), $this->object->getAttributeItems( 'invalid' ) );

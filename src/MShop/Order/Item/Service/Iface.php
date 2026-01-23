@@ -169,10 +169,10 @@ interface Iface
 	/**
 	 * Returns the list of attribute items for the service.
 	 *
-	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
+	 * @param array|string|null $type Filters returned attributes by the given types, type or null for no filtering
 	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	 */
-	public function getAttributeItems( ?string $type = null ) : \Aimeos\Map;
+	public function getAttributeItems( $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Returns the deleted attribute items for the service.
