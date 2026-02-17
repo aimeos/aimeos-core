@@ -251,7 +251,7 @@
 
 
 	<target name="createext" description="Creates new extension">
-		<propertyprompt propertyName="extname" promptText="Enter extension name (only A-Z, a-z, 0-9 and -)" promptCharacter=":" useExistingValue="true"/>
+		<input propertyName="extname" message="Enter extension name (only A-Z, a-z, 0-9 and -)" promptChar=":"/>
 		<copy todir="${extdir}/${extname}" >
 			<fileset dir="${coredir}/misc/ext-template">
 				<include name="**" />
