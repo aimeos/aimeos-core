@@ -862,6 +862,13 @@ abstract class Base
 			$costs += $service->getPrice()->getCosts();
 		}
 
+		if( $type === 'delivery' )
+		{
+			foreach( $this->getProducts() as $product ) {
+				$costs += $product->getPrice()->getCosts() * $product->getQuantity();
+			}
+		}
+
 		return $costs;
 	}
 
