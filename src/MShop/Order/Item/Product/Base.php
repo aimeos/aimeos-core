@@ -124,7 +124,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		foreach( $this->get( '.attributes', [] ) as $attrItem )
 		{
-			if( $attrItem->getType() === $type ) {
+			if( in_array( $attrItem->getType(), (array) $type ) ) {
 				$list[] = $attrItem;
 			}
 		}
