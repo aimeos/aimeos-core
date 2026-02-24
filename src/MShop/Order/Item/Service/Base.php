@@ -121,11 +121,8 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 		foreach( $this->get( '.attributes', [] ) as $attrItem )
 		{
-			foreach( (array) $type as $code )
-			{
-				if( $attrItem->getType() === $code ) {
-					$list[] = $attrItem;
-				}
+			if( in_array( $attrItem->getType(), (array) $type ) ) {
+				$list[] = $attrItem;
 			}
 		}
 
