@@ -530,6 +530,21 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetCostsWithProducts()
+	{
+		$this->object->setServices( $this->services );
+
+		foreach( $this->products as $product ) {
+			$this->object->addProduct( $product );
+		}
+
+		// delivery: 2.00 (service) + 1.11 * 1 (prod1) + 2.00 * 1 (prod2) = 5.11
+		$this->assertEquals( '5.11', round( $this->object->getCosts( 'delivery' ), 2 ) );
+		// payment costs are unaffected by product costs
+		$this->assertEquals( '0.00', $this->object->getCosts( 'payment' ) );
+	}
+
+
 	public function testCheck()
 	{
 		foreach( $this->products as $product ) {
