@@ -4,20 +4,23 @@
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />
-		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml --display-warnings --display-notices"
-			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpunit" dir="tests" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml --display-warnings --display-notices" />
+		</exec>
 	</target>
 
 	<target name="coverage" description="Generates code coverage report" depends="clean">
 		<echo msg="Generating code coverage report" />
-		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml --display-warnings --display-notices"
-			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpunit" dir="tests" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml --display-warnings --display-notices" />
+		</exec>
 	</target>
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Aimeos src tests/*/"
-			  checkreturn="true" logoutput="true" passthru="true" />
+		<exec executable="${bindir}phpcs" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-n --standard=${codestddir}/Aimeos src tests/*/" />
+		</exec>
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
@@ -30,8 +33,9 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./src/ ./templates/ -type f | xgettext -j -s --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/source.pot -f -"
-			checkreturn="true" logoutput="true" />
+		<exec executable="find" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="./src/ ./templates/ -type f | xgettext -j -s --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/source.pot -f -" />
+		</exec>
 		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
 			<fileset dir="./i18n">
 				<include name="*.po" />
@@ -42,7 +46,9 @@
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgmerge -s -N -U --backup=none ${po-filename} i18n/source.pot" checkreturn="true" logoutput="true" />
+		<exec executable="msgmerge" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-s -N -U --backup=none ${po-filename} i18n/source.pot" />
+		</exec>
 	</target>
 
 	<target name="build" description="Builds package for deployment">
@@ -56,7 +62,9 @@
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" />
+		<exec executable="msgfmt" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="--statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" />
+		</exec>
 	</target>
 
 	<target name="all" depends="coverage,check" description="Builds all parts of the package">
