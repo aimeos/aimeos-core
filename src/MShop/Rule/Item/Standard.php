@@ -89,33 +89,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration of the rule item.
-	 *
-	 * @return array Custom configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'rule.config', [] );
-	}
-
-
-	/**
-	 * Sets the new configuration for the rule item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'rule.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the starting point of time, in which the rule is available.
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format

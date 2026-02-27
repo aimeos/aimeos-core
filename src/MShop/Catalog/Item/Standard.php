@@ -209,33 +209,6 @@ class Standard
 
 
 	/**
-	 * Returns the config property of the catalog.
-	 *
-	 * @return array Returns the config of the catalog node
-	 */
-	public function getConfig() : array
-	{
-		return (array) $this->get( 'config', [] );
-	}
-
-
-	/**
-	 * Sets the config property of the catalog item.
-	 *
-	 * @param array $config Configuration to be set for the catalog node
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the code of the item.
 	 *
 	 * @return string Code of the item

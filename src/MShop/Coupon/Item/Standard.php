@@ -119,33 +119,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration of the coupon item.
-	 *
-	 * @return array Custom configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'coupon.config', [] );
-	}
-
-
-	/**
-	 * Sets the new configuration for the coupon item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'coupon.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the status of the coupon item.
 	 *
 	 * @return int Status of the item

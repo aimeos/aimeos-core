@@ -72,33 +72,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration values of the item
-	 *
-	 * @return array Configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'order.service.transaction.config', [] );
-	}
-
-
-	/**
-	 * Sets the configuration values of the item.
-	 *
-	 * @param array $config Configuration values
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'order.service.transaction.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the price item for the transaction.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate

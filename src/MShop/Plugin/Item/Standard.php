@@ -90,33 +90,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration of the plugin item.
-	 *
-	 * @return array Custom configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'plugin.config', [] );
-	}
-
-
-	/**
-	 * Sets the new configuration for the plugin item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'plugin.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the position of the plugin item.
 	 *
 	 * @return int Position of the item

@@ -20,20 +20,30 @@ namespace Aimeos\MShop\Common\Item\Config;
 trait Traits
 {
 	/**
-	 * Returns the configuration values of the item
+	 * Returns the config property of the catalog.
 	 *
-	 * @return array Configuration values
+	 * @return array Returns the config of the catalog node
 	 */
-	abstract public function getConfig() : array;
+	public function getConfig() : array
+	{
+		return (array) $this->get( $this->prefix() . 'config', [] );
+	}
 
 
 	/**
-	 * Sets the configuration values of the item
+	 * Sets the config property of the catalog item.
 	 *
-	 * @param array $config Configuration values
+	 * @param array $config Configuration to be set for the catalog node
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	abstract public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
+			$this->set( $this->prefix() . 'config', $config );
+		}
+
+		return $this;
+	}
 
 
 	/**

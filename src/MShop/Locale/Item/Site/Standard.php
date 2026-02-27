@@ -71,33 +71,6 @@ class Standard
 
 
 	/**
-	 * Returns the config property of the site.
-	 *
-	 * @return array Returns the config of the Site
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'locale.site.config', [] );
-	}
-
-
-	/**
-	 * Sets the config property of the site.
-	 *
-	 * @param array $config Configuration to be set for the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'locale.site.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the label property of the site.
 	 *
 	 * @return string Returns the label of the Site

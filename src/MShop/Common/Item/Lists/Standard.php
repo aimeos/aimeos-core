@@ -227,33 +227,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration of the list item.
-	 *
-	 * @return array Custom configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( $this->prefix . 'config', [] );
-	}
-
-
-	/**
-	 * Sets the new configuration for the list item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			return $this->set( $this->prefix . 'config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the referenced item if it's available.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Iface|null Referenced list item

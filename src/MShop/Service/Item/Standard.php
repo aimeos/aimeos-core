@@ -162,33 +162,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration values of the item
-	 *
-	 * @return array Configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'service.config', [] );
-	}
-
-
-	/**
-	 * Sets the configuration values of the item.
-	 *
-	 * @param array $config Configuration values
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'service.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the position of the service item in the list of deliveries.
 	 *
 	 * @return int Position in item list

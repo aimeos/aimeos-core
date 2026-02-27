@@ -219,33 +219,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration values of the item
-	 *
-	 * @return array Configuration values
-	 */
-	public function getConfig() : array
-	{
-		return $this->get( 'product.config', [] );
-	}
-
-
-	/**
-	 * Sets the configuration values of the item.
-	 *
-	 * @param array $config Configuration values
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
-	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
-			$this->set( 'product.config', $config );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the starting point of time, in which the product is available.
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
