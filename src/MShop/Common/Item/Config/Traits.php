@@ -20,6 +20,14 @@ namespace Aimeos\MShop\Common\Item\Config;
 trait Traits
 {
 	/**
+	 * Returns the prefix for the item properties
+	 *
+	 * @return string Prefix for the item properties
+	 */
+	abstract protected function prefix() : string;
+
+
+	/**
 	 * Returns the config property of the catalog.
 	 *
 	 * @return array Returns the config of the catalog node
