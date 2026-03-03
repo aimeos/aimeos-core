@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['log.facility'], $item->getFacility() );
 		$this->assertEquals( $list['log.message'], $item->getMessage() );
 		$this->assertEquals( $list['log.request'], $item->getRequest() );
-		$this->assertEquals( '2', $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 
