@@ -34,7 +34,7 @@ return array(
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
-					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					mcat."mtime", mcat."editor", mcat."ctime", mcat."target", mcat."pathid"
 				FROM "mshop_catalog" mcat, "mshop_catalog" AS parent
 				WHERE parent."id" = ?
 					AND mcat."siteid" = :siteid
@@ -46,7 +46,7 @@ return array(
 				GROUP BY :columns
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-					mcat."nleft", mcat."nright", mcat."target",
+					mcat."nleft", mcat."nright", mcat."target", mcat."pathid",
 					mcat."mtime", mcat."editor", mcat."ctime"
 				ORDER BY mcat."nleft"
 			'
@@ -55,16 +55,16 @@ return array(
 			'ansi' => '
 				INSERT INTO "mshop_catalog" (
 					"siteid", "label", "code", "status", "parentid", "level",
-					"nleft", "nright", "config", "mtime", "ctime", "editor", "target"
+					"nleft", "nright", "config", "mtime", "ctime", "editor", "target", "pathid"
 				) VALUES (
-					:siteid, ?, ?, ?, ?, ?, ?, ?, \'\', \'1970-01-01 00:00:00\', \'1970-01-01 00:00:00\', \'\', \'\'
+					:siteid, ?, ?, ?, ?, ?, ?, ?, \'\', \'1970-01-01 00:00:00\', \'1970-01-01 00:00:00\', \'\', \'\', \'\'
 				)
 			'
 		),
 		'insert-usage' => array(
 			'ansi' => '
 				UPDATE "mshop_catalog"
-				SET :names "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
+				SET :names "url" = ?, "config" = ?, "pathid" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
 				WHERE "siteid" LIKE ? AND "id" = ?
 			'
 		),
@@ -85,8 +85,15 @@ return array(
 		'update-usage' => array(
 			'ansi' => '
 				UPDATE "mshop_catalog"
-				SET :names "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
+				SET :names "url" = ?, "config" = ?, "pathid" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 				WHERE "siteid" LIKE ? AND "id" = ?
+			'
+		),
+		'update-path' => array(
+			'ansi' => '
+				UPDATE "mshop_catalog"
+				SET "pathid" = ?
+				WHERE "id" = ?
 			'
 		),
 		'move-left' => array(
@@ -109,7 +116,7 @@ return array(
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
-					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					mcat."mtime", mcat."editor", mcat."ctime", mcat."target", mcat."pathid"
 				FROM "mshop_catalog" mcat
 				WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
 					AND mcat."nright" <= ? AND :cond
@@ -122,7 +129,7 @@ return array(
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
-					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					mcat."mtime", mcat."editor", mcat."ctime", mcat."target", mcat."pathid"
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
@@ -135,7 +142,7 @@ return array(
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
-					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					mcat."mtime", mcat."editor", mcat."ctime", mcat."target", mcat."pathid"
 				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond

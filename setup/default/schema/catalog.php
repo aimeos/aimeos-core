@@ -24,6 +24,7 @@ return array(
 			$table->int( 'nleft' );
 			$table->int( 'nright' );
 			$table->string( 'target' )->default( '' );
+			$table->string( 'pathid' )->default( '' );
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 

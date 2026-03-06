@@ -22,6 +22,21 @@ interface Iface
 		\Aimeos\MShop\Common\Item\ListsRef\Iface, \Aimeos\MShop\Common\Item\Tree\Iface
 {
 	/**
+	 * Returns the materialized path of the catalog item.
+	 *
+	 * @return string Materialized path of the catalog item (e.g. "1.5.10.")
+	 */
+	public function getPathId() : string;
+
+	/**
+	 * Sets a new materialized path for the catalog item.
+	 *
+	 * @param string $value New materialized path of the catalog item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 */
+	public function setPathId( string $value ) : \Aimeos\MShop\Catalog\Item\Iface;
+
+	/**
 	 * Returns the URL segment for the catalog item.
 	 *
 	 * @return string URL segment of the catalog item

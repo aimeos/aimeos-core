@@ -185,6 +185,30 @@ class Standard
 
 
 	/**
+	 * Returns the materialized path of the catalog item.
+	 *
+	 * @return string Materialized path of the catalog item (e.g. "1.5.10.")
+	 */
+	public function getPathId() : string
+	{
+		return (string) ( $this->node->pathid ?? '' );
+	}
+
+
+	/**
+	 * Sets a new materialized path for the catalog item.
+	 *
+	 * @param string $value New materialized path of the catalog item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 */
+	public function setPathId( string $value ) : \Aimeos\MShop\Catalog\Item\Iface
+	{
+		$this->node->pathid = $value;
+		return $this;
+	}
+
+
+	/**
 	 * Returns the URL segment for the catalog item.
 	 *
 	 * @return string URL segment of the catalog item
@@ -484,6 +508,7 @@ class Standard
 				case 'catalog.target': $item->setTarget( $value ); break;
 				case 'catalog.status': $item->setStatus( (int) $value ); break;
 				case 'catalog.config': $item->setConfig( (array) $value ); break;
+				case 'catalog.pathid': !$private ?: $item->setPathId( $value ); break;
 				case 'catalog.id': !$private ?: $item->setId( $value ); break;
 				default: continue 2;
 			}
@@ -517,6 +542,7 @@ class Standard
 		{
 			$list['catalog.id'] = $this->getId();
 			$list['catalog.level'] = $this->getLevel();
+			$list['catalog.pathid'] = $this->getPathId();
 			$list['catalog.siteid'] = $this->getSiteId();
 			$list['catalog.parentid'] = $this->getParentId();
 			$list['catalog.ctime'] = $this->getTimeCreated();

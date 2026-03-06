@@ -36,6 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser',
 			'target' => 'testtarget',
+			'pathid' => '3.2.',
 			'hasChildren' => true
 		];
 
@@ -115,6 +116,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 'unit test', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetPathId()
+	{
+		$this->assertEquals( '3.2.', $this->object->getPathId() );
+	}
+
+
+	public function testSetPathId()
+	{
+		$return = $this->object->setPathId( '1.3.2.' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
+		$this->assertEquals( '1.3.2.', $this->object->getPathId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -286,6 +303,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->values['mtime'], $values['catalog.mtime'] );
 		$this->assertEquals( $this->values['editor'], $values['catalog.editor'] );
 		$this->assertEquals( $this->values['target'], $values['catalog.target'] );
+		$this->assertEquals( $this->values['pathid'], $values['catalog.pathid'] );
 		$this->assertEquals( $this->values['hasChildren'], $values['catalog.hasChildren'] );
 	}
 
