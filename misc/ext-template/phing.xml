@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="<extname> extension" default="test">
+<project name="<extname>" default="test">
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />
@@ -34,36 +34,46 @@
 
 	<target name="i18n" description="Creates translation message files">
 		<exec executable="find" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="./src/ ./templates/ -type f | xgettext -j -s --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/source.pot -f -" />
+			<arg line="src/ templates/ -type f | xgettext -j -s --no-location --add-comments=/// --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/source.pot -f -" />
 		</exec>
-		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
-			<fileset dir="./i18n">
+		<foreach list="./i18n" param="i18n-dir" inheritall="true" target="i18n-files" />
+	</target>
+
+	<target name="i18n-files" description="Updates translation message files in passed directory">
+		<foreach param="po-filename" absparam="po-filepath" inheritall="true" target="i18n-update">
+			<fileset dir="${i18n-dir}">
 				<include name="*.po" />
 			</fileset>
 		</foreach>
 	</target>
 
 	<target name="i18n-update" description="Updates translation message files">
-		<fail unless="po-filename" message="Missing file name" />
-		<echo msg="File: ${po-filename}" />
+		<fail unless="po-filepath" message="Missing file name" />
+		<echo msg="File: ${po-filepath}" />
 		<exec executable="msgmerge" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="-s -N -U --backup=none ${po-filename} i18n/source.pot" />
+			<arg line="-s -N -U --backup=none ${po-filepath} ${i18n-dir}/source.pot" />
+		</exec>
+		<exec executable="msgattrib" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="-s --no-fuzzy -o ${po-filepath} ${po-filepath}" />
 		</exec>
 	</target>
 
 	<target name="build" description="Builds package for deployment">
-		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-			<fileset dir="./i18n">
-				<include name="*.po" />
+		<exec executable="tx" checkreturn="true" logoutput="true" passthru="true">
+			<arg line="pull -a -f --minimum-perc=1" />
+		</exec>
+		<foreach param="po-filename" absparam="po-filepath" target="build-mo">
+			<fileset dir="i18n">
+				<include name="**/*.po" />
 			</fileset>
 		</foreach>
 	</target>
 
 	<target name="build-mo" description="Generates binary translation files">
-		<fail unless="po-filename" message="Missing file name" />
-		<echo msg="File: ${po-filename}" />
+		<fail unless="po-filepath" message="Missing file name" />
+		<echo msg="File: ${po-filepath}" />
 		<exec executable="msgfmt" checkreturn="true" logoutput="true" passthru="true">
-			<arg line="--statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" />
+			<arg line="--statistics -c -o `echo ${po-filepath} | sed s/\.po//` ${po-filepath}" />
 		</exec>
 	</target>
 
