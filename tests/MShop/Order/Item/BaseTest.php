@@ -494,6 +494,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $item );
 		$this->assertEquals( 'value', $item->getValue() );
+
+		$this->assertNull( $this->object->getStatus( 'test', 'invalid' ) );
 	}
 
 

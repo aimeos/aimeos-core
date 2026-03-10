@@ -429,7 +429,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Status item of an order
 	 * @throws \Aimeos\MShop\Order\Exception If status item is not available
 	 */
-	public function getStatus( string $type, string $value ) : \Aimeos\MShop\Order\Item\Status\Iface;
+	public function getStatus( string $type, string $value ) : ?\Aimeos\MShop\Order\Item\Status\Iface;
 
 	/**
 	 * Returns the status items

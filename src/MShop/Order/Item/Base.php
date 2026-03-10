@@ -819,20 +819,15 @@ abstract class Base
 
 
 	/**
-	 * Returns the status item specified by its type and value
+	 * Returns the latest status item specified by its type and value
 	 *
 	 * @param string $type Status type
 	 * @param string $value Status value
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Status item of an order
-	 * @throws \Aimeos\MShop\Order\Exception If status item is not available
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface|null Status item of an order or null if not available
 	 */
-	public function getStatus( string $type, string $value ) : \Aimeos\MShop\Order\Item\Status\Iface
+	public function getStatus( string $type, string $value ) : ?\Aimeos\MShop\Order\Item\Status\Iface
 	{
-		if( !isset( $this->statuses[$type][$value] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Status not available' ) );
-		}
-
-		return $this->statuses[$type][$value];
+		return $this->statuses[$type][$value] ?? null;
 	}
 
 
