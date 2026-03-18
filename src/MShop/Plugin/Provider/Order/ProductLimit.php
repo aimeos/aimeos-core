@@ -157,7 +157,7 @@ class ProductLimit
 			$value->setQuantity( $config['single-number-max'] ); // reset to allowed value
 
 			$msg = $this->context()->translate( 'mshop', 'The maximum product quantity is %1$d' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ) );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ), 409 );
 		}
 
 
@@ -172,7 +172,7 @@ class ProductLimit
 			if( $total > (int) $config['total-number-max'] )
 			{
 				$msg = $this->context()->translate( 'mshop', 'The maximum quantity of all products is %1$d' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['total-number-max'] ) );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['total-number-max'] ), 409 );
 			}
 		}
 	}
@@ -195,7 +195,7 @@ class ProductLimit
 			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId]
 		) {
 			$msg = $this->context()->translate( 'mshop', 'The maximum product value is %1$s' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['single-value-max'][$currencyId] ) );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['single-value-max'][$currencyId] ), 409 );
 		}
 
 
@@ -211,7 +211,7 @@ class ProductLimit
 			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] )
 			{
 				$msg = $this->context()->translate( 'mshop', 'The maximum value of all products is %1$s' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['total-value-max'][$currencyId] ) );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['total-value-max'][$currencyId] ), 409 );
 			}
 		}
 	}

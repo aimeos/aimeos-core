@@ -112,7 +112,7 @@ class PropertyMatch
 		{
 			$code = array( 'product' => $map );
 			$msg = $this->context()->translate( 'mshop', 'Product matching given properties not found' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409, null, $code );
 		}
 
 		return $value;

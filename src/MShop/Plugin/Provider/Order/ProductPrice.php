@@ -160,7 +160,7 @@ class ProductPrice
 		{
 			$code = ['product' => $changedProducts];
 			$msg = $this->context()->translate( 'mshop', 'Please have a look at the prices of the products in your basket' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409, null, $code );
 		}
 
 		return $value;
@@ -263,7 +263,7 @@ class ProductPrice
 		{
 			$codes = ['product' => [$pos => 'product.price']];
 			$msg = $this->context()->translate( 'mshop', 'No price for product available' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409, null, $codes );
 		}
 
 		return $prices;

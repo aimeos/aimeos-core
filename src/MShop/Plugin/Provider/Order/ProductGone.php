@@ -80,7 +80,7 @@ class ProductGone
 		{
 			$code = array( 'product' => $notAvailable );
 			$msg = $this->context()->translate( 'mshop', 'Products in basket not available' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409, null, $code );
 		}
 
 		return $value;

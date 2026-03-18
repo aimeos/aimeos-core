@@ -91,7 +91,7 @@ class Coupon
 		if( $notAvailable )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Coupon is not available any more' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409 );
 		}
 
 		return $value;

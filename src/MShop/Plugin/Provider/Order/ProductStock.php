@@ -66,7 +66,7 @@ class ProductStock
 		if( !$order->getProducts()->isEmpty() && ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Products out of stock' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, array( 'product' => $outOfStock ) );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409, null, array( 'product' => $outOfStock ) );
 		}
 
 		return $value;
