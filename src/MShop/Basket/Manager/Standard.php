@@ -160,7 +160,7 @@ class Standard
 		$context = $this->context();
 		$date = $context->datetime();
 		$conn = $context->db( $this->getResourceName() );
-		$columns = $this->object()->getSaveAttributes();
+		$columns = array_column( $this->object()->getSaveAttributes(), null, 'internalcode' );
 
 		/** mshop/basket/manager/insert/mysql
 		 * Inserts a new basket record into the database table or updates an existing one
