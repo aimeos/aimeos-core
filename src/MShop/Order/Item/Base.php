@@ -274,7 +274,7 @@ abstract class Base
 		$this->notify( 'check.before', $what );
 
 		if( in_array( 'order/product', $what ) && ( count( $this->getProducts() ) < 1 ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ), 0 );
 		}
 
 		$this->notify( 'check.after', $what );
