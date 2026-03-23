@@ -390,7 +390,7 @@ class Standard
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$columns = $this->object()->getSaveAttributes();
+		$columns = $this->getSaveColumns();
 
 		/** mshop/locale/manager/site/insert/mysql
 		 * Inserts a new currency record into the database table
@@ -429,8 +429,8 @@ class Standard
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, '' ); // site ID
@@ -651,7 +651,7 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
+		$columns = $this->getSaveColumns();
 
 		/** mshop/locale/manager/site/update/mysql
 		 * Updates an existing site record in the database
@@ -687,8 +687,8 @@ class Standard
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getSiteId() );

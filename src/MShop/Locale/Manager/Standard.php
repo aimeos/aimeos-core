@@ -593,7 +593,7 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$columns = $this->object()->getSaveAttributes();
+		$columns = $this->getSaveColumns();
 
 		if( $id === null )
 		{
@@ -675,8 +675,8 @@ class Standard
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 		$siteIds = explode( '.', trim( $item->getSiteId(), '.' ) );
 
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLanguageId() );

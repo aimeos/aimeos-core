@@ -361,6 +361,8 @@ trait Methods
 	}
 
 
+
+
 	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *

@@ -1029,7 +1029,7 @@ class Standard extends Base
 		$conn = $context->db( $this->getResourceName() );
 
 		$siteid = $context->locale()->getSiteId();
-		$columns = $this->object()->getSaveAttributes();
+		$columns = $this->getSaveColumns();
 
 		if( $case !== true )
 		{
@@ -1124,8 +1124,8 @@ class Standard extends Base
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 		$idx = 1;
 
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getUrl() );

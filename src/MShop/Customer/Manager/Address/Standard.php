@@ -152,7 +152,7 @@ class Standard
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$columns = array_column( $this->object()->getSaveAttributes(), null, 'internalcode' );
+		$columns = $this->getSaveColumns();
 
 		if( $id === null )
 		{
@@ -169,7 +169,7 @@ class Standard
 		$values = $item->toArray( true );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		foreach( $this->object()->getSaveAttributes() as $name => $entry )
+		foreach( $columns as $entry )
 		{
 			$value = $values[$entry->getCode()] ?? null;
 			$value = $entry->getType() === 'json' ? json_encode( $value, JSON_FORCE_OBJECT ) : $value;
