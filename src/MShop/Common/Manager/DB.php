@@ -627,6 +627,29 @@ trait DB
 
 
 	/**
+	 * Returns the save attributes re-keyed by column name.
+	 *
+	 * If internalcode is set, its bare column name (without table alias/quotes)
+	 * is used as key. Otherwise the array key from getSaveAttributes() is used.
+	 *
+	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of attribute items keyed by column name
+	 */
+	protected function getSaveColumns() : array
+	{
+		$columns = [];
+
+		foreach( $this->object()->getSaveAttributes() as $key => $entry )
+		{
+			$parts = explode( '.', (string) $entry->getInternalCode() );
+			$col = trim( end( $parts ), '"' );
+			$columns[$col] = $entry;
+		}
+
+		return $columns;
+	}
+
+
+	/**
 	 * Returns the search attribute objects used for searching.
 	 *
 	 * @param array $list Associative list of search keys and the lists of search definitions
@@ -910,7 +933,7 @@ trait DB
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$columns = array_column( $this->object()->getSaveAttributes(), null, 'internalcode' );
+		$columns = $this->getSaveColumns();
 
 		if( $id === null )
 		{

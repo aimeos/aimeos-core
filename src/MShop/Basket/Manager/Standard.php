@@ -160,7 +160,7 @@ class Standard
 		$context = $this->context();
 		$date = $context->datetime();
 		$conn = $context->db( $this->getResourceName() );
-		$columns = $this->object()->getSaveAttributes();
+		$columns = $this->getSaveColumns();
 
 		/** mshop/basket/manager/insert/mysql
 		 * Inserts a new basket record into the database table or updates an existing one
@@ -193,8 +193,8 @@ class Standard
 		$serialized = base64_encode( serialize( clone $item->getItem() ) );
 		$idx = 1;
 
-		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		// insert
