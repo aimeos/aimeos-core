@@ -194,7 +194,7 @@ class Standard
 		$idx = 1;
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		// insert
