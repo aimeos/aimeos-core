@@ -46,6 +46,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddFilter()
 	{
+		$this->mock->expects( $this->once() )->method( 'addFilter' );
 		$this->object->addFilter( 'object', function() {} );
 	}
 

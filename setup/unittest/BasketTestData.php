@@ -43,6 +43,8 @@ class BasketTestData extends Base
 		$manager = \Aimeos\MShop::create( $context, 'basket', 'Standard' );
 		$manager->begin();
 
+		$manager->delete( array_column( $testdata, 'basket.id' ) );
+
 		foreach( $testdata as $entry ) {
 			$manager->save( $manager->create()->fromArray( $entry, true )->setItem( $orderManager->create() ) );
 		}
