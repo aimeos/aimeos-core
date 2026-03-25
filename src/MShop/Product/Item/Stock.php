@@ -87,7 +87,7 @@ trait Stock
 	 */
 	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		$id = $item->getId();
+		$id = $item->getId() ?? '';
 
 		if( isset( $this->stockItems[$id] ) )
 		{

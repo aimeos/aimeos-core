@@ -284,7 +284,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setStatusPayment' );
-		$method->setAccessible( true );
+
 
 		$method->invokeArgs( $this->object, array( $this->order, [] ) );
 
@@ -296,7 +296,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setStatusPayment' );
-		$method->setAccessible( true );
+
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Pending', 'PENDINGREASON' => 'error' ) ) );
 
@@ -308,7 +308,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setStatusPayment' );
-		$method->setAccessible( true );
+
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Refunded' ) ) );
 
@@ -320,7 +320,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setStatusPayment' );
-		$method->setAccessible( true );
+
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Voided' ) ) );
 
@@ -332,7 +332,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setStatusPayment' );
-		$method->setAccessible( true );
+
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Invalid' ) ) );
 

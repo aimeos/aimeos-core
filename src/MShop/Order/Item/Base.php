@@ -334,9 +334,9 @@ abstract class Base
 	 */
 	public function deleteAddress( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( $position === null && isset( $this->addresses[$type] ) || isset( $this->addresses[$type][$position] ) )
+		if( ( $position === null && isset( $this->addresses[$type] ) ) || ( $position !== null && isset( $this->addresses[$type][$position] ) ) )
 		{
-			$old = ( isset( $this->addresses[$type][$position] ) ? $this->addresses[$type][$position] : $this->addresses[$type] );
+			$old = ( $position !== null && isset( $this->addresses[$type][$position] ) ? $this->addresses[$type][$position] : $this->addresses[$type] );
 			$old = $this->notify( 'deleteAddress.before', $old );
 
 			if( $position !== null ) {
@@ -714,9 +714,9 @@ abstract class Base
 	 */
 	public function deleteService( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( $position === null && isset( $this->services[$type] ) || isset( $this->services[$type][$position] ) )
+		if( ( $position === null && isset( $this->services[$type] ) ) || ( $position !== null && isset( $this->services[$type][$position] ) ) )
 		{
-			$old = ( isset( $this->services[$type][$position] ) ? $this->services[$type][$position] : $this->services[$type] );
+			$old = ( $position !== null && isset( $this->services[$type][$position] ) ? $this->services[$type][$position] : $this->services[$type] );
 			$old = $this->notify( 'deleteService.before', $old );
 
 			if( $position !== null ) {

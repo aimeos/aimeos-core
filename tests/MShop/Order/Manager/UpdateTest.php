@@ -109,7 +109,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'addStatusItem' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$method->invokeArgs( $object, array( 1, 2, 3 ) );
@@ -123,7 +123,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'getBundleMap' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$result = $method->invokeArgs( $object, array( $prodId ) );
@@ -138,7 +138,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'context' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$result = $method->invokeArgs( $object, [] );
@@ -155,7 +155,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'getLastStatusItem' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus', 'shipped' ) );
@@ -172,7 +172,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'getLastStatusItem' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$result = $method->invokeArgs( $object, array( -1, 0, 0 ) );
@@ -188,7 +188,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'getStockItems' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$result = $method->invokeArgs( $object, [[$prodid], 'default'] );
@@ -230,7 +230,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateCoupons' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
@@ -267,7 +267,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateCoupons' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 
@@ -295,7 +295,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, 'type', 1, 0 ) );
 	}
 
@@ -319,7 +319,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, 0 ) );
 	}
 
@@ -343,7 +343,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, 0 ) );
 	}
 
@@ -386,7 +386,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -432,7 +432,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -478,7 +478,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -502,7 +502,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 
@@ -560,7 +560,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStockBundle' );
-		$method->setAccessible( true );
+
 		$method->invokeArgs( $object, [1, 'default'] );
 	}
 
@@ -587,7 +587,7 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 
 		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
 		$method = $class->getMethod( 'updateStockSelection' );
-		$method->setAccessible( true );
+
 
 		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
 		$method->invokeArgs( $object, array( $prodId, 'default' ) );

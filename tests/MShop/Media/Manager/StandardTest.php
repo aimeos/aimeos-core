@@ -409,8 +409,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Media\Manager\Standard::class );
 		$method = $class->getMethod( $name );
-		$method->setAccessible( true );
-
 		return $method;
 	}
 }

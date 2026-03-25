@@ -319,7 +319,7 @@ class Context implements \Aimeos\MShop\ContextIface
 			$locale = key( $this->i18n );
 		}
 
-		if( isset( $this->i18n[$locale] ) ) {
+		if( $locale !== null && isset( $this->i18n[$locale] ) ) {
 			return $this->i18n[$locale];
 		}
 

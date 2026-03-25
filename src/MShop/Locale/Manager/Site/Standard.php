@@ -371,7 +371,7 @@ class Standard
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'default', 'locale.site.code' ) );
 		}
 
-		$this->cache[$item->getId()] = $item;
+		$this->cache[$item->getId() ?? ''] = $item;
 
 		return $item;
 	}

@@ -1059,8 +1059,6 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MW\Tree\Manager\DBNestedSet::class );
 		$method = $class->getMethod( 'setReadOnly' );
-		$method->setAccessible( true );
-
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm->get() );
 
 		$method->invokeArgs( $manager, [] );

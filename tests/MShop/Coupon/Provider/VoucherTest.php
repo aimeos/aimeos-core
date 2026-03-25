@@ -122,8 +122,6 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Coupon\Provider\Voucher::class );
 		$method = $class->getMethod( $name );
-		$method->setAccessible( true );
-
 		return $method;
 	}
 

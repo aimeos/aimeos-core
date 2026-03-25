@@ -695,7 +695,7 @@ class Standard
 			}
 
 			foreach( $product->getRefItems( 'text', $types ) as $text ) {
-				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
+				$texts[$text->getLanguageId() ?? '']['content'][] = $text->getContent();
 			}
 
 			foreach( $this->getLanguageIds() as $langId )

@@ -218,8 +218,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Common\Manager\Decorator\Example::class );
 		$method = $class->getMethod( $name );
-		$method->setAccessible( true );
-
 		return $method;
 	}
 }

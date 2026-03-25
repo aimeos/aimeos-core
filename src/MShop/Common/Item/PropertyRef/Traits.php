@@ -82,7 +82,7 @@ trait Traits
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
-		$id = $item->getId();
+		$id = $item->getId() ?? '';
 
 		if( isset( $this->propItems[$id] ) )
 		{
@@ -91,7 +91,7 @@ trait Traits
 			return $this;
 		}
 
-		$id = '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+		$id = '_' . $this->getId() . '_' . $item->getType() . '_' . ( $item->getLanguageId() ?? '' ) . '_' . $item->getValue();
 
 		if( isset( $this->propItems[$id] ) )
 		{
