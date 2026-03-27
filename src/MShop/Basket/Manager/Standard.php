@@ -188,6 +188,13 @@ class Standard
 		$path = 'mshop/basket/manager/insert';
 
 		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+
+		$update = '';
+		foreach( array_keys( $columns ) as $name ) {
+			$update .= '"' . $name . '" = ?, ';
+		}
+		$sql = str_replace( ':columns', $update, $sql );
+
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		$serialized = base64_encode( serialize( clone $item->getItem() ) );
@@ -207,6 +214,9 @@ class Standard
 		$stmt->bind( $idx++, $date ); //ctime
 		$stmt->bind( $idx++, $item->getId() );
 		// update
+		foreach( $columns as $entry ) {
+			$stmt->bind( $idx++, $item->get( $entry->getCode() ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
 		$stmt->bind( $idx++, $item->getCustomerId() );
 		$stmt->bind( $idx++, $serialized );
 		$stmt->bind( $idx++, $item->getName() );
