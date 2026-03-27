@@ -20,7 +20,7 @@ return array(
 					"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 				) VALUES ( :values
 					?, ?, ?, ?, ?, ?, ?, ?
-				) ON DUPLICATE KEY UPDATE
+				) ON DUPLICATE KEY UPDATE :columns
 					"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 			',
 			'pgsql' => '
@@ -28,7 +28,7 @@ return array(
 					"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 				) VALUES ( :values
 					?, ?, ?, ?, ?, ?, ?, ?
-				) ON CONFLICT ("id") DO UPDATE SET
+				) ON CONFLICT ("id") DO UPDATE SET :columns
 					"customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 			',
 			'sqlsrv' => '
@@ -37,7 +37,7 @@ return array(
 					"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
 				) ON (tgt."id" = src."id")
 				WHEN MATCHED THEN
-					UPDATE SET "customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+					UPDATE SET :columns "customerid" = ?, "content" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 				WHEN NOT MATCHED THEN
 					INSERT ( :names
 						"customerid", "content", "name", "mtime", "editor", "siteid", "ctime", "id"
