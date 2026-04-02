@@ -295,8 +295,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
-		$this->assertNotEmpty( $itemSaved->getPathId() );
-		$this->assertStringEndsWith( '.', $itemSaved->getPathId() );
 
 		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );

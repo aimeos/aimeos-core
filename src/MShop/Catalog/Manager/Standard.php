@@ -195,13 +195,6 @@ class Standard extends Base
 			'label' => 'URL segment',
 			'type' => 'string',
 		),
-		'catalog.pathid' => array(
-			'code' => 'catalog.pathid',
-			'internalcode' => 'mcat."pathid"',
-			'label' => 'Materialized path',
-			'type' => 'string',
-			'public' => false,
-		),
 		'catalog.target' => array(
 			'code' => 'catalog.target',
 			'internalcode' => 'mcat."target"',
@@ -528,10 +521,7 @@ class Standard extends Base
 			$node = $item->getNode();
 			$siteid = $this->context()->locale()->getSiteId();
 
-			$manager = $this->createTreeManager( $siteid );
-			$manager->insertNode( $node, $parentId, $refId );
-
-			$item->setPathId( join( '.', array_keys( $manager->getPath( $node->getId() ) ) ) . '.' );
+			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
 
 			$this->cacheTags[] = 'catalog';
@@ -571,10 +561,7 @@ class Standard extends Base
 			$item = $this->object()->get( $id );
 			$siteid = $this->context()->locale()->getSiteId();
 
-			$manager = $this->createTreeManager( $siteid );
-			$manager->moveNode( $id, $oldParentId, $newParentId, $refId );
-
-			$this->updatePaths( $manager, $id );
+			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
 
 			$this->cacheTags[] = 'catalog';
@@ -1028,56 +1015,6 @@ class Standard extends Base
 
 
 	/**
-	 * Updates the materialized paths for a node and all its descendants.
-	 *
-	 * @param \Aimeos\MW\Tree\Manager\Iface $manager Tree manager
-	 * @param string $id ID of the moved node
-	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
-	 */
-	private function updatePaths( \Aimeos\MW\Tree\Manager\Iface $manager, string $id ) : \Aimeos\MShop\Catalog\Manager\Iface
-	{
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$node = $manager->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
-		$this->updatePathsRecursive( $conn, $manager, $node );
-
-		return $this;
-	}
-
-
-	/**
-	 * Recursively updates the materialized path for a node and its children.
-	 *
-	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
-	 * @param \Aimeos\MW\Tree\Manager\Iface $manager Tree manager
-	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node
-	 */
-	private function updatePathsRecursive( \Aimeos\Base\DB\Connection\Iface $conn,
-		\Aimeos\MW\Tree\Manager\Iface $manager, \Aimeos\MW\Tree\Node\Iface $node ) : void
-	{
-		$path = join( '.', array_keys( $manager->getPath( $node->getId() ) ) ) . '.';
-
-		/** mshop/catalog/manager/update-path/ansi
-		 * Updates the materialized path of a catalog node
-		 *
-		 * @param string SQL statement for updating the path
-		 * @since 2026.04
-		 */
-		$sql = $this->getSqlConfig( 'mshop/catalog/manager/update-path' );
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $path );
-		$stmt->bind( 2, (int) $node->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->execute()->finish();
-
-		foreach( $node->getChildren() as $child ) {
-			$this->updatePathsRecursive( $conn, $manager, $child );
-		}
-	}
-
-
-	/**
 	 * Updates the usage information of a node.
 	 *
 	 * @param string $id Id of the record
@@ -1193,7 +1130,6 @@ class Standard extends Base
 
 		$stmt->bind( $idx++, $item->getUrl() );
 		$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-		$stmt->bind( $idx++, $item->getPathId() );
 		$stmt->bind( $idx++, $context->datetime() ); // mtime
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, $item->getTarget() );
