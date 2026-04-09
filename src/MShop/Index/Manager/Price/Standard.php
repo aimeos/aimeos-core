@@ -618,12 +618,13 @@ class Standard
 	{
 		$prices = [];
 		$context = $this->context();
+		$config = $context->config();
 		$siteid = $context->locale()->getSiteId();
 
 		/** mshop/index/manager/price/types
 		 * Use different product prices types for indexing
 		 *
-		 * In some cases, prices are stored with different types, eg. price per kg.
+		 * In some cases, prices are stored with different types, e.g. price per kg.
 		 * This configuration option defines which types are incorporated in which
 		 * order. If a price of the defined type with the lowest index is available,
 		 * it will be indexed, otherwise the next lowest index price type. It is
@@ -632,15 +633,31 @@ class Standard
 		 * @param array List of price types codes
 		 * @since 2019.04
 		 */
-		$types = $context->config()->get( 'mshop/index/manager/price/types', ['default'] );
+		$types = $config->get( 'mshop/index/manager/price/types', ['default'] );
 
-		foreach( $types as $priceType )
+		/** mshop/index/manager/price/listtypes
+		 * Use different product price list types for indexing
+		 *
+		 * In some cases, prices are stored with different list types.
+		 * This configuration option defines which list types are incorporated in which
+		 * order. If a price of the defined type with the lowest index is available, it
+		 * will be indexed, otherwise the next lowest index list type. It is highly
+		 * recommended to add the list type 'default' with the highest index.
+		 *
+		 * @param array List of price list types
+		 * @since 2026.04
+		 */
+		$listTypes = $config->get( 'mshop/index/manager/price/listtypes', ['default'] );
+
+		foreach( $item->getRefItems( 'price', $types, $listTypes ) as $refItem )
 		{
-			foreach( $item->getListItems( 'price', 'default', $priceType ) as $listItem )
-			{
-				if( ( $refItem = $listItem->getRefItem() ) && $refItem->isAvailable() ) {
-					$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
-				}
+			$currencyId = $refItem->getCurrencyId();
+			$quantity = $refItem->getQuantity();
+			$value = $refItem->getValue();
+
+			// Keep the lowest price for each currency/quantity combination
+			if( !isset( $prices[$currencyId][$quantity] ) || $value < $prices[$currencyId][$quantity] ) {
+				$prices[$currencyId][$quantity] = $value;
 			}
 		}
 
