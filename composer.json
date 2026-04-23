@@ -13,7 +13,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "^8.0.11",
+		"php": "~8.1",
 		"composer-runtime-api": "^2.1",
 		"ext-curl": "*",
 		"ext-dom": "*",
