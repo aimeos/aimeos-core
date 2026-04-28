@@ -1,14 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Translators:
-# Henry LIU <dadaycm@hotmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 13:36+0100\n"
+"POT-Creation-Date: 2026-04-25 10:34+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Henry LIU <dadaycm@hotmail.com>, 2016\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/"

@@ -1,8 +1,3 @@
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# manuel.fries <manuel.fries@gdatasoftware.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

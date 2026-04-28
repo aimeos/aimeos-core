@@ -14,12 +14,12 @@ msgstr ""
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2015-07-09 20:36+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Catalan (http://app.transifex.com/aimeos/aimeos-core/language/ca/)\n"
+"Language-Team: Georgian (http://app.transifex.com/aimeos/aimeos-core/language/ka/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #. Item status
 msgid "status:-2"
@@ -27,7 +27,7 @@ msgstr ""
 
 #. Item status
 msgid "status:-1"
-msgstr "Review"
+msgstr "მიმოხილვა"
 
 #. Item status
 msgid "status:0"
@@ -43,11 +43,11 @@ msgstr ""
 
 #. Address salutation
 msgid "company"
-msgstr "Comunicació"
+msgstr "კომპანია"
 
 #. Address salutation
 msgid "mr"
-msgstr "senyor"
+msgstr "ბატონი"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr "senyora"
+msgstr "ქალბატონი"
 
 #. Address salutation
 msgid "miss"
-msgstr "miss"
+msgstr "მის"
 
 #. Order type value
 msgid "order:repeat"
@@ -75,7 +75,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "pagament"
+msgstr "გადახდა"
 
 #. Subscription reason code
 msgid "reason:0"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "raó:1"
+msgstr "გადაიხადე:1"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,31 +91,31 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr "estat:0"
+msgstr "სტატ:0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "raó:1"
+msgstr "გადაიხადე:1"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "estat:6"
+msgstr "გადაიხადე:2"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "paga:3"
+msgstr "გადაიხადე:3"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "estadística:1"
+msgstr "მდგომარეობა:1"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "paga:5"
+msgstr "გადაიხადე:5"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "paga:6"
+msgstr "გადაიხადე:6"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,35 +127,35 @@ msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "estat:0"
+msgstr "სტატ:0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "estadística:1"
+msgstr "მდგომარეობა:1"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "estadística:2"
+msgstr "მდგომარეობა:2"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "estadística:3"
+msgstr "სტატისტიკა:3"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "estat:4"
+msgstr "სტატ:4"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "estat:5"
+msgstr "სტატ:5"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "estat:6"
+msgstr "გადაიხადე:2"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "estat:7"
+msgstr "სტატისტიკა:7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

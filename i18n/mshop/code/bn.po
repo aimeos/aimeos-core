@@ -43,11 +43,11 @@ msgstr ""
 
 #. Address salutation
 msgid "company"
-msgstr ""
+msgstr "কোম্পানি"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "মিস্টার"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "মিসেস"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "মিস"
 
 #. Order type value
 msgid "order:repeat"
@@ -75,7 +75,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "পরিশোধ"
 
 #. Subscription reason code
 msgid "reason:0"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "কারণ:১"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,31 +91,31 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "পরিসংখ্যান:0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "কারণ:১"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "পরিসংখ্যান:৬"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "বেতন:৩"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "পরিসংখ্যান:১"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "বেতন:৫"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "বেতন:৬"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,35 +127,35 @@ msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "পরিসংখ্যান:0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "পরিসংখ্যান:১"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "পরিসংখ্যান:২"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "পরিসংখ্যান:৩"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "পরিসংখ্যান:৪"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "পরিসংখ্যান:৫"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "পরিসংখ্যান:৬"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "পরিসংখ্যান:৭"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

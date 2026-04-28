@@ -141,7 +141,7 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Lớp \"%1$s\" không thực hiện giao diện \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"

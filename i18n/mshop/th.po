@@ -141,11 +141,11 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "คลาส \"%1$s\" ไม่ได้ดำเนินการตามอินเตอร์เฟซ \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "คลาส \"%1$s\" ไม่มีให้ใช้งาน"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
@@ -370,7 +370,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "โรงงานไม่ถูกต้อง \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
@@ -795,7 +795,7 @@ msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "พารามิเตอร์ที่จำเป็น \"%1$s\" ขาดหายไป"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"

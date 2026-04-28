@@ -47,7 +47,7 @@ msgstr "ကုမ္ပဏီ"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "မစ္စတာ"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "မစ္စစ်"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "လွတ်သွားခြင်း၊ မမှန်ခြင်း၊ မဖြစ်ခြင်း၊ မရောက်ခြင်း၊ မဖြစ်ပေါ်ခြင်း၊ မ"
 
 #. Order type value
 msgid "order:repeat"
@@ -75,7 +75,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "ငွေပေးချေမှု"
 
 #. Subscription reason code
 msgid "reason:0"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "အကြောင်းရင်း:၁"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,31 +91,31 @@ msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "လစာ:0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "အကြောင်းရင်း:၁"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "လစာ:၂"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "လစာ:၃"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "လစာ:၄"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "ပေးချေ:၅"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "ပေးချေ:၆"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,35 +127,35 @@ msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "လစာ:0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "လစာ:၄"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "အချက်အလက်:2"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "အချက်အလက်:၃"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "အချက်အလက်:၄"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "အချက်အလက်:၅"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "လစာ:၂"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "အချက်အလက်:၇"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
