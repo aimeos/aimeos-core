@@ -9,7 +9,6 @@ return [
 		'aimeos-core',
 		'ai-admin-graphql',
 		'ai-admin-jqadm',
-		'ai-admin-jsonadm',
 		'ai-client-html',
 		'ai-client-jsonapi',
 		'ai-controller-jobs',
@@ -38,9 +37,6 @@ return [
 	'template' => [
 		'admin/jqadm/templates' => [
 			'templates/admin/jqadm',
-		],
-		'admin/jsonadm/templates' => [
-			'templates/admin/jsonadm',
 		],
 		'client/jsonapi/templates' => [
 			'templates/client/jsonapi',

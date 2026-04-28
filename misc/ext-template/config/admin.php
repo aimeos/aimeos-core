@@ -5,6 +5,4 @@ return [
 	],
 	'jqadm' => [
 	],
-	'jsonadm' => [
-	],
 ];
