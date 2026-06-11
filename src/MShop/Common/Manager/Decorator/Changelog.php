@@ -48,7 +48,7 @@ class Changelog
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		$log = map( $items )->isModified()->filter()->sum();
+		$log = map( $items )->isModified()->filter()->count();
 
 		$items = $this->getManager()->save( $items, true );
 
