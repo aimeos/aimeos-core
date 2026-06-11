@@ -13,7 +13,7 @@ return [
 				'ansi' => '
 					UPDATE "mshop_coupon_code"
 					SET	"count" = "count" + ?, "mtime" = ?, "editor" = ?
-					WHERE :cond AND "code" = ?
+					WHERE :cond AND "code" = ? AND ( "count" IS NULL OR "count" + ? >= 0 )
 				'
 			],
 		],
