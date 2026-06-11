@@ -227,6 +227,7 @@ class Standard
 		$stmt->bind( 2, $context->datetime() ); // mtime
 		$stmt->bind( 3, $context->editor() );
 		$stmt->bind( 4, $code );
+		$stmt->bind( 5, $amount, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // prevent count underflow
 
 		$stmt->execute()->finish();
 
