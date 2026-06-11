@@ -37,6 +37,6 @@ class Nocosts
 			$costs += $product->getPrice()->getCosts() * $product->getQuantity();
 		}
 
-		return $price->setCosts( -$costs );
+		return $price->setCosts( -max( 0, $costs ) );
 	}
 }
