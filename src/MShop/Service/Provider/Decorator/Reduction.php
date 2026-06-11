@@ -54,6 +54,10 @@ class Reduction
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
 
+		if( isset( $attributes['reduction.percent'] ) && abs( (float) $attributes['reduction.percent'] ) > 100 ) {
+			$error['reduction.percent'] = $this->context()->translate( 'mshop', 'Value must be between -100 and 100' );
+		}
+
 		return $error;
 	}
 
