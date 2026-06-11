@@ -130,7 +130,7 @@ trait Preview
 			$this->driver = new \Intervention\Image\ImageManager( $driver );
 		}
 
-		if( preg_match( '#^[a-zA-Z]{1,10}://#', $file ) === 1 )
+		if( preg_match( '#^https?://#', $file ) === 1 )
 		{
 			if( ( $fh = fopen( $file, 'r' ) ) === false )
 			{
