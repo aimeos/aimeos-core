@@ -53,7 +53,7 @@ abstract class Base
 
 
 	/**
-	 * Stock level is already updated.
+	 * Coupon codes has been updated.
 	 */
 	const COUPON_UPDATE = 'coupon-update';
 }
