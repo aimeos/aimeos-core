@@ -21,13 +21,11 @@ class Xml
 	extends \Aimeos\MShop\Service\Provider\Delivery\Base
 	implements \Aimeos\MShop\Service\Provider\Delivery\Iface
 {
-	private int $num = 0;
-
 	private array $beConfig = [
 		'xml.backupdir' => [
 			'code' => 'xml.backupdir',
 			'internalcode' => 'xml.backupdir',
-			'label' => 'Relative or absolute path of the backup directory (with date() placeholders)',
+			'label' => 'Relative or absolute backup path and file name (with date() placeholders)',
 			'default' => '',
 			'required' => false,
 		],
@@ -65,8 +63,16 @@ class Xml
 	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
+		$errors = array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
 
-		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+		foreach( ['xml.backupdir', 'xml.exportpath'] as $key )
+		{
+			if( isset( $attributes[$key] ) && $attributes[$key] !== '' && !$this->isXmlPath( (string) $attributes[$key] ) ) {
+				$errors[$key] = sprintf( 'File path for "%1$s" must end with ".xml"', $key );
+			}
+		}
+
+		return $errors;
 	}
 
 
@@ -159,8 +165,14 @@ class Xml
 	 */
 	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
-		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
-		$filepath = sprintf( \Aimeos\Base\Str::strtime( $filepath ), $this->num++ );
+		$filepath = (string) $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
+		$filepath = \Aimeos\Base\Str::strtime( $filepath );
+
+		if( !$this->isXmlPath( $filepath ) )
+		{
+			$msg = sprintf( 'File path "%1$s" must end with ".xml"', $filepath );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
+		}
 
 		if( file_put_contents( $filepath, $content ) === false )
 		{
@@ -198,6 +210,13 @@ class Xml
 		$nodes = [];
 		$xml = new \XMLReader();
 		$logger = $this->context()->logger();
+		$backup = \Aimeos\Base\Str::strtime( (string) $this->getConfigValue( 'xml.backupdir', '' ) );
+
+		if( $backup !== '' && !$this->isXmlPath( $backup ) )
+		{
+			$msg = sprintf( 'File path "%1$s" must end with ".xml"', $backup );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+		}
 
 		if( $xml->open( $filename, null, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 		{
@@ -205,40 +224,59 @@ class Xml
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
 		}
 
-		$msg = sprintf( 'Started order status import from file "%1$s"', $filename );
-		$logger->info( $msg, 'core/service' );
-
-		while( $xml->read() === true )
+		try
 		{
-			if( $xml->depth === 1 && $xml->nodeType === \XMLReader::ELEMENT && $xml->name === 'orderitem' )
-			{
-				if( ( $dom = $xml->expand() ) === false )
-				{
-					$msg = sprintf( 'Expanding "%1$s" node failed', 'orderitem' );
-					throw new \Aimeos\Controller\Jobs\Exception( $msg );
-				}
+			$msg = sprintf( 'Started order status import from file "%1$s"', $filename );
+			$logger->info( $msg, 'core/service' );
 
-				if( ( $attr = $dom->attributes->getNamedItem( 'ref' ) ) !== null ) {
-					$nodes[$attr->nodeValue] = $dom;
+			while( $xml->read() === true )
+			{
+				if( $xml->depth === 1 && $xml->nodeType === \XMLReader::ELEMENT && $xml->name === 'orderitem' )
+				{
+					if( ( $dom = $xml->expand() ) === false )
+					{
+						$msg = sprintf( 'Expanding "%1$s" node failed', 'orderitem' );
+						throw new \Aimeos\Controller\Jobs\Exception( $msg );
+					}
+
+					if( ( $attr = $dom->attributes->getNamedItem( 'ref' ) ) !== null ) {
+						$nodes[$attr->nodeValue] = $dom;
+					}
 				}
 			}
-		}
 
-		$this->importNodes( $nodes );
-		unset( $nodes );
+			$this->importNodes( $nodes );
+		}
+		finally
+		{
+			$xml->close();
+		}
 
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
 		$logger->info( $msg, 'core/service' );
 
-		$backup = \Aimeos\Base\Str::strtime( $this->getConfigValue( 'xml.backupdir', '' ) );
-
-		if( !empty( $backup ) && @rename( $filename, $backup ) === false )
+		if( $backup !== '' )
 		{
-			$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, $backup );
-			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+			if( @rename( $filename, $backup ) === false )
+			{
+				$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, $backup );
+				throw new \Aimeos\Controller\Jobs\Exception( $msg );
+			}
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Tests if the path points to an XML file
+	 *
+	 * @param string $path Path to check
+	 * @return bool True if the file extension is XML, false if not
+	 */
+	private function isXmlPath( string $path ) : bool
+	{
+		return strcasecmp( pathinfo( $path, PATHINFO_EXTENSION ), 'xml' ) === 0;
 	}
 
 
