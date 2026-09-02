@@ -17,13 +17,22 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		file_exists( 'tmp' ) ?: mkdir( 'tmp' );
-
 		$this->context = \TestHelper::context();
+		$this->context->setFilesystemManager( new \Aimeos\Base\Filesystem\Manager\Standard( [
+			'fs-export' => [
+				'adapter' => 'Standard',
+				'basedir' => 'tmp',
+			],
+			'fs-import' => [
+				'adapter' => 'Standard',
+				'basedir' => __DIR__,
+			],
+		] ) );
+
 		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$serviceItem = $serviceManager->create()->setConfig( [
-			'xml.exportpath' => 'tmp/order-export_%d.xml',
-			'xml.updatedir' => __DIR__ . '/_tests',
+			'xml.exportpath' => 'order-export_%d.xml',
+			'xml.updatedir' => '_tests',
 		] );
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
@@ -52,10 +61,10 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testCheckConfigBE()
 	{
 		$attributes = [
-			'xml.backupdir' => '/backup',
+			'xml.backupdir' => 'backup/order.xml',
 			'xml.exportpath' => 'order-%H:%i:%s.xml',
 			'xml.template' => 'body.xml',
-			'xml.updatedir' => '/',
+			'xml.updatedir' => 'update',
 		];
 
 		$result = $this->object->checkConfigBE( $attributes );
@@ -65,6 +74,17 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result['xml.exportpath'] );
 		$this->assertEquals( null, $result['xml.template'] );
 		$this->assertEquals( null, $result['xml.updatedir'] );
+	}
+
+
+	public function testCreateFileFilesystem()
+	{
+		$method = new \ReflectionMethod( $this->object, 'createFile' );
+		$method->invoke( $this->object, '<orders></orders>' );
+		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
+
+		$this->assertSame( '<orders></orders>', file_get_contents( $file ) );
+		unlink( $file );
 	}
 
 
