@@ -52,7 +52,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testCheckConfigBE()
 	{
 		$attributes = [
-			'xml.backupdir' => '/backup',
+			'xml.backupdir' => '/backup/order.xml',
 			'xml.exportpath' => 'order-%H:%i:%s.xml',
 			'xml.template' => 'body.xml',
 			'xml.updatedir' => '/',
@@ -65,6 +65,76 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result['xml.exportpath'] );
 		$this->assertEquals( null, $result['xml.template'] );
 		$this->assertEquals( null, $result['xml.updatedir'] );
+	}
+
+
+	public function testCheckConfigBEInvalidPath()
+	{
+		$result = $this->object->checkConfigBE( [
+			'xml.backupdir' => '/backup/order.php',
+			'xml.exportpath' => '/export/order.phtml',
+		] );
+
+		$this->assertStringContainsString( '.xml', $result['xml.backupdir'] );
+		$this->assertStringContainsString( '.xml', $result['xml.exportpath'] );
+	}
+
+
+	public function testCreateFileAbsolutePath()
+	{
+		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid( 'aimeos-xml-' ) . '.xml';
+		$serviceItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setConfig( [
+			'xml.exportpath' => $file,
+		] );
+		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
+		$method = new \ReflectionMethod( $object, 'createFile' );
+
+		try
+		{
+			$method->invoke( $object, '<orders></orders>' );
+			$this->assertSame( '<orders></orders>', file_get_contents( $file ) );
+		}
+		finally
+		{
+			file_exists( $file ) && unlink( $file );
+		}
+	}
+
+
+	public function testCreateFileRelativePath()
+	{
+		$method = new \ReflectionMethod( $this->object, 'createFile' );
+		$method->invoke( $this->object, '<orders></orders>' );
+		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
+
+		$this->assertSame( '<orders></orders>', file_get_contents( $file ) );
+		unlink( $file );
+	}
+
+
+	public function testCreateFileInvalidPath()
+	{
+		$serviceItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setConfig( [
+			'xml.exportpath' => 'tmp/order.php',
+		] );
+		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
+		$method = new \ReflectionMethod( $object, 'createFile' );
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$method->invoke( $object, '<orders></orders>' );
+	}
+
+
+	public function testImportFileInvalidBackupPath()
+	{
+		$serviceItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setConfig( [
+			'xml.backupdir' => '/backup/order.php',
+		] );
+		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
+		$method = new \ReflectionMethod( $object, 'importFile' );
+
+		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
+		$method->invoke( $object, __DIR__ . '/_tests/order.xml' );
 	}
 
 
