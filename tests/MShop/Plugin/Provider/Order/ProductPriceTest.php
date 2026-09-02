@@ -83,6 +83,23 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAddProductPriceUpdated()
+	{
+		$orderProduct = $this->order->getProduct( 0 )->setQuantity( 99 );
+		$this->order->addProduct( $orderProduct, 0 );
+
+		$product = clone $orderProduct;
+		$product->setQuantity( 1 );
+
+		$this->object->register( $this->order );
+		$this->order->addProduct( $product );
+
+		$this->assertEquals( 100, $this->order->getProduct( 0 )->getQuantity() );
+		$this->assertEquals( '580.00', $this->order->getProduct( 0 )->getPrice()->getValue() );
+		$this->assertEquals( '20.00', $this->order->getProduct( 0 )->getPrice()->getCosts() );
+	}
+
+
 	public function testUpdateArticlePriceCorrect()
 	{
 		$part = ['order/product'];
