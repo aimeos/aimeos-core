@@ -94,7 +94,11 @@ class ProductPrice
 	 */
 	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
-		$p->attach( $this->object(), 'check.after' );
+		$plugin = $this->object();
+
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'check.after' );
+
 		return $this;
 	}
 
@@ -110,13 +114,23 @@ class ProductPrice
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Iface $order, string $action, $value = null )
 	{
-		if( !in_array( 'order/product', (array) $value ) ) {
+		$isAdd = $action === 'addProduct.after';
+
+		if( $isAdd && !( $value instanceof \Aimeos\MShop\Order\Item\Product\Iface ) ) {
+			return $value;
+		}
+
+		if( !$isAdd && !in_array( 'order/product', (array) $value ) ) {
 			return $value;
 		}
 
 		$changedProducts = [];
 		$attrIds = $prodIds = map();
 		$orderProducts = $order->getProducts();
+
+		if( $isAdd ) {
+			$orderProducts = $orderProducts->filter( fn( $item ) => $item === $value );
+		}
 
 		foreach( $orderProducts as $pos => $item )
 		{
@@ -155,13 +169,19 @@ class ProductPrice
 
 			if( $orderProduct->getPrice()->compare( $price ) === false )
 			{
-				// @phpstan-ignore argument.type, argument.type
-				$order->addProduct( $orderProduct->setPrice( $price ), (int) $pos );
+				if( $isAdd ) {
+					// The basket is already marked as modified; don't trigger addProduct.after again
+					$orderProduct->setPrice( $price );
+				} else {
+					// @phpstan-ignore argument.type, argument.type
+					$order->addProduct( $orderProduct->setPrice( $price ), (int) $pos );
+				}
+
 				$changedProducts[$pos] = 'price.changed';
 			}
 		}
 
-		if( $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
+		if( !$isAdd && $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
 		{
 			$code = ['product' => $changedProducts];
 			$msg = $this->context()->translate( 'mshop', 'Please have a look at the prices of the products in your basket' );
