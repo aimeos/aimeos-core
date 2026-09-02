@@ -25,7 +25,7 @@ class Xml
 		'xml.backupdir' => [
 			'code' => 'xml.backupdir',
 			'internalcode' => 'xml.backupdir',
-			'label' => 'Relative or absolute backup path and file name (with date() placeholders)',
+			'label' => 'Relative backup path and file name in the import filesystem (with date() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
@@ -34,10 +34,10 @@ class Xml
 		'xml.exportpath' => [
 			'code' => 'xml.exportpath',
 			'internalcode' => 'xml.exportpath',
-			'label' => 'Relative or absolute path and name of the XML files (with date() placeholders)',
+			'label' => 'Relative path and name of the XML files in the export filesystem (with date() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
-			'default' => './order_%Y-%m-%d_%H:%i:%s_%v.xml',
+			'default' => 'order_%Y-%m-%d_%H:%i:%s_%v.xml',
 			'required' => true,
 		],
 		'xml.template' => [
@@ -52,7 +52,7 @@ class Xml
 		'xml.updatedir' => [
 			'code' => 'xml.updatedir',
 			'internalcode' => 'xml.updatedir',
-			'label' => 'Relative or absolute path and name of the order update XML files',
+			'label' => 'Relative path and name of the order update XML files in the import filesystem',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
@@ -137,10 +137,11 @@ class Xml
 	public function updateAsync() : bool
 	{
 		$context = $this->context();
+		$fs = $context->fs( 'fs-import' );
 		$logger = $context->logger();
 		$location = $this->getConfigValue( 'xml.updatedir' );
 
-		if( $location === '' || !file_exists( $location ) )
+		if( $location === '' || !$fs->has( $location ) )
 		{
 			$msg = sprintf( 'File or directory "%1$s" doesn\'t exist', $location );
 			throw new \Aimeos\Controller\Jobs\Exception( $msg );
@@ -151,12 +152,14 @@ class Xml
 
 		$files = [];
 
-		if( is_dir( $location ) )
+		if( $fs instanceof \Aimeos\Base\Filesystem\DirIface && $fs->isDir( $location ) )
 		{
-			foreach( new \DirectoryIterator( $location ) as $entry )
+			foreach( $fs->scan( $location ) as $entry )
 			{
-				if( !strncmp( $entry->getFilename(), 'order', 5 ) && $entry->getExtension() === 'xml' ) {
-					$files[] = $entry->getPathname();
+				$filename = (string) $entry;
+
+				if( str_starts_with( $filename, 'order' ) && str_ends_with( $filename, '.xml' ) ) {
+					$files[] = rtrim( $location, '/' ) . '/' . $filename;
 				}
 			}
 		}
@@ -186,7 +189,7 @@ class Xml
 	 */
 	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
-		$filepath = (string) $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
+		$filepath = (string) $this->getConfigValue( 'xml.exportpath', 'order_%Y-%m-%d_%H:%i:%s_%v.xml' );
 		$filepath = \Aimeos\Base\Str::strtime( $filepath );
 
 		if( !$this->isXmlPath( $filepath ) )
@@ -195,10 +198,12 @@ class Xml
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
-		if( file_put_contents( $filepath, $content ) === false )
+		try {
+			$this->context()->fs( 'fs-export' )->write( $filepath, $content );
+		} catch( \Exception $e )
 		{
 			$msg = sprintf( 'Unable to create order XML file "%1$s"', $filepath );
-			throw new \Aimeos\MShop\Service\Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg, 0, $e );
 		}
 
 		return $this;
@@ -223,14 +228,16 @@ class Xml
 	/**
 	 * Imports all orders from the given XML file name
 	 *
-	 * @param string $filename Relative or absolute path to the XML file
+	 * @param string $filename Relative path to the XML file in the import filesystem
 	 * @return \Aimeos\MShop\Service\Provider\Delivery\Iface Same object for fluent interface
 	 */
 	protected function importFile( string $filename ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$nodes = [];
 		$xml = new \XMLReader();
-		$logger = $this->context()->logger();
+		$context = $this->context();
+		$fs = $context->fs( 'fs-import' );
+		$logger = $context->logger();
 		$backup = \Aimeos\Base\Str::strtime( (string) $this->getConfigValue( 'xml.backupdir', '' ) );
 
 		if( $backup !== '' && !$this->isXmlPath( $backup ) )
@@ -239,14 +246,16 @@ class Xml
 			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 
-		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
-		{
-			$msg = $this->context()->translate( 'mshop', 'No XML file "%1$s" found' );
-			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
-		}
+		$tmpfile = $fs->readf( $filename );
 
 		try
 		{
+			if( $xml->open( $tmpfile, null, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
+			{
+				$msg = $context->translate( 'mshop', 'No XML file "%1$s" found' );
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
+			}
+
 			$msg = sprintf( 'Started order status import from file "%1$s"', $filename );
 			$logger->info( $msg, 'core/service' );
 
@@ -271,6 +280,7 @@ class Xml
 		finally
 		{
 			$xml->close();
+			@unlink( $tmpfile );
 		}
 
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
@@ -278,10 +288,11 @@ class Xml
 
 		if( $backup !== '' )
 		{
-			if( @rename( $filename, $backup ) === false )
-			{
+			try {
+				$fs->move( $filename, $backup );
+			} catch( \Exception $e ) {
 				$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, $backup );
-				throw new \Aimeos\Controller\Jobs\Exception( $msg );
+				throw new \Aimeos\Controller\Jobs\Exception( $msg, 0, $e );
 			}
 		}
 
