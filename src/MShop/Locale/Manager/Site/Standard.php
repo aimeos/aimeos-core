@@ -387,6 +387,8 @@ class Standard
 	 */
 	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
+		$this->checkConfig( $item->getConfig() );
+
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
@@ -629,6 +631,28 @@ class Standard
 
 
 	/**
+	 * Rejects site overrides of application-owned configuration namespaces.
+	 *
+	 * @param array $config Site configuration
+	 */
+	protected function checkConfig( array $config ) : void
+	{
+		foreach( array_keys( $config ) as $key )
+		{
+			$path = trim( (string) $key, '/' );
+
+			if( str_starts_with( $path, 'resource' )
+				|| str_starts_with( $path, 'madmin' )
+				|| str_starts_with( $path, 'mshop' )
+			) {
+				$msg = $this->context()->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
+				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $key ) );
+			}
+		}
+	}
+
+
+	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
@@ -637,6 +661,8 @@ class Standard
 	 */
 	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		$this->checkConfig( $item->getConfig() );
+
 		if( $item->getId() === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
