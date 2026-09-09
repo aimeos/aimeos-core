@@ -26,6 +26,7 @@
 		"ext-PDO": "*",
 		"ext-zip": "*",
 		"aimeos/aimeos-base": "dev-master",
+		"aimeos/sanitizer": "~0.4",
 		"aimeos/upscheme": "~1.0",
 		"aimeos/macro": "~1.0",
 		"aimeos/map": "~4.0",
