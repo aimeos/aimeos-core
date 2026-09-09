@@ -54,17 +54,56 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	/**
+	 * @dataProvider restrictedConfigProvider
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
+	public function testRejectsRestrictedConfig( string $method, string $key, $value )
+	{
+		$item = $this->object->create()->setConfig( [$key => $value] );
+
+		if( $method === 'save' ) {
+			$item->setId( '-1' );
+		}
+
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+		$this->object->$method( $item );
+	}
+
+
+	public static function restrictedConfigProvider() : array
+	{
+		$result = [];
+
+		foreach( ['insert', 'save'] as $method )
+		{
+			foreach( ['resource', 'madmin', 'mshop'] as $prefix )
+			{
+				$result[$method . ' ' . $prefix . ' nested'] = [$method, $prefix, ['manager' => ['name' => 'Custom']]];
+				$result[$method . ' ' . $prefix . ' flat'] = [$method, $prefix . '/manager/name', 'Custom'];
+				$result[$method . ' ' . $prefix . ' leading slash'] = [$method, '/' . $prefix . '/manager/name', 'Custom'];
+				$result[$method . ' ' . $prefix . ' surrounding slashes'] = [$method, '//' . $prefix . '//', ['manager' => ['name' => 'Custom']]];
+				$result[$method . ' ' . $prefix . ' prefix'] = [$method, $prefix . '-custom', 'value'];
+			}
+		}
+
+		return $result;
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
 		$item->setLabel( 'new name' );
 		$item->setStatus( 1 );
 		$item->setCode( 'xx' );
+		$item->setConfig( ['client' => ['html' => ['catalog' => ['pagesize' => 12]]], 'theme/default/color' => 'blue'] );
 		$resultSaved = $this->object->insert( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setLabel( 'new new name' );
+		$itemExp->setConfig( ['client' => ['html' => ['catalog' => ['pagesize' => 24]]]] );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
