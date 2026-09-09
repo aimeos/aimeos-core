@@ -293,7 +293,63 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['text.siteid'] = $values['text.siteid'] ?? $this->context()->locale()->getSiteId();
+
+		if( isset( $values['text.content'] ) ) {
+			$values['text.content'] = $this->sanitize(
+				(string) $values['text.content'],
+				(string) ( $values['text.type'] ?? '' )
+			);
+		}
+
 		return $this->createItemBase( $values );
+	}
+
+
+	/**
+	 * Adds or updates a text item or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Text\Item\Iface[]|\Aimeos\MShop\Text\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Text\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		foreach( map( $items ) as $item )
+		{
+			if( !$item instanceof \Aimeos\MShop\Text\Item\Iface ) {
+				throw new \Aimeos\MShop\Text\Exception( sprintf( 'Object does not implement "%1$s"', \Aimeos\MShop\Text\Item\Iface::class ) );
+			}
+
+			$item->setContent( $this->sanitize( $item->getContent(), $item->getType() ) );
+		}
+
+		return parent::save( $items, $fetch );
+	}
+
+
+	/**
+	 * Sanitizes text unless explicitly excluded by configuration.
+	 *
+	 * @param string $content Text content
+	 * @param string $type Text type
+	 * @return string Sanitized text content
+	 */
+	protected function sanitize( string $content, string $type ) : string
+	{
+		/** mshop/text/manager/sanitize/excludes
+		 * Additional text types whose content is validated by their owning extension.
+		 *
+		 * @type array List of text type codes
+		 * @since 2026.10
+		 * @category Developer
+		 */
+		$excludes = (array) $this->context()->config()->get( 'mshop/text/manager/sanitize/excludes', [] );
+
+		if( in_array( $type, $excludes, true ) ) {
+			return $content;
+		}
+
+		return str_contains( $content, '<' ) ? trim( \Aimeos\Sanitizer\Sane::html( $content ) ) : $content;
 	}
 
 
