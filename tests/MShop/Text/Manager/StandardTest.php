@@ -12,19 +12,21 @@ namespace Aimeos\MShop\Text\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
+	private $context;
 	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Text\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
+		$this->object = new \Aimeos\MShop\Text\Manager\Standard( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object, $this->context );
 	}
 
 
@@ -60,6 +62,64 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertContains( 'text', $result );
 		$this->assertContains( 'text/lists', $result );
+	}
+
+
+	public function testCreateSanitizesRichText()
+	{
+		$content = '<p onclick="alert(1)">Safe</p><script>alert(2)</script>';
+		$item = $this->object->create( ['text.type' => 'long', 'text.content' => $content] );
+
+		$this->assertSame( '<p>Safe</p>', $item->getContent() );
+	}
+
+
+	public function testCreateSanitizesAllTextTypes()
+	{
+		$content = '<p onclick="alert(1)">Safe</p><script>alert(2)</script>';
+
+		foreach( ['', 'name', 'label', 'title', 'url', 'meta-description', 'meta-custom', 'media.url', 'img-description'] as $type )
+		{
+			$item = $this->object->create( ['text.type' => $type, 'text.content' => $content] );
+			$this->assertSame( '<p>Safe</p>', $item->getContent(), $type );
+		}
+	}
+
+
+	public function testCreatePreservesConfiguredExcludedText()
+	{
+		$this->context->config()->set( 'mshop/text/manager/sanitize/excludes', ['custom'] );
+		$manager = new Standard( $this->context );
+		$content = '<iframe src="https://example.org/embed"></iframe>';
+		$item = $manager->create( ['text.type' => 'custom', 'text.content' => $content] );
+		$this->assertSame( $content, $item->getContent() );
+
+		$this->context->config()->set( 'mshop/text/manager/sanitize/excludes', [] );
+		$item = $manager->create( ['text.type' => 'custom', 'text.content' => $content] );
+		$this->assertSame( '', $item->getContent() );
+	}
+
+
+	public function testSaveSanitizesRichText()
+	{
+		$item = $this->object->create()
+			->setType( 'long' )
+			->setDomain( 'product' )
+			->setLabel( 'Sanitizer test' )
+			->setContent( '<p onmouseover="alert(1)">Safe</p><iframe src="https://example.com"></iframe>' );
+
+		try
+		{
+			$this->object->save( $item );
+			$this->assertSame( '<p>Safe</p>', $item->getContent() );
+			$this->assertSame( '<p>Safe</p>', $this->object->get( $item->getId() )->getContent() );
+		}
+		finally
+		{
+			if( $item->getId() ) {
+				$this->object->delete( $item->getId() );
+			}
+		}
 	}
 
 
