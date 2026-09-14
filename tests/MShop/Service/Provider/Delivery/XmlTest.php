@@ -120,7 +120,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
 		$method = new \ReflectionMethod( $object, 'importFile' );
 
-		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$method->invoke( $object, '_tests/order.xml' );
 	}
 
