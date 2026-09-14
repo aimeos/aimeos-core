@@ -467,11 +467,15 @@ abstract class Base
 			$basket->addAddress( $item, $item->getType() );
 		}
 
-		foreach( $products as $item )
+		foreach( $products as $key => $item )
 		{
-			if( !( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) ) {
-				$basket->addProduct( $item );
+			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
+				unset( $products[$key] );
 			}
+		}
+
+		if( !empty( $products ) ) {
+			$basket->setProducts( $products );
 		}
 
 		foreach( $coupons as $code => $items ) {
