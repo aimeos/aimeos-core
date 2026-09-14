@@ -144,7 +144,7 @@ class Xml
 		if( $location === '' || !$fs->has( $location ) )
 		{
 			$msg = sprintf( 'File or directory "%1$s" doesn\'t exist', $location );
-			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$msg = sprintf( 'Started order status import from "%1$s"', $location );
@@ -243,7 +243,7 @@ class Xml
 		if( $backup !== '' && !$this->isXmlPath( $backup ) )
 		{
 			$msg = sprintf( 'File path "%1$s" must end with ".xml"', $backup );
-			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$tmpfile = $fs->readf( $filename );
@@ -253,7 +253,7 @@ class Xml
 			if( $xml->open( $tmpfile, null, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 			{
 				$msg = $context->translate( 'mshop', 'No XML file "%1$s" found' );
-				throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $filename ) );
 			}
 
 			$msg = sprintf( 'Started order status import from file "%1$s"', $filename );
@@ -266,7 +266,7 @@ class Xml
 					if( ( $dom = $xml->expand() ) === false )
 					{
 						$msg = sprintf( 'Expanding "%1$s" node failed', 'orderitem' );
-						throw new \Aimeos\Controller\Jobs\Exception( $msg );
+						throw new \Aimeos\MShop\Service\Exception( $msg );
 					}
 
 					if( ( $attr = $dom->attributes->getNamedItem( 'ref' ) ) !== null ) {
@@ -292,7 +292,7 @@ class Xml
 				$fs->move( $filename, $backup );
 			} catch( \Exception $e ) {
 				$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, $backup );
-				throw new \Aimeos\Controller\Jobs\Exception( $msg, 0, $e );
+				throw new \Aimeos\MShop\Service\Exception( $msg, 0, $e );
 			}
 		}
 
