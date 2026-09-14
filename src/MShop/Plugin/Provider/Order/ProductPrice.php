@@ -133,7 +133,9 @@ class ProductPrice
 		$orderProducts = $order->getProducts();
 
 		if( $isAdd ) {
-			$orderProducts = $orderProducts->filter( fn( $item ) => $item === $value );
+			$orderProducts = $orderProducts->filter( function( $item ) use ( $value ) {
+				return $item === $value;
+			} );
 		}
 
 		foreach( $orderProducts as $pos => $item )
