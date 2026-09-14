@@ -91,6 +91,11 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testCreateFileFilesystem()
 	{
 		$method = new \ReflectionMethod( $this->object, 'createFile' );
+
+		if( \PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
+
 		$method->invoke( $this->object, '<orders></orders>' );
 		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
 
@@ -107,6 +112,10 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
 		$method = new \ReflectionMethod( $object, 'createFile' );
 
+		if( \PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
+
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$method->invoke( $object, '<orders></orders>' );
 	}
@@ -119,6 +128,10 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		] );
 		$object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
 		$method = new \ReflectionMethod( $object, 'importFile' );
+
+		if( \PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$method->invoke( $object, '_tests/order.xml' );
