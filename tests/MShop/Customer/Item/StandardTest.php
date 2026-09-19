@@ -381,14 +381,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		// The password hash is write-only and must not be serialized, so the array
+		// contains one entry less than the values passed to the constructor.
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
+		$this->assertArrayNotHasKey( 'customer.password', $arrayObject );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['customer.id'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['customer.label'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['customer.code'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['customer.status'] );
 		$this->assertEquals( $this->object->getGroups(), $arrayObject['customer.groups'] );
-		$this->assertEquals( $this->object->getPassword(), $arrayObject['customer.password'] );
 		$this->assertEquals( $this->object->getDateVerified(), $arrayObject['customer.dateverified'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.mtime'] );
