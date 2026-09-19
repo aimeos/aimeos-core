@@ -272,6 +272,10 @@ class Xml
 		$search->setConditions( $search->compare( '==', 'order.id', array_keys( $nodes ) ) );
 		$items = $manager->search( $search );
 
+		// Order status updates coming back from an external delivery/ERP system may
+		// only touch the payment/delivery status and their dates.
+		$allowed = ['order.statusdelivery', 'order.statuspayment', 'order.datedelivery', 'order.datepayment'];
+
 		foreach( $nodes as $node )
 		{
 			$list = [];
@@ -279,6 +283,8 @@ class Xml
 			foreach( $node->childNodes as $childNode ) {
 				$list[$childNode->nodeName] = $childNode->nodeValue;
 			}
+
+			$list = array_intersect_key( $list, array_flip( $allowed ) );
 
 			// @phpstan-ignore argument.type
 			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null
