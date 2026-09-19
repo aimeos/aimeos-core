@@ -290,9 +290,9 @@ class Standard extends Base implements Iface
 
 		if( $private === true )
 		{
+			// The password hash is write-only
 			$list['customer.status'] = $this->getStatus();
 			$list['customer.groups'] = $this->getGroups();
-			$list['customer.password'] = $this->getPassword();
 			$list['customer.dateverified'] = $this->getDateVerified();
 		}
 
