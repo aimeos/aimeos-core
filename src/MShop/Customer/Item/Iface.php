@@ -70,16 +70,19 @@ interface Iface
 	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : static;
 
 	/**
-	 * Returns the password of the customer item.
+	 * Returns the new password hash of the customer item.
 	 *
-	 * @return string Encrypted password
+	 * The stored password hash is write-only and never loaded, so an empty
+	 * string is returned unless a new password has been set before.
+	 *
+	 * @return string New password hash or empty string if unchanged
 	 */
 	public function getPassword() : string;
 
 	/**
-	 * Sets the password of the customer item.
+	 * Sets a new password for the customer item.
 	 *
-	 * @param string $value Password of the customer item
+	 * @param string $value New password of the customer item, empty string keeps the current one
 	 * @return static Customer item for chaining method calls
 	 */
 	public function setPassword( string $value ) : static;
