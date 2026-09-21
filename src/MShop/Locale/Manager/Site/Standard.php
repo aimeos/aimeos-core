@@ -633,20 +633,33 @@ class Standard
 	/**
 	 * Rejects site overrides of application-owned configuration namespaces.
 	 *
+	 * Only the "resource/email" settings (e.g. sender addresses) can be set per site.
+	 *
 	 * @param array $config Site configuration
+	 * @param string $prefix Path of the parent configuration key
 	 */
-	protected function checkConfig( array $config ) : void
+	protected function checkConfig( array $config, string $prefix = '' ) : void
 	{
-		foreach( array_keys( $config ) as $key )
+		foreach( $config as $key => $value )
 		{
-			$path = trim( (string) $key, '/' );
+			$path = join( '/', array_filter( explode( '/', $prefix . '/' . $key ), fn( $part ) => $part !== '' ) );
+
+			if( $path === 'resource/email' || str_starts_with( $path, 'resource/email/' ) ) {
+				continue;
+			}
+
+			if( $path === 'resource' && is_array( $value ) && !empty( $value ) )
+			{
+				$this->checkConfig( $value, $path );
+				continue;
+			}
 
 			if( str_starts_with( $path, 'resource' )
 				|| str_starts_with( $path, 'madmin' )
 				|| str_starts_with( $path, 'mshop' )
 			) {
 				$msg = $this->context()->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
-				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $key ) );
+				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $path ) );
 			}
 		}
 	}
