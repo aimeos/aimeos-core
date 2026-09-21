@@ -85,9 +85,48 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$result[$method . ' ' . $prefix . ' surrounding slashes'] = [$method, '//' . $prefix . '//', ['manager' => ['name' => 'Custom']]];
 				$result[$method . ' ' . $prefix . ' prefix'] = [$method, $prefix . '-custom', 'value'];
 			}
+
+			$result[$method . ' resource with email'] = [$method, 'resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']]];
+			$result[$method . ' resource email prefix nested'] = [$method, 'resource', ['emails' => ['from-email' => 'a@b.c']]];
+			$result[$method . ' resource email prefix flat'] = [$method, 'resource/email-custom', 'value'];
+			$result[$method . ' resource empty'] = [$method, 'resource', []];
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * @dataProvider emailConfigProvider
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'emailConfigProvider' )]
+	public function testAllowsEmailConfig( array $config )
+	{
+		$item = $this->object->create()->setCode( 'unittest-email' )->setLabel( 'unittest' )->setConfig( $config );
+		$item = $this->object->insert( $item );
+
+		try
+		{
+			$item = $this->object->save( $item->setConfig( $config + ['client' => ['html' => ['x' => 1]]] ) );
+			$result = $this->object->get( $item->getId() )->getConfig();
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+
+		$this->assertEquals( $config + ['client' => ['html' => ['x' => 1]]], $result );
+	}
+
+
+	public static function emailConfigProvider() : array
+	{
+		return [
+			'nested' => [['resource' => ['email' => ['from-email' => 'a@b.c', 'from-name' => 'Shop']]]],
+			'flat' => [['resource/email/from-email' => 'a@b.c']],
+			'surrounding slashes' => [['/resource/email/' => ['from-email' => 'a@b.c']]],
+			'partly flat' => [['resource' => ['email/reply-email' => 'a@b.c']]],
+		];
 	}
 
 
