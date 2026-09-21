@@ -167,6 +167,32 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetPasswordEmpty()
+	{
+		$this->object->setPassword( '' );
+		$this->assertFalse( $this->object->isModified() );
+
+		$this->object->setPassword( '08154712' )->setPassword( '' );
+		$this->assertEquals( '08154712', $this->object->getPassword() );
+	}
+
+
+	public function testJsonSerialize()
+	{
+		$helper = new \Aimeos\MShop\Common\Helper\Password\Standard( [] );
+		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, [], [], [], [], $helper, 'mshop' );
+		$object->setPassword( '08154712' );
+
+		$list = $object->jsonSerialize();
+		$json = (string) json_encode( $object );
+
+		$this->assertArrayNotHasKey( 'customer.password', $list );
+		$this->assertEquals( $object->getCode(), $list['customer.code'] );
+		$this->assertStringNotContainsString( $object->getPassword(), $json );
+		$this->assertStringContainsString( '"customer.code":"12345ABCDEF"', $json );
+	}
+
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2010-01-01 00:00:00', $this->object->getTimeCreated() );

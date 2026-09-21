@@ -139,9 +139,12 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the password of the customer item.
+	 * Returns the new password hash of the customer item.
 	 *
-	 * @return string
+	 * The stored password hash is write-only and never loaded, so an empty
+	 * string is returned unless a new password has been set before.
+	 *
+	 * @return string New password hash or empty string if unchanged
 	 */
 	public function getPassword() : string
 	{
@@ -150,18 +153,18 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Sets the password of the customer item.
+	 * Sets a new password for the customer item.
 	 *
-	 * @param string $value password of the customer item
+	 * @param string $value New password of the customer item, empty string keeps the current one
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
-			$value = $this->helper->encode( $value, $this->salt );
+		if( $value === '' || $value === $this->getPassword() ) {
+			return $this;
 		}
 
-		return $this->set( 'customer.password', $value );
+		return $this->set( 'customer.password', $this->helper ? $this->helper->encode( $value, $this->salt ) : $value );
 	}
 
 
@@ -250,6 +253,21 @@ class Standard extends Base implements Iface
 	public function isSuper() : bool
 	{
 		return (bool) $this->get( '.super', false );
+	}
+
+
+	/**
+	 * Specifies the data which should be serialized to JSON by json_encode().
+	 *
+	 * @return array Data to serialize to JSON
+	 */
+	#[\ReturnTypeWillChange]
+	public function jsonSerialize()
+	{
+		$list = parent::jsonSerialize();
+		unset( $list['customer.password'] ); // The password hash is write-only
+
+		return $list;
 	}
 
 
