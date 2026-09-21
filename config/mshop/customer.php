@@ -129,7 +129,7 @@ return [
 					"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 					"mobile" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 					"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
-					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
+					"vdate" = ?, "password" = COALESCE( ?, "password" ), "mtime" = ?, "editor" = ?
 				WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 			'
 		],
