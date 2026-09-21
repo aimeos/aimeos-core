@@ -658,7 +658,7 @@ return array(
 					"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 					"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 					"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
-					"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
+					"vdate" = ?, "password" = COALESCE( ?, "password" ), "mtime" = ?, "editor" = ?
 				WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 			'
 		),
@@ -678,7 +678,7 @@ return array(
 					mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
 					mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
 					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
+					mcus."vdate" AS "customer.dateverified",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
 					mcus."editor" AS "customer.editor"
 				FROM "mshop_customer" mcus
@@ -690,7 +690,7 @@ return array(
 					mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state",
 					mcus."countryid", mcus."langid", mcus."telephone", mcus."email", mcus."telefax",
 					mcus."website", mcus."longitude", mcus."latitude", mcus."birthday", mcus."status",
-					mcus."vdate", mcus."password", mcus."ctime", mcus."mtime", mcus."editor"
+					mcus."vdate", mcus."ctime", mcus."mtime", mcus."editor"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -709,7 +709,7 @@ return array(
 					mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
 					mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
 					mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
+					mcus."vdate" AS "customer.dateverified",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
 					mcus."editor" AS "customer.editor"
 				FROM "mshop_customer" mcus

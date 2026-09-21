@@ -328,14 +328,6 @@ class Standard
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.password' => array(
-			'label' => 'Password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 		'customer.ctime' => array(
 			'label' => 'Create date/time',
 			'code' => 'customer.ctime',
@@ -690,7 +682,8 @@ class Standard
 		$stmt->bind( $idx++, $billingAddress->getBirthday() );
 		$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $item->getDateVerified() );
-		$stmt->bind( $idx++, $item->getPassword() );
+		// Password hash is write-only, NULL keeps the stored one when updating
+		$stmt->bind( $idx++, $id === null ? $item->getPassword() : ( $item->getPassword() ?: null ) );
 		$stmt->bind( $idx++, $date ); // Modification time
 		$stmt->bind( $idx++, $context->editor() );
 
