@@ -158,7 +158,7 @@ class Xml
 			{
 				$filename = (string) $entry;
 
-				if( str_starts_with( $filename, 'order' ) && str_ends_with( $filename, '.xml' ) ) {
+				if( !strncmp( $filename, 'order', 5 ) && substr( $filename, -4 ) === '.xml' ) {
 					$files[] = rtrim( $location, '/' ) . '/' . $filename;
 				}
 			}

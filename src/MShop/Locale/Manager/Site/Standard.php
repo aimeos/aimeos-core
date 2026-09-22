@@ -1167,9 +1167,9 @@ class Standard
 	{
 		foreach( $config as $key => $value )
 		{
-			$path = join( '/', array_filter( explode( '/', $prefix . '/' . $key ), fn( $part ) => $part !== '' ) );
+			$path = join( '/', array_filter( explode( '/', $prefix . '/' . $key ), function( $part ) { return $part !== ''; } ) );
 
-			if( $path === 'resource/email' || str_starts_with( $path, 'resource/email/' ) ) {
+			if( $path === 'resource/email' || !strncmp( $path, 'resource/email/', 15 ) ) {
 				continue;
 			}
 
@@ -1179,9 +1179,9 @@ class Standard
 				continue;
 			}
 
-			if( str_starts_with( $path, 'resource' )
-				|| str_starts_with( $path, 'madmin' )
-				|| str_starts_with( $path, 'mshop' )
+			if( !strncmp( $path, 'resource', 8 )
+				|| !strncmp( $path, 'madmin', 6 )
+				|| !strncmp( $path, 'mshop', 5 )
 			) {
 				$msg = $this->context()->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
 				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $path ) );

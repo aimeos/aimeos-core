@@ -349,7 +349,7 @@ class Standard
 			return $content;
 		}
 
-		return str_contains( $content, '<' ) ? trim( \Aimeos\Sanitizer\Sane::html( $content ) ) : $content;
+		return strpos( $content, '<' ) !== false ? trim( \Aimeos\Sanitizer\Sane::html( $content ) ) : $content;
 	}
 
 
