@@ -11,6 +11,7 @@ namespace Aimeos\MShop\Customer\Manager;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 	private $fixture;
 	private $address;
@@ -19,8 +20,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
-		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::context() );
+		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( $this->context );
 
 		$this->fixture = array(
 			'customer.label' => 'unitTest',
@@ -33,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->fixture, $this->address );
+		unset( $this->object, $this->fixture, $this->address, $this->context );
 	}
 
 
