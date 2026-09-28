@@ -236,9 +236,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $item->getId() );
 
+		$password = new \Aimeos\Base\Password\Standard();
+
 		$this->assertEquals( '', $loaded->getPassword() );
-		$this->assertTrue( $this->context->password()->verify( 'secret', $kept ) );
-		$this->assertTrue( $this->context->password()->verify( 'changed', $changed ) );
+		$this->assertTrue( $password->verify( 'secret', $kept ) );
+		$this->assertTrue( $password->verify( 'changed', $changed ) );
 	}
 
 
