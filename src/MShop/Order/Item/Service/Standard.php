@@ -337,9 +337,12 @@ class Standard extends Base implements Iface
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );
-		$this->setServiceId( $service->getId() );
+		$this->setServiceId( (string) $service->getId() );
 
-		if( ( $item = $service->getRefItems( 'media', 'default', 'default' )->first() ) !== null ) {
+		$item = $service->getRefItems( 'media', 'icon', 'default' )->first()
+			?? $service->getRefItems( 'media', 'default', 'default' )->first();
+
+		if( $item !== null ) {
 			$this->setMediaUrl( $item->getUrl() );
 		}
 
