@@ -52,6 +52,16 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCalcPriceParentAndVariant()
+	{
+		$parentId = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNC' )->getId();
+		$this->order->getProducts()->first()->setParentProductId( $parentId );
+
+		$price = $this->object->calcPrice( $this->order );
+		$this->assertEquals( 39.0, $price->getValue() + $price->getCosts() );
+	}
+
+
 	public function testGetConfigBE()
 	{
 		$result = $this->object->getConfigBE();
@@ -108,5 +118,21 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem->setConfig( array( 'category.code' => 'cafe,tea' ) );
 
 		$this->assertTrue( $this->object->isAvailable( $this->order ) );
+	}
+
+
+	public function testIsAvailableOtherCategory()
+	{
+		$this->couponItem->setConfig( array( 'category.code' => 'misc' ) );
+
+		$this->assertFalse( $this->object->isAvailable( $this->order ) );
+	}
+
+
+	public function testIsAvailableEmptyBasket()
+	{
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+
+		$this->assertFalse( $this->object->isAvailable( $order ) );
 	}
 }
