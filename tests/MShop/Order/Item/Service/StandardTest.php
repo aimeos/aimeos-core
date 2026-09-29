@@ -639,4 +639,39 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $serviceCopy->isModified() );
 	}
+
+
+	public function testCopyFromMediaIcon()
+	{
+		$item = $this->copyFromMedia( ['default' => 'path/to/default.png', 'icon' => 'path/to/icon.png'] );
+
+		$this->assertEquals( 'path/to/icon.png', $item->getMediaUrl() );
+	}
+
+
+	public function testCopyFromMediaDefault()
+	{
+		$item = $this->copyFromMedia( ['default' => 'path/to/default.png'] );
+
+		$this->assertEquals( 'path/to/default.png', $item->getMediaUrl() );
+	}
+
+
+	protected function copyFromMedia( array $urls ) : \Aimeos\MShop\Order\Item\Service\Iface
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'service' );
+		$mediaManager = \Aimeos\MShop::create( $this->context, 'media' );
+		$service = $manager->create()->setCode( 'test' );
+
+		foreach( $urls as $type => $url )
+		{
+			$listItem = $manager->createListItem()->setType( 'default' );
+			$mediaItem = $mediaManager->create()->setType( $type )->setUrl( $url )->setStatus( 1 );
+			$service->addListItem( 'media', $listItem, $mediaItem );
+		}
+
+		$serviceCopy = new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.', ['.price' => $this->price] );
+
+		return $serviceCopy->copyFrom( $service );
+	}
 }
