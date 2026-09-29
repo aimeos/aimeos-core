@@ -366,6 +366,50 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetContentPrivate()
+	{
+		$list = ['http://127.0.0.1/test.png', 'http://localhost/test.png', 'https://169.254.169.254/latest',
+			'http://[::1]/test.png', 'file:///etc/passwd'];
+
+		foreach( $list as $url )
+		{
+			try
+			{
+				$this->access( 'getContent' )->invokeArgs( $this->object, [$url] );
+				$this->fail( 'No exception for ' . $url );
+			}
+			catch( \Aimeos\MShop\Media\Exception $e )
+			{
+				$this->assertStringContainsString( $url, $e->getMessage() );
+			}
+		}
+	}
+
+
+	public function testRemoteInvalidScheme()
+	{
+		$this->expectException( \RuntimeException::class );
+		$this->access( 'remote' )->invokeArgs( $this->object, ['file:///etc/passwd'] );
+	}
+
+
+	public function testPublicIp()
+	{
+		$method = $this->access( 'publicIp' );
+
+		foreach( ['8.8.8.8', '2606:4700::1111'] as $ip ) {
+			$this->assertTrue( $method->invokeArgs( $this->object, [$ip] ), $ip );
+		}
+
+		$list = ['127.0.0.1', '10.0.0.1', '172.17.0.1', '192.168.1.1', '169.254.169.254', '0.0.0.0', '100.100.100.200',
+			'::1', '::ffff:127.0.0.1', 'fd00::1', 'fe80::1', '64:ff9b::a00:1', 'invalid', ''];
+
+		foreach( $list as $ip ) {
+			$this->assertFalse( $method->invokeArgs( $this->object, [$ip] ), $ip );
+		}
+	}
+
+
 	public function testGetFile()
 	{
 		$dest = dirname( __DIR__, 3 ) . '/tmp/';

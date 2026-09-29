@@ -135,6 +135,7 @@ class Standard
 
 	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+	use \Aimeos\MShop\Media\Manager\Remote;
 
 
 	private array $searchConfig = array(
@@ -1149,7 +1150,18 @@ class Standard
 		{
 			if( preg_match( '#^[a-zA-Z]{1,10}://#', $path ) === 1 )
 			{
-				if( ( $content = @file_get_contents( $path ) ) === false ) {
+				try
+				{
+					$fh = $this->remote( $path );
+					$content = stream_get_contents( $fh );
+					fclose( $fh );
+				}
+				catch( \RuntimeException $e )
+				{
+					$content = false;
+				}
+
+				if( $content === false ) {
 					throw new \Aimeos\MShop\Media\Exception( sprintf( 'Downloading file "%1$s" failed', $path ) );
 				}
 
