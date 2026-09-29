@@ -323,6 +323,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetFileContentPrivate()
+	{
+		$list = ['http://127.0.0.1/test.png', 'http://localhost/test.png', 'https://169.254.169.254/latest',
+			'http://[::1]/test.png', 'file:///etc/passwd'];
+
+		foreach( $list as $url )
+		{
+			try
+			{
+				$this->access( 'getFileContent' )->invokeArgs( $this->object, [$url, 'fs-media'] );
+				$this->fail( 'No exception for ' . $url );
+			}
+			catch( \Aimeos\Controller\Common\Exception $e )
+			{
+				$this->assertStringContainsString( $url, $e->getMessage() );
+			}
+		}
+	}
+
+
 	public function testGetFileContentException()
 	{
 		$this->expectException( \Aimeos\Controller\Common\Exception::class );
