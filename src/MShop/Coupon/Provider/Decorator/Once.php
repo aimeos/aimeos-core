@@ -39,8 +39,9 @@ class Once
 			$expr = [
 				$search->compare( '==', 'order.address.email', $address->getEmail() ),
 				$search->compare( '==', 'order.coupon.code', $this->getCode() ),
-				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+				$this->redeemed( $search, $order->getId() ),
 			];
+			// @phpstan-ignore argument.type
 			$search->setConditions( $search->and( $expr ) );
 
 			if( !$manager->search( $search )->isEmpty() ) {

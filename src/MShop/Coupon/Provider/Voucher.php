@@ -82,7 +82,7 @@ class Voucher
 
 		$orderProduct = $this->getOrderProductItem( $orderProductId, $order->getPrice()->getCurrencyId() );
 		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate();
-		$usedRebate = $this->getUsedRebate( $this->getCode() );
+		$usedRebate = $this->getUsedRebate( $this->getCode(), $order->getId() );
 		$rebate = $value - $usedRebate;
 
 		if( $rebate <= 0 )
@@ -127,17 +127,18 @@ class Voucher
 
 
 	/**
-	 * Filters the order IDs and removes those order which aren't payed
+	 * Filters the order IDs and removes those order which aren't payed or recently created
 	 *
 	 * @param string[] $ids List of order IDs to check
+	 * @param string|null $orderId ID of the current order which is excluded
 	 * @return string[] List of filtered order IDs
 	 */
-	protected function filterOrderIds( array $ids ) : array
+	protected function filterOrderIds( array $ids, ?string $orderId = null ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
-		$search = $manager->filter()->add( 'order.id', '==', $ids )
-			->add( 'order.statuspayment', '>=', \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+		$search = $manager->filter()->add( 'order.id', '==', $ids );
+		$search->add( $this->redeemed( $search, $orderId ) );
 
 		return $manager->search( $search )->getId()->all();
 	}
@@ -173,9 +174,10 @@ class Voucher
 	 * Returns the already used rebate for the given voucher code
 	 *
 	 * @param string $code Voucher code
+	 * @param string|null $orderId ID of the current order which is excluded
 	 * @return float Already used rebate value
 	 */
-	protected function getUsedRebate( string $code ) : float
+	protected function getUsedRebate( string $code, ?string $orderId = null ) : float
 	{
 		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order/coupon' );
@@ -189,7 +191,7 @@ class Voucher
 			$prodIds[] = $orderCouponItem->getProductId();
 			$orderIds[] = $orderCouponItem->getParentId();
 		}
-		$orderIds = $this->filterOrderIds( $orderIds );
+		$orderIds = $this->filterOrderIds( $orderIds, $orderId );
 
 
 		$manager = \Aimeos\MShop::create( $context, 'order/product' );
