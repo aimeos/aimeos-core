@@ -179,7 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'common.type.id' => 8,
 			'common.type.code' => 'test',
-			'common.type.domain' => 'testDomain',
+			'common.type.domain' => 'testdomain',
 			'common.type.i18n' => ['de' => 'test eintrag'],
 			'common.type.label' => 'test item',
 			'common.type.position' => 2,

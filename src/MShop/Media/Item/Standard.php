@@ -159,7 +159,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'media.domain', (string) $domain );
+		return $this->set( 'media.domain', $this->checkDomain( $domain ) );
 	}
 
 
