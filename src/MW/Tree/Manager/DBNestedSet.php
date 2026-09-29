@@ -312,6 +312,15 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 		$diff = $node->right - $node->left + 1;
 
+		foreach( array_filter( [$newParentId, $newRefId], fn( $val ) => $val !== null ) as $targetId )
+		{
+			$target = $this->getNode( $targetId, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+
+			if( $target->getId() == $node->getId() || $this->isChild( $target, $node ) ) {
+				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Unable to move node "%1$s" into its own subtree', $id ) );
+			}
+		}
+
 		if( $newRefId !== null )
 		{
 			$refNode = $this->getNode( $newRefId, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );

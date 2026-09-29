@@ -319,6 +319,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testMoveIntoChild()
+	{
+		$item = $this->object->find( 'categories' );
+		$child = $this->object->find( 'cafe' );
+
+		$this->expectException( \Aimeos\MW\Tree\Exception::class );
+		$this->object->move( $item->getId(), $item->getParentId(), $child->getId() );
+	}
+
+
 	public function testSaveChildren()
 	{
 		$item = $this->object->find( 'cafe', ['text'] )->setCode( 'ccafe' )->setId( null );
