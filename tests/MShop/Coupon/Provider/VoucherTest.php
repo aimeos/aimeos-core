@@ -97,6 +97,29 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFilterOrderIdsUnfinished()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$item = $manager->save( $manager->create()->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ) );
+
+		try
+		{
+			$id = $item->getId();
+			$filter = $this->access( 'filterOrderIds' );
+
+			$this->assertEquals( [$id => $id], $filter->invokeArgs( $this->object, [[$id]] ) );
+			$this->assertEquals( [], $filter->invokeArgs( $this->object, [[$id], $id] ) );
+
+			$this->context->config()->set( 'mshop/coupon/provider/unfinished-hours', -1 );
+			$this->assertEquals( [], $filter->invokeArgs( $this->object, [[$id]] ) );
+		}
+		finally
+		{
+			$manager->delete( $item );
+		}
+	}
+
+
 	public function testGetOrderProductItem()
 	{
 		$id = $this->getOrderProduct()->getId();
