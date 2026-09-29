@@ -83,7 +83,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : static
 	{
-		return $this->set( 'text.domain', $domain );
+		return $this->set( 'text.domain', $this->checkDomain( $domain ) );
 	}
 
 

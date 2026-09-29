@@ -43,7 +43,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : static
 	{
-		return $this->set( 'tag.domain', $domain );
+		return $this->set( 'tag.domain', $this->checkDomain( $domain ) );
 	}
 
 

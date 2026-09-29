@@ -87,7 +87,7 @@ class Standard
 	 */
 	public function setDomain( string $value ) : static
 	{
-		return $this->set( 'review.domain', $value );
+		return $this->set( 'review.domain', $this->checkDomain( $value ) );
 	}
 
 

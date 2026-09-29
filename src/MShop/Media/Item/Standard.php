@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : static
 	{
-		return $this->set( 'media.domain', (string) $domain );
+		return $this->set( 'media.domain', $this->checkDomain( $domain ) );
 	}
 
 

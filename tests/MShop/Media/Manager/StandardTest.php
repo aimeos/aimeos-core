@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setLanguageId( 'de' );
-		$item->setDomain( 'test_dom' );
+		$item->setDomain( 'testdom' );
 		$item->setLabel( 'test' );
 		$item->setMimeType( 'image/jpeg' );
 		$item->setUrl( 'test.jpg' );

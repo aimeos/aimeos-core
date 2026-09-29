@@ -130,7 +130,7 @@ class Standard extends Base
 	 */
 	public function setDomain( string $domain ) : static
 	{
-		return $this->set( 'price.domain', $domain );
+		return $this->set( 'price.domain', $this->checkDomain( $domain ) );
 	}
 
 
