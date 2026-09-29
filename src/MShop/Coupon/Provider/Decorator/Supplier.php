@@ -66,12 +66,12 @@ class Supplier
 			$catIds = $catManager->search( $filter )->keys()->all();
 			$price = \Aimeos\MShop::create( $context, 'price' )->create();
 
-			foreach( $order->getProducts() as $product )
+			foreach( $order->getProducts() as $pos => $product )
 			{
-				$prodIds[$product->getProductId()][] = $product;
+				$prodIds[$product->getProductId()][$pos] = $product;
 
 				if( $parentid = $product->getParentProductId() ) {
-					$prodIds[$parentid][] = $product;
+					$prodIds[$parentid][$pos] = $product;
 				}
 			}
 
@@ -79,11 +79,14 @@ class Supplier
 			$filter->add( $filter->is( $filter->make( 'product:has', ['supplier', $types, $catIds] ), '!=', null ) )
 				->add( $filter->is( 'product.id', '==', array_keys( $prodIds ) ) );
 
-			foreach( $prodManager->search( $filter ) as $item )
-			{
-				foreach( $prodIds[$item->getId()] ?? [] as $product ) {
-					$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
-				}
+			$matched = [];
+
+			foreach( $prodManager->search( $filter ) as $item ) {
+				$matched = array_replace( $matched, $prodIds[$item->getId()] ?? [] );
+			}
+
+			foreach( $matched as $product ) {
+				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 
 			// @phpstan-ignore return.type
@@ -129,7 +132,7 @@ class Supplier
 	{
 		if( ( $codes = $this->getConfigValue( 'supplier.code' ) ) !== null )
 		{
-			$expr = [];
+			$prodIds = [];
 			$context = $this->context();
 			$types = ['default', 'promotion'];
 
@@ -139,13 +142,24 @@ class Supplier
 			$filter = $catManager->filter( true )->add( ['supplier.code' => explode( ',', (string) $codes )] );
 			$catIds = $catManager->search( $filter )->keys()->all();
 
-			$filter = $prodManager->filter( true );
+			foreach( $order->getProducts() as $product )
+			{
+				$prodIds[$product->getProductId()] = true;
 
-			foreach( $order->getProducts() as $product ) {
-				$expr[] = $filter->is( $filter->make( 'product:has', ['supplier', $types, $catIds] ), '!=', null );
+				if( $parentid = $product->getParentProductId() ) {
+					$prodIds[$parentid] = true;
+				}
 			}
 
-			if( $prodManager->search( $filter->add( $filter->or( $expr ) ) )->isEmpty() ) {
+			if( empty( $prodIds ) ) {
+				return false;
+			}
+
+			$filter = $prodManager->filter( true )->slice( 0, 1 );
+			$filter->add( $filter->is( $filter->make( 'product:has', ['supplier', $types, $catIds] ), '!=', null ) )
+				->add( $filter->is( 'product.id', '==', array_keys( $prodIds ) ) );
+
+			if( $prodManager->search( $filter )->isEmpty() ) {
 				return false;
 			}
 		}

@@ -52,6 +52,16 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCalcPriceParentAndVariant()
+	{
+		$parentId = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNC' )->getId();
+		$this->order->getProducts()->first()->setParentProductId( $parentId );
+
+		$price = $this->object->calcPrice( $this->order );
+		$this->assertEquals( 39.0, $price->getValue() + $price->getCosts() );
+	}
+
+
 	public function testGetConfigBE()
 	{
 		$result = $this->object->getConfigBE();
@@ -108,5 +118,23 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem->setConfig( array( 'supplier.code' => 'unitSupplier001,unitSupplier002' ) );
 
 		$this->assertTrue( $this->object->isAvailable( $this->order ) );
+	}
+
+
+	public function testIsAvailableOtherProduct()
+	{
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'ABCD' );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create()->copyFrom( $product );
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off()->addProduct( $orderProduct );
+
+		$this->assertFalse( $this->object->isAvailable( $order ) );
+	}
+
+
+	public function testIsAvailableEmptyBasket()
+	{
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+
+		$this->assertFalse( $this->object->isAvailable( $order ) );
 	}
 }
