@@ -414,6 +414,52 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+
+	public function testImageRemotePrivate()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+
+		foreach( ['http://127.0.0.1/test.png', 'http://localhost/test.png', 'https://169.254.169.254/latest', 'http://[::1]/test.png'] as $url )
+		{
+			try
+			{
+				$this->access( 'image' )->invokeArgs( $object, [$url] );
+				$this->fail( 'No exception for ' . $url );
+			}
+			catch( \RuntimeException $e )
+			{
+				$this->assertStringContainsString( $url, $e->getMessage() );
+			}
+		}
+	}
+
+
+	public function testRemoteInvalidScheme()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+
+		$this->expectException( \RuntimeException::class );
+		$this->access( 'remote' )->invokeArgs( $object, ['file:///etc/passwd'] );
+	}
+
+
+	public function testPublicIp()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$method = $this->access( 'publicIp' );
+
+		foreach( ['8.8.8.8', '2606:4700::1111'] as $ip ) {
+			$this->assertTrue( $method->invokeArgs( $object, [$ip] ), $ip );
+		}
+
+		$list = ['127.0.0.1', '10.0.0.1', '172.17.0.1', '192.168.1.1', '169.254.169.254', '0.0.0.0', '100.100.100.200',
+			'::1', '::ffff:127.0.0.1', 'fd00::1', 'fe80::1', '64:ff9b::a00:1', 'invalid', ''];
+
+		foreach( $list as $ip ) {
+			$this->assertFalse( $method->invokeArgs( $object, [$ip] ), $ip );
+		}
+	}
+
 	protected function access( $name )
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Media\Manager\Standard::class );
