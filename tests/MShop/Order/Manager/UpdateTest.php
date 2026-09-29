@@ -181,6 +181,23 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetLastStatusItemAnyValue()
+	{
+		$context = \TestHelper::context();
+		$orderItem = $this->getOrderItem( '2008-02-15 12:34:56' );
+
+		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
+		$method = $class->getMethod( 'getLastStatusItem' );
+
+
+		$object = new \Aimeos\MShop\Order\Manager\Standard( $context );
+		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus' ) );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $result );
+		$this->assertEquals( 'shipped', $result->getValue() );
+	}
+
+
 	public function testGetStockItems()
 	{
 		$context = \TestHelper::context();
@@ -345,6 +362,54 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'updateStatus' );
 
 		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, 0 ) );
+	}
+
+
+	public function testUpdateStatusUnblockNotBlocked()
+	{
+		$context = \TestHelper::context();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
+
+		$object = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setConstructorArgs( array( $context ) )
+			->onlyMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateStock' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'getLastStatusItem' )
+			->willReturn( null );
+
+		$object->expects( $this->never() )->method( 'updateStock' );
+		$object->expects( $this->never() )->method( 'addStatusItem' );
+
+		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
+		$method = $class->getMethod( 'updateStatus' );
+
+		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 0, +1 ) );
+	}
+
+
+	public function testUpdateStatusReblock()
+	{
+		$context = \TestHelper::context();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
+		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
+		$statusItem->setValue( 0 );
+
+		$object = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setConstructorArgs( array( $context ) )
+			->onlyMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateStock' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'getLastStatusItem' )
+			->willReturn( $statusItem );
+
+		$object->expects( $this->once() )->method( 'updateStock' )->with( $this->anything(), $this->equalTo( -1 ) );
+		$object->expects( $this->once() )->method( 'addStatusItem' );
+
+		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
+		$method = $class->getMethod( 'updateStatus' );
+
+		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, -1 ) );
 	}
 
 

@@ -181,10 +181,10 @@ trait Update
 	 *
 	 * @param string $parentid Order ID
 	 * @param string $type Status type constant
-	 * @param string $status New status value stored along with the order item
+	 * @param string|null $status Status value the item must have or NULL for the last item of any value
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface|null Order status item or NULL if no item is available
 	 */
-	protected function getLastStatusItem( string $parentid, string $type, string $status ) : ?\Aimeos\MShop\Order\Item\Status\Iface
+	protected function getLastStatusItem( string $parentid, string $type, ?string $status = null ) : ?\Aimeos\MShop\Order\Item\Status\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'order/status' );
 
@@ -192,11 +192,15 @@ trait Update
 		$expr = array(
 			$search->compare( '==', 'order.status.parentid', $parentid ),
 			$search->compare( '==', 'order.status.type', $type ),
-			$search->compare( '==', 'order.status.value', $status ),
 		);
+
+		if( $status !== null ) {
+			$expr[] = $search->compare( '==', 'order.status.value', $status );
+		}
+
 		$search->setConditions( $search->and( $expr ) );
 		// @phpstan-ignore argument.type
-		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
+		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ), $search->sort( '-', 'order.status.id' ) ) );
 		$search->slice( 0, 1 );
 
 		// @phpstan-ignore return.type
@@ -281,9 +285,15 @@ trait Update
 	 */
 	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, string $type, string $status, int $value )
 	{
-		$statusItem = $this->getLastStatusItem( (string) $orderItem->getId(), $type, $status );
+		$statusItem = $this->getLastStatusItem( (string) $orderItem->getId(), $type );
 
+		// resources are already in the requested state
 		if( $statusItem && $statusItem->getValue() == $status ) {
+			return $this;
+		}
+
+		// resources have never been blocked, so there's nothing to release
+		if( $statusItem === null && $value > 0 ) {
 			return $this;
 		}
 
