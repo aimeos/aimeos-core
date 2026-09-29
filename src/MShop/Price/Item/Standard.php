@@ -129,7 +129,7 @@ class Standard extends Base
 	 */
 	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'price.domain', $domain );
+		return $this->set( 'price.domain', $this->checkDomain( $domain ) );
 	}
 
 

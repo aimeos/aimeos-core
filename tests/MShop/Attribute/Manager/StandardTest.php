@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->create();
 		$item->setId( null );
-		$item->setDomain( 'tmpDomainx' );
+		$item->setDomain( 'tmpdomainx' );
 		$item->setCode( '106x' );
 		$item->setLabel( '106x' );
 		$item->setType( 'size' );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setDomain( 'tmpDomain' );
+		$itemExp->setDomain( 'tmpdomain' );
 		$itemExp->setCode( '106' );
 		$itemExp->setLabel( '106' );
 		$resultUpd = $this->object->save( $itemExp );
