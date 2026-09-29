@@ -63,7 +63,7 @@ class Standard
 	 */
 	public function setDomain( string $domain ) : \Aimeos\MShop\Type\Item\Iface
 	{
-		return $this->set( $this->prefix() . 'domain', $domain );
+		return $this->set( $this->prefix() . 'domain', $this->checkDomain( $domain ) );
 	}
 
 

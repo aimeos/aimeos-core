@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.id' => 1,
 			'media.siteid' => 123,
 			'media.type' => 'category',
-			'media.domain' => 'test_dom',
+			'media.domain' => 'testdom',
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
 			'media.filesystem' => 'fs-mimeicon',
@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'test_dom', $this->object->getDomain() );
+		$this->assertEquals( 'testdom', $this->object->getDomain() );
 	}
 
 
