@@ -212,6 +212,55 @@ abstract class Base
 
 
 	/**
+	 * Returns the condition matching orders whose coupon codes count as redeemed
+	 *
+	 * Besides confirmed orders, recently stored orders which are still unfinished
+	 * are included because they may be confirmed later. Otherwise, the same code
+	 * could be redeemed in several orders before the first one is confirmed.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Order search criteria object
+	 * @param string|null $orderId ID of the current order which is excluded
+	 * @return \Aimeos\Base\Criteria\Expression\Iface Condition for redeemed orders
+	 */
+	protected function redeemed( \Aimeos\Base\Criteria\Iface $search, ?string $orderId = null ) : \Aimeos\Base\Criteria\Expression\Iface
+	{
+		/** mshop/coupon/provider/unfinished-hours
+		 * Number of hours unfinished orders count as coupon code redemption
+		 *
+		 * Orders are stored with an "unfinished" payment status before the
+		 * customer is redirected to the payment provider and the coupon code
+		 * counts are only decreased after the payment has been confirmed. To
+		 * prevent customers from redeeming the same code in several orders
+		 * before confirming the first one, unfinished orders created within
+		 * the configured time frame are counted too. The value should match
+		 * the time unfinished orders are kept before they are removed.
+		 *
+		 * @type int Number of hours
+		 * @since 2026.10
+		 * @see controller/jobs/order/cleanup/unfinished/keep-hours
+		 */
+		$hours = (int) $this->context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
+		$date = date( 'Y-m-d H:i:s', time() - $hours * 3600 );
+
+		// @phpstan-ignore argument.type
+		$expr = [$search->or( [
+			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+			$search->and( [
+				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
+				$search->compare( '>=', 'order.ctime', $date ),
+			] ),
+		] )];
+
+		if( $orderId !== null ) {
+			$expr[] = $search->compare( '!=', 'order.id', $orderId );
+		}
+
+		// @phpstan-ignore argument.type
+		return $search->and( $expr );
+	}
+
+
+	/**
 	 * Creates an order product for the given product code
 	 *
 	 * @param string $prodcode Unique product code

@@ -230,7 +230,15 @@ class Standard
 		$stmt->bind( 4, $code );
 		$stmt->bind( 5, $amount, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // prevent count underflow
 
-		$stmt->execute()->finish();
+		$result = $stmt->execute();
+
+		if( $amount < 0 && $result->affectedRows() === 0 )
+		{
+			$msg = sprintf( 'Count of coupon code "%1$s" could not be decreased by %2$d', $code, -$amount );
+			$context->logger()->warning( $msg, 'core/coupon' );
+		}
+
+		$result->finish();
 
 		return $this;
 	}

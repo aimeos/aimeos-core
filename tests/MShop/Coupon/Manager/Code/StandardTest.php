@@ -218,6 +218,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDecreaseUnderflow()
+	{
+		$context = \TestHelper::context();
+		$codeItem = $this->object->find( 'OPQR' );
+
+		$logger = $this->getMockBuilder( \Aimeos\Base\Logger\Iface::class )->getMock();
+		$logger->expects( $this->once() )->method( 'warning' )
+			->with( $this->stringContains( 'OPQR' ), 'core/coupon' );
+		$context->setLogger( $logger );
+
+		$object = \Aimeos\MShop::create( $context, 'coupon/code', 'Standard' );
+		$object->decrease( 'OPQR', $codeItem->getCount() + 1 );
+
+		$this->assertEquals( $codeItem->getCount(), $object->get( $codeItem->getId() )->getCount() );
+	}
+
+
 	public function testIncrease()
 	{
 		$search = $this->object->filter();
