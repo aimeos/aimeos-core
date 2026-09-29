@@ -97,7 +97,7 @@ class Standard
 	 */
 	public function setDomain( string $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'review.domain', $value );
+		return $this->set( 'review.domain', $this->checkDomain( $value ) );
 	}
 
 

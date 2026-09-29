@@ -477,6 +477,23 @@ abstract class Base
 
 
 	/**
+	 * Checks if the domain name is valid
+	 *
+	 * @param string $domain Domain name, e.g. "product" or "customer/address"
+	 * @return string Validated domain name
+	 * @throws \Aimeos\MShop\Exception If domain name contains invalid characters
+	 */
+	protected function checkDomain( string $domain ) : string
+	{
+		if( preg_match( '/^[a-z0-9\/]*$/', $domain ) !== 1 ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+		}
+
+		return $domain;
+	}
+
+
+	/**
 	 * Tests if the code is valid.
 	 *
 	 * @param string $code New code for an item
