@@ -648,8 +648,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function copyFromMedia( array $urls ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->context, 'service' );
-		$mediaManager = \Aimeos\MShop::create( $this->context, 'media' );
+		$context = \TestHelper::context();
+		$manager = \Aimeos\MShop::create( $context, 'service' );
+		$mediaManager = \Aimeos\MShop::create( $context, 'media' );
 		$service = $manager->create()->setCode( 'test' );
 
 		foreach( $urls as $type => $url )
@@ -659,7 +660,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$service->addListItem( 'media', $listItem, $mediaItem );
 		}
 
-		$serviceCopy = new \Aimeos\MShop\Order\Item\Service\Standard( 'order.service.', ['.price' => $this->price] );
+		$serviceCopy = new \Aimeos\MShop\Order\Item\Service\Standard( $this->price );
 
 		return $serviceCopy->copyFrom( $service );
 	}
