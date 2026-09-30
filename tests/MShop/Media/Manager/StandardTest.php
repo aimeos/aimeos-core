@@ -448,12 +448,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
 		$method = $this->access( 'publicIp' );
 
-		foreach( ['8.8.8.8', '2606:4700::1111'] as $ip ) {
+		foreach( ['8.8.8.8', '2606:4700::1111', '::ffff:8.8.8.8'] as $ip ) {
 			$this->assertTrue( $method->invokeArgs( $object, [$ip] ), $ip );
 		}
 
 		$list = ['127.0.0.1', '10.0.0.1', '172.17.0.1', '192.168.1.1', '169.254.169.254', '0.0.0.0', '100.100.100.200',
-			'::1', '::ffff:127.0.0.1', 'fd00::1', 'fe80::1', '64:ff9b::a00:1', 'invalid', ''];
+			'::1', '::', '::ffff:127.0.0.1', '::ffff:7f00:1', '::ffff:169.254.169.254', '::ffff:100.100.100.200',
+			'::127.0.0.1', '::8.8.8.8', 'fd00::1', 'fe80::1', '64:ff9b::a00:1', 'invalid', ''];
 
 		foreach( $list as $ip ) {
 			$this->assertFalse( $method->invokeArgs( $object, [$ip] ), $ip );
