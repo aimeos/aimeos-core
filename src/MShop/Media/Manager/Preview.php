@@ -154,11 +154,20 @@ trait Preview
 	 */
 	protected function publicIp( string $ip ) : bool
 	{
-		if( !filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+		if( !filter_var( $ip, FILTER_VALIDATE_IP ) ) {
 			return false;
 		}
 
 		$bin = (string) inet_pton( $ip );
+
+		// IPv4-mapped (::ffff:0:0/96) addresses aren't reserved before PHP 8.3, IPv4-compatible (::/96) ones are deprecated
+		if( strlen( $bin ) === 16 && strncmp( $bin, str_repeat( "\x00", 10 ), 10 ) === 0 ) {
+			return substr( $bin, 10, 2 ) === "\xff\xff" && $this->publicIp( (string) inet_ntop( substr( $bin, 12 ) ) );
+		}
+
+		if( !filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+			return false;
+		}
 
 		if( strlen( $bin ) === 4 ) {
 			return ( ord( $bin[0] ) !== 100 || ( ord( $bin[1] ) & 0xc0 ) !== 64 ); // 100.64.0.0/10 (CGNAT)
