@@ -85,13 +85,20 @@ trait Remote
 			$host = $parts['host'] ?? '';
 			$scheme = strtolower( $parts['scheme'] ?? '' );
 
-			if( !in_array( $scheme, ['http', 'https'], true ) || !filter_var( $host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME ) ) {
+			// IPv6 addresses are enclosed in brackets in URLs
+			if( preg_match( '/^\[(.+)\]$/', $host, $match ) ) {
+				$literal = filter_var( $match[1], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) ?: null;
+			} else {
+				$literal = filter_var( $host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ?: null;
+			}
+
+			if( !in_array( $scheme, ['http', 'https'], true ) || !$literal && !filter_var( $host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME ) ) {
 				throw new \RuntimeException( sprintf( $msg, $orig ) );
 			}
 
-			if( filter_var( $host, FILTER_VALIDATE_IP ) )
+			if( $literal )
 			{
-				$ips = [$host];
+				$ips = [$literal];
 			}
 			else
 			{
@@ -117,10 +124,14 @@ trait Remote
 			curl_setopt_array( $ch, [
 				CURLOPT_FILE => $fh,
 				CURLOPT_FOLLOWLOCATION => false,
-				CURLOPT_RESOLVE => [$host . ':' . $port . ':' . $ip],
 				CURLOPT_CONNECTTIMEOUT => 10,
 				CURLOPT_TIMEOUT => 60,
 			] );
+
+			// IP addresses are used as they are, host names are pinned to the validated address
+			if( !$literal ) {
+				curl_setopt( $ch, CURLOPT_RESOLVE, [$host . ':' . $port . ':' . $ip] );
+			}
 
 			$result = curl_exec( $ch );
 			$status = curl_getinfo( $ch, CURLINFO_RESPONSE_CODE );
