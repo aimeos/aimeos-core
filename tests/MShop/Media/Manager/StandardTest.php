@@ -419,7 +419,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
 
-		foreach( ['http://127.0.0.1/test.png', 'http://localhost/test.png', 'https://169.254.169.254/latest', 'http://[::1]/test.png'] as $url )
+		foreach( ['http://127.0.0.1/test.png', 'http://localhost/test.png', 'https://169.254.169.254/latest', 'http://[::1]/test.png',
+			'http://[::ffff:127.0.0.1]/test.png', 'http://[fd00::1]/test.png', 'http://[127.0.0.1]/test.png'] as $url )
 		{
 			try
 			{
