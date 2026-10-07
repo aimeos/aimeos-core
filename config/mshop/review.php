@@ -10,7 +10,7 @@ return array(
 	'manager' => array(
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_review" mrev
@@ -22,7 +22,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_review" mrev
@@ -36,7 +36,7 @@ return array(
 		),
 		'aggregaterate' => array(
 			'ansi' => '
-				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
+				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, mrev.rating AS "val"
 					FROM "mshop_review" mrev
@@ -48,7 +48,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
+				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, mrev.rating AS "val"
 					FROM "mshop_review" mrev

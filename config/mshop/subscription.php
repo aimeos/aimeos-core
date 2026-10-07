@@ -10,7 +10,7 @@ return array(
 	'manager' => array(
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_subscription" msub
@@ -23,7 +23,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_subscription" msub

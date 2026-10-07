@@ -436,7 +436,7 @@ return array(
 		),
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" mpro
@@ -449,7 +449,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" mpro

@@ -68,7 +68,7 @@ return [
 		],
 		'aggregate' => [
 			'ansi' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_customer" mcus
@@ -81,7 +81,7 @@ return [
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_customer" mcus

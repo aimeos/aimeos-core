@@ -105,6 +105,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateTruncated()
+	{
+		$context = \TestHelper::context();
+		$context->config()->set( 'mshop/common/manager/aggregate/limit', 3 );
+
+		$logger = $this->createMock( \Aimeos\Base\Logger\Iface::class );
+		$logger->expects( $this->once() )->method( 'notice' );
+		$context->setLogger( $logger );
+
+		$object = new \Aimeos\MShop\Index\Manager\Standard( $context );
+		$search = $object->filter( true )->add( ['index.catalog.id' => null], '!=' );
+		$result = $object->aggregate( $search, ['product.status', 'index.attribute.id'] );
+
+		$this->assertEquals( 3, $result->flat()->sum() );
+	}
+
+
 	public function testAggregateMax()
 	{
 		$search = $this->object->filter( true );

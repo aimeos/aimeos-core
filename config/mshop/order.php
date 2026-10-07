@@ -11,7 +11,7 @@ return array(
 		'address' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_address" mordad
@@ -24,7 +24,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_address" mordad
@@ -41,7 +41,7 @@ return array(
 		'coupon' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_coupon" mordco
@@ -54,7 +54,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_coupon" mordco
@@ -75,7 +75,7 @@ return array(
 			'attribute' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_product_attr" mordprat
@@ -88,7 +88,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_product_attr" mordprat
@@ -104,7 +104,7 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_product" mordpr
@@ -117,7 +117,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_product" mordpr
@@ -158,7 +158,7 @@ return array(
 			'attribute' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_service_attr" mordseat
@@ -171,7 +171,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_service_attr" mordseat
@@ -188,7 +188,7 @@ return array(
 			'transaction' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_service_tx" mordsetx
@@ -201,7 +201,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, :type("val") AS "value"
+						SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 						FROM (
 							SELECT :acols, :type(:val) AS "val"
 							FROM "mshop_order_service_tx" mordsetx
@@ -236,7 +236,7 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_service" mordse
@@ -249,7 +249,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_service" mordse
@@ -285,7 +285,7 @@ return array(
 		'status' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_status" mordst
@@ -298,7 +298,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, :type("val") AS "value"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :type(:val) AS "val"
 						FROM "mshop_order_status" mordst
@@ -314,7 +314,7 @@ return array(
 		),
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :type(:val) AS "val"
 					FROM "mshop_order" mord
@@ -327,7 +327,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, :type("val") AS "value"
+				SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 				FROM (
 					SELECT :acols, :type(:val) AS "val"
 					FROM "mshop_order" mord

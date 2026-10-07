@@ -165,7 +165,7 @@ trait DB
 		 * @type integer Number of records
 		 * @since 2021.04
 		 */
-		$limit = $this->context()->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
+		$limit = (int) $this->context()->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
 
 		if( empty( $keys ) )
 		{
@@ -197,7 +197,8 @@ trait DB
 		// @phpstan-ignore argument.type
 		$keys = array_map( strval( ... ), (array) $keys );
 		$acols = $cols = $expr = [];
-		$search = (clone $search)->slice( $search->getOffset(), (int) min( $search->getLimit(), $limit ) );
+		$size = min( $search->getLimit(), $limit );
+		$search = (clone $search)->slice( $search->getOffset(), $size );
 
 		foreach( $keys as $string )
 		{
@@ -239,7 +240,15 @@ trait DB
 		// @phpstan-ignore argument.type
 		$sql = str_replace( ':val', $val, $sql );
 
-		return $this->aggregateResult( $search, (string) $sql, $required );
+		$result = $this->aggregateResult( $search, (string) $sql, $required, $total );
+
+		if( $size === $limit && $total !== null && $total >= $limit )
+		{
+			$msg = 'Aggregating "%1$s" by "%2$s" reached the limit of %3$d records (mshop/common/manager/aggregate/limit), result may be incomplete';
+			$this->context()->logger()->notice( sprintf( $msg, $valkey, join( '", "', $keys ), $limit ), 'core/aggregate' );
+		}
+
+		return $result;
 	}
 
 
@@ -249,18 +258,26 @@ trait DB
 	 * @param \Aimeos\Base\Criteria\Iface $filter Filter object
 	 * @param string $sql SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
+	 * @param int|null $total Number of aggregated records or NULL if the SQL statement doesn't return a "_total" column
 	 * @return \Aimeos\Map (Nested) list of aggregated values as key and the number of counted products as value
 	 */
-	protected function aggregateResult( \Aimeos\Base\Criteria\Iface $filter, string $sql, array $required ) : \Aimeos\Map
+	protected function aggregateResult( \Aimeos\Base\Criteria\Iface $filter, string $sql, array $required,
+		?int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$total = null;
+		$total = $count = null;
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$conn = $this->context()->db( $this->getResourceName() );
-		$results = $this->searchItemsBase( $conn, $filter, $sql, '', $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $filter, $sql, '', $required, $count, $level );
 
 		while( $row = $results->fetch() )
 		{
+			if( array_key_exists( '_total', $row ) )
+			{
+				$total = ( $total ?? 0 ) + (int) $row['_total'];
+				unset( $row['_total'] );
+			}
+
 			$row = $this->transform( $row );
 
 			$temp = &$map;

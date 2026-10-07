@@ -52,6 +52,71 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateTruncated()
+	{
+		$logger = $this->createMock( \Aimeos\Base\Logger\Iface::class );
+		$logger->expects( $this->once() )->method( 'notice' );
+		$this->context->setLogger( $logger );
+
+		$this->context->config()->set( 'mshop/common/manager/aggregate/limit', 2 );
+
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
+		$result = $this->object->aggregate( $search, 'order.channel' );
+
+		$this->assertEquals( 2, array_sum( $result->toArray() ) );
+	}
+
+
+	public function testAggregateTruncatedAvg()
+	{
+		$logger = $this->createMock( \Aimeos\Base\Logger\Iface::class );
+		$logger->expects( $this->once() )->method( 'notice' );
+		$this->context->setLogger( $logger );
+
+		$this->context->config()->set( 'mshop/common/manager/aggregate/limit', 2 );
+
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.price', 'avg' );
+
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
+	public function testAggregateTruncatedSlice()
+	{
+		$logger = $this->createMock( \Aimeos\Base\Logger\Iface::class );
+		$logger->expects( $this->never() )->method( 'notice' );
+		$this->context->setLogger( $logger );
+
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] )->slice( 0, 2 );
+		$result = $this->object->aggregate( $search, 'order.channel' );
+
+		$this->assertEquals( 2, array_sum( $result->toArray() ) );
+	}
+
+
+	public function testAggregateNoTotal()
+	{
+		$logger = $this->createMock( \Aimeos\Base\Logger\Iface::class );
+		$logger->expects( $this->never() )->method( 'notice' );
+		$this->context->setLogger( $logger );
+
+		$config = $this->context->config();
+		$config->set( 'mshop/common/manager/aggregate/limit', 2 );
+
+		foreach( ['ansi', 'mysql'] as $adapter )
+		{
+			$sql = $config->get( 'mshop/order/manager/aggregate/' . $adapter );
+			$config->set( 'mshop/order/manager/aggregate/' . $adapter, str_replace( ', COUNT(*) AS "_total"', '', $sql ) );
+		}
+
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
+		$result = $this->object->aggregate( $search, 'order.channel' );
+
+		$this->assertEquals( 2, array_sum( $result->toArray() ) );
+	}
+
+
 	public function testAggregateAvg()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
