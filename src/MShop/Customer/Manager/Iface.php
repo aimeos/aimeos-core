@@ -21,4 +21,12 @@ namespace Aimeos\MShop\Customer\Manager;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
+	/**
+	 * Verifies the password against the stored password hash of the customer
+	 *
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Stored customer item
+	 * @param string $password Plain text password entered by the user
+	 * @return bool TRUE if the password matches the stored one, FALSE if not
+	 */
+	public function verify( \Aimeos\MShop\Customer\Item\Iface $item, string $password ) : bool;
 }

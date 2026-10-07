@@ -133,6 +133,11 @@ return [
 				WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 			'
 		],
+		'password' => [
+			'ansi' => '
+				SELECT "password" FROM "mshop_customer" WHERE "id" = ?
+			'
+		],
 		'newid' => [
 			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 			'mysql' => 'SELECT LAST_INSERT_ID()',

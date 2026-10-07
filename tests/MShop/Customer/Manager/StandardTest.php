@@ -267,6 +267,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testVerify()
+	{
+		$item = $this->object->save( $this->object->create()->setCode( 'unitTest' )->setPassword( 'secret' ) );
+		$loaded = $this->object->get( $item->getId() );
+
+		$valid = $this->object->verify( $loaded, 'secret' );
+		$invalid = $this->object->verify( $loaded, 'wrong' );
+		$empty = $this->object->verify( $loaded, '' );
+		$new = $this->object->verify( $this->object->create(), 'secret' );
+
+		$this->object->delete( $item->getId() );
+
+		$this->assertEquals( '', $loaded->getPassword() );
+		$this->assertTrue( $valid );
+		$this->assertFalse( $invalid );
+		$this->assertFalse( $empty );
+		$this->assertFalse( $new );
+	}
+
+
+	public function testVerifyNoPassword()
+	{
+		$item = $this->object->find( 'test@example.com' );
+		$this->assertFalse( $this->object->verify( $item, '' ) );
+		$this->assertFalse( $this->object->verify( $this->object->create()->setId( '-1' ), 'secret' ) );
+	}
+
+
 	public function testSearchPasswordInvalid()
 	{
 		$this->assertArrayNotHasKey( 'customer.password', $this->object->getSearchAttributes() );

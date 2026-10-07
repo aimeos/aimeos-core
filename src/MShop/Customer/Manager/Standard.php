@@ -253,6 +253,45 @@ class Standard
 
 
 	/**
+	 * Verifies the password against the stored password hash of the customer
+	 *
+	 * The password hash is write-only and never loaded into customer items,
+	 * so it's checked here without exposing the hash to the caller.
+	 *
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Stored customer item
+	 * @param string $password Plain text password entered by the user
+	 * @return bool TRUE if the password matches the stored one, FALSE if not
+	 */
+	public function verify( \Aimeos\MShop\Customer\Item\Iface $item, string $password ) : bool
+	{
+		if( ( $id = $item->getId() ) === null || $password === '' ) {
+			return false;
+		}
+
+		/** mshop/customer/manager/password/ansi
+		 * Retrieves the stored password hash of a customer for verification
+		 *
+		 * The hash is only used internally to verify a password and never
+		 * returned. The statement must select the hash as "password" column
+		 * and contain one placeholder for the customer ID.
+		 *
+		 * @type string SQL statement for retrieving the password hash
+		 * @since 2027.04
+		 * @see mshop/customer/manager/update/ansi
+		 */
+		$path = $this->getConfigKey( 'password', 'mshop/customer/manager/password' );
+		$conn = $this->context()->db( $this->getResourceName() );
+
+		$stmt = $this->getCachedStatement( $conn, $path );
+		$result = $stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT )->execute();
+		$hash = (string) ( $result->fetch()['password'] ?? '' );
+		$result->finish();
+
+		return $hash !== '' && $this->context()->password()->verify( $password, $hash );
+	}
+
+
+	/**
 	 * Saves a customer item object.
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
