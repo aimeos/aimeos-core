@@ -10,7 +10,7 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
-use \Enshrined\Svgsanitize\Sanitizer;
+use \enshrined\svgSanitize\Sanitizer;
 use \Intervention\Image\Interfaces\ImageInterface;
 
 
