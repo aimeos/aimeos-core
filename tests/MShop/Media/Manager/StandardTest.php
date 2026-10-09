@@ -462,6 +462,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
+
+	public function testSanitizeSvg()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$svg = '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script><rect onclick="alert(1)" width="1"/></svg>';
+
+		$result = $this->access( 'sanitize' )->invokeArgs( $object, [$svg, 'image/svg+xml'] );
+
+		$this->assertStringContainsString( '<rect width="1"', $result );
+		$this->assertStringNotContainsString( 'script', $result );
+		$this->assertStringNotContainsString( 'onclick', $result );
+	}
+
+
+	public function testSanitizeSvgInvalid()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+
+		$this->expectException( \Aimeos\MShop\Media\Exception::class );
+		$this->access( 'sanitize' )->invokeArgs( $object, ['no svg <', 'image/svg+xml'] );
+	}
+
 	protected function access( $name )
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Media\Manager\Standard::class );
