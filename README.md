@@ -1,5 +1,5 @@
 <a href="https://aimeos.org">
-    <img src="https://aimeos.org/fileadmin/template/icons/logo.png" alt="Aimeos logo" title="Aimeos" align="right" height="60" />
+    <img src="https://aimeos.org/images/logo.png" alt="Aimeos logo" title="Aimeos" align="right" height="60" />
 </a>
 
 # Aimeos core - high performance e-commerce
@@ -12,7 +12,7 @@
 
 :star: Star us on GitHub — it helps!
 
-[![Aimeos demo](https://aimeos.org/fileadmin/aimeos.org/images/aimeos-github.png)](https://demo.aimeos.org)
+[![Aimeos demo](https://aimeos.org/images/aimeos-github.png)](https://demo.aimeos.org)
 
 ## What is Aimeos core?
 
