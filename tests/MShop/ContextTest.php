@@ -309,6 +309,36 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUserClone()
+	{
+		$mock = $this->createStub( \Aimeos\MShop\Customer\Item\Iface::class );
+		$this->object->setUser( function( \Aimeos\MShop\ContextIface $context ) use ( $mock ) {
+			return $context->locale() ? $mock : null;
+		} );
+
+		$clone = clone $this->object;
+		$clone->setLocale( $this->createStub( \Aimeos\MShop\Locale\Item\Iface::class ) );
+
+		$this->assertSame( $mock, $clone->user() );
+	}
+
+
+	public function testGroupsClone()
+	{
+		$this->object->setGroups( function( \Aimeos\MShop\ContextIface $context ) {
+			return [$context->locale()->getSiteId() => new \stdClass()];
+		} );
+
+		$locale = $this->createStub( \Aimeos\MShop\Locale\Item\Iface::class );
+		$locale->method( 'getSiteId' )->willReturn( '1.' );
+
+		$clone = clone $this->object;
+		$clone->setLocale( $locale );
+
+		$this->assertEquals( ['1.'], array_keys( $clone->groups() ) );
+	}
+
+
 	public function testGetSetGroups()
 	{
 		$items = [123 => new \stdClass()];

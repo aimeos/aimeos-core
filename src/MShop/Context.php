@@ -672,7 +672,7 @@ class Context implements \Aimeos\MShop\ContextIface
 		if( $this->user instanceof \Closure )
 		{
 			$fcn = $this->user;
-			$this->user = $fcn();
+			$this->user = $fcn( $this );
 		}
 
 		return $this->user;
@@ -681,6 +681,10 @@ class Context implements \Aimeos\MShop\ContextIface
 
 	/**
 	 * Sets the user/customer item of the logged in user.
+	 *
+	 * The closure gets the context object passed whose user() method is called,
+	 * which can differ from the context the closure has been created for if
+	 * the context has been cloned afterwards.
 	 *
 	 * @param \Closure|null $user User/customer item of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
@@ -703,7 +707,7 @@ class Context implements \Aimeos\MShop\ContextIface
 		if( $this->groups instanceof \Closure )
 		{
 			$fcn = $this->groups;
-			$this->groups = $fcn();
+			$this->groups = $fcn( $this );
 		}
 
 		return (array) $this->groups;
@@ -712,6 +716,8 @@ class Context implements \Aimeos\MShop\ContextIface
 
 	/**
 	 * Sets the group IDs of the logged in user.
+	 *
+	 * The closure gets the context object passed whose groups() method is called.
 	 *
 	 * @param \Closure|array $groups Group ID/item pairs of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
