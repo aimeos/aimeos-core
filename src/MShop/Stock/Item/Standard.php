@@ -147,7 +147,7 @@ class Standard
 			switch( $key )
 			{
 				case 'stock.productid': $item->setProductId( (string) $value ); break;
-				case 'stock.stocklevel': $item->setStockLevel( $value !== null ? (int) $value : null ); break;
+				case 'stock.stocklevel': $item->setStockLevel( is_numeric( $value ) ? (int) $value : null ); break;
 				case 'stock.timeframe': $item->setTimeFrame( $value ? (string) $value : null ); break;
 				case 'stock.dateback': $item->setDateBack( $value ? (string) $value : null ); break;
 				case 'stock.type': $item->setType( (string) $value ); break;
