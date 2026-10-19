@@ -135,9 +135,15 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$sanitizer = new Sanitizer();
 			$sanitizer->removeRemoteReferences( true );
 
-			if( ( $content = $sanitizer->sanitize( $content ) ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Invalid SVG file: %1$s' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid SVG file: %1$s' );
+
+			try {
+				$content = $sanitizer->sanitize( $content );
+			} catch( \Throwable $t ) { // svg-sanitize throws on some malformed input
+				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, $t->getMessage() ), previous: $t );
+			}
+
+			if( $content === false ) {
 				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, print_r( $sanitizer->getXmlIssues(), true ) ) );
 			}
 		}
