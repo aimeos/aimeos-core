@@ -205,6 +205,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFromArrayStockLevel()
+	{
+		$item = new \Aimeos\MShop\Stock\Item\Standard( 'stock.', [] );
+
+		$entries = ['stock.stocklevel' => ''];
+		$this->assertNull( $item->fromArray( $entries )->getStockLevel() );
+
+		$entries = ['stock.stocklevel' => null];
+		$this->assertNull( $item->fromArray( $entries )->getStockLevel() );
+
+		$entries = ['stock.stocklevel' => '0'];
+		$this->assertSame( 0, $item->fromArray( $entries )->getStockLevel() );
+
+		$entries = ['stock.stocklevel' => '5'];
+		$this->assertSame( 5, $item->fromArray( $entries )->getStockLevel() );
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );
