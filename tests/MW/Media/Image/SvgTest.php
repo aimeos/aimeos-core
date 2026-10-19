@@ -36,6 +36,13 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testConstructInvalid()
+	{
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
+		new \Aimeos\MW\Media\Image\Svg( 'no svg <', 'image/svg+xml' );
+	}
+
+
 	public function testGetHeight()
 	{
 		$ds = DIRECTORY_SEPARATOR;
