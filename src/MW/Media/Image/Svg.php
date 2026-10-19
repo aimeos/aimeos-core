@@ -44,7 +44,13 @@ class Svg
 		$sanitizer = new Sanitizer();
 		$sanitizer->removeRemoteReferences( true );
 
-		if( ( $content = $sanitizer->sanitize( $content ) ) === false ) {
+		try {
+			$content = $sanitizer->sanitize( $content );
+		} catch( \Throwable $t ) { // svg-sanitize throws on some malformed input
+			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file: ' . $t->getMessage(), 0, $t );
+		}
+
+		if( $content === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file: ' . print_r( $sanitizer->getXmlIssues(), true ) );
 		}
 
