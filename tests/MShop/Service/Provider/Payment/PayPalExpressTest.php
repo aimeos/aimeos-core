@@ -157,6 +157,41 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateSyncCanceled()
+	{
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+
+		$request->expects( $this->once() )->method( 'getAttributes' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( ['token' => 'UT-99999999'] );
+
+		$this->object->expects( $this->never() )->method( 'send' );
+
+		$this->order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		$result = $this->object->updateSync( $request, $this->order );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $result->getStatusPayment() );
+	}
+
+
+	public function testUpdateSyncNoPayerId()
+	{
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+
+		$request->expects( $this->once() )->method( 'getAttributes' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( ['token' => 'UT-99999999'] );
+
+		$this->object->expects( $this->never() )->method( 'send' );
+
+		$this->order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->object->updateSync( $request, $this->order );
+	}
+
+
 	public function testUpdatePush()
 	{
 		//IPN Call
