@@ -436,6 +436,11 @@ class PayPalExpress
 
 		if( !isset( $params['PayerID'] ) )
 		{
+			// customer canceled at PayPal, which redirects to the cancel URL with the token only
+			if( $orderItem->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ) {
+				return $orderItem->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+			}
+
 			$msg = sprintf( $this->context()->translate( 'mshop', 'Required parameter "%1$s" is missing' ), 'PayerID' );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
