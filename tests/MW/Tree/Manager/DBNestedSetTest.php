@@ -242,6 +242,24 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchNodesPlaceholdersInValues()
+	{
+		$code = 'unittest:order:size:start';
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm->get() );
+		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+
+		$newNode = $manager->createNode()->setLabel( 'l1n4' )->setCode( $code );
+		$manager->insertNode( $newNode, $root->getId() );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'tree.code', $code ) );
+		$nodes = $manager->searchNodes( $search );
+
+		$this->assertEquals( 1, count( $nodes ) );
+		$this->assertEquals( $code, current( $nodes )->getCode() );
+	}
+
+
 	public function testSearchException()
 	{
 		$this->config['sql']['search'] = '
