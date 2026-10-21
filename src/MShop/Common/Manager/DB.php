@@ -780,11 +780,16 @@ trait DB
 			$sql = $str;
 		}
 
-		foreach( $replace as $key => $value ) {
-			$sql = str_replace( $key, $value, $sql );
+		$sql = str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
+
+		// replace in one pass, so inserted values like search strings containing placeholders aren't replaced again
+		$replace = array_map( 'strval', $replace );
+
+		if( is_array( $sql ) ) {
+			return array_map( fn( $str ) => strtr( $str, $replace ), $sql );
 		}
 
-		return str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
+		return strtr( $sql, $replace );
 	}
 
 
