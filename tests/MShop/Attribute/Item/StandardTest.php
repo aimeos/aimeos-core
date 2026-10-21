@@ -93,10 +93,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDomain()
 	{
-		$return = $this->object->setDomain( 'TestDom' );
+		$return = $this->object->setDomain( 'testdom' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Attribute\Item\Iface::class, $return );
-		$this->assertEquals( 'TestDom', $this->object->getDomain() );
+		$this->assertEquals( 'testdom', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

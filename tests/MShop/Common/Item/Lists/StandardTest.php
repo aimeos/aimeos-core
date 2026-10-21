@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.id' => 8,
 			'common.lists.siteid' => 99,
 			'common.lists.parentid' => 2,
-			'common.lists.domain' => 'testDomain',
+			'common.lists.domain' => 'testdomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
 			'common.lists.dateend' => '2100-01-01 00:00:00',
@@ -79,23 +79,43 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetKey()
 	{
-		$this->assertEquals( 'testDomain|test|unitId', $this->object->getKey() );
+		$this->assertEquals( 'testdomain|test|unitId', $this->object->getKey() );
 	}
 
 
 	public function testGetDomain()
 	{
-		$this->assertEquals( 'testDomain', $this->object->getDomain() );
+		$this->assertEquals( 'testdomain', $this->object->getDomain() );
 	}
 
 
 	public function testSetDomain()
 	{
-		$return = $this->object->setDomain( 'newDom' );
+		$return = $this->object->setDomain( 'newdom' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $return );
-		$this->assertEquals( 'newDom', $this->object->getDomain() );
+		$this->assertEquals( 'newdom', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetDomainInvalid()
+	{
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->setDomain( 'PRODUCT' );
+	}
+
+
+	public function testSetDomainInvalidChars()
+	{
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->setDomain( 'product ' );
+	}
+
+
+	public function testSetDomainPath()
+	{
+		$this->assertEquals( 'customer/address', $this->object->setDomain( 'customer/address' )->getDomain() );
 	}
 
 
@@ -303,7 +323,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.id' => 8,
 			'common.lists.parentid' => 2,
 			'common.lists.type' => 'default',
-			'common.lists.domain' => 'testDomain',
+			'common.lists.domain' => 'testdomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.config' => array( 'cnt' => '40' ),
 			'common.lists.position' => 7,
@@ -331,8 +351,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.id' => '8',
 			'common.lists.siteid' => 99,
 			'common.lists.parentid' => 2,
-			'common.lists.key' => 'testDomain|test|unitId',
-			'common.lists.domain' => 'testDomain',
+			'common.lists.key' => 'testdomain|test|unitId',
+			'common.lists.domain' => 'testdomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
 			'common.lists.dateend' => '2100-01-01 00:00:00',
