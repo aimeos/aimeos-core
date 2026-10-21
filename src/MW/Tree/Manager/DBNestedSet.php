@@ -492,11 +492,13 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
 		$sortations = $search->getSortationSource( $types, $translations, $funcs );
 
-		$sql = str_replace(
-			[':cond', ':order', ':size', ':start'],
-			[$conditions, $sortations, $search->getLimit(), $search->getOffset()],
-			$this->config['search']
-		);
+		// replace in one pass, so inserted values like search strings containing placeholders aren't replaced again
+		$sql = strtr( (string) $this->config['search'], [
+			':cond' => (string) $conditions,
+			':order' => (string) $sortations,
+			':size' => (string) $search->getLimit(),
+			':start' => (string) $search->getOffset(),
+		] );
 
 		$stmt = $this->conn->create( $sql );
 		$stmt->bind( 1, $left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
