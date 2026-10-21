@@ -628,7 +628,7 @@ class Standard
 			$items = $manager->search( $manager->filter( true )->slice( 0, 10000 ) );
 
 			foreach( $items as $item ) {
-				$list[$item->getLanguageId()] = null;
+				$list[$item->getLanguageId() ?? ''] = null;
 			}
 
 			$this->languageIds = array_keys( $list );
@@ -677,11 +677,11 @@ class Standard
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
 
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['url'] = \Aimeos\Base\Str::slug( $text->getContent() );
+			$texts[$text->getLanguageId() ?? '']['url'] = \Aimeos\Base\Str::slug( $text->getContent() );
 		}
 
 		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['name'] = $text->getContent();
+			$texts[$text->getLanguageId() ?? '']['name'] = $text->getContent();
 		}
 
 		$products = $item->getRefItems( 'product', null, 'default' )->unshift( $item );
