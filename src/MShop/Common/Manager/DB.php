@@ -797,11 +797,10 @@ trait DB
 			$sql = (string) $str;
 		}
 
-		foreach( $replace as $key => $value ) {
-			$sql = str_replace( (string) $key, (string) $value, $sql );
-		}
+		$sql = str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
 
-		return str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
+		// replace in one pass, so inserted values like search strings containing placeholders aren't replaced again
+		return strtr( $sql, array_map( 'strval', $replace ) );
 	}
 
 
