@@ -88,6 +88,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchPlaceholdersInValues()
+	{
+		$code = 'unittest:tabletop:alias:order:size';
+		$item = $this->object->find( 'default', [], 'product' )->setId( null )->setCode( $code );
+		$this->object->save( $item );
+
+		$search = $this->object->filter()->add( ['type.domain' => 'product', 'type.code' => $code] );
+		$result = $this->object->search( $search )->toArray();
+
+		$this->object->delete( $item->getId() );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( $code, current( $result )->getCode() );
+	}
+
+
 	public function testGet()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
