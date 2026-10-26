@@ -691,7 +691,7 @@ abstract class Base
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @type array &$list Associative list of item keys and their values
+	 * @param array &$list Associative list of item keys and their values
 	 * @param bool $private True to set private properties too, false for public only
 	 * @return static Address item for chaining method calls
 	 */

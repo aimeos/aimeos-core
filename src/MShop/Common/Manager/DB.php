@@ -162,7 +162,7 @@ trait DB
 		 * lead to the situation that visitors see that no items are available despite
 		 * the fact that there would be at least one.
 		 *
-		 * @type integer Number of records
+		 * @param integer Number of records
 		 * @since 2021.04
 		 */
 		$limit = (int) $this->context()->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
@@ -999,7 +999,7 @@ trait DB
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2023.10
 			 * @see mshop/common/manager/update/ansi
 			 * @see mshop/common/manager/newid/ansi
@@ -1035,7 +1035,7 @@ trait DB
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2023.10
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/newid/ansi
@@ -1102,7 +1102,7 @@ trait DB
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @type string SQL statement for retrieving the last inserted record ID
+			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2023.10
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/update/ansi

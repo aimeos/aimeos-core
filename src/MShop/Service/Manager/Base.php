@@ -70,7 +70,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all delivery provider
 		 * objects.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/service/provider/payment/decorators
 		 */
@@ -92,7 +92,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all payment provider
 		 * objects.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/service/provider/delivery/decorators
 		 */

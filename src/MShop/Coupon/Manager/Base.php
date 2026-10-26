@@ -63,7 +63,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Coupon\Provider\Decorator\Decorator1" to all coupon provider
 		 * objects.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.05
 		 * @see client/html/common/decorators/default
 		 * @see client/html/account/favorite/decorators/excludes

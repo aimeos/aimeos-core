@@ -51,7 +51,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -73,7 +73,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "madmin/common/manager/decorators/default" for the cache manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard
 	 * This would add the decorator named "decorator1" defined by
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the cache controller.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the cache
 	 * controller.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/cache/manager/decorators/excludes
@@ -173,7 +173,7 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @type string Database connection name
+		 * @param string Database connection name
 		 * @since 2023.04
 		 */
 		$this->setResourceName( (string) $context->config()->get( 'madmin/cache/manager/resource', 'db-cache' ) );
@@ -282,7 +282,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for inserting a new cache entry
+		 * @param string SQL statement for inserting a new cache entry
 		 * @since 2014.03
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
@@ -318,7 +318,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for inserting a new tag to an existing cache entry
+		 * @param string SQL statement for inserting a new tag to an existing cache entry
 		 * @since 2014.03
 		 * @see madmin/cache/manager/delete/ansi
 		 * @see madmin/cache/manager/deletebytag/ansi
@@ -377,7 +377,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MAdmin\Cache\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -419,7 +419,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see madmin/cache/manager/get/ansi
 		 * @see madmin/cache/manager/delete/ansi
@@ -459,7 +459,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see madmin/cache/manager/get/ansi
 		 * @see madmin/cache/manager/delete/ansi
@@ -504,7 +504,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'madmin/cache/manager/submanagers';

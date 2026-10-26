@@ -34,7 +34,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @type array List of sub-manager names
+	 * @param array List of sub-manager names
 	 * @since 2015.10
 	 */
 
@@ -67,7 +67,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyType"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -89,7 +89,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the service type manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/service/manager/type/decorators/global
@@ -114,7 +114,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the service
 	 * type manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/service/manager/type/decorators/excludes
@@ -139,7 +139,7 @@ class Standard
 	 * "\Aimeos\MShop\Service\Manager\Type\Decorator\Decorator2" only to the
 	 * service type manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/service/manager/type/decorators/excludes
@@ -172,7 +172,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for inserting records
+	 * @param string SQL statement for inserting records
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/update/ansi
 	 * @see mshop/service/manager/type/newid/ansi
@@ -204,7 +204,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for updating records
+	 * @param string SQL statement for updating records
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/insert/ansi
 	 * @see mshop/service/manager/type/newid/ansi
@@ -240,7 +240,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @type string SQL statement for retrieving the last inserted record ID
+	 * @param string SQL statement for retrieving the last inserted record ID
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/insert/ansi
 	 * @see mshop/service/manager/type/update/ansi
@@ -270,7 +270,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for deleting items
+	 * @param string SQL statement for deleting items
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/insert/ansi
 	 * @see mshop/service/manager/type/update/ansi
@@ -325,7 +325,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for searching items
+	 * @param string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/insert/ansi
 	 * @see mshop/service/manager/type/update/ansi
@@ -376,7 +376,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for counting items
+	 * @param string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/service/manager/type/insert/ansi
 	 * @see mshop/service/manager/type/update/ansi

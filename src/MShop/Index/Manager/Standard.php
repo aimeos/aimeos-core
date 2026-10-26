@@ -51,7 +51,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2015.11
 	 */
 
@@ -73,7 +73,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the index manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.11
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard
 	 * This would add the decorator named "decorator1" defined by
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.11
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard
 	 * "\Aimeos\MShop\Index\Manager\Decorator\Decorator2" only to the index
 	 * manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.11
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/index/manager/decorators/excludes
@@ -186,7 +186,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for aggregating order items
+		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/optimize/ansi
@@ -306,7 +306,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for optimizing the stored product data
+		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/search/ansi
@@ -340,7 +340,7 @@ class Standard
 		 * downside of big bunches is a higher memory consumption that can
 		 * exceed the maximum allowed memory of the process.
 		 *
-		 * @type int Number of products
+		 * @param int Number of products
 		 * @since 2014.09
 		 * @see mshop/index/manager/domains
 		 * @see mshop/index/manager/index
@@ -362,7 +362,7 @@ class Standard
 		 * of the indexed product and therefore won't be found when searching
 		 * the index.
 		 *
-		 * @type string List of MShop domain names
+		 * @param string List of MShop domain names
 		 * @since 2014.09
 		 * @see mshop/index/manager/chunksize
 		 * @see mshop/index/manager/index
@@ -408,7 +408,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -459,7 +459,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/count/ansi
 		 * @see mshop/index/manager/optimize/ansi
@@ -509,7 +509,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/search/ansi
 		 * @see mshop/index/manager/optimize/ansi
@@ -548,7 +548,7 @@ class Standard
 			 * retrieved there and fetching items that won't be indexed is a
 			 * waste of resources.
 			 *
-			 * @type string List of index sub-manager names
+			 * @param string List of index sub-manager names
 			 * @since 2016.02
 			 * @see mshop/index/manager/chunksize
 			 * @see mshop/index/manager/domains

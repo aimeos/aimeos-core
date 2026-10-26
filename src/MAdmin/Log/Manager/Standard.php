@@ -51,7 +51,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -73,7 +73,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "madmin/common/manager/decorators/default" for the log manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard
 	 * This would add the decorator named "decorator1" defined by
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the log controller.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the log
 	 * controller.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/log/manager/decorators/excludes
@@ -194,7 +194,7 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @type string Database connection name
+		 * @param string Database connection name
 		 * @since 2023.04
 		 */
 		$this->setResourceName( (string) $context->config()->get( 'madmin/log/manager/resource', 'db-log' ) );
@@ -231,7 +231,7 @@ class Standard
 		 * down the system and the debug log level shouldn't be used in
 		 * production environments with a high number of visitors!
 		 *
-		 * @type int Log level number
+		 * @param int Log level number
 		 * @since 2014.03
 		 */
 		$this->loglevel = $config->get( 'madmin/log/manager/loglevel', \Aimeos\Base\Logger\Iface::NOTICE );
@@ -301,7 +301,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting items
+		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi
@@ -365,7 +365,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'madmin/log/manager/submanagers';
@@ -469,7 +469,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see madmin/log/manager/update/ansi
 			 * @see madmin/log/manager/newid/ansi
@@ -505,7 +505,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @see madmin/log/manager/insert/ansi
 			 * @see madmin/log/manager/newid/ansi
@@ -567,7 +567,7 @@ class Standard
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @type string SQL statement for retrieving the last inserted record ID
+			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @see madmin/log/manager/insert/ansi
 			 * @see madmin/log/manager/update/ansi
@@ -589,7 +589,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing Aimeos\MAdmin\Log\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -647,7 +647,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi
@@ -699,7 +699,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @see madmin/log/manager/insert/ansi
 		 * @see madmin/log/manager/update/ansi

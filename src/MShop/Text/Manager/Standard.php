@@ -150,7 +150,7 @@ class Standard
 		/** mshop/text/manager/sanitize/excludes
 		 * Additional text types whose content is validated by their owning extension.
 		 *
-		 * @type array List of text type codes
+		 * @param array List of text type codes
 		 * @since 2026.10
 		 * @category Developer
 		 */
@@ -172,7 +172,7 @@ class Standard
 	 * It's also possible to use the same database connection for different
 	 * data domains by configuring the same connection name using this setting.
 	 *
-	 * @type string Database connection name
+	 * @param string Database connection name
 	 * @since 2023.04
 	 */
 
@@ -205,7 +205,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -227,7 +227,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the text manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/text/manager/decorators/global
@@ -251,7 +251,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the text
 	 * manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/text/manager/decorators/excludes
@@ -275,7 +275,7 @@ class Standard
 	 * "\Aimeos\MShop\Text\Manager\Decorator\Decorator2" only to the text
 	 * manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/text/manager/decorators/excludes
@@ -308,7 +308,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for inserting records
+	 * @param string SQL statement for inserting records
 	 * @since 2015.10
 	 * @see mshop/text/manager/update/ansi
 	 * @see mshop/text/manager/newid/ansi
@@ -340,7 +340,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for updating records
+	 * @param string SQL statement for updating records
 	 * @since 2015.10
 	 * @see mshop/text/manager/insert/ansi
 	 * @see mshop/text/manager/newid/ansi
@@ -376,7 +376,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @type string SQL statement for retrieving the last inserted record ID
+	 * @param string SQL statement for retrieving the last inserted record ID
 	 * @since 2015.10
 	 * @see mshop/text/manager/insert/ansi
 	 * @see mshop/text/manager/update/ansi
@@ -406,7 +406,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for deleting items
+	 * @param string SQL statement for deleting items
 	 * @since 2015.10
 	 * @see mshop/text/manager/insert/ansi
 	 * @see mshop/text/manager/update/ansi
@@ -428,7 +428,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @type array List of sub-manager names
+	 * @param array List of sub-manager names
 	 * @since 2015.10
 	 */
 
@@ -456,7 +456,7 @@ class Standard
 	 * this domain, then items wil be only inherited. Thus, you have full
 	 * control over inheritance and aggregation in each domain.
 	 *
-	 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 	 * @since 2018.01
 	 * @see mshop/locale/manager/sitelevel
 	 */
@@ -507,7 +507,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for searching items
+	 * @param string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/text/manager/insert/ansi
 	 * @see mshop/text/manager/update/ansi
@@ -558,7 +558,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @type string SQL statement for counting items
+	 * @param string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/text/manager/insert/ansi
 	 * @see mshop/text/manager/update/ansi

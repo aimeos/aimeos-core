@@ -72,7 +72,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Plugin\Provider\Decorator\Decorator1" to all order provider
 		 * objects.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/plugin/provider/order/decorators
 		 */

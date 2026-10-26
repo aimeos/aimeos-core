@@ -114,7 +114,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for aggregating order items
+		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
@@ -127,7 +127,7 @@ class Standard
 		/** mshop/order/manager/service/aggregateavg/mysql
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @type string SQL statement for aggregating the order service items and computing the average value
+		 * @param string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregateavg/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
@@ -136,7 +136,7 @@ class Standard
 		/** mshop/order/manager/service/aggregateavg/ansi
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @type string SQL statement for aggregating the order service items and computing the average value
+		 * @param string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */
@@ -144,7 +144,7 @@ class Standard
 		/** mshop/order/manager/service/aggregatesum/mysql
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @type string SQL statement for aggregating the order service items and computing the sum
+		 * @param string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregatesum/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
@@ -153,7 +153,7 @@ class Standard
 		/** mshop/order/manager/service/aggregatesum/ansi
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @type string SQL statement for aggregating the order service items and computing the sum
+		 * @param string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */

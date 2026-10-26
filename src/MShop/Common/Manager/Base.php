@@ -237,7 +237,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -288,7 +288,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2023.10
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi
@@ -340,7 +340,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2023.10
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi

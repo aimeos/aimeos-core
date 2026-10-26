@@ -235,7 +235,7 @@ abstract class Base
 		 * the configured time frame are counted too. The value should match
 		 * the time unfinished orders are kept before they are removed.
 		 *
-		 * @type int Number of hours
+		 * @param int Number of hours
 		 * @since 2026.10
 		 * @see controller/jobs/order/cleanup/unfinished/keep-hours
 		 */

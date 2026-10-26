@@ -40,7 +40,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * uploaded files. Trying to upload and store a file not available in
 		 * the list of allowed mime types will result in an exception.
 		 *
-		 * @type array List of image mime types
+		 * @param array List of image mime types
 		 * @since 2024.01
 		 */
 		$default = [
@@ -83,7 +83,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * provides the file extensions for the configured mime types. You can
 		 * add more mime type / file extension combinations if required.
 		 *
-		 * @type array Associative list of mime types as keys and file extensions as values
+		 * @param array Associative list of mime types as keys and file extensions as values
 		 * @since 2018.04
 		 */
 		$default = ['image/gif' => 'gif', 'image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -114,7 +114,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * Qualitity level must be an integer from 0 (worst) to 100 (best).
 		 * The higher the quality, the bigger the file size.
 		 *
-		 * @type int Quality level from 0 to 100
+		 * @param int Quality level from 0 to 100
 		 * @since 2024.01
 		 */
 		return (int) $this->context()->config()->get( 'mshop/media/manager/quality', 75 );

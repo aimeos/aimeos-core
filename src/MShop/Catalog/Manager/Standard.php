@@ -50,7 +50,7 @@ class Standard extends Base
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @type string Last part of the class name
+	 * @param string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -72,7 +72,7 @@ class Standard extends Base
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the catalog manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog
 	 * manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Catalog\Manager\Decorator\Decorator2" only to the catalog
 	 * manager.
 	 *
-	 * @type array List of decorator names
+	 * @param array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
@@ -288,7 +288,7 @@ class Standard extends Base
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @type string Database connection name
+		 * @param string Database connection name
 		 * @since 2023.04
 		 */
 		$this->setResourceName( (string) $context->config()->get( 'mshop/catalog/manager/resource', 'db-catalog' ) );
@@ -332,7 +332,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for removing the records
+		 * @param string SQL statement for removing the records
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/insert/ansi
@@ -494,7 +494,7 @@ class Standard extends Base
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/catalog/manager/submanagers';
@@ -635,7 +635,7 @@ class Standard extends Base
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -669,7 +669,7 @@ class Standard extends Base
 		 * this domain, then items wil be only inherited. Thus, you have full
 		 * control over inheritance and aggregation in each domain.
 		 *
-		 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -722,7 +722,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
@@ -779,7 +779,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
@@ -978,7 +978,7 @@ class Standard extends Base
 		 * the whole table to avoid data corruption. This statement will be followed by
 		 * insert or update statements and closed by an unlock statement.
 		 *
-		 * @type string Lock SQL statement
+		 * @param string Lock SQL statement
 		 * @since 2019.04
 		 */
 		$path = 'mshop/catalog/manager/lock';
@@ -1014,7 +1014,7 @@ class Standard extends Base
 		 * after the table is locked and insert or update statements have been sent to
 		 * the database.
 		 *
-		 * @type string Lock SQL statement
+		 * @param string Lock SQL statement
 		 * @since 2019.04
 		 */
 		 $path = 'mshop/catalog/manager/unlock';
@@ -1074,7 +1074,7 @@ class Standard extends Base
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi
@@ -1118,7 +1118,7 @@ class Standard extends Base
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi

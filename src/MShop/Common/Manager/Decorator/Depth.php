@@ -28,7 +28,7 @@ class Depth
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -49,7 +49,7 @@ class Depth
 			 * sub-products will retrieve the directly associated products but not the
 			 * products referenced by the associated product for example.
 			 *
-			 * @type int Number of levels
+			 * @param int Number of levels
 			 * @since 2019.04
 			 */
 			$max = $this->context()->config()->get( 'mshop/common/manager/maxdepth', 2 );

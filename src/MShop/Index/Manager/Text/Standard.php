@@ -149,7 +149,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting the outdated text index records
+		 * @param string SQL statement for deleting the outdated text index records
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/delete/ansi
@@ -190,7 +190,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting index text records
+		 * @param string SQL statement for deleting index text records
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -226,7 +226,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/index/manager/text/submanagers';
@@ -273,7 +273,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyText"!
 		 *
-		 * @type string Last part of the class name
+		 * @param string Last part of the class name
 		 * @since 2014.03
 		 */
 
@@ -295,7 +295,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index text manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/global
@@ -320,7 +320,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * text manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
@@ -345,7 +345,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Text\Decorator\Decorator2" only to the index
 		 * text manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
@@ -383,7 +383,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for optimizing the stored text data
+		 * @param string SQL statement for optimizing the stored text data
 		 * @since 2014.09
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -438,7 +438,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/index/manager/text/cleanup/ansi
 			 * @see mshop/index/manager/text/count/ansi
@@ -481,7 +481,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -532,7 +532,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -585,7 +585,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -663,7 +663,7 @@ class Standard
 		 * for words that are part of those skipped texts. This is most useful
 		 * for avoiding product matches due to texts that should be internal only.
 		 *
-		 * @type array|string|null Type name or list of type names, null for all
+		 * @param array|string|null Type name or list of type names, null for all
 		 * @since 2019.04
 		 */
 		$types = $config->get( 'mshop/index/manager/text/types' );
@@ -676,7 +676,7 @@ class Standard
 		 * others will be left out so products won't be found if users search
 		 * for words that are part of those skipped attributes.
 		 *
-		 * @type array|string|null Type name or list of type names, null for all
+		 * @param array|string|null Type name or list of type names, null for all
 		 * @since 2020.10
 		 */
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
@@ -814,7 +814,7 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product texts.
 			 *
-			 * @type string List of index sub-manager names
+			 * @param string List of index sub-manager names
 			 * @since 2014.09
 			 * @see mshop/index/manager/submanagers
 			 */

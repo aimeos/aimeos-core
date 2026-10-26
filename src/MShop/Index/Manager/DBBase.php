@@ -41,7 +41,7 @@ abstract class DBBase
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @type string Database connection name
+		 * @param string Database connection name
 		 * @since 2023.04
 		 */
 		$this->setResourceName( (string) $context->config()->get( 'mshop/index/manager/resource', 'db-product' ) );
@@ -419,7 +419,7 @@ abstract class DBBase
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int &$total Total number of items matched by the given criteria
+	 * @param int &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
 	 * @return \Aimeos\Map List of product items
@@ -457,7 +457,7 @@ abstract class DBBase
 		 * this domain, then items wil be only inherited. Thus, you have full
 		 * control over inheritance and aggregation in each domain.
 		 *
-		 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */

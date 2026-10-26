@@ -188,7 +188,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for deleting items
+					 * @param string SQL statement for deleting items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -233,7 +233,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for searching items
+					 * @param string SQL statement for searching items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -276,7 +276,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for inserting records
+					 * @param string SQL statement for inserting records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -317,7 +317,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for updating records
+					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -358,7 +358,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for updating records
+					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -405,7 +405,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for searching items
+					 * @param string SQL statement for searching items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -445,7 +445,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for updating records
+					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -485,7 +485,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @type string SQL statement for updating records
+					 * @param string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -529,7 +529,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * fits for most database servers as they implement their own
 					 * specific way.
 					 *
-					 * @type string SQL statement for retrieving the last inserted record ID
+					 * @param string SQL statement for retrieving the last inserted record ID
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi

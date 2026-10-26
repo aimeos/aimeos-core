@@ -52,7 +52,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 */
 		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );

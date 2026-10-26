@@ -75,7 +75,7 @@ abstract class Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for aggregating customer items
+		 * @param string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @see mshop/customer/manager/insert/ansi
 		 * @see mshop/customer/manager/update/ansi

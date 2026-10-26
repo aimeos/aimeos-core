@@ -21,6 +21,7 @@ class ConfigDocTask extends Task
 	private $filesets = [];
 	private $keyparts = 1;
 	private $prefix = '';
+	private $patterns;
 
 
 	/**
@@ -50,25 +51,49 @@ class ConfigDocTask extends Task
 	 */
 	public function main()
 	{
-		$options = [];
-
 		if( !isset( $this->file ) && empty( $this->filesets ) ) {
 			throw new BuildException( "Missing either a nested fileset or attribute 'file' set" );
 		}
 
-		if( isset( $this->optfile )
-			&& ( $string = file_get_contents( $this->optfile ) ) !== false
-			&& ( $options = unserialize( $string ) ) === false
-		) {
-			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $this->optfile ) );
+		$optfiles = array_filter( array_map( 'trim', explode( ',', (string) $this->optfile ) ) );
+		$options = $this->extract( $this->unserialize( array_shift( $optfiles ) ) );
+
+		// Additional files only add values of documented options missing in the first file
+		foreach( $optfiles as $optfile )
+		{
+			foreach( $this->unserialize( $optfile ) as $key => $values )
+			{
+				if( isset( $options[$key]['short'] ) && !array_key_exists( 'value', $options[$key] ) ) {
+					$options[$key] += (array) $values;
+				}
+			}
 		}
 
-		$options = $this->sanitize( $this->extract( $options ) );
+		$options = $this->sanitize( $options );
 
 		ksort( $options );
 		$this->writeFiles( $this->createContent( $options ) );
 
 		$this->log( 'Number of config options for ' . $this->prefix . ': ' . count( $options ) );
+	}
+
+
+	/**
+	 * Returns the configuration options stored in the given file
+	 *
+	 * @param string|null $optfile Path to the file with serialized PHP array
+	 * @return array Associative list of configuration keys and their values
+	 */
+	protected function unserialize( ?string $optfile ) : array
+	{
+		if( $optfile !== null
+			&& ( $string = file_get_contents( $optfile ) ) !== false
+			&& ( $options = unserialize( $string ) ) === false
+		) {
+			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $optfile ) );
+		}
+
+		return (array) ( $options ?? [] );
 	}
 
 
@@ -84,7 +109,9 @@ class ConfigDocTask extends Task
 
 
 	/**
-	 * File with serialized PHP array of extracted configuration options
+	 * File(s) with serialized PHP array of extracted configuration options
+	 *
+	 * Several files can be passed as comma separated list
 	 *
 	 * @param string $file
 	 */
@@ -139,7 +166,16 @@ class ConfigDocTask extends Task
 	{
 		$prefixlen = strlen( $this->prefix ) + 1;
 		$header = '';
-		$files = [];
+		$files = $pages = [];
+
+		foreach( $options as $key => $list )
+		{
+			$parts = explode( '/', substr( $key, $prefixlen ) );
+
+			if( count( $parts ) > $this->keyparts ) {
+				$pages[implode( '-', array_slice( $parts, 0, $this->keyparts ) )] = true;
+			}
+		}
 
 		foreach( $options as $key => $list )
 		{
@@ -174,15 +210,24 @@ class ConfigDocTask extends Task
 				$options[$key]['short'] = $short;
 			}
 
-			if( $header !== join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) ) ) {
-				$data .= "\n# " . join( '/', array_slice( $parts, $this->keyparts, 1 ) );
+			if( count( $parts ) <= $this->keyparts )
+			{
+				// Keys without sub-keys have no group, so they are headed by their full name
+				$data .= "\n# " . join( '/', $parts );
+				$header = '';
 			}
+			else
+			{
+				if( $header !== join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) ) ) {
+					$data .= "\n# " . join( '/', array_slice( $parts, $this->keyparts, 1 ) );
+				}
 
-			if( count( $parts ) > $this->keyparts + 1 ) {
-				$data .= "\n## " . join( '/', array_slice( $parts, $this->keyparts + 1 ) );
+				if( count( $parts ) > $this->keyparts + 1 ) {
+					$data .= "\n## " . join( '/', array_slice( $parts, $this->keyparts + 1 ) );
+				}
+
+				$header = join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) );
 			}
-
-			$header = join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) );
 
 			$keyvalue = print_r( str_replace( ["\n\t"], ["\n "], print_r( $list['value'] ?? '', true ) ), true );
 			$defvalue = $list['default'] ?? '';
@@ -229,11 +274,14 @@ class ConfigDocTask extends Task
 				}
 			}
 
-			if( count( $parts ) > $this->keyparts )
-			{
-				$filename = implode( '-', array_slice( $parts, 0, $this->keyparts ) );
-				$files[$filename][] = $data;
+			$filename = implode( '-', array_slice( $parts, 0, $this->keyparts ) );
+
+			// Keys without sub-keys are added to the page of the same name or to the common page
+			if( count( $parts ) <= $this->keyparts && !isset( $pages[$filename] ) ) {
+				$filename = 'common';
 			}
+
+			$files[$filename][] = $data;
 		}
 
 		return $files;
@@ -406,7 +454,50 @@ class ConfigDocTask extends Task
 			return isset( $options[$parentKey]['short'] ) || $this->isCovered( $options, $parentKey );
 		}
 
+		// Dynamic key described by a placeholder pattern of a documented key, e.g. "admin/graphql/<domain>/name"
+		foreach( $this->patterns( $options ) as $pattern )
+		{
+			if( preg_match( $pattern, $key ) === 1 ) {
+				return true;
+			}
+		}
+
 		return false;
+	}
+
+
+	/**
+	 * Returns the regular expressions for the placeholder patterns in the documentation
+	 *
+	 * @param array $options Map of config key and associative list of option pairs
+	 * @return array List of regular expressions matching the config keys described by the patterns
+	 */
+	protected function patterns( array $options ) : array
+	{
+		if( isset( $this->patterns ) ) {
+			return $this->patterns;
+		}
+
+		$this->patterns = [];
+		$quoted = preg_quote( $this->prefix . '/', '#' );
+
+		foreach( $options as $values )
+		{
+			$text = ( $values['short'] ?? '' ) . join( '', $values['long'] ?? [] );
+			$matches = [];
+
+			if( preg_match_all( '#' . $quoted . '[a-zA-Z0-9/\-\._]*<[a-z\-]+>[a-zA-Z0-9/\-\._<>]*#', $text, $matches ) )
+			{
+				foreach( $matches[0] as $match )
+				{
+					$parts = preg_split( '#<[a-z\-]+>#', $match );
+					$parts = array_map( fn( $part ) => preg_quote( $part, '#' ), $parts );
+					$this->patterns[$match] = '#^' . join( '.+', $parts ) . '$#';
+				}
+			}
+		}
+
+		return $this->patterns;
 	}
 
 

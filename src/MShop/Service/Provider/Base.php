@@ -483,7 +483,7 @@ abstract class Base
 	 * @param string $customerId Unique customer ID the service token belongs to
 	 * @param string $key Key of the value that should be added
 	 * @param string|array $data Service data to store
-	 * @type \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
+	 * @return \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
 	protected function setData( string $customerId, string $key, $data ) : \Aimeos\MShop\Service\Provider\Iface
 	{

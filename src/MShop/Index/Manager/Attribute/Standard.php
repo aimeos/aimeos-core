@@ -147,7 +147,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting the outdated attribute index records
+		 * @param string SQL statement for deleting the outdated attribute index records
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/delete/ansi
@@ -187,7 +187,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting index attribute records
+		 * @param string SQL statement for deleting index attribute records
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/cleanup/ansi
@@ -222,7 +222,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/index/manager/attribute/submanagers';
@@ -269,7 +269,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyAttribute"!
 		 *
-		 * @type string Last part of the class name
+		 * @param string Last part of the class name
 		 * @since 2014.03
 		 */
 
@@ -291,7 +291,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index attribute manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/global
@@ -316,7 +316,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * attribute manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
@@ -341,7 +341,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Attribute\Decorator\Decorator2" only to th
 		 * index attribute manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
@@ -379,7 +379,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for optimizing the stored attribute data
+		 * @param string SQL statement for optimizing the stored attribute data
 		 * @since 2014.09
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/search/ansi
@@ -431,7 +431,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/index/manager/attribute/cleanup/ansi
 			 * @see mshop/index/manager/attribute/delete/ansi
@@ -472,7 +472,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -523,7 +523,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
@@ -573,7 +573,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/search/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
@@ -609,7 +609,7 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product attributes.
 			 *
-			 * @type string List of index sub-manager names
+			 * @param string List of index sub-manager names
 			 * @since 2014.09
 			 * @see mshop/index/manager/submanagers
 			 */

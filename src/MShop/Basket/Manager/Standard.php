@@ -88,7 +88,7 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @type string Database connection name
+		 * @param string Database connection name
 		 * @since 2023.04
 		 */
 		$this->setResourceName( (string) $context->config()->get( 'mshop/basket/manager/resource', 'db-basket' ) );
@@ -178,7 +178,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for inserting or updating records
+		 * @param string SQL statement for inserting or updating records
 		 * @since 2022.10
 		 * @see mshop/basket/manager/newid/ansi
 		 * @see mshop/basket/manager/delete/ansi
@@ -273,7 +273,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting items
+		 * @param string SQL statement for deleting items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
@@ -308,7 +308,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @type array List of sub-manager names
+		 * @param array List of sub-manager names
 		 * @since 2022.10
 		 */
 		$path = 'mshop/basket/manager/submanagers';
@@ -355,7 +355,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyBasket"!
 		 *
-		 * @type string Last part of the class name
+		 * @param string Last part of the class name
 		 * @since 2022.10
 		 */
 
@@ -377,7 +377,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the basket manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/global
@@ -402,7 +402,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the
 		 * basket manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/excludes
@@ -427,7 +427,7 @@ class Standard
 		 * "\Aimeos\MShop\Order\Manager\Basket\Decorator\Decorator2" only to the
 		 * basket manager.
 		 *
-		 * @type array List of decorator names
+		 * @param array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/excludes
@@ -443,7 +443,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Basket\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -503,7 +503,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for searching items
+		 * @param string SQL statement for searching items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
@@ -555,7 +555,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for counting items
+		 * @param string SQL statement for counting items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
