@@ -151,15 +151,6 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc prefix="admin/jsonadm" keyparts="1"
-			optfile="${extdir}/ai-admin-jsonadm/tests/confdoc.ser"
-			outdir="${coredir}/misc/confdoc">
-			<fileset dir="${extdir}/ai-admin-jsonadm" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="config/**/*.php" />
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc prefix="admin/graphql" keyparts="1"
 			optfile="${extdir}/ai-admin-graphql/tests/confdoc.ser"
 			outdir="${coredir}/misc/confdoc">
