@@ -97,7 +97,7 @@ class Standard
 	 */
 	public function getName() : string
 	{
-		return $this->getI18n()[$this->get( '.language' )] ?? $this->getLabel();
+		return $this->getI18n()[$this->get( '.language' ) ?? ''] ?? $this->getLabel();
 	}
 
 
