@@ -356,16 +356,57 @@ class ConfigDocTask extends Task
 
 		foreach( $options as $key => $values )
 		{
-			if( strncmp( $key, $this->prefix, $len ) !== 0 ) {
+			if( strncmp( $key, $this->prefix . '/', $len + 1 ) !== 0 ) {
 				unset( $options[$key] );
 			} else if( strpos( $key, 'unknown' ) !== false ) {
 				unset( $options[$key] );
-			} else if( !isset( $values['short'] ) && $key[0] !== "\n" ) {
-				$this->log( 'No doc: ' . $key );
+			}
+		}
+
+		foreach( $options as $key => $values )
+		{
+			if( !isset( $values['short'] ) && $key[0] !== "\n" )
+			{
+				if( $this->isCovered( $options, $key ) ) {
+					unset( $options[$key] );
+				} else {
+					$this->log( 'No doc: ' . $key );
+				}
 			}
 		}
 
 		return $options;
+	}
+
+
+	/**
+	 * Checks if the undocumented key is covered by the documentation of another key
+	 *
+	 * @param array $options Map of config key and associative list of option pairs
+	 * @param string $key Undocumented config key
+	 * @return bool True if the key is covered by another documented key, false if not
+	 */
+	protected function isCovered( array $options, string $key ) : bool
+	{
+		// Dynamic sub-key whose parent shows "<parent>/<code>" examples, e.g. ".../preselect/color"
+		$parent = dirname( $key );
+
+		if( isset( $options[$parent]['short'] )
+			&& strpos( join( '', $options[$parent]['long'] ?? [] ), $parent . '/' ) !== false
+		) {
+			return true;
+		}
+
+		// Decorators of subparts which are documented for the parent component
+		$matches = [];
+
+		if( preg_match( '#^(.+)/[^/]+/decorators/(global|local)$#', $key, $matches ) === 1 )
+		{
+			$parentKey = $matches[1] . '/decorators/' . $matches[2];
+			return isset( $options[$parentKey]['short'] ) || $this->isCovered( $options, $parentKey );
+		}
+
+		return false;
 	}
 
 
