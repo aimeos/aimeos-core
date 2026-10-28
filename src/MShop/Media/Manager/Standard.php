@@ -402,7 +402,7 @@ class Standard
 					->setMimetype( $mime )
 					->setUrl( $path );
 
-				if( !$preview ) {
+				if( !$preview || $preview->getError() === UPLOAD_ERR_NO_FILE ) {
 					$this->scale( $item, true );
 				}
 
