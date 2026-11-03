@@ -129,7 +129,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->setFilesystemManager( $fsm );
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'test' )->setUrl( 'test' );
+		$path = $this->context->locale()->getSiteId() . 'd/test';
+		$item->setPreview( $path )->setUrl( $path );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
 	}
@@ -158,7 +159,109 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->setFilesystemManager( $fsm );
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'test' )->setUrl( 'test' );
+		$path = $this->context->locale()->getSiteId() . 'd/test';
+		$item->setPreview( $path )->setUrl( $path );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
+	}
+
+
+	public function testAddForeignFiles()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'rm' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->any() )->method( 'get' )
+			->willReturn( $fs );
+
+		$fs->expects( $this->never() )->method( 'rm' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
+			->setMethods( array( 'checkFileUpload', 'store', 'stored', 'getMediaFile' ) )
+			->setConstructorArgs( array( $this->context ) )
+			->getMock();
+
+		$stored = \Aimeos\MShop::create( $this->context, 'media' )->create()
+			->setUrl( '/etc/passwd' )->setPreviews( [1 => '../../.env'] )->setFileSystem( 'fs-media' );
+
+		$object->expects( $this->once() )->method( 'stored' )->willReturn( $stored );
+		$object->expects( $this->any() )->method( 'getMediaFile' )
+			->willReturn( new \Aimeos\MW\Media\Application\Standard( 'test', 'application/pdf', [] ) );
+
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
+		$stream->expects( $this->any() )->method( 'getContents' )->willReturn( 'test' );
+		$stream->expects( $this->any() )->method( '__toString' )->willReturn( 'test' );
+
+		$file->expects( $this->any() )->method( 'getStream' )->willReturn( $stream );
+		$file->expects( $this->any() )->method( 'getClientFilename' )->willReturn( 'test.pdf' );
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create()->setId( 1 )
+			->setUrl( '/etc/passwd' )->setFileSystem( 'fs' );
+
+		$result = $object->add( $item, $file );
+
+		$this->assertEquals( 'fs-media', $result->getFileSystem() );
+		$this->assertNotEquals( '/etc/passwd', $result->getUrl() );
+	}
+
+
+	public function testCopyForeignFiles()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'copy' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->any() )->method( 'get' )
+			->willReturn( $fs );
+
+		$fs->expects( $this->never() )->method( 'copy' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
+		$item->setPreviews( [1 => '../test'] )->setUrl( '/etc/passwd' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
+	}
+
+
+	public function testDeleteForeignFiles()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'rm' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->any() )->method( 'get' )
+			->willReturn( $fs );
+
+		$fs->expects( $this->never() )->method( 'rm' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
+		$item->setPreviews( [1 => 'test', 2 => '/etc/passwd'] )->setUrl( '/etc/passwd' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
 	}

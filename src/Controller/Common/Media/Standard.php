@@ -54,11 +54,17 @@ class Standard
 		$mimetype = $this->getMimeType( $media, 'files' );
 		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
 
-		$path = $item->getUrl();
-		$fsname = $item->getFileSystem();
-		$fs = $this->context->fs( $fsname );
+		// never trust the passed paths, only files of the stored item can be replaced
+		$stored = $this->stored( $item );
+		$fsname = $this->filesystem( $item->getFileSystem() );
+		$oldfs = $stored ? $this->filesystem( $stored->getFileSystem() ) : $fsname;
+		$path = $stored ? $stored->getUrl() : '';
+		$fs = $this->context->fs( $oldfs );
 
-		if( $path && $fs->has( $path ) ) {
+		$item->setFileSystem( $fsname )
+			->setPreviews( $stored && $oldfs === $fsname ? $stored->getPreviews() : [] );
+
+		if( $path && $this->isOwned( $path ) && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
 
@@ -90,8 +96,10 @@ class Standard
 
 		$media = $this->getMediaFile( $file->getStream() );
 
-		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
-			$item = $this->addImages( $item, $media, $file->getClientFilename(), $item->getFileSystem() );
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
+		{
+			$fsname = $this->filesystem( $item->getFileSystem() );
+			$item = $this->addImages( $item->setFileSystem( $fsname ), $media, $file->getClientFilename(), $fsname );
 		}
 
 		return $item;
@@ -118,7 +126,7 @@ class Standard
 		$fsname = $item->getFileSystem();
 		$fs = $this->context->fs( $fsname );
 
-		if( $fs->has( $path ) )
+		if( $this->isOwned( $path ) && $fs->has( $path ) )
 		{
 			$newPath = $this->getFilePath( substr( basename( $path ), 9 ), 'files', $item->getMimeType() );
 			$fs->copy( $path, $newPath );
@@ -127,7 +135,7 @@ class Standard
 
 		foreach( $previews as $size => $preview )
 		{
-			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
+			if( $fsname !== 'fs-mimeicon' && $this->isOwned( (string) $preview ) && $fs->has( $preview ) )
 			{
 				$newPath = $this->getFilePath( substr( basename( $preview ), 9 ), 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
 				$fs->copy( $preview, $newPath );
@@ -161,7 +169,7 @@ class Standard
 		$fsname = $item->getFileSystem();
 		$fs = $this->context->fs( $fsname );
 
-		if( $path && $fs->has( $path ) ) {
+		if( $path && $this->isOwned( $path ) && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
 
@@ -396,7 +404,7 @@ class Standard
 
 		foreach( $previews as $preview )
 		{
-			if( $fsname !== 'fs-mimeicon' && $preview && $fs->has( $preview ) ) {
+			if( $fsname !== 'fs-mimeicon' && $preview && $this->isOwned( (string) $preview ) && $fs->has( $preview ) ) {
 				$fs->rm( $preview );
 			}
 		}
@@ -413,6 +421,69 @@ class Standard
 	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		return $this->context;
+	}
+
+
+	/**
+	 * Returns the allowed file system name for storing uploaded files
+	 *
+	 * The file system name of the item can be passed by the user, so only
+	 * configured file systems are allowed and "fs-media" is used otherwise.
+	 *
+	 * @param string $name File system name of the media item
+	 * @return string Allowed file system name
+	 */
+	protected function filesystem( string $name ) : string
+	{
+		/** mshop/media/manager/filesystems
+		 * List of file system names allowed for uploaded media files
+		 *
+		 * The file system of media items can be set by the user. To prevent
+		 * writing or deleting files in arbitrary file systems like "fs" (public
+		 * web root) or "fs-admin", only the configured file systems are used.
+		 * For all other file system names, "fs-media" is used instead.
+		 *
+		 * @param array List of file system names
+		 * @since 2022.10
+		 */
+		$list = $this->context->config()->get( 'mshop/media/manager/filesystems', ['fs-media', 'fs-secure'] );
+		return in_array( $name, (array) $list, true ) ? $name : 'fs-media';
+	}
+
+
+	/**
+	 * Checks if the file path has been generated for the current site
+	 *
+	 * Only files created for the current site can be overwritten or deleted
+	 * to prevent removing arbitrary files of the file system or files of
+	 * other sites if the path has been passed by the user.
+	 *
+	 * @param string $path Relative file path
+	 * @return bool TRUE if the file belongs to the current site, FALSE if not
+	 */
+	protected function isOwned( string $path ) : bool
+	{
+		$prefix = $this->context->locale()->getSiteId() . 'd/';
+		return strncmp( $path, $prefix, strlen( $prefix ) ) === 0 && strpos( $path, '..' ) === false && strpos( $path, '\\' ) === false;
+	}
+
+
+	/**
+	 * Returns the stored version of the passed media item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which may contain modified values
+	 * @return \Aimeos\MShop\Media\Item\Iface|null Stored media item or NULL for new or not found items
+	 */
+	protected function stored( \Aimeos\MShop\Media\Item\Iface $item ) : ?\Aimeos\MShop\Media\Item\Iface
+	{
+		if( ( $id = $item->getId() ) === null ) {
+			return null;
+		}
+
+		$manager = \Aimeos\MShop::create( $this->context, 'media' );
+		$filter = $manager->filter()->add( 'media.id', '==', $id )->slice( 0, 1 );
+
+		return $manager->search( $filter )->first();
 	}
 
 

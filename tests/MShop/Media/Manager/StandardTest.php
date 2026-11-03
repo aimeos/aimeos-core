@@ -106,9 +106,60 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = $this->object->create()->setPreview( 'test' )->setUrl( 'test' );
+		$path = $this->context->locale()->getSiteId() . 'd/test';
+		$item = $this->object->create()->setPreview( $path )->setUrl( $path );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
+	}
+
+
+	public function testCopyForeignFiles()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'copy' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->any() )->method( 'get' )
+			->willReturn( $fs );
+
+		$fs->expects( $this->never() )->method( 'copy' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = $this->object->create()->setPreviews( [1 => '../test'] )->setUrl( '/etc/passwd' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
+	}
+
+
+	public function testDeleteForeignFiles()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'rm' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->any() )->method( 'get' )
+			->willReturn( $fs );
+
+		$fs->expects( $this->never() )->method( 'rm' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = $this->object->create()->setUrl( '/etc/passwd' )->setPreviews( [1 => '../.env'] )->setId( -1 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [$item] ) );
 	}
 
 
