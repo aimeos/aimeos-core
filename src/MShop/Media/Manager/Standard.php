@@ -30,6 +30,9 @@ class Standard
 	/**
 	 * Copies the media item and the referenced files
 	 *
+	 * Only files of the current site are copied, all other paths are referenced
+	 * by the new item as they are and are never modified or deleted afterwards.
+	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
 	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
 	 */
@@ -44,7 +47,7 @@ class Standard
 		$fsname = $item->getFileSystem();
 		$fs = $this->context()->fs( $fsname );
 
-		if( $fs->has( $path ) )
+		if( $this->isOwned( $path ) && $fs->has( $path ) )
 		{
 			$newPath = $this->path( substr( basename( $path ), 9 ), $mime, $domain );
 			$fs->copy( $path, $newPath );
@@ -57,7 +60,7 @@ class Standard
 
 		foreach( $previews as $size => $preview )
 		{
-			if( $fsname !== 'fs-mimeicon' && $fs->has( (string) $preview ) )
+			if( $fsname !== 'fs-mimeicon' && $this->isOwned( (string) $preview ) && $fs->has( (string) $preview ) )
 			{
 				$newPath = $this->path( substr( basename( (string) $preview ), 9 ), $mime, $domain );
 				$fs->copy( (string) $preview, $newPath );
@@ -100,8 +103,11 @@ class Standard
 			{
 				try
 				{
-					$this->deletePreviews( $item, $item->getPreviews() );
-					$this->deleteFile( $item->getUrl(), 'fs-media' );
+					$this->deletePreviews( $item, array_filter( $item->getPreviews(), fn( $path ) => $this->isOwned( (string) $path ) ) );
+
+					if( $this->isOwned( $item->getUrl() ) ) {
+						$this->deleteFile( $item->getUrl(), 'fs-media' );
+					}
 				}
 				catch( \Exception $e )
 				{
@@ -261,13 +267,14 @@ class Standard
 
 		foreach( $this->createPreviews( $image, $sizes ) as $width => $image )
 		{
-			$path = $old[$width] ?? $this->path( $url, 'image/webp', $domain );
+			$path = isset( $old[$width] ) && $this->isOwned( (string) $old[$width] ) ? $old[$width] : $this->path( $url, 'image/webp', $domain );
 			$fs->write( (string) $path, (string) $image->toWebp( $quality ) );
 
 			$previews[$width] = $path;
 			unset( $old[$width] );
 		}
 
+		$old = array_filter( $old, fn( $path ) => $this->isOwned( (string) $path ) );
 		$item = $this->deletePreviews( $item, $old )->setPreviews( $previews );
 
 		$this->call( 'scaled', $item, $image );
@@ -406,7 +413,7 @@ class Standard
 					$this->scale( $item, true );
 				}
 
-				if( !empty( $oldpath ) && $fs->has( $oldpath ) ) {
+				if( $this->isOwned( $oldpath ) && $fs->has( $oldpath ) ) {
 					$fs->rm( $oldpath );
 				}
 			}
