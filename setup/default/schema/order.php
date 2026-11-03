@@ -142,6 +142,7 @@ return array(
 			$table->index( ['parentid', 'prodcode'], 'idx_msordpr_pid_pcd' );
 			$table->index( ['parentid', 'qtyopen'], 'idx_msordpr_pid_qtyo' );
 			$table->index( ['ctime', 'prodid', 'parentid'], 'idx_msordpr_ct_prid_pid' );
+			$table->index( ['parentid', 'ordprodid', 'statuspayment', 'siteid', 'quantity', 'price', 'costs'], 'idx_msordpr_pid_opid_pstat_sid' );
 
 			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordpr_parentid' );
 		},
