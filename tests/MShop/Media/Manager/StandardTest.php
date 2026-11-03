@@ -58,6 +58,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteForeignFiles()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$fs->write( 'foreign.txt', 'test' );
+		$fs->write( 'foreign-1.txt', 'test' );
+
+		$item = $this->object->create()->setUrl( 'foreign.txt' )->setPreviews( [1 => 'foreign-1.txt'] )->setId( -1 );
+		$this->object->delete( [$item] );
+
+		$this->assertTrue( $fs->has( 'foreign.txt' ) );
+		$this->assertTrue( $fs->has( 'foreign-1.txt' ) );
+
+		$fs->rm( 'foreign.txt' )->rm( 'foreign-1.txt' );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
@@ -108,9 +124,42 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = $this->object->create()->setPreview( 'test' )->setUrl( 'test' );
+		$path = $this->context->locale()->getSiteId() . 'd/test/abcdefgh_test.jpg';
+		$item = $this->object->create()->setPreview( $path )->setUrl( $path );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
+		$result = $this->object->copy( $item );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
+		$this->assertStringContainsString( '_test', $result->getUrl() );
+		$this->assertNotEquals( $path, $result->getUrl() );
+		$this->assertNotEquals( $path, $result->getPreview() );
+	}
+
+
+	public function testCopyForeign()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
+			->onlyMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
+			->onlyMethods( array( 'has', 'copy' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->once() )->method( 'get' )->willReturn( $fs );
+		$fs->expects( $this->never() )->method( 'copy' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$path = $this->context->locale()->getSiteId() . 'd/../foreign.jpg';
+		$item = $this->object->create()->setFileSystem( 'fs-secure' )->setPreview( $path )->setUrl( 'foreign.jpg' );
+
+		$result = $this->object->copy( $item );
+
+		$this->assertEquals( 'foreign.jpg', $result->getUrl() );
+		$this->assertEquals( $path, $result->getPreview() );
 	}
 
 
@@ -377,6 +426,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUploadPreviewNoImage()
+	{
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.pdf' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.pdf', strlen( $content ), UPLOAD_ERR_OK, 'test.pdf' );
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.png' );
+		$preview = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.png', strlen( $content ), UPLOAD_ERR_OK, 'test.png' );
+
+		$item = $this->object->create()->setUrl( 'foreign.pdf' )->setPreviews( [1 => 'foreign.png'] );
+		$result = $this->object->upload( $item, $file, $preview );
+
+		$this->assertStringStartsWith( $this->context->locale()->getSiteId() . 'd/', $result->getPreview() );
+		$this->assertStringEndsWith( '_test.png', $result->getPreview() );
+		$this->assertStringEndsWith( '_test.pdf', $result->getUrl() );
+		$this->assertEquals( 'application/pdf', $result->getMimetype() );
+		$this->assertTrue( $this->context->fs( 'fs-media' )->has( $result->getPreview() ) );
+	}
+
+
 	public function testUploadEmptyPreview()
 	{
 		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
@@ -388,6 +455,60 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
 		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
 		$this->assertNotEmpty( $result->getPreviews() );
+	}
+
+
+	public function testUploadOwnedFile()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/test/old.gif';
+		$fs->write( $path, 'test' );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $this->object->create()->setUrl( $path ), $file );
+
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertFalse( $fs->has( $path ) );
+	}
+
+
+	public function testUploadForeignFile()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$fs->write( 'foreign.txt', 'test' );
+		$fs->write( 'foreign-1.txt', 'test' );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$item = $this->object->create()->setUrl( 'foreign.txt' )->setPreviews( [1 => 'foreign-1.txt', 240 => 'foreign-1.txt'] );
+		$result = $this->object->upload( $item, $file );
+
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertNotContains( 'foreign-1.txt', $result->getPreviews() );
+		$this->assertEquals( 'test', $fs->read( 'foreign.txt' ) );
+		$this->assertEquals( 'test', $fs->read( 'foreign-1.txt' ) );
+
+		$fs->rm( 'foreign.txt' )->rm( 'foreign-1.txt' );
+	}
+
+
+	public function testUploadTraversal()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$fs->write( 'foreign.txt', 'test' );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$path = $this->context->locale()->getSiteId() . 'd/../foreign.txt';
+		$this->object->upload( $this->object->create()->setUrl( $path ), $file );
+
+		$this->assertTrue( $fs->has( 'foreign.txt' ) );
+
+		$fs->rm( 'foreign.txt' );
 	}
 
 
