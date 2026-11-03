@@ -62,6 +62,33 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 
 	/**
+	 * Returns the allowed file system name for storing uploaded files
+	 *
+	 * The file system name of the item can be passed by the user, so only
+	 * configured file systems are allowed and "fs-media" is used otherwise.
+	 *
+	 * @param string $name File system name of the media item
+	 * @return string Allowed file system name
+	 */
+	protected function filesystem( string $name ) : string
+	{
+		/** mshop/media/manager/filesystems
+		 * List of file system names allowed for uploaded media files
+		 *
+		 * The file system of media items can be set by the user. To prevent
+		 * writing or deleting files in arbitrary file systems like "fs" (public
+		 * web root) or "fs-admin", only the configured file systems are used.
+		 * For all other file system names, "fs-media" is used instead.
+		 *
+		 * @param array List of file system names
+		 * @since 2026.10
+		 */
+		$list = $this->context()->config()->get( 'mshop/media/manager/filesystems', ['fs-media', 'fs-secure'] );
+		return in_array( $name, (array) $list, true ) ? $name : 'fs-media';
+	}
+
+
+	/**
 	 * Checks if the file path has been generated for the current site
 	 *
 	 * Only files created by path() for the current site can be overwritten or
@@ -75,6 +102,23 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	{
 		$prefix = $this->context()->locale()->getSiteId() . 'd/';
 		return str_starts_with( $path, $prefix ) && !str_contains( $path, '..' ) && !str_contains( $path, '\\' );
+	}
+
+
+	/**
+	 * Returns the stored version of the passed media item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which may contain modified values
+	 * @return \Aimeos\MShop\Media\Item\Iface|null Stored media item or NULL for new or not found items
+	 */
+	protected function stored( \Aimeos\MShop\Media\Item\Iface $item ) : ?\Aimeos\MShop\Media\Item\Iface
+	{
+		if( ( $id = $item->getId() ) === null ) {
+			return null;
+		}
+
+		$filter = $this->object()->filter()->add( 'media.id', '==', $id )->slice( 0, 1 );
+		return $this->object()->search( $filter )->first();
 	}
 
 

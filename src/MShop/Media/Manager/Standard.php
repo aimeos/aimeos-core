@@ -393,14 +393,20 @@ class Standard
 	public function upload( \Aimeos\MShop\Media\Item\Iface $item, ?UploadedFileInterface $file, ?UploadedFileInterface $preview = null ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$domain = $item->getDomain() ?: '-';
-		$fsname = $item->getFileSystem() ?: 'fs-media';
+		$fsname = $this->filesystem( $item->getFileSystem() );
 		$fs = $this->context()->fs( $fsname );
 
 		if( $file && $file->getError() !== UPLOAD_ERR_NO_FILE && $this->isAllowed( $mime = $this->mimetype( $file ) ) )
 		{
 			try
 			{
-				$oldpath = $item->getUrl();
+				// never trust the passed paths, only files of the stored item can be replaced
+				$stored = $this->stored( $item );
+				$oldfs = $stored ? $this->filesystem( $stored->getFileSystem() ) : $fsname;
+				$oldpath = $stored ? $stored->getUrl() : '';
+
+				$item->setFileSystem( $fsname )
+					->setPreviews( $stored && $oldfs === $fsname ? $stored->getPreviews() : [] );
 
 				$path = $this->path( $file->getClientFilename(), $mime, $domain );
 				$fs->write( $path, $this->sanitize( $file->getStream()->getContents(), $mime ) );
@@ -413,8 +419,8 @@ class Standard
 					$this->scale( $item, true );
 				}
 
-				if( $this->isOwned( $oldpath ) && $fs->has( $oldpath ) ) {
-					$fs->rm( $oldpath );
+				if( $oldpath !== $path && $this->isOwned( $oldpath ) && $this->context()->fs( $oldfs )->has( $oldpath ) ) {
+					$this->context()->fs( $oldfs )->rm( $oldpath );
 				}
 			}
 			catch( \Exception $e )
