@@ -462,15 +462,55 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$fs = $this->context->fs( 'fs-media' );
 		$path = $this->context->locale()->getSiteId() . 'd/test/old.gif';
+		$other = $this->context->locale()->getSiteId() . 'd/test/other.gif';
+		$fs->write( $path, 'test' )->write( $other, 'test' );
+
+		$item = $this->object->create( ['media.domain' => 'product', 'media.type' => 'default'] );
+		$item = $this->object->save( $item->setLabel( 'unittest' )->setUrl( $path ) );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $item->setUrl( $other ), $file );
+		$this->object->delete( $result );
+
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertFalse( $fs->has( $path ) );
+		$this->assertTrue( $fs->has( $other ) );
+
+		$fs->rm( $other );
+	}
+
+
+	public function testUploadNewItem()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/test/old.gif';
 		$fs->write( $path, 'test' );
 
 		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
 		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
 
-		$result = $this->object->upload( $this->object->create()->setUrl( $path ), $file );
+		$item = $this->object->create()->setUrl( $path )->setPreviews( [1 => $path] );
+		$result = $this->object->upload( $item, $file );
 
 		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
-		$this->assertFalse( $fs->has( $path ) );
+		$this->assertNotContains( $path, $result->getPreviews() );
+		$this->assertTrue( $fs->has( $path ) );
+
+		$fs->rm( $path );
+	}
+
+
+	public function testUploadFilesystem()
+	{
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $this->object->create()->setFileSystem( 'fs' ), $file );
+
+		$this->assertEquals( 'fs-media', $result->getFileSystem() );
+		$this->assertTrue( $this->context->fs( 'fs-media' )->has( $result->getUrl() ) );
 	}
 
 
