@@ -343,7 +343,7 @@ class Standard
 		$fsname = $item->getFileSystem();
 		$fs = $this->context()->fs( $fsname );
 
-		if( $fs->has( $path ) )
+		if( $this->isOwned( $path ) && $fs->has( $path ) )
 		{
 			$newPath = $this->getPath( substr( basename( $path ), 9 ), 'files', $item->getMimeType() );
 			$fs->copy( $path, $newPath );
@@ -356,7 +356,7 @@ class Standard
 
 		foreach( $previews as $size => $preview )
 		{
-			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
+			if( $fsname !== 'fs-mimeicon' && $this->isOwned( (string) $preview ) && $fs->has( $preview ) )
 			{
 				$newPath = $this->getPath( substr( basename( $preview ), 9 ), 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
 				$fs->copy( $preview, $newPath );
@@ -427,11 +427,11 @@ class Standard
 		{
 			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
 			{
-				if( ( $path = $item->getUrl() ) && $fs->has( $path ) ) {
+				if( ( $path = $item->getUrl() ) && $this->isOwned( $path ) && $fs->has( $path ) ) {
 					$fs->rm( $path );
 				}
 
-				$this->deletePreviews( $item, $item->getPreviews() );
+				$this->deletePreviews( $item, $this->owned( $item->getPreviews() ) );
 			}
 		}
 
@@ -768,14 +768,14 @@ class Standard
 			foreach( $this->createPreviews( $media, $domain, $item->getType() ) as $width => $mediaFile )
 			{
 				$mime = $this->getMime( $mediaFile );
-				$path = $old[$width] ?? $this->getPath( $url, $mime, $domain ?: '-' );
+				$path = isset( $old[$width] ) && $this->isOwned( (string) $old[$width] ) ? $old[$width] : $this->getPath( $url, $mime, $domain ?: '-' );
 
 				$this->store( $mediaFile->save( null, $mime ), $path, $fs );
 				$previews[$width] = $path;
 				unset( $old[$width] );
 			}
 
-			$item = $this->deletePreviews( $item, $old );
+			$item = $this->deletePreviews( $item, $this->owned( $old ) );
 			$item->setPreviews( $previews );
 
 			$this->call( 'scaled', $item, $media );
@@ -1117,6 +1117,37 @@ class Standard
 		}
 
 		return $item;
+	}
+
+
+	/**
+	 * Checks if the file path has been generated for the current site
+	 *
+	 * Only files created for the current site can be overwritten or deleted
+	 * to prevent removing arbitrary files of the file system or files of
+	 * other sites if the path has been passed by the user.
+	 *
+	 * @param string $path Relative file path
+	 * @return bool TRUE if the file belongs to the current site, FALSE if not
+	 */
+	protected function isOwned( string $path ) : bool
+	{
+		$prefix = $this->context()->locale()->getSiteId() . 'd/';
+		return strncmp( $path, $prefix, strlen( $prefix ) ) === 0 && strpos( $path, '..' ) === false && strpos( $path, '\\' ) === false;
+	}
+
+
+	/**
+	 * Returns only the paths which belong to the current site
+	 *
+	 * @param array $paths List of file paths
+	 * @return array List of file paths owned by the current site
+	 */
+	protected function owned( array $paths ) : array
+	{
+		return array_filter( $paths, function( $path ) {
+			return $this->isOwned( (string) $path );
+		} );
 	}
 
 
