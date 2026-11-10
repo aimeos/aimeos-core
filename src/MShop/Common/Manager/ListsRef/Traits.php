@@ -182,20 +182,32 @@ trait Traits
 			$listManager->delete( $rmListItems );
 
 
-			foreach( $item->getListItems( null, null, null, false ) as $listItem )
+			$listItems = $item->getListItems( null, null, null, false );
+			$refItems = [];
+
+			foreach( $listItems as $key => $listItem )
 			{
-				$refDomain = $listItem->getDomain();
+				if( ( $refItem = $listItem->getRefItem() ) !== null ) {
+					$refItems[$listItem->getDomain()][$key] = $refItem;
+				}
+			}
 
-				if( ( $refItem = $listItem->getRefItem() ) !== null )
+			// saved together because the managers check each call, e.g. the owning domains of shared items
+			foreach( $refItems as $refDomain => $list )
+			{
+				if( !isset( $refManager[$refDomain] ) )
 				{
-					if( !isset( $refManager[$refDomain] ) )
-					{
-						$refManager[$refDomain] = \Aimeos\MShop::create( $context, (string) $refDomain );
-						$refManager[$refDomain]->begin();
-					}
+					$refManager[$refDomain] = \Aimeos\MShop::create( $context, (string) $refDomain );
+					$refManager[$refDomain]->begin();
+				}
 
-					// @phpstan-ignore argument.type
-					$refItem = $refManager[$refDomain]->save( $refItem );
+				// @phpstan-ignore argument.type
+				$refManager[$refDomain]->save( $list );
+			}
+
+			foreach( $listItems as $listItem )
+			{
+				if( ( $refItem = $listItem->getRefItem() ) !== null ) {
 					$listItem->setRefId( (string) $refItem->getId() );
 				}
 
@@ -203,9 +215,11 @@ trait Traits
 					$listItem->setId( null ); // create new list item if copied
 				}
 
-				// @phpstan-ignore argument.type
-				$listManager->save( $listItem->setParentId( $item->getId() ), $fetch );
+				$listItem->setParentId( $item->getId() );
 			}
+
+			// @phpstan-ignore argument.type
+			$listManager->save( $listItems, $fetch );
 
 
 			foreach( $refManager as $manager ) {
