@@ -9,11 +9,18 @@
 return [
 	'manager' => [
 		'decorators' => [
+			// replaced by the media Owner decorator which also protects the file operations
+			'excludes' => [
+				'Owner' => 'Owner',
+			],
 			'global' => [
 				'Lists' => 'Lists',
 				'Property' => 'Property',
 				'Type' => 'Type',
-			]
+			],
+			'local' => [
+				'Owner' => 'Owner',
+			],
 		],
 		'lists' => [
 			'submanagers' => [
