@@ -513,7 +513,6 @@ class Standard
 			'catalog.url' => $this->getUrl(),
 			'catalog.code' => $this->getCode(),
 			'catalog.label' => $this->getLabel(),
-			'catalog.config' => $this->getConfig(),
 			'catalog.status' => $this->getStatus(),
 			'catalog.target' => $this->getTarget(),
 			'catalog.hasChildren' => $this->hasChildren(),
@@ -528,6 +527,7 @@ class Standard
 			$list['catalog.ctime'] = $this->getTimeCreated();
 			$list['catalog.mtime'] = $this->getTimeModified();
 			$list['catalog.editor'] = $this->editor();
+			$list['catalog.config'] = $this->getConfig();
 		}
 
 		return $list;

@@ -211,6 +211,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testToArrayPublic()
+	{
+		$this->assertArrayNotHasKey( 'order.service.transaction.config', $this->object->toArray() );
+	}
+
+
 	public function testToArray()
 	{
 		$list = $this->object->toArray( true );

@@ -655,6 +655,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testToArrayPublic()
+	{
+		$this->assertArrayNotHasKey( 'product.config', $this->object->toArray() );
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );

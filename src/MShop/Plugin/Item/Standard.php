@@ -190,9 +190,12 @@ class Standard
 		$list['plugin.type'] = $this->getType();
 		$list['plugin.label'] = $this->getLabel();
 		$list['plugin.provider'] = $this->getProvider();
-		$list['plugin.config'] = $this->getConfig();
 		$list['plugin.status'] = $this->getStatus();
 		$list['plugin.position'] = $this->getPosition();
+
+		if( $private === true ) {
+			$list['plugin.config'] = $this->getConfig();
+		}
 
 		return $list;
 	}

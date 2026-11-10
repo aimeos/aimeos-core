@@ -273,8 +273,11 @@ class Standard
 		$list['service.position'] = $this->getPosition();
 		$list['service.datestart'] = $this->getDateStart();
 		$list['service.dateend'] = $this->getDateEnd();
-		$list['service.config'] = $this->getConfig();
 		$list['service.status'] = $this->getStatus();
+
+		if( $private === true ) {
+			$list['service.config'] = $this->getConfig();
+		}
 
 		return $list;
 	}

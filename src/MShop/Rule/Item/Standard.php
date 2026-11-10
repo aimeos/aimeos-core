@@ -240,10 +240,13 @@ class Standard
 		$list['rule.label'] = $this->getLabel();
 		$list['rule.provider'] = $this->getProvider();
 		$list['rule.status'] = $this->getStatus();
-		$list['rule.config'] = $this->getConfig();
 		$list['rule.position'] = $this->getPosition();
 		$list['rule.datestart'] = $this->getDateStart();
 		$list['rule.dateend'] = $this->getDateEnd();
+
+		if( $private === true ) {
+			$list['rule.config'] = $this->getConfig();
+		}
 
 		return $list;
 	}

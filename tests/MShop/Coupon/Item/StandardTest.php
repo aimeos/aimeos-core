@@ -212,6 +212,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testToArrayPublic()
+	{
+		$this->assertArrayNotHasKey( 'coupon.config', $this->object->toArray() );
+	}
+
+
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );

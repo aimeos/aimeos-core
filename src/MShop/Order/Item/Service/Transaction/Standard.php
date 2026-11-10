@@ -168,7 +168,6 @@ class Standard
 		$price = $this->getPrice();
 
 		$list['order.service.transaction.type'] = $this->getType();
-		$list['order.service.transaction.config'] = $this->getConfig();
 		$list['order.service.transaction.status'] = $this->getStatus();
 		$list['order.service.transaction.currencyid'] = $price->getCurrencyId();
 		$list['order.service.transaction.price'] = $price->getValue();
@@ -177,8 +176,10 @@ class Standard
 		$list['order.service.transaction.taxvalue'] = $price->getTaxvalue();
 		$list['order.service.transaction.taxflag'] = $price->getTaxflag();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
 			$list['order.service.transaction.parentid'] = $this->getParentId();
+			$list['order.service.transaction.config'] = $this->getConfig();
 		}
 
 		return $list;

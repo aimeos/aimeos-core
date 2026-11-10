@@ -489,7 +489,6 @@ class Standard
 		$list['product.dataset'] = $this->getDataset();
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
-		$list['product.config'] = $this->getConfig();
 		$list['product.scale'] = $this->getScale();
 		$list['product.target'] = $this->getTarget();
 		$list['product.ctime'] = $this->getTimeCreated();
@@ -497,6 +496,10 @@ class Standard
 		$list['product.rating'] = $this->getRating();
 		$list['product.instock'] = $this->inStock();
 		$list['product.boost'] = $this->boost();
+
+		if( $private === true ) {
+			$list['product.config'] = $this->getConfig();
+		}
 
 		return $list;
 	}

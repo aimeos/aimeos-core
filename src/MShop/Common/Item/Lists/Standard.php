@@ -325,7 +325,6 @@ class Standard
 		$list[$this->prefix . 'refid'] = $this->getRefId();
 		$list[$this->prefix . 'datestart'] = $this->getDateStart();
 		$list[$this->prefix . 'dateend'] = $this->getDateEnd();
-		$list[$this->prefix . 'config'] = $this->getConfig();
 		$list[$this->prefix . 'position'] = $this->getPosition();
 		$list[$this->prefix . 'status'] = $this->getStatus();
 		$list[$this->prefix . 'type'] = $this->getType();
@@ -334,6 +333,7 @@ class Standard
 		{
 			$list[$this->prefix . 'key'] = $this->getKey();
 			$list[$this->prefix . 'parentid'] = $this->getParentId();
+			$list[$this->prefix . 'config'] = $this->getConfig();
 		}
 
 		return $list;

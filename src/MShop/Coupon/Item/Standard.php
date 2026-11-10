@@ -195,12 +195,15 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['coupon.config'] = $this->getConfig();
 		$list['coupon.label'] = $this->getLabel();
 		$list['coupon.datestart'] = $this->getDateStart();
 		$list['coupon.dateend'] = $this->getDateEnd();
 		$list['coupon.provider'] = $this->getProvider();
 		$list['coupon.status'] = $this->getStatus();
+
+		if( $private === true ) {
+			$list['coupon.config'] = $this->getConfig();
+		}
 
 		return $list;
 	}
