@@ -194,6 +194,21 @@ interface ContextIface
 	public function setPassword( \Aimeos\Base\Password\Iface $password ) : \Aimeos\MShop\ContextIface;
 
 	/**
+	 * Returns the authorization policy object.
+	 *
+	 * @return \Aimeos\MShop\PolicyIface|null Authorization policy or NULL for no restrictions
+	 */
+	public function policy() : ?\Aimeos\MShop\PolicyIface;
+
+	/**
+	 * Sets the authorization policy object.
+	 *
+	 * @param \Aimeos\MShop\PolicyIface|null $policy Authorization policy or NULL for no restrictions
+	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 */
+	public function setPolicy( ?\Aimeos\MShop\PolicyIface $policy ) : \Aimeos\MShop\ContextIface;
+
+	/**
 	 * Returns the message queue object.
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"

@@ -336,6 +336,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetTaxRatesEmpty()
+	{
+		$object = new \Aimeos\MShop\Price\Item\Standard( 'price.', ['price.value' => '10.00'] );
+		$object->setTaxRates( ['' => ''] );
+
+		$this->assertEquals( [], $object->getTaxRates() );
+		$this->assertFalse( $object->isModified() );
+	}
+
+
 	public function testGetTaxFlag()
 	{
 		$this->assertEquals( true, $this->object->getTaxFlag() );
@@ -379,6 +389,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTaxValueUnmodified()
+	{
+		$object = new \Aimeos\MShop\Price\Item\Standard( 'price.', ['price.value' => '10.00', 'price.taxrates' => ['tax' => '10.00']] );
+
+		// computing the tax value isn't a change, so unchanged items aren't written
+		$this->assertEquals( '0.9091', $object->getTaxValue() );
+		$this->assertFalse( $object->isModified() );
+	}
+
+
 	public function testSetTaxValue()
 	{
 		$return = $this->object->setTaxValue( '100.00' );
@@ -386,6 +406,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( '100.0000', $this->object->getTaxValue() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetTaxValueUnchanged()
+	{
+		$object = new \Aimeos\MShop\Price\Item\Standard( 'price.', ['price.value' => '10.00', 'price.taxrates' => ['tax' => '10.00']] );
+		$object->setTaxValue( '0.9091' );
+
+		$this->assertEquals( '0.9091', $object->getTaxValue() );
+		$this->assertFalse( $object->isModified() );
 	}
 
 

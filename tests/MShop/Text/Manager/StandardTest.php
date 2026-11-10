@@ -93,6 +93,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveUnmodifiedNotWritten()
+	{
+		$item = $this->object->save( $this->object->create()->setType( 'long' )->setDomain( 'product' )
+			->setLabel( 'Sanitizer test' )->setContent( '<p>Safe</p>' ) );
+
+		try
+		{
+			// setId() resets the modified flag, so the item isn't sanitized and written
+			$content = '<p>Changed</p><iframe src="https://example.com"></iframe>';
+			$this->object->save( $item->setContent( $content )->setId( $item->getId() ) );
+
+			$this->assertFalse( $item->isModified() );
+			$this->assertSame( $content, $item->getContent() );
+			$this->assertSame( '<p>Safe</p>', $this->object->get( $item->getId() )->getContent() );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
 	public function testSaveSanitizesRichText()
 	{
 		$item = $this->object->create()

@@ -316,6 +316,12 @@ class Standard
 	 */
 	public function setPreview( string $url ) : static
 	{
+		// passing the returned preview again isn't a change and must not remove the previews of other sizes,
+		// without previews getPreview() returns the URL which must be stored as preview then
+		if( $this->get( 'media.preview', [] ) !== [] && $url === $this->getPreview() ) {
+			return $this;
+		}
+
 		return $this->set( 'media.preview', [1 => $url] );
 	}
 

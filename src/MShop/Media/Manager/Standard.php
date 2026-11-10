@@ -92,15 +92,31 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
+	 * The files of the stored items are removed if media items are passed because the
+	 * passed items can contain any file path, e.g. files of items owned by other domains.
+	 * Items passed as IDs and items which haven't been stored don't remove files.
+	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
 	 * @return static Manager object for chaining method calls
 	 */
 	public function delete( $items ) : static
 	{
-		foreach( map( $items ) as $item )
+		// iterators (e.g. generators) can be read only once, so the list is passed on
+		$items = $items instanceof \Traversable ? map( $items ) : $items;
+
+		$ids = map( $items )->filter( fn( $item ) => $item instanceof \Aimeos\MShop\Media\Item\Iface )
+			->map( fn( $item ) => $item->getId() )->filter()->values();
+
+		if( !$ids->isEmpty() )
 		{
-			if( $item instanceof \Aimeos\MShop\Media\Item\Iface && $item->getFileSystem() === 'fs-media' )
+			$filter = $this->object()->filter()->add( 'media.id', '==', $ids->all() )->slice( 0, $ids->count() );
+
+			foreach( $this->object()->search( $filter ) as $item )
 			{
+				if( $item->getFileSystem() !== 'fs-media' ) {
+					continue;
+				}
+
 				try
 				{
 					$this->deletePreviews( $item, array_filter( $item->getPreviews(), fn( $path ) => $this->isOwned( (string) $path ) ) );

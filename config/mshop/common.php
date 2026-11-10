@@ -12,7 +12,14 @@ return [
 			'default' => [
 				'Lazy' => 'Lazy',
 				'Depth' => 'Depth',
+				'Owner' => 'Owner',
 			],
+		],
+		'unowned' => [
+			'attribute' => 'attribute',
+			'review' => 'review',
+			'tag' => 'tag',
+			'type' => 'type',
 		],
 
 		// generic SQL statements

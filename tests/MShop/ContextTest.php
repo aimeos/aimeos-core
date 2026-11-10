@@ -240,6 +240,20 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetPolicy()
+	{
+		$policy = $this->createStub( \Aimeos\MShop\PolicyIface::class );
+		$return = $this->object->setPolicy( $policy );
+
+		$this->assertNull( ( new \Aimeos\MShop\Context() )->policy() );
+		$this->assertSame( $policy, $this->object->policy() );
+		$this->assertEquals( $policy, ( clone $this->object )->policy() );
+		$this->assertNotSame( $policy, ( clone $this->object )->policy() );
+		$this->assertNull( $this->object->setPolicy( null )->policy() );
+		$this->assertInstanceOf( \Aimeos\MShop\ContextIface::class, $return );
+	}
+
+
 	public function testSetProcess()
 	{
 		$process = new \Aimeos\Base\Process\Pcntl();

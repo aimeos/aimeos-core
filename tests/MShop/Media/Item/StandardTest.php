@@ -239,6 +239,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetPreviewUnchanged()
+	{
+		$object = new \Aimeos\MShop\Media\Item\Standard( 'media.', ['media.preview' => [100 => 'http://test/s.jpg', 500 => 'http://test/l.jpg']] );
+		$object->setPreview( $object->getPreview() );
+
+		$this->assertEquals( [100 => 'http://test/s.jpg', 500 => 'http://test/l.jpg'], $object->getPreviews() );
+		$this->assertFalse( $object->isModified() );
+	}
+
+
+	public function testSetPreviewSameAsUrl()
+	{
+		$object = new \Aimeos\MShop\Media\Item\Standard( 'media.', [] );
+		$object->setUrl( 'http://test/a.jpg' )->setPreview( 'http://test/a.jpg' );
+
+		$this->assertEquals( [1 => 'http://test/a.jpg'], $object->getPreviews() );
+		$this->assertTrue( $object->isModified() );
+	}
+
+
 	public function testSetPreviews()
 	{
 		$return = $this->object->setPreviews( [1 => '/pictures/category.jpg'] );

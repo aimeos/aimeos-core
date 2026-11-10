@@ -26,6 +26,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	private ?\Aimeos\Base\Mail\Manager\Iface $mail = null;
 	private ?\Aimeos\Base\MQueue\Manager\Iface $queue = null;
 	private ?\Aimeos\Base\Password\Iface $password = null;
+	private ?\Aimeos\MShop\PolicyIface $policy = null;
 	private ?\Aimeos\Base\Process\Iface $process = null;
 	private ?\Aimeos\Base\Session\Iface $session = null;
 	private ?\Aimeos\Base\View\Iface $view = null;
@@ -72,6 +73,7 @@ class Context implements \Aimeos\MShop\ContextIface
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
 		$this->queue = ( isset( $this->queue ) ? clone $this->queue : null );
 		$this->password = ( isset( $this->password ) ? clone $this->password : null );
+		$this->policy = ( isset( $this->policy ) ? clone $this->policy : null );
 		$this->process = ( isset( $this->process ) ? clone $this->process : null );
 		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		// view is always cloned
@@ -525,6 +527,30 @@ class Context implements \Aimeos\MShop\ContextIface
 	public function setPassword( \Aimeos\Base\Password\Iface $password ) : \Aimeos\MShop\ContextIface
 	{
 		$this->password = $password;
+		return $this;
+	}
+
+
+	/**
+	 * Returns the authorization policy object.
+	 *
+	 * @return \Aimeos\MShop\PolicyIface|null Authorization policy or NULL for no restrictions
+	 */
+	public function policy() : ?\Aimeos\MShop\PolicyIface
+	{
+		return $this->policy;
+	}
+
+
+	/**
+	 * Sets the authorization policy object.
+	 *
+	 * @param \Aimeos\MShop\PolicyIface|null $policy Authorization policy or NULL for no restrictions
+	 * @return \Aimeos\MShop\ContextIface Context item for chaining method calls
+	 */
+	public function setPolicy( ?\Aimeos\MShop\PolicyIface $policy ) : \Aimeos\MShop\ContextIface
+	{
+		$this->policy = $policy;
 		return $this;
 	}
 

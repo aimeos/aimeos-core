@@ -60,7 +60,11 @@ class Standard
 				throw new \Aimeos\MShop\Text\Exception( sprintf( 'Object does not implement "%1$s"', \Aimeos\MShop\Text\Item\Iface::class ) );
 			}
 
-			$item->setContent( $this->sanitize( $item->getContent(), $item->getType() ) );
+			// unchanged items aren't written and sanitizing them would mark them as modified,
+			// e.g. stored texts which haven't been sanitized saved together with their parent item
+			if( $item->isModified() ) {
+				$item->setContent( $this->sanitize( $item->getContent(), $item->getType() ) );
+			}
 		}
 
 		return parent::save( $items, $fetch );
