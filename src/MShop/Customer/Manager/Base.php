@@ -20,6 +20,24 @@ namespace Aimeos\MShop\Customer\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\Super\Traits;
+
+
+	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to change a super user
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		$this->protectCustomers( $this->itemIds( map( $items )->filter( fn( $item ) => $item->isModified() ) ) );
+		return parent::save( $items, $fetch );
+	}
+
+
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
@@ -195,6 +213,7 @@ abstract class Base
 	 * @param bool $siteid If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 * @return static Manager object for chaining method calls
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to delete a super user
 	 */
 	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
 		string $name = 'id' ) : static
@@ -202,6 +221,8 @@ abstract class Base
 		if( map( $items )->isEmpty() ) {
 			return $this;
 		}
+
+		$this->protectCustomers( $this->itemIds( $items ) );
 
 		$search = $this->object()->filter();
 		$search->setConditions( $search->compare( '==', $name, $items ) );

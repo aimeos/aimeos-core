@@ -21,6 +21,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Group\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\Super\Traits;
+
+
 	 private array $searchConfig = [
 		'group.code' => [
 			'label' => 'Group code',
@@ -75,6 +78,28 @@ class Standard
 
 
 	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to create or change the "super" group
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		$list = map( $items )->filter( fn( $item ) => $this->isModified( $item ) );
+
+		// trailing spaces are ignored by MySQL comparisons
+		if( $list->some( fn( $item ) => trim( (string) $item->getCode() ) === 'super' ) && !$this->context()->access( 'super' ) ) {
+			$this->denySuper();
+		}
+
+		$this->protectGroups( $this->itemIds( $list ) );
+		return parent::save( $items, $fetch );
+	}
+
+
+	/**
 	 * Returns the prefix for the item properties and search keys.
 	 *
 	 * @return string Prefix for the item properties and search keys
@@ -82,6 +107,23 @@ class Standard
 	protected function prefix() : string
 	{
 		return 'group.';
+	}
+
+
+	/**
+	 * Deletes items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
+	 * @param string $cfgpath Configuration path to the SQL statement
+	 * @param bool $siteid If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @return static Manager object for chaining method calls
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to delete the "super" group
+	 */
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true, string $name = 'id' ) : static
+	{
+		$this->protectGroups( $this->itemIds( $items ) );
+		return parent::deleteItemsBase( $items, $cfgpath, $siteid, $name );
 	}
 
 

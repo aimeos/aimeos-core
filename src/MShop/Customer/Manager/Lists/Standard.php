@@ -21,6 +21,72 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Lists\Base
 	implements \Aimeos\MShop\Customer\Manager\Lists\Iface
 {
+	use \Aimeos\MShop\Common\Manager\Super\Traits;
+
+
+	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to add or change a membership of the "super" group
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		$list = map( $items )->filter( fn( $item ) => $this->isModified( $item ) );
+		$this->protectGroups( $this->groupIds( $list->concat( $this->stored( $list ) ) ) );
+
+		return parent::save( $items, $fetch );
+	}
+
+
+	/**
+	 * Deletes items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
+	 * @param string $cfgpath Configuration path to the SQL statement
+	 * @param bool $siteid If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @return static Manager object for chaining method calls
+	 * @throws \Aimeos\MShop\PolicyException If a non-super user tries to remove a membership of the "super" group
+	 */
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true, string $name = 'id' ) : static
+	{
+		$this->protectGroups( $this->groupIds( $this->stored( $items ) ) );
+		return parent::deleteItemsBase( $items, $cfgpath, $siteid, $name );
+	}
+
+
+	/**
+	 * Returns the IDs of the groups referenced by the given list items
+	 *
+	 * @param \Aimeos\Map $items List of customer list items
+	 * @return \Aimeos\Map List of group IDs
+	 */
+	protected function groupIds( \Aimeos\Map $items ) : \Aimeos\Map
+	{
+		return $items->filter( fn( $item ) => $item->getDomain() === 'group' )->map( fn( $item ) => $item->getRefId() );
+	}
+
+
+	/**
+	 * Returns the stored list items for the given items or IDs
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|string[]|\Aimeos\MShop\Common\Item\Iface|string $items List item(s) or ID(s)
+	 * @return \Aimeos\Map List of stored customer list items
+	 */
+	protected function stored( $items ) : \Aimeos\Map
+	{
+		if( ( $ids = $this->itemIds( $items ) )->isEmpty() ) {
+			return map();
+		}
+
+		$filter = $this->filter()->add( 'customer.lists.id', '==', $ids->values()->all() )->slice( 0, $ids->count() );
+		return $this->search( $filter );
+	}
+
+
 	/** mshop/customer/manager/lists/submanagers
 	 * List of manager names that can be instantiated by the customer list manager
 	 *

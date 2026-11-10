@@ -508,4 +508,135 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		return (string) ( $row['password'] ?? '' );
 	}
+
+
+	public function testSaveSuperMember()
+	{
+		[$group, $item] = $this->superMember();
+
+		try
+		{
+			$this->access( true );
+			$result = $this->object->save( $item->setLabel( 'unitsuper2' ) );
+			$this->assertEquals( 'unitsuper2', $result->getLabel() );
+		}
+		finally
+		{
+			$this->cleanup( $group, $item );
+		}
+	}
+
+
+	public function testSaveSuperMemberSelf()
+	{
+		[$group, $item] = $this->superMember();
+
+		try
+		{
+			$this->access( false );
+			$this->context->setUser( $item );
+			$result = $this->object->save( $item->setLabel( 'unitsuper2' ) );
+			$this->assertEquals( 'unitsuper2', $result->getLabel() );
+		}
+		finally
+		{
+			$this->context->setUser( null );
+			$this->cleanup( $group, $item );
+		}
+	}
+
+
+	public function testSaveSuperMemberUnmodified()
+	{
+		[$group, $item] = $this->superMember();
+
+		try
+		{
+			$this->access( false );
+			$this->assertSame( $item, $this->object->save( $item ) );
+		}
+		finally
+		{
+			$this->cleanup( $group, $item );
+		}
+	}
+
+
+	public function testSaveSuperMemberDenied()
+	{
+		[$group, $item] = $this->superMember();
+
+		try
+		{
+			$this->access( false );
+			$this->object->save( $item->setPassword( 'takeover' ) );
+			$this->fail( 'Changing a super user must not be possible' );
+		}
+		catch( \Aimeos\MShop\PolicyException $e )
+		{
+			$this->assertEquals( 403, $e->getCode() );
+		}
+		finally
+		{
+			$this->cleanup( $group, $item );
+		}
+	}
+
+
+	public function testDeleteSuperMemberDenied()
+	{
+		[$group, $item] = $this->superMember();
+
+		try
+		{
+			$this->access( false );
+			$this->object->delete( $item->getId() );
+			$this->fail( 'Deleting a super user must not be possible' );
+		}
+		catch( \Aimeos\MShop\PolicyException $e )
+		{
+			$this->assertEquals( 403, $e->getCode() );
+		}
+		finally
+		{
+			$this->cleanup( $group, $item );
+		}
+	}
+
+
+	protected function access( bool $super ) : void
+	{
+		$view = new \Aimeos\Base\View\Standard();
+
+		$helper = $super
+			? new \Aimeos\Base\View\Helper\Access\All( $view )
+			: new \Aimeos\Base\View\Helper\Access\Standard( $view, ['admin'] );
+
+		$this->context->setView( $view->addHelper( 'access', $helper ) );
+	}
+
+
+	protected function cleanup( \Aimeos\MShop\Group\Item\Iface $group, \Aimeos\MShop\Customer\Item\Iface $item ) : void
+	{
+		$this->access( true );
+		$this->object->delete( $item->getId() );
+		\Aimeos\MShop::create( $this->context, 'group' )->delete( $group->getId() );
+	}
+
+
+	protected function superMember() : array
+	{
+		$this->access( true );
+
+		$manager = \Aimeos\MShop::create( $this->context, 'group' );
+		$group = $manager->save( $manager->create()->setCode( 'super' )->setLabel( 'Super' ) );
+
+		$item = $this->object->save( $this->object->create()->setCode( 'unitsuper@example.com' )->setLabel( 'unitsuper' ) );
+
+		$manager = \Aimeos\MShop::create( $this->context, 'customer/lists' );
+		$manager->save( $manager->create()->setParentId( $item->getId() )->setDomain( 'group' )
+			->setType( 'default' )->setRefId( $group->getId() ) );
+
+		return [$group, $item];
+	}
 }
