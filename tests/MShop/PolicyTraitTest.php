@@ -242,6 +242,36 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testReadableSubDomain()
+	{
+		// sub-domains like the ones of property types are owned by their top-level domain
+		$item = \Aimeos\MShop::create( $this->context, 'price' )->create()->setDomain( 'product/property' );
+
+		$this->assertSame( $item, $this->object::readable( $this->context, $item ) );
+	}
+
+
+	public function testReadableSubDomainDenied()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
+
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectExceptionCode( 404 );
+		$this->object::readable( $this->context, $manager->create()->setDomain( 'service/property' ) );
+	}
+
+
+	public function testReadableLeadingSlash()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
+
+		// malformed domains aren't mapped to top-level domains
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectExceptionCode( 404 );
+		$this->object::readable( $this->context, $manager->create()->setDomain( '/product' ) );
+	}
+
+
 	public function testReadableNoOwner()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
@@ -255,7 +285,12 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$this->object::restrict( $this->context, $manager, $filter = $manager->filter() );
 
-		$expected = $manager->filter()->add( 'price.domain', '==', ['', 'order', 'product'] );
+		$expected = $manager->filter();
+		$expected->add( $expected->or( [
+			$expected->compare( '==', 'price.domain', ['', 'order', 'product'] ),
+			$expected->compare( '=~', 'price.domain', ['order/', 'product/'] ),
+		] ) );
+
 		$this->assertEquals( $expected->getConditions(), $filter->getConditions() );
 	}
 
@@ -268,7 +303,27 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$this->object::restrict( $this->context, $manager, $filter = $manager->filter() );
 
-		$expected = $manager->filter()->add( 'price.domain', '==', ['', 'order', 'product'] );
+		$expected = $manager->filter();
+		$expected->add( $expected->or( [
+			$expected->compare( '==', 'price.domain', ['', 'order', 'product'] ),
+			$expected->compare( '=~', 'price.domain', ['order/', 'product/'] ),
+		] ) );
+
+		$this->assertEquals( $expected->getConditions(), $filter->getConditions() );
+	}
+
+
+	public function testRestrictNone()
+	{
+		$this->context->config()->set( 'test/resource', ['service' => ['groups' => []]] );
+
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
+		$this->object::restrict( $this->context, $manager, $filter = $manager->filter() );
+
+		// no prefix condition if the user isn't allowed to retrieve items of any domain
+		$expected = $manager->filter();
+		$expected->add( $expected->or( [$expected->compare( '==', 'price.domain', [''] )] ) );
+
 		$this->assertEquals( $expected->getConditions(), $filter->getConditions() );
 	}
 

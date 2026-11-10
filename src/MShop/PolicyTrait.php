@@ -152,6 +152,8 @@ trait PolicyTrait
 	 *
 	 * Items the user isn't allowed to retrieve are reported like missing items, so
 	 * their IDs don't reveal which items exist in the domains the user can't access.
+	 * Sub-domains (e.g. "product/property" of property types) are owned by their
+	 * top-level domain because the sub-resources are checked by the entry points.
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context object with the current user
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item to check
@@ -162,6 +164,7 @@ trait PolicyTrait
 	{
 		$type = $item->getResourceType();
 		$domain = (string) $item->get( \Aimeos\MShop\Common\Manager\Decorator\Owner::key( $type ) );
+		$domain = strstr( $domain, '/', true ) ?: $domain;
 
 		// only the owning domain is checked instead of computing all readable domains
 		if( $domain !== '' && ( !static::protects( $context, $domain ) || !static::allowed( $context, $domain, 'get' ) ) ) {
@@ -177,6 +180,9 @@ trait PolicyTrait
 	/**
 	 * Restricts the filter to the items the current user is allowed to retrieve
 	 *
+	 * Items of sub-domains (e.g. "product/property" of property types) are retrieved
+	 * if the user is allowed to retrieve the items of their top-level domain.
+	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context object with the current user
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager the filter is used for
 	 * @param \Aimeos\Base\Criteria\Iface $filter Filter for searching the items which is restricted in place
@@ -187,8 +193,16 @@ trait PolicyTrait
 	{
 		$key = \Aimeos\MShop\Common\Manager\Decorator\Owner::key( join( '/', $manager->type() ) );
 
-		if( isset( $manager->getSearchAttributes( false )[$key] ) ) {
-			$filter->add( $key, '==', array_merge( [''], static::domains( $context ) ) );
+		if( isset( $manager->getSearchAttributes( false )[$key] ) )
+		{
+			$domains = static::domains( $context );
+			$expr = [$filter->compare( '==', $key, array_merge( [''], $domains ) )];
+
+			if( !empty( $domains ) ) {
+				$expr[] = $filter->compare( '=~', $key, array_map( fn( $domain ) => $domain . '/', $domains ) );
+			}
+
+			$filter->add( $filter->or( $expr ) );
 		}
 	}
 
