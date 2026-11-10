@@ -65,6 +65,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteStoredFiles()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/test/';
+		$fs->write( $path . 'stored.jpg', 'test' )->write( $path . 'stored-1.jpg', 'test' )->write( $path . 'other.jpg', 'test' );
+
+		$item = $this->object->create()->setDomain( 'product' )->setType( 'default' )->setLabel( 'delete test' )
+			->setUrl( $path . 'stored.jpg' )->setPreviews( [1 => $path . 'stored-1.jpg'] );
+		$item = $this->object->save( $item );
+
+		// the passed file path is ignored, only the files of the stored item are removed
+		$this->object->delete( [$item->setUrl( $path . 'other.jpg' )->setPreviews( [1 => $path . 'other.jpg'] )] );
+
+		$this->assertFalse( $fs->has( $path . 'stored.jpg' ) );
+		$this->assertFalse( $fs->has( $path . 'stored-1.jpg' ) );
+		$this->assertTrue( $fs->has( $path . 'other.jpg' ) );
+
+		$fs->rm( $path . 'other.jpg' );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
