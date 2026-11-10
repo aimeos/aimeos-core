@@ -320,7 +320,8 @@ class OwnerTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUnownedRemoved()
 	{
 		// entries are removed by setting their value to NULL because the configurations are merged by key
-		$this->context->config()->set( 'mshop/common/manager/unowned/attribute', null );
+		$list = $this->context->config()->get( 'mshop/common/manager/unowned', [] );
+		$this->context->config()->set( 'mshop/common/manager/unowned', ['attribute' => null] + $list );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Owner( new \Aimeos\MShop\Attribute\Manager\Standard( $this->context ), $this->context );
 		$item = $object->create()->setDomain( 'service' )->setType( 'size' )->setCode( 'owner-test' )->setLabel( 'owner test' );
 

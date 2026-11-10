@@ -21,7 +21,12 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$view->addHelper( 'access', new \Aimeos\Base\View\Helper\Access\Standard( $view, ['editor'] ) );
 
 		$this->context = \TestHelper::context()->setView( $view )->setPolicy( null );
+		// runtime values can't be read by the keys of their sub-arrays
 		$this->context->config()->set( 'test/resource', ['order' => ['groups' => []], 'product' => ['groups' => []], 'service' => ['groups' => []]] );
+
+		foreach( ['order', 'product', 'service'] as $resource ) {
+			$this->context->config()->set( 'test/resource/' . $resource, ['groups' => []] );
+		}
 
 		$this->object = new class {
 			use \Aimeos\MShop\PolicyTrait;

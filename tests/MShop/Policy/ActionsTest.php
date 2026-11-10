@@ -71,6 +71,8 @@ class ActionsTest extends \PHPUnit\Framework\TestCase
 	public function testAllowedSubResources()
 	{
 		// resources configured only by their sub-resources have no rules on their own
+		$this->context->config()->set( 'test/resource/order', ['address' => ['get' => ['editor']]] );
+		$this->context->config()->set( 'test/resource/order/address', ['get' => ['editor']] );
 		$this->context->config()->set( 'test/resource/order/address/get', ['editor'] );
 
 		$this->assertNull( $this->object->allowed( $this->context, 'order', 'get' ) );
@@ -81,6 +83,7 @@ class ActionsTest extends \PHPUnit\Framework\TestCase
 	public function testAllowedEmpty()
 	{
 		// empty lists are actions allowed for super users only
+		$this->context->config()->set( 'test/resource/order', ['get' => []] );
 		$this->context->config()->set( 'test/resource/order/get', [] );
 
 		$this->assertFalse( $this->object->allowed( $this->context, 'order', 'get' ) );
