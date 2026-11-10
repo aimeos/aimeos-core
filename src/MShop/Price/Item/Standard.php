@@ -288,6 +288,18 @@ class Standard extends Base
 			$taxrates[$name ?: 'tax'] = $this->checkPrice( (string) $taxrate );
 		}
 
+		// passing the returned tax rates again isn't a change and empty rates (e.g. from forms)
+		// equal missing ones, checkPrice() returns NULL for empty strings
+		$new = array_filter( $taxrates, fn( $rate ) => $rate !== null );
+		$old = array_filter( array_map( fn( $rate ) => $this->checkPrice( (string) $rate ), $this->getTaxRates() ), fn( $rate ) => $rate !== null );
+
+		ksort( $new );
+		ksort( $old );
+
+		if( $new === $old ) {
+			return $this;
+		}
+
 		return $this->set( 'price.taxrates', $taxrates );
 	}
 
@@ -325,18 +337,8 @@ class Standard extends Base
 	 */
 	public function getTaxValue() : string
 	{
-		if( $this->tax === null )
-		{
-			$taxrate = array_sum( $this->getTaxRates() );
-
-			if( $this->getTaxFlag() !== false ) {
-				$this->tax = (string) ( ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate ); // @phpstan-ignore binaryOp.invalid
-			} else {
-				$this->tax = (string) ( ( $this->getValue() + $this->getCosts() ) * $taxrate / 100 ); // @phpstan-ignore binaryOp.invalid
-			}
-
-			parent::setModified();
-		}
+		// computing the tax value doesn't change the price, so the item isn't marked as modified
+		$this->tax ??= $this->calcTax();
 
 		return $this->formatNumber( (float) $this->tax, $this->getPrecision() + 2 ) ?? '0.00';
 	}
@@ -350,7 +352,14 @@ class Standard extends Base
 	 */
 	public function setTaxValue( $value ) : static
 	{
-		$this->tax = $this->checkPrice( (string) $value, $this->getPrecision() + 2 );
+		$tax = $this->checkPrice( (string) $value, $this->getPrecision() + 2 );
+
+		// passing the returned tax value again isn't a change
+		if( $tax === $this->getTaxValue() ) {
+			return $this;
+		}
+
+		$this->tax = $tax;
 		parent::setModified();
 		return $this;
 	}
@@ -530,5 +539,22 @@ class Standard extends Base
 		$list['price.label'] = $this->getLabel();
 
 		return $list;
+	}
+
+
+	/**
+	 * Computes the tax value from the price value, costs and tax rates
+	 *
+	 * @return string Computed tax value
+	 */
+	protected function calcTax() : string
+	{
+		$taxrate = array_sum( $this->getTaxRates() );
+
+		if( $this->getTaxFlag() !== false ) {
+			return (string) ( ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate ); // @phpstan-ignore binaryOp.invalid
+		}
+
+		return (string) ( ( $this->getValue() + $this->getCosts() ) * $taxrate / 100 ); // @phpstan-ignore binaryOp.invalid
 	}
 }
