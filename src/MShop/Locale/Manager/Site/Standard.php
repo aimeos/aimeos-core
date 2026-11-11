@@ -392,7 +392,7 @@ class Standard
 	 */
 	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		$this->checkConfig( $item->getConfig() );
+		$this->checkConfig( $item->getConfig(), null );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -636,37 +636,156 @@ class Standard
 
 
 	/**
-	 * Rejects site overrides of application-owned configuration namespaces.
+	 * Rejects site configuration changes which are not allowed for the current user.
 	 *
-	 * Only the "resource/email" settings (e.g. sender addresses) can be set per site.
+	 * Users who are not super users can only add, change or remove the keys configured
+	 * in "mshop/locale/manager/site/allowed". Unchanged keys are not checked, so site owners
+	 * can still save sites whose configuration contains settings added by super users before.
 	 *
-	 * @param array $config Site configuration
-	 * @param string $prefix Path of the parent configuration key
+	 * @param array $config New site configuration
+	 * @param string|null $id ID of the stored site whose configuration is compared or NULL for new sites
 	 */
-	protected function checkConfig( array $config, string $prefix = '' ) : void
+	protected function checkConfig( array $config, ?string $id ) : void
 	{
-		foreach( $config as $key => $value )
+		$context = $this->context();
+
+		if( $context->access( 'super' ) ) {
+			return;
+		}
+
+		$stored = [];
+		$allowed = $this->allowedConfig();
+
+		if( $id !== null ) {
+			$stored = (array) $this->search( $this->filter()->add( 'locale.site.id', '==', $id ) )->call( 'getConfig' )->first( [] );
+		}
+
+		foreach( $this->changedConfig( $config, $stored ) as $path )
 		{
-			$path = join( '/', array_filter( explode( '/', $prefix . '/' . $key ), fn( $part ) => $part !== '' ) );
-
-			if( $path === 'resource/email' || str_starts_with( $path, 'resource/email/' ) ) {
-				continue;
-			}
-
-			if( $path === 'resource' && is_array( $value ) && !empty( $value ) )
+			if( !$this->isAllowedConfig( $path, $allowed ) )
 			{
-				$this->checkConfig( $value, $path );
-				continue;
-			}
-
-			if( str_starts_with( $path, 'resource' )
-				|| str_starts_with( $path, 'madmin' )
-				|| str_starts_with( $path, 'mshop' )
-			) {
-				$msg = $this->context()->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
+				$msg = $context->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
 				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $path ) );
 			}
 		}
+	}
+
+
+	/**
+	 * Tests if the configuration key path is one of the allowed prefixes or below
+	 *
+	 * @param string $path Normalized key path like "resource/email/from-email"
+	 * @param string[] $allowed List of configuration key prefixes like "resource/email"
+	 * @return bool TRUE if the key path is allowed, FALSE if not
+	 */
+	protected function isAllowedConfig( string $path, array $allowed ) : bool
+	{
+		foreach( $allowed as $prefix )
+		{
+			if( $path === $prefix || str_starts_with( $path, $prefix . '/' ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Returns the site configuration keys which users who are not super users can change
+	 *
+	 * @return string[] List of configuration key prefixes like "resource/email"
+	 */
+	protected function allowedConfig() : array
+	{
+		$context = $this->context();
+
+		/** mshop/locale/manager/site/allowed
+		 * List of site configuration keys non-super users are allowed to change
+		 *
+		 * Site configuration overwrites the application configuration for the site,
+		 * so users which are allowed to edit sites (e.g. in the "Settings" panel)
+		 * could change e.g. the user groups required for accessing admin resources.
+		 * Therefore, users who are not super users can only add, change or
+		 * remove the site configuration keys listed here. Each entry also allows
+		 * all keys below, e.g. "resource/email" allows "resource/email/from-email".
+		 *
+		 * Only the array keys are used, so extensions can add their own keys:
+		 *
+		 *  'allowed' => ['paypal/email' => 'paypal/email']
+		 *
+		 * Entries added by the configuration of the current site are ignored because
+		 * a site must not be able to extend the list of keys allowed for itself.
+		 *
+		 * SECURITY: Never add keys which control authorization (e.g. "admin/jqadm/resource"),
+		 * the domains available to customers (e.g. "controller/frontend") or credentials
+		 * which are inherited from parent sites (e.g. "stripe/apikey").
+		 *
+		 * @param array List of configuration key prefixes
+		 * @since 2024.10
+		 */
+		$key = 'mshop/locale/manager/site/allowed';
+		$configured = (array) $context->config()->get( $key, [] );
+		$siteAllowed = (array) $context->locale()->getSiteItem()->getConfigValue( $key, [] );
+
+		return array_filter( array_keys( array_diff_key( $configured, $siteAllowed ) ), 'is_string' );
+	}
+
+
+	/**
+	 * Returns the configuration keys which are added, changed or removed compared to the stored configuration
+	 *
+	 * @param array $config New site configuration
+	 * @param array $stored Stored site configuration
+	 * @return string[] List of normalized key paths like "resource/email/from-email"
+	 */
+	protected function changedConfig( array $config, array $stored ) : array
+	{
+		$paths = [];
+		$old = $this->flattenConfig( $stored );
+		$new = $this->flattenConfig( $config );
+
+		foreach( array_keys( $new + $old ) as $key )
+		{
+			if( !array_key_exists( $key, $new ) || !array_key_exists( $key, $old ) || $new[$key] !== $old[$key] )
+			{
+				$path = join( '/', array_map( 'rawurldecode', explode( '/', (string) $key ) ) );
+				$paths[] = join( '/', array_filter( explode( '/', $path ), fn( $part ) => $part !== '' ) );
+			}
+		}
+
+		return array_unique( $paths );
+	}
+
+
+	/**
+	 * Returns the site configuration values by their encoded key paths
+	 *
+	 * Each key is URL encoded before joining them with slashes, so flat keys like "a/b" which
+	 * are not used at runtime are kept apart from nested ones like "a" => ["b" => ...] and
+	 * changing one into the other is detected. Numbers are compared as strings because values
+	 * submitted by forms are strings while stored ones may not.
+	 *
+	 * @param array $config Site configuration with nested and/or flat keys
+	 * @param string $prefix Encoded path of the parent configuration key
+	 * @return array<string,mixed> Encoded key paths like "/resource/email/from-email" and their values
+	 */
+	protected function flattenConfig( array $config, string $prefix = '' ) : array
+	{
+		$result = [];
+
+		foreach( $config as $key => $value )
+		{
+			$path = $prefix . '/' . rawurlencode( (string) $key );
+
+			if( is_array( $value ) && !empty( $value ) ) {
+				$result += $this->flattenConfig( $value, $path );
+			} else {
+				$result[$path] = is_int( $value ) || is_float( $value ) ? (string) $value : $value;
+			}
+		}
+
+		return $result;
 	}
 
 
@@ -679,8 +798,6 @@ class Standard
 	 */
 	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$this->checkConfig( $item->getConfig() );
-
 		if( $item->getId() === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
@@ -690,6 +807,8 @@ class Standard
 		if( !$item->isModified() ) {
 			return $item;
 		}
+
+		$this->checkConfig( $item->getConfig(), $item->getId() );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
