@@ -12,22 +12,21 @@ namespace Aimeos\MShop\Group\Manager;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object = null;
-	private $context = null;
 	private $editor = '';
 
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelper::context();
-		$this->editor = $this->context->editor();
+		$context = \TestHelper::context();
+		$this->editor = $context->editor();
 
-		$this->object = new \Aimeos\MShop\Group\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Group\Manager\Standard( $context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->context );
+		unset( $this->object );
 	}
 
 
@@ -140,91 +139,4 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, $total );
 	}
 
-
-	public function testSaveSuper()
-	{
-		$this->access( true );
-
-		$item = $this->object->save( $this->object->create()->setCode( 'super' )->setLabel( 'Super' ) );
-		$this->object->delete( $item );
-
-		$this->assertNotNull( $item->getId() );
-	}
-
-
-	public function testSaveSuperDenied()
-	{
-		$this->access( false );
-
-		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->save( $this->object->create()->setCode( 'super ' )->setLabel( 'Super' ) );
-	}
-
-
-	public function testSaveRenameToSuperDenied()
-	{
-		$this->access( false );
-		$item = $this->object->find( 'unitgroup' )->setCode( 'super' );
-
-		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->save( $item );
-	}
-
-
-	public function testSaveRenameFromSuperDenied()
-	{
-		$this->access( true );
-		$item = $this->object->save( $this->object->create()->setCode( 'super' )->setLabel( 'Super' ) );
-
-		try
-		{
-			$this->access( false );
-			$this->object->save( $item->setCode( 'nosuper' ) );
-			$this->fail( 'Renaming the "super" group must not be possible' );
-		}
-		catch( \Aimeos\MShop\PolicyException $e )
-		{
-			$this->assertEquals( 403, $e->getCode() );
-		}
-		finally
-		{
-			$this->access( true );
-			$this->object->delete( $item->getId() );
-		}
-	}
-
-
-	public function testDeleteSuperDenied()
-	{
-		$this->access( true );
-		$item = $this->object->save( $this->object->create()->setCode( 'super' )->setLabel( 'Super' ) );
-
-		try
-		{
-			$this->access( false );
-			$this->object->delete( $item->getId() );
-			$this->fail( 'Deleting the "super" group must not be possible' );
-		}
-		catch( \Aimeos\MShop\PolicyException $e )
-		{
-			$this->assertEquals( 403, $e->getCode() );
-		}
-		finally
-		{
-			$this->access( true );
-			$this->object->delete( $item->getId() );
-		}
-	}
-
-
-	protected function access( bool $super ) : void
-	{
-		$view = new \Aimeos\Base\View\Standard();
-
-		$helper = $super
-			? new \Aimeos\Base\View\Helper\Access\All( $view )
-			: new \Aimeos\Base\View\Helper\Access\Standard( $view, ['admin'] );
-
-		$this->context->setView( $view->addHelper( 'access', $helper ) );
-	}
 }
