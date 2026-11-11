@@ -29,6 +29,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	protected function super() : \Aimeos\MShop\Locale\Manager\Site\Iface
+	{
+		$context = clone $this->context;
+		$view = clone $context->view();
+		$view->addHelper( 'access', new \Aimeos\Base\View\Helper\Access\All( $view ) );
+
+		return new \Aimeos\MShop\Locale\Manager\Site\Standard( $context->setView( $view ) );
+	}
+
+
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );
@@ -58,16 +68,41 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 * @dataProvider restrictedConfigProvider
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
-	public function testRejectsRestrictedConfig( string $method, string $key, $value )
+	public function testInsertRejectsRestrictedConfig( string $key, $value )
 	{
-		$item = $this->object->create()->setConfig( [$key => $value] );
+		$item = $this->object->create()->setCode( 'unittest-insert' )->setLabel( 'unittest' )->setConfig( [$key => $value] );
 
-		if( $method === 'save' ) {
-			$item->setId( '-1' );
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->insert( $item );
 		}
+		finally
+		{
+			if( $item->getId() ) {
+				$this->super()->delete( $item->getId() );
+			}
+		}
+	}
 
-		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-		$this->object->$method( $item );
+
+	/**
+	 * @dataProvider restrictedConfigProvider
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
+	public function testSaveRejectsRestrictedConfig( string $key, $value )
+	{
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-save' )->setLabel( 'unittest' ) );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->save( $item->setConfig( [$key => $value] ) );
+		}
+		finally
+		{
+			$this->super()->delete( $item->getId() );
+		}
 	}
 
 
@@ -75,22 +110,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = [];
 
-		foreach( ['insert', 'save'] as $method )
+		foreach( ['resource', 'madmin', 'mshop', 'admin/jqadm/resource', 'controller/frontend'] as $prefix )
 		{
-			foreach( ['resource', 'madmin', 'mshop'] as $prefix )
-			{
-				$result[$method . ' ' . $prefix . ' nested'] = [$method, $prefix, ['manager' => ['name' => 'Custom']]];
-				$result[$method . ' ' . $prefix . ' flat'] = [$method, $prefix . '/manager/name', 'Custom'];
-				$result[$method . ' ' . $prefix . ' leading slash'] = [$method, '/' . $prefix . '/manager/name', 'Custom'];
-				$result[$method . ' ' . $prefix . ' surrounding slashes'] = [$method, '//' . $prefix . '//', ['manager' => ['name' => 'Custom']]];
-				$result[$method . ' ' . $prefix . ' prefix'] = [$method, $prefix . '-custom', 'value'];
-			}
-
-			$result[$method . ' resource with email'] = [$method, 'resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']]];
-			$result[$method . ' resource email prefix nested'] = [$method, 'resource', ['emails' => ['from-email' => 'a@b.c']]];
-			$result[$method . ' resource email prefix flat'] = [$method, 'resource/email-custom', 'value'];
-			$result[$method . ' resource empty'] = [$method, 'resource', []];
+			$result[$prefix . ' nested'] = [$prefix, ['manager' => ['name' => 'Custom']]];
+			$result[$prefix . ' flat'] = [$prefix . '/manager/name', 'Custom'];
+			$result[$prefix . ' leading slash'] = ['/' . $prefix . '/manager/name', 'Custom'];
+			$result[$prefix . ' surrounding slashes'] = ['//' . $prefix . '//', ['manager' => ['name' => 'Custom']]];
+			$result[$prefix . ' prefix'] = [$prefix . '-custom', 'value'];
 		}
+
+		$result['resource with email'] = ['resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']]];
+		$result['resource email prefix nested'] = ['resource', ['emails' => ['from-email' => 'a@b.c']]];
+		$result['resource email prefix flat'] = ['resource/email-custom', 'value'];
+		$result['resource empty'] = ['resource', []];
 
 		return $result;
 	}
@@ -107,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$item = $this->object->save( $item->setConfig( $config + ['client' => ['html' => ['x' => 1]]] ) );
+			$item = $this->object->save( $item->setConfig( $config + ['resource' => ['email' => ['reply-name' => 'x']]] ) );
 			$result = $this->object->get( $item->getId() )->getConfig();
 		}
 		finally
@@ -115,7 +147,132 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->object->delete( $item->getId() );
 		}
 
-		$this->assertEquals( $config + ['client' => ['html' => ['x' => 1]]], $result );
+		$this->assertEquals( $config + ['resource' => ['email' => ['reply-name' => 'x']]], $result );
+	}
+
+
+	public function testAllowsStoredConfig()
+	{
+		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-stored' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		try
+		{
+			$this->object->save( $item->setConfigValue( 'resource/email/from-email', 'b@c.d' ) );
+			$result = $this->object->get( $item->getId() )->getConfig();
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+
+		$this->assertEquals( ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'b@c.d']]], $result );
+	}
+
+
+	public function testAllowsStoredScalarConfig()
+	{
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-scalar' )->setLabel( 'unittest' )->setConfig( ['client' => ['html' => ['x' => 1]]] ) );
+
+		try
+		{
+			$this->object->save( $item->setConfig( ['client' => ['html' => ['x' => '1']], 'resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
+			$result = $this->object->get( $item->getId() )->getConfig();
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+
+		$this->assertEquals( ['client' => ['html' => ['x' => '1']], 'resource' => ['email' => ['from-email' => 'a@b.c']]], $result );
+	}
+
+
+	public function testRejectsHiddenConfig()
+	{
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-hidden' )->setLabel( 'unittest' )->setConfig( ['client' => ['html' => ['x' => 1]]] ) );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->save( $item->setConfig( ['client' => ['html' => ['x' => 2]], 'client/html/x' => 1] ) );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
+	public function testRejectsFlattenedConfig()
+	{
+		$config = ['admin' => ['jqadm' => ['resource' => ['customer' => ['groups' => ['admin']]]]]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-flattened' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->save( $item->setConfig( ['admin/jqadm/resource/customer/groups' => ['admin']] ) );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
+	public function testAllowsStoredFalsyConfig()
+	{
+		$config = ['client' => ['html' => ['a' => 0, 'b' => false, 'c' => '0']]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-falsy' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		try
+		{
+			$item = $this->object->save( $item->setLabel( 'unittest2' )->setConfig( ['client' => ['html' => ['a' => '0', 'b' => false, 'c' => '0']]] ) );
+			$this->assertEquals( 'unittest2', $item->getLabel() );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
+	public function testRejectsRemovedConfig()
+	{
+		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-removed' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->save( $item->setConfig( ['resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
+	public function testAllowsConfiguredConfig()
+	{
+		$allowed = $this->context->config()->get( 'mshop/locale/manager/site/allowed', [] );
+		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + ['client/html' => 'client/html'] );
+		$item = $this->object->create()->setCode( 'unittest-configured' )->setLabel( 'unittest' )->setConfig( ['client/html/x' => 1] );
+
+		try
+		{
+			$result = $this->object->get( $this->object->insert( $item )->getId() )->getConfig();
+		}
+		finally
+		{
+			if( $item->getId() ) {
+				$this->object->delete( $item->getId() );
+			}
+		}
+
+		$this->assertEquals( ['client/html/x' => 1], $result );
 	}
 
 
@@ -130,6 +287,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRejectsSiteConfiguredConfig()
+	{
+		$entry = ['client/html' => 'client/html'];
+		$allowed = $this->context->config()->get( 'mshop/locale/manager/site/allowed', [] );
+
+		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + $entry );
+		$this->context->locale()->getSiteItem()->setConfigValue( 'mshop/locale/manager/site/allowed', $entry );
+
+		$item = $this->object->create()->setCode( 'unittest-siteconfigured' )->setLabel( 'unittest' )->setConfig( ['client/html/x' => 1] );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->insert( $item );
+		}
+		finally
+		{
+			if( $item->getId() ) {
+				$this->super()->delete( $item->getId() );
+			}
+		}
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
@@ -137,6 +318,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setStatus( 1 );
 		$item->setCode( 'xx' );
 		$item->setConfig( ['client' => ['html' => ['catalog' => ['pagesize' => 12]]], 'theme/default/color' => 'blue'] );
+		$this->object = $this->super();
 		$resultSaved = $this->object->insert( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
