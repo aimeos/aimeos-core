@@ -57,6 +57,9 @@ return array(
 			),
 		),
 		'site' => array(
+			'allowed' => [
+				'resource/email' => 'resource/email',
+			],
 			'cleanup' => [
 				'shop' => [
 					'domains' => [
