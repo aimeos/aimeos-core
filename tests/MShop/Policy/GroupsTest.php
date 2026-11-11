@@ -43,6 +43,33 @@ class GroupsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAllowedAction()
+	{
+		$this->context->config()->set( 'test/resource/product/import', ['admin'] );
+
+		$this->assertTrue( $this->object->allowed( $this->context, 'product', 'save' ) );
+		$this->assertFalse( $this->object->allowed( $this->context, 'product', 'import' ) );
+	}
+
+
+	public function testAllowedActionEmpty()
+	{
+		// empty lists allow the action for super users only
+		$this->context->config()->set( 'test/resource/product/import', [] );
+
+		$this->assertFalse( $this->object->allowed( $this->context, 'product', 'import' ) );
+	}
+
+
+	public function testAllowedActionSubresource()
+	{
+		// sub-resources with the name of the action don't overwrite the resource groups
+		$this->context->config()->set( 'test/resource/product/import/groups', ['admin'] );
+
+		$this->assertTrue( $this->object->allowed( $this->context, 'product', 'import' ) );
+	}
+
+
 	public function testAllowedString()
 	{
 		// single group names as strings have been accepted by the interfaces before
