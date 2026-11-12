@@ -1274,6 +1274,11 @@ class Standard
 
 		foreach( array_keys( $new + $old ) as $key )
 		{
+			// the site form drops empty values, so removing them changes nothing
+			if( !array_key_exists( $key, $new ) && in_array( $old[$key], [null, '', []], true ) ) {
+				continue;
+			}
+
 			if( !array_key_exists( $key, $new ) || !array_key_exists( $key, $old ) || $new[$key] !== $old[$key] )
 			{
 				$path = join( '/', array_map( 'rawurldecode', explode( '/', (string) $key ) ) );
@@ -1290,8 +1295,10 @@ class Standard
 	 *
 	 * Each key is URL encoded before joining them with slashes, so flat keys like "a/b" which
 	 * are not used at runtime are kept apart from nested ones like "a" => ["b" => ...] and
-	 * changing one into the other is detected. Numbers are compared as strings because values
-	 * submitted by forms are strings while stored ones may not.
+	 * changing one into the other is detected. Values are normalized like the site form does,
+	 * so unchanged configurations submitted by the form are equal to the stored ones: Strings
+	 * are JSON decoded or trimmed and numbers are compared as strings. Empty values are kept,
+	 * so adding them is detected.
 	 *
 	 * @param array $config Site configuration with nested and/or flat keys
 	 * @param string $prefix Encoded path of the parent configuration key
@@ -1304,6 +1311,10 @@ class Standard
 		foreach( $config as $key => $value )
 		{
 			$path = $prefix . '/' . rawurlencode( (string) $key );
+
+			if( is_string( $value ) ) {
+				$value = json_decode( $value, true ) ?? trim( $value );
+			}
 
 			if( is_array( $value ) && !empty( $value ) ) {
 				$result += $this->flattenConfig( $value, $path );
