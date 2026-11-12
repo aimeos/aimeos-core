@@ -228,6 +228,43 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAllowsFormSubmittedConfig()
+	{
+		$config = ['client' => ['html' => ['a' => null, 'b' => [], 'c' => '1.50', 'd' => 'true', 'e' => ' x', 'f' => '{"g":1}']]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-form' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		// values like the site form submits them after json_decode(), trim() and dropping empty ones
+		$form = ['client' => ['html' => ['c' => 1.5, 'd' => true, 'e' => 'x', 'f' => ['g' => 1]]]];
+
+		try
+		{
+			$item = $this->object->save( $item->setLabel( 'unittest2' )->setConfig( $form ) );
+			$this->assertEquals( 'unittest2', $item->getLabel() );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
+	public function testRejectsChangedFormConfig()
+	{
+		$config = ['client' => ['html' => ['c' => '1.50']]];
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-formchange' )->setLabel( 'unittest' )->setConfig( $config ) );
+
+		try
+		{
+			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
+			$this->object->save( $item->setConfig( ['client' => ['html' => ['c' => '1.51']]] ) );
+		}
+		finally
+		{
+			$this->object->delete( $item->getId() );
+		}
+	}
+
+
 	public function testRejectsRemovedConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
