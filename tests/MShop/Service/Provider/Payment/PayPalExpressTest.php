@@ -45,6 +45,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$attr->setType( 'tx' )->setCode( 'TRANSACTIONID' )->setValue( '111111111' );
 		$this->order->getService( 'payment', 0 )->setAttributeItem( $attr );
 
+		$attr = \Aimeos\MShop::create( $this->context, 'order/service' )->createAttributeItem();
+		$attr->setType( 'tx' )->setCode( 'TOKEN' )->setValue( 'UT-99999999' );
+		$this->order->getService( 'payment', 0 )->setAttributeItem( $attr );
+
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
@@ -151,6 +155,22 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getStatusPayment() );
+	}
+
+
+	public function testUpdateSyncWrongToken()
+	{
+		$params = ['token' => 'UT-88888888', 'PayerID' => 'PaypalUnitTestBuyer'];
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+
+		$request->expects( $this->once() )->method( 'getAttributes' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->willReturn( [] );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( $params );
+
+		$this->object->expects( $this->never() )->method( 'send' );
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->object->updateSync( $request, $this->order );
 	}
 
 
