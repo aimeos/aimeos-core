@@ -400,6 +400,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetEmailIdn()
+	{
+		$this->assertEquals( 'unit@xn--mller-kva.de', $this->object->setEmail( "unit@m\u{fc}ller.de" )->getEmail() );
+		$this->assertEquals( 'unit@xn--strae-oqa.de', $this->object->setEmail( "unit@stra\u{df}e.de" )->getEmail() );
+		$this->assertEquals( 'unit@xn--mller-kva.de', $this->object->setEmail( 'unit@xn--mller-kva.de' )->getEmail() );
+	}
+
+
+	public function testSetEmailIdnInvalid()
+	{
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->setEmail( "\u{fc}nit@test.de" );
+	}
+
+
 	public function testGetWebsite()
 	{
 		$this->assertEquals( 'www.example.com', $this->object->getWebsite() );
