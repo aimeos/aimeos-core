@@ -322,6 +322,7 @@ trait Update
 		$search->setConditions( $search->compare( '==', 'order.product.parentid', $orderItem->getId() ) );
 
 		$start = 0;
+		$quantities = [];
 
 		$stockManager->begin();
 
@@ -330,10 +331,18 @@ trait Update
 			do
 			{
 				$items = $manager->search( $search );
+				$quantities += $items->getQuantity()->all();
 
 				foreach( $items as $item )
 				{
-					$stockManager->decrease( [$item->getProductId() => -1 * $how * $item->getQuantity()], $item->getStockType() );
+					$qty = $item->getQuantity();
+
+					// bundle articles store the quantity per bundle, not the total
+					if( $parentId = $item->getOrderProductId() ) {
+						$qty *= $quantities[$parentId] ??= $manager->get( $parentId )->getQuantity();
+					}
+
+					$stockManager->decrease( [$item->getProductId() => -1 * $how * $qty], $item->getStockType() );
 
 					switch( $item->getType() ) {
 						case 'default':
