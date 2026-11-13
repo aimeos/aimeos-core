@@ -502,6 +502,60 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateStockBundleArticles()
+	{
+		$context = \TestHelper::context();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
+
+
+		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Product\Standard::class )
+			->setConstructorArgs( array( $context ) )
+			->onlyMethods( ['search'] )
+			->getMock();
+
+		$bundleItem = $orderProductStub->create()->setId( '1' )->setType( 'bundle' )
+			->setProductId( '10' )->setQuantity( 4 );
+		$articleItem = $orderProductStub->create()->setId( '2' )->setType( 'default' )
+			->setProductId( '20' )->setOrderProductId( '1' )->setParentProductId( '10' );
+
+		$orderProductStub->expects( $this->once() )->method( 'search' )
+			->willReturn( map( ['2' => $articleItem, '1' => $bundleItem] ) );
+
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Product\Standard::class, $orderProductStub );
+
+
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
+			->setConstructorArgs( array( $context ) )
+			->onlyMethods( array( 'decrease' ) )
+			->getMock();
+
+		$decreased = [];
+		$stockStub->expects( $this->exactly( 2 ) )->method( 'decrease' )
+			->willReturnCallback( function( $list ) use ( &$decreased, $stockStub ) {
+				$decreased += $list;
+				return $stockStub;
+			} );
+
+		\Aimeos\MShop::inject( \Aimeos\MShop\Stock\Manager\Standard::class, $stockStub );
+
+
+		$object = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setConstructorArgs( array( $context ) )
+			->onlyMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'updateStockBundle' );
+
+
+		$class = new \ReflectionClass( \Aimeos\MShop\Order\Manager\Standard::class );
+		$method = $class->getMethod( 'updateStock' );
+
+		$method->invokeArgs( $object, array( $orderItem, -1 ) );
+
+		$this->assertEquals( ['10' => 4, '20' => 4], $decreased );
+	}
+
+
 	public function testUpdateStockSelect()
 	{
 		$context = \TestHelper::context();
