@@ -462,15 +462,22 @@ class PayPalExpress
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
+		$baseItem = $this->getOrderBase( $orderItem->getBaseId() );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $this->getBasketService( $baseItem, $type, $this->getServiceItem()->getCode() );
+
+		// the token must belong to the order, e.g. not to another one started in a second browser tab
+		if( $serviceItem->getAttribute( 'TOKEN', 'payment/paypal' ) !== $params['token'] )
+		{
+			$msg = sprintf( $this->context()->translate( 'mshop', 'Invalid parameter "%1$s"' ), 'token' );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
+		}
+
 		if( !isset( $params['PayerID'] ) )
 		{
 			$msg = sprintf( $this->context()->translate( 'mshop', 'Required parameter "%1$s" is missing' ), 'PayerID' );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
-
-		$baseItem = $this->getOrderBase( $orderItem->getBaseId() );
-		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
-		$serviceItem = $this->getBasketService( $baseItem, $type, $this->getServiceItem()->getCode() );
 
 		$price = $baseItem->getPrice();
 

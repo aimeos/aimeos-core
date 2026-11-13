@@ -160,10 +160,48 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$this->returnValue( '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId() )
 		);
 
+		$this->injectToken( 'UT-99999999' );
 		$result = $this->object->updateSync( $request, $this->order );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getStatusPayment() );
+	}
+
+
+	public function testUpdateSyncWrongToken()
+	{
+		$params = ['token' => 'UT-88888888', 'PayerID' => 'PaypalUnitTestBuyer'];
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+
+		$request->expects( $this->once() )->method( 'getAttributes' )->will( $this->returnValue( [] ) );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->will( $this->returnValue( [] ) );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+
+		$this->object->expects( $this->never() )->method( 'send' );
+		$this->injectToken( 'UT-99999999' );
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->object->updateSync( $request, $this->order );
+	}
+
+
+	protected function injectToken( $token )
+	{
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
+		$baseItem = $baseManager->load( $this->order->getBaseId(), ['order/base/service'] );
+
+		$attr = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' )->create();
+		$attr->setType( 'payment/paypal' )->setCode( 'TOKEN' )->setValue( $token );
+		$baseItem->getService( 'payment', 0 )->setAttributeItem( $attr );
+
+		$baseMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Standard::class )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'load' ) )
+			->getMock();
+
+		$baseMock->expects( $this->any() )->method( 'load' )->will( $this->returnValue( $baseItem ) );
+
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Base\Standard::class, $baseMock );
 	}
 
 
