@@ -434,6 +434,16 @@ class PayPalExpress
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
+		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $this->getBasketService( $orderItem, $type, $this->getServiceItem()->getCode() );
+
+		// the token must belong to the order, e.g. not to another one started in a second browser tab
+		if( $serviceItem->getAttribute( 'TOKEN', 'tx' ) !== $params['token'] )
+		{
+			$msg = sprintf( $this->context()->translate( 'mshop', 'Invalid parameter "%1$s"' ), 'token' );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
+		}
+
 		if( !isset( $params['PayerID'] ) )
 		{
 			// customer canceled at PayPal, which redirects to the cancel URL with the token only
@@ -446,8 +456,6 @@ class PayPalExpress
 		}
 
 		$price = $orderItem->getPrice();
-		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
-		$serviceItem = $this->getBasketService( $orderItem, $type, $this->getServiceItem()->getCode() );
 
 		$values = $this->getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
