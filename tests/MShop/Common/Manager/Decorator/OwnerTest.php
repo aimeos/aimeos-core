@@ -1,4 +1,4 @@
-<?php
+/<?php
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
@@ -360,7 +360,7 @@ class OwnerTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function product(?string $domain = null ) : \Aimeos\MShop\Product\Item\Iface
+	protected function product( ?string $domain = null ) : \Aimeos\MShop\Product\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'product' );
 
