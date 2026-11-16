@@ -16,7 +16,6 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 	private $context;
 	private $manager;
 	private $object;
-	private $other;
 	private $site;
 
 
@@ -52,7 +51,6 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 
 		$manager = new \Aimeos\MShop\Locale\Manager\Site\Standard( \TestHelper::context() );
 		$this->site = $manager->find( 'unittest' );
-		$this->other = $manager->find( 'default' );
 
 		$this->user( $this->site->getSiteId() );
 	}
@@ -60,7 +58,7 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->manager, $this->context, $this->site, $this->other );
+		unset( $this->object, $this->manager, $this->context, $this->site );
 	}
 
 
@@ -75,7 +73,8 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
 		$this->expectExceptionCode( 403 );
-		$this->object->delete( [$this->site->getId(), $this->other->getId()] );
+		$this->outside();
+		$this->object->delete( [$this->site->getId()] );
 	}
 
 
@@ -98,7 +97,8 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 	public function testInsertDenied()
 	{
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->insert( $this->object->create(), $this->other->getId() );
+		$this->outside();
+		$this->object->insert( $this->object->create(), $this->site->getId() );
 	}
 
 
@@ -119,7 +119,8 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 	public function testMoveDenied()
 	{
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->move( $this->site->getId(), null, $this->other->getId() );
+		$this->outside();
+		$this->object->move( $this->site->getId(), null, $this->site->getId() );
 	}
 
 
@@ -139,23 +140,27 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveChangedSiteid()
 	{
+		$this->outside();
+
 		// the stored site is checked, not the site ID of the passed item
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->save( [( clone $this->other )->setSiteId( $this->site->getSiteId() )] );
+		$this->object->save( [( clone $this->site )->setSiteId( $this->site->getSiteId() . '99.' )] );
 	}
 
 
 	public function testSaveChangedSiteidOutside()
 	{
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->save( ( clone $this->site )->setSiteId( $this->other->getSiteId() ) );
+		$this->object->save( ( clone $this->site )->setSiteId( '-1.' ) );
 	}
 
 
 	public function testSaveDenied()
 	{
+		$this->outside();
+
 		$this->expectException( \Aimeos\MShop\PolicyException::class );
-		$this->object->save( [$this->site, $this->other] );
+		$this->object->save( [$this->site] );
 	}
 
 
@@ -172,7 +177,7 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->setPolicy( null );
 
-		$this->assertSame( $this->other, $this->object->save( $this->other ) );
+		$this->assertSame( $this->site, $this->object->save( $this->site ) );
 		$this->assertEquals( ['save'], $this->manager->calls );
 	}
 
@@ -182,7 +187,16 @@ class ScopeTest extends \PHPUnit\Framework\TestCase
 		$this->user( '' );
 		$this->super();
 
-		$this->assertSame( $this->other, $this->object->save( $this->other ) );
+		$this->assertSame( $this->site, $this->object->save( $this->site ) );
 		$this->assertEquals( ['save'], $this->manager->calls );
+	}
+
+
+	/**
+	 * Moves the user to a child site, so the unittest site is outside the site tree of the user
+	 */
+	protected function outside() : void
+	{
+		$this->user( $this->site->getSiteId() . '99.' );
 	}
 }

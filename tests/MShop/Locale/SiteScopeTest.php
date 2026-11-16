@@ -14,7 +14,6 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 	use SiteUserTrait;
 
 	private $context;
-	private $other;
 	private $site;
 
 
@@ -25,7 +24,6 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 
 		$manager = new \Aimeos\MShop\Locale\Manager\Site\Standard( \TestHelper::context() );
 		$this->site = $manager->find( 'unittest' );
-		$this->other = $manager->find( 'default' );
 
 		$this->user( $this->site->getSiteId() );
 	}
@@ -33,7 +31,7 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->context, $this->site, $this->other );
+		unset( $this->context, $this->site );
 	}
 
 
@@ -47,10 +45,22 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 	public function testLimit()
 	{
 		$manager = new \Aimeos\MShop\Locale\Manager\Site\Standard( \TestHelper::context() );
-		$filter = $manager->filter()->add( 'locale.site.code', '==', ['unittest', 'default'] );
+		$filter = $manager->filter()->add( 'locale.site.code', '==', 'unittest' );
 
 		$this->assertSame( $filter, SiteScope::limit( $this->context, $manager, $filter ) );
 		$this->assertEquals( ['unittest'], $manager->search( $filter )->getCode()->values()->all() );
+	}
+
+
+	public function testLimitOutside()
+	{
+		// the parent site of the user's site is outside the site tree of the user
+		$this->user( $this->site->getSiteId() . '99.' );
+
+		$manager = new \Aimeos\MShop\Locale\Manager\Site\Standard( \TestHelper::context() );
+		$filter = $manager->filter()->add( 'locale.site.code', '==', 'unittest' );
+
+		$this->assertCount( 0, $manager->search( SiteScope::limit( $this->context, $manager, $filter ) ) );
 	}
 
 
@@ -69,9 +79,9 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 		$this->super();
 
 		$manager = new \Aimeos\MShop\Locale\Manager\Site\Standard( \TestHelper::context() );
-		$filter = $manager->filter()->add( 'locale.site.code', '==', ['unittest', 'default'] );
+		$filter = $manager->filter()->add( 'locale.site.code', '==', 'unittest' );
 
-		$this->assertCount( 2, $manager->search( SiteScope::limit( $this->context, $manager, $filter ) ) );
+		$this->assertCount( 1, $manager->search( SiteScope::limit( $this->context, $manager, $filter ) ) );
 	}
 
 
@@ -109,7 +119,13 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 	public function testVisible()
 	{
 		$this->assertTrue( SiteScope::visible( $this->context, $this->site ) );
-		$this->assertFalse( SiteScope::visible( $this->context, $this->other ) );
+	}
+
+
+	public function testVisibleOutside()
+	{
+		$this->user( $this->site->getSiteId() . '99.' );
+		$this->assertFalse( SiteScope::visible( $this->context, $this->site ) );
 	}
 
 
@@ -127,7 +143,7 @@ class SiteScopeTest extends \PHPUnit\Framework\TestCase
 		$this->user( '' );
 		$this->super();
 
-		$this->assertTrue( SiteScope::visible( $this->context, $this->other ) );
+		$this->assertTrue( SiteScope::visible( $this->context, $this->site ) );
 	}
 
 

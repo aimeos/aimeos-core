@@ -292,8 +292,8 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 
 	public function testReadableSiteDenied()
 	{
-		$context = $this->site( 'unittest' );
-		$item = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'default' );
+		$context = $this->site( 'unittest', '99.' );
+		$item = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'unittest' );
 
 		// sites outside the site tree of the user are reported like missing items too
 		$this->expectException( \Aimeos\MShop\Exception::class );
@@ -364,12 +364,24 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$context = $this->site( 'unittest' );
 		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
 		$filter = $manager->filter()->slice( 0, 100 );
-		$filter->setConditions( $filter->compare( '==', 'locale.site.code', ['default', 'unittest'] ) );
+		$filter->setConditions( $filter->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$this->object::restrict( $context, $manager, $filter );
 		$codes = $manager->search( $filter )->getCode()->sort()->values()->all();
 
 		$this->assertEquals( ['unittest'], $codes );
+	}
+
+
+	public function testRestrictSiteOutside()
+	{
+		// the parent site of the user's site is outside the site tree of the user
+		$context = $this->site( 'unittest', '99.' );
+		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
+		$filter = $manager->filter()->add( 'locale.site.code', '==', 'unittest' );
+		$this->object::restrict( $context, $manager, $filter );
+
+		$this->assertCount( 0, $manager->search( $filter ) );
 	}
 
 
@@ -421,13 +433,13 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
 
 		$this->assertTrue( $this->object::visible( $context, $manager->find( 'unittest' ) ) );
-		$this->assertFalse( $this->object::visible( $context, $manager->find( 'default' ) ) );
+		$this->assertFalse( $this->object::visible( $this->site( 'unittest', '99.' ), $manager->find( 'unittest' ) ) );
 	}
 
 
 	public function testVisibleSiteNoPolicy()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'locale/site' )->find( 'default' );
+		$item = \Aimeos\MShop::create( $this->context, 'locale/site' )->find( 'unittest' );
 
 		$this->assertTrue( $this->object::visible( $this->context, $item ) );
 	}
@@ -455,9 +467,15 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns a context with policy for a user of the given site
 	 */
-	protected function site( string $code ) : \Aimeos\MShop\ContextIface
+	/**
+	 * Returns a context whose user belongs to the passed site or to a child site of it
+	 *
+	 * @param string $code Site code or empty for users without site
+	 * @param string $child Site ID part of a child site, e.g. "99."
+	 */
+	protected function site( string $code, string $child = '' ) : \Aimeos\MShop\ContextIface
 	{
-		$siteid = $code ? \Aimeos\MShop::create( $this->context, 'locale/site' )->find( $code )->getSiteId() : '';
+		$siteid = $code ? \Aimeos\MShop::create( $this->context, 'locale/site' )->find( $code )->getSiteId() . $child : '';
 		$user = \Aimeos\MShop::create( $this->context, 'customer' )->create( ['customer.siteid' => $siteid] );
 
 		return $this->object::context( $this->context )->setUser( $user );
