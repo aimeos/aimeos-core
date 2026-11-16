@@ -283,7 +283,8 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 	public function testReadableSite()
 	{
 		$context = $this->site( 'unittest' );
-		$item = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'unittest-child' );
+		$siteid = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'unittest' )->getSiteId();
+		$item = \Aimeos\MShop::create( $context, 'locale/site' )->create()->setSiteId( $siteid . '99.' );
 
 		$this->assertSame( $item, $this->object::readable( $context, $item ) );
 	}
@@ -363,12 +364,12 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$context = $this->site( 'unittest' );
 		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
 		$filter = $manager->filter()->slice( 0, 100 );
-		$filter->setConditions( $filter->compare( '=~', 'locale.site.code', ['default', 'unittest'] ) );
+		$filter->setConditions( $filter->compare( '==', 'locale.site.code', ['default', 'unittest'] ) );
 
 		$this->object::restrict( $context, $manager, $filter );
 		$codes = $manager->search( $filter )->getCode()->sort()->values()->all();
 
-		$this->assertEquals( ['unittest', 'unittest-child'], $codes );
+		$this->assertEquals( ['unittest'], $codes );
 	}
 
 
