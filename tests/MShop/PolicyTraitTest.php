@@ -280,6 +280,27 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testReadableSite()
+	{
+		$context = $this->site( 'unittest' );
+		$item = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'unittest-child' );
+
+		$this->assertSame( $item, $this->object::readable( $context, $item ) );
+	}
+
+
+	public function testReadableSiteDenied()
+	{
+		$context = $this->site( 'unittest' );
+		$item = \Aimeos\MShop::create( $context, 'locale/site' )->find( 'default' );
+
+		// sites outside the site tree of the user are reported like missing items too
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->expectExceptionCode( 404 );
+		$this->object::readable( $context, $item );
+	}
+
+
 	public function testRestrict()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
@@ -337,6 +358,80 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRestrictSite()
+	{
+		$context = $this->site( 'unittest' );
+		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
+		$filter = $manager->filter()->slice( 0, 100 );
+		$filter->setConditions( $filter->compare( '=~', 'locale.site.code', ['default', 'unittest'] ) );
+
+		$this->object::restrict( $context, $manager, $filter );
+		$codes = $manager->search( $filter )->getCode()->sort()->values()->all();
+
+		$this->assertEquals( ['unittest', 'unittest-child'], $codes );
+	}
+
+
+	public function testRestrictSiteNoPolicy()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'locale/site' );
+		$this->object::restrict( $this->context, $manager, $filter = $manager->filter() );
+
+		$this->assertEquals( $manager->filter()->getConditions(), $filter->getConditions() );
+	}
+
+
+	public function testRestrictSiteSuper()
+	{
+		$view = new \Aimeos\Base\View\Standard();
+		$view->addHelper( 'access', new \Aimeos\Base\View\Helper\Access\All( $view ) );
+		$context = $this->site( '' )->setView( $view );
+
+		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
+		$this->object::restrict( $context, $manager, $filter = $manager->filter() );
+
+		$this->assertEquals( $manager->filter()->getConditions(), $filter->getConditions() );
+	}
+
+
+	public function testRestrictSiteNoUserSite()
+	{
+		$context = $this->site( '' );
+		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
+
+		// users without site would see all sites
+		$this->expectException( \Aimeos\MShop\PolicyException::class );
+		$this->object::restrict( $context, $manager, $manager->filter() );
+	}
+
+
+	public function testVisible()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
+
+		$this->assertTrue( $this->object::visible( $this->context, $manager->create()->setDomain( 'product' ) ) );
+		$this->assertFalse( $this->object::visible( $this->context, $manager->create()->setDomain( 'service' ) ) );
+	}
+
+
+	public function testVisibleSite()
+	{
+		$context = $this->site( 'unittest' );
+		$manager = \Aimeos\MShop::create( $context, 'locale/site' );
+
+		$this->assertTrue( $this->object::visible( $context, $manager->find( 'unittest' ) ) );
+		$this->assertFalse( $this->object::visible( $context, $manager->find( 'default' ) ) );
+	}
+
+
+	public function testVisibleSiteNoPolicy()
+	{
+		$item = \Aimeos\MShop::create( $this->context, 'locale/site' )->find( 'default' );
+
+		$this->assertTrue( $this->object::visible( $this->context, $item ) );
+	}
+
+
 	public function testWithPolicy()
 	{
 		$context = $this->object::context( $this->context );
@@ -353,5 +448,17 @@ class PolicyTraitTest extends \PHPUnit\Framework\TestCase
 		$this->context->setPolicy( $this->object::policy() );
 
 		$this->assertSame( $this->context, $this->object::context( $this->context ) );
+	}
+
+
+	/**
+	 * Returns a context with policy for a user of the given site
+	 */
+	protected function site( string $code ) : \Aimeos\MShop\ContextIface
+	{
+		$siteid = $code ? \Aimeos\MShop::create( $this->context, 'locale/site' )->find( $code )->getSiteId() : '';
+		$user = \Aimeos\MShop::create( $this->context, 'customer' )->create( ['customer.siteid' => $siteid] );
+
+		return $this->object::context( $this->context )->setUser( $user );
 	}
 }

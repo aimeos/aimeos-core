@@ -94,6 +94,11 @@ return array(
 					]
 				]
 			],
+			'decorators' => [
+				'local' => [
+					'Scope' => 'Scope',
+				]
+			],
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_locale_site"

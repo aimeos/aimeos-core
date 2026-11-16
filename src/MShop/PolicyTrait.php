@@ -23,8 +23,9 @@ namespace Aimeos\MShop;
  * - denial(): the exception for an action which isn't allowed, e.g. if checked by allowed() before
  * - forbidden(): the exception for other actions which aren't allowed, e.g. converted policy exceptions
  * - permitted(): which resources of a list the user can execute an action for
- * - readable(): if the user can retrieve a single shared item
- * - restrict(): limits a filter to the shared items the user can retrieve
+ * - readable(): same as visible() but throws the same exception as for missing items if not
+ * - restrict(): limits a filter to the shared items and sites the user can retrieve
+ * - visible(): if the user can retrieve a single shared item or site
  *
  * @package MShop
  */
@@ -146,31 +147,23 @@ trait PolicyTrait
 	/**
 	 * Returns the item if the current user is allowed to retrieve it
 	 *
-	 * Shared items (e.g. prices, texts and media) can contain sensitive data of the
-	 * domain owning them like service provider credentials, so they require the read
-	 * permission of the owning domain. Items without owning domain can be retrieved.
-	 *
 	 * Items the user isn't allowed to retrieve are reported like missing items, so
 	 * their IDs don't reveal which items exist in the domains the user can't access.
-	 * Sub-domains (e.g. "product/property" of property types) are owned by their
-	 * top-level domain because the sub-resources are checked by the entry points.
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context object with the current user
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item to check
 	 * @return \Aimeos\MShop\Common\Item\Iface Passed item
 	 * @throws \Aimeos\MShop\Exception If the user isn't allowed to retrieve the item, same as for missing items
+	 * @see visible()
 	 */
 	public static function readable( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Common\Item\Iface $item ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$type = $item->getResourceType();
-		$domain = (string) $item->get( \Aimeos\MShop\Common\Manager\Decorator\Owner::key( $type ) );
-		$domain = strstr( $domain, '/', true ) ?: $domain;
-
-		// only the owning domain is checked instead of computing all readable domains
-		if( $domain !== '' && ( !static::protects( $context, $domain ) || !static::allowed( $context, $domain, 'get' ) ) ) {
+		if( !static::visible( $context, $item ) )
+		{
 			// same exception as for missing items, so the IDs don't reveal which items exist
 			$msg = $context->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, str_replace( '/', '.', $type ) . '.id', (string) $item->getId() ), 404 );
+			$type = str_replace( '/', '.', $item->getResourceType() );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $type . '.id', (string) $item->getId() ), 404 );
 		}
 
 		return $item;
@@ -180,30 +173,46 @@ trait PolicyTrait
 	/**
 	 * Restricts the filter to the items the current user is allowed to retrieve
 	 *
-	 * Items of sub-domains (e.g. "product/property" of property types) are retrieved
-	 * if the user is allowed to retrieve the items of their top-level domain.
+	 * Same rules as in visible(): shared items of the owning domains the user is allowed
+	 * to retrieve and sites within the site tree of the user.
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context object with the current user
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager the filter is used for
 	 * @param \Aimeos\Base\Criteria\Iface $filter Filter for searching the items which is restricted in place
-	 * @see readable()
+	 * @throws \Aimeos\MShop\PolicyException If the user has no site ID for restricting the sites
+	 * @see visible()
 	 */
 	public static function restrict( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Common\Manager\Iface $manager,
 		\Aimeos\Base\Criteria\Iface $filter ) : void
 	{
-		$key = \Aimeos\MShop\Common\Manager\Decorator\Owner::key( join( '/', $manager->type() ) );
+		\Aimeos\MShop\Locale\SiteScope::limit( $context, $manager, $filter );
+		\Aimeos\MShop\Common\OwnerScope::limit( $manager, $filter, fn() => static::domains( $context ) );
+	}
 
-		if( isset( $manager->getSearchAttributes( false )[$key] ) )
-		{
-			$domains = static::domains( $context );
-			$expr = [$filter->compare( '==', $key, array_merge( [''], $domains ) )];
 
-			if( !empty( $domains ) ) {
-				$expr[] = $filter->compare( '=~', $key, array_map( fn( $domain ) => $domain . '/', $domains ) );
-			}
-
-			$filter->add( $filter->or( $expr ) );
+	/**
+	 * Returns if the current user is allowed to retrieve the item
+	 *
+	 * Shared items (e.g. prices, texts and media) require the read permission of the
+	 * domain owning them (see \Aimeos\MShop\Common\OwnerScope) and sites must be
+	 * within the site tree of the user (see \Aimeos\MShop\Locale\SiteScope).
+	 *
+	 * @param \Aimeos\MShop\ContextIface $context Context object with the current user
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item to check
+	 * @return bool TRUE if the user is allowed to retrieve the item, FALSE if not
+	 * @throws \Aimeos\MShop\PolicyException If the user has no site ID for checking sites
+	 * @see restrict()
+	 */
+	public static function visible( \Aimeos\MShop\ContextIface $context, \Aimeos\MShop\Common\Item\Iface $item ) : bool
+	{
+		if( !\Aimeos\MShop\Locale\SiteScope::visible( $context, $item ) ) {
+			return false;
 		}
+
+		$domain = \Aimeos\MShop\Common\OwnerScope::owner( $item );
+
+		// only the owning domain is checked instead of computing all readable domains
+		return $domain === '' || static::protects( $context, $domain ) && static::allowed( $context, $domain, 'get' );
 	}
 
 

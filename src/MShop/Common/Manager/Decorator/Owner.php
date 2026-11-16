@@ -155,7 +155,7 @@ class Owner
 	 */
 	protected function domains( \Aimeos\Map $items ) : \Aimeos\Map
 	{
-		$key = static::key( $this->resource() );
+		$key = \Aimeos\MShop\Common\OwnerScope::key( $this->resource() );
 		return $items->map( fn( $item ) => $item->get( $key ) );
 	}
 
@@ -176,21 +176,6 @@ class Owner
 
 
 	/**
-	 * Returns the key of the domain owning the items
-	 *
-	 * Shared items store the domain owning them and list items the domain of the referenced
-	 * items in this field. The field must be a search attribute to protect the items.
-	 *
-	 * @param string $resource Resource type of the items, e.g. "price" or "product/lists"
-	 * @return string Item key, e.g. "price.domain" or "product.lists.domain"
-	 */
-	public static function key( string $resource ) : string
-	{
-		return str_replace( '/', '.', $resource ) . '.domain';
-	}
-
-
-	/**
 	 * Returns if the managed items store the domain owning them
 	 *
 	 * Items whose domain field doesn't contain the owning domain are excluded.
@@ -200,8 +185,7 @@ class Owner
 	 */
 	protected function owned() : bool
 	{
-		return $this->owned ??= !$this->unowned()
-			&& isset( $this->getManager()->getSearchAttributes( false )[static::key( $this->resource() )] );
+		return $this->owned ??= !$this->unowned() && \Aimeos\MShop\Common\OwnerScope::shared( $this->getManager() );
 	}
 
 

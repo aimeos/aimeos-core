@@ -142,12 +142,6 @@ class OwnerTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testKey()
-	{
-		$this->assertEquals( 'product.lists.domain', \Aimeos\MShop\Common\Manager\Decorator\Owner::key( 'product/lists' ) );
-	}
-
-
 	public function testListsSave()
 	{
 		$product = $this->product();
