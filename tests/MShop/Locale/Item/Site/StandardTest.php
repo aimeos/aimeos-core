@@ -94,6 +94,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetCodeInvalid()
+	{
+		foreach( ['site2/', 'a/b', 'site2\\', '.', '..'] as $code )
+		{
+			try {
+				$this->object->setCode( $code );
+			} catch( \Aimeos\MShop\Exception $e ) {
+				continue;
+			}
+
+			$this->fail( sprintf( 'Site code "%1$s" accepted', $code ) );
+		}
+
+		$this->assertEquals( 'ExtID', $this->object->getCode() );
+	}
+
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'My Site', $this->object->getLabel() );
