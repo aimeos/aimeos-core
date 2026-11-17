@@ -102,6 +102,58 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCheckConfigBEInvalidUrls()
+	{
+		$attributes = array(
+			'paypalexpress.ApiEndpoint' => 'gopher://127.0.0.1:6379/_FLUSHALL',
+			'paypalexpress.url-validate' => ['https://www.paypal.com/'],
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 'Only HTTPS URLs of PayPal hosts are allowed', $result['paypalexpress.ApiEndpoint'] );
+		$this->assertEquals( 'Only HTTPS URLs of PayPal hosts are allowed', $result['paypalexpress.url-validate'] );
+	}
+
+
+	public function testCheckConfigBEValidUrls()
+	{
+		$attributes = array(
+			'paypalexpress.ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp',
+			'paypalexpress.url-validate' => 'https://www.paypal.com/webscr&cmd=_notify-validate',
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertNull( $result['paypalexpress.ApiEndpoint'] );
+		$this->assertNull( $result['paypalexpress.url-validate'] );
+	}
+
+
+	public static function invalidUrlProvider() : array
+	{
+		return [
+			['gopher://127.0.0.1:6379/_FLUSHALL'],
+			['http://api-3t.paypal.com/nvp'],
+			['https://paypal.com.example.com/nvp'],
+			['https://evilpaypal.com/nvp'],
+			['https://user:pw@api-3t.paypal.com/nvp'],
+			['https://api-3t.paypal.com:6379/nvp'],
+		];
+	}
+
+
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'invalidUrlProvider' )]
+	public function testSendInvalidUrl( string $url )
+	{
+		$object = new \Aimeos\MShop\Service\Provider\Payment\PayPalExpress( $this->context, $this->serviceItem );
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectExceptionMessage( 'Only HTTPS URLs of PayPal hosts are allowed' );
+		$object->send( $url, 'POST', '' );
+	}
+
+
 	public function testIsImplemented()
 	{
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
@@ -212,6 +264,19 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->updatePush( $request, $response );
 		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
+	}
+
+
+	public function testUpdatePushMissingParam()
+	{
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
+
+		$request->expects( $this->once() )->method( 'getQueryParams' )->willReturn( ['txn_id' => '111111111'] );
+		$response->expects( $this->once() )->method( 'withStatus' )->with( $this->equalTo( 400 ) )->willReturn( $response );
+		$this->object->expects( $this->never() )->method( 'send' );
+
+		$this->object->updatePush( $request, $response );
 	}
 
 
