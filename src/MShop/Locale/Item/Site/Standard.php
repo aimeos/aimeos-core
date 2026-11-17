@@ -91,11 +91,20 @@ class Standard
 	/**
 	 * Sets the code of the site.
 	 *
+	 * Site codes are used as directory names in file paths (e.g. import and
+	 * upload directories, sitemap and feed files), so path separators and
+	 * dot segments are rejected to prevent access to directories of other sites.
+	 *
 	 * @param string $code The code to set
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @throws \Aimeos\MShop\Exception If the code is too long, contains path separators, whitespace or control characters or is a dot segment
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
+		if( strpbrk( $code, '/\\' ) !== false || $code === '.' || $code === '..' ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid site code: "%1$s"', $code ) );
+		}
+
 		return $this->set( 'locale.site.code', $this->checkCode( $code, 255 ) );
 	}
 
