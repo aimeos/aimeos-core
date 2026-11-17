@@ -210,8 +210,18 @@ class PayPalExpress
 	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
+		$errors = array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
 
-		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+		foreach( ['paypalexpress.ApiEndpoint', 'paypalexpress.url-validate'] as $key )
+		{
+			$value = $attributes[$key] ?? null;
+
+			if( $value !== null && ( !is_string( $value ) || !$this->isPayPalUrl( $value ) ) ) {
+				$errors[$key] = $this->context()->translate( 'mshop', 'Only HTTPS URLs of PayPal hosts are allowed' );
+			}
+		}
+
+		return $errors;
 	}
 
 
@@ -405,8 +415,12 @@ class PayPalExpress
 	{
 		$params = $request->getQueryParams();
 
-		if( !isset( $params['txn_id'] ) ) { //tid from ipn
-			return $response->withStatus( 400, 'PayPal Express: Parameter "txn_id" is missing' );
+		// check before contacting PayPal to avoid outgoing requests for incomplete notifications
+		foreach( ['txn_id', 'invoice', 'payment_status', 'receiver_email', 'payment_amount'] as $name )
+		{
+			if( !isset( $params[$name] ) ) {
+				return $response->withStatus( 400, sprintf( 'PayPal Express: Parameter "%1$s" is missing', $name ) );
+			}
 		}
 
 		$urlQuery = http_build_query( $params, '', '&' );
@@ -844,6 +858,18 @@ class PayPalExpress
 
 
 	/**
+	 * Tests if the URL is a HTTPS URL pointing to a PayPal host
+	 *
+	 * @param string $url URL to test
+	 * @return bool TRUE if the URL is allowed, FALSE if not
+	 */
+	protected function isPayPalUrl( string $url ) : bool
+	{
+		return preg_match( '#^https://([a-z0-9-]+\.)*paypal\.com(/|$)#i', $url ) === 1;
+	}
+
+
+	/**
 	 * Sends request parameters to the providers interface.
 	 *
 	 * @param string $target Receivers address e.g. url.
@@ -853,39 +879,30 @@ class PayPalExpress
 	 */
 	public function send( string $target, string $method, string $payload ) : string
 	{
+		if( !$this->isPayPalUrl( $target ) )
+		{
+			$msg = $this->context()->translate( 'mshop', 'Only HTTPS URLs of PayPal hosts are allowed' );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
+		}
+
 		if( ( $curl = curl_init() ) === false ) {
 			throw new \Aimeos\MShop\Service\Exception( 'Could not initialize curl' );
 		}
 
-		try
+		curl_setopt( $curl, CURLOPT_URL, $target );
+
+		curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, strtoupper( $method ) );
+		curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
+		curl_setopt( $curl, CURLOPT_TIMEOUT, 60 );
+		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true ); // return data as string
+
+		curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
+
+		if( ( $response = curl_exec( $curl ) ) === false )
 		{
-			curl_setopt( $curl, CURLOPT_URL, $target );
-
-			curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, strtoupper( $method ) );
-			curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
-			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
-			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true ); // return data as string
-
-			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
-
-			if( ( $response = curl_exec( $curl ) ) === false )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Sending order failed: "%1$s"' );
-				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_error( $curl ) ) );
-			}
-
-			if( curl_errno( $curl ) )
-			{
-				$msg = $this->context()->translate( 'mshop', 'Curl error: "%1$s" - "%2$s"' );
-				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_errno( $curl ), curl_error( $curl ) ) );
-			}
-
-			curl_close( $curl );
-		}
-		catch( \Exception $e )
-		{
-			curl_close( $curl );
-			throw $e;
+			$msg = $this->context()->translate( 'mshop', 'Sending order failed: "%1$s"' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_error( $curl ) ) );
 		}
 
 		return $response;
