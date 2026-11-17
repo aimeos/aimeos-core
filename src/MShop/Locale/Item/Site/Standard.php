@@ -61,11 +61,20 @@ class Standard
 	/**
 	 * Sets the code of the site.
 	 *
+	 * Site codes are used as directory names in file paths (e.g. import and
+	 * upload directories, sitemap and feed files), so path separators and
+	 * dot segments are rejected to prevent access to directories of other sites.
+	 *
 	 * @param string $code The code to set
 	 * @return static Locale site item for chaining method calls
+	 * @throws \RuntimeException If the code is too long, contains path separators, whitespace or control characters or is a dot segment
 	 */
 	public function setCode( string $code ) : static
 	{
+		if( strpbrk( $code, '/\\' ) !== false || $code === '.' || $code === '..' ) {
+			throw new \RuntimeException( sprintf( 'Invalid site code: "%1$s"', $code ) );
+		}
+
 		return $this->set( 'locale.site.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
 
