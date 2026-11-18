@@ -23,7 +23,6 @@ class Standard
 	extends Base
 	implements \Aimeos\MShop\Media\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	use \Aimeos\MShop\Upload;
 	use Preview;
 
 

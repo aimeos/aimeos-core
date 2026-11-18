@@ -667,9 +667,50 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
 
-		$this->expectException( \Aimeos\MShop\Media\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->access( 'sanitize' )->invokeArgs( $object, ['no svg <', 'image/svg+xml'] );
 	}
+
+	public function testStoreFile()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$file = new \Nyholm\Psr7\UploadedFile( \Nyholm\Psr7\Stream::create( 'test' ), 4, UPLOAD_ERR_OK, 'test.txt' );
+		$fs = $this->context->fs( 'fs-media' );
+
+		$this->access( 'storeFile' )->invokeArgs( $object, [$file, 'upload-test.txt'] );
+		$result = $fs->read( 'upload-test.txt' );
+		$fs->rm( 'upload-test.txt' );
+
+		$this->assertEquals( 'test', $result );
+	}
+
+
+	public function testStoreFileSvg()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$svg = '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script><rect width="1"/></svg>';
+		$file = new \Nyholm\Psr7\UploadedFile( \Nyholm\Psr7\Stream::create( $svg ), strlen( $svg ), UPLOAD_ERR_OK, 'test.svg' );
+		$fs = $this->context->fs( 'fs-media' );
+
+		$this->access( 'storeFile' )->invokeArgs( $object, [$file, 'upload-test.svg'] );
+		$result = $fs->read( 'upload-test.svg' );
+		$fs->rm( 'upload-test.svg' );
+
+		$this->assertStringContainsString( '<rect width="1"', $result );
+		$this->assertStringNotContainsString( 'script', $result );
+	}
+
+	public function testStoreFileUnknownType()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$stream = $this->createStub( \Psr\Http\Message\StreamInterface::class );
+		$stream->method( 'isSeekable' )->willReturn( false );
+		$file = new \Nyholm\Psr7\UploadedFile( $stream, 4, UPLOAD_ERR_OK, 'test.svg' );
+
+		$this->expectException( \RuntimeException::class );
+		$this->access( 'storeFile' )->invokeArgs( $object, [$file, 'upload-test.svg'] );
+	}
+
 
 	protected function access( $name )
 	{

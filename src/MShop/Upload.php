@@ -104,9 +104,45 @@ trait Upload
 			$fs->mkdir( $dirname );
 		}
 
-		// @phpstan-ignore argument.type
-		$fs->writes( $filepath, $file->getStream()->detach() );
+		if( ( $mime = $this->mimetype( $file ) ) === '' ) {
+			throw new \RuntimeException( 'Unable to determine the file type of the uploaded file' );
+		}
+
+		if( strncmp( 'image/svg', $mime, 9 ) === 0 ) {
+			$fs->write( $filepath, $this->sanitizeSvg( (string) $file->getStream() ) );
+		} else {
+			// @phpstan-ignore argument.type
+			$fs->writes( $filepath, $file->getStream()->detach() );
+		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Removes scripts and other unsafe content from the SVG image
+	 *
+	 * @param string $content SVG image content
+	 * @return string Sanitized SVG image content
+	 * @throws \Aimeos\MShop\Exception If the SVG image is invalid
+	 */
+	protected function sanitizeSvg( string $content ) : string
+	{
+		$sanitizer = new \enshrined\svgSanitize\Sanitizer();
+		$sanitizer->removeRemoteReferences( true );
+
+		$msg = $this->context()->translate( 'mshop', 'Invalid SVG file: %1$s' );
+
+		try {
+			$result = $sanitizer->sanitize( $content );
+		} catch( \Throwable $t ) { // svg-sanitize throws on some malformed input
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $t->getMessage() ), previous: $t );
+		}
+
+		if( $result === false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $sanitizer->getXmlIssues(), true ) ) );
+		}
+
+		return $result;
 	}
 }

@@ -10,7 +10,6 @@
 
 namespace Aimeos\MShop\Media\Manager;
 
-use \enshrined\svgSanitize\Sanitizer;
 use \Intervention\Image\Interfaces\ImageInterface;
 
 
@@ -22,6 +21,8 @@ use \Intervention\Image\Interfaces\ImageInterface;
  */
 abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Upload;
+
 	/**
 	 * Checks if the mime type is allowed
 	 *
@@ -191,22 +192,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function sanitize( string $content, string $mimetype ) : string
 	{
-		if( strncmp( 'image/svg', $mimetype, 9 ) === 0 )
-		{
-			$sanitizer = new Sanitizer();
-			$sanitizer->removeRemoteReferences( true );
-
-			$msg = $this->context()->translate( 'mshop', 'Invalid SVG file: %1$s' );
-
-			try {
-				$content = $sanitizer->sanitize( $content );
-			} catch( \Throwable $t ) { // svg-sanitize throws on some malformed input
-				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, $t->getMessage() ), previous: $t );
-			}
-
-			if( $content === false ) {
-				throw new \Aimeos\MShop\Media\Exception( sprintf( $msg, print_r( $sanitizer->getXmlIssues(), true ) ) );
-			}
+		if( strncmp( 'image/svg', $mimetype, 9 ) === 0 ) {
+			$content = $this->sanitizeSvg( $content );
 		}
 
 		if( $fcn = self::macro( 'sanitize' ) ) {
