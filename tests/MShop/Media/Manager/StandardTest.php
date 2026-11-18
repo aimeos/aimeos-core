@@ -431,8 +431,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->upload( $this->object->create(), $file );
 
-		$this->assertStringEndsWith( '_test-php', $result->getUrl() );
-		$this->context->fs( 'fs-media' )->rm( $result->getUrl() );
+		try
+		{
+			$this->assertStringEndsWith( '_test-php', $result->getUrl() );
+		}
+		finally
+		{
+			$this->context->fs( 'fs-media' )->rm( $result->getUrl() );
+		}
 	}
 
 

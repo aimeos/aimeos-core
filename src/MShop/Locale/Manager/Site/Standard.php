@@ -642,7 +642,10 @@ class Standard
 	 * site owners can still save sites whose configuration contains settings added by super
 	 * users before. Only nested keys are used from the passed configuration.
 	 *
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Site item with the new configuration
+	 * The configuration of the passed item is replaced by the restricted one, so the caller's
+	 * item contains the restricted configuration afterwards even if storing it fails.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Site item with the new configuration, will be modified
 	 * @param string|null $id ID of the stored site whose configuration is used or NULL for new sites
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item with the restricted configuration
 	 */
