@@ -203,16 +203,20 @@ abstract class Base
 	 */
 	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		// workaround for NULL values instead of empty strings and stringified integers from database
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
-			|| $value === null && $this->bdata[$name] !== null
-			|| $value !== null && $this->bdata[$name] === null
-		) {
-			$this->bdata[$name] = $value;
-			$this->setModified();
+		if( array_key_exists( $name, $this->bdata ) )
+		{
+			$old = $this->bdata[$name];
+
+			// numbers are compared loosely to numeric strings because the database may return them as strings
+			$loose = is_numeric( $old ) && is_numeric( $value ) && !( is_string( $old ) && is_string( $value ) );
+
+			if( $loose ? $old == $value : $old === $value ) {
+				return $this;
+			}
 		}
 
-		return $this;
+		$this->bdata[$name] = $value;
+		return $this->setModified();
 	}
 
 
