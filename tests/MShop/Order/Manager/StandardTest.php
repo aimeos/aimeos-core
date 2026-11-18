@@ -913,6 +913,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveCouponsExisting()
+	{
+		$ref = ['order/address', 'order/product', 'order/service'];
+
+		$search = $this->object->filter()->add( ['order.price' => '53.50'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
+
+		$basket = $this->getBasket( $item->getId(), $ref, true );
+		$basket->addCoupon( 'CDEF' );
+		$basket->addCoupon( '90AB' );
+		$this->object->save( $basket );
+
+		$manager = $this->object->getSubManager( 'coupon' );
+		$filter = $manager->filter()->add( 'order.coupon.parentid', '==', $basket->getId() );
+		$expected = count( $manager->search( $filter ) );
+
+		$ref[] = 'order/coupon';
+		$newBasket = $this->object->get( $basket->getId(), $ref );
+		$this->object->save( $newBasket->setComment( 'save again' ) );
+		$this->object->save( $newBasket->setComment( 'and again' ) );
+
+		$actual = count( $manager->search( $filter ) );
+		$this->object->delete( $basket->getId() );
+
+		$this->assertGreaterThan( 0, $expected );
+		$this->assertEquals( $expected, $actual );
+	}
+
+
 	public function testSaveStatus()
 	{
 		$item = $this->getOrderItem();
