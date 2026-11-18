@@ -184,7 +184,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			{
 				foreach( $items[$code] ?? [] as $prodItem )
 				{
-					if( $product->getId() === $prodItem->getId() ) {
+					if( $product->getId() === $prodItem->getProductId() ) {
 						continue 2;
 					}
 				}
