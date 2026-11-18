@@ -509,6 +509,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetFilePathRemovesDots()
+	{
+		$this->context->config()->set( 'controller/common/media/extensions', [] );
+
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( 'test.php.', 'files', 'image/gif' ) );
+		$this->assertStringEndsWith( '_test-php', $result );
+	}
+
+
 	public function testGetMediaFile()
 	{
 		$result = $this->access( 'getMediaFile' )->invokeArgs( $this->object, array( __FILE__ ) );

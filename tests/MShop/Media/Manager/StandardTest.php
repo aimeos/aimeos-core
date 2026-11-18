@@ -483,6 +483,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPathRemovesDots()
+	{
+		$this->context->config()->set( 'controller/common/media/extensions', [] );
+
+		$result = $this->access( 'getPath' )->invokeArgs( $this->object, array( 'test.php.', 'image/gif', 'product' ) );
+		$this->assertStringEndsWith( '_test-php', $result );
+	}
+
+
 	protected function access( $name )
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Media\Manager\Standard::class );
