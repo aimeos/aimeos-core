@@ -640,7 +640,8 @@ class Standard
 	 * "mshop/locale/manager/site/allowed". All other keys are taken from the stored site
 	 * configuration, so they can't be changed in any way (values, types or flat keys) and
 	 * site owners can still save sites whose configuration contains settings added by super
-	 * users before. Only nested keys are used from the passed configuration.
+	 * users before. Only nested keys are used from the passed configuration and allowed keys
+	 * which aren't passed are removed, so the application configuration applies again.
 	 *
 	 * The configuration of the passed item is replaced by the restricted one, so the caller's
 	 * item contains the restricted configuration afterwards even if storing it fails.
@@ -655,20 +656,57 @@ class Standard
 			return $item;
 		}
 
-		$stored = $this->create();
+		$new = $item->getConfig();
+		$config = $this->storedConfig( $id );
 
-		if( $id !== null ) {
-			$stored->setConfig( (array) $this->search( $this->filter()->add( 'locale.site.id', '==', $id ) )->call( 'getConfig' )->first( [] ) );
+		foreach( $this->allowedConfig() as $key ) {
+			$config = $this->replaceConfig( $config, $new, explode( '/', trim( $key, '/' ) ) );
 		}
 
-		foreach( $this->allowedConfig() as $key )
+		return $item->setConfig( $config );
+	}
+
+
+	/**
+	 * Replaces the value of the key path in the configuration by the one from the new configuration
+	 *
+	 * The key path is removed if the new configuration doesn't contain a value for it, including
+	 * parent keys which become empty by that. Parent keys which are not arrays in the configuration
+	 * are only replaced if there's a value to store.
+	 *
+	 * @param array $config Configuration whose value is replaced
+	 * @param array $new Configuration containing the new value
+	 * @param string[] $parts Key path parts like ["resource", "email"]
+	 * @return array Configuration with the replaced value
+	 */
+	protected function replaceConfig( array $config, array $new, array $parts ) : array
+	{
+		$part = array_shift( $parts );
+		$value = $new[$part] ?? null;
+
+		if( empty( $parts ) )
 		{
-			if( ( $value = $item->getConfigValue( $key ) ) !== null || $stored->getConfigValue( $key ) !== null ) {
-				$stored->setConfigValue( $key, $value );
+			if( $value !== null ) {
+				$config[$part] = $value;
+			} else {
+				unset( $config[$part] );
 			}
+
+			return $config;
 		}
 
-		return $item->setConfig( $stored->getConfig() );
+		$current = $config[$part] ?? null;
+		$sub = $this->replaceConfig( is_array( $current ) ? $current : [], is_array( $value ) ? $value : [], $parts );
+
+		// keep values below and empty parents, remove parents only containing the removed key
+		// and leave scalar or missing parents unchanged if there's nothing to store below them
+		if( $sub !== [] || $current === [] ) {
+			$config[$part] = $sub;
+		} elseif( is_array( $current ) ) {
+			unset( $config[$part] );
+		}
+
+		return $config;
 	}
 
 
@@ -710,6 +748,22 @@ class Standard
 		$siteAllowed = (array) $context->locale()->getSiteItem()->getConfigValue( $key, [] );
 
 		return array_filter( array_keys( array_diff_key( $configured, $siteAllowed ) ), 'is_string' );
+	}
+
+
+	/**
+	 * Returns the configuration of the stored site
+	 *
+	 * @param string|null $id ID of the stored site or NULL for new sites
+	 * @return array Stored site configuration or an empty array for new sites
+	 */
+	protected function storedConfig( ?string $id ) : array
+	{
+		if( $id === null ) {
+			return [];
+		}
+
+		return $this->search( $this->filter()->add( 'locale.site.id', '==', $id ) )->call( 'getConfig' )->first( [] );
 	}
 
 

@@ -63,13 +63,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function saveConfig( array $stored, array $config ) : array
+	/**
+	 * Stores the site configuration and returns the one from the database
+	 *
+	 * Without $update, the configuration is inserted by the non-super user. Otherwise, it's inserted
+	 * by a super user and the non-super user saves the site with the configuration from $update.
+	 */
+	protected function storeConfig( array $config, ?array $update = null ) : array
 	{
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-config' )->setLabel( 'unittest' )->setConfig( $stored ) );
+		$manager = $update === null ? $this->object : $this->super();
+		$item = $manager->insert( $this->object->create()->setCode( 'unittest-config' )->setLabel( 'unittest' )->setConfig( $config ) );
 
 		try
 		{
-			$this->object->save( $item->setLabel( 'unittest2' )->setConfig( $config ) );
+			if( $update !== null ) {
+				$this->object->save( $item->setConfig( $update ) );
+			}
+
 			return $this->object->get( $item->getId() )->getConfig();
 		}
 		finally
@@ -82,24 +92,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
 	public function testInsertIgnoresRestrictedConfig( string $key, $value, array $expected )
 	{
-		$item = $this->object->create()->setCode( 'unittest-insert' )->setLabel( 'unittest' )->setConfig( [$key => $value] );
-		$item = $this->object->insert( $item );
-
-		try
-		{
-			$this->assertEquals( $expected, $this->object->get( $item->getId() )->getConfig() );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
+		$this->assertEquals( $expected, $this->storeConfig( [$key => $value] ) );
 	}
 
 
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
 	public function testSaveIgnoresRestrictedConfig( string $key, $value, array $expected )
 	{
-		$this->assertEquals( $expected, $this->saveConfig( [], [$key => $value] ) );
+		$this->assertEquals( $expected, $this->storeConfig( [], [$key => $value] ) );
 	}
 
 
@@ -116,7 +116,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$result[$prefix . ' prefix'] = [$prefix . '-custom', 'value', []];
 		}
 
-		$result['resource with email'] = ['resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']], ['resource' => ['email' => ['from-email' => 'a@b.c']]]];
+		$result['resource with email'] = [
+			'resource',
+			['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']],
+			['resource' => ['email' => ['from-email' => 'a@b.c']]]
+		];
 		$result['resource email prefix nested'] = ['resource', ['emails' => ['from-email' => 'a@b.c']], []];
 		$result['resource email prefix flat'] = ['resource/email-custom', 'value', []];
 		$result['resource empty'] = ['resource', [], []];
@@ -128,29 +132,42 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAllowsEmailConfig()
 	{
 		$config = ['resource' => ['email' => ['from-email' => 'a@b.c', 'from-name' => 'Shop']]];
-		$this->assertEquals( $config, $this->saveConfig( [], $config ) );
+		$this->assertEquals( $config, $this->storeConfig( [], $config ) );
 	}
 
 
 	public function testIgnoresFlatEmailConfig()
 	{
-		$this->assertEquals( [], $this->saveConfig( [], ['resource/email/from-email' => 'a@b.c'] ) );
+		$this->assertEquals( [], $this->storeConfig( [], ['resource/email/from-email' => 'a@b.c'] ) );
 	}
 
 
 	public function testRemovesEmailConfig()
 	{
 		$config = ['resource' => ['email' => ['from-email' => 'a@b.c']]];
-		$this->assertEquals( ['resource' => ['email' => null]], $this->saveConfig( $config, [] ) );
+		$this->assertEquals( [], $this->storeConfig( $config, [] ) );
+	}
+
+
+	public function testRemovesEmailConfigKeepsOthers()
+	{
+		$config = ['resource' => ['db' => ['host' => 'x'], 'email' => ['from-email' => 'a@b.c']]];
+		$this->assertEquals( ['resource' => ['db' => ['host' => 'x']]], $this->storeConfig( $config, [] ) );
+	}
+
+
+	public function testKeepsStoredScalarConfig()
+	{
+		$this->assertEquals( ['resource' => 'x'], $this->storeConfig( ['resource' => 'x'], [] ) );
 	}
 
 
 	public function testKeepsStoredConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
-		$result = $this->saveConfig( $config, ['resource' => ['email' => ['from-email' => 'b@c.d']]] );
+		$expected = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'b@c.d']]];
 
-		$this->assertEquals( ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'b@c.d']]], $result );
+		$this->assertEquals( $expected, $this->storeConfig( $config, ['resource' => ['email' => ['from-email' => 'b@c.d']]] ) );
 	}
 
 
@@ -161,37 +178,37 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		// values like the site form submits them after json_decode(), trim() and dropping empty ones
 		$form = ['client' => ['html' => ['c' => 1.5, 'd' => true, 'e' => 'x', 'f' => ['g' => 1]]]];
 
-		$this->assertSame( $config, $this->saveConfig( $config, $form ) );
+		$this->assertSame( $config, $this->storeConfig( $config, $form ) );
 	}
 
 
 	public function testIgnoresChangedConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 'admin']]];
-		$this->assertSame( $config, $this->saveConfig( $config, ['client' => ['html' => ['x' => true]]] ) );
+		$this->assertSame( $config, $this->storeConfig( $config, ['client' => ['html' => ['x' => true]]] ) );
 	}
 
 
 	public function testIgnoresHiddenConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]]];
-		$this->assertEquals( $config, $this->saveConfig( $config, ['client' => ['html' => ['x' => 2]], 'client/html/x' => 1] ) );
+		$this->assertEquals( $config, $this->storeConfig( $config, ['client' => ['html' => ['x' => 2]], 'client/html/x' => 1] ) );
 	}
 
 
 	public function testIgnoresJsonEncodedConfig()
 	{
 		$config = ['mshop' => ['media' => ['manager' => ['extensions' => ['application/pdf' => 'pdf']]]]];
-		$result = $this->saveConfig( $config, ['mshop' => ['media' => ['manager' => ['extensions' => '{"application/pdf":"pdf"}']]]] );
+		$update = ['mshop' => ['media' => ['manager' => ['extensions' => '{"application/pdf":"pdf"}']]]];
 
-		$this->assertSame( $config, $result );
+		$this->assertSame( $config, $this->storeConfig( $config, $update ) );
 	}
 
 
-	public function testIgnoresRemovedConfig()
+	public function testKeepsUnsubmittedConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
-		$this->assertEquals( $config, $this->saveConfig( $config, ['resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
+		$this->assertEquals( $config, $this->storeConfig( $config, ['resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
 	}
 
 
@@ -201,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + ['client/html' => 'client/html'] );
 
 		$config = ['client' => ['html' => ['x' => 1]]];
-		$this->assertEquals( $config, $this->saveConfig( [], $config ) );
+		$this->assertEquals( $config, $this->storeConfig( [], $config ) );
 	}
 
 
@@ -213,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + $entry );
 		$this->context->locale()->getSiteItem()->setConfigValue( 'mshop/locale/manager/site/allowed', $entry );
 
-		$this->assertEquals( [], $this->saveConfig( [], ['client' => ['html' => ['x' => 1]]] ) );
+		$this->assertEquals( [], $this->storeConfig( [], ['client' => ['html' => ['x' => 1]]] ) );
 	}
 
 

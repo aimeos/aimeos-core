@@ -205,15 +205,20 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function set( string $name, $value ) : static
 	{
-		// numbers are compared loosely because the database returns them as strings
-		if( !array_key_exists( $name, $this->bdata ) || ( is_numeric( $value ) && is_numeric( $this->bdata[$name] )
-			? $this->bdata[$name] != $value : $this->bdata[$name] !== $value )
-		) {
-			$this->bdata[$name] = $value;
-			$this->setModified();
+		if( array_key_exists( $name, $this->bdata ) )
+		{
+			$old = $this->bdata[$name];
+
+			// numbers are compared loosely to numeric strings because the database may return them as strings
+			$loose = is_numeric( $old ) && is_numeric( $value ) && !( is_string( $old ) && is_string( $value ) );
+
+			if( $loose ? $old == $value : $old === $value ) {
+				return $this;
+			}
 		}
 
-		return $this;
+		$this->bdata[$name] = $value;
+		return $this->setModified();
 	}
 
 

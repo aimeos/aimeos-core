@@ -422,12 +422,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testUploadNoExtension()
+	public function testUploadRemovesDots()
 	{
 		$this->context->config()->set( 'mshop/media/manager/extensions', [] );
 
-		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
-		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.php.' );
+		$path = __DIR__ . '/_testfiles/test.gif';
+		$file = new \Nyholm\Psr7\UploadedFile( $path, filesize( $path ), UPLOAD_ERR_OK, 'test.php.' );
 
 		$result = $this->object->upload( $this->object->create(), $file );
 

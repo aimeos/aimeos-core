@@ -152,8 +152,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$list = $context->config()->get( 'mshop/media/manager/extensions', $default );
 
 		$filename = basename( $filepath );
-		// never keep other extensions like ".php" from "test.php.jpg" or "test.php." in the file name
-		$filename = strtr( \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) ), '.', '-' );
+		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
+		// replace all dots so no other extension like ".php" from "test.php.jpg" or "test.php." is kept
+		$filename = strtr( $filename, '.', '-' );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
 		$ext = isset( $list[$mimetype] ) ? '.' . $list[$mimetype] : '';
