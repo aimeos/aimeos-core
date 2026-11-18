@@ -63,39 +63,43 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
-	public function testInsertRejectsRestrictedConfig( string $key, $value )
+	protected function saveConfig( array $stored, array $config ) : array
 	{
-		$item = $this->object->create()->setCode( 'unittest-insert' )->setLabel( 'unittest' )->setConfig( [$key => $value] );
+		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-config' )->setLabel( 'unittest' )->setConfig( $stored ) );
 
 		try
 		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->insert( $item );
+			$this->object->save( $item->setLabel( 'unittest2' )->setConfig( $config ) );
+			return $this->object->get( $item->getId() )->getConfig();
 		}
 		finally
 		{
-			if( $item->getId() ) {
-				$this->super()->delete( $item->getId() );
-			}
+			$this->object->delete( $item->getId() );
 		}
 	}
 
 
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
-	public function testSaveRejectsRestrictedConfig( string $key, $value )
+	public function testInsertIgnoresRestrictedConfig( string $key, $value, array $expected )
 	{
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-save' )->setLabel( 'unittest' ) );
+		$item = $this->object->create()->setCode( 'unittest-insert' )->setLabel( 'unittest' )->setConfig( [$key => $value] );
+		$item = $this->object->insert( $item );
 
 		try
 		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->save( $item->setConfig( [$key => $value] ) );
+			$this->assertEquals( $expected, $this->object->get( $item->getId() )->getConfig() );
 		}
 		finally
 		{
-			$this->super()->delete( $item->getId() );
+			$this->object->delete( $item->getId() );
 		}
+	}
+
+
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'restrictedConfigProvider' )]
+	public function testSaveIgnoresRestrictedConfig( string $key, $value, array $expected )
+	{
+		$this->assertEquals( $expected, $this->saveConfig( [], [$key => $value] ) );
 	}
 
 
@@ -105,180 +109,89 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( ['resource', 'madmin', 'mshop', 'admin/jqadm/resource', 'controller/frontend'] as $prefix )
 		{
-			$result[$prefix . ' nested'] = [$prefix, ['manager' => ['name' => 'Custom']]];
-			$result[$prefix . ' flat'] = [$prefix . '/manager/name', 'Custom'];
-			$result[$prefix . ' leading slash'] = ['/' . $prefix . '/manager/name', 'Custom'];
-			$result[$prefix . ' surrounding slashes'] = ['//' . $prefix . '//', ['manager' => ['name' => 'Custom']]];
-			$result[$prefix . ' prefix'] = [$prefix . '-custom', 'value'];
+			$result[$prefix . ' nested'] = [$prefix, ['manager' => ['name' => 'Custom']], []];
+			$result[$prefix . ' flat'] = [$prefix . '/manager/name', 'Custom', []];
+			$result[$prefix . ' leading slash'] = ['/' . $prefix . '/manager/name', 'Custom', []];
+			$result[$prefix . ' surrounding slashes'] = ['//' . $prefix . '//', ['manager' => ['name' => 'Custom']], []];
+			$result[$prefix . ' prefix'] = [$prefix . '-custom', 'value', []];
 		}
 
-		$result['resource with email'] = ['resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']]];
-		$result['resource email prefix nested'] = ['resource', ['emails' => ['from-email' => 'a@b.c']]];
-		$result['resource email prefix flat'] = ['resource/email-custom', 'value'];
-		$result['resource empty'] = ['resource', []];
+		$result['resource with email'] = ['resource', ['email' => ['from-email' => 'a@b.c'], 'db' => ['host' => 'x']], ['resource' => ['email' => ['from-email' => 'a@b.c']]]];
+		$result['resource email prefix nested'] = ['resource', ['emails' => ['from-email' => 'a@b.c']], []];
+		$result['resource email prefix flat'] = ['resource/email-custom', 'value', []];
+		$result['resource empty'] = ['resource', [], []];
 
 		return $result;
 	}
 
 
-	#[\PHPUnit\Framework\Attributes\DataProvider( 'emailConfigProvider' )]
-	public function testAllowsEmailConfig( array $config )
+	public function testAllowsEmailConfig()
 	{
-		$item = $this->object->create()->setCode( 'unittest-email' )->setLabel( 'unittest' )->setConfig( $config );
-		$item = $this->object->insert( $item );
-
-		try
-		{
-			$item = $this->object->save( $item->setConfig( $config + ['resource' => ['email' => ['reply-name' => 'x']]] ) );
-			$result = $this->object->get( $item->getId() )->getConfig();
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
-
-		$this->assertEquals( $config + ['resource' => ['email' => ['reply-name' => 'x']]], $result );
+		$config = ['resource' => ['email' => ['from-email' => 'a@b.c', 'from-name' => 'Shop']]];
+		$this->assertEquals( $config, $this->saveConfig( [], $config ) );
 	}
 
 
-	public function testAllowsStoredConfig()
+	public function testIgnoresFlatEmailConfig()
+	{
+		$this->assertEquals( [], $this->saveConfig( [], ['resource/email/from-email' => 'a@b.c'] ) );
+	}
+
+
+	public function testRemovesEmailConfig()
+	{
+		$config = ['resource' => ['email' => ['from-email' => 'a@b.c']]];
+		$this->assertEquals( ['resource' => ['email' => null]], $this->saveConfig( $config, [] ) );
+	}
+
+
+	public function testKeepsStoredConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-stored' )->setLabel( 'unittest' )->setConfig( $config ) );
-
-		try
-		{
-			$this->object->save( $item->setConfigValue( 'resource/email/from-email', 'b@c.d' ) );
-			$result = $this->object->get( $item->getId() )->getConfig();
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
+		$result = $this->saveConfig( $config, ['resource' => ['email' => ['from-email' => 'b@c.d']]] );
 
 		$this->assertEquals( ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'b@c.d']]], $result );
 	}
 
 
-	public function testAllowsStoredScalarConfig()
-	{
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-scalar' )->setLabel( 'unittest' )->setConfig( ['client' => ['html' => ['x' => 1]]] ) );
-
-		try
-		{
-			$this->object->save( $item->setConfig( ['client' => ['html' => ['x' => '1']], 'resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
-			$result = $this->object->get( $item->getId() )->getConfig();
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
-
-		$this->assertEquals( ['client' => ['html' => ['x' => '1']], 'resource' => ['email' => ['from-email' => 'a@b.c']]], $result );
-	}
-
-
-	public function testRejectsHiddenConfig()
-	{
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-hidden' )->setLabel( 'unittest' )->setConfig( ['client' => ['html' => ['x' => 1]]] ) );
-
-		try
-		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->save( $item->setConfig( ['client' => ['html' => ['x' => 2]], 'client/html/x' => 1] ) );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
-	}
-
-
-	public function testRejectsFlattenedConfig()
-	{
-		$config = ['admin' => ['jqadm' => ['resource' => ['customer' => ['groups' => ['admin']]]]]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-flattened' )->setLabel( 'unittest' )->setConfig( $config ) );
-
-		try
-		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->save( $item->setConfig( ['admin/jqadm/resource/customer/groups' => ['admin']] ) );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
-	}
-
-
-	public function testAllowsStoredFalsyConfig()
-	{
-		$config = ['client' => ['html' => ['a' => 0, 'b' => false, 'c' => '0']]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-falsy' )->setLabel( 'unittest' )->setConfig( $config ) );
-
-		try
-		{
-			$item = $this->object->save( $item->setLabel( 'unittest2' )->setConfig( ['client' => ['html' => ['a' => '0', 'b' => false, 'c' => '0']]] ) );
-			$this->assertEquals( 'unittest2', $item->getLabel() );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
-	}
-
-
-	public function testAllowsFormSubmittedConfig()
+	public function testKeepsStoredFormConfig()
 	{
 		$config = ['client' => ['html' => ['a' => null, 'b' => [], 'c' => '1.50', 'd' => 'true', 'e' => ' x', 'f' => '{"g":1}']]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-form' )->setLabel( 'unittest' )->setConfig( $config ) );
 
 		// values like the site form submits them after json_decode(), trim() and dropping empty ones
 		$form = ['client' => ['html' => ['c' => 1.5, 'd' => true, 'e' => 'x', 'f' => ['g' => 1]]]];
 
-		try
-		{
-			$item = $this->object->save( $item->setLabel( 'unittest2' )->setConfig( $form ) );
-			$this->assertEquals( 'unittest2', $item->getLabel() );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
+		$this->assertSame( $config, $this->saveConfig( $config, $form ) );
 	}
 
 
-	public function testRejectsChangedFormConfig()
+	public function testIgnoresChangedConfig()
 	{
-		$config = ['client' => ['html' => ['c' => '1.50']]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-formchange' )->setLabel( 'unittest' )->setConfig( $config ) );
-
-		try
-		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->save( $item->setConfig( ['client' => ['html' => ['c' => '1.51']]] ) );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
+		$config = ['client' => ['html' => ['x' => 'admin']]];
+		$this->assertSame( $config, $this->saveConfig( $config, ['client' => ['html' => ['x' => true]]] ) );
 	}
 
 
-	public function testRejectsRemovedConfig()
+	public function testIgnoresHiddenConfig()
+	{
+		$config = ['client' => ['html' => ['x' => 1]]];
+		$this->assertEquals( $config, $this->saveConfig( $config, ['client' => ['html' => ['x' => 2]], 'client/html/x' => 1] ) );
+	}
+
+
+	public function testIgnoresJsonEncodedConfig()
+	{
+		$config = ['mshop' => ['media' => ['manager' => ['extensions' => ['application/pdf' => 'pdf']]]]];
+		$result = $this->saveConfig( $config, ['mshop' => ['media' => ['manager' => ['extensions' => '{"application/pdf":"pdf"}']]]] );
+
+		$this->assertSame( $config, $result );
+	}
+
+
+	public function testIgnoresRemovedConfig()
 	{
 		$config = ['client' => ['html' => ['x' => 1]], 'resource' => ['email' => ['from-email' => 'a@b.c']]];
-		$item = $this->super()->insert( $this->object->create()->setCode( 'unittest-removed' )->setLabel( 'unittest' )->setConfig( $config ) );
-
-		try
-		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->save( $item->setConfig( ['resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
-		}
-		finally
-		{
-			$this->object->delete( $item->getId() );
-		}
+		$this->assertEquals( $config, $this->saveConfig( $config, ['resource' => ['email' => ['from-email' => 'a@b.c']]] ) );
 	}
 
 
@@ -286,35 +199,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$allowed = $this->context->config()->get( 'mshop/locale/manager/site/allowed', [] );
 		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + ['client/html' => 'client/html'] );
-		$item = $this->object->create()->setCode( 'unittest-configured' )->setLabel( 'unittest' )->setConfig( ['client/html/x' => 1] );
 
-		try
-		{
-			$result = $this->object->get( $this->object->insert( $item )->getId() )->getConfig();
-		}
-		finally
-		{
-			if( $item->getId() ) {
-				$this->object->delete( $item->getId() );
-			}
-		}
-
-		$this->assertEquals( ['client/html/x' => 1], $result );
+		$config = ['client' => ['html' => ['x' => 1]]];
+		$this->assertEquals( $config, $this->saveConfig( [], $config ) );
 	}
 
 
-	public static function emailConfigProvider() : array
-	{
-		return [
-			'nested' => [['resource' => ['email' => ['from-email' => 'a@b.c', 'from-name' => 'Shop']]]],
-			'flat' => [['resource/email/from-email' => 'a@b.c']],
-			'surrounding slashes' => [['/resource/email/' => ['from-email' => 'a@b.c']]],
-			'partly flat' => [['resource' => ['email/reply-email' => 'a@b.c']]],
-		];
-	}
-
-
-	public function testRejectsSiteConfiguredConfig()
+	public function testIgnoresSiteConfiguredConfig()
 	{
 		$entry = ['client/html' => 'client/html'];
 		$allowed = $this->context->config()->get( 'mshop/locale/manager/site/allowed', [] );
@@ -322,19 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->config()->set( 'mshop/locale/manager/site/allowed', $allowed + $entry );
 		$this->context->locale()->getSiteItem()->setConfigValue( 'mshop/locale/manager/site/allowed', $entry );
 
-		$item = $this->object->create()->setCode( 'unittest-siteconfigured' )->setLabel( 'unittest' )->setConfig( ['client/html/x' => 1] );
-
-		try
-		{
-			$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-			$this->object->insert( $item );
-		}
-		finally
-		{
-			if( $item->getId() ) {
-				$this->super()->delete( $item->getId() );
-			}
-		}
+		$this->assertEquals( [], $this->saveConfig( [], ['client' => ['html' => ['x' => 1]]] ) );
 	}
 
 

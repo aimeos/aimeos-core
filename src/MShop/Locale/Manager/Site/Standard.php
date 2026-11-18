@@ -390,7 +390,7 @@ class Standard
 	 */
 	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $parentId = null, ?string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		$this->checkConfig( $item->getConfig(), null );
+		$item = $this->restrictConfig( $item, null );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -634,58 +634,38 @@ class Standard
 
 
 	/**
-	 * Rejects site configuration changes which are not allowed for the current user.
+	 * Restricts the site configuration changes to the allowed keys for the current user
 	 *
-	 * Users who are not super users can only add, change or remove the keys configured
-	 * in "mshop/locale/manager/site/allowed". Unchanged keys are not checked, so site owners
-	 * can still save sites whose configuration contains settings added by super users before.
+	 * Users who are not super users can only add, change or remove the keys configured in
+	 * "mshop/locale/manager/site/allowed". All other keys are taken from the stored site
+	 * configuration, so they can't be changed in any way (values, types or flat keys) and
+	 * site owners can still save sites whose configuration contains settings added by super
+	 * users before. Only nested keys are used from the passed configuration.
 	 *
-	 * @param array $config New site configuration
-	 * @param string|null $id ID of the stored site whose configuration is compared or NULL for new sites
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Site item with the new configuration
+	 * @param string|null $id ID of the stored site whose configuration is used or NULL for new sites
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item with the restricted configuration
 	 */
-	protected function checkConfig( array $config, ?string $id ) : void
+	protected function restrictConfig( \Aimeos\MShop\Locale\Item\Site\Iface $item, ?string $id ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		$context = $this->context();
-
-		if( $context->access( 'super' ) ) {
-			return;
+		if( $this->context()->access( 'super' ) ) {
+			return $item;
 		}
 
-		$stored = [];
-		$allowed = $this->allowedConfig();
+		$stored = $this->create();
 
 		if( $id !== null ) {
-			$stored = (array) $this->search( $this->filter()->add( 'locale.site.id', '==', $id ) )->call( 'getConfig' )->first( [] );
+			$stored->setConfig( (array) $this->search( $this->filter()->add( 'locale.site.id', '==', $id ) )->call( 'getConfig' )->first( [] ) );
 		}
 
-		foreach( $this->changedConfig( $config, $stored ) as $path )
+		foreach( $this->allowedConfig() as $key )
 		{
-			if( !$this->isAllowedConfig( $path, $allowed ) )
-			{
-				$msg = $context->translate( 'mshop', 'Site configuration key "%1$s" is not allowed' );
-				throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $path ) );
-			}
-		}
-	}
-
-
-	/**
-	 * Tests if the configuration key path is one of the allowed prefixes or below
-	 *
-	 * @param string $path Normalized key path like "resource/email/from-email"
-	 * @param string[] $allowed List of configuration key prefixes like "resource/email"
-	 * @return bool TRUE if the key path is allowed, FALSE if not
-	 */
-	protected function isAllowedConfig( string $path, array $allowed ) : bool
-	{
-		foreach( $allowed as $prefix )
-		{
-			if( $path === $prefix || str_starts_with( $path, $prefix . '/' ) ) {
-				return true;
+			if( ( $value = $item->getConfigValue( $key ) ) !== null || $stored->getConfigValue( $key ) !== null ) {
+				$stored->setConfigValue( $key, $value );
 			}
 		}
 
-		return false;
+		return $item->setConfig( $stored->getConfig() );
 	}
 
 
@@ -731,74 +711,6 @@ class Standard
 
 
 	/**
-	 * Returns the configuration keys which are added, changed or removed compared to the stored configuration
-	 *
-	 * @param array $config New site configuration
-	 * @param array $stored Stored site configuration
-	 * @return string[] List of normalized key paths like "resource/email/from-email"
-	 */
-	protected function changedConfig( array $config, array $stored ) : array
-	{
-		$paths = [];
-		$old = $this->flattenConfig( $stored );
-		$new = $this->flattenConfig( $config );
-
-		foreach( array_keys( $new + $old ) as $key )
-		{
-			// the site form drops empty values, so removing them changes nothing
-			if( !array_key_exists( $key, $new ) && in_array( $old[$key], [null, '', []], true ) ) {
-				continue;
-			}
-
-			if( !array_key_exists( $key, $new ) || !array_key_exists( $key, $old ) || $new[$key] !== $old[$key] )
-			{
-				$path = join( '/', array_map( 'rawurldecode', explode( '/', (string) $key ) ) );
-				$paths[] = join( '/', array_filter( explode( '/', $path ), fn( $part ) => $part !== '' ) );
-			}
-		}
-
-		return array_unique( $paths );
-	}
-
-
-	/**
-	 * Returns the site configuration values by their encoded key paths
-	 *
-	 * Each key is URL encoded before joining them with slashes, so flat keys like "a/b" which
-	 * are not used at runtime are kept apart from nested ones like "a" => ["b" => ...] and
-	 * changing one into the other is detected. Values are normalized like the site form does,
-	 * so unchanged configurations submitted by the form are equal to the stored ones: Strings
-	 * are JSON decoded or trimmed and numbers are compared as strings. Empty values are kept,
-	 * so adding them is detected.
-	 *
-	 * @param array $config Site configuration with nested and/or flat keys
-	 * @param string $prefix Encoded path of the parent configuration key
-	 * @return array<string,mixed> Encoded key paths like "/resource/email/from-email" and their values
-	 */
-	protected function flattenConfig( array $config, string $prefix = '' ) : array
-	{
-		$result = [];
-
-		foreach( $config as $key => $value )
-		{
-			$path = $prefix . '/' . rawurlencode( (string) $key );
-
-			if( is_string( $value ) ) {
-				$value = json_decode( $value, true ) ?? trim( $value );
-			}
-
-			if( is_array( $value ) && !empty( $value ) ) {
-				$result += $this->flattenConfig( $value, $path );
-			} else {
-				$result[$path] = is_int( $value ) || is_float( $value ) ? (string) $value : $value;
-			}
-		}
-
-		return $result;
-	}
-
-
-	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
@@ -817,7 +729,7 @@ class Standard
 			return $item;
 		}
 
-		$this->checkConfig( $item->getConfig(), $item->getId() );
+		$item = $this->restrictConfig( $item, $item->getId() );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );

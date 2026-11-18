@@ -422,6 +422,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUploadNoExtension()
+	{
+		$this->context->config()->set( 'mshop/media/manager/extensions', [] );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.php.' );
+
+		$result = $this->object->upload( $this->object->create(), $file );
+
+		$this->assertStringEndsWith( '_test-php', $result->getUrl() );
+		$this->context->fs( 'fs-media' )->rm( $result->getUrl() );
+	}
+
+
 	public function testUploadPreview()
 	{
 		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );

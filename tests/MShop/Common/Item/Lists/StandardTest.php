@@ -267,6 +267,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetConfigUnchanged()
+	{
+		$this->object->setConfig( ['cnt' => '40'] );
+
+		$this->assertFalse( $this->object->isModified() );
+	}
+
+
+	public function testSetConfigStrict()
+	{
+		$this->object->setConfig( ['cnt' => true] );
+
+		$this->assertSame( ['cnt' => true], $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );

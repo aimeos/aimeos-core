@@ -206,7 +206,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	public function set( string $name, $value ) : static
 	{
 		// workaround for NULL values instead of empty strings and stringified integers from database
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
+		// arrays are compared strictly because their values aren't stringified (e.g. true == "admin")
+		if( !array_key_exists( $name, $this->bdata )
+			|| ( is_array( $value ) || is_array( $this->bdata[$name] ) ? $this->bdata[$name] !== $value : $this->bdata[$name] != $value )
 			|| $value === null && $this->bdata[$name] !== null
 			|| $value !== null && $this->bdata[$name] === null
 		) {
