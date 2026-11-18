@@ -284,6 +284,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetNumeric()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => '1.50'] );
+
+		$this->assertFalse( $item->set( 'x', 1.5 )->isModified() );
+	}
+
+
+	public function testSetStrict()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => 'admin', 'y' => ''] );
+
+		$this->assertTrue( $item->set( 'x', true )->isModified() );
+		$this->assertSame( true, $item->get( 'x' ) );
+		$this->assertTrue( ( new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['y' => ''] ) )->set( 'y', null )->isModified() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );
