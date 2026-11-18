@@ -96,7 +96,7 @@ trait Traits
 	 *
 	 * @param array $a First associative array
 	 * @param array $b Second associative array
-	 * @return bool TRUE if arrays are loosly equal, FALSE if there are differences other than the order of keys
+	 * @return bool TRUE if arrays are equal, FALSE if there are differences other than the order of keys
 	 */
 	protected function compareConfig( array $a, array $b ) : bool
 	{
@@ -114,7 +114,7 @@ trait Traits
 					return false;
 				}
 			}
-			elseif( $v != $bv )
+			elseif( $v !== $bv )
 			{
 				return false;
 			}

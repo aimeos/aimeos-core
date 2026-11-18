@@ -267,6 +267,58 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetConfigUnchanged()
+	{
+		$this->object->setConfig( ['cnt' => '40'] );
+
+		$this->assertFalse( $this->object->isModified() );
+	}
+
+
+	public function testSetConfigStrict()
+	{
+		$this->object->setConfig( ['cnt' => true] );
+
+		$this->assertSame( ['cnt' => true], $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetNumeric()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => '1.50'] );
+
+		$this->assertFalse( $item->set( 'x', 1.5 )->isModified() );
+	}
+
+
+	public function testSetNumericString()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => '123'] );
+
+		$this->assertTrue( $item->set( 'x', '0123' )->isModified() );
+		$this->assertSame( '0123', $item->get( 'x' ) );
+	}
+
+
+	public function testSetStrict()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => 'admin'] );
+
+		$this->assertTrue( $item->set( 'x', true )->isModified() );
+		$this->assertTrue( $item->get( 'x' ) );
+	}
+
+
+	public function testSetNull()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', ['x' => ''] );
+
+		$this->assertTrue( $item->set( 'x', null )->isModified() );
+		$this->assertNull( $item->get( 'x' ) );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );
