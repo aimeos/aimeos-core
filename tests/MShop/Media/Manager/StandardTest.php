@@ -401,6 +401,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUploadRemovesDots()
+	{
+		$this->context->config()->set( 'mshop/media/manager/extensions', [] );
+
+		$path = __DIR__ . '/_testfiles/test.gif';
+		$file = new \Nyholm\Psr7\UploadedFile( $path, filesize( $path ), UPLOAD_ERR_OK, 'test.php.' );
+
+		$result = $this->object->upload( $this->object->create(), $file );
+
+		try
+		{
+			$this->assertStringEndsWith( '_test-php', $result->getUrl() );
+		}
+		finally
+		{
+			$this->context->fs( 'fs-media' )->rm( $result->getUrl() );
+		}
+	}
+
+
 	public function testUploadPreview()
 	{
 		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );

@@ -152,6 +152,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		$filename = basename( $filepath );
 		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
+		// replace all dots so no other extension like ".php" from "test.php.jpg" or "test.php." is kept
+		$filename = strtr( $filename, '.', '-' );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
 		$ext = isset( $list[$mimetype] ) ? '.' . $list[$mimetype] : '';
