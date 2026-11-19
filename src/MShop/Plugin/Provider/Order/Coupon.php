@@ -85,7 +85,7 @@ class Coupon
 			);
 			$search->setConditions( $search->and( $expr ) );
 
-			if( ( $item = $manager->search( $search )->first() ) !== null ) {
+			if( ( $item = $manager->search( $search )->first() ) !== null && $this->available( (string) $code, $order ) ) {
 				$manager->getProvider( $item, $code )->update( $order );
 			} else {
 				$order->deleteCoupon( $code );
@@ -100,6 +100,53 @@ class Coupon
 		}
 
 		return $value;
+	}
+
+
+	/**
+	 * Tests if the coupon code count isn't exhausted by unfinished orders
+	 *
+	 * The coupon code counts are only decreased after the payment has been
+	 * confirmed. Thus, recently stored but unfinished orders are subtracted from
+	 * the count to prevent redeeming the same code in several orders before the
+	 * first one is confirmed.
+	 *
+	 * @param string $code Coupon code entered by the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket or order of the customer
+	 * @return bool TRUE if the code can still be redeemed, FALSE if not
+	 */
+	protected function available( string $code, \Aimeos\MShop\Order\Item\Base\Iface $order ) : bool
+	{
+		$context = $this->context();
+		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
+
+		$filter = $codeManager->filter()->slice( 0, 1 );
+		$filter->setConditions( $filter->compare( '==', 'coupon.code.code', $code ) );
+
+		if( ( $codeItem = $codeManager->search( $filter )->first() ) === null || ( $count = $codeItem->getCount() ) === null ) {
+			return true;
+		}
+
+		// same time frame as in \Aimeos\MShop\Coupon\Provider\Base::redeemed()
+		$hours = (int) $context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
+		$manager = \Aimeos\MShop::create( $context, 'order' );
+		$total = 0;
+
+		$search = $manager->filter()->slice( 0, 0 );
+		$expr = [
+			$search->compare( '==', 'order.base.coupon.code', $code ),
+			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
+			$search->compare( '>=', 'order.ctime', date( 'Y-m-d H:i:s', time() - $hours * 3600 ) ),
+		];
+
+		if( ( $id = $order->getId() ) !== null ) {
+			$expr[] = $search->compare( '!=', 'order.baseid', $id );
+		}
+
+		$search->setConditions( $search->and( $expr ) );
+		$manager->search( $search, [], $total );
+
+		return $count > $total;
 	}
 
 }
