@@ -250,6 +250,21 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateAvailableDefault()
+	{
+		$this->plugin->setConfig( [] );
+
+		$order = $this->orderStub( 2 );
+		$serviceStub = $this->serviceStub();
+
+		$serviceStub->expects( $this->once() )->method( 'search' )
+			->willReturn( map( [] ) );
+
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->object->update( $order, 'check.after', ['order/service'] );
+	}
+
+
 	public function testUpdateAvailableGone()
 	{
 		$this->plugin->setConfig( ['available' => '1'] );
