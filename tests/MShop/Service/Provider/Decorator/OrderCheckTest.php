@@ -218,4 +218,112 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}
 
+
+	public function testIsAvailableLimitUnfinished()
+	{
+		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$result = $this->object->isAvailable( $this->basket );
+		}
+		finally
+		{
+			$item ? $this->remove( $item ) : null;
+		}
+
+		$this->assertFalse( $result );
+	}
+
+
+	public function testIsAvailableLimitUnfinishedCurrent()
+	{
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$result = $this->object->isAvailable( $this->basket->setId( $item->getBaseId() ) );
+		}
+		finally
+		{
+			$item ? $this->remove( $item ) : null;
+		}
+
+		$this->assertTrue( $result );
+	}
+
+
+	public function testIsAvailableLimitUnfinishedOtherService()
+	{
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$this->servItem->setCode( 'unittest-other' );
+			$result = $this->object->isAvailable( $this->basket );
+		}
+		finally
+		{
+			$item ? $this->remove( $item ) : null;
+		}
+
+		$this->assertTrue( $result );
+	}
+
+
+	public function testIsAvailableLimitUnfinishedExpired()
+	{
+		$this->context->config()->set( 'mshop/coupon/provider/unfinished-hours', -1 );
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->willReturn( true );
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$result = $this->object->isAvailable( $this->basket );
+		}
+		finally
+		{
+			$item ? $this->remove( $item ) : null;
+		}
+
+		$this->assertTrue( $result );
+	}
+
+
+	protected function unfinished() : \Aimeos\MShop\Order\Item\Iface
+	{
+		$customer = \Aimeos\MShop::create( $this->context, 'customer' )->find( 'test@example.com' );
+		$this->context->setUserId( $customer->getId() );
+
+		$this->servItem->setConfig( ['ordercheck.limit-days-pending' => 1] )
+			->setCode( 'unittest-check' )->setType( 'payment' );
+
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
+		$service = \Aimeos\MShop::create( $this->context, 'order/base/service' )->create()
+			->setCode( 'unittest-check' )->setType( 'payment' );
+
+		$basket = $baseManager->create()->off()->setCustomerId( $customer->getId() )
+			->addService( $service, 'payment' );
+		$basket = $baseManager->store( $basket );
+
+		$item = $manager->create()->setBaseId( $basket->getId() )
+			->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+
+		return $manager->save( $item );
+	}
+
+
+	protected function remove( \Aimeos\MShop\Order\Item\Iface $item )
+	{
+		\Aimeos\MShop::create( $this->context, 'order' )->delete( $item );
+		\Aimeos\MShop::create( $this->context, 'order/base' )->delete( $item->getBaseId() );
+	}
 }
