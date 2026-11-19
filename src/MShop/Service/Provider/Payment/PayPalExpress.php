@@ -423,7 +423,7 @@ class PayPalExpress
 			->addAttributeItems( $this->attributes( [(string) $params['txn_id'] => $params['payment_status']], 'paypal/txn' ) );
 
 		// @phpstan-ignore argument.type
-		$manager->save( $this->setStatusPayment( $order, $status ) );
+		$this->save( $this->setStatusPayment( $order, $status ) );
 
 		return $response->withStatus( 200 );
 	}

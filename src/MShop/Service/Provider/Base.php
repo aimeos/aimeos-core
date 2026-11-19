@@ -468,12 +468,27 @@ abstract class Base
 	/**
 	 * Saves the order item.
 	 *
+	 * Canceled orders, e.g. replaced by a new order of the same basket, are not marked as
+	 * paid if the payment provider reports a payment for them later on. Otherwise, coupon
+	 * and free product limits could be bypassed by paying canceled orders too.
+	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order object including the generated ID
 	 */
 	protected function save( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item ); // @phpstan-ignore return.type
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+
+		if( ( $id = $item->getId() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING
+			&& $manager->get( $id )->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_CANCELED
+		) {
+			$msg = sprintf( 'Payment for canceled order "%1$s" refused, refund it if money has been received', $id );
+			$this->context->logger()->error( $msg, 'core/service' );
+
+			$item->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+		}
+
+		return $manager->save( $item ); // @phpstan-ignore return.type
 	}
 
 
