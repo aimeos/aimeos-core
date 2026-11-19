@@ -503,6 +503,72 @@ class Standard extends Base
 	}
 
 
+
+	/**
+	 * Returns the condition matching orders which are paid or may still be paid
+	 *
+	 * Besides paid and pending orders, recently stored orders which are still unfinished
+	 * are included because they may be paid later. Otherwise, coupon codes or free products
+	 * could be used in several orders before the first one is paid.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Order search criteria object
+	 * @param string|null $id ID of the current order which is excluded
+	 * @return \Aimeos\Base\Criteria\Expression\Iface Condition for paid or recently unfinished orders
+	 * @since 2026.10
+	 */
+	public function reserved( \Aimeos\Base\Criteria\Iface $search, ?string $id = null ) : \Aimeos\Base\Criteria\Expression\Iface
+	{
+		$expr = [$search->or( [
+			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+			$search->and( [
+				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
+				$search->compare( '>=', 'order.ctime', $this->unfinished() ),
+			] ),
+		] )];
+
+		if( $id !== null ) {
+			$expr[] = $search->compare( '!=', 'order.id', $id );
+		}
+
+		// @phpstan-ignore argument.type
+		return $search->and( $expr );
+	}
+
+	/**
+	 * Returns the date and time since when unfinished orders are still taken into account
+	 *
+	 * Unfinished orders created after that date may still be paid and count like paid
+	 * ones, e.g. for coupon code redemptions, free products or pending order limits.
+	 *
+	 * @return string Date and time in "YYYY-MM-DD HH:mm:ss" format
+	 * @since 2026.10
+	 */
+	public function unfinished() : string
+	{
+		/** mshop/coupon/provider/unfinished-hours
+		 * Number of hours unfinished orders count as coupon code redemption
+		 *
+		 * Orders are stored with an "unfinished" payment status before the
+		 * customer is redirected to the payment provider and the coupon code
+		 * counts are only decreased after the payment has been confirmed. To
+		 * prevent customers from redeeming the same code in several orders
+		 * before confirming the first one, unfinished orders created within
+		 * the configured time frame are counted too. The value should match
+		 * the time unfinished orders are kept before they are removed.
+		 *
+		 * The same time frame is used for free products, pending order limits
+		 * and for paying unfinished orders again.
+		 *
+		 * @param int Number of hours
+		 * @since 2026.10
+		 * @see controller/jobs/order/cleanup/unfinished/keep-hours
+		 */
+		$hours = (int) $this->context()->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
+
+		return date( 'Y-m-d H:i:s', time() - $hours * 3600 );
+	}
+
+
 	/**
 	 * Adds the new payment and delivery values to the order status log.
 	 *

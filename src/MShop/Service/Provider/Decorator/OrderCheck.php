@@ -114,8 +114,6 @@ class OrderCheck
 		{
 			$time = time() - (int) $config['ordercheck.limit-days-pending'] * 86400;
 
-			// same time frame as in \Aimeos\MShop\Coupon\Provider\Base::redeemed()
-			$hours = (int) $context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
 			$serviceItem = $this->getServiceItem();
 
 			$search = $manager->filter( true );
@@ -128,7 +126,7 @@ class OrderCheck
 					] ),
 					// recent unfinished orders using this service may become pending later
 					$search->and( [
-						$search->compare( '>=', 'order.ctime', date( 'Y-m-d H:i:s', time() - $hours * 3600 ) ),
+						$search->compare( '>=', 'order.ctime', $manager->unfinished() ),
 						$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
 						$search->compare( '==', 'order.service.code', $serviceItem->getCode() ),
 						$search->compare( '==', 'order.service.type', $serviceItem->getType() ),
