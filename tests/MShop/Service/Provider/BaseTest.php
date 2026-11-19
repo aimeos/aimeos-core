@@ -145,6 +145,49 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveOrder()
+	{
+		$item = \Aimeos\MShop::create( $this->context, 'order' )->create();
+
+		$stub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setConstructorArgs( [$this->context] )
+			->onlyMethods( ['get', 'save'] )
+			->getMock();
+
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $stub );
+
+		$stub->expects( $this->never() )->method( 'get' );
+		$stub->expects( $this->once() )->method( 'save' )->willReturnArgument( 0 );
+
+		$item->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
+		$result = $this->access( 'saveOrder' )->invokeArgs( $this->object, [$item] );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $result->getStatusPayment() );
+	}
+
+
+	public function testSaveOrderCanceled()
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
+		$stored = $manager->create()->setId( 123 )->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+		$item = ( clone $stored )->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
+
+		$stub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setConstructorArgs( [$this->context] )
+			->onlyMethods( ['get', 'save'] )
+			->getMock();
+
+		\Aimeos\MShop::inject( \Aimeos\MShop\Order\Manager\Standard::class, $stub );
+
+		$stub->expects( $this->once() )->method( 'get' )->willReturn( $stored );
+		$stub->expects( $this->once() )->method( 'save' )->willReturnArgument( 0 );
+
+		$result = $this->access( 'saveOrder' )->invokeArgs( $this->object, [$item] );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $result->getStatusPayment() );
+	}
+
+
 	public function testThrow()
 	{
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
