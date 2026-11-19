@@ -610,6 +610,48 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testPath()
+	{
+		$this->context->config()->set( 'mshop/media/manager/extensions', ['image/jpeg' => 'JPG'] );
+
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$result = $this->access( 'path' )->invokeArgs( $object, ['dir/test.php.jpg', 'image/jpeg', 'product'] );
+
+		$this->assertMatchesRegularExpression( '#^' . $this->context->locale()->getSiteId() . 'd/product/[0-9a-f]/[0-9a-f]/[0-9a-f]{8}_test-php\.jpg$#', $result );
+	}
+
+
+	public function testPathNoExtension()
+	{
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$result = $this->access( 'path' )->invokeArgs( $object, ['test.bin', 'application/octet-stream', 'product'] );
+
+		$this->assertStringEndsWith( '_test', $result );
+	}
+
+
+	public function testPathExtensionDenied()
+	{
+		$this->context->config()->set( 'mshop/media/manager/extensions', ['image/gif' => 'PHP'] );
+
+		$this->expectException( \Aimeos\MShop\Exception::class );
+
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$this->access( 'path' )->invokeArgs( $object, ['test.gif', 'image/gif', 'product'] );
+	}
+
+
+	public function testPathExtensionInvalid()
+	{
+		$this->context->config()->set( 'mshop/media/manager/extensions', ['image/gif' => 'gif/../../x'] );
+
+		$this->expectException( \Aimeos\MShop\Exception::class );
+
+		$object = new \Aimeos\MShop\Media\Manager\Standard( $this->context );
+		$this->access( 'path' )->invokeArgs( $object, ['test.gif', 'image/gif', 'product'] );
+	}
+
+
 	public function testImage()
 	{
 		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );

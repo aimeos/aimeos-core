@@ -145,11 +145,15 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * provides the file extensions for the configured mime types. You can
 		 * add more mime type / file extension combinations if required.
 		 *
+		 * Extensions must consist of letters and digits only. Extensions of files
+		 * executed by web servers or rendered as active content by browsers like
+		 * "php" or "html" are rejected.
+		 *
 		 * @param array Associative list of mime types as keys and file extensions as values
 		 * @since 2018.04
 		 */
 		$default = ['image/gif' => 'gif', 'image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-		$list = $context->config()->get( 'mshop/media/manager/extensions', $default );
+		$list = (array) $context->config()->get( 'mshop/media/manager/extensions', $default );
 
 		$filename = basename( $filepath );
 		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
@@ -157,11 +161,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$filename = strtr( $filename, '.', '-' );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
-		$ext = isset( $list[$mimetype] ) ? '.' . $list[$mimetype] : '';
+		$ext = \Aimeos\Utils::extension( is_string( $list[$mimetype] ?? null ) ? $list[$mimetype] : '' );
 		$siteid = $context->locale()->getSiteId();
 
 		// the "d" after {siteid} is the required extension for Windows (no dots at the end allowed)
-		return "{$siteid}d/{$domain}/{$filename[0]}/{$filename[1]}/{$filename}{$ext}";
+		return "{$siteid}d/{$domain}/{$filename[0]}/{$filename[1]}/{$filename}" . ( $ext !== '' ? '.' . $ext : '' );
 	}
 
 

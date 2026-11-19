@@ -58,6 +58,30 @@ class Utils
 
 
 	/**
+	 * Tests if files with the given extension can be stored safely.
+	 *
+	 * Files with these extensions could be executed by web servers or rendered
+	 * as active content by browsers if they are requested directly.
+	 *
+	 * @param string $ext File extension without dot
+	 * @param array $deny List of additional lower case file extensions which are not allowed
+	 * @return string Lower case file extension
+	 * @throws \Aimeos\MShop\Exception If the file extension is invalid or not allowed
+	 */
+	public static function extension( string $ext, array $deny = [] ) : string
+	{
+		$ext = strtolower( $ext );
+		$list = 'php\d*|pht|phtml?|phar|phps|inc|f?cgi|pl|py|rb|sh|asa|aspx?|ashx|asmx|cer|jspx?|s?html?|stm|xht|xhtml?|xml|xslt?|hta|m?js|htaccess';
+
+		if( !preg_match( '/^[a-z0-9]*$/', $ext ) || preg_match( '/^(' . $list . ')$/', $ext ) || in_array( $ext, $deny, true ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'File extension "%1$s" is not allowed', $ext ) );
+		}
+
+		return $ext;
+	}
+
+
+	/**
 	 * Tests if the country ID parameter represents an ISO country format.
 	 *
 	 * @param string|null $countryid Two letter ISO country format, e.g. DE
