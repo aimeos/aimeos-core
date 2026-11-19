@@ -81,7 +81,11 @@ class FreeProduct
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
-		$p->attach( $this->object(), 'addProduct.after' );
+		$plugin = $this->object();
+
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'setOrder.before' );
+
 		return $this;
 	}
 
@@ -89,43 +93,118 @@ class FreeProduct
 	/**
 	 * Receives a notification from a publisher object
 	 *
+	 * The free product is checked again before the order is stored because the
+	 * basket of another session could have been stored after the free product
+	 * has been added to the current basket.
+	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If the product isn't available for free any more when storing the order
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
-		map( [$value] )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		$code = $this->getConfigValue( 'productcode' );
-		$addresses = $order->getAddress( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT );
 
-		if( $value->getProductCode() !== $code || ( $address = current( $addresses ) ) === false ) {
+		if( $action === 'addProduct.after' )
+		{
+			map( [$value] )->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
+
+			if( $value->getProductCode() !== $code ) {
+				return $value;
+			}
+		}
+
+		$products = $order->getProducts()->filter( fn( $product ) => $product->getProductCode() === $code );
+
+		if( $products->isEmpty() ) {
 			return $value;
 		}
 
-		$email = $address->getEmail();
-		$count = $this->getConfigValue( 'count' );
-		$status = \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED;
+		$qty = $products->sum( fn( $product ) => $product->getQuantity() );
+		$address = current( $order->getAddress( \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT ) );
+		$free = $address && $this->used( (string) $address->getEmail(), $code, $order ) + $qty <= (int) $this->getConfigValue( 'count' );
+		$revoked = false;
 
-		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
+		foreach( $products as $product )
+		{
+			$price = $product->getPrice();
+
+			// prices are only lowered when products are added, not when the order is stored
+			if( $free && $action === 'addProduct.after' && $price->getValue() > 0 ) {
+				$product->setPrice( $price->setRebate( $price->getValue() )->setValue( '0.00' ) );
+			} elseif( !$free && $this->isFree( $product ) ) {
+				$product->setPrice( $price->setValue( $price->getRebate() )->setRebate( '0.00' ) );
+				$revoked = true;
+			}
+		}
+
+		if( $revoked && $action === 'setOrder.before' )
+		{
+			$msg = $this->context()->translate( 'mshop', 'Product "%1$s" is not available for free any more' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $code ), 409 );
+		}
+
+		return $value;
+	}
+
+
+	/**
+	 * Tests if the product is free because of this plugin
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Product\Iface $product Ordered product
+	 * @return bool TRUE if the product is free, FALSE if not
+	 */
+	protected function isFree( \Aimeos\MShop\Order\Item\Product\Iface $product ) : bool
+	{
+		$price = $product->getPrice();
+		return $price->getValue() == 0 && $price->getRebate() > 0;
+	}
+
+
+	/**
+	 * Returns the quantity of the free product in previous orders of the customer
+	 *
+	 * Besides confirmed orders, recently stored orders which are still unfinished
+	 * are included because they may be confirmed later. Otherwise, the product
+	 * could be ordered for free in several orders before the first one is confirmed.
+	 *
+	 * @param string $email E-mail address of the customer
+	 * @param string $code Product code of the free product
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Current order which is excluded
+	 * @return int Quantity of the product in previous orders
+	 */
+	protected function used( string $email, string $code, \Aimeos\MShop\Order\Item\Iface $order ) : int
+	{
+		$context = $this->context();
+
+		// same time frame as in \Aimeos\MShop\Coupon\Provider\Base::redeemed()
+		$hours = (int) $context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
+		$manager = \Aimeos\MShop::create( $context, 'order' );
 
 		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.address.email', $email ),
+			$search->compare( '==', 'order.address.type', \Aimeos\MShop\Order\Item\Address\Base::TYPE_PAYMENT ),
 			$search->compare( '==', 'order.product.prodcode', $code ),
-			$search->compare( '>=', 'order.statuspayment', $status ),
+			$search->or( [
+				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+				$search->and( [
+					$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
+					$search->compare( '>=', 'order.ctime', date( 'Y-m-d H:i:s', time() - $hours * 3600 ) ),
+				] ),
+			] ),
 		];
-		$search->setConditions( $search->and( $expr ) );
 
-		$result = $manager->aggregate( $search, 'order.address.email', 'order.product.quantity', 'sum' );
-
-		if( isset( $result[$email] ) && $result[$email] < $count ) {
-			$value->setPrice( $value->getPrice()->setRebate( $value->getPrice()->getValue() )->setValue( '0.00' ) );
+		if( ( $id = $order->getId() ) !== null ) {
+			$expr[] = $search->compare( '!=', 'order.id', $id );
 		}
 
-		return $value;
+		$result = $manager->aggregate( $search->add( $search->and( $expr ) ), 'order.address.email', 'order.product.quantity', 'sum' );
+
+		return (int) ( $result[$email] ?? 0 );
 	}
 }
