@@ -414,7 +414,7 @@ class PayPalExpress
 		$serviceItem->addAttributeItems( $this->attributes( ['TRANSACTIONID' => $params['txn_id']], 'tx' ) )
 			->addAttributeItems( $this->attributes( [$params['txn_id'] => $params['payment_status']], 'paypal/txn' ) );
 
-		$manager->save( $this->setStatusPayment( $order, $status ) );
+		$this->save( $this->setStatusPayment( $order, $status ) );
 
 		return $response->withStatus( 200 );
 	}
