@@ -992,6 +992,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+
+	public function testReserved()
+	{
+		$item = $this->getOrderItem();
+		$search = $this->object->filter()->add( 'order.editor', '==', $this->editor );
+
+		$all = $this->object->search( ( clone $search )->add( $this->object->reserved( $search ) ) );
+		$other = $this->object->search( $search->add( $this->object->reserved( $search, $item->getId() ) ) );
+
+		$this->assertGreaterThan( 0, count( $all ) );
+		$this->assertTrue( $all->has( $item->getId() ) );
+		$this->assertFalse( $other->has( $item->getId() ) );
+		$this->assertEquals( count( $all ) - 1, count( $other ) );
+
+		foreach( $all as $order )
+		{
+			$status = $order->getStatusPayment();
+			$this->assertTrue( $status >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING || $status === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		}
+	}
+
+
+	public function testUnfinished()
+	{
+		$this->context->config()->set( 'mshop/coupon/provider/unfinished-hours', 2 );
+
+		$this->assertEqualsWithDelta( time() - 7200, strtotime( $this->object->unfinished() ), 1 );
+	}
+
 	/**
 	 * Returns an order base item
 	 *

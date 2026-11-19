@@ -101,4 +101,22 @@ interface Iface
 	 * @return static Manager object for chaining method calls
 	 */
 	public function setSession( \Aimeos\MShop\Order\Item\Iface $order, string $type = 'default' ) : static;
+
+	/**
+	 * Returns the condition matching orders which are paid or may still be paid
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Order search criteria object
+	 * @param string|null $id ID of the current order which is excluded
+	 * @return \Aimeos\Base\Criteria\Expression\Iface Condition for paid or recently unfinished orders
+	 * @since 2026.10
+	 */
+	public function reserved( \Aimeos\Base\Criteria\Iface $search, ?string $id = null ) : \Aimeos\Base\Criteria\Expression\Iface;
+
+	/**
+	 * Returns the date and time since when unfinished orders are still taken into account
+	 *
+	 * @return string Date and time in "YYYY-MM-DD HH:mm:ss" format
+	 * @since 2026.10
+	 */
+	public function unfinished() : string;
 }
