@@ -110,6 +110,7 @@ class ProductLimit
 
 		$p->attach( $plugin, 'addProduct.after' );
 		$p->attach( $plugin, 'setProducts.after' );
+		$p->attach( $plugin, 'check.after' );
 
 		return $this;
 	}
@@ -128,7 +129,12 @@ class ProductLimit
 	{
 		map( $order )->implements( \Aimeos\MShop\Order\Item\Iface::class, true );
 
-		$list = map( $value );
+		if( $action === 'check.after' && !in_array( 'order/product', (array) $value ) ) {
+			return $value;
+		}
+
+		// setProducts.after passes the old products and check.after the checked parts
+		$list = $action === 'addProduct.after' ? map( [$value] ) : $order->getProducts();
 		$list->implements( \Aimeos\MShop\Order\Item\Product\Iface::class, true );
 
 		foreach( $list as $entry )
@@ -136,6 +142,8 @@ class ProductLimit
 			$this->checkWithoutCurrency( $order, $entry );
 			$this->checkWithCurrency( $order, $entry );
 		}
+
+		$this->checkTotals( $order );
 
 		return $value;
 	}
@@ -161,22 +169,6 @@ class ProductLimit
 			$msg = $this->context()->translate( 'mshop', 'The maximum product quantity is %1$d' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ) );
 		}
-
-
-		if( isset( $config['total-number-max'] ) && !is_array( $config['total-number-max'] ) )
-		{
-			$total = $value->getQuantity();
-
-			foreach( $order->getProducts() as $product ) {
-				$total += $product->getQuantity();
-			}
-
-			if( $total > (int) $config['total-number-max'] )
-			{
-				$msg = $this->context()->translate( 'mshop', 'The maximum quantity of all products is %1$d' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['total-number-max'] ) );
-			}
-		}
 	}
 
 
@@ -199,18 +191,38 @@ class ProductLimit
 			$msg = $this->context()->translate( 'mshop', 'The maximum product value is %1$s' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['single-value-max'][$currencyId] ) );
 		}
+	}
 
 
-		if( isset( $config['total-value-max'][$currencyId] ) )
+	/**
+	 * Checks for the limits of all products in the basket
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
+	 * @return void
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one limit is exceeded
+	 */
+	protected function checkTotals( \Aimeos\MShop\Order\Item\Iface $order ) : void
+	{
+		$totals = [];
+		$config = $this->getItemBase()->getConfig();
+
+		if( isset( $config['total-number-max'] ) && !is_array( $config['total-number-max'] )
+			&& $order->getProducts()->sum( fn( $product ) => $product->getQuantity() ) > (int) $config['total-number-max']
+		) {
+			$msg = $this->context()->translate( 'mshop', 'The maximum quantity of all products is %1$d' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['total-number-max'] ) );
+		}
+
+		foreach( $order->getProducts() as $product )
 		{
-			$price = clone $value->getPrice();
-			$price->setValue( $price->getValue() * $value->getQuantity() );
+			$price = $product->getPrice();
+			$currencyId = (string) $price->getCurrencyId();
+			$totals[$currencyId] = ( $totals[$currencyId] ?? 0 ) + $price->getValue() * $product->getQuantity();
+		}
 
-			foreach( $order->getProducts() as $product ) {
-				$price->addItem( $product->getPrice(), $product->getQuantity() );
-			}
-
-			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] )
+		foreach( $totals as $currencyId => $total )
+		{
+			if( isset( $config['total-value-max'][$currencyId] ) && $total > (float) $config['total-value-max'][$currencyId] )
 			{
 				$msg = $this->context()->translate( 'mshop', 'The maximum value of all products is %1$s' );
 				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['total-value-max'][$currencyId] ) );
