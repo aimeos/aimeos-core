@@ -43,4 +43,67 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 		$this->order->addCoupon( 'OPQR' );
 		$this->assertEquals( null, $this->object->update( $this->order, 'test' ) );
 	}
+
+
+	public function testUpdateUnfinished()
+	{
+		$context = \TestHelper::context();
+		$manager = \Aimeos\MShop::create( $context, 'order' );
+		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
+
+		$codeItem = $codeManager->find( 'OPQR' );
+		$codeItem = $codeManager->save( ( clone $codeItem )->setId( null )->setCode( 'unittest-count' )->setCount( 1 ) );
+
+		$item = $manager->create()->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		$item = $manager->save( $item->setCoupon( 'unittest-count', [] ) );
+
+		try
+		{
+			$this->assertEquals( null, $this->object->update( $item, 'test' ) );
+
+			$this->order->addCoupon( 'unittest-count' );
+			$this->object->update( $this->order, 'test' );
+		}
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+		{
+			$this->assertEquals( 409, $e->getCode() );
+		}
+		finally
+		{
+			$manager->delete( $item );
+			$codeManager->delete( $codeItem );
+		}
+
+		$this->assertTrue( isset( $e ) );
+		$this->assertEquals( [], $this->order->getCoupons()->all() );
+	}
+
+
+	public function testUpdateUnfinishedExpired()
+	{
+		$context = \TestHelper::context();
+		$manager = \Aimeos\MShop::create( $context, 'order' );
+		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
+
+		$codeItem = $codeManager->find( 'OPQR' );
+		$codeItem = $codeManager->save( ( clone $codeItem )->setId( null )->setCode( 'unittest-count' )->setCount( 1 ) );
+
+		$item = $manager->create()->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		$item = $manager->save( $item->setCoupon( 'unittest-count', [] ) );
+
+		try
+		{
+			$context->config()->set( 'mshop/coupon/provider/unfinished-hours', -1 );
+			$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( $context, \Aimeos\MShop::create( $context, 'plugin' )->create() );
+
+			$this->order->addCoupon( 'unittest-count' );
+			$this->assertEquals( null, $object->update( $this->order, 'test' ) );
+			$this->assertEquals( ['unittest-count'], $this->order->getCoupons()->keys()->all() );
+		}
+		finally
+		{
+			$manager->delete( $item );
+			$codeManager->delete( $codeItem );
+		}
+	}
 }
