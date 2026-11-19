@@ -86,6 +86,7 @@ return array(
 			$table->index( ['baseid', 'postal'], 'idx_msordbaad_bid_postal' );
 			$table->index( ['baseid', 'city'], 'idx_msordbaad_bid_city' );
 			$table->index( ['baseid', 'email'], 'idx_msordbaad_bid_email' );
+			$table->index( ['email', 'type', 'siteid'], 'idx_msordbaad_email_type_sid' );
 
 			$table->foreign( 'baseid', 'mshop_order_base', 'id', 'fk_msordbaad_baseid' );
 		},
