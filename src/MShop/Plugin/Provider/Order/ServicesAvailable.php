@@ -27,14 +27,14 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * In addition, the "available" option re-checks if the delivery/payment services
  * actually stored in the basket are still available according to their service
  * provider (including decorators like customer- or country-specific restrictions):
- * - available: 1 (re-check selected services and remove unavailable ones)
- * - available: '' or not set (don't re-check, only presence/absence is validated)
+ * - available: 1 or not set (re-check selected services and remove unavailable ones)
+ * - available: '' or 0 (don't re-check, only presence/absence is validated)
  *
  * This makes sure that restrictions enforced for the service list display are also
  * enforced server-side during checkout. Services that aren't available any more are
  * removed from the basket so the customer is forced to select a valid option again.
- * The default is off to keep the behavior backward compatible; enable it for shops
- * that rely on provider-based availability checks.
+ * The checks are also executed before the order is stored because conditions like
+ * the number of pending orders could have changed since the services have been added.
  *
  * The checks are executed before the checkout summary page is rendered
  *
@@ -73,7 +73,7 @@ class ServicesAvailable
 			'label' => 'Re-check availability of selected services',
 			'type' => 'boolean',
 			'internaltype' => 'boolean',
-			'default' => '',
+			'default' => '1',
 			'required' => false,
 		),
 	);
@@ -138,7 +138,7 @@ class ServicesAvailable
 
 		$problems = [];
 
-		if( (bool) $this->getConfigValue( 'available', false ) === true ) {
+		if( (bool) $this->getConfigValue( 'available', true ) === true ) {
 			$problems = $this->checkAvailable( $order );
 		}
 
@@ -208,7 +208,7 @@ class ServicesAvailable
 		// filter( true ) only returns enabled/valid services, so deleted or disabled
 		// services are missing from the result and treated as not available
 		$filter = $manager->filter( true )->add( ['service.id' => array_keys( $ids )] );
-		$items = $manager->search( $filter, ['media', 'price', 'text'] );
+		$items = $manager->search( $filter );
 
 		$problems = [];
 
