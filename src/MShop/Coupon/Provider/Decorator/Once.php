@@ -39,7 +39,7 @@ class Once
 			$expr = [
 				$search->compare( '==', 'order.base.address.email', $address->getEmail() ),
 				$search->compare( '==', 'order.base.coupon.code', $this->getCode() ),
-				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+				$this->redeemed( $search, $base->getId() ),
 			];
 			$search->setConditions( $search->and( $expr ) );
 

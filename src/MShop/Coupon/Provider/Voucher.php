@@ -84,7 +84,7 @@ class Voucher
 
 		$orderProduct = $this->getOrderProductItem( $orderProductId, $base->getPrice()->getCurrencyId() );
 		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate();
-		$usedRebate = $this->getUsedRebate( $this->getCode() );
+		$usedRebate = $this->getUsedRebate( $this->getCode(), $base->getId() );
 		$rebate = $value - $usedRebate;
 
 		if( $rebate <= 0 )
@@ -129,19 +129,20 @@ class Voucher
 
 
 	/**
-	 * Filters the order base IDs and removes those order which aren't payed
+	 * Filters the order base IDs and removes those order which aren't payed or recently created
 	 *
 	 * @param string[] $baseIds List of order base IDs to check
+	 * @param string|null $baseId ID of the current order base which is excluded
 	 * @return string[] List of filtered order base IDs
 	 */
-	protected function filterOrderBaseIds( array $baseIds ) : array
+	protected function filterOrderBaseIds( array $baseIds, ?string $baseId = null ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
 		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.baseid', $baseIds ),
-			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
+			$this->redeemed( $search, $baseId ),
 		];
 		$search->setConditions( $search->and( $expr ) );
 
@@ -184,9 +185,10 @@ class Voucher
 	 * Returns the already used rebate for the given voucher code
 	 *
 	 * @param string $code Voucher code
+	 * @param string|null $baseId ID of the current order base which is excluded
 	 * @return float Already used rebate value
 	 */
-	protected function getUsedRebate( string $code ) : float
+	protected function getUsedRebate( string $code, ?string $baseId = null ) : float
 	{
 		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
@@ -200,7 +202,7 @@ class Voucher
 			$prodIds[] = $orderCouponItem->getProductId();
 			$baseIds[] = $orderCouponItem->getBaseId();
 		}
-		$baseIds = $this->filterOrderBaseIds( $baseIds );
+		$baseIds = $this->filterOrderBaseIds( $baseIds, $baseId );
 
 
 
