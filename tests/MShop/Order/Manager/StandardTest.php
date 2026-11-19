@@ -580,4 +580,33 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->getSubManager( 'base', 'unknown' );
 	}
 
+
+	public function testReserved()
+	{
+		$search = $this->object->filter()->add( ['order.editor' => 'core'] );
+		$item = $this->object->search( $search )->first();
+
+		$all = $this->object->search( ( clone $search )->add( $this->object->reserved( $search ) ) );
+		$other = $this->object->search( $search->add( $this->object->reserved( $search, $item->getBaseId() ) ) );
+
+		$this->assertGreaterThan( 0, count( $all ) );
+		$this->assertTrue( $all->has( $item->getId() ) );
+		$this->assertFalse( $other->has( $item->getId() ) );
+		$this->assertEquals( count( $all->col( 'order.baseid' )->unique() ) - 1, count( $other->col( 'order.baseid' )->unique() ) );
+
+		foreach( $all as $order )
+		{
+			$status = $order->getStatusPayment();
+			$this->assertTrue( $status >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING || $status === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		}
+	}
+
+
+	public function testUnfinished()
+	{
+		$this->context->config()->set( 'mshop/coupon/provider/unfinished-hours', 2 );
+
+		$this->assertEqualsWithDelta( time() - 7200, strtotime( $this->object->unfinished() ), 1 );
+	}
+
 }

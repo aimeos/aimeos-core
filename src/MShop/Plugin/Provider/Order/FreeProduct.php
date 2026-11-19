@@ -121,14 +121,11 @@ class FreeProduct
 			}
 		}
 
-		$qty = 0;
 		$products = [];
 
 		foreach( $order->getProducts() as $product )
 		{
-			if( $product->getProductCode() === $code )
-			{
-				$qty += $product->getQuantity();
+			if( $product->getProductCode() === $code ) {
 				$products[] = $product;
 			}
 		}
@@ -137,30 +134,81 @@ class FreeProduct
 			return $value;
 		}
 
-		$address = current( $order->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT ) );
-		$free = $address && $this->used( (string) $address->getEmail(), $code, $order ) + $qty <= (int) $this->getConfigValue( 'count' );
-		$revoked = false;
+		$free = $this->free( $order, $products, $code );
 
-		foreach( $products as $product )
-		{
-			$price = $product->getPrice();
-
-			// prices are only lowered when products are added, not when the order is stored
-			if( $free && $action === 'addProduct.after' && $price->getValue() > 0 ) {
-				$product->setPrice( $price->setRebate( $price->getValue() )->setValue( '0.00' ) );
-			} elseif( !$free && $this->isFree( $product ) ) {
-				$product->setPrice( $price->setValue( $price->getRebate() )->setRebate( '0.00' ) );
-				$revoked = true;
-			}
-		}
-
-		if( $revoked && $action === 'setOrder.before' )
-		{
+		// prices are only lowered when products are added, not when the order is stored
+		if( $free && $action === 'addProduct.after' ) {
+			$this->grant( $products );
+		} elseif( !$free && $this->revoke( $products ) && $action === 'setOrder.before' ) {
 			$msg = $this->context()->translate( 'mshop', 'Product "%1$s" is not available for free any more' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $code ) );
 		}
 
 		return $value;
+	}
+
+
+	/**
+	 * Tests if the customer can still get the free products
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket or order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products Ordered products with the configured product code
+	 * @param string $code Product code of the free product
+	 * @return bool TRUE if the products can be free, FALSE if not
+	 */
+	protected function free( \Aimeos\MShop\Order\Item\Base\Iface $order, array $products, string $code ) : bool
+	{
+		if( !( $address = current( $order->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT ) ) ) ) {
+			return false;
+		}
+
+		$qty = 0;
+
+		foreach( $products as $product ) {
+			$qty += $product->getQuantity();
+		}
+
+		return $this->used( (string) $address->getEmail(), $code, $order ) + $qty <= (int) $this->getConfigValue( 'count' );
+	}
+
+
+	/**
+	 * Lowers the prices of the products to zero and keeps the original value as rebate
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products Ordered products which should be free
+	 */
+	protected function grant( array $products )
+	{
+		foreach( $products as $product )
+		{
+			if( ( $price = $product->getPrice() )->getValue() > 0 ) {
+				$product->setPrice( $price->setRebate( $price->getValue() )->setValue( '0.00' ) );
+			}
+		}
+	}
+
+
+	/**
+	 * Restores the original prices of the products made free by this plugin
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products Ordered products which aren't free any more
+	 * @return bool TRUE if at least one price has been restored, FALSE if not
+	 */
+	protected function revoke( array $products ) : bool
+	{
+		$revoked = false;
+
+		foreach( $products as $product )
+		{
+			if( $this->isFree( $product ) )
+			{
+				$price = $product->getPrice();
+				$product->setPrice( $price->setValue( $price->getRebate() )->setRebate( '0.00' ) );
+				$revoked = true;
+			}
+		}
+
+		return $revoked;
 	}
 
 
@@ -191,29 +239,15 @@ class FreeProduct
 	 */
 	protected function used( string $email, string $code, \Aimeos\MShop\Order\Item\Base\Iface $order ) : int
 	{
-		$context = $this->context();
-
-		// same time frame as in \Aimeos\MShop\Coupon\Provider\Base::redeemed()
-		$hours = (int) $context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
-		$manager = \Aimeos\MShop::create( $context, 'order' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
 		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.base.address.email', $email ),
 			$search->compare( '==', 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT ),
 			$search->compare( '==', 'order.base.product.prodcode', $code ),
-			$search->or( [
-				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
-				$search->and( [
-					$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
-					$search->compare( '>=', 'order.ctime', date( 'Y-m-d H:i:s', time() - $hours * 3600 ) ),
-				] ),
-			] ),
+			$manager->reserved( $search, $order->getId() ),
 		];
-
-		if( ( $id = $order->getId() ) !== null ) {
-			$expr[] = $search->compare( '!=', 'order.baseid', $id );
-		}
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $manager->aggregate( $search, 'order.base.address.email', 'order.base.product.quantity', 'sum' );

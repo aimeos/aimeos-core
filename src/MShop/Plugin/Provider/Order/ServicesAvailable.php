@@ -138,12 +138,20 @@ class ServicesAvailable
 
 		$problems = [];
 
-		if( (bool) $this->getConfigValue( 'available', true ) === true ) {
-			$problems = $this->checkAvailable( $order );
+		if( (bool) $this->getConfigValue( 'available', true ) === true )
+		{
+			foreach( $this->unavailable( $order ) as $type => $positions )
+			{
+				foreach( $positions as $pos ) {
+					$order->deleteService( $type, $pos );
+				}
+
+				$problems[$type] = 'available.notallowed';
+			}
 		}
 
-		// Re-fetch after checkAvailable() may have removed unavailable services so a
-		// removed but required type correctly produces "available.none" below
+		// Re-fetch after unavailable services have been removed so a removed
+		// but required type correctly produces "available.none" below
 		$services = $order->getServices();
 
 		foreach( $this->getItemBase()->getConfig() as $type => $val )
@@ -175,17 +183,17 @@ class ServicesAvailable
 
 
 	/**
-	 * Removes the services from the basket that aren't available any more
+	 * Returns the services in the basket that aren't available any more
 	 *
 	 * Each service stored in the basket is checked against its service provider
 	 * (including decorators). Services whose underlying service item doesn't exist
 	 * any more (deleted or disabled) or whose provider reports them as not available
-	 * are removed from the basket and reported as problem.
+	 * are returned.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shop basket instance
-	 * @return array Associative list of service types as keys and error codes as values
+	 * @return array<string, int[]> Service types as keys and lists of basket positions as values
 	 */
-	protected function checkAvailable( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
+	protected function unavailable( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
 		$ids = [];
 
@@ -210,23 +218,22 @@ class ServicesAvailable
 		$filter = $manager->filter( true )->add( ['service.id' => array_keys( $ids )] );
 		$items = $manager->search( $filter );
 
-		$problems = [];
+		$result = [];
 
-		foreach( $order->getServices() as $type => $list )
+		foreach( $order->getServices() as $type => $services )
 		{
-			foreach( $list as $pos => $ordService )
+			foreach( $services as $pos => $ordService )
 			{
 				$item = $items->get( $ordService->getServiceId() );
 
 				if( $item === null
 					|| $manager->getProvider( $item, $item->getType() )->isAvailable( $order ) !== true
 				) {
-					$order->deleteService( $type, $pos );
-					$problems[$type] = 'available.notallowed';
+					$result[$type][] = $pos;
 				}
 			}
 		}
 
-		return $problems;
+		return $result;
 	}
 }

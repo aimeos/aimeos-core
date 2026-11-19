@@ -127,8 +127,6 @@ class Coupon
 			return true;
 		}
 
-		// same time frame as in \Aimeos\MShop\Coupon\Provider\Base::redeemed()
-		$hours = (int) $context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
 		$manager = \Aimeos\MShop::create( $context, 'order' );
 		$total = 0;
 
@@ -136,7 +134,7 @@ class Coupon
 		$expr = [
 			$search->compare( '==', 'order.base.coupon.code', $code ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
-			$search->compare( '>=', 'order.ctime', date( 'Y-m-d H:i:s', time() - $hours * 3600 ) ),
+			$search->compare( '>=', 'order.ctime', $manager->unfinished() ),
 		];
 
 		if( ( $id = $order->getId() ) !== null ) {

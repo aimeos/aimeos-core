@@ -223,37 +223,7 @@ abstract class Base
 	 */
 	protected function redeemed( \Aimeos\Base\Criteria\Iface $search, ?string $baseId = null ) : \Aimeos\Base\Criteria\Expression\Iface
 	{
-		/** mshop/coupon/provider/unfinished-hours
-		 * Number of hours unfinished orders count as coupon code redemption
-		 *
-		 * Orders are stored with an "unfinished" payment status before the
-		 * customer is redirected to the payment provider and the coupon code
-		 * counts are only decreased after the payment has been confirmed. To
-		 * prevent customers from redeeming the same code in several orders
-		 * before confirming the first one, unfinished orders created within
-		 * the configured time frame are counted too. The value should match
-		 * the time unfinished orders are kept before they are removed.
-		 *
-		 * @type int Number of hours
-		 * @since 2026.10
-		 * @see controller/jobs/order/cleanup/unfinished/keep-hours
-		 */
-		$hours = (int) $this->context->config()->get( 'mshop/coupon/provider/unfinished-hours', 24 );
-		$date = date( 'Y-m-d H:i:s', time() - $hours * 3600 );
-
-		$expr = [$search->or( [
-			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
-			$search->and( [
-				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
-				$search->compare( '>=', 'order.ctime', $date ),
-			] ),
-		] )];
-
-		if( $baseId !== null ) {
-			$expr[] = $search->compare( '!=', 'order.baseid', $baseId );
-		}
-
-		return $search->and( $expr );
+		return \Aimeos\MShop::create( $this->context, 'order' )->reserved( $search, $baseId );
 	}
 
 
