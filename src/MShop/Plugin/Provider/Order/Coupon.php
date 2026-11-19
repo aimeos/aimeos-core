@@ -126,7 +126,7 @@ class Coupon
 		$manager = \Aimeos\MShop::create( $context, 'order' );
 		$total = 0;
 
-		$search = $manager->filter()->slice( 0, 0 );
+		$search = $manager->filter()->slice( 0, 1 );
 		$expr = [
 			$search->compare( '==', 'order.coupon.code', $code ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
