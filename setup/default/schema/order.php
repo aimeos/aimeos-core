@@ -96,6 +96,7 @@ return array(
 			$table->index( ['parentid', 'postal'], 'idx_msordad_pid_postal' );
 			$table->index( ['parentid', 'city'], 'idx_msordad_pid_city' );
 			$table->index( ['parentid', 'email'], 'idx_msordad_pid_email' );
+			$table->index( ['email', 'type', 'siteid'], 'idx_msordad_email_type_sid' );
 
 			$table->foreign( 'parentid', 'mshop_order', 'id', 'fk_msordad_parentid' );
 		},
