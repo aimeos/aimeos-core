@@ -114,4 +114,218 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
 		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getRebate() );
 	}
+
+
+	public function testUpdateFirstOrder()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+
+		$this->object->update( $this->order, 'addProduct.after', $this->orderProduct );
+
+		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getRebate() );
+	}
+
+
+	public function testUpdatePaymentAddressOnly()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 3] );
+
+		$this->object->update( $this->order, 'addProduct.after', $this->orderProduct );
+
+		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateQuantityExceeded()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+
+		$this->object->update( $this->order, 'addProduct.after', $this->orderProduct->setQuantity( 2 ) );
+
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateBasketExceeded()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+
+		$product = ( clone $this->orderProduct )->setPrice( clone $this->orderProduct->getPrice() );
+		$this->order->addProduct( $product, 1 );
+
+		$this->object->update( $this->order, 'addProduct.after', $product );
+
+		$this->assertEquals( '100.00', $product->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateBasketRevoke()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+		$this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+
+		$product = ( clone $this->orderProduct )->setPrice( clone $this->orderProduct->getPrice() );
+		$this->order->addProduct( $product, 1 );
+
+		$this->object->update( $this->order, 'addProduct.after', $product );
+
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+		$this->assertEquals( '100.00', $product->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateRestore()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+
+		$price = $this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+		$this->object->update( $this->order, 'addProduct.after', $this->orderProduct->setPrice( $price )->setQuantity( 2 ) );
+
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getRebate() );
+	}
+
+
+	public function testUpdateUnfinished()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		$price = $this->orderProduct->getPrice()->getValue();
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$this->object->update( $this->order, 'addProduct.after', $this->orderProduct );
+			$price = $this->orderProduct->getPrice()->getValue();
+		}
+		finally
+		{
+			$item ? \Aimeos\MShop::create( \TestHelper::context(), 'order' )->delete( $item ) : null;
+		}
+
+		$this->assertEquals( '100.00', $price );
+	}
+
+
+	public function testUpdateUnfinishedExpired()
+	{
+		$context = \TestHelper::context();
+		$context->config()->set( 'mshop/coupon/provider/unfinished-hours', -1 );
+
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\FreeProduct( $context, $this->plugin );
+		$price = $this->orderProduct->getPrice()->getValue();
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+			$object->update( $this->order, 'addProduct.after', $this->orderProduct );
+			$price = $this->orderProduct->getPrice()->getValue();
+		}
+		finally
+		{
+			$item ? \Aimeos\MShop::create( $context, 'order' )->delete( $item ) : null;
+		}
+
+		$this->assertEquals( '0.00', $price );
+	}
+
+
+	public function testUpdateAlreadyFree()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+		$this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+
+		$this->object->update( $this->order, 'addProduct.after', $this->orderProduct );
+
+		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getRebate() );
+	}
+
+
+	public function testUpdateOrder()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+		$this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+
+		$this->assertNull( $this->object->update( $this->order, 'setOrder.before' ) );
+		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateOrderNotFree()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 0] );
+
+		$this->assertNull( $this->object->update( $this->order, 'setOrder.before' ) );
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateOrderNotLowered()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 5] );
+
+		$this->assertNull( $this->object->update( $this->order, 'setOrder.before' ) );
+		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+	}
+
+
+	public function testUpdateOrderUnfinished()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		$this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+		$item = null;
+
+		try
+		{
+			$item = $this->unfinished();
+
+			$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+			$this->object->update( $this->order, 'setOrder.before' );
+		}
+		finally
+		{
+			$item ? \Aimeos\MShop::create( \TestHelper::context(), 'order' )->delete( $item ) : null;
+			$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
+			$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getRebate() );
+		}
+	}
+
+
+	public function testUpdateOrderNoAddress()
+	{
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 1] );
+		$this->orderProduct->getPrice()->setValue( '0.00' )->setRebate( '100.00' );
+		$this->order->deleteAddress( 'payment' );
+
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->object->update( $this->order, 'setOrder.before' );
+	}
+
+
+	protected function unfinished() : \Aimeos\MShop\Order\Item\Iface
+	{
+		$context = \TestHelper::context();
+		$manager = \Aimeos\MShop::create( $context, 'order' );
+
+		$address = \Aimeos\MShop::create( $context, 'order/address' )->create()->setEmail( 'unittest-free@example.com' );
+		$product = \Aimeos\MShop::create( $context, 'order/product' )->create()->setProductCode( 'ABCD' );
+
+		current( $this->order->getAddress( 'payment' ) )->setEmail( 'unittest-free@example.com' );
+
+		$item = $manager->create()->off()->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
+			->addAddress( $address, 'payment' )->addProduct( $product );
+
+		return $manager->save( $item );
+	}
 }
