@@ -21,7 +21,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
 
-		if( $dbadapter !== 'pgsql' ) {
+		if( $dbadapter !== 'pgsql' && !str_starts_with( $this->name(), 'testGetRelevanceTerm' ) ) {
 			$this->markTestSkipped( 'PostgreSQL specific test' );
 		}
 
@@ -32,6 +32,28 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testGetRelevanceTerm()
+	{
+		$this->assertEquals( 'cafe:* | noire:* | "cafe <-> noire"', $this->relevanceTerm( 'Cafe Noire' ) );
+	}
+
+
+	public function testGetRelevanceTermIndex()
+	{
+		$fcn = $this->object->getSearchAttributes()['index.text:relevance']->getFunction();
+		$parts = $fcn( ['de', 'Cafe'], fn( $value ) => '\'' . $value . '\'' );
+
+		$expected = 'to_tsvector(\'english\', mindte."content") @@ to_tsquery(\'english\', \'cafe:* | "cafe"\')';
+		$this->assertEquals( $expected, $parts[2] );
+	}
+
+
+	public function testGetRelevanceTermShort()
+	{
+		$this->assertEquals( '"tv"', $this->relevanceTerm( 'TV' ) );
 	}
 
 
@@ -78,5 +100,11 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->search( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
+
+
+	protected function relevanceTerm( string $value ) : string
+	{
+		return \Closure::bind( fn( $value ) => $this->getRelevanceTerm( $value ), $this->object, PgSQL::class )( $value );
 	}
 }

@@ -53,6 +53,14 @@ trait DB
 
 
 	/**
+	 * Returns the site mode constant for inheritance/aggregation
+	 *
+	 * @return int Site mode constant
+	 */
+	abstract protected function getSiteMode() : int;
+
+
+	/**
 	 * Returns the attribute translations for searching defined by the manager.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of search attribute items
@@ -71,11 +79,29 @@ trait DB
 
 
 	/**
+	 * Returns the keys of the list items to search for
+	 *
+	 * @param array $params Parameters of "<domain>:has()", i.e. domain, list types and reference IDs
+	 * @return string[] List of keys like "<domain>|<list type>|<reference ID>", maybe incomplete for prefix search
+	 */
+	abstract protected function hasKeys( array $params ) : array;
+
+
+	/**
 	 * Returns the outmost decorator of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
 	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
+
+
+	/**
+	 * Returns the keys of the property items to search for
+	 *
+	 * @param array $params Parameters of "<domain>:prop()", i.e. property type, language IDs and values
+	 * @return string[] List of keys like "<type>|<language ID>|<value>", maybe incomplete for prefix search
+	 */
+	abstract protected function propKeys( array $params ) : array;
 
 
 	/**
@@ -97,6 +123,16 @@ trait DB
 	 * @since 2022.04
 	 */
 	abstract protected function siteId( string $siteId, int $sitelevel ) : string;
+
+
+	/**
+	 * Returns the site expression for the given name
+	 *
+	 * @param string $name SQL name for the site condition
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return string Site search condition
+	 */
+	abstract protected function siteString( string $name, int $sitelevel ) : string;
 
 
 	/**
@@ -525,6 +561,22 @@ trait DB
 
 
 	/**
+	 * Returns the configuration key of the manager for the passed last part
+	 *
+	 * @param string $name Configuration last part
+	 * @return string Configuration key like "mshop/<domain>/manager/<subdomain>/<name>"
+	 * @since 2026.10
+	 */
+	protected function configKey( string $name ) : string
+	{
+		$type = $this->type();
+		array_splice( $type, 1, 0, ['manager'] );
+
+		return 'mshop/' . join( '/', $type ) . '/' . $name;
+	}
+
+
+	/**
 	 * Returns the full configuration key for the passed last part
 	 *
 	 * @param string $name Configuration last part
@@ -533,9 +585,7 @@ trait DB
 	 */
 	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
-		$type = $this->type();
-		array_splice( $type, 1, 0, ['manager'] );
-		$key = 'mshop/' . join( '/', $type ) . '/' . $name;
+		$key = $this->configKey( $name );
 
 		if( $this->context()->config()->get( $key ) ) {
 			return $key;
@@ -1185,6 +1235,56 @@ trait DB
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the search function for list items referenced by the items
+	 *
+	 * @param string $alias Alias of the joined list table
+	 * @param int|null $level Site level constant from \Aimeos\MShop\Locale\Manager\Base or NULL for the site mode of the manager
+	 * @return \Closure Function returning the conditions and the target for "<domain>:has()"
+	 * @since 2026.10
+	 */
+	protected function hasFunction( string $alias, ?int $level = null ) : \Closure
+	{
+		return $this->keyFunction( $alias, $level ?? $this->getSiteMode(), fn( array $params ) => $this->hasKeys( $params ) );
+	}
+
+
+	/**
+	 * Returns the search function for property items of the items
+	 *
+	 * @param string $alias Alias of the joined property table
+	 * @param int|null $level Site level constant from \Aimeos\MShop\Locale\Manager\Base or NULL for the site mode of the manager
+	 * @return \Closure Function returning the conditions and the target for "<domain>:prop()"
+	 * @since 2026.10
+	 */
+	protected function propFunction( string $alias, ?int $level = null ) : \Closure
+	{
+		return $this->keyFunction( $alias, $level ?? $this->getSiteMode(), fn( array $params ) => $this->propKeys( $params ) );
+	}
+
+
+	/**
+	 * Returns the search function for the keys of list or property items referenced by the items
+	 *
+	 * @param string $alias Alias of the joined list or property table
+	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @param \Closure $keyFcn Function returning the list of keys for the passed parameters
+	 * @return \Closure Function returning the conditions and the target
+	 */
+	private function keyFunction( string $alias, int $level, \Closure $keyFcn ) : \Closure
+	{
+		return function( array $params ) use ( $alias, $level, $keyFcn ) {
+			$keys = array_map( fn( $key ) => substr( $key, 0, 255 ), $keyFcn( $params ) );
+
+			return [
+				$this->siteString( $alias . '."siteid"', $level ),
+				$this->toExpression( $alias . '."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' ),
+				$alias . '."id"'
+			];
+		};
 	}
 
 

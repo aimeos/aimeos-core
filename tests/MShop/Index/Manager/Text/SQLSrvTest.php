@@ -22,7 +22,7 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 
 		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
 
-		if( $dbadapter !== 'sqlsrv' ) {
+		if( $dbadapter !== 'sqlsrv' && !str_starts_with( $this->name(), 'testGetRelevanceTerm' ) ) {
 			$this->markTestSkipped( 'SQL Server specific test' );
 		}
 
@@ -43,6 +43,49 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 		foreach( $list as $attribute ) {
 			$this->assertInstanceOf( \Aimeos\Base\Criteria\Attribute\Iface::class, $attribute );
 		}
+	}
+
+
+	public function testGetRelevanceTerm()
+	{
+		$this->assertEquals( 'cafe noire', $this->relevanceTerm( 'Cafe Noire' ) );
+	}
+
+
+	public function testGetRelevanceTermFulltext()
+	{
+		$this->context->config()->set( 'mshop/index/manager/text/sqlsrv/fulltext', true );
+
+		$this->assertEquals( '"cafe*" | "noire*"', $this->relevanceTerm( 'Cafe Noire' ) );
+	}
+
+
+	public function testGetRelevanceTermIndex()
+	{
+		$this->context->config()->set( 'mshop/index/manager/text/sqlsrv/fulltext', true );
+
+		$fcn = $this->object->getSearchAttributes()['index.text:relevance']->getFunction();
+		$parts = $fcn( ['de', 'Cafe'], fn( $value ) => '\'' . $value . '\'' );
+
+		$expected = 'mindte."id" IN ( SELECT "KEY" FROM CONTAINSTABLE("mshop_index_text", "content", \'"cafe*"\') )';
+		$this->assertEquals( $expected, $parts[2] );
+	}
+
+
+	public function testGetRelevanceTermIndexNoFulltext()
+	{
+		$fcn = $this->object->getSearchAttributes()['index.text:relevance']->getFunction();
+		$parts = $fcn( ['de', 'Cafe'], fn( $value ) => '\'' . $value . '\'' );
+
+		$this->assertEquals( 'CHARINDEX( \'cafe\', mindte."content" )', $parts[2] );
+	}
+
+
+	public function testGetRelevanceTermFulltextShort()
+	{
+		$this->context->config()->set( 'mshop/index/manager/text/sqlsrv/fulltext', true );
+
+		$this->assertEquals( '"tv"', $this->relevanceTerm( 'TV' ) );
 	}
 
 
@@ -79,5 +122,11 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->search( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+	}
+
+
+	protected function relevanceTerm( string $value ) : string
+	{
+		return \Closure::bind( fn( $value ) => $this->getRelevanceTerm( $value ), $this->object, SQLSrv::class )( $value );
 	}
 }

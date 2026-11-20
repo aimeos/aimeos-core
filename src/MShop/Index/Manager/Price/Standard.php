@@ -63,11 +63,8 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
-
 		$name = 'index.price:value';
-		$expr = $this->siteString( 'mindpr."siteid"', (int) $level );
+		$expr = $this->siteString( 'mindpr."siteid"', $this->getSiteMode() );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 	}
 

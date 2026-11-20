@@ -70,36 +70,16 @@ class Property
 		$domain = $this->domain();
 		$alias = $this->alias( $domain . '.property.id' );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/' . $domain . '/manager/sitemode', $level );
-
 		return $this->getManager()->getSearchAttributes( $withsub ) + $this->createAttributes( [
 			$domain . ':prop' => [
 				'code' => $domain . ':prop()',
-				'internalcode' => ':site AND :key AND ' . $alias . '."id"',
 				'internaldeps' => [
 					'LEFT JOIN "mshop_' . $domain . '_property" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
 				],
 				'label' => 'Has property item, parameter(<property type>[,<language code>[,<property value>]])',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$keys = [];
-					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-					foreach( (array) $langs as $lang ) {
-						foreach( (array) ( $params[2] ?? '' ) as $val ) {
-							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-						}
-					}
-
-					// @phpstan-ignore argument.type
-					$sitestr = $this->siteString( $alias . '."siteid"', $level );
-					$keystr = $this->toExpression( $alias . '."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
-
-					return $params;
-				}
+				'function' => $this->propFunction( $alias )
 			],
 		] );
 	}

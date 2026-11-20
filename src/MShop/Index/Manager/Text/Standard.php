@@ -48,15 +48,13 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => '-POSITION( $2 IN mindte."content" ) * mpro."boost"',
-			'label' => 'Product texts, parameter(<language ID>,<search term>)',
+			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'public' => false,
 		),
@@ -76,15 +74,26 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+		$site = $this->siteString( 'mindte."siteid"', $this->getSiteMode() );
 
-		$this->searchConfig['index.text:relevance']['function'] = $this->getFunctionRelevance();
+		$termFcn = fn( array $params, \Closure $quote ) => $quote( isset( $params[1] ) ? $this->getRelevanceTerm( (string) $params[1] ) : null );
 
-		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
-		{
-			$expr = $this->siteString( 'mindte."siteid"', (int) $level );
-			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$key]['internalcode'] );
+		$this->searchConfig['index.text:relevance']['function'] = function( array $params, \Closure $quote ) use ( $site, $termFcn ) {
+			$term = $termFcn( $params, $quote );
+
+			return [
+				$site, 'mindte."langid" = ' . $quote( $params[0] ?? null ),
+				...$this->relevanceConditions( $term ),
+				$this->relevanceSource( $term )
+			];
+		};
+
+		$this->searchConfig['sort:index.text:relevance']['function'] = function( array $params, \Closure $quote ) use ( $termFcn ) {
+			return $this->relevanceSort( $termFcn( $params, $quote ) );
+		};
+
+		foreach( ['index.text:name', 'index.text:url'] as $key ) {
+			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $site, (string) $this->searchConfig[$key]['internalcode'] );
 		}
 	}
 
@@ -601,20 +610,71 @@ class Standard
 
 
 	/**
-	 * Returns the search function for searching by relevance
+	 * Returns the words of the search string used for searching by relevance
 	 *
-	 * @return \Closure Relevance search function
+	 * Operators of the full text search languages are removed and the words are lower case.
+	 *
+	 * @param string $value Search string entered by the user
+	 * @return string[] List of words
+	 * @since 2026.10
 	 */
-	protected function getFunctionRelevance()
+	protected function getRelevanceWords( string $value ) : array
 	{
-		return function( $source, array $params ) {
+		$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
+		$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', $value ) ), "' \t\n\r\0\x0B" );
 
-			if( isset( $params[1] ) ) {
-				$params[1] = mb_strtolower( (string) $params[1] );
-			}
+		return explode( ' ', $search );
+	}
 
-			return $params;
-		};
+
+	/**
+	 * Returns additional conditions for searching by relevance, e.g. for using a fulltext index
+	 *
+	 * @param string $term Quoted search term
+	 * @return string[] List of SQL conditions
+	 * @since 2026.10
+	 */
+	protected function relevanceConditions( string $term ) : array
+	{
+		return [];
+	}
+
+
+	/**
+	 * Returns the expression for searching by relevance
+	 *
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
+	 * @since 2026.10
+	 */
+	protected function relevanceSource( string $term ) : string
+	{
+		return 'POSITION( ' . $term . ' IN mindte."content" )';
+	}
+
+
+	/**
+	 * Returns the expression for sorting by relevance
+	 *
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
+	 * @since 2026.10
+	 */
+	protected function relevanceSort( string $term ) : string
+	{
+		return '-' . $this->relevanceSource( $term ) . ' * mpro."boost"';
+	}
+
+
+	/**
+	 * Returns the search term used for searching by relevance
+	 *
+	 * @param string $value Search string entered by the user
+	 * @return string Search term for the relevance query
+	 */
+	protected function getRelevanceTerm( string $value ) : string
+	{
+		return mb_strtolower( $value );
 	}
 
 

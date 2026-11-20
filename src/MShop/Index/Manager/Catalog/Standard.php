@@ -30,7 +30,6 @@ class Standard
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
-			'internalcode' => ':expr AND mindca."pos"',
 			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'int',
 			'public' => false,
@@ -56,12 +55,11 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $this->getSiteMode();
 
-		$this->searchConfig['index.catalog:position']['function'] = function( &$source, array $params ) use ( $level ) {
+		$this->searchConfig['index.catalog:position']['function'] = function( array $params ) use ( $level ) {
 
-			$expr = [$this->siteString( 'mindca."siteid"', (int) $level )];
+			$expr = [$this->siteString( 'mindca."siteid"', $level )];
 
 			if( isset( $params[0] ) ) {
 				$expr[] = $this->toExpression( 'mindca."listtype"', $params[0] );
@@ -71,9 +69,9 @@ class Standard
 				$expr[] = $this->toExpression( 'mindca."catid"', $params[1] );
 			}
 
-			$source = str_replace( ':expr', join( ' AND ', $expr ), (string) $source );
+			$expr[] = 'mindca."pos"';
 
-			return $params;
+			return $expr;
 		};
 	}
 

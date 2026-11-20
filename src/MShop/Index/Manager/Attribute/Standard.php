@@ -30,28 +30,12 @@ class Standard
 		),
 		'index.attribute:allof' => array(
 			'code' => 'index.attribute:allof()',
-			'internalcode' => '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
-				WHERE mpro."id" = mpro_allof."id" AND (
-					SELECT COUNT(DISTINCT mindat_allof."attrid")
-					FROM "mshop_index_attribute" AS mindat_allof
-					WHERE mpro."id" = mindat_allof."prodid" AND :site AND mindat_allof."attrid" IN ( $1 )
-					GROUP BY mindat_allof."prodid"
-					HAVING COUNT(DISTINCT mindat_allof."artid") > 0
-					) = $2
-				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
 			'public' => false,
 		),
 		'index.attribute:oneof' => array(
 			'code' => 'index.attribute:oneof()',
-			'internalcode' => '( SELECT mpro_oneof."id" FROM mshop_product AS mpro_oneof
-				WHERE mpro."id" = mpro_oneof."id" AND (
-					SELECT COUNT(DISTINCT mindat_oneof."attrid")
-					FROM "mshop_index_attribute" AS mindat_oneof
-					WHERE mpro."id" = mindat_oneof."prodid" AND :site
-					AND mindat_oneof."attrid" IN ( $1 ) ) > 0
-				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
 			'public' => false,
@@ -70,20 +54,32 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $this->getSiteMode();
 
-		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
-			return [$params[0], count( (array) $params[0] )];
+		$this->searchConfig['index.attribute:allof']['function'] = function( array $params, \Closure $quote ) use ( $level ) {
+			$ids = array_filter( (array) ( $params[0] ?? [] ), 'is_scalar' );
+
+			return '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
+				WHERE mpro."id" = mpro_allof."id" AND (
+					SELECT COUNT(DISTINCT mindat_allof."attrid")
+					FROM "mshop_index_attribute" AS mindat_allof
+					WHERE mpro."id" = mindat_allof."prodid" AND ' . $this->siteString( 'mindat_allof."siteid"', $level ) . '
+					AND mindat_allof."attrid" IN ( ' . $quote( $ids ) . ' )
+					GROUP BY mindat_allof."prodid"
+					HAVING COUNT(DISTINCT mindat_allof."artid") > 0
+					) = ' . count( $ids ) . '
+				)';
 		};
 
-		$name = 'index.attribute:allof';
-		$expr = $this->siteString( 'mindat_allof."siteid"', (int) $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
-
-		$name = 'index.attribute:oneof';
-		$expr = $this->siteString( 'mindat_oneof."siteid"', (int) $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig['index.attribute:oneof']['function'] = function( array $params, \Closure $quote ) use ( $level ) {
+			return '( SELECT mpro_oneof."id" FROM mshop_product AS mpro_oneof
+				WHERE mpro."id" = mpro_oneof."id" AND (
+					SELECT COUNT(DISTINCT mindat_oneof."attrid")
+					FROM "mshop_index_attribute" AS mindat_oneof
+					WHERE mpro."id" = mindat_oneof."prodid" AND ' . $this->siteString( 'mindat_oneof."siteid"', $level ) . '
+					AND mindat_oneof."attrid" IN ( ' . $quote( $params[0] ?? [] ) . ' ) ) > 0
+				)';
+		};
 	}
 
 

@@ -21,89 +21,41 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
-	private array $searchConfig = array(
-		'index.text:relevance' => array(
-			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',
-			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-		),
-		'sort:index.text:relevance' => array(
-			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE ) * mpro."boost"',
-			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-			'public' => false,
-		),
-	);
-
-
 	/**
-	 * Initializes the object
+	 * Returns the expression for searching by relevance
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
+	protected function relevanceSource( string $term ) : string
 	{
-		parent::__construct( $context );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
-
-		$func = $this->getFunctionRelevance();
-		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
-		$sql = $this->searchConfig['index.text:relevance']['internalcode'];
-
-		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, (string) $sql );
-		$this->searchConfig['sort:index.text:relevance']['function'] = $func;
-		$this->searchConfig['index.text:relevance']['function'] = $func;
+		return 'MATCH( mindte."content" ) AGAINST( ' . $term . ' IN BOOLEAN MODE )';
 	}
 
 
 	/**
-	 * Returns a list of objects describing the available criterias for searching.
+	 * Returns the expression for sorting by relevance
 	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attriubte items
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
+	protected function relevanceSort( string $term ) : string
 	{
-		$list = parent::getSearchAttributes( $withsub );
-
-		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
-		}
-
-		return $list;
+		return $this->relevanceSource( $term ) . ' * mpro."boost"';
 	}
 
 
 	/**
-	 * Returns the search function for searching by relevance
+	 * Returns the search term used for searching by relevance
 	 *
-	 * @return \Closure Relevance search function
+	 * @param string $value Search string entered by the user
+	 * @return string Search term for the relevance query
 	 */
-	protected function getFunctionRelevance()
+	protected function getRelevanceTerm( string $value ) : string
 	{
-		return function( $source, array $params ) {
+		$words = $this->getRelevanceWords( $value );
+		$parts = array_filter( $words, fn( $word ) => strlen( $word ) > 2 );
 
-			if( isset( $params[1] ) )
-			{
-				$str = '';
-				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
-
-				foreach( explode( ' ', $search ) as $part )
-				{
-					if( strlen( $part ) > 2 ) {
-						$str .= $part . '* ';
-					}
-				}
-
-				$params[1] = '\'' . $str . '"' . $search . '"\'';
-			}
-
-			return $params;
-		};
+		return join( '', array_map( fn( $part ) => $part . '* ', $parts ) ) . '"' . join( ' ', $words ) . '"';
 	}
 }

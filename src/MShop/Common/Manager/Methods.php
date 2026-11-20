@@ -422,6 +422,27 @@ trait Methods
 
 
 	/**
+	 * Returns the keys of the list items to search for
+	 *
+	 * @param array $params Parameters of "<domain>:has()", i.e. domain, list types and reference IDs
+	 * @return string[] List of keys like "<domain>|<list type>|<reference ID>", maybe incomplete for prefix search
+	 * @since 2026.10
+	 */
+	protected function hasKeys( array $params ) : array
+	{
+		$keys = [];
+
+		foreach( (array) ( $params[1] ?? '' ) as $type ) {
+			foreach( (array) ( $params[2] ?? '' ) as $id ) {
+				$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+			}
+		}
+
+		return $keys;
+	}
+
+
+	/**
 	 * Checks if the given domain is in the list of domains
 	 *
 	 * @param array $ref List of domains
@@ -453,5 +474,27 @@ trait Methods
 	protected function prefix() : string
 	{
 		return '';
+	}
+
+
+	/**
+	 * Returns the keys of the property items to search for
+	 *
+	 * @param array $params Parameters of "<domain>:prop()", i.e. property type, language IDs and values
+	 * @return string[] List of keys like "<type>|<language ID>|<value>", maybe incomplete for prefix search
+	 * @since 2026.10
+	 */
+	protected function propKeys( array $params ) : array
+	{
+		$keys = [];
+		$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
+
+		foreach( (array) $langs as $lang ) {
+			foreach( (array) ( $params[2] ?? '' ) as $val ) {
+				$keys[] = $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val;
+			}
+		}
+
+		return $keys;
 	}
 }

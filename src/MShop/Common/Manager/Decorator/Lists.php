@@ -93,86 +93,48 @@ class Lists
 		$domain = $this->domain();
 		$alias = $this->alias( $domain . '.lists.id' );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = (int) $this->context()->config()->get( 'mshop/' . $domain . '/manager/sitemode', $level );
+		$level = $this->getSiteMode();
+
+		$join = ['LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'];
+
+		$dateFcn = fn( string $col ) => function( array $params ) use ( $alias, $level, $col ) {
+			$expr = [
+				$this->toExpression( $alias . '."domain"', $params[0] ?? '' ),
+				$this->toExpression( $alias . '."type"', $params[1] ?? '' ),
+				$this->toExpression( $alias . '."' . $col . '"', $params[2] ?? '', '>=' )
+			];
+
+			if( isset( $params[3] ) ) {
+				$expr[] = $this->toExpression( $alias . '."' . $col . '"', $params[3], '<=' );
+			}
+
+			return [$this->siteString( $alias . '."siteid"', $level ), ...$expr, $alias . '."id"'];
+		};
 
 		return $this->getManager()->getSearchAttributes( $withsub ) + $this->createAttributes( [
 			$domain . ':has' => [
 				'code' => $domain . ':has()',
-				'internalcode' => ':site AND :key AND ' . $alias . '."id"',
-				'internaldeps' => [
-					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
-				],
+				'internaldeps' => $join,
 				'label' => 'Has list item, parameter(<domain>[,<list type>[,<reference ID>]])',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$keys = [];
-
-					foreach( (array) ( $params[1] ?? '' ) as $type ) {
-						foreach( (array) ( $params[2] ?? '' ) as $id ) {
-							$keys[] = substr( $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id, 0, 255 );
-						}
-					}
-
-					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
-					$keystr = $this->toExpression( $alias . '."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
-
-					return $params;
-				}
+				'function' => $this->hasFunction( $alias, $level )
 			],
 			$domain . ':starts' => [
 				'code' => $domain . ':starts()',
-				'internalcode' => ':site AND :expr AND ' . $alias . '."id"',
-				'internaldeps' => [
-					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
-				],
+				'internaldeps' => $join,
 				'label' => 'Has list item with start date, parameter(<domain>,<list type>,<after>[,<before>])',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$expr = [
-						$this->toExpression( $alias . '."domain"', $params[0] ?? '' ),
-						$this->toExpression( $alias . '."type"', $params[1] ?? '' ),
-						$this->toExpression( $alias . '."start"', $params[2] ?? '', '>=' )
-					];
-
-					if( isset( $params[3] ) ) {
-						$expr[] = $this->toExpression( $alias . '."start"', $params[3], '<=' );
-					}
-
-					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
-					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], (string) $source );
-
-					return $params;
-				}
+				'function' => $dateFcn( 'start' )
 			],
 			$domain . ':ends' => [
 				'code' => $domain . ':ends()',
-				'internalcode' => ':site AND :expr AND ' . $alias . '."id"',
-				'internaldeps' => [
-					'LEFT JOIN "mshop_' . $domain . '_list" AS ' . $alias . ' ON ( ' . $alias . '."parentid" = ' . $this->alias() . '."id" )'
-				],
+				'internaldeps' => $join,
 				'label' => 'Has list item with end date, parameter(<domain>,<list type>,<after>[,<before>])',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $alias, $level ) {
-					$expr = [
-						$this->toExpression( $alias . '."domain"', $params[0] ?? '' ),
-						$this->toExpression( $alias . '."type"', $params[1] ?? '' ),
-						$this->toExpression( $alias . '."end"', $params[2] ?? '', '>=' )
-					];
-
-					if( isset( $params[3] ) ) {
-						$expr[] = $this->toExpression( $alias . '."end"', $params[3], '<=' );
-					}
-
-					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
-					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], (string) $source );
-
-					return $params;
-				}
+				'function' => $dateFcn( 'end' )
 			]
 		] );
 	}

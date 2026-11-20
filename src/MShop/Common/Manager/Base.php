@@ -455,8 +455,11 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 */
 	protected function getSiteMode() : int
 	{
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		return (int) $this->context()->config()->get( $this->getConfigKey( 'sitemode', 'mshop/common/manager/sitemode' ), $level );
+		$config = $this->context()->config();
+		$level = $config->get( 'mshop/common/manager/sitemode', \Aimeos\MShop\Locale\Manager\Base::SITE_ALL );
+
+		// value 0 (SITE_ONE) is a valid setting
+		return (int) $config->get( $this->configKey( 'sitemode' ), $level );
 	}
 
 

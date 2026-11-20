@@ -231,7 +231,6 @@ class Standard extends Base
 		),
 		'catalog:has' => array(
 			'code' => 'catalog:has()',
-			'internalcode' => ':site AND :key AND mcatli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_catalog_list" AS mcatli ON ( mcatli."parentid" = mcat."id" )'],
 			'label' => 'Catalog has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -257,26 +256,8 @@ class Standard extends Base
 	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/catalog/manager/sitemode', $level );
-
-
-		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-
-			foreach( (array) ( $params[1] ?? '' ) as $type ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-				}
-			}
-
-			$sitestr = $this->siteString( 'mcatli."siteid"', (int) $level );
-			$keystr = $this->toExpression( 'mcatli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
-
-			return $params;
-		};
-
+		$level = (int) $context->config()->get( 'mshop/catalog/manager/sitemode', $level );
+		$this->searchConfig['catalog:has']['function'] = $this->hasFunction( 'mcatli', $level );
 
 		parent::__construct( $context, $this->searchConfig );
 
@@ -631,20 +612,12 @@ class Standard extends Base
 
 
 	/**
-	 * Searches for all items matching the given critera.
+	 * Returns the site mode constant for inheritance/aggregation
 	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface with ids as keys
+	 * @return int Site mode constant (default: SITE_PATH for inheritance)
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
+	protected function getSiteMode() : int
 	{
-		$map = [];
-		$required = ['catalog'];
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
 		/** mshop/catalog/manager/sitemode
 		 * Mode how items from levels below or above in the site tree are handled
 		 *
@@ -674,7 +647,26 @@ class Standard extends Base
 		 * @see mshop/locale/manager/sitelevel
 		 */
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-		$level = $context->config()->get( 'mshop/catalog/manager/sitemode', $level );
+		return (int) $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $level );
+	}
+
+
+	/**
+	 * Searches for all items matching the given critera.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int|null &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface with ids as keys
+	 */
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
+	{
+		$map = [];
+		$required = ['catalog'];
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$level = $this->getSiteMode();
 
 		/** mshop/catalog/manager/search-item/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -799,7 +791,7 @@ class Standard extends Base
 			$search->setSortations( [$search->sort( '+', 'sort:catalog:position' )] );
 		}
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, (int) $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() ) {
 			$map[$row['id']] = new \Aimeos\MW\Tree\Node\DBNestedSet( $row );
@@ -818,8 +810,7 @@ class Standard extends Base
 	 */
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
-		$mode = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-		$mode = $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $mode );
+		$mode = $this->getSiteMode();
 
 		if( $mode !== \Aimeos\MShop\Locale\Manager\Base::SITE_ONE ) {
 			$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
@@ -864,8 +855,7 @@ class Standard extends Base
 	public function getTree( ?string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
 		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		$mode = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-		$mode = $this->context()->config()->get( 'mshop/catalog/manager/sitemode', $mode );
+		$mode = $this->getSiteMode();
 
 		if( $mode === \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
 			$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );

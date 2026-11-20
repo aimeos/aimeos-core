@@ -168,7 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchPositionMarkers()
 	{
-		// internal marker and positional parameters in values must not be replaced again
+		// placeholders in values must be passed through as escaped values
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ["x' :expr \$1", ["' :expr \$2"]] ), 0 ) );
 		$result = $this->object->search( $search, [] );

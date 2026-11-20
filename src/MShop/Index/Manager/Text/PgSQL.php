@@ -20,87 +20,56 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
-	private array $searchConfig = array(
-		'index.text:relevance' => array(
-			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( to_tsvector(mindte."content") @@ to_tsquery( $2 ) AS integer )',
-			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-			'public' => false,
-		),
-		'sort:index.text:relevance' => array(
-			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 )) * mpro."boost"',
-			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-			'public' => false,
-		),
-	);
-
-
 	/**
-	 * Initializes the object
+	 * Returns additional conditions for searching by relevance
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
+	 * The condition must match the "idx_msindte_content" GIN index exactly to use it.
+	 *
+	 * @param string $term Quoted search term
+	 * @return string[] List of SQL conditions
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
+	protected function relevanceConditions( string $term ) : array
 	{
-		parent::__construct( $context );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
-
-		$name = 'index.text:relevance';
-		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
-		$this->searchConfig[$name]['function'] = $this->searchConfig['sort:' . $name]['function'] = $this->getFunctionRelevance();
+		return ['to_tsvector(\'english\', mindte."content") @@ to_tsquery(\'english\', ' . $term . ')'];
 	}
 
 
 	/**
-	 * Returns a list of objects describing the available criterias for searching.
+	 * Returns the expression for searching by relevance
 	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attriubte items
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
+	protected function relevanceSource( string $term ) : string
 	{
-		$list = parent::getSearchAttributes( $withsub );
-
-		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
-		}
-
-		return $list;
+		return 'CAST( to_tsvector(\'english\', mindte."content") @@ to_tsquery(\'english\', ' . $term . ') AS integer )';
 	}
 
 
 	/**
-	 * Returns the search function for searching by relevance
+	 * Returns the expression for sorting by relevance
 	 *
-	 * @return \Closure Relevance search function
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	protected function getFunctionRelevance()
+	protected function relevanceSort( string $term ) : string
 	{
-		return function( $source, array $params ) {
+		return 'ts_rank(to_tsvector(\'english\', mindte."content"), to_tsquery(\'english\', ' . $term . ')) * mpro."boost"';
+	}
 
-			if( isset( $params[1] ) )
-			{
-				$strings = [];
-				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
 
-				foreach( explode( ' ', $search ) as $part )
-				{
-					if( strlen( $part ) > 2 ) {
-						$strings[] = $part . ':*';
-					}
-				}
+	/**
+	 * Returns the search term used for searching by relevance
+	 *
+	 * @param string $value Search string entered by the user
+	 * @return string Search term for the relevance query
+	 */
+	protected function getRelevanceTerm( string $value ) : string
+	{
+		$words = $this->getRelevanceWords( $value );
+		$parts = array_filter( $words, fn( $word ) => strlen( $word ) > 2 );
+		$parts = array_map( fn( $part ) => $part . ':*', $parts );
 
-				$params[1] = join( ' | ', $strings ) . ' | "' . join( ' <-> ', explode( ' ', $search ) ) . '"';
-			}
-
-			return $params;
-		};
+		return join( ' | ', [...$parts, '"' . join( ' <-> ', $words ) . '"'] );
 	}
 }

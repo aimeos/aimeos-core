@@ -362,7 +362,7 @@ abstract class DBBase
 
 		if( !empty( $sorts = $search->getSortations() ) )
 		{
-			$names = $search->translate( $sorts, [], $funcs );
+			$names = $search->translate( $sorts );
 			$cols = $search->translate( $sorts, $translations, $funcs );
 			$ops = map( $sorts )->getOperator();
 
@@ -381,7 +381,7 @@ abstract class DBBase
 		$map = parent::getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
 
 		$map[':mincols'] = !empty( $list ) ? ', ' . implode( ', ', $list ) : '';
-		$map[':order'] = $search->getSortationSource( $types, $translations, $funcs );
+		$map[':order'] = $search->getSortationSource( $types, $translations );
 
 		return $map;
 	}
@@ -415,24 +415,12 @@ abstract class DBBase
 
 
 	/**
-	 * Searches for items matching the given criteria.
+	 * Returns the site mode constant for inheritance/aggregation shared by all index managers
 	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Total number of items matched by the given criteria
-	 * @param string $cfgPathSearch Configuration path to the search SQL statement
-	 * @param string $cfgPathCount Configuration path to the count SQL statement
-	 * @return \Aimeos\Map List of product items
+	 * @return int Site mode constant (default: SITE_ALL for inheritance and aggregation)
 	 */
-	protected function searchItemsIndexBase( \Aimeos\Base\Criteria\Iface $search,
-		array $ref, ?int &$total, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
+	protected function getSiteMode() : int
 	{
-		$list = $ids = [];
-		$context = $this->context();
-		$conn = $context->db( $this->getResourceName() );
-
-		$required = array( 'product' );
-
 		/** mshop/index/manager/sitemode
 		 * Mode how items from levels below or above in the site tree are handled
 		 *
@@ -462,9 +450,32 @@ abstract class DBBase
 		 * @see mshop/locale/manager/sitelevel
 		 */
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
+		return (int) $this->context()->config()->get( 'mshop/index/manager/sitemode', $level );
+	}
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, (int) $level );
+
+	/**
+	 * Searches for items matching the given criteria.
+	 *
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int &$total Total number of items matched by the given criteria
+	 * @param string $cfgPathSearch Configuration path to the search SQL statement
+	 * @param string $cfgPathCount Configuration path to the count SQL statement
+	 * @return \Aimeos\Map List of product items
+	 */
+	protected function searchItemsIndexBase( \Aimeos\Base\Criteria\Iface $search,
+		array $ref, ?int &$total, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
+	{
+		$list = $ids = [];
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$required = array( 'product' );
+
+		$level = $this->getSiteMode();
+
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 		while( $row = $results->fetch() ) {
 			$ids[] = $row['id'];

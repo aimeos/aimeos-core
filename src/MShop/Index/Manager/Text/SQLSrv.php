@@ -20,112 +20,92 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class SQLSrv
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
-	private array $searchConfig = array(
-		'index.text:relevance' => array(
-			'code' => 'index.text:relevance()',
-			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-			'public' => false,
-		),
-		'sort:index.text:relevance' => array(
-			'code' => 'sort:index.text:relevance()',
-			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
-			'type' => 'float',
-			'public' => false,
-		),
-	);
+	/**
+	 * Returns additional conditions for searching by relevance
+	 *
+	 * Filters by the fulltext index first so the rank subquery is only evaluated for matching rows.
+	 *
+	 * @param string $term Quoted search term
+	 * @return string[] List of SQL conditions
+	 */
+	protected function relevanceConditions( string $term ) : array
+	{
+		if( $this->fulltext() ) {
+			return ['mindte."id" IN ( SELECT "KEY" FROM CONTAINSTABLE("mshop_index_text", "content", ' . $term . ') )'];
+		}
+
+		return [];
+	}
 
 
 	/**
-	 * Initializes the object
+	 * Returns the expression for searching by relevance
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
+	protected function relevanceSource( string $term ) : string
 	{
-		parent::__construct( $context );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
-
-		if( $context->config()->get( 'mshop/index/manager/text/sqlsrv/fulltext', false ) )
+		if( $this->fulltext() )
 		{
-			$search = ':site AND mindte."langid" = $1 AND (
+			return '(
 				SELECT mindte_ft.RANK
-				FROM CONTAINSTABLE("mshop_index_text", "content", $2) AS mindte_ft
+				FROM CONTAINSTABLE("mshop_index_text", "content", ' . $term . ') AS mindte_ft
 				WHERE mindte."id" = mindte_ft."KEY"
 			)';
-			$sort = 'mindte_ft.RANK * mpro."boost"';
-
-			$func = $this->getFunctionRelevance();
-		}
-		else
-		{
-			$search = ':site AND mindte."langid" = $1 AND CHARINDEX( $2, content )';
-			$sort = '-CHARINDEX( $2, content ) * mpro."boost"';
-
-			$func = function( $source, array $params ) {
-
-				if( isset( $params[1] ) ) {
-					$params[1] = mb_strtolower( (string) $params[1] );
-				}
-
-				return $params;
-			};
 		}
 
-		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
-
-		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, $search );
-		$this->searchConfig['sort:index.text:relevance']['internalcode'] = $sort;
-		$this->searchConfig['index.text:relevance']['function'] = $func;
+		return 'CHARINDEX( ' . $term . ', mindte."content" )';
 	}
 
 
 	/**
-	 * Returns a list of objects describing the available criterias for searching.
+	 * Returns the expression for sorting by relevance
 	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of search attriubte items
+	 * @param string $term Quoted search term
+	 * @return string SQL expression
 	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
+	protected function relevanceSort( string $term ) : string
 	{
-		$list = parent::getSearchAttributes( $withsub );
-
-		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
+		if( $this->fulltext() ) {
+			return $this->relevanceSource( $term ) . ' * mpro."boost"';
 		}
 
-		return $list;
+		return parent::relevanceSort( $term );
 	}
 
 
 	/**
-	 * Returns the search function for searching by relevance
+	 * Returns if the SQL Server fulltext index should be used
 	 *
-	 * @return \Closure Relevance search function
+	 * @return bool TRUE if the fulltext index is available, FALSE if not
 	 */
-	protected function getFunctionRelevance()
+	private function fulltext() : bool
 	{
-		return function( $source, array $params ) {
+		return (bool) $this->context()->config()->get( 'mshop/index/manager/text/sqlsrv/fulltext', false );
+	}
 
-			if( isset( $params[1] ) )
-			{
-				$strings = [];
-				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
 
-				foreach( explode( ' ', $search ) as $part )
-				{
-					if( strlen( $part ) > 2 ) {
-						$strings[] = '"' . $part . '*"';
-					}
-				}
+	/**
+	 * Returns the search term used for searching by relevance
+	 *
+	 * @param string $value Search string entered by the user
+	 * @return string Search term for the relevance query
+	 */
+	protected function getRelevanceTerm( string $value ) : string
+	{
+		if( !$this->fulltext() ) {
+			return parent::getRelevanceTerm( $value );
+		}
 
-				$params[1] = '\'' . join( ' | ', $strings ) . '\'';
-			}
+		$words = $this->getRelevanceWords( $value );
+		$parts = array_filter( $words, fn( $word ) => strlen( $word ) > 2 );
 
-			return $params;
-		};
+		// CONTAINSTABLE fails for empty search conditions
+		if( empty( $parts ) ) {
+			return '"' . join( ' ', $words ) . '"';
+		}
+
+		return join( ' | ', array_map( fn( $part ) => '"' . $part . '*"', $parts ) );
 	}
 }

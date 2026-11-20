@@ -81,7 +81,7 @@ abstract class Base implements \Aimeos\MW\Tree\Manager\Iface
 			if( $item instanceof $iface ) {
 				$translations[$item->getCode()] = $item->getInternalCode();
 			} else if( isset( $item['code'] ) ) {
-				$translations[$item['code']] = $item['internalcode'];
+				$translations[$item['code']] = $item['internalcode'] ?? $item['code'];
 			} else {
 				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
