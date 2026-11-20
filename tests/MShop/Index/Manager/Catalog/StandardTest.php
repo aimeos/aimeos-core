@@ -174,6 +174,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchPositionMarkers()
+	{
+		// internal marker and positional parameters in values must not be replaced again
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ["x' :expr \$1", ["' :expr \$2"]] ), 0 ) );
+		$result = $this->object->search( $search, [] );
+
+		$this->assertEquals( 0, count( $result ) );
+	}
+
+
 	public function testSearchPositionNoCatid()
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->context, 'catalog' );

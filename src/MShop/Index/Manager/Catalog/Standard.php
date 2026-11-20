@@ -30,7 +30,7 @@ class Standard
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
-			'internalcode' => ':site :catid :listtype mindca."pos"',
+			'internalcode' => ':expr AND mindca."pos"',
 			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'int',
 			'public' => false,
@@ -61,9 +61,17 @@ class Standard
 
 		$this->searchConfig['index.catalog:position']['function'] = function( &$source, array $params ) use ( $level ) {
 
-			$source = str_replace( ':listtype', isset( $params[0] ) ? 'mindca."listtype" = $1 AND' : '', $source );
-			$source = str_replace( ':catid', isset( $params[1] ) ? 'mindca."catid" IN ( $2 ) AND' : '', $source );
-			$source = str_replace( ':site', $this->siteString( 'mindca."siteid"', $level ) . ' AND', $source );
+			$expr = [$this->siteString( 'mindca."siteid"', $level )];
+
+			if( isset( $params[0] ) ) {
+				$expr[] = $this->toExpression( 'mindca."listtype"', $params[0] );
+			}
+
+			if( isset( $params[1] ) ) {
+				$expr[] = $this->toExpression( 'mindca."catid"', $params[1] );
+			}
+
+			$source = str_replace( ':expr', join( ' AND ', $expr ), $source );
 
 			return $params;
 		};
