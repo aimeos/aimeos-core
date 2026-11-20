@@ -374,10 +374,6 @@ class Standard
 	 */
 	public function searchRefs( array $entries, array $ref ) : array
 	{
-		if( $this->hasRef( $ref, 'stock' ) ) {
-			$entries = $this->searchStocks( $entries, $ref );
-		}
-
 		if( $this->hasRef( $ref, 'parent' ) || $this->hasRef( $ref, 'product/parent' ) ) {
 			$entries = $this->searchParents( $entries );
 		}
@@ -445,30 +441,6 @@ class Standard
 				// @phpstan-ignore argument.type
 				$entries[$listItem->getRefId()]['.parent'][$listItem->getParentId()] = $items->get( $listItem->getParentId() );
 			}
-		}
-
-		return $entries;
-	}
-
-
-	/**
-	 * Adds the stock items to the product entries
-	 *
-	 * @param array $entries Associative list of product IDs as keys and product entries as values
-	 * @return array Associative list of product IDs as keys and product entries as values
-	 */
-	protected function searchStocks( array $entries, array $ref = [] ) : array
-	{
-		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
-		$filter = $manager->filter( true )->slice( 0, 0x7fffffff )
-			->add( 'stock.productid', '==', array_keys( $entries ) );
-
-		if( isset( $ref['stock'] ) && is_array( $ref['stock'] ) ) {
-			$filter->add( 'stock.type', '==', $ref['stock'] );
-		}
-
-		foreach( $manager->search( $filter ) as $stockId => $stockItem ) {
-			$entries[$stockItem->getProductId()]['.stock'][$stockId] = $stockItem;
 		}
 
 		return $entries;

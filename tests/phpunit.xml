@@ -6,6 +6,7 @@
     </testsuite>
     <testsuite name="MShop suite">
       <file>MShopTest.php</file>
+      <file>UtilsTest.php</file>
       <directory>MShop/</directory>
     </testsuite>
     <testsuite name="MAdmin suite">

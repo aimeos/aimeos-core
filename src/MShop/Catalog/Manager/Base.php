@@ -57,9 +57,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		if( !empty( $domains ) )
 		{
 			// @phpstan-ignore argument.type
-			$listItems = $this->getListItems( array_keys( $itemMap ), $domains, $prefix );
-
-			// @phpstan-ignore argument.type
 			foreach( $this->getListItems( array_keys( $itemMap ), $domains, $prefix ) as $id => $listItem ) {
 				$listItemMap[$listItem->getParentId()][$id] = $listItem;
 			}

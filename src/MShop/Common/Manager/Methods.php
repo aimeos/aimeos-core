@@ -430,7 +430,7 @@ trait Methods
 	 */
 	protected function hasRef( array $ref, string $domain ) : bool
 	{
-		return isset( $ref[$domain] ) || in_array( $domain, $ref );
+		return array_key_exists( $domain, \Aimeos\Utils::refs( $ref ) );
 	}
 
 

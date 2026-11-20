@@ -236,4 +236,32 @@ class Utils
 
 		return null;
 	}
+
+
+	/**
+	 * Returns the domains whose items should be fetched as domain names and list types
+	 *
+	 * Domains can be passed as values (e.g. ['text']) or as keys with the list
+	 * of types as values (e.g. ['media' => ['default']]). For scalar values
+	 * with string keys (e.g. ['product' => 'customer']), the value is the
+	 * domain name. Invalid entries are removed.
+	 *
+	 * @param array $ref List of domain names or domain names as keys and list of types as values
+	 * @return array Domain names as keys and list of types or NULL for all types as values
+	 */
+	public static function refs( array $ref ) : array
+	{
+		$list = [];
+
+		foreach( $ref as $key => $value )
+		{
+			if( is_string( $key ) && is_array( $value ) ) {
+				$list[$key] = array_key_exists( $key, $list ) ? null : $value; // domain without types fetches all
+			} elseif( is_string( $value ) && $value !== '' ) {
+				$list[$value] = null;
+			}
+		}
+
+		return $list;
+	}
 }

@@ -21,6 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelper::context();
 
 		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$this->object = new \Aimeos\MShop\Product\Manager\Decorator\Stock( $this->object, $this->context );
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Type( $this->object, $this->context );
@@ -494,6 +495,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchRef()
 	{
 		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$object = new \Aimeos\MShop\Product\Manager\Decorator\Stock( $object, $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
@@ -511,6 +513,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchDomains()
 	{
 		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$object = new \Aimeos\MShop\Product\Manager\Decorator\Stock( $object, $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
 		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
 		$object->setObject( $object );
@@ -522,6 +525,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
 		$this->assertEquals( 1, count( $item->getParentItems() ) );
 		$this->assertEquals( 0, count( $item->getStockItems() ) );
+	}
+
+
+	public function testSearchRefKeyValue()
+	{
+		$object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
+		$object = new \Aimeos\MShop\Product\Manager\Decorator\Stock( $object, $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Site( $object, $this->context );
+		$object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $object, $this->context );
+		$object->setObject( $object );
+
+		$item = $object->find( 'CNC', ['stock' => 'catalog', 'locale/site' => 'supplier', 'parent' => 'text'] );
+
+		$this->assertNull( $item->getSiteItem() );
+		$this->assertEquals( 0, count( $item->getStockItems() ) );
+		$this->assertEquals( 0, count( $item->getParentItems() ) );
+		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
+		$this->assertGreaterThan( 0, count( $item->getRefItems( 'text' ) ) );
 	}
 
 

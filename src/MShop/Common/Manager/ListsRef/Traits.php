@@ -104,7 +104,7 @@ trait Traits
 	 */
 	protected function getListItems( array $parentIds, array $ref, string $domain ) : array
 	{
-		if( empty( $ref ) ) {
+		if( empty( $refs = \Aimeos\Utils::refs( $ref ) ) ) {
 			return [];
 		}
 
@@ -115,22 +115,12 @@ trait Traits
 		$len = strlen( $domain );
 		$expr = [$search->compare( '==', $domain . '.lists.parentid', $parentIds )];
 
-		foreach( $ref as $key => $type )
+		foreach( $refs as $name => $types )
 		{
-			if( is_array( $type ) )
-			{
-				$key = !strncmp( $key, $domain . '/', $len + 1 ) ? [$key, substr( $key, $len + 1 )] : $key; // remove prefix
+			$name = !strncmp( $name, $domain . '/', $len + 1 ) ? [$name, substr( $name, $len + 1 )] : $name; // remove prefix
+			$cond = $search->compare( '==', $domain . '.lists.domain', $name );
 
-				$list[] = $search->and( [
-					$search->compare( '==', $domain . '.lists.domain', $key ),
-					$search->compare( '==', $domain . '.lists.type', $type ),
-				] );
-			}
-			else
-			{
-				$type = !strncmp( $type, $domain . '/', $len + 1 ) ? [$type, substr( $type, $len + 1 )] : $type; // remove prefix
-				$list[] = $search->compare( '==', $domain . '.lists.domain', $type );
-			}
+			$list[] = $types !== null ? $search->and( [$cond, $search->compare( '==', $domain . '.lists.type', $types )] ) : $cond;
 		}
 
 		// @phpstan-ignore argument.type

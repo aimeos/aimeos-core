@@ -397,19 +397,37 @@ class Standard
 		}
 
 
-		if( in_array( 'order', $ref ) )
-		{
-			$ids = array_column( $items, 'subscription.orderid' );
-			$manager = \Aimeos\MShop::create( $context, 'order' );
-			$search = $manager->filter()->add( 'order.id', '==', $ids )->slice( 0, count( $ids ) );
-			$orderItems = $manager->search( $search, $ref );
-
-			foreach( $items as $item ) {
-				$item->set( '.orderitem', $orderItems[$item['subscription.orderid']] ?? null ); // @phpstan-ignore method.notFound
-			}
+		if( $this->hasRef( $ref, 'order' ) ) {
+			$items = $this->searchOrders( $items, $ref );
 		}
 
 		return map( $items );
+	}
+
+
+	/**
+	 * Adds the order items to the subscription items
+	 *
+	 * @param \Aimeos\MShop\Subscription\Item\Iface[] $items Associative list of subscription IDs as keys and items as values
+	 * @param array $ref List of domains to fetch referenced items for
+	 * @return \Aimeos\MShop\Subscription\Item\Iface[] Associative list of subscription IDs as keys and items as values
+	 */
+	protected function searchOrders( array $items, array $ref ) : array
+	{
+		if( empty( $items ) ) {
+			return [];
+		}
+
+		$ids = array_column( $items, 'subscription.orderid' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
+		$search = $manager->filter()->add( 'order.id', '==', $ids )->slice( 0, count( $ids ) );
+		$orderItems = $manager->search( $search, $ref );
+
+		foreach( $items as $item ) {
+			$item->set( '.orderitem', $orderItems[$item['subscription.orderid']] ?? null ); // @phpstan-ignore method.notFound
+		}
+
+		return $items;
 	}
 
 

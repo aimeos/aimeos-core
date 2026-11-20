@@ -121,9 +121,7 @@ class Stock
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 		$filter = $manager->filter()->slice( 0, 0x7fffffff )->add( 'stock.productid', '==', $prodIds );
 
-		$types = isset( $ref['stock'] ) && is_array( $ref['stock'] ) ? $ref['stock'] : null;
-
-		if( !empty( $types ) ) {
+		if( ( $types = \Aimeos\Utils::refs( $ref )['stock'] ?? null ) !== null ) {
 			$filter->add( 'stock.type', '==', $types );
 		}
 

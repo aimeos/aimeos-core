@@ -77,10 +77,7 @@ trait Traits
 		$manager = $this->object()->getSubManager( 'property' );
 		$filter = $manager->filter()->slice( 0, 0x7fffffff )->add( $domain . '.property.parentid', '==', $parentIds );
 
-		$name = $domain . '/property';
-		$types = $ref && isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-
-		if( !empty( $types ) ) {
+		if( ( $types = \Aimeos\Utils::refs( $ref ?? [] )[$domain . '/property'] ?? null ) !== null ) {
 			$filter->add( $domain . '.property.type', '==', $types );
 		}
 
