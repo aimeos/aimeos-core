@@ -89,19 +89,23 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 
 	/**
-	 * Checks if the file path has been generated for the current site
+	 * Checks if the file path has been generated for the current site and the given domain
 	 *
-	 * Only files created by path() for the current site can be overwritten or
-	 * deleted to prevent removing arbitrary files of the file system or files
-	 * of other sites if the path has been passed by the user.
+	 * Only files created by path() for the current site and the domain owning the
+	 * media item can be overwritten or deleted to prevent removing arbitrary files
+	 * of the file system or files of other sites and domains if the path has been
+	 * passed by the user. Domains containing slashes never own files because their
+	 * paths would overlap with the paths of other domains, e.g. "catalog/a".
 	 *
 	 * @param string $path Relative file path
-	 * @return bool TRUE if the file belongs to the current site, FALSE if not
+	 * @param string $domain Domain of the media item owning the file, e.g. "product"
+	 * @return bool TRUE if the file belongs to the current site and domain, FALSE if not
 	 */
-	protected function isOwned( string $path ) : bool
+	protected function isOwned( string $path, string $domain ) : bool
 	{
-		$prefix = $this->context()->locale()->getSiteId() . 'd/';
-		return str_starts_with( $path, $prefix ) && !str_contains( $path, '..' ) && !str_contains( $path, '\\' );
+		$prefix = $this->context()->locale()->getSiteId() . 'd/' . ( $domain ?: '-' ) . '/';
+		return !str_contains( $domain, '/' ) && str_starts_with( $path, $prefix )
+			&& !str_contains( $path, '..' ) && !str_contains( $path, '\\' );
 	}
 
 
