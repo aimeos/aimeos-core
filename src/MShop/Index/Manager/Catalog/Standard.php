@@ -78,7 +78,7 @@ class Standard
 
 			$source = str_replace( ':expr', join( ' AND ', $expr ), $source );
 
-			return $params;
+			return [];
 		};
 	}
 
