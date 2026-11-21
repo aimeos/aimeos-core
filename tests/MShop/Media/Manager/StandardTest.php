@@ -65,6 +65,37 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'otherDomainProvider' )]
+	public function testDeleteOtherDomainFiles( string $domain, string $dir )
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/' . $dir;
+		$fs->write( $path . 'stored.jpg', 'test' )->write( $path . 'stored-1.jpg', 'test' );
+
+		$item = $this->object->create()->setDomain( $domain )->setType( 'default' )->setLabel( 'delete test' )
+			->setUrl( $path . 'stored.jpg' )->setPreviews( [1 => $path . 'stored-1.jpg'] );
+		$item = $this->object->save( $item );
+
+		// files of other domains are never removed, even if they are referenced by the stored item
+		$this->object->delete( [$item] );
+
+		$this->assertTrue( $fs->has( $path . 'stored.jpg' ) );
+		$this->assertTrue( $fs->has( $path . 'stored-1.jpg' ) );
+
+		$fs->rm( $path . 'stored.jpg' )->rm( $path . 'stored-1.jpg' );
+	}
+
+
+	public static function otherDomainProvider() : array
+	{
+		return [
+			'other domain' => ['product', 'catalog/'],
+			// domains with slashes would match files of other domains like "catalog"
+			'nested domain' => ['catalog/a', 'catalog/a/'],
+		];
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
@@ -115,8 +146,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$path = $this->context->locale()->getSiteId() . 'd/test/abcdefgh_test.jpg';
-		$item = $this->object->create()->setPreview( $path )->setUrl( $path );
+		$path = $this->context->locale()->getSiteId() . 'd/product/abcdefgh_test.jpg';
+		$item = $this->object->create()->setDomain( 'product' )->setPreview( $path )->setUrl( $path );
 
 		$result = $this->object->copy( $item );
 
@@ -151,6 +182,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'foreign.jpg', $result->getUrl() );
 		$this->assertEquals( $path, $result->getPreview() );
+	}
+
+
+	public function testCopyOtherDomain()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/catalog/abcdefgh_test.jpg';
+		$fs->write( $path, 'test' );
+
+		$item = $this->object->create()->setDomain( 'product' )->setPreview( $path )->setUrl( $path );
+		$result = $this->object->copy( $item );
+
+		$this->assertEquals( $path, $result->getUrl() );
+		$this->assertEquals( $path, $result->getPreview() );
+
+		$fs->rm( $path );
 	}
 
 
@@ -373,6 +420,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testScaleOtherDomain()
+	{
+		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
+
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/catalog/';
+		$fs->write( $path . 'test-1.webp', 'test' )->write( $path . 'test-2.webp', 'test' );
+
+		$item = $this->object->create()->setUrl( 'test.gif' )->setMimeType( 'image/gif' )->setDomain( 'product' )
+			->setPreviews( [1 => $path . 'test-1.webp', 240 => $path . 'test-2.webp'] );
+
+		$result = $this->object->scale( $item, true );
+
+		$this->assertNotContains( $path . 'test-1.webp', $result->getPreviews() );
+		$this->assertNotContains( $path . 'test-2.webp', $result->getPreviews() );
+		$this->assertEquals( 'test', $fs->read( $path . 'test-1.webp' ) );
+		$this->assertEquals( 'test', $fs->read( $path . 'test-2.webp' ) );
+
+		$fs->rm( $path . 'test-1.webp' )->rm( $path . 'test-2.webp' );
+	}
+
+
 	public function testScaleOtherFilesystem()
 	{
 		$config = $this->context->config()->get( 'resource', [] );
@@ -499,8 +568,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUploadOwnedFile()
 	{
 		$fs = $this->context->fs( 'fs-media' );
-		$path = $this->context->locale()->getSiteId() . 'd/test/old.gif';
-		$other = $this->context->locale()->getSiteId() . 'd/test/other.gif';
+		$path = $this->context->locale()->getSiteId() . 'd/product/old.gif';
+		$other = $this->context->locale()->getSiteId() . 'd/product/other.gif';
 		$fs->write( $path, 'test' )->write( $other, 'test' );
 
 		$item = $this->object->create( ['media.domain' => 'product', 'media.type' => 'default'] );
@@ -517,6 +586,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $fs->has( $other ) );
 
 		$fs->rm( $other );
+	}
+
+
+	public function testUploadOtherDomainFile()
+	{
+		$fs = $this->context->fs( 'fs-media' );
+		$path = $this->context->locale()->getSiteId() . 'd/catalog/old.gif';
+		$fs->write( $path, 'test' );
+
+		$item = $this->object->create( ['media.domain' => 'product', 'media.type' => 'default'] );
+		$item = $this->object->save( $item->setLabel( 'unittest' )->setUrl( $path ) );
+
+		$content = file_get_contents( __DIR__ . '/_testfiles/test.gif' );
+		$file = new \Nyholm\Psr7\UploadedFile( __DIR__ . '/_testfiles/test.gif', strlen( $content ), UPLOAD_ERR_OK, 'test.gif' );
+
+		$result = $this->object->upload( $item, $file );
+		$this->object->delete( $result );
+
+		$this->assertStringEndsWith( '_test.gif', $result->getUrl() );
+		$this->assertTrue( $fs->has( $path ) );
+
+		$fs->rm( $path );
 	}
 
 
