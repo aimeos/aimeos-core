@@ -463,6 +463,33 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testScaleOtherFilesystem()
+	{
+		$config = $this->context->config()->get( 'resource', [] );
+		$config['fs-secure'] = ['adapter' => 'Standard', 'basedir' => 'tmp/fs-secure'];
+		$this->context->setFilesystemManager( new \Aimeos\Base\Filesystem\Manager\Standard( $config ) );
+
+		$fs = $this->context->fs( 'fs-secure' );
+		$path = $this->context->locale()->getSiteId() . 'd/product/abcdefgh_test.gif';
+		$fs->write( $path, (string) file_get_contents( __DIR__ . '/_testfiles/test.gif' ) );
+
+		$item = $this->object->create()->setUrl( $path )->setFileSystem( 'fs-secure' )
+			->setMimeType( 'image/gif' )->setDomain( 'product' );
+
+		$result = $this->object->scale( $item, true );
+		$previews = $result->getPreviews();
+
+		$this->assertNotEmpty( $previews );
+		$this->assertTrue( $fs->has( (string) reset( $previews ) ) );
+
+		foreach( $previews as $preview ) {
+			$fs->rm( (string) $preview );
+		}
+
+		$fs->rm( $path );
+	}
+
+
 	public function testScaleHttp()
 	{
 
