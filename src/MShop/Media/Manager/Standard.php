@@ -275,7 +275,7 @@ class Standard
 
 		$domain = $item->getDomain() ?: '-';
 		$sizes = $this->sizes( $domain, $item->getType() );
-		$image = $this->image( $url );
+		$image = $this->image( $url, $item->getFileSystem() );
 		$quality = $this->quality();
 		$old = $item->getPreviews();
 		$previews = [];
