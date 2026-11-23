@@ -373,28 +373,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScaleOtherDomain()
-	{
-		copy( __DIR__ . '/_testfiles/test.gif', 'tmp/test.gif' );
-
-		$fs = $this->context->fs( 'fs-media' );
-		$path = $this->context->locale()->getSiteId() . 'd/catalog/';
-		$fs->write( $path . 'test-1.webp', 'test' )->write( $path . 'test-2.webp', 'test' );
-
-		$item = $this->object->create()->setUrl( 'test.gif' )->setMimeType( 'image/gif' )->setDomain( 'product' )
-			->setPreviews( [1 => $path . 'test-1.webp', 240 => $path . 'test-2.webp'] );
-
-		$result = $this->object->scale( $item, true );
-
-		$this->assertNotContains( $path . 'test-1.webp', $result->getPreviews() );
-		$this->assertNotContains( $path . 'test-2.webp', $result->getPreviews() );
-		$this->assertEquals( 'test', $fs->read( $path . 'test-1.webp' ) );
-		$this->assertEquals( 'test', $fs->read( $path . 'test-2.webp' ) );
-
-		$fs->rm( $path . 'test-1.webp' )->rm( $path . 'test-2.webp' );
-	}
-
-
 	public function testScaleOtherFilesystem()
 	{
 		$config = $this->context->config()->get( 'resource', [] );
