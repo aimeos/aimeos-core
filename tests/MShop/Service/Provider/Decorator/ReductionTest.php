@@ -100,6 +100,29 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCalcPriceServiceInBasket()
+	{
+		$this->servItem->setType( 'payment' )->setConfig( ['reduction.percent' => 10] );
+		$this->basket->addProduct( $this->getOrderProduct() );
+
+		// price of this service from the previous calculation, must not reduce its own base value
+		$orderService = \Aimeos\MShop::create( $this->context, 'order/service' )->create()
+			->copyFrom( $this->servItem )->setServiceId( $this->servItem->getId() )
+			->setPrice( \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '-2.00' ) );
+		$this->basket->addService( $orderService, 'payment' );
+
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '0.00' );
+
+		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
+			->willReturn( $priceItem );
+
+		$price = $this->object->calcPrice( $this->basket );
+
+		$this->assertEquals( '-2.00', $price->getValue() );
+		$this->assertEquals( '2.00', $price->getRebate() );
+	}
+
+
 	public function testCalcPriceIncludeCosts()
 	{
 		$this->servItem->setConfig( ['reduction.percent' => 10, 'reduction.include-costs' => 1] );
