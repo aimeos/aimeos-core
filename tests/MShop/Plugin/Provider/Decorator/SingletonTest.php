@@ -67,4 +67,26 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $value, $this->object->update( $order, 'test', $value ) );
 	}
+
+
+	public function testUpdateException()
+	{
+		$order = \Aimeos\MShop::create( $this->context, 'order' )->create()->off();
+
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'update' )
+			->willThrowException( new \Aimeos\MShop\Plugin\Provider\Exception( 'test' ) );
+
+		for( $i = 0; $i < 2; $i++ )
+		{
+			try
+			{
+				$this->object->update( $order, 'test' );
+				$this->fail( 'Plugin provider exception expected' );
+			}
+			catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+			{
+				$this->assertEquals( 'test', $e->getMessage() );
+			}
+		}
+	}
 }

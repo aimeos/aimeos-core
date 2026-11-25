@@ -45,6 +45,29 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateProviderException()
+	{
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/product' );
+		$filter = $manager->filter()->add( ['order.product.prodcode' => 'CNE', 'order.product.price' => '36.00'] );
+
+		$this->order->addProduct( $manager->search( $filter )->first( new \Exception( 'No order product' ) ) );
+		$this->order->addCoupon( 'STUV' )->addCoupon( '90AB' ); // unpaid voucher, percent rebate
+
+		try
+		{
+			$this->object->update( $this->order, 'test' );
+			$this->fail( 'Plugin provider exception expected' );
+		}
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+		{
+			$this->assertEquals( 409, $e->getCode() );
+		}
+
+		$this->assertEquals( ['90AB'], $this->order->getCoupons()->keys()->all() );
+		$this->assertEquals( 1, count( $this->order->getCoupons()->get( '90AB' ) ) );
+	}
+
+
 	public function testUpdateUnfinished()
 	{
 		$context = \TestHelper::context();
