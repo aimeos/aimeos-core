@@ -39,9 +39,11 @@ class Singleton
 		}
 
 		$this->singleton = true;
-		$value = $this->getProvider()->update( $order, $action, $value );
-		$this->singleton = false;
 
-		return $value;
+		try {
+			return $this->getProvider()->update( $order, $action, $value );
+		} finally {
+			$this->singleton = false;
+		}
 	}
 }

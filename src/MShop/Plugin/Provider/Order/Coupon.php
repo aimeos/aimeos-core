@@ -67,7 +67,7 @@ class Coupon
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Iface $order, string $action, $value = null )
 	{
-		$notAvailable = false;
+		$errors = [];
 		$context = $this->context();
 
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
@@ -80,18 +80,27 @@ class Coupon
 				->add( $codeManager->filter( true )->getConditions() )
 				->slice( 0, 1 );
 
-			if( ( $item = $manager->search( $search )->first() ) !== null && $this->available( (string) $code, $order ) ) {
-				$manager->getProvider( $item, $code )->update( $order );
-			} else {
+			if( ( $item = $manager->search( $search )->first() ) === null || !$this->available( (string) $code, $order ) )
+			{
 				$order->deleteCoupon( (string) $code );
-				$notAvailable = true;
+				$errors[] = $context->translate( 'mshop', 'Coupon is not available any more' );
+				continue;
+			}
+
+			try
+			{
+				$manager->getProvider( $item, $code )->update( $order );
+			}
+			catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+			{
+				// update the remaining coupons too, configuration errors are still thrown
+				$order->deleteCoupon( (string) $code );
+				$errors[] = $e->getMessage();
 			}
 		}
 
-		if( $notAvailable )
-		{
-			$msg = $this->context()->translate( 'mshop', 'Coupon is not available any more' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, 409 );
+		if( !empty( $errors ) ) {
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( join( "\n", array_unique( $errors ) ), 409 );
 		}
 
 		return $value;
