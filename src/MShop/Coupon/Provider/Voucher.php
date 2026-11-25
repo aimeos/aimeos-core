@@ -77,18 +77,27 @@ class Voucher
 		$manager = \Aimeos\MShop::create( $this->context(), 'coupon/code' );
 		$orderProductId = $manager->find( $this->getCode() )->getRef();
 
-		$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
-		$this->checkVoucher( (string) $orderProductId, $status );
-
-		$orderProduct = $this->getOrderProductItem( (string) $orderProductId, (string) $order->getPrice()->getCurrencyId() );
-		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate(); // @phpstan-ignore binaryOp.invalid
-		$usedRebate = $this->getUsedRebate( $this->getCode(), $order->getId() );
-		$rebate = $value - $usedRebate;
-
-		if( $rebate <= 0 )
+		try
 		{
-			$msg = $context->translate( 'mshop', 'No more credit available for voucher "%1$s"' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
+			$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
+			$this->checkVoucher( (string) $orderProductId, $status );
+
+			$orderProduct = $this->getOrderProductItem( (string) $orderProductId, (string) $order->getPrice()->getCurrencyId() );
+			$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate(); // @phpstan-ignore binaryOp.invalid
+			$usedRebate = $this->getUsedRebate( $this->getCode(), $order->getId() );
+			$rebate = $value - $usedRebate;
+
+			if( $rebate <= 0 )
+			{
+				$msg = $context->translate( 'mshop', 'No more credit available for voucher "%1$s"' );
+				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
+			}
+		}
+		catch( \Aimeos\MShop\Coupon\Exception $e )
+		{
+			// the voucher can't be used by the customer (not paid, no credit left or other currency)
+			$order->deleteCoupon( $this->getCode() );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $e->getMessage(), 409, $e );
 		}
 
 		$orderProducts = $this->createRebateProducts( $order, (string) $prodcode, $rebate );
