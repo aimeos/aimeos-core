@@ -98,6 +98,29 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCalcPriceServiceInBasket()
+	{
+		$this->basket->addProduct( $this->getOrderProduct() );
+		$this->servItem->setType( 'payment' )->setConfig( ['costs.percent' => 10] );
+
+		// price of this service from the previous calculation, must not change its own base value
+		$orderService = \Aimeos\MShop::create( $this->context, 'order/service' )->create()
+			->copyFrom( $this->servItem )->setServiceId( $this->servItem->getId() )
+			->setPrice( \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '5.00' ) );
+		$this->basket->addService( $orderService, 'payment' );
+
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create();
+
+		$this->mockProvider->expects( $this->once() )
+			->method( 'calcPrice' )
+			->willReturn( $priceItem->setValue( 0 ) );
+
+		$price = $this->object->calcPrice( $this->basket );
+		$this->assertEquals( '0.00', $price->getValue() );
+		$this->assertEquals( '2.00', $price->getCosts() );
+	}
+
+
 	/**
 	 * Returns an order product item
 	 *

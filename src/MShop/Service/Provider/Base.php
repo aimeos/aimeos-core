@@ -366,6 +366,30 @@ abstract class Base
 
 
 	/**
+	 * Returns the basket value without the price of this service from the last calculation
+	 *
+	 * The service must not change its own base value, otherwise the price depends on
+	 * whether the service has already been added to the basket.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
+	 * @return float Basket value excluding the value of this service
+	 */
+	protected function getBasketValue( \Aimeos\MShop\Order\Item\Iface $basket ) : float
+	{
+		$value = (float) $basket->getPrice()->getValue();
+		$id = (string) $this->getServiceItem()->getId();
+
+		if( $id === '' ) {
+			return $value;
+		}
+
+		return $value - map( $basket->getService( $this->getServiceItem()->getType() ) )
+			->filter( fn( \Aimeos\MShop\Order\Item\Service\Iface $service ) => $service->getServiceId() === $id )
+			->sum( fn( \Aimeos\MShop\Order\Item\Service\Iface $service ) => $service->getPrice()->getValue() );
+	}
+
+
+	/**
 	 * Returns the criteria attribute items for the backend configuration
 	 *
 	 * @return \Aimeos\Base\Criteria\Attribute\Iface[] List of criteria attribute items
