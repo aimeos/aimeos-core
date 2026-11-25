@@ -93,20 +93,8 @@ class Reduction
 			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub ); // @phpstan-ignore binaryOp.invalid, binaryOp.invalid
 		}
 
-		$value = $basket->getPrice()->getValue();
-		$serviceItem = $this->getServiceItem();
-
-		// the basket contains the price of this service from the last calculation, it must not reduce its own base value
-		// @phpstan-ignore foreach.nonIterable
-		foreach( $basket->getService( $serviceItem->getType() ) as $orderService )
-		{
-			if( $orderService->getServiceId() === (string) $serviceItem->getId() ) {
-				$value -= $orderService->getPrice()->getValue(); // @phpstan-ignore assignOp.invalid
-			}
-		}
-
-		// @phpstan-ignore argument.type, argument.type
-		$sub = $value * $this->getConfigValue( 'reduction.percent' ) / 100;
+		// @phpstan-ignore binaryOp.invalid
+		$sub = $this->getBasketValue( $basket ) * $this->getConfigValue( 'reduction.percent' ) / 100;
 		// @phpstan-ignore argument.type, argument.type
 		return $price->setValue( $price->getValue() - $sub )->setRebate( $price->getRebate() + $sub ); // @phpstan-ignore binaryOp.invalid, binaryOp.invalid
 	}

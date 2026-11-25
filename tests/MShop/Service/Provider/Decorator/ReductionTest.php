@@ -111,6 +111,11 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 			->setPrice( \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '-2.00' ) );
 		$this->basket->addService( $orderService, 'payment' );
 
+		// other services stay part of the base value
+		$deliveryService = \Aimeos\MShop::create( $this->context, 'order/service' )->create()->setServiceId( '-2' )
+			->setPrice( \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '5.00' ) );
+		$this->basket->addService( $deliveryService, 'delivery' );
+
 		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '0.00' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
@@ -118,8 +123,8 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$price = $this->object->calcPrice( $this->basket );
 
-		$this->assertEquals( '-2.00', $price->getValue() );
-		$this->assertEquals( '2.00', $price->getRebate() );
+		$this->assertEquals( '-2.50', $price->getValue() );
+		$this->assertEquals( '2.50', $price->getRebate() );
 	}
 
 
