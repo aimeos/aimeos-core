@@ -77,6 +77,38 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateNoCredit()
+	{
+		$this->order->addProduct( $this->getOrderProduct() )->addCoupon( '90AB' );
+
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/product' )->create();
+		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
+		$orderProduct->getPrice()->setValue( '100.00' );
+
+		$object = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\Voucher::class )
+			->setConstructorArgs( [$this->context, $this->couponItem, '90AB'] )
+			->onlyMethods( ['checkVoucher', 'getOrderProductItem', 'getUsedRebate'] )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'getOrderProductItem' )
+			->willReturn( $orderProduct );
+
+		$object->expects( $this->once() )->method( 'getUsedRebate' )
+			->willReturn( 100.0 );
+
+		try
+		{
+			$object->update( $this->order );
+			$this->fail( 'Plugin provider exception expected' );
+		}
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+		{
+			$this->assertEquals( 409, $e->getCode() );
+			$this->assertFalse( $this->order->getCoupons()->has( '90AB' ) );
+		}
+	}
+
+
 	public function testCheckVoucher()
 	{
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
