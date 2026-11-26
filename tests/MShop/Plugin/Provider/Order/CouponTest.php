@@ -40,8 +40,37 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->order->addCoupon( 'OPQR' );
+		$this->order->addProduct( $this->getOrderProduct() )->addCoupon( 'OPQR' );
 		$this->assertEquals( null, $this->object->update( $this->order, 'test' ) );
+		$this->assertEquals( ['OPQR'], $this->order->getCoupons()->keys()->all() );
+	}
+
+
+	public function testUpdateNotAvailable()
+	{
+		$this->order->addCoupon( 'OPQR' ); // minimum basket value of 9.00 EUR isn't reached
+
+		try
+		{
+			$this->object->update( $this->order, 'test' );
+			$this->fail( 'Plugin provider exception expected' );
+		}
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+		{
+			$this->assertEquals( 409, $e->getCode() );
+			$this->assertStringContainsString( 'OPQR', $e->getMessage() );
+		}
+
+		$this->assertEquals( [], $this->order->getCoupons()->all() );
+	}
+
+
+	public function testUpdateNotAvailableAdded()
+	{
+		$this->order->addCoupon( 'OPQR' ); // minimum basket value isn't reached, checked by the frontend controller
+
+		$this->assertEquals( 'OPQR', $this->object->update( $this->order, 'addCoupon.after', 'OPQR' ) );
+		$this->assertEquals( ['OPQR'], $this->order->getCoupons()->keys()->all() );
 	}
 
 
@@ -84,7 +113,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertEquals( null, $this->object->update( $item, 'test' ) );
 
-			$this->order->addCoupon( 'unittest-count' );
+			$this->order->addProduct( $this->getOrderProduct() )->addCoupon( 'unittest-count' );
 			$this->object->update( $this->order, 'test' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
@@ -119,7 +148,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 			$context->config()->set( 'mshop/coupon/provider/unfinished-hours', -1 );
 			$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( $context, \Aimeos\MShop::create( $context, 'plugin' )->create() );
 
-			$this->order->addCoupon( 'unittest-count' );
+			$this->order->addProduct( $this->getOrderProduct() )->addCoupon( 'unittest-count' );
 			$this->assertEquals( null, $object->update( $this->order, 'test' ) );
 			$this->assertEquals( ['unittest-count'], $this->order->getCoupons()->keys()->all() );
 		}
@@ -128,5 +157,19 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 			$manager->delete( $item );
 			$codeManager->delete( $codeItem );
 		}
+	}
+
+
+	/**
+	 * Returns an order product with a value above the minimum basket value of the test coupons
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order product item
+	 */
+	protected function getOrderProduct() : \Aimeos\MShop\Order\Item\Product\Iface
+	{
+		$manager = \Aimeos\MShop::create( \TestHelper::context(), 'order/product' );
+		$filter = $manager->filter()->add( ['order.product.prodcode' => 'CNE', 'order.product.price' => '36.00'] );
+
+		return $manager->search( $filter )->first( new \Exception( 'No order product' ) );
 	}
 }

@@ -87,9 +87,21 @@ class Coupon
 				continue;
 			}
 
+			$provider = $manager->getProvider( $item, $code );
+
+			// conditions of coupons already in the basket aren't met any more (e.g. the basket value has been
+			// reduced), the conditions of newly entered codes are checked by the frontend controller
+			if( ( $action !== 'addCoupon.after' || $value !== $code ) && !$provider->isAvailable( $order ) )
+			{
+				$msg = $context->translate( 'mshop', 'The conditions of coupon "%1$s" are not met any more' );
+				$order->deleteCoupon( (string) $code );
+				$errors[] = sprintf( $msg, $code );
+				continue;
+			}
+
 			try
 			{
-				$manager->getProvider( $item, $code )->update( $order );
+				$provider->update( $order );
 			}
 			catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 			{
