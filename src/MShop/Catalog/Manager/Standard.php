@@ -397,12 +397,17 @@ class Standard extends Base
 		$this->begin();
 		$this->lock();
 
+		$ids = [];
+
 		try
 		{
 			$siteid = $this->context()->locale()->getSiteId();
 
-			foreach( $items as $item ) {
-				$this->createTreeManager( $siteid )->deleteNode( (string) $item );
+			foreach( $items as $item )
+			{
+				$treeManager = $this->createTreeManager( $siteid );
+				$ids = array_merge( $ids, $this->getNodeIds( $treeManager->getNode( (string) $item ) ) );
+				$treeManager->deleteNode( (string) $item );
 			}
 
 			$this->cacheTags = array_merge( $this->cacheTags, map( $items )->cast()->prefix( 'catalog-' )->all() );
@@ -416,6 +421,8 @@ class Standard extends Base
 			$this->rollback();
 			throw $e;
 		}
+
+		$this->deleteProductRelations( $ids );
 
 		// @phpstan-ignore argument.type
 		return $this->deleteRefItems( $items );
@@ -907,6 +914,56 @@ class Standard extends Base
 	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'catalog', $manager, $name );
+	}
+
+
+	/**
+	 * Removes the product relations of the deleted categories
+	 *
+	 * The product/catalog relations are stored in the product lists and point
+	 * to the categories by their reference ID, so they aren't removed together
+	 * with the category nodes.
+	 *
+	 * @param string[] $ids IDs of the deleted categories incl. their subcategories
+	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function deleteProductRelations( array $ids ) : \Aimeos\MShop\Catalog\Manager\Iface
+	{
+		if( empty( $ids ) ) {
+			return $this;
+		}
+
+		$manager = \Aimeos\MShop::create( $this->context(), 'product/lists' );
+		$filter = $manager->filter()->add( [
+			'product.lists.domain' => 'catalog',
+			'product.lists.refid' => array_map( 'strval', $ids ),
+		] )->slice( 0, 1000 );
+
+		$cursor = $manager->cursor( $filter );
+
+		while( $items = $manager->iterate( $cursor ) ) {
+			$manager->delete( $items );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the IDs of the given node and all its descendants
+	 *
+	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node incl. its children
+	 * @return string[] List of node IDs
+	 */
+	protected function getNodeIds( \Aimeos\MW\Tree\Node\Iface $node ) : array
+	{
+		$ids = [(string) $node->getId()];
+
+		foreach( $node->getChildren() as $child ) {
+			$ids = array_merge( $ids, $this->getNodeIds( $child ) );
+		}
+
+		return $ids;
 	}
 
 

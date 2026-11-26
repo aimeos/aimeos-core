@@ -51,6 +51,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteProductRelations()
+	{
+		$context = \TestHelper::context();
+		$listManager = \Aimeos\MShop::create( $context, 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $context, 'product' );
+
+		$parent = $this->object->insert( $this->object->create()->setCode( 'unittest-del' )->setLabel( 'unittest' ),
+			$this->object->find( 'root' )->getId() );
+		$child = $this->object->insert( $this->object->create()->setCode( 'unittest-del-child' )->setLabel( 'unittest' ),
+			$parent->getId() );
+
+		$product = $productManager->find( 'CNE', ['catalog'] )
+			->addListItem( 'catalog', $listManager->create()->setType( 'main' ), $parent )
+			->addListItem( 'catalog', $listManager->create()->setType( 'default' ), $child );
+		$productManager->save( $product );
+
+		$filter = $listManager->filter()->add( [
+			'product.lists.domain' => 'catalog',
+			'product.lists.refid' => [$parent->getId(), $child->getId()]
+		] );
+
+		$this->assertEquals( 2, count( $listManager->search( $filter ) ) );
+
+		$this->object->delete( $parent->getId() );
+
+		$this->assertEquals( 0, count( $listManager->search( $filter ) ) );
+	}
+
+
 	public function testFilter()
 	{
 		$this->assertInstanceOf( \Aimeos\Base\Criteria\Iface::class, $this->object->filter() );
