@@ -87,20 +87,9 @@ class Coupon
 				continue;
 			}
 
-			$provider = $manager->getProvider( $item, $code );
-
-			if( !$provider->isAvailable( $order ) )
-			{
-				// conditions of the coupon (e.g. the basket value) aren't met (any more)
-				$msg = $context->translate( 'mshop', 'The coupon "%1$s" can\'t be used because its conditions (e.g. the minimum order value) aren\'t met' );
-				$order->deleteCoupon( (string) $code );
-				$errors[] = sprintf( $msg, $code );
-				continue;
-			}
-
 			try
 			{
-				$provider->update( $order );
+				$manager->getProvider( $item, $code )->update( $order );
 			}
 			catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 			{
